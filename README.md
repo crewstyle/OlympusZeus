@@ -1,6 +1,7 @@
 Tea Theme Options
 =================
 
+The Tea Theme Options (or "**Tea TO**") allows you to easily add professional looking theme options panels to your WordPress theme.
 This document contains information on how to download, install, and start using the Tea Theme Options Wordpress project.  
 Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
@@ -9,6 +10,9 @@ Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordp
 ------------------------------
 
 **To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/`
+
+    git clone https://github.com/takeatea/tea_to_wp tea_theme_options
+
 Check your new `tea_theme_options` folder is created in your template directory (you can rename it if you want).
 
 Include the `tea-theme-options.php` file in your `functions.php`
@@ -26,7 +30,9 @@ Before starting, instanciate a new object with an uniq identifier:
 And set details:
 
     $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. to 24h
-    $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea Theme Options directory. By default, it will consider the `tea_theme_options` folder
+    $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea Theme Options directory.
+
+NOTA: by default, the Tea TO will consider the `tea_theme_options` folder
 
 
 3) Let's roll!
@@ -117,6 +123,11 @@ Note: the Tea Theme Options uses transient to stock options. All options are nam
 
 All available types are:
 
++ **Display inputs**:
+++ Br, display a simple breakline with clear css class
+++ Heading, display a simple title
+++ Hr, equivalent to the br input, but display an horizontal line
+
 + **Normal inputs**:
 ++ Checkbox
 ++ Hidden
@@ -127,20 +138,42 @@ All available types are:
 ++ Upload (for images only)
 
 + **Special inputs**:
-++ Br, display a simple breakline with clear css class
 ++ Category, offers a WP category listing with multiselect option if needed
 ++ Color, offers an input text with colorpicker
 ++ Font, offers a list of font choices with image labels (uniq choices)
 ++ Group, offers the possibility to add multiple inputs
-++ Hr, equivalent to the br input, but display an horizontal line
 ++ Image, offers a list of choices with image labels (uniq choices)
 ++ Menu, display menus as information (no action required)
 ++ Page, display pages as information (no action required)
 ++ Sidebar, display widgets as information (no action required)
+++ Social, display a list of wanted social buttons with multichoice
 ++ Typeahead, offers an input text with ajax call __IN PROGRESS__
 
 
-6) Normal inputs
+6) Display inputs
+-----------------
+
+Adding a `br`
+
+    array(
+        'type' => 'br'
+    )
+
+Adding an `heading`
+
+    array(
+        'type' => 'heading',
+        'title' => 'Heading'
+    )
+
+Adding an `hr`
+
+    array(
+        'type' => 'hr'
+    )
+
+
+7) Normal inputs
 ----------------
 
 Adding a `checkbox`
@@ -228,14 +261,8 @@ NOTA: the upload input uses the Media file uploader or Wordpress.
     )
 
 
-7) Special inputs
+8) Special inputs
 -----------------
-
-Adding a `br`
-
-    array(
-        'type' => 'br'
-    )
 
 Adding a `category`
 NOTA: the category input has a special method which detects if the ID has the `__category` term to register in transient more than expected, as the category title, slug and category.
@@ -315,19 +342,6 @@ NOTA: groups is able to display to 4 input columns per line. You can break a lin
         )
     )
 
-Adding an `heading`
-
-    array(
-        'type' => 'heading',
-        'title' => 'Heading'
-    )
-
-Adding an `hr`
-
-    array(
-        'type' => 'hr'
-    )
-
 Adding an `image`
 NOTA: the Tea Theme Options package offers a large set of background patterns. If you want them, set the `default` attribute to `true`
 
@@ -370,9 +384,28 @@ Adding a `sidebar`
 
     array(
         'type' => 'sidebar',
-        'title' => 'Sidebar group',
+        'title' => 'Sidebar',
         'id' => '1st-homepage-content-block', //define the sidebar id
-        'description' => 'Simple description to text group panel'
+        'description' => 'Simple description to text panel'
+    )
+
+Adding a `social`
+NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.
+`addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
+
+    array(
+        'type' => 'social',
+        'title' => 'Social',
+        'id' => 'simple_social',
+        'std' => array('facebook', 'twitter', 'googleplus', 'addthis'),
+        'description' => 'Simple description to social panel',
+        'wanted' => array( //Define here all the wanted social buttons in your order
+            'facebook',
+            'twitter',
+            'googleplus',
+            'pinterest',
+            'addthis'
+        )
     )
 
 Adding an `typeahead`
@@ -387,7 +420,7 @@ Adding an `typeahead`
     )
 
 
-8) That's all folkes!
+9) That's all folkes!
 ---------------------
 
 Here is the latest step: check quickly your new panel options.
@@ -399,8 +432,13 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working on Tea Theme Options
 
 
-9) Authors
+10) Authors
 ----------
+
+**Take a Tea**
+
++ http://twitter.com/takeatea
++ http://github.com/takeatea
 
 **Achraf Chouk**
 
@@ -408,7 +446,7 @@ That's all to begin working on Tea Theme Options
 + http://github.com/crewstyle
 
 
-10) Copyright and license
+11) Copyright and license
 ------------------------
 
 Copyright 2012 [Take a tea](http://takeatea.com "Take a tea")
