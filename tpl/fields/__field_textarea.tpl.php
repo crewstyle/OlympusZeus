@@ -4,7 +4,7 @@
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside textarea">
                             <textarea name="<?php echo $id ?>" id="<?php echo $id ?>" rows="8" <?php echo $placeholder ?>><?php echo $val ?></textarea>
 
                             <p><?php echo $description ?></p>

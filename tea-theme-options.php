@@ -795,7 +795,7 @@ class Tea_Theme_Options {
 
         //Get options
         $wanted = isset($content['wanted']) ? $content['wanted'] : array();
-        $options = $this->__getDefaults('social', $options);
+        $options = $this->__getDefaults('social', $wanted);
 
         //Radio selected
         $val = $this->__getOption($id, $std);

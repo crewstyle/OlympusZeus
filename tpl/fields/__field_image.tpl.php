@@ -4,16 +4,16 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside image image-<?php echo $type ?>">
                             <fieldset>
                                 <?php foreach ($options as $option): ?>
                                     <?php
                                         $selected = is_array($val) && in_array($option, $val) ? true : ($option == $val ? true : false);
-                                        $for = $id . '_' . $option;
-                                        $name = $multiselect ? $id . '[' . $option . ']' : $id;
                                         $pathinfo = pathinfo($option);
+                                        $for = $id . '_' . $pathinfo['filename'];
+                                        $name = $multiselect ? $id . '[' . $pathinfo['filename'] . ']' : $id;
                                     ?>
-                                    <label for="<?php echo $for ?>" class="selectit image image-<?php echo $type ?> <?php echo $selected ? 'selected' : '' ?>">
+                                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                                         <div class="image-to-show">
                                             <img src="<?php echo $option ?>" width="<?php echo $width ?>" height="<?php echo $height ?>" />
                                             <span>

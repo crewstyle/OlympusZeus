@@ -8,21 +8,21 @@
 */
 ;(function($){
     $(document).ready(function (){
-        //Radio & Image input
-        $('.selectit.radio, .selectit.image-radio').bind('click', function (e){
-            var $self = $(this);
-            $self.closest('.inside').find('.selectit').removeClass('selected');
-            $self.addClass('selected');
-        });
-
         //Checkbox & Image input
-        $('.selectit.checkbox, .selectit.image-checkbox').bind('click', function (e){
+        $('.inside.checkbox label, .inside.image-checkbox label').bind('click', function (e){
             var $self = $(this);
             $self.find('input:checked').length ? $self.addClass('selected') : $self.removeClass('selected');
         });
 
+        //Radio & Image input
+        $('.inside.radio label, .inside.image-radio label').bind('click', function (e){
+            var $self = $(this);
+            $self.closest('.inside').find('.selected').removeClass('selected');
+            $self.addClass('selected');
+        });
+
         //Color input
-        $('.color-picker').miniColors({
+        $('.inside.color .color-picker').miniColors({
             readonly: true,
             change: function(hex, rgb)
             {
@@ -32,7 +32,7 @@
         });
 
         //Upload input
-        $.each($('.upload_image_via_wp a.thickbox.add_media'), function (index, elem) {
+        $.each($('.inside.upload a.thickbox.add_media'), function (index, elem) {
             var $self = $(this);
             var _id = $self.closest('.upload_image_via_wp').find('input').attr('id');
 

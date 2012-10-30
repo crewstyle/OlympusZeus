@@ -4,7 +4,7 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside checkbox">
                             <fieldset>
                                 <?php foreach ($options as $key => $option): ?>
                                     <?php
@@ -12,7 +12,7 @@
                                         $for = $id . '_' . $key;
                                     ?>
                                     <p>
-                                        <label for="<?php echo $for ?>" class="selectit checkbox <?php echo $selected ? 'selected' : '' ?>">
+                                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                                             <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
                                             <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>]" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
                                             <?php echo $option ?>

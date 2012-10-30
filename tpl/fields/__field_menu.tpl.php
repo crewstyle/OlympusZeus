@@ -4,7 +4,7 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside menu">
                             <p>
                                 <?php if (has_nav_menu($id)): ?>
                                     <?php wp_nav_menu(array('theme_location' => $id)) ?>

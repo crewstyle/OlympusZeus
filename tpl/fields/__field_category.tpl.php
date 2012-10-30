@@ -4,7 +4,7 @@
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside category">
                             <select name="<?php echo $id ?>" id="<?php echo $id ?>" <?php echo $multiselect ? 'multiple size="5"' : '' ?>>
                                 <?php foreach ($categories as $key => $cat): ?>
                                     <?php $selected = is_array($vals) && in_array($key, $vals) ? true : ($key == $vals ? true : false) ?>

@@ -4,7 +4,7 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside sidebar">
                             <p>
                                 <?php if (is_active_sidebar($id)): ?>
                                     <?php _e('This sidebar has activated widgets.') ?>

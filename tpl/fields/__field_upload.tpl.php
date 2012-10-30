@@ -4,7 +4,7 @@
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside upload">
                             <div class="upload_image_via_wp">
                                 <input type="text" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo $val ?>" readonly="readonly" />
                                 <?php echo do_action('media_buttons') ?>

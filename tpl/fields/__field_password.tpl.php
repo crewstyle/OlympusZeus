@@ -4,8 +4,8 @@
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
-                            <input type="password" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo $val ?>" size="30" class="code" <?php echo $placeholder ?> />
+                        <div class="inside password">
+                            <input type="password" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo $val ?>" size="30" <?php echo $placeholder ?> />
 
                             <p><?php echo $description ?></p>
                         </div>

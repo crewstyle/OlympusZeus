@@ -4,14 +4,14 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside image image-checkbox">
                             <fieldset>
                                 <?php foreach ($options as $key => $option): ?>
                                     <?php
                                         $selected = is_array($val) && in_array($key, $val) ? true : false;
                                         $for = $id . '_' . $key;
                                     ?>
-                                    <label for="<?php echo $for ?>" class="selectit image image-checkbox <?php echo $selected ? 'selected' : '' ?>">
+                                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                                         <img src="<?php echo $option ?>" alt="" />
                                         <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $option ?>]" value="0" />
                                         <input type="checkbox" name="<?php echo $id ?>[<?php echo $option ?>]" id="<?php echo $for ?>" value="<?php echo $option ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />

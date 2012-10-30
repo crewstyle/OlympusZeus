@@ -4,7 +4,7 @@
                             <label><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside radio">
                             <fieldset>
                                 <?php foreach ($options as $key => $option): ?>
                                     <?php
@@ -12,7 +12,7 @@
                                         $for = $id . '_' . $key;
                                     ?>
                                     <p>
-                                        <label for="<?php echo $for ?>" class="selectit radio <?php echo $selected ? 'selected' : '' ?>">
+                                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                                             <input type="radio" name="<?php echo $id ?>" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
                                             <?php echo $option ?>
                                         </label>

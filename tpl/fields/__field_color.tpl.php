@@ -4,7 +4,7 @@
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>
 
-                        <div class="inside">
+                        <div class="inside color">
                             <input type="text" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo $val ?>" class="color-picker" maxlength="7" readonly="readonly" style="color:<?php echo $val ?>" />
 
                             <p><?php echo $description ?></p>
