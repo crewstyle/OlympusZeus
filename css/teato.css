@@ -1,5 +1,5 @@
 /*
- * Tea Theme Options v1.0.0 - "It's me! MARIO!"
+ * Tea Theme Options v1.0.1 - "Snake, Snake, SNAAAAAAAAAAAAAAAAAAAAAAAKE!!!"
  * Copyright 2012 Take a Tea
  * By Take a Tea <takeatea.com> :)
  */
@@ -180,7 +180,7 @@
     margin-bottom:5px;
 }
 .tea_to.wrap .inside .upload_image_result img {
-    background:url(../img/blank.png) 0 0;
+    background:url(../img/bg-upload.png) 0 0;
     margin:0 1px;
     max-width:90%;
     padding:10px;
