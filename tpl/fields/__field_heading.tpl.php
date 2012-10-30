@@ -1,0 +1,1 @@
+<h2 class="clear"><?php echo $title ?></h2>

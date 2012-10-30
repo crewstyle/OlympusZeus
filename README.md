@@ -1,7 +1,7 @@
 Tea Theme Options
 =================
 
-The Tea Theme Options (or "**Tea TO**") allows you to easily add professional looking theme options panels to your WordPress theme.
+The Tea Theme Options (or "**Tea TO**") allows you to easily add professional looking theme options panels to your WordPress theme.  
 This document contains information on how to download, install, and start using the Tea Theme Options Wordpress project.  
 Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
@@ -159,14 +159,14 @@ Adding a `br`
         'type' => 'br'
     )
 
-Adding an `heading`
+Adding a `heading`
 
     array(
         'type' => 'heading',
         'title' => 'Heading'
     )
 
-Adding an `hr`
+Adding a `hr`
 
     array(
         'type' => 'hr'
@@ -225,7 +225,7 @@ Adding a `radio`
         )
     )
 
-Adding a `text`
+Adding a `text`  
 NOTA: you can define the maxlength optional attribute
 
     array(
@@ -249,7 +249,7 @@ Adding a `textarea`
         'description' => 'Simple description to textarea panel'
     )
 
-Adding an `upload`
+Adding an `upload`  
 NOTA: the upload input uses the Media file uploader or Wordpress.
 
     array(
@@ -264,7 +264,7 @@ NOTA: the upload input uses the Media file uploader or Wordpress.
 8) Special inputs
 -----------------
 
-Adding a `category`
+Adding a `category`  
 NOTA: the category input has a special method which detects if the ID has the `__category` term to register in transient more than expected, as the category title, slug and category.
 
     array(
@@ -284,7 +284,7 @@ Adding a `color`
         'description' => 'Simple description to color panel'
     )
 
-Adding an `font`
+Adding an `font`  
 NOTA: the Tea Theme Options package offers a large set of fonts. If you want them, set the `default` attribute to `true`
 
     array(
@@ -301,10 +301,8 @@ NOTA: the Tea Theme Options package offers a large set of fonts. If you want the
         )
     )
 
-Adding a `group`
-NOTA: groups is able to display to 4 input columns per line. You can break a line by 2 ways:
-+ Add more than 4 inputs
-+ Add a `br`, `heading` or `hr` input
+Adding a `group`  
+NOTA: groups are able to display to 4 input columns per line. You can break a line by adding more than 4 inputs or with a `br`, `heading` or `hr` input
 
     array(
         'type' => 'group',
@@ -342,7 +340,7 @@ NOTA: groups is able to display to 4 input columns per line. You can break a lin
         )
     )
 
-Adding an `image`
+Adding an `image`  
 NOTA: the Tea Theme Options package offers a large set of background patterns. If you want them, set the `default` attribute to `true`
 
     array(
@@ -389,8 +387,8 @@ Adding a `sidebar`
         'description' => 'Simple description to text panel'
     )
 
-Adding a `social`
-NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.
+Adding a `social`  
+NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.  
 `addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
 
     array(
@@ -449,6 +447,6 @@ That's all to begin working on Tea Theme Options
 11) Copyright and license
 ------------------------
 
-Copyright 2012 [Take a tea](http://takeatea.com "Take a tea")
+Copyright 2012 [Take a tea](http://takeatea.com "Take a tea")  
 Influsé par Take a tea ;)
 
