@@ -9,11 +9,11 @@ Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordp
 1) Installing the theme roller
 ------------------------------
 
-**To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/`
+**To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/__YOUR_TEA_TO_CUSTOM_FOLDER__/` by this command line:
 
     git clone https://github.com/takeatea/tea_to_wp __YOUR_TEA_TO_CUSTOM_FOLDER__
 
-Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory (you can rename it if you want).
+Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory.
 
 Include the `tea-theme-options.php` file in your `functions.php`
 
@@ -109,7 +109,7 @@ Add all used fields in the last created page (to get definition fields, see belo
 4) Building menus
 -----------------
 
-The last step is to build menus and get your pages available in the adminbar menu.
+The last step is to build menus and get your pages available in the admin menu.
 
     $tea->buildMenus();
 
@@ -117,9 +117,8 @@ The last step is to build menus and get your pages available in the adminbar men
 5) Adding fields
 ----------------
 
-Adding fields is quite simple. All you have to do is to create an array and define
-all inputs nedded in your Wordpress template.
-Note: the Tea Theme Options uses transient to stock options. All options are named as `tea_to_your_input_id`
+Adding fields is quite simple. All you have to do is to create an array and define all inputs nedded in your Wordpress template.  
+NOTA: the **Tea TO** uses [Transient Wordpress API](http://codex.wordpress.org/Transients_API) to stock options.
 
 All available types are:
 
