@@ -1,7 +1,7 @@
 Tea Theme Options
 =================
 
-The Tea Theme Options (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme.  
+The Tea Theme Options (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. **Tea TO** uses the [Transient Wordpress API](http://codex.wordpress.org/Transients_API) and puts all data in cache.  
 This document contains information on how to download, install, and start using the Tea Theme Options Wordpress project.  
 Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
@@ -20,10 +20,10 @@ Include the `tea-theme-options.php` file in your `functions.php`
     include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
 
 
-2) Create a new Tea_Theme_Options and set details
--------------------------------------------------
+2) Create a new Tea_Theme_Options object and set details
+--------------------------------------------------------
 
-Before starting, instanciate a new object with an uniq identifier:
+Before starting, in your `functions.php` instanciate a new object with an uniq identifier:
 
     $tea = new Tea_Theme_Options('your_identifier');
 
@@ -55,7 +55,7 @@ Create your new first page with global details (as capability, icon, bigicon and
         'description' => 'Here is a description of my first page'
     ));
 
-Add all used fields in the last created page (to get definition fields, see below "5) Adding fields"):
+Add all used fields in the last created page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
     $tea->addFields(array(
         array(
@@ -81,7 +81,7 @@ Create a new sub page with usefull parameters (add description if you need it). 
         'slug' => '_homepage'
     ));
 
-Add all used fields in the last created page (to get definition fields, see below "5) Adding fields"):
+Add all used fields in the last created page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
     $tea->addFields(array(
         array(
@@ -418,14 +418,33 @@ Adding an `typeahead`
     )
 
 
-9) That's all folkes!
+9) Get data from Transient
+--------------------------
+
+To get your data back in your theme, you have to know the ID of what you want to retrieve.  
+Don't forget that the **Tea TO** uses the Transient Wordpress API, and get back data is quite simple.  
+In this example, we will display the `simple_text` data on the screen:
+
+    //`simple_text` is the ID of our text input, defined above
+    $mytext = get_transient('simple_text'); //get the data from the cache via Transient API
+    if (false === $mytext) { //checks if the `simple_text` is in cache. And if not...
+        $mytext_from_option = get_option('simple_text'); //get data from DB
+        $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option; //check if the data is in the DB
+        set_transient('simple_text', $mytext, 86400); //set the data in the cache via Transient API with name - value - time in cache
+    }
+    echo $mytext; //display the data
+
+You can do more better. Try to test your value before any manipulation.
+
+
+10) That's all folkes!
 ---------------------
 
 Here is the latest step: check quickly your new panel options.
 
 + Go to your `your_wp_website/wp-admin`
 + Log in to your admin panel
-+ See that you have a new Link in your admin sidebar
++ **See that you have a new Link in your admin sidebar**
 
 That's all to begin working on Tea Theme Options
 
