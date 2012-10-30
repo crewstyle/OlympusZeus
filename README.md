@@ -1,7 +1,7 @@
 Tea Theme Options
 =================
 
-The Tea Theme Options (or "**Tea TO**") allows you to easily add professional looking theme options panels to your WordPress theme.  
+The Tea Theme Options (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme.  
 This document contains information on how to download, install, and start using the Tea Theme Options Wordpress project.  
 Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
@@ -123,31 +123,31 @@ Note: the Tea Theme Options uses transient to stock options. All options are nam
 
 All available types are:
 
-+ **Display inputs**:
-++ Br, display a simple breakline with clear css class
-++ Heading, display a simple title
-++ Hr, equivalent to the br input, but display an horizontal line
+**Display inputs**:
++ Br, display a simple breakline with clear css class
++ Heading, display a simple title
++ Hr, equivalent to the br input, but display an horizontal line
 
-+ **Normal inputs**:
-++ Checkbox
-++ Hidden
-++ Password
-++ Radio
-++ Text
-++ Textarea
-++ Upload (for images only)
+**Normal inputs**:
++ Checkbox
++ Hidden
++ Password
++ Radio
++ Text
++ Textarea
++ Upload (for images only)
 
-+ **Special inputs**:
-++ Category, offers a WP category listing with multiselect option if needed
-++ Color, offers an input text with colorpicker
-++ Font, offers a list of font choices with image labels (uniq choices)
-++ Group, offers the possibility to add multiple inputs
-++ Image, offers a list of choices with image labels (uniq choices)
-++ Menu, display menus as information (no action required)
-++ Page, display pages as information (no action required)
-++ Sidebar, display widgets as information (no action required)
-++ Social, display a list of wanted social buttons with multichoice
-++ Typeahead, offers an input text with ajax call __IN PROGRESS__
+**Special inputs**:
++ Category, offers a WP category listing with multiselect option if needed
++ Color, offers an input text with colorpicker
++ Font, offers a list of font choices with image labels (uniq choices)
++ Group, offers the possibility to add multiple inputs
++ Image, offers a list of choices with image labels (uniq choices)
++ Menu, display menus as information (no action required)
++ Page, display pages as information (no action required)
++ Sidebar, display widgets as information (no action required)
++ Social, display a list of wanted social buttons with multichoice
++ Typeahead, offers an input text with ajax call __IN PROGRESS__
 
 
 6) Display inputs
@@ -226,7 +226,7 @@ Adding a `radio`
     )
 
 Adding a `text`  
-NOTA: you can define the maxlength optional attribute
+NOTA: you can define the maxlength optional attribute.
 
     array(
         'type' => 'text',
@@ -285,7 +285,7 @@ Adding a `color`
     )
 
 Adding an `font`  
-NOTA: the Tea Theme Options package offers a large set of fonts. If you want them, set the `default` attribute to `true`
+NOTA: the Tea Theme Options package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
 
     array(
         'type' => 'font',
@@ -302,7 +302,7 @@ NOTA: the Tea Theme Options package offers a large set of fonts. If you want the
     )
 
 Adding a `group`  
-NOTA: groups are able to display to 4 input columns per line. You can break a line by adding more than 4 inputs or with a `br`, `heading` or `hr` input
+NOTA: groups are able to display to 4 input columns per line. You can break a line by adding more than 4 inputs or with a `br`, `heading` or `hr` input.
 
     array(
         'type' => 'group',
@@ -341,7 +341,7 @@ NOTA: groups are able to display to 4 input columns per line. You can break a li
     )
 
 Adding an `image`  
-NOTA: the Tea Theme Options package offers a large set of background patterns. If you want them, set the `default` attribute to `true`
+NOTA: the Tea Theme Options package offers a large set of background patterns. If you want them, set the `default` attribute to `true`.
 
     array(
         'type' => 'image',
