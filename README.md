@@ -404,7 +404,7 @@ NOTA: use the `wanted` attribute to list all the wanted social buttons, from the
         )
     )
 
-Adding an `typeahead`
+Adding an `typeahead` __IN PROGRESS__
 
     array(
         'type' => 'typeahead',
@@ -465,5 +465,5 @@ That's all to begin working on **Tea TO**
 ------------------------
 
 Copyright 2012 [Take a tea](http://takeatea.com "Take a tea")  
-Influsé par Take a tea ;)
+Infusé par Take a tea ;)
 
