@@ -11,9 +11,9 @@ Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordp
 
 **To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/`
 
-    git clone https://github.com/takeatea/tea_to_wp tea_theme_options
+    git clone https://github.com/takeatea/tea_to_wp __YOUR_TEA_TO_CUSTOM_FOLDER__
 
-Check your new `tea_theme_options` folder is created in your template directory (you can rename it if you want).
+Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory (you can rename it if you want).
 
 Include the `tea-theme-options.php` file in your `functions.php`
 
