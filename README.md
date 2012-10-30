@@ -2,19 +2,18 @@ Tea Theme Options
 =================
 
 The Tea Theme Options (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. **Tea TO** uses the [Transient Wordpress API](http://codex.wordpress.org/Transients_API) and puts all data in cache.  
-This document contains information on how to download, install, and start using the Tea Theme Options Wordpress project.  
-Note: Tea Theme Options is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+This document contains information on how to download, install, and start using the **Tea TO** Wordpress project.  
+NOTA: **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
 
 1) Installing the theme roller
 ------------------------------
 
-**To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/__YOUR_TEA_TO_CUSTOM_FOLDER__/` by this command line:
+**To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/__YOUR_TEA_TO_CUSTOM_FOLDER__/`
 
     git clone https://github.com/takeatea/tea_to_wp __YOUR_TEA_TO_CUSTOM_FOLDER__
 
-Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory.
-
+Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory.  
 Include the `tea-theme-options.php` file in your `functions.php`
 
     include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
@@ -30,15 +29,15 @@ Before starting, in your `functions.php` instanciate a new object with an uniq i
 And set details:
 
     $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. to 24h
-    $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea Theme Options directory.
+    $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
 
-NOTA: by default, the Tea TO will consider the `tea_theme_options` folder
+NOTA: by default, the Tea TO will consider the `tea_theme_options` folder.
 
 
 3) Let's roll!
 --------------
 
-Create your new first page with global details (as capability, icon, bigicon and descripton if you want):
+Create your new first page with global details (as capability, icon, bigicon and description if you want):
 
     $tea->addPage(array(
         //used in your page
@@ -81,7 +80,7 @@ Create a new sub page with usefull parameters (add description if you need it). 
         'slug' => '_homepage'
     ));
 
-Add all used fields in the last created page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
+Add all used fields in the last created subpage (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
     $tea->addFields(array(
         array(
@@ -284,7 +283,7 @@ Adding a `color`
     )
 
 Adding an `font`  
-NOTA: the Tea Theme Options package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
+NOTA: the **Tea TO** package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
 
     array(
         'type' => 'font',
@@ -340,7 +339,7 @@ NOTA: groups are able to display to 4 input columns per line. You can break a li
     )
 
 Adding an `image`  
-NOTA: the Tea Theme Options package offers a large set of background patterns. If you want them, set the `default` attribute to `true`.
+NOTA: the **Tea TO** package offers a large set of background patterns. If you want them, set the `default` attribute to `true`.
 
     array(
         'type' => 'image',
@@ -445,7 +444,7 @@ Here is the latest step: check quickly your new panel options.
 + Log in to your admin panel
 + **See that you have a new Link in your admin sidebar**
 
-That's all to begin working on Tea Theme Options
+That's all to begin working on **Tea TO**
 
 
 10) Authors
