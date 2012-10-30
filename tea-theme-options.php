@@ -1,10 +1,10 @@
 <?php
 /**
- * BasketSession backend functions and definitions
+ * Tea TO backend functions and definitions
  * 
  * @package TakeaTea
- * @subpackage BasketSession
- * @since BasketSession 1.0
+ * @subpackage Tea Theme Options
+ * @since Tea Theme Options 1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -16,14 +16,14 @@ if (!defined('ABSPATH')) {
 
 
 /**
- * Theme option page.
+ * Tea Theme Option page.
  *
  * To get its own settings
  *
  * @todo Update options.
  * @todo Upload files.
  *
- * @since BasketSession 1.0
+ * @since Tea Theme Options 1.0
  */
 class Tea_Theme_Options {
     public $breadcrumb;
@@ -40,7 +40,7 @@ class Tea_Theme_Options {
     /**
      * Constructor.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __construct($identifier = '') {
@@ -74,7 +74,7 @@ class Tea_Theme_Options {
     /**
      * Add a page to the theme options panel.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function addPage($configs = array()) {
@@ -99,7 +99,7 @@ class Tea_Theme_Options {
     /**
      * Add a subpage to the theme options panel.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function addSubpage($configs = array()) {
@@ -130,7 +130,7 @@ class Tea_Theme_Options {
     /**
      * Add fields to the last created page.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function addFields($configs = array()) {
@@ -154,7 +154,7 @@ class Tea_Theme_Options {
     /**
      * Register menus.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function buildMenus() {
@@ -177,7 +177,7 @@ class Tea_Theme_Options {
     /**
      * Hook that build admin bar.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildAdminBar() {
@@ -193,7 +193,7 @@ class Tea_Theme_Options {
     /**
      * Hook that build menus.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildMenuPage() {
@@ -256,7 +256,7 @@ class Tea_Theme_Options {
     /**
      * Build scripts.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __assetScripts() {
@@ -268,7 +268,7 @@ class Tea_Theme_Options {
     /**
      * Build styles.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __assetStyles() {
@@ -280,7 +280,7 @@ class Tea_Theme_Options {
     /**
      * Build header layout.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildLayoutHeader() {
@@ -298,7 +298,7 @@ class Tea_Theme_Options {
     /**
      * Build content layout.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildContent() {
@@ -328,7 +328,7 @@ class Tea_Theme_Options {
     /**
      * Build footer layout.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildLayoutFooter() {
@@ -339,7 +339,7 @@ class Tea_Theme_Options {
     /**
      * Build each type content.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __buildType($contents, $group = false) {
@@ -419,7 +419,7 @@ class Tea_Theme_Options {
     /**
      * Build hr component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldBr() {
@@ -429,7 +429,7 @@ class Tea_Theme_Options {
     /**
      * Build category component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldCategory($content, $group) {
@@ -470,7 +470,7 @@ class Tea_Theme_Options {
     /**
      * Build checkbox component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldCheckbox($content, $group) {
@@ -492,7 +492,7 @@ class Tea_Theme_Options {
     /**
      * Build text component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldColor($content, $group) {
@@ -513,7 +513,7 @@ class Tea_Theme_Options {
     /**
      * Build font component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldFont($content, $group) {
@@ -543,7 +543,7 @@ class Tea_Theme_Options {
      *
      * @uses __buildType() To build each components.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldGroup($content) {
@@ -592,7 +592,7 @@ class Tea_Theme_Options {
     /**
      * Build heading component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldHeading($content) {
@@ -606,7 +606,7 @@ class Tea_Theme_Options {
     /**
      * Build hidden component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldHidden($content) {
@@ -625,7 +625,7 @@ class Tea_Theme_Options {
     /**
      * Build hr component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldHr() {
@@ -635,7 +635,7 @@ class Tea_Theme_Options {
     /**
      * Build image component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldImage($content, $group) {
@@ -667,7 +667,7 @@ class Tea_Theme_Options {
     /**
      * Build sidebar component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldMenu($content, $group) {
@@ -683,7 +683,7 @@ class Tea_Theme_Options {
     /**
      * Build page component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldPage($content, $group) {
@@ -725,7 +725,7 @@ class Tea_Theme_Options {
     /**
      * Build password component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldPassword($content, $group) {
@@ -746,7 +746,7 @@ class Tea_Theme_Options {
     /**
      * Build radio component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldRadio($content, $group) {
@@ -767,7 +767,7 @@ class Tea_Theme_Options {
     /**
      * Build sidebar component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldSidebar($content, $group) {
@@ -783,7 +783,7 @@ class Tea_Theme_Options {
     /**
      * Build social component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldSocial($content, $group) {
@@ -807,7 +807,7 @@ class Tea_Theme_Options {
     /**
      * Build text component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldText($content, $group) {
@@ -830,7 +830,7 @@ class Tea_Theme_Options {
     /**
      * Build textarea component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldTextarea($content, $group) {
@@ -852,7 +852,7 @@ class Tea_Theme_Options {
     /**
      * Build upload component.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __fieldUpload($content, $group) {
@@ -872,7 +872,7 @@ class Tea_Theme_Options {
     /**
      * Return default values.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __getDefaults($return = 'images', $wanted = array()) {
@@ -954,7 +954,7 @@ class Tea_Theme_Options {
     /**
      * Return option's value from transient.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __getOption($key, $default) {
@@ -980,7 +980,7 @@ class Tea_Theme_Options {
     /**
      * Returns automatical slug.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __getSlug($slug = '') {
@@ -990,7 +990,7 @@ class Tea_Theme_Options {
     /**
      * Set Tea TO directory.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __setDirectory($directory = '') {
@@ -1000,7 +1000,7 @@ class Tea_Theme_Options {
     /**
      * Set transient duration.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __setDuration($duration = 86400) {
@@ -1010,7 +1010,7 @@ class Tea_Theme_Options {
     /**
      * Register uniq option into transient.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __setOption($key, $value, $dependancy = array()) {
@@ -1077,7 +1077,7 @@ class Tea_Theme_Options {
     /**
      * Register options into transients.
      *
-     * @since BasketSession 1.0
+     * @since Tea Theme Options 1.0
      *
      */
     public function __updateOptions($post, $files) {
