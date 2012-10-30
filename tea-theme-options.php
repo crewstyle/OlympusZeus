@@ -387,6 +387,13 @@ class Tea_Theme_Options {
                 case 'menu':
                     $this->__fieldMenu($content, $group);
                     break;
+                case 'multiselect':
+                    $this->__fieldMultiselect($content, $group);
+                    break;
+                case 'number':
+                case 'range':
+                    $this->__fieldNumber($content, $group);
+                    break;
                 case 'page':
                     $this->__fieldPage($content, $group);
                     break;
@@ -397,13 +404,19 @@ class Tea_Theme_Options {
                 case 'radio':
                     $this->__fieldRadio($content, $group);
                     break;
+                case 'select':
+                    $this->__fieldSelect($content, $group);
+                    break;
                 case 'sidebar':
                     $this->__fieldSidebar($content, $group);
                     break;
                 case 'social':
                     $this->__fieldSocial($content, $group);
                     break;
+                case 'email':
+                case 'search':
                 case 'text':
+                case 'url':
                     $this->__fieldText($content, $group);
                     break;
                 case 'textarea':
@@ -681,6 +694,64 @@ class Tea_Theme_Options {
     }
 
     /**
+     * Build multiselect component.
+     *
+     * @since Tea Theme Options 1.0
+     *
+     */
+    public function __fieldMultiselect($content, $group) {
+        //Default variables
+        $id = $content['id'];
+        $title = isset($content['title']) ? $content['title'] : __('Tea Multiselect');
+        $std = isset($content['std']) ? $content['std'] : array();
+        $options = isset($content['options']) ? $content['options'] : array();
+        $description = isset($content['description']) ? $content['description'] : '';
+
+        //Check selected
+        $vals = $this->__getOption($id, $std);
+        $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
+
+        //Get template
+        include('tpl/fields/__field_multiselect.tpl.php');
+    }
+
+    /**
+     * Build number component.
+     *
+     * @since Tea Theme Options 1.0
+     *
+     */
+    public function __fieldNumber($content, $group) {
+        //Default variables
+        $id = $content['id'];
+        $title = isset($content['title']) ? $content['title'] : __('Tea Number');
+        $std = isset($content['std']) ? $content['std'] : '';
+        $placeholder = isset($content['placeholder']) ? 'placeholder="' . $content['placeholder'] . '"' : '';
+        $min = isset($content['min']) ? 'min="' . $content['min'] . '"' : 'min="1"';
+        $max = isset($content['max']) ? 'max="' . $content['max'] . '"' : 'max="50"';
+        $step = isset($content['step']) ? 'step="' . $content['step'] . '"' : 'step="1"';
+        $description = isset($content['description']) ? $content['description'] : '';
+
+        //Check the type
+        switch ($content['type']) {
+            case 'number':
+            case 'range':
+                $type = $content['type'];
+                break;
+            default:
+                $type = 'number';
+                break;
+        }
+
+        //Check selected
+        $val = $this->__getOption($id, $std);
+        $val = stripslashes($val);
+
+        //Get template
+        include('tpl/fields/__field_number.tpl.php');
+    }
+
+    /**
      * Build page component.
      *
      * @since Tea Theme Options 1.0
@@ -765,6 +836,27 @@ class Tea_Theme_Options {
     }
 
     /**
+     * Build select component.
+     *
+     * @since Tea Theme Options 1.0
+     *
+     */
+    public function __fieldSelect($content, $group) {
+        //Default variables
+        $id = $content['id'];
+        $title = isset($content['title']) ? $content['title'] : __('Tea Select');
+        $std = isset($content['std']) ? $content['std'] : '';
+        $options = isset($content['options']) ? $content['options'] : array();
+        $description = isset($content['description']) ? $content['description'] : '';
+
+        //Radio selected
+        $val = $this->__getOption($id, $std);
+
+        //Get template
+        include('tpl/fields/__field_select.tpl.php');
+    }
+
+    /**
      * Build sidebar component.
      *
      * @since Tea Theme Options 1.0
@@ -792,6 +884,7 @@ class Tea_Theme_Options {
         $title = isset($content['title']) ? $content['title'] : __('Tea Social');
         $std = isset($content['std']) ? $content['std'] : array();
         $description = isset($content['description']) ? $content['description'] : '';
+        $url = $this->directory . '/img/social/icon-';
 
         //Get options
         $wanted = isset($content['wanted']) ? $content['wanted'] : array();
@@ -818,6 +911,19 @@ class Tea_Theme_Options {
         $placeholder = isset($content['placeholder']) ? 'placeholder="' . $content['placeholder'] . '"' : '';
         $maxlength = isset($content['maxlength']) ? 'maxlength="' . $content['maxlength'] . '"' : '';
         $description = isset($content['description']) ? $content['description'] : '';
+
+        //Check the type
+        switch ($content['type']) {
+            case 'email':
+            case 'search':
+            case 'text':
+            case 'url':
+                $type = $content['type'];
+                break;
+            default:
+                $type = 'text';
+                break;
+        }
 
         //Check selected
         $val = $this->__getOption($id, $std);
@@ -878,6 +984,7 @@ class Tea_Theme_Options {
     public function __getDefaults($return = 'images', $wanted = array()) {
         $defaults = array();
 
+        //Return defauls background
         if ('images' == $return) {
             $url = $this->directory . '/img/patterns/';
 
@@ -897,6 +1004,7 @@ class Tea_Theme_Options {
                 $url . 'wavecut.png'
             );
         }
+        //Return defaults font
         else if ('fonts' == $return) {
             $url = $this->directory . '/img/fonts/';
 
@@ -917,33 +1025,33 @@ class Tea_Theme_Options {
                 'YanoneKaffeesatzRegular' => $url . 'YanoneKaffeesatz.png'
             );
         }
+        //Return defaults social button
         else if ('social' == $return) {
-            $url = $this->directory . '/img/social/icon-';
-
             $socials = array(
-                'addthis' => $url . 'addthis.png',
-                'deviantart' => $url . 'deviantart.png',
-                'dribbble' => $url . 'dribbble.png',
-                'facebook' => $url . 'facebook.png',
-                'flickr' => $url . 'flickr.png',
-                'forrst' => $url . 'forrst.png',
-                'friendfeed' => $url . 'friendfeed.png',
-                'googleplus' => $url . 'googleplus.png',
-                'lastfm' => $url . 'lastfm.png',
-                'linkedin' => $url . 'linkedin.png',
-                'pinterest' => $url . 'pinterest.png',
-                'rss' => $url . 'rss.png',
-                'skype' => $url . 'skype.png',
-                'tumblr' => $url . 'tumblr.png',
-                'twitter' => $url . 'twitter.png',
-                'vimeo' => $url . 'vimeo.png'
+                'addthis',
+                'deviantart',
+                'dribbble',
+                'facebook',
+                'flickr',
+                'forrst',
+                'friendfeed',
+                'googleplus',
+                'lastfm',
+                'linkedin',
+                'pinterest',
+                'rss',
+                'skype',
+                'tumblr',
+                'twitter',
+                'vimeo'
             );
 
             $defaults = array();
 
+            //Return only wanted
             foreach ($wanted as $want) {
-                if (array_key_exists($want, $socials)) {
-                    $defaults[$want] = $socials[$want];
+                if (in_array($want, $socials)) {
+                    $defaults[] = $want;
                 }
             }
         }

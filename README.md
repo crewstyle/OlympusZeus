@@ -129,9 +129,11 @@ All available types are:
 **Normal inputs**:
 + Checkbox
 + Hidden
++ Multiselect
 + Password
 + Radio
-+ Text
++ Select
++ Text (or Email or Search or Url)
 + Textarea
 + Upload (for images only)
 
@@ -142,6 +144,7 @@ All available types are:
 + Group, offers the possibility to add multiple inputs
 + Image, offers a list of choices with image labels (uniq choices)
 + Menu, display menus as information (no action required)
++ Number (or Range), display new HTML5 inputs
 + Page, display pages as information (no action required)
 + Sidebar, display widgets as information (no action required)
 + Social, display a list of wanted social buttons with multichoice
@@ -198,6 +201,21 @@ Adding a `hidden`
         'std' => 'Simple hidden'
     )
 
+Adding a `multiselect`
+
+    array(
+        'type' => 'multiselect',
+        'title' => 'Multiselect',
+        'id' => 'simple_multiselect',
+        'std' => array('mountain', 'beach'),
+        'description' => 'Simple description to multiselect panel',
+        'options' => array(
+            'mountain' => 'Mountain',
+            'sea' => 'Sea',
+            'beach' => 'Beach'
+        )
+    )
+
 Adding a `password`
 
     array(
@@ -223,6 +241,21 @@ Adding a `radio`
         )
     )
 
+Adding a `select`
+
+    array(
+        'type' => 'select',
+        'title' => 'Select',
+        'id' => 'simple_select',
+        'std' => 'sea',
+        'description' => 'Simple description to select panel',
+        'options' => array(
+            'mountain' => 'Mountain',
+            'sea' => 'Sea',
+            'beach' => 'Beach'
+        )
+    )
+
 Adding a `text`  
 NOTA: you can define the maxlength optional attribute.
 
@@ -236,7 +269,8 @@ NOTA: you can define the maxlength optional attribute.
         'maxlength' => 7
     )
 
-Adding a `textarea`
+Adding a `textarea`  
+NOTA: you can use `email`, `search` or `url` type to use the new HTML5 inputs
 
     array(
         'type' => 'textarea',
@@ -365,6 +399,20 @@ Adding an `menu`
         'title' => 'Menu',
         'id' => 'id_of_the_menu_expected',
         'description' => 'Simple description to menu panel'
+    )
+
+Adding a `number`  
+NOTA: you can use `range` type to use the new HTML5 inputs
+
+    array(
+        'type' => 'number',
+        'title' => 'Number',
+        'id' => 'simple_number',
+        'std' => 'Simple number',
+        'min' => 12, //'1' by default
+        'max' => 120, //'50' by default
+        'step' => 10, //'1' by default
+        'description' => 'Simple description to number panel'
     )
 
 Adding a `page`

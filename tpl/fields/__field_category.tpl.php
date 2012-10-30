@@ -5,7 +5,7 @@
                         </h3>
 
                         <div class="inside category">
-                            <select name="<?php echo $id ?>" id="<?php echo $id ?>" <?php echo $multiselect ? 'multiple size="5"' : '' ?>>
+                            <select name="<?php echo $id ?>" id="<?php echo $id ?>" <?php echo $multiselect ? 'multiple="true" size="5"' : '' ?>>
                                 <?php foreach ($categories as $key => $cat): ?>
                                     <?php $selected = is_array($vals) && in_array($key, $vals) ? true : ($key == $vals ? true : false) ?>
                                     <option value="<?php echo $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $cat ?></option>
