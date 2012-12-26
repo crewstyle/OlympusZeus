@@ -250,7 +250,8 @@ class Tea_Theme_Options {
      */
     public function __assetScripts() {
         wp_enqueue_script('thickbox', '/'.WPINC.'/js/thickbox/thickbox.js', array('jquery'));
-        wp_enqueue_script('mini-color', $this->directory . '/js/minicolor.js', array('jquery'));
+        //wp_enqueue_script('mini-color', $this->directory . '/js/minicolor.js', array('jquery'));
+        wp_enqueue_script('wp-color-picker');
         wp_enqueue_script('tea-to', $this->directory . '/js/teato.js', array('jquery'));
     }
 
@@ -261,7 +262,8 @@ class Tea_Theme_Options {
      */
     public function __assetStyles() {
         wp_enqueue_style('thick-box', '/'.WPINC.'/js/thickbox/thickbox.css');
-        wp_enqueue_style('mini-color', $this->directory . '/css/minicolor.css');
+        //wp_enqueue_style('mini-color', $this->directory . '/css/minicolor.css');
+        wp_enqueue_style('wp-color-picker');
         wp_enqueue_style('tea-to', $this->directory . '/css/teato.css');
     }
 

@@ -22,13 +22,37 @@
         });
 
         //Color input
-        $('.inside.color .color-picker').miniColors({
+        /*$('.inside.color .color-picker').miniColors({
             readonly: true,
             change: function(hex, rgb)
             {
                 $(this).val('' + hex);
                 $(this).css('color', hex);
             }
+        });*/
+        $.each($('.inside.color .color-picker'), function (index,elem){
+            var $self = $(this);
+            var default_color = 'fbfbfb';
+
+            $self.wpColorPicker({
+                change: function(event, ui) {
+                    $self.val($self.wpColorPicker('color'));
+                },
+                clear: function() {
+                    $self.val('');
+                }
+            });
+
+            $self.bind('click', function (e){
+                var _value = $self.val().replace('#', '');
+                if ('' == _value) {
+                    $self.val('' + default_color);
+                }
+                else {
+                    $self.val('' + $self.val());
+                }
+            });
+            $self.click();
         });
 
         //Upload input
