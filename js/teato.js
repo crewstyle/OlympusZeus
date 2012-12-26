@@ -42,11 +42,21 @@
             //Bind the click event
             $(this).bind('click', function (e){
                 formfield = _id;
-                tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+                tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true&amp;post_id=0');
                 return false;
             });
             window.send_to_editor = function (html){
-                imgurl = $('img', html).attr('src');
+                imgurl = undefined == $(html).attr('src') ? $(html).attr('href') : $(html).attr('src');
+                $('#' + _id).val(imgurl);
+                tb_remove();
+            }
+        });
+        $.each($('.inside.upload a.add_media:not(.thickbox)'), function (index, elem) {
+            var $self = $(this);
+            var _id = $self.closest('.upload_image_via_wp').find('input').attr('id');
+
+            window.send_to_editor = function (html){
+                imgurl = undefined == $(html).attr('src') ? $(html).attr('href') : $(html).attr('src');
                 $('#' + _id).val(imgurl);
                 tb_remove();
             }

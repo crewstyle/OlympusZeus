@@ -1,5 +1,5 @@
 /*
- * Tea Theme Options v1.0.1 - "Snake, Snake, SNAAAAAAAAAAAAAAAAAAAAAAAKE!!!"
+ * Tea Theme Options v1.0.2 - "Come get some! - Duke Nukem"
  * Copyright 2012 Take a Tea
  * By Take a Tea <takeatea.com> :)
  */
@@ -82,8 +82,19 @@
 }
 .tea_to.wrap textarea,
 .tea_to.wrap select,
-.tea_to.wrap .inside input[type='text'],
-.tea_to.wrap .inside input[type='password'],
+.tea_to.wrap .inside input[type="text"],
+.tea_to.wrap .inside input[type="password"],
+.tea_to.wrap .inside input[type="datetime"],
+.tea_to.wrap .inside input[type="datetime-local"],
+.tea_to.wrap .inside input[type="date"],
+.tea_to.wrap .inside input[type="month"],
+.tea_to.wrap .inside input[type="time"],
+.tea_to.wrap .inside input[type="week"],
+.tea_to.wrap .inside input[type="number"],
+.tea_to.wrap .inside input[type="email"],
+.tea_to.wrap .inside input[type="url"],
+.tea_to.wrap .inside input[type="search"],
+.tea_to.wrap .inside input[type="tel"],
 .tea_to.wrap .inside input[type='file'] {
     width:98%;
 }
@@ -95,6 +106,9 @@
 }
 
 /*--- [CHECKBOXES] ---*/
+.tea_to.wrap .inside.checkbox {
+    background:#fff;
+}
 .tea_to.wrap .inside.checkbox label {
     background-color:#fff;
     border-left:5px solid #e5f1f7;

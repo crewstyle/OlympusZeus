@@ -20,9 +20,6 @@ if (!defined('ABSPATH')) {
  *
  * To get its own settings
  *
- * @todo Update options.
- * @todo Upload files.
- *
  * @since Tea Theme Options 1.0
  */
 class Tea_Theme_Options {
@@ -41,7 +38,6 @@ class Tea_Theme_Options {
      * Constructor.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __construct($identifier = '') {
         //Check identifier
@@ -75,7 +71,6 @@ class Tea_Theme_Options {
      * Add a page to the theme options panel.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function addPage($configs = array()) {
         //Check params and if a master page already exists
@@ -100,7 +95,6 @@ class Tea_Theme_Options {
      * Add a subpage to the theme options panel.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function addSubpage($configs = array()) {
         //Check params and if no master page is defined
@@ -131,7 +125,6 @@ class Tea_Theme_Options {
      * Add fields to the last created page.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function addFields($configs = array()) {
         //Check params and if no master page is defined
@@ -155,7 +148,6 @@ class Tea_Theme_Options {
      * Register menus.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function buildMenus() {
         //Check if no master page is defined
@@ -178,7 +170,6 @@ class Tea_Theme_Options {
      * Hook that build admin bar.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildAdminBar() {
         global $wp_admin_bar;
@@ -194,7 +185,6 @@ class Tea_Theme_Options {
      * Hook that build menus.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildMenuPage() {
         //Check if no master page is defined
@@ -257,7 +247,6 @@ class Tea_Theme_Options {
      * Build scripts.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __assetScripts() {
         wp_enqueue_script('thickbox', '/'.WPINC.'/js/thickbox/thickbox.js', array('jquery'));
@@ -269,7 +258,6 @@ class Tea_Theme_Options {
      * Build styles.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __assetStyles() {
         wp_enqueue_style('thick-box', '/'.WPINC.'/js/thickbox/thickbox.css');
@@ -281,15 +269,14 @@ class Tea_Theme_Options {
      * Build header layout.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildLayoutHeader() {
         //Get all pages with link, icon and title
         $links = $this->breadcrumb;
         $icon = $this->page['bigicon'];
-        $page = $this->current;
-        $title = !isset($this->index) ? $this->page['title'] : $this->subpages[$this->index]['title'];
-        $description = !isset($this->index) ? $this->page['description'] : $this->subpages[$this->index]['description'];
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $title = empty($this->current) || $this->identifier == $this->current ? $this->page['title'] : $this->subpages[$this->current]['title'];
+        $description = empty($this->current) || $this->identifier == $this->current ? $this->page['description'] : $this->subpages[$this->current]['description'];
 
         //Include template
         include('tpl/layouts/__layout_header.tpl.php');
@@ -299,7 +286,6 @@ class Tea_Theme_Options {
      * Build content layout.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildContent() {
         //Build header
@@ -309,13 +295,16 @@ class Tea_Theme_Options {
         $icon = $this->page['icon'];
 
         //Get contents
-        if($this->current == $this->identifier) {
+        if(isset($this->page['contents']) && $this->current == $this->identifier) {
             $title = $this->page['title'];
             $contents = $this->page['contents'];
         }
-        else {
+        else if (isset($this->subpages[$this->current]['contents'])) {
             $title = $this->subpages[$this->current]['title'];
             $contents = $this->subpages[$this->current]['contents'];
+        }
+        else {
+            return new WP_Error('broke', __('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.'));
         }
 
         //Build contents relatively to the type
@@ -329,7 +318,6 @@ class Tea_Theme_Options {
      * Build footer layout.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildLayoutFooter() {
         //Include template
@@ -340,7 +328,6 @@ class Tea_Theme_Options {
      * Build each type content.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __buildType($contents, $group = false) {
         //Iteration on all array
@@ -433,7 +420,6 @@ class Tea_Theme_Options {
      * Build hr component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldBr() {
         include('tpl/fields/__field_br.tpl.php');
@@ -443,7 +429,6 @@ class Tea_Theme_Options {
      * Build category component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldCategory($content, $group) {
         //Default variables
@@ -484,7 +469,6 @@ class Tea_Theme_Options {
      * Build checkbox component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldCheckbox($content, $group) {
         //Default variables
@@ -506,7 +490,6 @@ class Tea_Theme_Options {
      * Build text component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldColor($content, $group) {
         //Default variables
@@ -527,7 +510,6 @@ class Tea_Theme_Options {
      * Build font component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldFont($content, $group) {
         //Default variables
@@ -557,7 +539,6 @@ class Tea_Theme_Options {
      * @uses __buildType() To build each components.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldGroup($content) {
         $count = 0;
@@ -606,7 +587,6 @@ class Tea_Theme_Options {
      * Build heading component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldHeading($content) {
         //Default variables
@@ -620,7 +600,6 @@ class Tea_Theme_Options {
      * Build hidden component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldHidden($content) {
         //Default variables
@@ -639,7 +618,6 @@ class Tea_Theme_Options {
      * Build hr component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldHr() {
         include('tpl/fields/__field_hr.tpl.php');
@@ -649,7 +627,6 @@ class Tea_Theme_Options {
      * Build image component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldImage($content, $group) {
         //Default variables
@@ -681,7 +658,6 @@ class Tea_Theme_Options {
      * Build sidebar component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldMenu($content, $group) {
         //Default variables
@@ -697,7 +673,6 @@ class Tea_Theme_Options {
      * Build multiselect component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldMultiselect($content, $group) {
         //Default variables
@@ -719,7 +694,6 @@ class Tea_Theme_Options {
      * Build number component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldNumber($content, $group) {
         //Default variables
@@ -755,7 +729,6 @@ class Tea_Theme_Options {
      * Build page component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldPage($content, $group) {
         //Default variables
@@ -772,12 +745,12 @@ class Tea_Theme_Options {
             foreach ($pages_obj as $pag)
             {
                 //Don't consider the select WP default title
-                if ('Select a page:' == $pag->page_name) {
+                if ('Select a page:' == $pag->post_title) {
                     continue;
                 }
 
                 //Get the id and the name
-                $this->pages[$pag->ID] = $pag->post_name;
+                $this->pages[$pag->ID] = $pag->post_title;
             }
         }
 
@@ -797,7 +770,6 @@ class Tea_Theme_Options {
      * Build password component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldPassword($content, $group) {
         //Default variables
@@ -818,7 +790,6 @@ class Tea_Theme_Options {
      * Build radio component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldRadio($content, $group) {
         //Default variables
@@ -839,7 +810,6 @@ class Tea_Theme_Options {
      * Build select component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldSelect($content, $group) {
         //Default variables
@@ -860,7 +830,6 @@ class Tea_Theme_Options {
      * Build sidebar component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldSidebar($content, $group) {
         //Default variables
@@ -876,7 +845,6 @@ class Tea_Theme_Options {
      * Build social component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldSocial($content, $group) {
         //Default variables
@@ -901,7 +869,6 @@ class Tea_Theme_Options {
      * Build text component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldText($content, $group) {
         //Default variables
@@ -937,7 +904,6 @@ class Tea_Theme_Options {
      * Build textarea component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldTextarea($content, $group) {
         //Default variables
@@ -959,7 +925,6 @@ class Tea_Theme_Options {
      * Build upload component.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __fieldUpload($content, $group) {
         //Default variables
@@ -979,7 +944,6 @@ class Tea_Theme_Options {
      * Return default values.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __getDefaults($return = 'images', $wanted = array()) {
         $defaults = array();
@@ -1063,7 +1027,6 @@ class Tea_Theme_Options {
      * Return option's value from transient.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __getOption($key, $default) {
         //Get transient
@@ -1089,7 +1052,6 @@ class Tea_Theme_Options {
      * Returns automatical slug.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __getSlug($slug = '') {
         return $this->identifier . $slug;
@@ -1099,7 +1061,6 @@ class Tea_Theme_Options {
      * Set Tea TO directory.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __setDirectory($directory = '') {
         $this->directory = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : $directory;
@@ -1109,7 +1070,6 @@ class Tea_Theme_Options {
      * Set transient duration.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __setDuration($duration = 86400) {
         $this->duration = $duration;
@@ -1119,7 +1079,6 @@ class Tea_Theme_Options {
      * Register uniq option into transient.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __setOption($key, $value, $dependancy = array()) {
         //Set the option
@@ -1143,12 +1102,59 @@ class Tea_Theme_Options {
             set_transient($key . '_title', $category->name, $this->duration);
 
             //Set the other parameters: slug
-            update_option($key . '_slug', $category->slug);
-            set_transient($key . '_slug', $category->slug, $this->duration);
+            $slug = get_category_link($value);
+            update_option($key . '_slug', $slug);
+            set_transient($key . '_slug', $slug, $this->duration);
+
+            //Set the other parameters: feed
+            $feed = get_category_feed_link($value);
+            update_option($key . '_feed', $feed);
+            set_transient($key . '_feed', $feed, $this->duration);
 
             //Set the other parameters: description
             update_option($key . '_description', $category->description);
             set_transient($key . '_description', $category->description, $this->duration);
+        }
+
+        //Special usecase: categories. We can also register information as title, slug, description and children
+        if (false !== strpos($key, '__categories')) {
+            //All contents
+            $allcats = array();
+
+            //Iterate on categories
+            foreach ($value as $c) {
+                //Get all children
+                $cats = get_categories('child_of=' . $c);
+                $children = '';
+
+                //Iterate on children to get ID only
+                foreach ($cats as $ca) {
+                    //Get all children
+                    $children .= (!empty($children) ? ',' : '') . $ca->cat_ID;
+
+                    //Idem
+                    $allcats[$ca->cat_ID] = array(
+                        'id' => $ca->cat_ID,
+                        'name' => get_cat_name($ca->cat_ID),
+                        'link' => get_category_link($ca->cat_ID),
+                        'has_parent' => true,
+                        'children' => ''
+                    );
+                }
+
+                //Add some extra contents
+                $allcats[$c] = array(
+                    'id' => $c,
+                    'name' => get_cat_name($c),
+                    'link' => get_category_link($c),
+                    'has_parent' => false,
+                    'children' => $children
+                );
+            }
+
+            //Set the other parameters: width
+            update_option($key . '_children', $allcats);
+            set_transient($key . '_children', $allcats, $this->duration);
         }
 
         //Special usecase: checkboxes. When it's not checked, no data is sent through the $_POST array
@@ -1186,7 +1192,6 @@ class Tea_Theme_Options {
      * Register options into transients.
      *
      * @since Tea Theme Options 1.0
-     *
      */
     public function __updateOptions($post, $files) {
         //Set all options in transient

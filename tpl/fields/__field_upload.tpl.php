@@ -7,7 +7,13 @@
                         <div class="inside upload">
                             <div class="upload_image_via_wp">
                                 <input type="text" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo $val ?>" readonly="readonly" />
-                                <?php echo do_action('media_buttons') ?>
+                                <?php if (current_user_can('upload_files')) : ?>
+                                <div id="wp-<?php echo $id ?>-editor-tools" class="wp-editor-tools hide-if-no-js">
+                                    <?php do_action('media_buttons', $id) ?>
+                                </div>
+                                <?php else: ?>
+                                    <?php _e('It seems you are not able to upload files.') ?>
+                                <?php endif ?>
                             </div>
 
                             <?php if (!empty($val)): ?>
