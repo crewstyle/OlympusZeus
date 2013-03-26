@@ -461,10 +461,10 @@ NOTA: use the `wanted` attribute to list all the wanted social buttons, from the
     )
 
 
-9) Special inputs
+9) Next inputs
 -----------------
 
-Adding an `date` __IN PROGRESS__
+Adding a `date` __IN PROGRESS__
 
     array(
         'type' => 'date',
@@ -474,7 +474,7 @@ Adding an `date` __IN PROGRESS__
         'description' => 'Simple description to date panel'
     )
 
-Adding an `post` __IN PROGRESS__
+Adding a `post` __IN PROGRESS__
 
     array(
         'type' => 'post',
@@ -484,7 +484,7 @@ Adding an `post` __IN PROGRESS__
         'description' => 'Simple description to post panel'
     )
 
-Adding an `tag` __IN PROGRESS__
+Adding a `tag` __IN PROGRESS__
 
     array(
         'type' => 'tag',
@@ -494,7 +494,7 @@ Adding an `tag` __IN PROGRESS__
         'description' => 'Simple description to tag panel'
     )
 
-Adding an `typeahead` __IN PROGRESS__
+Adding a `typeahead` __IN PROGRESS__
 
     array(
         'type' => 'typeahead',
@@ -505,7 +505,7 @@ Adding an `typeahead` __IN PROGRESS__
         'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
     )
 
-Adding an `wysiwyg` __IN PROGRESS__
+Adding a `wysiwyg` __IN PROGRESS__
 
     array(
         'type' => 'wysiwyg',
