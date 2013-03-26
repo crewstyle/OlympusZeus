@@ -1,38 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Tea to wp by Takeatea</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Tea to wp : The Tea Theme Options (or &quot;Tea TO&quot;) allows you to easily add professional looking theme options panels to your WordPress theme." />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tea to wp</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Tea to wp</h1>
-        <p class="header">The Tea Theme Options (or &quot;Tea TO&quot;) allows you to easily add professional looking theme options panels to your WordPress theme.</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/Takeatea/tea_to_wp/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/Takeatea/tea_to_wp/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/Takeatea/tea_to_wp">View On GitHub</a></li>
-        </ul>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Takeatea/tea_to_wp">View on GitHub</a>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/Takeatea">Takeatea</a></p>
+          <h1 id="project_title">Tea to wp</h1>
+          <h2 id="project_tagline">The Tea Theme Options (or &quot;Tea TO&quot;) allows you to easily add professional looking theme options panels to your WordPress theme.</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Takeatea/tea_to_wp/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Takeatea/tea_to_wp/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      </header>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>Tea Theme Options</h1>
 
-<p>The Tea Theme Options (or <strong>Tea TO</strong>) allows you to easily add professional looking theme options panels to your WordPress theme. <strong>Tea TO</strong> uses the <a href="http://codex.wordpress.org/Transients_API">Transient Wordpress API</a> and puts all data in cache.<br>
+<p>The <a href="http://takeatea.github.com/tea_to_wp/">Tea Theme Options</a> (or <strong>Tea TO</strong>) allows you to easily add professional looking theme options panels to your WordPress theme. <strong>Tea TO</strong> uses the <a href="http://codex.wordpress.org/Transients_API">Transient Wordpress API</a> and puts all data in cache.<br>
 This document contains information on how to download, install, and start using the <strong>Tea TO</strong> Wordpress project.<br>
 NOTA: <strong>Tea TO</strong> is built for <a href="http://wordpress.org" title="CMS Wordpress">Wordpress</a> v3.x and uses the Wordpress built-in pages.</p>
 
@@ -168,22 +169,29 @@ NOTA: the <strong>Tea TO</strong> uses <a href="http://codex.wordpress.org/Trans
 <li>Select</li>
 <li>Text (or Email or Search or Url)</li>
 <li>Textarea</li>
-<li>Upload (for images only)</li>
+<li>Upload (for images only) with the <a href="http://codex.wordpress.org/Version_3.5#Highlights">Wordpress Media Manager</a>.</li>
 </ul><p><strong>Special inputs</strong>:</p>
 
 <ul>
 <li>Category, offers a WP category listing with multiselect option if needed</li>
 <li>Color, offers an input text with colorpicker</li>
-<li>Font, offers a list of font choices with image labels (uniq choices)</li>
+<li>Font, offers a list of font choices with image labels (uniq choice)</li>
 <li>Group, offers the possibility to add multiple inputs</li>
-<li>Image, offers a list of choices with image labels (uniq choices)</li>
+<li>Image, offers a list of choices with image labels (uniq choice)</li>
 <li>Menu, display menus as information (no action required)</li>
 <li>Number (or Range), display new HTML5 inputs</li>
 <li>Page, display pages as information (no action required)</li>
 <li>Sidebar, display widgets as information (no action required)</li>
 <li>Social, display a list of wanted social buttons with multichoice</li>
-<li>Typeahead, offers an input text with ajax call <strong>IN PROGRESS</strong>
-</li>
+</ul><p><strong>Next inputs</strong>: <strong>IN PROGRESS</strong></p>
+
+<ul>
+<li>Button, offers a button with custom interaction</li>
+<li>Date, offers an input text with calendar interaction</li>
+<li>Post, offers a WP post listing with multiselect option if needed</li>
+<li>Tag, offers a WP tag listing with multiselect option if needed</li>
+<li>Typeahead, offers an input text with ajax call</li>
+<li>WYSIWYG, offers a Rich Text Editor</li>
 </ul><h2>6) Display inputs</h2>
 
 <p>Adding a <code>br</code></p>
@@ -296,7 +304,7 @@ NOTA: the <strong>Tea TO</strong> uses <a href="http://codex.wordpress.org/Trans
 </code></pre>
 
 <p>Adding a <code>text</code><br>
-NOTA: you can define the maxlength optional attribute.</p>
+NOTA: you can define the maxlength optional attribute. You can use <code>email</code>, <code>search</code> or <code>url</code> type to use the new HTML5 inputs.</p>
 
 <pre><code>array(
     'type' =&gt; 'text',
@@ -309,8 +317,7 @@ NOTA: you can define the maxlength optional attribute.</p>
 )
 </code></pre>
 
-<p>Adding a <code>textarea</code><br>
-NOTA: you can use <code>email</code>, <code>search</code> or <code>url</code> type to use the new HTML5 inputs</p>
+<p>Adding a <code>textarea</code></p>
 
 <pre><code>array(
     'type' =&gt; 'textarea',
@@ -323,7 +330,7 @@ NOTA: you can use <code>email</code>, <code>search</code> or <code>url</code> ty
 </code></pre>
 
 <p>Adding an <code>upload</code><br>
-NOTA: the upload input uses the Media file uploader or Wordpress.</p>
+NOTA: the upload input uses the <a href="http://codex.wordpress.org/Version_3.5#Highlights">Wordpress Media Manager</a>.</p>
 
 <pre><code>array(
     'type' =&gt; 'upload',
@@ -337,7 +344,8 @@ NOTA: the upload input uses the Media file uploader or Wordpress.</p>
 <h2>8) Special inputs</h2>
 
 <p>Adding a <code>category</code><br>
-NOTA: the category input has a special method which detects if the ID has the <code>__category</code> term to register in transient more than expected, as the category title, slug and category.</p>
+NOTA: the category input has a special method which detects if the ID has the <code>__category</code> term to register in transient more than expected, as the category title, slug and category.
+NOTA: the category input has a special method which detects if the ID has the <code>__categories</code> term to register in transient its children categories.</p>
 
 <pre><code>array(
     'type' =&gt; 'category',
@@ -437,7 +445,7 @@ NOTA: the <strong>Tea TO</strong> package offers a large set of background patte
 )
 </code></pre>
 
-<p>Adding an <code>menu</code></p>
+<p>Adding a <code>menu</code></p>
 
 <pre><code>array(
     'type' =&gt; 'menu',
@@ -483,7 +491,7 @@ NOTA: you can use <code>range</code> type to use the new HTML5 inputs</p>
 </code></pre>
 
 <p>Adding a <code>social</code><br>
-NOTA: use the <code>wanted</code> attribute to list all the wanted social buttons, from the list below.<br><code>addthis</code>, <code>deviantart</code>, <code>dribbble</code>, <code>facebook</code>, <code>flickr</code>, <code>forrst</code>, <code>friendfeed</code>, <code>googleplus</code>, <code>lastfm</code>, <code>linkedin</code>, <code>pinterest</code>, <code>rss</code>, <code>skype</code>, <code>tumblr</code>, <code>twitter</code>, <code>vimeo</code></p>
+NOTA: use the <code>wanted</code> attribute to list all the wanted social buttons, from the list below.<br><code>addthis</code>, <code>deviantart</code>, <code>dribbble</code>, <code>facebook</code>, <code>flickr</code>, <code>forrst</code>, <code>friendfeed</code>, <code>googleplus</code>, <code>instagram</code>, <code>lastfm</code>, <code>linkedin</code>, <code>pinterest</code>, <code>rss</code>, <code>skype</code>, <code>tumblr</code>, <code>twitter</code>, <code>vimeo</code></p>
 
 <pre><code>array(
     'type' =&gt; 'social',
@@ -495,13 +503,49 @@ NOTA: use the <code>wanted</code> attribute to list all the wanted social button
         'facebook',
         'twitter',
         'googleplus',
+        'instagram',
         'pinterest',
         'addthis'
     )
 )
 </code></pre>
 
-<p>Adding an <code>typeahead</code> <strong>IN PROGRESS</strong></p>
+<h2>9) Next inputs</h2>
+
+<p>Adding a <code>date</code> <strong>IN PROGRESS</strong></p>
+
+<pre><code>array(
+    'type' =&gt; 'date',
+    'title' =&gt; 'Date',
+    'id' =&gt; 'simple_date',
+    'std' =&gt; 'Simple date',
+    'description' =&gt; 'Simple description to date panel'
+)
+</code></pre>
+
+<p>Adding a <code>post</code> <strong>IN PROGRESS</strong></p>
+
+<pre><code>array(
+    'type' =&gt; 'post',
+    'title' =&gt; 'Post',
+    'id' =&gt; 'simple_post',
+    'std' =&gt; 'Simple post',
+    'description' =&gt; 'Simple description to post panel'
+)
+</code></pre>
+
+<p>Adding a <code>tag</code> <strong>IN PROGRESS</strong></p>
+
+<pre><code>array(
+    'type' =&gt; 'tag',
+    'title' =&gt; 'Tag',
+    'id' =&gt; 'simple_tag',
+    'std' =&gt; 'Simple tag',
+    'description' =&gt; 'Simple description to tag panel'
+)
+</code></pre>
+
+<p>Adding a <code>typeahead</code> <strong>IN PROGRESS</strong></p>
 
 <pre><code>array(
     'type' =&gt; 'typeahead',
@@ -513,25 +557,48 @@ NOTA: use the <code>wanted</code> attribute to list all the wanted social button
 )
 </code></pre>
 
-<h2>9) Get data from Transient</h2>
+<p>Adding a <code>wysiwyg</code> <strong>IN PROGRESS</strong></p>
+
+<pre><code>array(
+    'type' =&gt; 'wysiwyg',
+    'title' =&gt; 'WYSIWYG',
+    'id' =&gt; 'simple_wysiwyg',
+    'std' =&gt; 'Simple wysiwyg',
+    'description' =&gt; 'Simple description to wysiwyg panel'
+)
+</code></pre>
+
+<h2>10) Get data from Transient</h2>
 
 <p>To get your data back in your theme, you have to know the ID of what you want to retrieve.<br>
 Don't forget that the <strong>Tea TO</strong> uses the Transient Wordpress API, and get back data is quite simple.<br>
 In this example, we will display the <code>simple_text</code> data on the screen:</p>
 
 <pre><code>//`simple_text` is the ID of our text input, defined above
-$mytext = get_transient('simple_text'); //get the data from the cache via Transient API
-if (false === $mytext) { //checks if the `simple_text` is in cache. And if not...
-    $mytext_from_option = get_option('simple_text'); //get data from DB
-    $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option; //check if the data is in the DB
-    set_transient('simple_text', $mytext, 86400); //set the data in the cache via Transient API with name - value - time in cache
+
+//get the data from the cache via Transient API
+$mytext = get_transient('simple_text');
+
+//checks if the `simple_text` is in cache. And if not...
+if (false === $mytext)
+{
+    //get data from DB
+    $mytext_from_option = get_option('simple_text');
+
+    //check if the data is in the DB
+    $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option;
+
+    //set the data in the cache via Transient API with name - value - time in cache
+    set_transient('simple_text', $mytext, 86400);
 }
-echo $mytext; //display the data
+
+//display the data
+echo $mytext;
 </code></pre>
 
 <p>You can do more better. Try to test your value before any manipulation.</p>
 
-<h2>10) That's all folkes!</h2>
+<h2>11) That's all folkes!</h2>
 
 <p>Here is the latest step: check quickly your new panel options.</p>
 
@@ -542,7 +609,7 @@ echo $mytext; //display the data
 <li><strong>See that you have a new Link in your admin sidebar</strong></li>
 </ul><p>That's all to begin working on <strong>Tea TO</strong></p>
 
-<h2>10) Authors</h2>
+<h2>12) Authors</h2>
 
 <p><strong>Take a Tea</strong></p>
 
@@ -554,17 +621,22 @@ echo $mytext; //display the data
 <ul>
 <li><a href="http://twitter.com/crewstyle">http://twitter.com/crewstyle</a></li>
 <li><a href="http://github.com/crewstyle">http://github.com/crewstyle</a></li>
-</ul><h2>11) Copyright and license</h2>
+</ul><h2>13) Copyright and license</h2>
 
-<p>Copyright 2012 <a href="http://takeatea.com" title="Take a tea">Take a tea</a><br>
+<p>Copyright 2013 <a href="http://takeatea.com" title="Take a tea">Take a tea</a><br>
 Infusé par Take a tea ;)</p>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tea to wp maintained by <a href="https://github.com/Takeatea">Takeatea</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		          <script type="text/javascript">
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -574,6 +646,7 @@ Infusé par Take a tea ;)</p>
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
