@@ -8,15 +8,13 @@
         <?php screen_icon() ?>
     </div>
 
-    <h2>
-        <?php echo empty($title) ? __('Tea Options Panel') : $title ?>
-    </h2>
+    <h2><?php echo empty($title) ? __('Tea Options Panel') : $title ?></h2>
 
     <ul class="subsubsub">
         <?php foreach ($links as $link): ?>
             <li class="all"><a href="admin.php?page=<?php echo $link['slug'] ?>"<?php echo $link['slug'] == $page ? ' class="current"' : '' ?>><?php echo $link['title'] ?></a> |</li>
         <?php endforeach ?>
-            <li class="all">Infus&eacute; par <a href="http://takeatea.com" target="_blank">Take a tea</a></li>
+            <li class="all"><?php _e('Made by <a href="http://takeatea.com" target="_blank">Take a tea</a>') ?></li>
     </ul>
 
     <br class="clear" />

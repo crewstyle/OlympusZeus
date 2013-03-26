@@ -1,7 +1,7 @@
 /*
  * jQuery Tea Theme Options
  *
- * Copyright 2012 Take a Tea (http://takeatea.com)
+ * Copyright 2013 Take a Tea (http://takeatea.com)
  *
  * Dual licensed under the MIT or GPL Version 2 licenses
  *
@@ -56,7 +56,7 @@
         });
 
         //Upload input
-        $.each($('.inside.upload a.thickbox.add_media'), function (index, elem) {
+        $.each($('.inside.upload a.thickbox.add_media'), function (index, elem){
             var $self = $(this);
             var _id = $self.closest('.upload_image_via_wp').find('input').attr('id');
 
@@ -75,13 +75,19 @@
                 tb_remove();
             }
         });
-        $.each($('.inside.upload a.add_media:not(.thickbox)'), function (index, elem) {
+        $.each($('.inside.upload a.add_media:not(.thickbox)'), function (index, elem){
             var $self = $(this);
-            var _id = $self.closest('.upload_image_via_wp').find('input').attr('id');
 
+            //Bind the click event
+            $self.bind('click', function (e){
+                _id = $self.closest('.upload_image_via_wp').find('input').attr('id');
+                return;
+            });
             window.send_to_editor = function (html){
                 imgurl = undefined == $(html).attr('src') ? $(html).attr('href') : $(html).attr('src');
                 $('#' + _id).val(imgurl);
+                $self.closest('.inside.upload').find('.upload_image_result a').attr('href', imgurl);
+                $self.closest('.inside.upload').find('.upload_image_result img').attr('src', imgurl);
                 tb_remove();
             }
         });

@@ -135,20 +135,27 @@ All available types are:
 + Select
 + Text (or Email or Search or Url)
 + Textarea
-+ Upload (for images only)
++ Upload (for images only) with the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
 **Special inputs**:
 + Category, offers a WP category listing with multiselect option if needed
 + Color, offers an input text with colorpicker
-+ Font, offers a list of font choices with image labels (uniq choices)
++ Font, offers a list of font choices with image labels (uniq choice)
 + Group, offers the possibility to add multiple inputs
-+ Image, offers a list of choices with image labels (uniq choices)
++ Image, offers a list of choices with image labels (uniq choice)
 + Menu, display menus as information (no action required)
 + Number (or Range), display new HTML5 inputs
 + Page, display pages as information (no action required)
 + Sidebar, display widgets as information (no action required)
 + Social, display a list of wanted social buttons with multichoice
-+ Typeahead, offers an input text with ajax call __IN PROGRESS__
+
+**Next inputs**: __IN PROGRESS__
++ Button, offers a button with custom interaction
++ Date, offers an input text with calendar interaction
++ Post, offers a WP post listing with multiselect option if needed
++ Tag, offers a WP tag listing with multiselect option if needed
++ Typeahead, offers an input text with ajax call
++ WYSIWYG, offers a Rich Text Editor
 
 
 6) Display inputs
@@ -257,7 +264,7 @@ Adding a `select`
     )
 
 Adding a `text`  
-NOTA: you can define the maxlength optional attribute.
+NOTA: you can define the maxlength optional attribute. You can use `email`, `search` or `url` type to use the new HTML5 inputs.
 
     array(
         'type' => 'text',
@@ -269,8 +276,7 @@ NOTA: you can define the maxlength optional attribute.
         'maxlength' => 7
     )
 
-Adding a `textarea`  
-NOTA: you can use `email`, `search` or `url` type to use the new HTML5 inputs
+Adding a `textarea`
 
     array(
         'type' => 'textarea',
@@ -282,7 +288,7 @@ NOTA: you can use `email`, `search` or `url` type to use the new HTML5 inputs
     )
 
 Adding an `upload`  
-NOTA: the upload input uses the Media file uploader or Wordpress.
+NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
     array(
         'type' => 'upload',
@@ -298,6 +304,7 @@ NOTA: the upload input uses the Media file uploader or Wordpress.
 
 Adding a `category`  
 NOTA: the category input has a special method which detects if the ID has the `__category` term to register in transient more than expected, as the category title, slug and category.
+NOTA: the category input has a special method which detects if the ID has the `__categories` term to register in transient its children categories.
 
     array(
         'type' => 'category',
@@ -392,7 +399,7 @@ NOTA: the **Tea TO** package offers a large set of background patterns. If you w
         )
     )
 
-Adding an `menu`
+Adding a `menu`
 
     array(
         'type' => 'menu',
@@ -435,7 +442,7 @@ Adding a `sidebar`
 
 Adding a `social`  
 NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.  
-`addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
+`addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
 
     array(
         'type' => 'social',
@@ -447,9 +454,44 @@ NOTA: use the `wanted` attribute to list all the wanted social buttons, from the
             'facebook',
             'twitter',
             'googleplus',
+            'instagram',
             'pinterest',
             'addthis'
         )
+    )
+
+
+9) Special inputs
+-----------------
+
+Adding an `date` __IN PROGRESS__
+
+    array(
+        'type' => 'date',
+        'title' => 'Date',
+        'id' => 'simple_date',
+        'std' => 'Simple date',
+        'description' => 'Simple description to date panel'
+    )
+
+Adding an `post` __IN PROGRESS__
+
+    array(
+        'type' => 'post',
+        'title' => 'Post',
+        'id' => 'simple_post',
+        'std' => 'Simple post',
+        'description' => 'Simple description to post panel'
+    )
+
+Adding an `tag` __IN PROGRESS__
+
+    array(
+        'type' => 'tag',
+        'title' => 'Tag',
+        'id' => 'simple_tag',
+        'std' => 'Simple tag',
+        'description' => 'Simple description to tag panel'
     )
 
 Adding an `typeahead` __IN PROGRESS__
@@ -463,8 +505,18 @@ Adding an `typeahead` __IN PROGRESS__
         'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
     )
 
+Adding an `wysiwyg` __IN PROGRESS__
 
-9) Get data from Transient
+    array(
+        'type' => 'wysiwyg',
+        'title' => 'WYSIWYG',
+        'id' => 'simple_wysiwyg',
+        'std' => 'Simple wysiwyg',
+        'description' => 'Simple description to wysiwyg panel'
+    )
+
+
+10) Get data from Transient
 --------------------------
 
 To get your data back in your theme, you have to know the ID of what you want to retrieve.  
@@ -472,18 +524,30 @@ Don't forget that the **Tea TO** uses the Transient Wordpress API, and get back 
 In this example, we will display the `simple_text` data on the screen:
 
     //`simple_text` is the ID of our text input, defined above
-    $mytext = get_transient('simple_text'); //get the data from the cache via Transient API
-    if (false === $mytext) { //checks if the `simple_text` is in cache. And if not...
-        $mytext_from_option = get_option('simple_text'); //get data from DB
-        $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option; //check if the data is in the DB
-        set_transient('simple_text', $mytext, 86400); //set the data in the cache via Transient API with name - value - time in cache
+
+    //get the data from the cache via Transient API
+    $mytext = get_transient('simple_text');
+
+    //checks if the `simple_text` is in cache. And if not...
+    if (false === $mytext)
+    {
+        //get data from DB
+        $mytext_from_option = get_option('simple_text');
+
+        //check if the data is in the DB
+        $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option;
+
+        //set the data in the cache via Transient API with name - value - time in cache
+        set_transient('simple_text', $mytext, 86400);
     }
-    echo $mytext; //display the data
+
+    //display the data
+    echo $mytext;
 
 You can do more better. Try to test your value before any manipulation.
 
 
-10) That's all folkes!
+11) That's all folkes!
 ---------------------
 
 Here is the latest step: check quickly your new panel options.
@@ -495,7 +559,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working on **Tea TO**
 
 
-10) Authors
+12) Authors
 ----------
 
 **Take a Tea**
@@ -509,9 +573,8 @@ That's all to begin working on **Tea TO**
 + http://github.com/crewstyle
 
 
-11) Copyright and license
+13) Copyright and license
 ------------------------
 
-Copyright 2012 [Take a tea](http://takeatea.com "Take a tea")  
+Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
 Infusé par Take a tea ;)
-

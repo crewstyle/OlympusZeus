@@ -21,7 +21,7 @@
                         </h3>
 
                         <div class="inside">
-                            <?php echo sprintf(__('<p>Please, contact <a href="mailto:hello@takeatea.com?subject=Tea Theme Options on %s">hello@takeatea.com</a> if you have any suggestions.</p><p>Your Teamakers will always be here for you ;)</p>', TEMPLATE_DICTIONNARY), BLOG_NAME) ?>
+                            <?php echo sprintf(__('<p>Please, contact <a href="mailto:teatime@takeatea.com?subject=Tea Theme Options on %s">teatime@takeatea.com</a> if you have any suggestions.</p><p>Your Teamakers will always be here for you ;)</p>', TEMPLATE_DICTIONNARY), BLOG_NAME) ?>
                             <hr/>
                             <?php _e('&copy; 2012, Take a tea. All rights reserved.', TEMPLATE_DICTIONNARY) ?>
                         </div>

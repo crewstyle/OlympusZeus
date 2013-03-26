@@ -101,9 +101,9 @@
 .tea_to.wrap .inside textarea {
     resize:none;
 }
-.tea_to.wrap .inside select {
+/*.tea_to.wrap .inside select {
     height:100%;
-}
+}*/
 
 /*--- [CHECKBOXES] ---*/
 .tea_to.wrap .inside.checkbox {
