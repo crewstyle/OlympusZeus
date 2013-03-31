@@ -1,3 +1,11 @@
+## 1.0.2 (March 31, 2013)
+
+Add a small checkbox feature
+
+- **New:**
+  - add an "Un/select all checkboxes" on checkbox field
+
+
 ## 1.0.1 (March 26, 2013)
 
 List now all next todos and add some extra features
@@ -12,5 +20,7 @@ List now all next todos and add some extra features
   - add admin warning messages
   - add Instagram social button
 
+
 ## v1.0.0
+
 - **Initial release**
