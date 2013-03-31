@@ -21,12 +21,11 @@ if (!defined('ABSPATH')) {
  * To get its own settings
  *
  * @since Tea Theme Options 1.0.1
- * @todo Special field:     WYSIWYG, Typeahead
+ * @todo Special field:     WYSIWYG, Typeahead, Tags, Posts, Date
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
  *                          Price table, Carousel, Icons
  * @todo Custom Post Types: Project, Carousel
- * @todo Special input: typeahead with Ajax URL
  */
 class Tea_Theme_Options
 {
