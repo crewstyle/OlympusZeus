@@ -442,7 +442,7 @@ Adding a `sidebar`
 
 Adding a `social`  
 NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.  
-`addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
+`addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `hellocoton`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
 
     array(
         'type' => 'social',
