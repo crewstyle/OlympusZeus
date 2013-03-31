@@ -21,10 +21,10 @@
             $self.addClass('selected');
         });
 
-        //Chckbox check all
+        //Checkbox check all
         $('.checkboxes .checkall input').bind('change', function (e){
             var $self = $(this);
-            var $checks = $self.closest('.checkboxes').find('.inside.checkbox input');
+            var $checks = $self.closest('.checkboxes').find('.inside input');
             $checks.attr('checked', $self.is(':checked'));
         });
 

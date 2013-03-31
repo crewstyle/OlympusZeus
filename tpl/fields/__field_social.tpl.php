@@ -1,7 +1,13 @@
                     <!-- Content social <?php echo $id ?> -->
-                    <div id="<?php echo $id ?>_content" class="<?php echo $group ? 'smallbox' : 'stuffbox' ?>">
+                    <div id="<?php echo $id ?>_content" class="checkboxes <?php echo $group ? 'smallbox' : 'stuffbox' ?>">
                         <h3>
                             <label><?php echo $title ?></label>
+                            <?php if (2 < count($options)): ?>
+                                <label for="checkall" class="checkall">
+                                    <?php _e('Un/select all options') ?>
+                                    <input type="checkbox" id="checkall" />
+                                </label>
+                            <?php endif ?>
                         </h3>
 
                         <div class="inside image image-checkbox">
