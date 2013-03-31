@@ -9,34 +9,35 @@
 ;(function($){
     $(document).ready(function (){
         //Checkbox & Image input
-        $('.inside.checkbox label, .inside.image-checkbox label').bind('click', function (e){
+        $('.inside input[type="checkbox"]').bind('change', function (e){
             var $self = $(this);
-            $self.find('input:checked').length ? $self.addClass('selected') : $self.removeClass('selected');
+            $self.is(':checked') ? $self.closest('label').addClass('selected') : $self.closest('label').removeClass('selected');
         });
 
         //Radio & Image input
-        $('.inside.radio label, .inside.image-radio label').bind('click', function (e){
+        $('.inside input[type="radio"]').bind('change', function (e){
             var $self = $(this);
             $self.closest('.inside').find('.selected').removeClass('selected');
-            $self.addClass('selected');
+            $self.closest('label').addClass('selected');
         });
 
         //Checkbox check all
-        $('.checkboxes .checkall input').bind('change', function (e){
+        $('.checkboxes .checkall input[type="checkbox"]').bind('change', function (e){
             var $self = $(this);
-            var $checks = $self.closest('.checkboxes').find('.inside input');
+            var $checks = $self.closest('.checkboxes').find('.inside input[type="checkbox"]');
             $checks.attr('checked', $self.is(':checked'));
+            $self.is(':checked') ? $checks.closest('label').addClass('selected') : $checks.closest('label').removeClass('selected');
         });
 
         //Color input
-        $('.inside.color .old.color-picker').miniColors({
+        /*$('.inside.color .old.color-picker').miniColors({
             readonly: true,
             change: function(hex, rgb)
             {
                 $(this).val('' + hex);
                 $(this).css('color', hex);
             }
-        });
+        });*/
         $.each($('.inside.color .color-picker'), function (index,elem){
             var $self = $(this);
             var default_color = 'fbfbfb';
