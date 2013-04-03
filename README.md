@@ -616,7 +616,6 @@ Here is a working example to define in your functions.php theme page.
 
 Here is how to get data in your template (i.e. in yout header.php)
 
-    <?php
     //Get data from DB
     $intro = get_option('contents_intro');
 
@@ -625,7 +624,6 @@ Here is how to get data in your template (i.e. in yout header.php)
 
     //Display it
     echo $intro;
-    ?>
 
 
 11) Get data from Transient
@@ -688,7 +686,7 @@ Here is the latest step: check quickly your new panel options.
 + Log in to your admin panel
 + **See that you have a new Link in your admin sidebar**
 
-That's all to begin working on **Tea TO**
+That's all to begin working with **Tea TO**
 
 
 14) Authors
