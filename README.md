@@ -547,7 +547,27 @@ In this example, we will display the `simple_text` data on the screen:
 You can do more better. Try to test your value before any manipulation.
 
 
-11) That's all folkes!
+11) Previews
+------------
+
+Main view with Google font special field
+![Main view with Google font special field](http://takeatea.com/teato/teato-a.png)
+
+Wordpress color field
+![Wordpress color field](http://takeatea.com/teato/teato-b.png)
+![Wordpress color field opened](http://takeatea.com/teato/teato-f.png)
+
+Group field with text inputs
+![Group field with text inputs](http://takeatea.com/teato/teato-c.png)
+
+Checkboxes field with un/select all
+![Checkboxes field with un/select all](http://takeatea.com/teato/teato-d.png)
+
+Social special field
+![Social special field](http://takeatea.com/teato/teato-e.png)
+
+
+12) That's all folkes!
 ---------------------
 
 Here is the latest step: check quickly your new panel options.
@@ -559,7 +579,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working on **Tea TO**
 
 
-12) Authors
+13) Authors
 ----------
 
 **Take a Tea**
@@ -575,7 +595,7 @@ That's all to begin working on **Tea TO**
 + http://github.com/crewstyle
 
 
-13) Copyright and license
+14) Copyright and license
 ------------------------
 
 Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
