@@ -564,11 +564,13 @@ That's all to begin working on **Tea TO**
 
 **Take a Tea**
 
++ http://takeatea.com
 + http://twitter.com/takeatea
 + http://github.com/takeatea
 
 **Achraf Chouk**
 
++ http://fr.linkedin.com/in/achrafchouk/
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
