@@ -272,11 +272,15 @@ class Tea_Theme_Options
             'slug' => $this->identifier
         );
 
+        //Set the current page
+        $is_page = $this->identifier == $this->current ? true : false;
+
         //Add submenu pages
         foreach ($this->subpages as $key => $subpage)
         {
-            //Build slug
+            //Build slug and check it
             $slug = $this->__getSlug($subpage['slug']);
+            $is_page = $slug == $this->current ? true : $is_page;
 
             //Add subpage
             add_submenu_page(
@@ -302,8 +306,11 @@ class Tea_Theme_Options
         }
 
         //Load assets
-        add_action('admin_print_scripts', array(&$this, '__assetScripts'));
-        add_action('admin_print_styles', array(&$this, '__assetStyles'));
+        if (!empty($this->current) && $is_page)
+        {
+            add_action('admin_print_scripts', array(&$this, '__assetScripts'));
+            add_action('admin_print_styles', array(&$this, '__assetStyles'));
+        }
     }
 
 
@@ -318,7 +325,6 @@ class Tea_Theme_Options
      */
     public function __assetScripts()
     {
-        wp_enqueue_script('thickbox', '/'.WPINC.'/js/thickbox/thickbox.js', array('jquery'));
         wp_enqueue_script('wp-color-picker');
         wp_enqueue_script('tea-to', $this->directory . '/js/teato.js', array('jquery'));
     }
@@ -332,7 +338,6 @@ class Tea_Theme_Options
      */
     public function __assetStyles()
     {
-        wp_enqueue_style('thick-box', '/'.WPINC.'/js/thickbox/thickbox.css');
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_style('tea-to', $this->directory . '/css/teato.css');
     }
@@ -1355,6 +1360,13 @@ class Tea_Theme_Options
      */
     public function __setOption($key, $value, $dependancy = array())
     {
+        //Check the category
+        if (empty($key) || empty($value))
+        {
+            $this->adminmessage = __('Something went wrong. Key and/or value is empty.');
+            return false;
+        }
+
         //Set the option
         update_option($key, $value);
 
