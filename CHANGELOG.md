@@ -42,6 +42,15 @@ Add some new fields and fix small bugs
   - add Choice field with some extra options instead of checkbox/radio/select/multiselect fields
 
 
+## 1.0.3 (March 31, 2013)
+
+Some improvments on checkbox fields and new social icons
+
+- **New:**
+  - add an "Un/select all checkboxes" on image and social fields
+  - add Bloglovin, Hellocoton and Youtube social icons
+
+
 ## 1.0.2 (March 31, 2013)
 
 Add a small checkbox feature

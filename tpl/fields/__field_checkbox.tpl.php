@@ -2,7 +2,6 @@
                     <div id="<?php echo $id ?>_checkbox_content" class="checkboxes <?php echo $group ? 'smallbox' : 'stuffbox' ?>">
                         <h3>
                             <label><?php echo $title ?></label>
-
                             <?php if (2 < count($options)): ?>
                                 <label for="checkall" class="checkall">
                                     <?php _e('Un/select all options') ?>

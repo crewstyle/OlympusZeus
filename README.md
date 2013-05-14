@@ -1,9 +1,26 @@
 Tea Theme Options
 =================
 
-The Tea Theme Options (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. **Tea TO** uses the [Transient Wordpress API](http://codex.wordpress.org/Transients_API) and puts all data in cache.  
+The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. **Tea TO** uses the [Transient Wordpress API](http://codex.wordpress.org/Transients_API) and puts all data in cache.  
 This document contains information on how to download, install, and start using the **Tea TO** Wordpress project.  
 NOTA: **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+
+**Summary**
++ [1) Installing the theme roller](#1-installing-the-theme-roller)
++ [2) Create a new Tea_Theme_Options object and set details](#2-create-a-new-tea_theme_options-object-and-set-details)
++ [3) Let's roll!](#3-lets-roll)
++ [4) Building menus](#4-building-menus)
++ [5) Adding fields](#5-adding-fields)
++ [6) Display inputs](#6-display-inputs)
++ [7) Normal inputs](#7-normal-inputs)
++ [8) Special inputs](#8-special-inputs)
++ [9) Next inputs](#9-next-inputs)
++ [10) Example](#10-example)
++ [11) Get data from Transient](#11-get-data-from-transient)
++ [12) Previews](#12-previews)
++ [13) That's all folkes!](#13-thats-all-folkes)
++ [14) Authors](#14-authors)
++ [15) Copyright and license](#15-copyright-and-license)
 
 
 1) Installing the theme roller
@@ -304,7 +321,7 @@ NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress
 
 Adding a `category`  
 NOTA: the category input has a special method which detects if the ID has the `__category` term to register in transient more than expected, as the category title, slug and category.
-NOTA: the category input has a special method which detects if the ID has the `__children` term to register in transient its children categories.
+NOTA: the category input has a special method which detects if the ID has the `__categories` term to register in transient its children categories.
 
     array(
         'type' => 'category',
@@ -442,7 +459,7 @@ Adding a `sidebar`
 
 Adding a `social`  
 NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.  
-`addthis`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`
+`addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `hellocoton`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
 
     array(
         'type' => 'social',
@@ -461,10 +478,10 @@ NOTA: use the `wanted` attribute to list all the wanted social buttons, from the
     )
 
 
-9) Special inputs
------------------
+9) Next inputs
+--------------
 
-Adding an `date` __IN PROGRESS__
+Adding a `date` __IN PROGRESS__
 
     array(
         'type' => 'date',
@@ -474,7 +491,7 @@ Adding an `date` __IN PROGRESS__
         'description' => 'Simple description to date panel'
     )
 
-Adding an `post` __IN PROGRESS__
+Adding a `post` __IN PROGRESS__
 
     array(
         'type' => 'post',
@@ -484,7 +501,7 @@ Adding an `post` __IN PROGRESS__
         'description' => 'Simple description to post panel'
     )
 
-Adding an `tag` __IN PROGRESS__
+Adding a `tag` __IN PROGRESS__
 
     array(
         'type' => 'tag',
@@ -494,7 +511,7 @@ Adding an `tag` __IN PROGRESS__
         'description' => 'Simple description to tag panel'
     )
 
-Adding an `typeahead` __IN PROGRESS__
+Adding a `typeahead` __IN PROGRESS__
 
     array(
         'type' => 'typeahead',
@@ -505,7 +522,7 @@ Adding an `typeahead` __IN PROGRESS__
         'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
     )
 
-Adding an `wysiwyg` __IN PROGRESS__
+Adding a `wysiwyg` __IN PROGRESS__
 
     array(
         'type' => 'wysiwyg',
@@ -516,8 +533,101 @@ Adding an `wysiwyg` __IN PROGRESS__
     )
 
 
-10) Get data from Transient
---------------------------
+10) Example
+-----------
+
+Here is a working example to define in your functions.php theme page.
+
+    define('BLOG_NAME', 'My blog name');
+    define('TEMPLATE_DICTIONNARY', 'mytemplate');
+    define('TEMPLATE_DIR_URI', get_template_directory_uri());
+
+    //Instanciate a new Tea_Theme_Options
+    $tea = new Tea_Theme_Options('tea_options');
+
+    //Build page
+    $tea_configs = array(
+        'title' => BLOG_NAME,
+        'name' => __('Tea T.O.', TEMPLATE_DICTIONNARY),
+        'capability' => 'edit_pages',
+        'icon' => TEMPLATE_DIR_URI . '/img/admin/settings_16.png',
+        'bigicon' => TEMPLATE_DIR_URI . '/img/admin/settings_32.png',
+        'description' => ''
+    );
+    $tea->addPage($tea_configs);
+
+    //Add fields
+    $tea_configs = array(
+        array(
+            'type' => 'text',
+            'title' => __('Your Google+ profile link.', TEMPLATE_DICTIONNARY),
+            'id' => 'global_google_profile_link',
+            'placeholder' => __('https://plus.google.com/...', TEMPLATE_DICTIONNARY),
+            'description' => __('Paste your Google+ account profile link here to appear as the website publisher', TEMPLATE_DICTIONNARY)
+        ),
+        array(
+            'type' => 'font',
+            'title' => __('Main font.', TEMPLATE_DICTIONNARY),
+            'id' => 'global_main_font',
+            'std' => DEFAULT_FONT,
+            'description' => __('Set the main website font for titles.', TEMPLATE_DICTIONNARY),
+            'default' => true,
+            'options' => array(
+                'Montserrat' => TEMPLATE_DIR_URI . '/img/montserrat.png'
+            )
+        )
+    );
+    $tea->addFields($tea_configs);
+
+    //Build subpage
+    $tea_configs = array(
+        'title' => __('Contents', TEMPLATE_DICTIONNARY),
+        'name' => __('Contents', TEMPLATE_DICTIONNARY),
+        'slug' => '_contents'
+    );
+    $tea->addSubpage($tea_configs);
+
+    //Add fields
+    $tea_configs = array(
+        array(
+            'type' => 'text',
+            'title' => __('Project list title.', TEMPLATE_DICTIONNARY),
+            'id' => 'contents_title'
+        ),
+        array(
+            'type' => 'textarea',
+            'title' => __('Project list intro.', TEMPLATE_DICTIONNARY),
+            'id' => 'contents_intro'
+        ),
+        array(
+            'type' => 'upload',
+            'title' => __('Default project image.', TEMPLATE_DICTIONNARY),
+            'id' => 'contents_default__image',
+            'description' => __('The image must be <b>340 * 280 pixels</b> per default.', TEMPLATE_DICTIONNARY)
+        )
+    );
+    $tea->addFields($tea_configs);
+
+    //Build menus
+    $tea->buildMenus();
+
+    //Unset array
+    unset($tea_configs);
+
+Here is how to get data in your template (i.e. in yout header.php)
+
+    //Get data from DB
+    $intro = get_option('contents_intro');
+
+    //Check transitivity
+    $intro = false === $intro ? 'No content found...' : $intro;
+
+    //Display it
+    echo $intro;
+
+
+11) Get data from Transient
+---------------------------
 
 To get your data back in your theme, you have to know the ID of what you want to retrieve.  
 Don't forget that the **Tea TO** uses the Transient Wordpress API, and get back data is quite simple.  
@@ -547,8 +657,28 @@ In this example, we will display the `simple_text` data on the screen:
 You can do more better. Try to test your value before any manipulation.
 
 
-11) That's all folkes!
----------------------
+12) Previews
+------------
+
+Main view with Google font special field
+![Main view with Google font special field](http://takeatea.com/teato/teato-a.png)
+
+Wordpress color field
+![Wordpress color field](http://takeatea.com/teato/teato-b.png)
+![Wordpress color field opened](http://takeatea.com/teato/teato-f.png)
+
+Group field with text inputs
+![Group field with text inputs](http://takeatea.com/teato/teato-c.png)
+
+Checkboxes field with un/select all
+![Checkboxes field with un/select all](http://takeatea.com/teato/teato-d.png)
+
+Social special field
+![Social special field](http://takeatea.com/teato/teato-e.png)
+
+
+13) That's all folkes!
+----------------------
 
 Here is the latest step: check quickly your new panel options.
 
@@ -556,26 +686,27 @@ Here is the latest step: check quickly your new panel options.
 + Log in to your admin panel
 + **See that you have a new Link in your admin sidebar**
 
-That's all to begin working on **Tea TO**
+That's all to begin working with **Tea TO**
 
 
-12) Authors
-----------
+14) Authors
+-----------
 
 **Take a Tea**
 
++ http://takeatea.com
 + http://twitter.com/takeatea
 + http://github.com/takeatea
 
 **Achraf Chouk**
 
++ http://fr.linkedin.com/in/achrafchouk/
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
 
-13) Copyright and license
-------------------------
+15) Copyright and license
+-------------------------
 
 Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
 Infusé par Take a tea ;)
-

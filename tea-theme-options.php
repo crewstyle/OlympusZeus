@@ -195,6 +195,9 @@ class Tea_Theme_Options
         wp_enqueue_style('tea-to', $this->directory . '/css/teato.css');
     }
 
+
+    //--------------------------------------------------------------------------//
+
     /**
      * Hook building admin bar.
      *
@@ -211,7 +214,7 @@ class Tea_Theme_Options
             'title' => $this->pages[$this->identifier]['name'],
             'href' => admin_url('admin.php?page=' . $this->identifier)
         ));
-    }
+    }*/
 
     /**
      * Hook building menus.
@@ -230,6 +233,9 @@ class Tea_Theme_Options
             $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.');
             return false;
         }
+
+        //Set the current page
+        $is_page = $this->identifier == $this->current ? true : false;
 
         //Set the current page
         $is_page = $this->identifier == $this->current ? true : false;
