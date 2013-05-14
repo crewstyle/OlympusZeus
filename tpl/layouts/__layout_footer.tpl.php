@@ -19,11 +19,11 @@
                         </h3>
 
                         <div class="inside">
-                            <?php echo sprintf(__('<p>Please, contact <a href="mailto:teatime@takeatea.com?subject=Tea Theme Options on %s">teatime@takeatea.com</a> if you have any suggestions.</p><p>Your Teamakers will always be here for you ;)</p>', TEMPLATE_DICTIONNARY), BLOG_NAME) ?>
-                            <hr/>
-                            <?php _e('&copy; 2013, Take a tea. All rights reserved.', TEMPLATE_DICTIONNARY) ?>
+                            <p><?php echo sprintf(__('Your Tea Theme Option is in <b>version %s</b>', TEMPLATE_DICTIONNARY), $version) ?></p>
+                            <p><?php echo sprintf(__('Please, contact <a href="mailto:teatime@takeatea.com?subject=Tea Theme Options on %s - version %s"><b>teatime@takeatea.com</b></a> if you have any suggestions.', TEMPLATE_DICTIONNARY), BLOG_NAME, $version) ?></p>
                         </div>
                     </div>
+                    <?php _e('&copy; 2013, Take a tea. All rights reserved.', TEMPLATE_DICTIONNARY) ?>
                 </div>
                 <!-- /Register block -->
 

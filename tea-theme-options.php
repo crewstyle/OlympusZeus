@@ -41,6 +41,7 @@ class Tea_Theme_Options
     public $index;
     public $is_admin;
     public $pages;
+    public $version;
     public $wp_contents;
 
     /**
@@ -60,6 +61,9 @@ class Tea_Theme_Options
             $this->adminmessage = __('Something went wrong in your parameters definition. You need at least an identifier.');
             return false;
         }
+
+        //Set version
+        $this->version = '1.2.1';
 
         //Define parameters
         $this->breadcrumb = array();
@@ -214,7 +218,7 @@ class Tea_Theme_Options
             'title' => $this->pages[$this->identifier]['name'],
             'href' => admin_url('admin.php?page=' . $this->identifier)
         ));
-    }*/
+    }
 
     /**
      * Hook building menus.
@@ -388,6 +392,7 @@ class Tea_Theme_Options
     {
         //Get all pages with submit button
         $submit = empty($this->current) ? $this->pages[$this->identifier]['submit'] : $this->pages[$this->current]['submit'];
+        $version = $this->version;
 
         //Include template
         include('tpl/layouts/__layout_footer.tpl.php');

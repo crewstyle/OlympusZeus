@@ -1,3 +1,13 @@
+## 1.2.1 (May 14, 2013)
+
+Fix some small bugs
+
+- **Fix:**
+  - delete a forgotten enclosure
+- **New:**
+  - add TeaTO version
+
+
 ## 1.2.0 (May 14, 2013)
 
 Add some new fields and fix small bugs
