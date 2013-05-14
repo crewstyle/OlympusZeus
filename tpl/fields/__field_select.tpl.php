@@ -1,5 +1,5 @@
                     <!-- Content select <?php echo $id ?> -->
-                    <div id="<?php echo $id ?>_content" class="<?php echo $group ? 'smallbox' : 'stuffbox' ?>">
+                    <div id="<?php echo $id ?>_select_content" class="<?php echo $group ? 'smallbox' : 'stuffbox' ?>">
                         <h3>
                             <label for="<?php echo $id ?>"><?php echo $title ?></label>
                         </h3>

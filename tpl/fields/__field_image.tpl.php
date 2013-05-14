@@ -1,7 +1,13 @@
                     <!-- Content image <?php echo $id ?> -->
-                    <div id="<?php echo $id ?>_content" class="<?php echo $group ? 'smallbox' : 'stuffbox' ?>">
+                    <div id="<?php echo $id ?>_image_content" class="checkboxes <?php echo $group ? 'smallbox' : 'stuffbox' ?>">
                         <h3>
                             <label><?php echo $title ?></label>
+                            <?php if ('checkbox' == $type && 2 < count($options)): ?>
+                                <label for="checkall" class="checkall">
+                                    <?php _e('Un/select all options') ?>
+                                    <input type="checkbox" id="checkall" />
+                                </label>
+                            <?php endif ?>
                         </h3>
 
                         <div class="inside image image-<?php echo $type ?>">
@@ -11,7 +17,7 @@
                                         $selected = is_array($val) && in_array($option, $val) ? true : ($option == $val ? true : false);
                                         $pathinfo = pathinfo($option);
                                         $for = $id . '_' . $pathinfo['filename'];
-                                        $name = $multiselect ? $id . '[' . $pathinfo['filename'] . ']' : $id;
+                                        $name = $multiple ? $id . '[' . $pathinfo['filename'] . ']' : $id;
                                     ?>
                                     <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                                         <div class="image-to-show">

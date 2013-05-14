@@ -1,15 +1,13 @@
 
-                    <!-- Content save -->
-                    <div id="save_content" class="postbox stuffbox">
-                        <h3>
-                            <label><?php _e('Actions') ?></label>
-                        </h3>
-
-                        <div class="inside">
-                            <?php submit_button(__('Update')) ?>
+                    <?php if ($submit): ?>
+                        <!-- Content save -->
+                        <div id="save_content">
+                            <div class="inside">
+                                <?php submit_button(__('Update')) ?>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /Content save -->
+                        <!-- /Content save -->
+                    <?php endif ?>
                 </div>
                 <!-- /Content block -->
 
@@ -21,9 +19,9 @@
                         </h3>
 
                         <div class="inside">
-                            <?php echo sprintf(__('<p>Please, contact <a href="mailto:hello@takeatea.com?subject=Tea Theme Options on %s">hello@takeatea.com</a> if you have any suggestions.</p><p>Your Teamakers will always be here for you ;)</p>', TEMPLATE_DICTIONNARY), BLOG_NAME) ?>
+                            <?php echo sprintf(__('<p>Please, contact <a href="mailto:teatime@takeatea.com?subject=Tea Theme Options on %s">teatime@takeatea.com</a> if you have any suggestions.</p><p>Your Teamakers will always be here for you ;)</p>', TEMPLATE_DICTIONNARY), BLOG_NAME) ?>
                             <hr/>
-                            <?php _e('&copy; 2012, Take a tea. All rights reserved.', TEMPLATE_DICTIONNARY) ?>
+                            <?php _e('&copy; 2013, Take a tea. All rights reserved.', TEMPLATE_DICTIONNARY) ?>
                         </div>
                     </div>
                 </div>

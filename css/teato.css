@@ -1,8 +1,22 @@
 /*
- * Tea Theme Options v1.0.2 - "Come get some! - Duke Nukem"
+ * Tea Theme Options v1.2.0 - "See you space cow-boy - Cow-boy Bebop"
  * Copyright 2012 Take a Tea
  * By Take a Tea <takeatea.com> :)
  */
+
+
+/*--- [CLEARFIX] ---*/
+.clearfix {
+    *zoom:1;
+}
+.clearfix:before, .clearfix:after {
+    content:"";
+    display:table;
+    line-height:0;
+}
+.clearfix:after {
+    clear:both;
+}
 
 
 /*--- [SMALLBOXES] ---*/
@@ -30,6 +44,7 @@
     width:24%;
 }
 
+
 /*--- [ALERTS] ---*/
 .tea_to.wrap .alert {
     background-color:#fcf8e3;
@@ -55,6 +70,7 @@
     border-color:#d6e9c6;
     color:#468847;
 }
+
 
 /*--- [INSIDES] ---*/
 .tea_to.wrap .inside p {
@@ -101,11 +117,57 @@
 .tea_to.wrap .inside textarea {
     resize:none;
 }
-.tea_to.wrap .inside select {
-    height:100%;
+
+
+/*--- [BACKGROUND] ---*/
+.tea_to.wrap .inside.background hr {
+    border:1px solid #ececec;
+    margin:5px 0 20px;
+}
+.tea_to.wrap .inside.background .bg-image label {
+    float:left;
+    margin:0 10px 10px 0;
+    text-align:center;
+}
+.tea_to.wrap .inside.background .bg-image label img {
+    border:5px solid #fff;
+    display:block;
+}
+.tea_to.wrap .inside.background .bg-image label:hover img {
+    border:5px solid #e5f1f7;
+}
+.tea_to.wrap .inside.background .bg-image label.selected img {
+    border:5px solid #298cba;
+}
+.tea_to.wrap .inside.background .bg-details {
+    float:left;
+    width:33%;
+}
+.tea_to.wrap .inside.count_25 .bg-details,
+.tea_to.wrap .inside.count_33 .bg-details,
+.tea_to.wrap .inside.count_50 .bg-details {
+    width:100%;
+}
+.tea_to.wrap .inside.background .bg-position input {
+    float:left;
+    width:49%;
+}
+.tea_to.wrap .inside.background .bg-position select {
+    float:right;
+    width:49%;
+}
+.tea_to.wrap .inside.background .bg-position span {
+    clear:both;
+    display:block;
 }
 
+
 /*--- [CHECKBOXES] ---*/
+.tea_to.wrap .checkall {
+    float:right;
+    font-size:12px;
+    line-height:20px;
+}
 .tea_to.wrap .inside.checkbox {
     background:#fff;
 }
@@ -125,27 +187,24 @@
     vertical-align:middle;
 }
 
-/*--- [RADIO BUTTONS] ---*/
-.tea_to.wrap .inside.radio label {
-    background-color:#fff;
-    display:block;
-    padding:5px;
-}
-.tea_to.wrap .inside.radio label:hover {
-    background-color:#e5f1f7;
-}
 
 /*--- [CHECKBOXES & RADIO BUTTONS & IMAGES] ---*/
-.tea_to.wrap .inside.checkbox label.selected,
-.tea_to.wrap .inside.radio label.selected,
-.tea_to.wrap .inside.image label.selected {
+.tea_to.wrap .inside label.selected {
     color:#298cba;
 }
 
+
 /*--- [COLORS] ---*/
-.tea_to.wrap .inside.color input.color-picker {
+.tea_to.wrap .inside input.color-picker {
     width:100px;
 }
+.tea_to.wrap .inside .wp-picker-container {
+    position:relative;
+}
+.tea_to.wrap .inside .wp-picker-holder {
+    position:absolute;
+}
+
 
 /*--- [IMAGES] ---*/
 .tea_to.wrap .inside.image label {
@@ -163,10 +222,13 @@
 .tea_to.wrap .inside.image label.selected img {
     border:5px solid #298cba;
 }
-.tea_to.wrap .inside.image label .image-to-show {
+
+
+/*--- [IMAGE-TO-SHOW] ---*/
+.tea_to.wrap .inside label .image-to-show {
     position:relative;
 }
-.tea_to.wrap .inside.image label .image-to-show span {
+.tea_to.wrap .inside label .image-to-show span {
     background:#e5f1f7;
     bottom:0;
     color:#000;
@@ -175,29 +237,111 @@
     padding:5px;
     position:absolute;
 }
-.tea_to.wrap .inside.image label:hover .image-to-show span {
+.tea_to.wrap .inside label:hover .image-to-show span {
     display:block;
 }
-.tea_to.wrap .inside.image label.selected .image-to-show span {
+.tea_to.wrap .inside label.selected .image-to-show span {
     background:#298cba;
     color:#fff;
     display:block;
 }
 
+
+/*--- [RADIO] ---*/
+.tea_to.wrap .inside .bg-repeat label,
+.tea_to.wrap .inside.radio label {
+    background-color:#fff;
+    display:block;
+    padding:5px;
+}
+.tea_to.wrap .inside .bg-repeat label:hover,
+.tea_to.wrap .inside.radio label:hover {
+    background-color:#e5f1f7;
+}
+
+
+/*--- [SOCIALS] ---*/
+.tea_to.wrap .inside.social div {
+    margin:0 0 10px 0;
+}
+.tea_to.wrap .inside.social label {
+    display:inline-block;
+    margin:0 10px 0 0;
+    text-align:center;
+}
+.tea_to.wrap .inside.social label img {
+    border:5px solid #fff;
+    vertical-align:middle;
+}
+.tea_to.wrap .inside.social label:hover img {
+    border:5px solid #e5f1f7;
+}
+.tea_to.wrap .inside.social label.selected img {
+    border:5px solid #298cba;
+}
+.tea_to.wrap .inside.social input[type="text"] {
+    display:inline-block;
+    margin:0 10px 0 0;
+    width:300px;
+}
+
+
 /*--- [UPLOADS] ---*/
+.tea_to.wrap .inside .customized {
+    padding:0 0 10px 0;
+}
 .tea_to.wrap .inside .upload_image_result {
     margin-top:10px;
     text-align:center;
 }
-.tea_to.wrap .inside .upload_image_result a {
+.tea_to.wrap .inside .upload_image_result figure {
     display:block;
-    margin-bottom:5px;
+    margin-bottom:10px;
+    opacity:1;
+    padding:10px 0 0;
 }
-.tea_to.wrap .inside .upload_image_result img {
+.tea_to.wrap .inside .upload_image_result figure img {
     background:url(../img/bg-upload.png) 0 0;
     margin:0 1px;
-    max-width:90%;
+    max-width:100%;
     padding:10px;
     vertical-align:middle;
+}
+.tea_to.wrap .inside .upload_image_result ul {
+    list-style:none;
+}
+.tea_to.wrap .inside .upload_image_result li {
+    display:inline-block;
+    height:150px;
+    margin:0 10px 10px 0;
+    opacity:1;
+    padding:5px;
+    vertical-align:top;
+    width:150px;
+}
+.tea_to.wrap .inside .upload_image_result li img {
+    background:url(../img/bg-upload.png) 0 0;
+    max-height:170px;
+    max-width:130px;
+    padding:10px;
+}
+.tea_to.wrap .inside .upload_image_result .delete {
+    color:#bc0b0b;
+    display:block;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    text-decoration:none;
+}
+.tea_to.wrap .delall {
+    color:#bc0b0b;
+    float:right;
+    font-size:12px;
+    line-height:20px;
+    text-decoration:none;
+}
+.tea_to.wrap .delall:hover,
+.tea_to.wrap .inside .upload_image_result .delete:hover {
+    color:red;
 }
 
