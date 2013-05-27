@@ -1,3 +1,21 @@
+## 1.2.3 (May 27, 2013)
+
+Get real advices from Xavier C. <https://twitter.com/xavismeh> :)
+
+- **Edit:**
+  - assets are now enabled in all Wordpress admin pages (a big news is coming ;))
+  - back to <checkbox>/<select>/<radio> instead of <choice> (not userfriendly)
+  - icons are now defined in the TeaTO and not settable anymore
+  - no more "__categories" special name anymore: you can set "__category" for simple or multiple choices
+  - public keys are now privates
+- **Fix:**
+  - fix <hidden> field which does not need description or title attributes
+- **New:**
+  - here comes the new default TeaTO Documentation page (appears even if you have no settings)
+  - new <features> and <list> fields to display contents
+  - new way to disable Wordpress scripts/styles on the TeaTO custom pages
+
+
 ## 1.2.2 (May 27, 2013)
 
 Fix some bugs, adds new fields, adds new default documentation page, better media-views integration, new scripts, and more...

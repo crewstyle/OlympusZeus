@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.2
+ * @since Tea Theme Options 1.2.3
  */
 
 if (!defined('ABSPATH')) {
@@ -29,60 +29,47 @@ if (!defined('ABSPATH')) {
  */
 class Tea_Theme_Options
 {
-    public $adminmessage;
-    public $breadcrumb;
-    public $capability;
-    public $categories;
-    public $can_upload;
-    public $current;
-    public $directory;
-    public $duration;
-    public $icon_small;
-    public $icon_big;
-    public $identifier;
-    public $index;
-    public $is_admin;
-    public $pages;
-    public $version;
-    public $wp_contents;
+    protected $adminmessage;
+    protected $breadcrumb = array();
+    protected $capability = 'edit_pages';
+    protected $categories = array();
+    protected $can_upload = false;
+    protected $current = '';
+    protected $directory = '';
+    protected $duration = 86400;
+    protected $icon_small = '/img/teato/icn-small.png';
+    protected $icon_big = '/img/teato/icn-big.png';
+    protected $identifier;
+    protected $index = null;
+    protected $is_admin;
+    protected $pages = array();
+    protected static $version = '1.2.3';
+    protected $wp_contents = array();
 
     /**
      * Constructor.
      *
-     * @uses __setDuration()
-     * @uses __updateOptions()
+     * @uses setDuration()
+     * @uses updateOptions()
      * @param string $identifier
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
     public function __construct($identifier = 'tea_theme_options')
     {
         //Check identifier
         if (empty($identifier))
         {
-            $this->adminmessage = __('Something went wrong in your parameters definition. You need at least an identifier.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong in your parameters definition. You need at least an identifier.'));
         }
 
-        //Set version
-        $this->version = '1.2.2';
-
         //Define parameters
-        $this->breadcrumb = array();
-        $this->capability = 'edit_pages';
-        $this->categories = array();
         $this->can_upload = current_user_can('upload_files');
-        $this->directory = '';
-        $this->icon_small = '/img/teato/icn-small.png';
-        $this->icon_big = '/img/teato/icn-big.png';
         $this->identifier = $identifier;
-        $this->index = null;
         $this->is_admin = is_admin() ? true : false;
-        $this->pages = array();
-        $this->wp_contents = array();
 
         //Set default duration
-        $this->__setDuration();
+        $this->setDuration();
 
         //Get page
         $this->current = isset($_GET['page']) ? $_GET['page'] : '';
@@ -90,7 +77,7 @@ class Tea_Theme_Options
         //Update options
         if (isset($_POST['tea_to_settings']))
         {
-            $this->__updateOptions($_POST, $_FILES);
+            $this->updateOptions($_POST, $_FILES);
         }
     }
 
@@ -99,20 +86,18 @@ class Tea_Theme_Options
      *
      * @param array $configs
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
     public function addPage($configs = array(), $contents = array())
     {
         //Check params and if a master page already exists
         if (empty($configs))
         {
-            $this->adminmessage = __('Something went wrong in your parameters definition: your configs are empty. See README.md for more explanations.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong in your parameters definition: your configs are empty. See README.md for more explanations.'));
         }
         else if (empty($contents))
         {
-            $this->adminmessage = __('Something went wrong in your parameters definition: your contents are empty. See README.md for more explanations.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong in your parameters definition: your contents are empty. See README.md for more explanations.'));
         }
 
         //Update capabilities
@@ -122,19 +107,21 @@ class Tea_Theme_Options
         }
 
         //Define the slug
-        $slug = isset($configs['slug']) ? $this->__getSlug($configs['slug']) : $this->__getSlug();
+        $slug = isset($configs['slug']) ? $this->getSlug($configs['slug']) : $this->getSlug();
 
         //Update the current page index
         $this->index = $slug;
 
         //Define page configurations
-        $this->pages[$this->index]['title'] = isset($configs['title']) ? $configs['title'] : 'Theme Options';
-        $this->pages[$this->index]['name'] = isset($configs['name']) ? $configs['name'] : 'Tea Theme Options';
-        $this->pages[$this->index]['position'] = isset($configs['position']) ? $configs['position'] : null;
-        $this->pages[$this->index]['description'] = isset($configs['description']) ? $configs['description'] : '';
-        $this->pages[$this->index]['submit'] = isset($configs['submit']) ? $configs['submit'] : true;
-        $this->pages[$this->index]['slug'] = $slug;
-        $this->pages[$this->index]['contents'] = $contents;
+        $this->pages[$slug] = array(
+            'title' => isset($configs['title']) ? $configs['title'] : 'Theme Options',
+            'name' => isset($configs['name']) ? $configs['name'] : 'Tea Theme Options',
+            'position' => isset($configs['position']) ? $configs['position'] : null,
+            'description' => isset($configs['description']) ? $configs['description'] : '',
+            'submit' => isset($configs['submit']) ? $configs['submit'] : true,
+            'slug' => $slug,
+            'contents' => $contents
+        );
     }
 
     /**
@@ -154,13 +141,12 @@ class Tea_Theme_Options
         }
 
         //Build Documentation content
-        $this->__buildDefaults();
+        $this->buildDefaults();
 
         //Check if no master page is defined
         if (empty($this->pages))
         {
-            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.'));
         }
 
         //Initialize the current index page
@@ -240,6 +226,12 @@ class Tea_Theme_Options
      */
     public function __buildAdminBar()
     {
+        //Check if there is no problems on page definitions
+        if (!isset($this->pages[$this->identifier]))
+        {
+            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page defined!'));
+        }
+
         global $wp_admin_bar;
 
         //Build WP menu in admin bar
@@ -253,8 +245,8 @@ class Tea_Theme_Options
     /**
      * Hook building menus.
      *
-     * @uses __getSlug()
-     * @uses __setDirectory()
+     * @uses getSlug()
+     * @uses setDirectory()
      * @uses add_action() - Wordpress
      *
      * @since Tea Theme Options 1.2.2
@@ -264,14 +256,13 @@ class Tea_Theme_Options
         //Check if no master page is defined
         if (empty($this->pages))
         {
-            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.'));
         }
 
         //Get the directory
         if (empty($this->directory))
         {
-            $this->__setDirectory();
+            $this->setDirectory();
         }
 
         //Set the current page
@@ -296,7 +287,7 @@ class Tea_Theme_Options
                     $page['name'],                  //page name
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
-                    array(&$this, '__buildContent'),//function to display content
+                    array(&$this, 'buildContent'),  //function to display content
                     $this->icon_small               //icon
                 );
             }
@@ -309,7 +300,7 @@ class Tea_Theme_Options
                     $page['name'],                  //page name
                     $this->capability,              //capability
                     $page['slug'],                  //menu slug
-                    array(&$this, '__buildContent') //function to display content
+                    array(&$this, 'buildContent')   //function to display content
                 );
             }
 
@@ -332,6 +323,22 @@ class Tea_Theme_Options
         add_action('admin_print_styles', array(&$this, '__assetStyles'));
     }
 
+    /**
+     * Display a warning message on the admin panel.
+     *
+     * @since Tea Theme Options 1.0.1
+     */
+    public function __showAdminMessage()
+    {
+        $content = $this->getAdminMessage();
+
+        if (!empty($content))
+        {
+            //Get template
+            include('tpl/layouts/__admin_message.tpl.php');
+        }
+    }
+
 
     //--------------------------------------------------------------------------//
 
@@ -340,7 +347,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __buildDefaults()
+    protected function buildDefaults()
     {
         //Get documentation contents
         include('tpl/layouts/__documentation.tpl.php');
@@ -349,15 +356,12 @@ class Tea_Theme_Options
         $this->addPage($titles, $details);
     }
 
-
-    //--------------------------------------------------------------------------//
-
     /**
      * Build header layout.
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __buildLayoutHeader()
+    protected function buildLayoutHeader()
     {
         //Get all pages with link, icon and title
         $links = $this->breadcrumb;
@@ -373,13 +377,13 @@ class Tea_Theme_Options
     /**
      * Build content layout.
      *
-     * @uses __buildLayoutFooter()
-     * @uses __buildLayoutHeader()
-     * @uses __buildType()
+     * @uses buildLayoutFooter()
+     * @uses buildLayoutHeader()
+     * @uses buildType()
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
-    public function __buildContent()
+    public function buildContent()
     {
         //Get current infos
         $current = empty($this->current) ? $this->identifier : $this->current;
@@ -387,12 +391,11 @@ class Tea_Theme_Options
         //Checks contents
         if (empty($this->pages[$current]['contents']))
         {
-            $this->adminmessage = __('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.');
-            return false;
+            $this->setAdminMessage(__('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.'));
         }
 
         //Build header
-        $this->__buildLayoutHeader();
+        $this->buildLayoutHeader();
 
         //Get globals
         $icon = $this->icon_big;
@@ -402,10 +405,10 @@ class Tea_Theme_Options
         $contents = $this->pages[$current]['contents'];
 
         //Build contents relatively to the type
-        $this->__buildType($contents);
+        $this->buildType($contents);
 
         //Build footer
-        $this->__buildLayoutFooter();
+        $this->buildLayoutFooter();
     }
 
     /**
@@ -413,11 +416,11 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __buildLayoutFooter()
+    protected function buildLayoutFooter()
     {
         //Get all pages with submit button
         $submit = empty($this->current) ? $this->pages[$this->identifier]['submit'] : $this->pages[$this->current]['submit'];
-        $version = $this->version;
+        $version = $this->getVersion();
 
         //Include template
         include('tpl/layouts/__layout_footer.tpl.php');
@@ -433,9 +436,9 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
-    public function __buildType($contents, $group = false)
+    protected function buildType($contents, $group = false)
     {
         //Iteration on all array
         foreach ($contents as $key => $content)
@@ -443,9 +446,7 @@ class Tea_Theme_Options
             //Check if an id is defined at least
             if (!isset($content['id']) && !in_array($content['type'], array('br', 'features', 'heading', 'hr', 'group', 'list', 'p')))
             {
-                $this->adminmessage = __('Something went wrong in your parameters definition: no id is defined!');
-                $this->adminmessage .= '<pre>' . var_dump($content) . '</pre>';
-                return false;
+                $this->setAdminMessage(__('Something went wrong in your parameters definition: no id is defined!') . '<pre>' . var_dump($content) . '</pre>');
             }
 
             //Get the right template
@@ -541,7 +542,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.1.0
      */
-    public function __fieldBr()
+    protected function __fieldBr()
     {
         include('tpl/fields/__field_br.tpl.php');
     }
@@ -553,7 +554,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __fieldFeatures($content)
+    protected function __fieldFeatures($content)
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Features');
@@ -566,12 +567,12 @@ class Tea_Theme_Options
     /**
      * Build group component.
      *
-     * @uses __buildType()
+     * @uses buildType()
      * @param array $content Contains all data
      *
      * @since Tea Theme Options 1.2.1
      */
-    public function __fieldGroup($content)
+    protected function __fieldGroup($content)
     {
         $percent = 0;
 
@@ -612,7 +613,7 @@ class Tea_Theme_Options
         include('tpl/fields/__field_group_header.tpl.php');
 
         //Recursive content
-        $this->__buildType($content['contents'], true);
+        $this->buildType($content['contents'], true);
 
         //Get group footer
         include('tpl/fields/__field_group_footer.tpl.php');
@@ -625,7 +626,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.0.1
      */
-    public function __fieldHeading($content)
+    protected function __fieldHeading($content)
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Heading');
@@ -639,7 +640,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.1.0
      */
-    public function __fieldHr()
+    protected function __fieldHr()
     {
         include('tpl/fields/__field_hr.tpl.php');
     }
@@ -651,7 +652,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __fieldList($content)
+    protected function __fieldList($content)
     {
         //Default variables
         $li = isset($content['contents']) ? $content['contents'] : array();
@@ -667,7 +668,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.1
      */
-    public function __fieldP($content)
+    protected function __fieldP($content)
     {
         //Default variables
         $content = isset($content['content']) ? $content['content'] : '';
@@ -682,14 +683,14 @@ class Tea_Theme_Options
     /**
      * Build choice component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param string $type Contains the type's field
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __fieldChoice($type, $content, $group)
+    protected function __fieldChoice($type, $content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -710,7 +711,7 @@ class Tea_Theme_Options
                 $std = isset($content['std']) ? $content['std'] : array();
 
                 //Check selected
-                $vals = $this->__getOption($id, $std);
+                $vals = $this->getOption($id, $std);
                 $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
                 break;
             default:
@@ -720,7 +721,7 @@ class Tea_Theme_Options
                 $std = isset($content['std']) ? $content['std'] : '';
 
                 //Check selected
-                $val = $this->__getOption($id, $std);
+                $val = $this->getOption($id, $std);
                 break;
         }
 
@@ -731,20 +732,20 @@ class Tea_Theme_Options
     /**
      * Build hidden component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __fieldHidden($content)
+    protected function __fieldHidden($content)
     {
         //Default variables
         $id = $content['id'];
         $std = isset($content['std']) ? $content['std'] : '';
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_hidden.tpl.php');
@@ -753,13 +754,13 @@ class Tea_Theme_Options
     /**
      * Build text component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.0
      */
-    public function __fieldText($content, $group)
+    protected function __fieldText($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -798,7 +799,7 @@ class Tea_Theme_Options
         }
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
         $val = stripslashes($val);
 
         //Get template
@@ -808,13 +809,13 @@ class Tea_Theme_Options
     /**
      * Build textarea component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.1
      */
-    public function __fieldTextarea($content, $group)
+    protected function __fieldTextarea($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -825,7 +826,7 @@ class Tea_Theme_Options
         $rows = isset($content['rows']) ? $content['rows'] : '8';
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
         $val = stripslashes($val);
 
         //Get template
@@ -838,14 +839,14 @@ class Tea_Theme_Options
     /**
      * Build background component.
      *
-     * @uses __getDefaults()
-     * @uses __getOption()
+     * @uses getDefaults()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __fieldBackground($content, $group)
+    protected function __fieldBackground($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -863,15 +864,15 @@ class Tea_Theme_Options
 
         if ($defaults)
         {
-            $defaults = $this->__getDefaults('images');
+            $defaults = $this->getDefaults('images');
             $options = array_merge($defaults, $options);
         }
 
         //Positions
-        $repeats = $this->__getDefaults('background-repeat');
+        $repeats = $this->getDefaults('background-repeat');
 
         //Radio selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_background.tpl.php');
@@ -880,13 +881,13 @@ class Tea_Theme_Options
     /**
      * Build color component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __fieldColor($content, $group)
+    protected function __fieldColor($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -895,7 +896,7 @@ class Tea_Theme_Options
         $description = isset($content['description']) ? $content['description'] : '';
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_color.tpl.php');
@@ -904,13 +905,13 @@ class Tea_Theme_Options
     /**
      * Build date component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __fieldDate($content, $group)
+    protected function __fieldDate($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -919,7 +920,7 @@ class Tea_Theme_Options
         $description = isset($content['description']) ? $content['description'] : '';
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_date.tpl.php');
@@ -928,13 +929,13 @@ class Tea_Theme_Options
     /**
      * Build font component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.0
      */
-    public function __fieldFont($content, $group)
+    protected function __fieldFont($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -948,12 +949,12 @@ class Tea_Theme_Options
 
         if ($defaults)
         {
-            $defaults = $this->__getDefaults('fonts');
+            $defaults = $this->getDefaults('fonts');
             $options = array_merge($defaults, $options);
         }
 
         //Radio selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_font.tpl.php');
@@ -962,14 +963,14 @@ class Tea_Theme_Options
     /**
      * Build image component.
      *
-     * @uses __getDefaults()
-     * @uses __getOption()
+     * @uses getDefaults()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.1
      */
-    public function __fieldImage($content, $group)
+    protected function __fieldImage($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -986,12 +987,12 @@ class Tea_Theme_Options
 
         if (isset($content['default']) && true === $content['default'])
         {
-            $defaults = $this->__getDefaults('images');
+            $defaults = $this->getDefaults('images');
             $options = array_merge($defaults, $options);
         }
 
         //Radio selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_image.tpl.php');
@@ -1000,13 +1001,13 @@ class Tea_Theme_Options
     /**
      * Build RTE component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.1
      */
-    public function __fieldRTE($content, $group)
+    protected function __fieldRTE($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -1017,7 +1018,7 @@ class Tea_Theme_Options
         $rows = isset($content['rows']) ? $content['rows'] : '8';
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
         $val = stripslashes($val);
 
         //Get template
@@ -1027,14 +1028,14 @@ class Tea_Theme_Options
     /**
      * Build social component.
      *
-     * @uses __getDefaults()
-     * @uses __getOption()
+     * @uses getDefaults()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.1.1
      */
-    public function __fieldSocial($content, $group)
+    protected function __fieldSocial($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -1045,10 +1046,10 @@ class Tea_Theme_Options
 
         //Get options
         $default = isset($content['default']) ? $content['default'] : array();
-        $options = $this->__getDefaults('social', $default);
+        $options = $this->getDefaults('social', $default);
 
         //Get values
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_social.tpl.php');
@@ -1057,13 +1058,13 @@ class Tea_Theme_Options
     /**
      * Build upload component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
      * @since Tea Theme Options 1.2.0
      */
-    public function __fieldUpload($content, $group)
+    protected function __fieldUpload($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -1076,7 +1077,7 @@ class Tea_Theme_Options
         $delete = __('Delete selection');
 
         //Check selected
-        $val = $this->__getOption($id, $std);
+        $val = $this->getOption($id, $std);
 
         //Get template
         include('tpl/fields/__field_upload.tpl.php');
@@ -1088,7 +1089,7 @@ class Tea_Theme_Options
     /**
      * Build wordpress contents component.
      *
-     * @uses __getOption()
+     * @uses getOption()
      * @uses get_categories() - Wordpress
      * @uses wp_get_nav_menus() - Wordpress
      * @uses get_pages() - Wordpress
@@ -1100,7 +1101,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __fieldWordpressContents($content, $group)
+    protected function __fieldWordpressContents($content, $group)
     {
         //Default variables
         $id = $content['id'];
@@ -1224,7 +1225,7 @@ class Tea_Theme_Options
         $contents = $this->wp_contents[$type];
 
         //Check selected
-        $vals = $this->__getOption($id, array());
+        $vals = $this->getOption($id, array());
         $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
 
         //Get template
@@ -1239,16 +1240,17 @@ class Tea_Theme_Options
      *
      * @return array $defaults All defaults data provided by the Tea TO
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
-    public function __getDefaults($return = 'images', $wanted = array())
+    protected function getDefaults($return = 'images', $wanted = array())
     {
         $defaults = array();
+        $directory = $this->getDirectory();
 
         //Return defauls background
         if ('images' == $return)
         {
-            $url = $this->directory . '/img/patterns/';
+            $url = $directory . '/img/patterns/';
 
             $defaults = array(
                 $url . 'none.png' => __('No background'),
@@ -1271,7 +1273,7 @@ class Tea_Theme_Options
         //Return defaults font
         else if ('fonts' == $return)
         {
-            $url = $this->directory . '/img/fonts/';
+            $url = $directory . '/img/fonts/';
 
             $defaults = array(
                 'sansserif' => $url . 'sansserif.png',
@@ -1341,14 +1343,42 @@ class Tea_Theme_Options
         return $defaults;
     }
 
+
+    //--------------------------------------------------------------------------//
+
+    /**
+     * Get the admin message.
+     *
+     * @return string $adminmessage
+     *
+     * @since Tea Theme Options 1.2.3
+     */
+    protected function getAdminMessage()
+    {
+        return $this->adminmessage;
+    }
+
+    /**
+     * Set the admin message.
+     *
+     * @param string $message The message to be displayed in the admin panel
+     *
+     * @since Tea Theme Options 1.2.3
+     */
+    protected function setAdminMessage($message = '')
+    {
+        $this->adminmessage = $message;
+        return false;
+    }
+
     /**
      * Get Tea TO directory.
      *
      * @return string $directory Path of the Tea TO directory
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __getDirectory()
+    protected function getDirectory()
     {
         return $this->directory;
     }
@@ -1358,9 +1388,9 @@ class Tea_Theme_Options
      *
      * @param string $directory The path of the Tea TO directory
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __setDirectory($directory = '')
+    protected function setDirectory($directory = '')
     {
         $this->directory = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : $directory;
     }
@@ -1370,9 +1400,9 @@ class Tea_Theme_Options
      *
      * @return number $duration Transient duration in secondes
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __getDuration()
+    protected function getDuration()
     {
         return $this->duration;
     }
@@ -1382,9 +1412,9 @@ class Tea_Theme_Options
      *
      * @param number $duration Transient duration in secondes
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __setDuration($duration = 86400)
+    protected function setDuration($duration = 86400)
     {
         $this->duration = $duration;
     }
@@ -1399,7 +1429,7 @@ class Tea_Theme_Options
      *
      * @since Tea Theme Options 1.2.2
      */
-    public function __getOption($key, $default)
+    protected function getOption($key, $default)
     {
         return _get_option($key, $default);
     }
@@ -1419,16 +1449,15 @@ class Tea_Theme_Options
      * @param var $value The default value if no one is found
      * @param array $dependancy The default value if no one is found
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.3
      */
-    public function __setOption($key, $value, $dependancy = array())
+    protected function setOption($key, $value, $dependancy = array())
     {
         //Check the category
         //if (empty($key) || empty($value))
         if (empty($key))
         {
-            $this->adminmessage = sprintf(__('Something went wrong. Key "%s" and/or its value is empty.'), $key);
-            return false;
+            $this->setAdminMessage(sprintf(__('Something went wrong. Key "%s" and/or its value is empty.'), $key));
         }
 
         //Check the key for special "NONE" value
@@ -1518,14 +1547,14 @@ class Tea_Theme_Options
     /**
      * Register $_POST and $_FILES into transients.
      *
-     * @uses __setOption()
+     * @uses setOption()
      * @uses wp_handle_upload() - Wordpress
      * @param array $post Contains all data in $_POST
      * @param array $files Contains all data in $_FILES
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __updateOptions($post, $files)
+    protected function updateOptions($post, $files)
     {
         //Set all options in transient
         foreach ($post as $k => $v)
@@ -1540,7 +1569,7 @@ class Tea_Theme_Options
             $p = false !== strpos($k, '__checkbox') ? $post : array();
 
             //Register option and transient
-            $this->__setOption($k, $v, $p);
+            $this->setOption($k, $v, $p);
         }
 
         //Check if files are attempting to be uploaded
@@ -1564,7 +1593,7 @@ class Tea_Theme_Options
                 $file = wp_handle_upload($v, array('test_form' => false));
 
                 //Register option and transient
-                $this->__setOption($k, $file['url']);
+                $this->setOption($k, $file['url']);
             }
         }
     }
@@ -1575,30 +1604,23 @@ class Tea_Theme_Options
      * @param string $slug
      * @return string $identifier.$slug
      *
-     * @since Tea Theme Options 1.0.1
+     * @since Tea Theme Options 1.2.3
      */
-    public function __getSlug($slug = '')
+    protected function getSlug($slug = '')
     {
         return $this->identifier . $slug;
     }
 
-
-    //--------------------------------------------------------------------------//
-
     /**
-     * Display a warning message on the admin panel.
+     * Returns current Tea Theme Options version.
      *
-     * @since Tea Theme Options 1.0.1
+     * @return string $version
+     *
+     * @since Tea Theme Options 1.2.3
      */
-    public function __showAdminMessage()
+    protected function getVersion()
     {
-        if (!empty($this->adminmessage))
-        {
-            $content = $this->adminmessage;
-
-            //Get template
-            include('tpl/layouts/__admin_message.tpl.php');
-        }
+        return self::$version;
     }
 }
 
