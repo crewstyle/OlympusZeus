@@ -65,6 +65,39 @@
             }
         });
 
+        //Features input
+        $.each($('.features-list li'), function (index,elem) {
+            var $self = $(this);
+            var $link = $self.find('a');
+
+            //Check if link
+            if (!$link.length)
+            {
+                return;
+            }
+
+            //Get infos
+            var $code = $self.find('pre');
+
+            //Bind the click event
+            $self.live('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                $self.teamodal({
+                    title: $self.find('h4').text(),
+                    content: [
+                        {
+                            label: $self.find('p').html(),
+                            type: 'html',
+                            code: $code.html()
+                        }
+                    ],
+                    submitbutton: false
+                });
+            });
+        });
+
         //Radio & Image input
         $.each($('.inside input[type="radio"]'), function (index,elem) {
             var $self = $(this);
@@ -240,7 +273,7 @@
         });
 
         //Upload input: delete button
-        $('.upload a.delete').on('click', function (e) {
+        $('.upload a.delete').live('click', function (e) {
             e.preventDefault();
             var $self = $(this);
             var $parent = $self.parent();
@@ -271,10 +304,10 @@
             });
         });
 
-        //Upload input: delete button
+        //Upload input: delete all button
         $.each($('a.delall'), function (index,elem) {
             var $self = $(this);
-            var $target = $('#' + $self.attr('data-target') + '_content').find('.upload_image_result li');
+            var $target = $('#' + $self.attr('data-target') + '_upload_content').find('.upload_image_result li');
             var $hidden = $('#' + $self.attr('data-target'));
 
             //Bind click event
@@ -300,7 +333,7 @@
         });
 
         //Upload Wordpress default button
-        /*$.each($('a.insert-media:not(.thickbox)'), function (index,elem) {
+        $.each($('a.insert-media:not(.thickbox)'), function (index,elem) {
             var $self = $(this);
 
             $self.bind('click', function (e) {
@@ -308,6 +341,6 @@
                     return false;
                 }
             });
-        });*/
+        });
     });
 })(jQuery);

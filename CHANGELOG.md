@@ -1,3 +1,9 @@
+## 1.2.2 (May 27, 2013)
+
+Fix some bugs, adds new fields, adds new default documentation page, better media-views integration, new scripts, and more...
+Details on the next commit
+
+
 ## 1.2.1 (May 14, 2013)
 
 Fix some small bugs

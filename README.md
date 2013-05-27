@@ -41,14 +41,14 @@ Include the `tea-theme-options.php` file in your `functions.php`
 
 Before starting, in your `functions.php` instanciate a new object with an uniq identifier:
 
-    $tea = new Tea_Theme_Options('your_identifier');
+    $tea = new Tea_Theme_Options();
 
 And set details:
 
     $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. to 24h
     $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
 
-NOTA: by default, the Tea TO will consider the `tea_theme_options` folder.
+NOTA: by default, the **Tea TO** will consider the `tea_theme_options` folder.
 
 
 3) Let's roll!

@@ -1,0 +1,25 @@
+/*
+ * Take a tea v1.0.0 - "GO GO GADGET GO !"
+ * Copyright 2013 Take a Tea
+ * By Take a Tea <takeatea.com> :)
+ */
+
+
+/*--- [MODAL] ---*/
+.tea-shortcodes .media-modal {
+    bottom:auto;
+    left:50%;
+    margin-left:-250px;
+    right:auto;
+    top:60px;
+    width:500px;
+}
+.tea-shortcodes .media-frame-title,
+.tea-shortcodes .media-frame-router,
+.tea-shortcodes .media-frame-toolbar {
+    left:0;
+}
+.tea-shortcodes .media-frame-content {
+    left:10px;
+    right:10px;
+}
