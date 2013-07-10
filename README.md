@@ -41,19 +41,25 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory.  
 Include the `tea-theme-options.php` file in your `functions.php`
 
-    include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
+```php
+include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
+```
 
 
 ### 2) Create a new Tea_Theme_Options object and set details
 
 Before starting, in your `functions.php` instanciate a new object with an uniq identifier:
 
-    $tea = new Tea_Theme_Options();
+```php
+$tea = new Tea_Theme_Options();
+```
 
 And set details if you want:
 
-    $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. 24h
-    $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
+```php
+$tea->__setDuration(86400); //Will stock transient for 86400sec, eq. 24h
+$tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
+```
 
 NOTA: by default, the **Tea TO** will consider `tea_theme_options/` folder.
 
@@ -63,47 +69,51 @@ NOTA: by default, the **Tea TO** will consider `tea_theme_options/` folder.
 Create your new first page settings (as capability, icon, bigicon and description if you want):
 
 ```php
-    //Build page
-    $tea_titles = array(
-        //used in your page
-        'title' => 'My first page',
-        //used in the admin menu
-        'name' => 'First page',
-        //a writer can use this page. If you want to give access only to the admin, use 'admin' instead
-        'capability' => 'edit_pages',
-        //used in your page
-        'description' => 'Here is a description of my first page'
-    );
+//Build page
+$tea_titles = array(
+    //used in your page
+    'title' => 'My first page',
+    //used in the admin menu
+    'name' => 'First page',
+    //a writer can use this page. If you want to give access only to the admin, use 'admin' instead
+    'capability' => 'edit_pages',
+    //used in your page
+    'description' => 'Here is a description of my first page'
+);
 ```
 
 Add all used fields in your page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
-    //Add fields
-    $tea_fields = array(
-        array(
-            //define the input type
-            'type' => 'text',
-            //define the title block
-            'title' => 'My first text title',
-            //define the uniq ID
-            'id' => 'my_first_text_id',
-            //define the default value
-            'std' => 'My default text value',
-            //define the description block
-            'description' => 'My first text description'
-        ),
-        array(
-            'type' => 'textarea',
-            'title' => 'My first textarea field',
-            'id' => 'my_first_textarea_id',
-            'description' => 'My first textarea description'
-        )
-    );
+```php
+//Add fields
+$tea_fields = array(
+    array(
+        //define the input type
+        'type' => 'text',
+        //define the title block
+        'title' => 'My first text title',
+        //define the uniq ID
+        'id' => 'my_first_text_id',
+        //define the default value
+        'std' => 'My default text value',
+        //define the description block
+        'description' => 'My first text description'
+    ),
+    array(
+        'type' => 'textarea',
+        'title' => 'My first textarea field',
+        'id' => 'my_first_textarea_id',
+        'description' => 'My first textarea description'
+    )
+);
+```
 
 Add your created details in your page and unset arrays:
 
-    $tea->addPage($tea_titles, $tea_fields);
-    unset($tea_titles, $tea_fields);
+```php
+$tea->addPage($tea_titles, $tea_fields);
+unset($tea_titles, $tea_fields);
+```
 
 Repeat the process as you want/need :)
 
@@ -112,7 +122,9 @@ Repeat the process as you want/need :)
 
 The **last step** is to build menus and get your pages available in the admin menu.
 
-    $tea->buildMenus();
+```php
+$tea->buildMenus();
+```
 
 
 ### 5) Adding fields
@@ -163,63 +175,75 @@ All available types are:
 
 Adding a `br` or `hr`
 
-    array(
-        'type' => 'br' //put 'hr' if you want
-    )
+```php
+array(
+    'type' => 'br' //put 'hr' if you want
+)
+```
 
 Adding a `heading`
 
-    array(
-        'type' => 'heading',
-        'title' => 'Take a tea, simply'
-    )
+```php
+array(
+    'type' => 'heading',
+    'title' => 'Take a tea, simply'
+)
+```
 
 Adding a `paragraph`
 
-    array(
-        'type' => 'p',
-        'content' => 'Hello and welcome to the "Tea Test Academy"'
-    )
+```php
+array(
+    'type' => 'p',
+    'content' => 'Hello and welcome to the "Tea Test Academy"'
+)
+```
 
 Adding a `list`
 
-    array(
-        'type' => 'list',
-        'contents' => array(
-            'Just admit it:',
-            'this is the best',
-            'Wordpress Theme Options Framework :)',
-            'Thanks to Take a Tea :D'
-        )
+```php
+array(
+    'type' => 'list',
+    'contents' => array(
+        'Just admit it:',
+        'this is the best',
+        'Wordpress Theme Options Framework :)',
+        'Thanks to Take a Tea :D'
     )
+)
+```
 
 Adding a `group`
 
-    array(
-        'type' => 'group',
-        'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
-        'contents' => array(
-            //Put here all your needed fields like this one...
-            array(
-                'type' => 'br'
-            )
+```php
+array(
+    'type' => 'group',
+    'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
+    'contents' => array(
+        //Put here all your needed fields like this one...
+        array(
+            'type' => 'br'
         )
     )
+)
+```
 
 Adding a `features`
 
-    array(
-        'type' => 'features',
-        'title' => 'Here is what I am',
-        'contents' => array(
-            array(
-                'title' => 'Real good gamer',
-                'content' => 'Yeah, I am the best at Super Bomberman 2 on SNES :D',
-                'code' => 'I am <b>the</b> best as I said ;)' //Use HTML code to describe your feature on popin
-            )
-            //You can repeat this array as much as you want
+```php
+array(
+    'type' => 'features',
+    'title' => 'Here is what I am',
+    'contents' => array(
+        array(
+            'title' => 'Real good gamer',
+            'content' => 'Yeah, I am the best at Super Bomberman 2 on SNES :D',
+            'code' => 'I am <b>the</b> best as I said ;)' //Use HTML code to describe your feature on popin
         )
+        //You can repeat this array as much as you want
     )
+)
+```
 
 
 ### 7) Common fields
@@ -227,115 +251,131 @@ Adding a `features`
 Adding a `text`  
 NOTA: you can define the maxlength optional attribute.
 
-    array(
-        'type' => 'text',
-        'title' => 'What do you like?',
-        'id' => 'my_text_field_id',
-        'std' => 'Penguins, I am sure they\'re gonna dominate the World!',
-        'placeholder' => 'McDonald\'s as well',
-        'description' => 'Put in here everything you want.',
-        'maxlength' => 120
-    )
+```php
+array(
+    'type' => 'text',
+    'title' => 'What do you like?',
+    'id' => 'my_text_field_id',
+    'std' => 'Penguins, I am sure they\'re gonna dominate the World!',
+    'placeholder' => 'McDonald\'s as well',
+    'description' => 'Put in here everything you want.',
+    'maxlength' => 120
+)
+```
 
 NOTA: you can use `email`, `search` or `url` type in options to use the new HTML5 inputs.
 
-    array(
-        'type' => 'text',
-        'title' => 'How much do you like Penguins?',
-        'id' => 'my_text_field_id',
-        'std' => 100,
-        'placeholder' => '50',
-        'description' => 'Tell us how much do like Penguins to have a chance to get into our private Penguins community ;)',
-        'options' => array(
-            'type' => 'number',
-            'min' => 10,
-            'max' => 100,
-            'step' => 1
-        )
+```php
+array(
+    'type' => 'text',
+    'title' => 'How much do you like Penguins?',
+    'id' => 'my_text_field_id',
+    'std' => 100,
+    'placeholder' => '50',
+    'description' => 'Tell us how much do like Penguins to have a chance to get into our private Penguins community ;)',
+    'options' => array(
+        'type' => 'number',
+        'min' => 10,
+        'max' => 100,
+        'step' => 1
     )
+)
+```
 
 Adding a `hidden`
 
-    array(
-        'type' => 'hidden',
-        'id' => 'my_hidden_field_id',
-        'std' => 'Haha I will dominate the World!!! MOUAHAHAHAHAHA - Crazy Penguin'
-    )
+```php
+array(
+    'type' => 'hidden',
+    'id' => 'my_hidden_field_id',
+    'std' => 'Haha I will dominate the World!!! MOUAHAHAHAHAHA - Crazy Penguin'
+)
+```
 
 Adding a `textarea`
 
-    array(
-        'type' => 'textarea',
-        'title' => 'How do Penguins drink their cola?',
-        'id' => 'my_textarea_field_id',
-        'std' => 'On the rocks.',
-        'placeholder' => 'Tell us how?',
-        'description' => 'A simple question to know if you will be able to survive to the Penguin domination.'
-    )
+```php
+array(
+    'type' => 'textarea',
+    'title' => 'How do Penguins drink their cola?',
+    'id' => 'my_textarea_field_id',
+    'std' => 'On the rocks.',
+    'placeholder' => 'Tell us how?',
+    'description' => 'A simple question to know if you will be able to survive to the Penguin domination.'
+)
+```
 
 Adding a `checkbox`
 
-    array(
-        'type' => 'checkbox',
-        'title' => 'What are your preferred personas?',
-        'id' => 'my_checkbox_field_id',
-        'std' => array('minions', 'lapinscretins'), //define the default choice(s)
-        'description' => '',
-        //define the options
-        'options' => array(
-            'minions' => 'The Minions', //value => label
-            'lapinscretins' => 'The Lapins Crétins',
-            'marvel' => 'All Marvel Superheroes',
-            'franklin' => 'Franklin (everything is possible)',
-            'spongebob' => 'Spongebob (nothing to say... Love it)'
-        )
+```php
+array(
+    'type' => 'checkbox',
+    'title' => 'What are your preferred personas?',
+    'id' => 'my_checkbox_field_id',
+    'std' => array('minions', 'lapinscretins'), //define the default choice(s)
+    'description' => '',
+    //define the options
+    'options' => array(
+        'minions' => 'The Minions', //value => label
+        'lapinscretins' => 'The Lapins Crétins',
+        'marvel' => 'All Marvel Superheroes',
+        'franklin' => 'Franklin (everything is possible)',
+        'spongebob' => 'Spongebob (nothing to say... Love it)'
     )
+)
+```
 
 Adding a `radio`
 
-    array(
-        'type' => 'radio',
-        'title' => 'Ok ok... But what is your favorite?',
-        'id' => 'my_radio_field_id',
-        'std' => 'minions',
-        'description' => '- "Bapouet?" - "Na na na, baapouet!" - "AAAAAAAAAA Bapoueeeeettttt!!!!"',
-        'options' => array(
-            'minions' => 'The Minions',
-            'lapinscretins' => 'The Lapins Crétins'
-        )
+```php
+array(
+    'type' => 'radio',
+    'title' => 'Ok ok... But what is your favorite?',
+    'id' => 'my_radio_field_id',
+    'std' => 'minions',
+    'description' => '- "Bapouet?" - "Na na na, baapouet!" - "AAAAAAAAAA Bapoueeeeettttt!!!!"',
+    'options' => array(
+        'minions' => 'The Minions',
+        'lapinscretins' => 'The Lapins Crétins'
     )
+)
+```
 
 Adding a `select`
 
-    array(
-        'type' => 'select',
-        'title' => 'Prove it: what do they mean by "Bapouet"?',
-        'id' => 'my_select_field_id',
-        'std' => '',
-        'description' => 'Don\'t cheat: the movie is NOT the solution :)',
-        'options' => array(
-            'toy' => 'A simple toy',
-            'milk' => 'Just milk',
-            'unicorn-toy' => 'A unicorn toy... Very stupid :p',
-            'tails' => 'A red fox with a tiny cute fire tail with his blue faster hedgedog friend'
-        )
+```php
+array(
+    'type' => 'select',
+    'title' => 'Prove it: what do they mean by "Bapouet"?',
+    'id' => 'my_select_field_id',
+    'std' => '',
+    'description' => 'Don\'t cheat: the movie is NOT the solution :)',
+    'options' => array(
+        'toy' => 'A simple toy',
+        'milk' => 'Just milk',
+        'unicorn-toy' => 'A unicorn toy... Very stupid :p',
+        'tails' => 'A red fox with a tiny cute fire tail with his blue faster hedgedog friend'
     )
+)
+```
 
 Adding a `multiselect`
 
-    array(
-        'type' => 'select',
-        'title' => 'Select the Minions that you may know',
-        'id' => 'my_multiselect_field_id',
-        'std' => '',
-        'description' => 'Pay attention to this question ;)',
-        'options' => array(
-            'henry' => 'Henry',
-            'jacques' => 'Jacques',
-            'kevin' => 'Kevin',
-            'tom' => 'Tom'
-        )
+```php
+array(
+    'type' => 'select',
+    'title' => 'Select the Minions that you may know',
+    'id' => 'my_multiselect_field_id',
+    'std' => '',
+    'description' => 'Pay attention to this question ;)',
+    'options' => array(
+        'henry' => 'Henry',
+        'jacques' => 'Jacques',
+        'kevin' => 'Kevin',
+        'tom' => 'Tom'
     )
+)
+```
 
 
 ### 8) Special fields
@@ -343,282 +383,318 @@ Adding a `multiselect`
 Adding a `background`  
 NOTA: the background input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights). The **Tea TO** package offers a large set of image patterns. If you want them, set the `default` attribute to `true`.
 
-    array(
-        'type' => 'background',
-        'title' => 'A new paint :D',
-        'id' => 'my_background_field_id',
-        'std' => array(
-            'image' => 'my_background_default_url',
-            'color' => '#ffffff',
-            'repeat' => 'no-repeat',
-            'position_x' => ',
-            'position_x_pos' => 'left',
-            'position_y' => ',
-            'position_y_pos' => 'top'
-        ),
-        'description' => 'It\'s tricky :)',
-        'default' => true
-    )
+```php
+array(
+    'type' => 'background',
+    'title' => 'A new paint :D',
+    'id' => 'my_background_field_id',
+    'std' => array(
+        'image' => 'my_background_default_url',
+        'color' => '#ffffff',
+        'repeat' => 'no-repeat',
+        'position_x' => ',
+        'position_x_pos' => 'left',
+        'position_y' => ',
+        'position_y_pos' => 'top'
+    ),
+    'description' => 'It\'s tricky :)',
+    'default' => true
+)
+```
 
 Adding a `color`
 
-    array(
-        'type' => 'color',
-        'title' => 'What is your favorite Coke?',
-        'id' => 'my_color_field_id',
-        'std' => '#000000',
-        'description' => 'Do not choose the Coke Zero, right? ;)'
-    )
+```php
+array(
+    'type' => 'color',
+    'title' => 'What is your favorite Coke?',
+    'id' => 'my_color_field_id',
+    'std' => '#000000',
+    'description' => 'Do not choose the Coke Zero, right? ;)'
+)
+```
 
 Adding a `date`
 
-    array(
-        'type' => 'date',
-        'title' => 'What\'s the day today?',
-        'id' => 'my_date_field_id',
-        'std' => '06-03-2013',
-        'description' => 'Choose your date simply'
-    )
+```php
+array(
+    'type' => 'date',
+    'title' => 'What\'s the day today?',
+    'id' => 'my_date_field_id',
+    'std' => '06-03-2013',
+    'description' => 'Choose your date simply'
+)
+```
 
 Adding a `font`  
 NOTA: the **Tea TO** package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
 
-    array(
-        'type' => 'font',
-        'title' => 'Choose your style',
-        'id' => 'my_font_field_id',
-        'std' => 'my_gorgeous_font',
-        'description' => 'Tell us how to scribe :D',
-        'default' => true,
-        'options' => array(
-            'my_gorgeous_font' => 'my_gorgeous_font_url',
-            'an_other_font' => 'an_other_font_url'
-        )
+```php
+array(
+    'type' => 'font',
+    'title' => 'Choose your style',
+    'id' => 'my_font_field_id',
+    'std' => 'my_gorgeous_font',
+    'description' => 'Tell us how to scribe :D',
+    'default' => true,
+    'options' => array(
+        'my_gorgeous_font' => 'my_gorgeous_font_url',
+        'an_other_font' => 'an_other_font_url'
     )
+)
+```
 
 Adding an `image`
 
-    array(
-        'type' => 'image',
-        'title' => 'Choose your avatar',
-        'id' => 'my_image_field_id',
-        'std' => 'beach',
-        'description' => 'A uniq avatar to define yourself',
-        'multiselect' => true, //if you need more than one choice
-        'height' => 50, //if you need to define a special height (60px by default)
-        'width' => 50, //if you need to define a special width (150px by default)
-        'options' => array(
-            'my_first_image_url',
-            'my_second_image_url',
-            'my_third_image_url'
-        )
+```php
+array(
+    'type' => 'image',
+    'title' => 'Choose your avatar',
+    'id' => 'my_image_field_id',
+    'std' => 'beach',
+    'description' => 'A uniq avatar to define yourself',
+    'multiselect' => true, //if you need more than one choice
+    'height' => 50, //if you need to define a special height (60px by default)
+    'width' => 50, //if you need to define a special width (150px by default)
+    'options' => array(
+        'my_first_image_url',
+        'my_second_image_url',
+        'my_third_image_url'
     )
+)
+```
 
 Adding a `rte`
 
-    array(
-        'type' => 'wysiwyg',
-        'title' => 'WYSIWYG',
-        'id' => 'simple_wysiwyg',
-        'std' => 'Simple wysiwyg',
-        'description' => 'Simple description to wysiwyg panel'
-    )
+```php
+array(
+    'type' => 'wysiwyg',
+    'title' => 'WYSIWYG',
+    'id' => 'simple_wysiwyg',
+    'std' => 'Simple wysiwyg',
+    'description' => 'Simple description to wysiwyg panel'
+)
+```
 
 Adding a `social`  
 NOTA: use the `default` attribute to list all the included social buttons, from the list below  
 `addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `hellocoton`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
 
-    array(
-        'type' => 'social',
-        'title' => 'Big Brother is watching you...',
-        'id' => 'my_social_field_id',
-        'std' => array('facebook', 'twitter', 'googleplus', 'addthis'),
-        'description' => '...Or not!',
-        'default' => array(
-            'facebook',
-            'twitter',
-            'googleplus',
-            'instagram',
-            'pinterest',
-            'addthis'
-        )
+```php
+array(
+    'type' => 'social',
+    'title' => 'Big Brother is watching you...',
+    'id' => 'my_social_field_id',
+    'std' => array('facebook', 'twitter', 'googleplus', 'addthis'),
+    'description' => '...Or not!',
+    'default' => array(
+        'facebook',
+        'twitter',
+        'googleplus',
+        'instagram',
+        'pinterest',
+        'addthis'
     )
+)
+```
 
 Adding an `upload`  
 NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
-    array(
-        'type' => 'upload',
-        'title' => 'Upload',
-        'id' => 'simple_upload',
-        'std' => get_template_directory_uri() . 'img/admin/default.png',
-        'description' => 'Simple description to upload panel'
-    )
+```php
+array(
+    'type' => 'upload',
+    'title' => 'Upload',
+    'id' => 'simple_upload',
+    'std' => get_template_directory_uri() . 'img/admin/default.png',
+    'description' => 'Simple description to upload panel'
+)
+```
 
 
 ### 9) Wordpress fields
 
 Adding a `categories`
 
-    array(
-        'type' => 'categories',
-        'title' => 'My Wordpress categories',
-        'id' => 'my_categories_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'categories',
+    'title' => 'My Wordpress categories',
+    'id' => 'my_categories_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 Adding a `menus`
 
-    array(
-        'type' => 'menus',
-        'title' => 'My Wordpress menus',
-        'id' => 'my_menus_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'menus',
+    'title' => 'My Wordpress menus',
+    'id' => 'my_menus_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 Adding a `pages`
 
-    array(
-        'type' => 'pages',
-        'title' => 'My Wordpress pages',
-        'id' => 'my_pages_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'pages',
+    'title' => 'My Wordpress pages',
+    'id' => 'my_pages_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 Adding a `posts`
 
-    array(
-        'type' => 'posts',
-        'title' => 'My Wordpress posts',
-        'id' => 'my_posts_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'posts',
+    'title' => 'My Wordpress posts',
+    'id' => 'my_posts_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 Adding a `post types`
 
-    array(
-        'type' => 'posttypes',
-        'title' => 'My Wordpress post types',
-        'id' => 'my_posttypes_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'posttypes',
+    'title' => 'My Wordpress post types',
+    'id' => 'my_posttypes_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 Adding a `tags`
 
-    array(
-        'type' => 'tags',
-        'title' => 'My Wordpress tags',
-        'id' => 'my_tags_field_id',
-        'multiselect' => true //Optional: to "false" by default
-    )
+```php
+array(
+    'type' => 'tags',
+    'title' => 'My Wordpress tags',
+    'id' => 'my_tags_field_id',
+    'multiselect' => true //Optional: to "false" by default
+)
+```
 
 
 ### 10) Next fields
 
 Adding a `address` __IN PROGRESS__
 
-    array(
-        'type' => 'address',
-        'title' => 'What is your postal address?',
-        'id' => 'my_address_field_id',
-        'std' => 'Arica, Chile',
-        'description' => '<a href="http://goo.gl/maps/fwqS8" class="openit">Always Coca Cola :)</a>',
-        'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
-    )
+```php
+array(
+    'type' => 'address',
+    'title' => 'What is your postal address?',
+    'id' => 'my_address_field_id',
+    'std' => 'Arica, Chile',
+    'description' => '<a href="http://goo.gl/maps/fwqS8" class="openit">Always Coca Cola :)</a>',
+    'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
+)
+```
 
 Adding a `autocomplete` __IN PROGRESS__
 
-    array(
-        'type' => 'autocomplete',
-        'title' => 'Autocomplete...',
-        'id' => 'my_autocompletion_field_id',
-        'std' => '...Because you are assisted :D',
-        'description' => ''
-    )
+```php
+array(
+    'type' => 'autocomplete',
+    'title' => 'Autocomplete...',
+    'id' => 'my_autocompletion_field_id',
+    'std' => '...Because you are assisted :D',
+    'description' => ''
+)
+```
 
 
 ### 11) Examples
 
-Here is a working example to define in your functions.php theme page.
+Here is a working example to define in your `functions.php` theme page.
 
-    define('BLOG_NAME', 'My blog name');
-    define('TEMPLATE_DICTIONNARY', 'mytemplate');
-    define('TEMPLATE_DIR_URI', get_template_directory_uri());
+```php
+define('BLOG_NAME', 'My blog name');
+define('TEMPLATE_DICTIONNARY', 'mytemplate');
+define('TEMPLATE_DIR_URI', get_template_directory_uri());
 
-    //Instanciate a new Tea_Theme_Options
-    $tea = new Tea_Theme_Options('tea_options');
+//Instanciate a new Tea_Theme_Options
+$tea = new Tea_Theme_Options('tea_options');
 
-    //Building your first page
-    $tea_titles = array(
-        'title' => BLOG_NAME,
-        'name' => __('Tea T.O.', TEMPLATE_DICTIONNARY),
-        'capability' => 'edit_pages',
-        'description' => ''
-    );
-    $tea_fields = array(
-        array(
-            'type' => 'text',
-            'title' => __('Your Google+ profile link.', TEMPLATE_DICTIONNARY),
-            'id' => 'global_google_profile_link',
-            'placeholder' => __('https://plus.google.com/...', TEMPLATE_DICTIONNARY),
-            'description' => __('Paste your Google+ account profile link here to appear as the website publisher', TEMPLATE_DICTIONNARY)
-        ),
-        array(
-            'type' => 'font',
-            'title' => __('Main font.', TEMPLATE_DICTIONNARY),
-            'id' => 'global_main_font',
-            'std' => DEFAULT_FONT,
-            'description' => __('Set the main website font for titles.', TEMPLATE_DICTIONNARY),
-            'default' => true,
-            'options' => array(
-                'Montserrat' => TEMPLATE_DIR_URI . '/img/montserrat.png'
-            )
+//Building your first page
+$tea_titles = array(
+    'title' => BLOG_NAME,
+    'name' => __('Tea T.O.', TEMPLATE_DICTIONNARY),
+    'capability' => 'edit_pages',
+    'description' => ''
+);
+$tea_fields = array(
+    array(
+        'type' => 'text',
+        'title' => __('Your Google+ profile link.', TEMPLATE_DICTIONNARY),
+        'id' => 'global_google_profile_link',
+        'placeholder' => __('https://plus.google.com/...', TEMPLATE_DICTIONNARY),
+        'description' => __('Paste your Google+ account profile link here to appear as the website publisher', TEMPLATE_DICTIONNARY)
+    ),
+    array(
+        'type' => 'font',
+        'title' => __('Main font.', TEMPLATE_DICTIONNARY),
+        'id' => 'global_main_font',
+        'std' => DEFAULT_FONT,
+        'description' => __('Set the main website font for titles.', TEMPLATE_DICTIONNARY),
+        'default' => true,
+        'options' => array(
+            'Montserrat' => TEMPLATE_DIR_URI . '/img/montserrat.png'
         )
-    );
-    $tea->addPage($tea_titles, $tea_fields);
-    unset($tea_titles, $tea_fields);
+    )
+);
+$tea->addPage($tea_titles, $tea_fields);
+unset($tea_titles, $tea_fields);
 
-    //Building subpages
-    $tea_titles = array(
-        'title' => __('Contents', TEMPLATE_DICTIONNARY),
-        'name' => __('Contents', TEMPLATE_DICTIONNARY),
-        'slug' => '_contents'
-    );
-    $tea_fields = array(
-        array(
-            'type' => 'text',
-            'title' => __('Project list title.', TEMPLATE_DICTIONNARY),
-            'id' => 'contents_title'
-        ),
-        array(
-            'type' => 'textarea',
-            'title' => __('Project list intro.', TEMPLATE_DICTIONNARY),
-            'id' => 'contents_intro'
-        ),
-        array(
-            'type' => 'upload',
-            'title' => __('Default project image.', TEMPLATE_DICTIONNARY),
-            'id' => 'contents_default__image',
-            'description' => __('The image must be <b>340 * 280 pixels</b> per default.', TEMPLATE_DICTIONNARY)
-        )
-    );
-    $tea->addPage($tea_titles, $tea_fields);
-    unset($tea_titles, $tea_fields);
+//Building subpages
+$tea_titles = array(
+    'title' => __('Contents', TEMPLATE_DICTIONNARY),
+    'name' => __('Contents', TEMPLATE_DICTIONNARY),
+    'slug' => '_contents'
+);
+$tea_fields = array(
+    array(
+        'type' => 'text',
+        'title' => __('Project list title.', TEMPLATE_DICTIONNARY),
+        'id' => 'contents_title'
+    ),
+    array(
+        'type' => 'textarea',
+        'title' => __('Project list intro.', TEMPLATE_DICTIONNARY),
+        'id' => 'contents_intro'
+    ),
+    array(
+        'type' => 'upload',
+        'title' => __('Default project image.', TEMPLATE_DICTIONNARY),
+        'id' => 'contents_default__image',
+        'description' => __('The image must be <b>340 * 280 pixels</b> per default.', TEMPLATE_DICTIONNARY)
+    )
+);
+$tea->addPage($tea_titles, $tea_fields);
+unset($tea_titles, $tea_fields);
 
-    //Build menus
-    $tea->buildMenus();
+//Build menus
+$tea->buildMenus();
+```
 
 Here is how to get data in your template (i.e. in yout header.php)
 
-    //Get data from DB
-    //NOTA: The _get_option() function is provided by the TTO framework
-    $intro = _get_option('contents_intro');
+```php
+//Get data from DB
+//NOTA: The _get_option() function is provided by the TTO framework
+$intro = _get_option('contents_intro');
 
-    //Check transitivity
-    $intro = false === $intro ? 'No content found...' : $intro;
+//Check transitivity
+$intro = false === $intro ? 'No content found...' : $intro;
 
-    //Display it
-    echo $intro;
+//Display it
+echo $intro;
+```
 
 
 ### 12) Previews
