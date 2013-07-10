@@ -60,7 +60,8 @@ class Tea_Theme_Options
         //Check identifier
         if (empty($identifier))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition. You need at least an identifier.'));
+            $this->adminmessage = __('Something went wrong in your parameters definition. You need at least an identifier.');
+            return false;
         }
 
         //Define parameters
@@ -93,11 +94,13 @@ class Tea_Theme_Options
         //Check params and if a master page already exists
         if (empty($configs))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition: your configs are empty. See README.md for more explanations.'));
+            $this->adminmessage = __('Something went wrong in your parameters definition: your configs are empty. See README.md for more explanations.');
+            return false;
         }
         else if (empty($contents))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition: your contents are empty. See README.md for more explanations.'));
+            $this->adminmessage = __('Something went wrong in your parameters definition: your contents are empty. See README.md for more explanations.');
+            return false;
         }
 
         //Update capabilities
@@ -146,7 +149,8 @@ class Tea_Theme_Options
         //Check if no master page is defined
         if (empty($this->pages))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.'));
+            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.');
+            return false;
         }
 
         //Initialize the current index page
@@ -221,25 +225,45 @@ class Tea_Theme_Options
     /**
      * Hook building admin bar.
      *
-     * @since Tea Theme Options 1.1.1
+     * @since Tea Theme Options 1.2.3
      * @todo
      */
     public function __buildAdminBar()
     {
         //Check if there is no problems on page definitions
-        if (!isset($this->pages[$this->identifier]))
+        if (!isset($this->pages[$this->identifier]) || empty($this->pages))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page defined!'));
+            $this->adminmessage = __('Something went wrong in your parameters definition: no master page defined!');
+            return false;
         }
 
         global $wp_admin_bar;
 
-        //Build WP menu in admin bar
-        $wp_admin_bar->add_menu( array(
-            'id' => $this->identifier,
-            'title' => $this->pages[$this->identifier]['name'],
-            'href' => admin_url('admin.php?page=' . $this->identifier)
-        ));
+        //Add submenu pages
+        foreach ($this->pages as $page)
+        {
+            //Check the main page
+            if ($this->identifier == $page['slug'])
+            {
+                //Build WP menu in admin bar
+                $wp_admin_bar->add_menu(array(
+                    'id' => $this->identifier,
+                    'title' => $page['name'],
+                    'href' => admin_url('admin.php?page=' . $this->identifier)
+                ));
+            }
+            else
+            {
+                //Build the subpages
+                $wp_admin_bar->add_menu(array(
+                    'parent' => $this->identifier,
+                    'id' => $this->getSlug($page['slug']),
+                    'href' => admin_url('admin.php?page=' . $page['slug']),
+                    'title' => $page['title'],
+                    'meta' => false
+                ));
+            }
+        }
     }
 
     /**
@@ -256,7 +280,8 @@ class Tea_Theme_Options
         //Check if no master page is defined
         if (empty($this->pages))
         {
-            $this->setAdminMessage(__('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.'));
+            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.');
+            return false;
         }
 
         //Get the directory
@@ -330,7 +355,7 @@ class Tea_Theme_Options
      */
     public function __showAdminMessage()
     {
-        $content = $this->getAdminMessage();
+        $content = $this->adminmessage;
 
         if (!empty($content))
         {
@@ -391,7 +416,8 @@ class Tea_Theme_Options
         //Checks contents
         if (empty($this->pages[$current]['contents']))
         {
-            $this->setAdminMessage(__('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.'));
+            $this->adminmessage = __('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.');
+            return false;
         }
 
         //Build header
@@ -446,7 +472,9 @@ class Tea_Theme_Options
             //Check if an id is defined at least
             if (!isset($content['id']) && !in_array($content['type'], array('br', 'features', 'heading', 'hr', 'group', 'list', 'p')))
             {
-                $this->setAdminMessage(__('Something went wrong in your parameters definition: no id is defined!') . '<pre>' . var_dump($content) . '</pre>');
+                $this->adminmessage = sprintf(__('Something went wrong in your parameters definition: no id is defined for your <b>%s</b> field!'), $content['type']);
+                $this->__showAdminMessage();
+                continue;
             }
 
             //Get the right template
@@ -1347,31 +1375,6 @@ class Tea_Theme_Options
     //--------------------------------------------------------------------------//
 
     /**
-     * Get the admin message.
-     *
-     * @return string $adminmessage
-     *
-     * @since Tea Theme Options 1.2.3
-     */
-    protected function getAdminMessage()
-    {
-        return $this->adminmessage;
-    }
-
-    /**
-     * Set the admin message.
-     *
-     * @param string $message The message to be displayed in the admin panel
-     *
-     * @since Tea Theme Options 1.2.3
-     */
-    protected function setAdminMessage($message = '')
-    {
-        $this->adminmessage = $message;
-        return false;
-    }
-
-    /**
      * Get Tea TO directory.
      *
      * @return string $directory Path of the Tea TO directory
@@ -1457,7 +1460,8 @@ class Tea_Theme_Options
         //if (empty($key) || empty($value))
         if (empty($key))
         {
-            $this->setAdminMessage(sprintf(__('Something went wrong. Key "%s" and/or its value is empty.'), $key));
+            $this->adminmessage = sprintf(__('Something went wrong. Key "%s" and/or its value is empty.'), $key);
+            return false;
         }
 
         //Check the key for special "NONE" value

@@ -1,9 +1,90 @@
 Tea Theme Options
 =================
 
-The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. **Tea TO** uses the [Transient Wordpress API](http://codex.wordpress.org/Transients_API) and puts all data in cache.  
-This document contains information on how to download, install, and start using the **Tea TO** Wordpress project.  
-NOTA: **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+
+h2. Simple, easy to use and fully integrated Theme Options for Wordpress.
+
+The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme.  
+The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+
++ [**Options API**](http://codex.wordpress.org/Options_API) - A simple and standardized way of storing data in the database.
++ [**Transients API**](http://codex.wordpress.org/Transients_API) - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
++ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
++ **Full of Options** - 3 kinds of options used to display information, store fields values or get data from your Wordpress database. The options are made to build your Wordpress pages easily.
++ **Easier for administrators** - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.
++ **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
+
+
+h2. Theme Options Field Types.
+
+
+h3. Display fields.
+
++ **Breakline or Horizontal rule** - Can be usefull.
+
++ **Heading** - Display a simple title.
+
++ **List items** - Show items in an unordered list.
+
++ **Paragraphe** - A simple text content.
+
++ **Group** - Usefull to group some settings and be focused on grouped values.
+
++ **Features** - **Special field** used only to build this documentation page (but you can use it as well).
+
+
+h3. Commn fields.
+
++ **Basic Text** - The most basic of form fields. Basic, but important.
+
++ **Email, number and more** - The most basic of form fields extended. You can choose between email, password, number, range, search and url.
+
++ **Hidden field** - A hidden field, if you need to store a special data.
+
++ **Textarea** - Again basic, but essencial.
+
++ **Checkbox** - No need to introduce it...
+
++ **Radio** - Its brother (or sister, as you want).
+
++ **Select** - Provide a list of possible option values.
+
++ **Multiselect** - The same list as previous one but with multichoices.
+
+
+h3. Special fields.
+
++ **Background** - Great for managing a complete background layout with options.
+
++ **Color** - Need some custom colors? Use the Wordpress color picker.
+
++ **Date** - Provide a calendar widget to select a date.
+
++ **Google Fonts** - Want to use a custom font provided by Google Web Fonts? It's easy now.
+
++ **Images** - Offers a list of choices with image labels (as radio buttons).
+
++ **RTE** - Want a full rich editing experience? Use the Wordpress editor.
+
++ **Social** - Who has never needed social links on his website? You can manage them easily here.
+
++ **Wordpress Upload** - Upload images (only for now), great for logo or default thumbnail. It uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
+
+
+h3. Wordress fields
+
++ **Categories** - Display a list of Wordpress categories.
+
++ **Menus** - Display a list of Wordpress menus.
+
++ **Pages** - Display a list of Wordpress pages.
+
++ **Posts** - Display a list of Wrdpress posts.
+
++ **Post Types** - Display a list of Wordpress posttypes.
+
++ **Tags** - Display a list of Wordpress tags.
+
 
 **Summary**
 + [1) Installing the theme roller](#1-installing-the-theme-roller)
@@ -43,9 +124,9 @@ Before starting, in your `functions.php` instanciate a new object with an uniq i
 
     $tea = new Tea_Theme_Options();
 
-And set details:
+And set details if you want:
 
-    $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. to 24h
+    $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. 24h
     $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
 
 NOTA: by default, the **Tea TO** will consider the `tea_theme_options` folder.
@@ -54,72 +135,45 @@ NOTA: by default, the **Tea TO** will consider the `tea_theme_options` folder.
 3) Let's roll!
 --------------
 
-Create your new first page with global details (as capability, icon, bigicon and description if you want):
+Create your new first page settings (as capability, icon, bigicon and description if you want):
 
-    $tea->addPage(array(
+    //Build page
+    $tea_titles = array(
         //used in your page
         'title' => 'My first page',
         //used in the admin menu
         'name' => 'First page',
         //a writer can use this page. If you want to give access only to the admin, use 'admin' instead
         'capability' => 'edit_pages',
-        //used in the admin menu
-        'icon' => get_template_directory_uri() . '/img/admin/settings_16.png',
-        //used in your page
-        'bigicon' => get_template_directory_uri() . '/img/admin/settings_32.png',
         //used in your page
         'description' => 'Here is a description of my first page'
-    ));
+    );
 
-Add all used fields in the last created page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
+Add all used fields in your page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
-    $tea->addFields(array(
+    //Add fields
+    $tea_configs = array(
         array(
-            'type' => 'text',
-            'title' => 'My first text title',
-            'id' => 'my_first_text_id',
-            'std' => 'My default text value'
-            'description' => 'My first text description'
+            'type' => 'text', //define the input type
+            'title' => 'My first text title', //define the title block
+            'id' => 'my_first_text_id', //define the uniq ID
+            'std' => 'My default text value', //define the default value
+            'description' => 'My first text description' //define the description block
         ),
         array(
-            'type' => 'password',
-            'title' => 'My first password field',
-            'id' => 'my_first_password_id',
-            'description' => 'My first password description'
+            'type' => 'textarea',
+            'title' => 'My first textarea field',
+            'id' => 'my_first_textarea_id',
+            'description' => 'My first textarea description'
         )
-    ));
+    );
 
-Create a new sub page with usefull parameters (add description if you need it). Try to put uniq slug for each array:
+Add your created details in your page and unset arrays:
 
-    $tea->addSubpage(array(
-        'title' => 'Subpage Options',
-        'name' => 'Homepage',
-        'slug' => '_homepage'
-    ));
+    $tea->addPage($tea_titles, $tea_configs);
+    unset($tea_titles, $tea_configs);
 
-Add all used fields in the last created subpage (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
-
-    $tea->addFields(array(
-        array(
-            'type' => 'text',
-            'title' => 'My second text title',
-            'id' => 'my_second_text_id',
-            'std' => 'My other default text value'
-            'description' => 'My second text description'
-        ),
-        array(
-            'type' => 'checkbox',
-            'title' => 'My first checkbox field',
-            'id' => 'my_first_checkbox_id',
-            'std' => array('check1', 'check2'),
-            'description' => 'My first checkbox description',
-            'options' => array(
-                'check1' => 'First checbox',
-                'check2' => 'Second checbox',
-                'check3' => 'Third checbox'
-            )
-        )
-    ));
+Repeat the process as you want/need :)
 
 
 4) Building menus
@@ -139,40 +193,43 @@ NOTA: the **Tea TO** uses [Transient Wordpress API](http://codex.wordpress.org/T
 All available types are:
 
 **Display inputs**:
-+ Br, display a simple breakline with clear css class
-+ Heading, display a simple title
-+ Hr, equivalent to the br input, but display an horizontal line
++ Br
++ Hr
++ Heading
++ P
++ List
++ Features
++ Group
 
 **Normal inputs**:
-+ Checkbox
++ Text (or Password or Email or Number or Range or Search or Url)
++ Textarea
 + Hidden
-+ Multiselect
-+ Password
++ Checkbox
 + Radio
 + Select
-+ Text (or Email or Search or Url)
-+ Textarea
-+ Upload (for images only) with the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
 **Special inputs**:
-+ Category, offers a WP category listing with multiselect option if needed
-+ Color, offers an input text with colorpicker
-+ Font, offers a list of font choices with image labels (uniq choice)
-+ Group, offers the possibility to add multiple inputs
-+ Image, offers a list of choices with image labels (uniq choice)
-+ Menu, display menus as information (no action required)
-+ Number (or Range), display new HTML5 inputs
-+ Page, display pages as information (no action required)
-+ Sidebar, display widgets as information (no action required)
-+ Social, display a list of wanted social buttons with multichoice
++ Color
++ Font
++ Image
++ Social
++ Background
++ Wordpress Upload
+
+**Wordpress inputs**:
++ Categories
++ Menus
++ Pages
++ Posts
++ Posttypes
++ Tags
 
 **Next inputs**: __IN PROGRESS__
-+ Button, offers a button with custom interaction
-+ Date, offers an input text with calendar interaction
-+ Post, offers a WP post listing with multiselect option if needed
-+ Tag, offers a WP tag listing with multiselect option if needed
-+ Typeahead, offers an input text with ajax call
-+ WYSIWYG, offers a Rich Text Editor
++ Autocompletion
++ Date
++ Geolocalisation
++ RTE
 
 
 6) Display inputs
@@ -184,36 +241,97 @@ Adding a `br`
         'type' => 'br'
     )
 
-Adding a `heading`
-
-    array(
-        'type' => 'heading',
-        'title' => 'Heading'
-    )
-
 Adding a `hr`
 
     array(
         'type' => 'hr'
     )
 
+Adding a `heading`
+
+    array(
+        'type' => 'heading',
+        'title' => 'Take a tea, simply'
+    )
+
+Adding a `paragraph`
+
+    array(
+        'type' => 'p',
+        'content' => 'Hello and welcome to the "Tea Test Academy"'
+    )
+
+Adding a `list`
+
+    array(
+        'type' => 'list',
+        'contents' => array(
+            'Just admit it:',
+            'this is the best',
+            'Wordpress Theme Options Framework :)',
+            'Thanks to Take a Tea :D'
+        )
+    )
+
+Adding a `features`
+
+    array(
+        'type' => 'features',
+        'title' => 'Here is what I am',
+        'contents' => array(
+            array(
+                'title' => 'Real good gamer',
+                'content' => 'Yeah, I am the best at Super Bomberman 2 on SNES :D',
+                'code' => 'I am <b>the</b> best as I said ;)' //Use HTML code to describe your feature on popin
+            )
+            //You can repeat this array as much as you want
+        )
+    )
+
+Adding a `group`
+
+    array(
+        'type' => 'group',
+        'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
+        'contents' => array(
+            //Put here all your needed fields like this one...
+            array(
+                'type' => 'br'
+            )
+        )
+    )
+
 
 7) Normal inputs
 ----------------
 
-Adding a `checkbox`
+Adding a `text`  
+NOTA: you can define the maxlength optional attribute.
 
     array(
-        'type' => 'checkbox', //define the input type
-        'title' => 'Checkbox', //define the title block
-        'id' => 'simple_checkbox', //define the uniq ID
-        'std' => array('mountain', 'beach'), //define the default choices
-        'description' => 'Simple description to checkbox panel', //define the description block
-        //define the options
+        'type' => 'text',
+        'title' => 'What do you like?',
+        'id' => 'my_text_field_id',
+        'std' => 'Penguins, I am sure they\'re gonna dominate the World!',
+        'placeholder' => 'McDonald\'s as well',
+        'description' => 'Put in here everything you want.',
+        'maxlength' => 120
+    )
+
+NOTA: you can use `email`, `search` or `url` type to use the new HTML5 inputs.
+
+    array(
+        'type' => 'text',
+        'title' => 'How much do you like Penguins?',
+        'id' => 'my_text_field_id',
+        'std' => 100,
+        'placeholder' => '50',
+        'description' => 'Tell us how much do like Penguins to have a chance to get into our private Penguins community ;)',
         'options' => array(
-            'mountain' => 'Mountain', //value => label
-            'sea' => 'Sea',
-            'beach' => 'Beach'
+            'type' => 'number',
+            'min' => 10,
+            'max' => 100,
+            'step' => 1
         )
     )
 
@@ -221,47 +339,50 @@ Adding a `hidden`
 
     array(
         'type' => 'hidden',
-        'id' => 'simple_hidden',
-        'std' => 'Simple hidden'
+        'id' => 'my_hidden_field_id',
+        'std' => 'Haha I will dominate the World!!! MOUAHAHAHAHAHA - Crazy Penguin'
     )
 
-Adding a `multiselect`
+Adding a `textarea`
 
     array(
-        'type' => 'multiselect',
-        'title' => 'Multiselect',
-        'id' => 'simple_multiselect',
-        'std' => array('mountain', 'beach'),
-        'description' => 'Simple description to multiselect panel',
+        'type' => 'textarea',
+        'title' => 'How do Penguins drink their cola?',
+        'id' => 'my_textarea_field_id',
+        'std' => 'On the rocks.',
+        'placeholder' => 'Tell us how?',
+        'description' => 'A simple question to know if you will be able to survive to the Penguin domination.'
+    )
+
+Adding a `checkbox`
+
+    array(
+        'type' => 'checkbox',
+        'title' => 'What are your preferred personas?',
+        'id' => 'my_checkbox_field_id',
+        'std' => array('minions', 'lapinscretins'), //define the default choice(s)
+        'description' => '',
+        //define the options
         'options' => array(
-            'mountain' => 'Mountain',
-            'sea' => 'Sea',
-            'beach' => 'Beach'
+            'minions' => 'The Minions', //value => label
+            'lapinscretins' => 'The Lapins Crétins',
+            'marvel' => 'All Marvel Superheroes',
+            'franklin' => 'Franklin (everything is possible)',
+            'spongebob' => 'Spongebob (nothing to say... Love it)'
         )
-    )
-
-Adding a `password`
-
-    array(
-        'type' => 'password',
-        'title' => 'Password',
-        'id' => 'simple_password',
-        'placeholder' => 'Simple placeholder',
-        'description' => 'Simple description to password panel'
     )
 
 Adding a `radio`
 
     array(
         'type' => 'radio',
-        'title' => 'Radio buttons',
-        'id' => 'simple_radio',
-        'std' => 'sea',
-        'description' => 'Simple description to radio buttons panel',
+        'title' => 'Ok ok... But what is your favorite?',
+        'id' => 'my_radio_field_id',
+        'std' => 'minions',
+        'description' => '- "Bapouet?" - "Na na na, baapouet!" - "AAAAAAAAAA Bapoueeeeettttt!!!!"',
         'options' => array(
-            'mountain' => 'Mountain',
-            'sea' => 'Sea',
-            'beach' => 'Beach'
+            'minions' => 'The Minions',
+            'lapinscretins' => 'The Lapins Crétins'
         )
     )
 
@@ -269,39 +390,120 @@ Adding a `select`
 
     array(
         'type' => 'select',
-        'title' => 'Select',
-        'id' => 'simple_select',
-        'std' => 'sea',
-        'description' => 'Simple description to select panel',
+        'title' => 'Prove it: what do they mean by "Bapouet"?',
+        'id' => 'my_select_field_id',
+        'std' => '',
+        'description' => 'Don\'t cheat: the movie is NOT the solution :)',
         'options' => array(
-            'mountain' => 'Mountain',
-            'sea' => 'Sea',
-            'beach' => 'Beach'
+            'toy' => 'A simple toy',
+            'milk' => 'Just milk',
+            'unicorn-toy' => 'A unicorn toy... Very stupid :p',
+            'tails' => 'A red fox with a tiny cute fire tail with his blue faster hedgedog friend'
         )
     )
 
-Adding a `text`  
-NOTA: you can define the maxlength optional attribute. You can use `email`, `search` or `url` type to use the new HTML5 inputs.
+Adding a `multiselect`
 
     array(
-        'type' => 'text',
-        'title' => 'Text',
-        'id' => 'simple_text',
-        'std' => 'Simple text',
-        'placeholder' => 'Simple placeholder',
-        'description' => 'Simple description to text panel',
-        'maxlength' => 7
+        'type' => 'select',
+        'title' => 'Select the Minions that you may know',
+        'id' => 'my_multiselect_field_id',
+        'std' => '',
+        'description' => 'Pay attention to this question ;)',
+        'options' => array(
+            'henry' => 'Henry',
+            'jacques' => 'Jacques',
+            'kevin' => 'Kevin',
+            'tom' => 'Tom'
+        )
     )
 
-Adding a `textarea`
+
+8) Special inputs
+-----------------
+
+Adding a `color`
 
     array(
-        'type' => 'textarea',
-        'title' => 'Textarea',
-        'id' => 'simple_textarea',
-        'std' => 'Simple textarea',
-        'placeholder' => 'Simple placeholder',
-        'description' => 'Simple description to textarea panel'
+        'type' => 'color',
+        'title' => 'What is your favorite Coke?',
+        'id' => 'my_color_field_id',
+        'std' => '#000000',
+        'description' => 'Do not choose the Coke Zero, right? ;)'
+    )
+
+Adding a `font`  
+NOTA: the **Tea TO** package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
+
+    array(
+        'type' => 'font',
+        'title' => 'Choose your style',
+        'id' => 'my_font_field_id',
+        'std' => 'my_gorgeous_font',
+        'description' => 'Tell us how to scribe :D',
+        'default' => true,
+        'options' => array(
+            'my_gorgeous_font' => 'my_gorgeous_font_url',
+            'an_other_font' => 'an_other_font_url'
+        )
+    )
+
+Adding an `image`
+
+    array(
+        'type' => 'image',
+        'title' => 'Choose your avatar',
+        'id' => 'my_image_field_id',
+        'std' => 'beach',
+        'description' => 'A uniq avatar to define yourself',
+        'multiselect' => true, //if you need more than one choice
+        'height' => 50, //if you need to define a special height (60px by default)
+        'width' => 50, //if you need to define a special width (150px by default)
+        'options' => array(
+            'my_first_image_url',
+            'my_second_image_url',
+            'my_third_image_url'
+        )
+    )
+
+Adding a `social`  
+NOTA: use the `default` attribute to list all the included social buttons, from the list below  
+`addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `hellocoton`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
+
+    array(
+        'type' => 'social',
+        'title' => 'Big Brother is watching you...',
+        'id' => 'my_social_field_id',
+        'std' => array('facebook', 'twitter', 'googleplus', 'addthis'),
+        'description' => '...Or not!',
+        'default' => array(
+            'facebook',
+            'twitter',
+            'googleplus',
+            'instagram',
+            'pinterest',
+            'addthis'
+        )
+    )
+
+Adding a `background`  
+NOTA: the background input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights). The **Tea TO** package offers a large set of image patterns. If you want them, set the `default` attribute to `true`.
+
+    array(
+        'type' => 'background',
+        'title' => 'A new paint :D',
+        'id' => 'my_background_field_id',
+        'std' => array(
+            'image' => 'my_background_default_url',
+            'color' => '#ffffff',
+            'repeat' => 'no-repeat',
+            'position_x' => ',
+            'position_x_pos' => 'left',
+            'position_y' => ',
+            'position_y_pos' => 'top'
+        ),
+        'description' => 'It\'s tricky :)',
+        'default' => true
     )
 
 Adding an `upload`  
@@ -316,210 +518,96 @@ NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress
     )
 
 
-8) Special inputs
------------------
+9) Wordpress inputs
+-------------------
 
-Adding a `category`  
-NOTA: the category input has a special method which detects if the ID has the `__category` term to register in transient more than expected, as the category title, slug and category.
-NOTA: the category input has a special method which detects if the ID has the `__categories` term to register in transient its children categories.
+Adding a `categories`
 
     array(
-        'type' => 'category',
-        'title' => 'Category',
-        'id' => 'simple_cat__category', //if you need the id only, don't use the `__category` term
+        'type' => 'categories',
+        'title' => 'My Wordpress categories',
+        'id' => 'my_categories_field_id',
         'multiselect' => true //Optional: to "false" by default
     )
 
-Adding a `color`
+Adding a `menus`
 
     array(
-        'type' => 'color',
-        'title' => 'Color',
-        'id' => 'simple_color',
-        'std' => '#123456',
-        'description' => 'Simple description to color panel'
+        'type' => 'menus',
+        'title' => 'My Wordpress menus',
+        'id' => 'my_menus_field_id',
+        'multiselect' => true //Optional: to "false" by default
     )
 
-Adding an `font`  
-NOTA: the **Tea TO** package offers a large set of fonts. If you want them, set the `default` attribute to `true`.
+Adding a `pages`
 
     array(
-        'type' => 'font',
-        'title' => 'Font',
-        'id' => 'simple_font',
-        'std' => 'font1',
-        'description' => 'Simple description to font panel',
-        'default' => true,
-        'options' => array(
-            'font1' => get_template_directory_uri() . '/img/font1.png',
-            'font2' => get_template_directory_uri() . '/img/font2.png',
-            'font3' => get_template_directory_uri() . '/img/font3.png'
-        )
+        'type' => 'pages',
+        'title' => 'My Wordpress pages',
+        'id' => 'my_pages_field_id',
+        'multiselect' => true //Optional: to "false" by default
     )
 
-Adding a `group`  
-NOTA: groups are able to display to 4 input columns per line. You can break a line by adding more than 4 inputs or with a `br`, `heading` or `hr` input.
+Adding a `posts`
 
     array(
-        'type' => 'group',
-        'title' => 'Group',
-        'description' => 'Simple optional group description',
-        'contents' => array(
-            array(
-                'type' => 'radio',
-                'title' => 'Radio group',
-                'id' => 'simple_radio_group',
-                'std' => 'beach',
-                'description' => 'Simple description to radio group panel',
-                'options' => array(
-                    'mountain' => 'Mountain',
-                    'sea' => 'Sea',
-                    'beach' => 'Beach'
-                )
-            ),
-            array(
-                'type' => 'text',
-                'title' => 'Text group',
-                'id' => 'simple_text_group',
-                'std' => 'Simple text group',
-                'description' => 'Simple description to text group panel'
-            ),
-            array(
-                'type' => 'br'
-            ),
-            array(
-                'type' => 'sidebar',
-                'title' => 'Sidebar group',
-                'id' => '1st-homepage-content-block',
-                'description' => 'Simple description to text group panel'
-            )
-        )
+        'type' => 'posts',
+        'title' => 'My Wordpress posts',
+        'id' => 'my_posts_field_id',
+        'multiselect' => true //Optional: to "false" by default
     )
 
-Adding an `image`  
-NOTA: the **Tea TO** package offers a large set of background patterns. If you want them, set the `default` attribute to `true`.
+Adding a `post types`
 
     array(
-        'type' => 'image',
-        'title' => 'Image',
-        'id' => 'simple_image',
-        'std' => 'beach',
-        'description' => 'Simple description to image panel',
-        'multiselect' => true, //if you need more than one choice
-        'height' => 25, //if you need to define a special height (60px by default)
-        'width' => 140, //if you need to define a special width (150px by default)
-        'default' => true,
-        'options' => array(
-            get_template_directory_uri() . '/img/mountain.png',
-            get_template_directory_uri() . '/img/sea.png',
-            get_template_directory_uri() . '/img/beach.png'
-        )
+        'type' => 'posttypes',
+        'title' => 'My Wordpress post types',
+        'id' => 'my_posttypes_field_id',
+        'multiselect' => true //Optional: to "false" by default
     )
 
-Adding a `menu`
+Adding a `tags`
 
     array(
-        'type' => 'menu',
-        'title' => 'Menu',
-        'id' => 'id_of_the_menu_expected',
-        'description' => 'Simple description to menu panel'
-    )
-
-Adding a `number`  
-NOTA: you can use `range` type to use the new HTML5 inputs
-
-    array(
-        'type' => 'number',
-        'title' => 'Number',
-        'id' => 'simple_number',
-        'std' => 'Simple number',
-        'min' => 12, //'1' by default
-        'max' => 120, //'50' by default
-        'step' => 10, //'1' by default
-        'description' => 'Simple description to number panel'
-    )
-
-Adding a `page`
-
-    array(
-        'type' => 'page',
-        'title' => 'Page',
-        'id' => 'simple_page',
-        'multiselect' => true
-    )
-
-Adding a `sidebar`
-
-    array(
-        'type' => 'sidebar',
-        'title' => 'Sidebar',
-        'id' => '1st-homepage-content-block', //define the sidebar id
-        'description' => 'Simple description to text panel'
-    )
-
-Adding a `social`  
-NOTA: use the `wanted` attribute to list all the wanted social buttons, from the list below.  
-`addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `googleplus`, `hellocoton`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
-
-    array(
-        'type' => 'social',
-        'title' => 'Social',
-        'id' => 'simple_social',
-        'std' => array('facebook', 'twitter', 'googleplus', 'addthis'),
-        'description' => 'Simple description to social panel',
-        'wanted' => array( //Define here all the wanted social buttons in your order
-            'facebook',
-            'twitter',
-            'googleplus',
-            'instagram',
-            'pinterest',
-            'addthis'
-        )
+        'type' => 'tags',
+        'title' => 'My Wordpress tags',
+        'id' => 'my_tags_field_id',
+        'multiselect' => true //Optional: to "false" by default
     )
 
 
-9) Next inputs
---------------
+10) Next inputs
+---------------
+
+Adding a `address` __IN PROGRESS__
+
+    array(
+        'type' => 'address',
+        'title' => 'What is your postal address?',
+        'id' => 'my_address_field_id',
+        'std' => 'Arica, Chile',
+        'description' => '<a href="http://goo.gl/maps/fwqS8" class="openit">Always Coca Cola :)</a>',
+        'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
+    )
+
+Adding a `autocomplete` __IN PROGRESS__
+
+    array(
+        'type' => 'autocomplete',
+        'title' => 'Autocomplete...',
+        'id' => 'my_autocompletion_field_id',
+        'std' => '...Because you are assisted :D',
+        'description' => ''
+    )
 
 Adding a `date` __IN PROGRESS__
 
     array(
         'type' => 'date',
-        'title' => 'Date',
-        'id' => 'simple_date',
-        'std' => 'Simple date',
-        'description' => 'Simple description to date panel'
-    )
-
-Adding a `post` __IN PROGRESS__
-
-    array(
-        'type' => 'post',
-        'title' => 'Post',
-        'id' => 'simple_post',
-        'std' => 'Simple post',
-        'description' => 'Simple description to post panel'
-    )
-
-Adding a `tag` __IN PROGRESS__
-
-    array(
-        'type' => 'tag',
-        'title' => 'Tag',
-        'id' => 'simple_tag',
-        'std' => 'Simple tag',
-        'description' => 'Simple description to tag panel'
-    )
-
-Adding a `typeahead` __IN PROGRESS__
-
-    array(
-        'type' => 'typeahead',
-        'title' => 'Typeahead',
-        'id' => 'simple_typeahead',
-        'std' => 'Simple typeahead',
-        'description' => 'Simple description to typeahead panel',
-        'ajaxurl' => 'name_of_your_ajax_url_to_parse' //define the ajax url to parse
+        'title' => 'What\'s the day today?',
+        'id' => 'my_date_field_id',
+        'std' => '06-03-2013',
+        'description' => 'Choose your date simply'
     )
 
 Adding a `wysiwyg` __IN PROGRESS__

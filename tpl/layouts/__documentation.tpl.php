@@ -43,15 +43,23 @@ $details = array(
             ),
             array(
                 'title' => __('Heading'),
-                'content' => __('Need to display a simple title?'),
+                'content' => __('Display a simple title.'),
                 'code' => 'array(
     "type" => "heading",
     "title" => "My heading title"
 );'
             ),
             array(
+                'title' => __('Paragraph'),
+                'content' => __('A simple text content.'),
+                'code' => 'array(
+    "type" => "p",
+    "content" => "My long text content as Lorem Ipsum"
+);'
+            ),
+            array(
                 'title' => __('List items'),
-                'content' => __('Want to display some list items?'),
+                'content' => __('Show items in an unordered list.'),
                 'code' => 'array(
     "type" => "list",
     "contents" => array(
@@ -63,27 +71,8 @@ $details = array(
 );'
             ),
             array(
-                'title' => __('Paragraph'),
-                'content' => __('Need to display a simple text content?'),
-                'code' => 'array(
-    "type" => "p",
-    "content" => "My long text content as Lorem Ipsum"
-);'
-            ),
-            array(
-                'title' => __('Group'),
-                'content' => __('Want to group some extra settings?'),
-                'code' => 'array(
-    "type" => "group",
-    "title" => "My group title",
-    "contents" => array(
-        //Put here all your needed fields
-    )
-);'
-            ),
-            array(
                 'title' => __('Features'),
-                'content' => __('<b>Special field</b> used only to build this documentation page.'),
+                'content' => __('<b>Special field</b> used only to build this documentation page (but you can use it as well).'),
                 'code' => 'array(
     "type" => "features",
     "title" => "My features title",
@@ -94,6 +83,20 @@ $details = array(
             "code" => "My 1st feature HTML code to display in popin after clicking on a button"
         )
         //You can repeat this array as much as you want
+    )
+);'
+            ),
+            array(
+                'title' => __('Group'),
+                'content' => __('Usefull to group some settings and be focused on grouped values.'),
+                'code' => 'array(
+    "type" => "group",
+    "title" => "My group title",
+    "contents" => array(
+        //Put here all your needed fields like this one...
+        array(
+            "type" => "br"
+        )
     )
 );'
             )
@@ -108,6 +111,7 @@ $details = array(
                 'content' => __('The most basic of form fields. Basic, but important.'),
                 'code' => 'array(
     "type" => "text",
+    "title" => "My text title",
     "id" => "my_text_field_id",
     "std" => "My default value",
     "placeholder" => "My usefull placeholder",
@@ -119,6 +123,7 @@ $details = array(
                 'content' => __('The most basic of form fields extended. You can choose between email, password, number, range, search and url.'),
                 'code' => 'array(
     "type" => "text",
+    "title" => "My text title",
     "id" => "my_number_field_id",
     "std" => "My default value",
     "placeholder" => "My usefull placeholder",
@@ -145,15 +150,17 @@ $details = array(
                 'content' => __('Again basic, but essencial.'),
                 'code' => 'array(
     "type" => "textarea",
+    "title" => "My textarea title",
     "id" => "my_textarea_field_id",
     "rows" => 10
 );'
             ),
             array(
                 'title' => __('Checkbox'),
-                'content' => __('The humble "Check if you want to.....".'),
+                'content' => __('No need to introduce it...'),
                 'code' => 'array(
     "type" => "checkbox",
+    "title" => "My choices title",
     "id" => "my_checkbox_field_id",
     "std" => array("3", "5"),
     "options" => array(
@@ -165,9 +172,10 @@ $details = array(
             ),
             array(
                 'title' => __('Radio'),
-                'content' => __('The expanded "Check if you want to.....".'),
+                'content' => __('Its brother (or sister, as you want).'),
                 'code' => 'array(
     "type" => "radio",
+    "title" => "My choice title",
     "id" => "my_radio_field_id",
     "std" => "3",
     "options" => array(
@@ -179,9 +187,10 @@ $details = array(
             ),
             array(
                 'title' => __('Select'),
-                'content' => __('Want to provide a list of possible option values.'),
+                'content' => __('Provide a list of possible option values.'),
                 'code' => 'array(
     "type" => "select",
+    "title" => "My choice title",
     "id" => "my_select_field_id",
     "std" => "3",
     "options" => array(
@@ -193,9 +202,10 @@ $details = array(
             ),
             array(
                 'title' => __('Multiselect'),
-                'content' => __('Need the option to have multiple option values at once?'),
+                'content' => __('The same list as previous one but with multichoices.'),
                 'code' => 'array(
     "type" => "select",
+    "title" => "My choices title",
     "id" => "my_multiselect_field_id",
     "std" => array("3", "5"),
     "multiple" => true,
@@ -217,6 +227,7 @@ $details = array(
                 'content' => __('Great for managing a complete background layout with options.'),
                 'code' => 'array(
     "type" => "background",
+    "title" => "My background field title",
     "id" => "my_background_field_id",
     "std" => array(
         "image" => "my_background_default_url",
@@ -227,7 +238,6 @@ $details = array(
         "position_y" => "",
         "position_y_pos" => "top"
     ),
-    "title" => "My background field title",
     "description" => "My background field description"
 );'
             ),
@@ -236,31 +246,31 @@ $details = array(
                 'content' => __('Need some custom colors? Use the Wordpress color picker.'),
                 'code' => 'array(
     "type" => "color",
+    "title" => "My color field title",
     "id" => "my_color_field_id",
     "std" => "#ffffff",
-    "title" => "My color field title",
     "description" => "My color field description"
 );'
             ),
             array(
                 'title' => __('Date'),
-                'content' => __('Privide a calendar widget for users to select a date.'),
+                'content' => __('Privide a calendar widget to select a date.'),
                 'code' => 'array(
     "type" => "date",
+    "title" => "My date field title",
     "id" => "my_date_field_id",
     "std" => "03-24-2013",
-    "title" => "My date field title",
     "description" => "My date field description"
 );'
             ),
             array(
-                'title' => __('Google Fonts Select'),
-                'content' => __('Want to use a custom font provided by Google Web Fonts? Its easy with this field.'),
+                'title' => __('Google Fonts'),
+                'content' => __('Want to use a custom font provided by Google Web Fonts? It\'s easy now.'),
                 'code' => 'array(
     "type" => "font",
+    "title" => "My font field title",
     "id" => "my_font_field_id",
     "std" => "lobster",
-    "title" => "My font field title",
     "description" => "My font field description",
     "default" => true,
     "options" => array(
@@ -269,22 +279,36 @@ $details = array(
 );'
             ),
             array(
+                'title' => __('Images'),
+                'content' => __('Offers a list of choices with image labels (as radio button).'),
+                'code' => 'array(
+    "type" => "image",
+    "title" => "My image field title",
+    "id" => "my_image_field_id",
+    "description" => "My image field description",
+    "default" => true,
+    "options" => array(
+        "my_custom_image" => "my_custom_image_url"
+    )
+);'
+            ),
+            array(
                 'title' => __('RTE'),
-                'content' => __('Want a full rich editing experience? Use the Wordpress editor around.'),
+                'content' => __('Want a full rich editing experience? Use the Wordpress editor.'),
                 'code' => 'array(
     "type" => "rte",
-    "id" => "my_rte_field_id",
     "title" => "My RTE field title",
+    "id" => "my_rte_field_id",
     "description" => "My RTE field description"
 );'
             ),
             array(
                 'title' => __('Social'),
-                'content' => __('Who has never needed social links on his blog? You can manage them easily with this field.'),
+                'content' => __('Who has never needed social links on his website? You can manage them easily here.'),
                 'code' => 'array(
     "type" => "social",
-    "id" => "my_social_field_id",
     "title" => "My social field title",
+    "id" => "my_social_field_id",
     "description" => "My social field description",
     "default" => array(
         "addthis", "bloglovin", "deviantart", "dribbble", "facebook",
@@ -296,11 +320,11 @@ $details = array(
             ),
             array(
                 'title' => __('Wordpress Upload'),
-                'content' => __('Upload images (only for now), great for logo options.'),
+                'content' => __('Upload images (only for now), great for logo or default thumbnail. It uses the <a href="http://codex.wordpress.org/Version_3.5#Highlights" class="openit">Wordpress Media Manager</a>'),
                 'code' => 'array(
     "type" => "upload",
-    "id" => "my_upload_field_id",
     "title" => "My upload field title",
+    "id" => "my_upload_field_id",
     "description" => "My upload field description",
     "library" => "image", //Default value, tells to accept only images
     "multiple" => true //If you need to upload a gallery
@@ -322,7 +346,7 @@ $details = array(
             ),
             array(
                 'title' => __('Menus'),
-                'content' => __('Display a list of Wordpress menus that you have created.'),
+                'content' => __('Display a list of Wordpress menus.'),
                 'code' => 'array(
     "type" => "menus",
     "id" => "my_menus_field_id"
