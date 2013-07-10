@@ -13,77 +13,6 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
 
 
-## Theme Options Field Types.
-
-
-### Display fields.
-
-+ **Breakline or Horizontal rule** - Can be usefull.
-
-+ **Heading** - Display a simple title.
-
-+ **List items** - Show items in an unordered list.
-
-+ **Paragraphe** - A simple text content.
-
-+ **Group** - Usefull to group some settings and be focused on grouped values.
-
-+ **Features** - **Special field** used only to build this documentation page (but you can use it as well).
-
-
-### Commn fields.
-
-+ **Basic Text** - The most basic of form fields. Basic, but important.
-
-+ **Email, number and more** - The most basic of form fields extended. You can choose between email, password, number, range, search and url.
-
-+ **Hidden field** - A hidden field, if you need to store a special data.
-
-+ **Textarea** - Again basic, but essencial.
-
-+ **Checkbox** - No need to introduce it...
-
-+ **Radio** - Its brother (or sister, as you want).
-
-+ **Select** - Provide a list of possible option values.
-
-+ **Multiselect** - The same list as previous one but with multichoices.
-
-
-### Special fields.
-
-+ **Background** - Great for managing a complete background layout with options.
-
-+ **Color** - Need some custom colors? Use the Wordpress color picker.
-
-+ **Date** - Provide a calendar widget to select a date.
-
-+ **Google Fonts** - Want to use a custom font provided by Google Web Fonts? It's easy now.
-
-+ **Images** - Offers a list of choices with image labels (as radio buttons).
-
-+ **RTE** - Want a full rich editing experience? Use the Wordpress editor.
-
-+ **Social** - Who has never needed social links on his website? You can manage them easily here.
-
-+ **Wordpress Upload** - Upload images (only for now), great for logo or default thumbnail. It uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
-
-
-### Wordress fields
-
-+ **Categories** - Display a list of Wordpress categories.
-
-+ **Menus** - Display a list of Wordpress menus.
-
-+ **Pages** - Display a list of Wordpress pages.
-
-+ **Posts** - Display a list of Wrdpress posts.
-
-+ **Post Types** - Display a list of Wordpress posttypes.
-
-+ **Tags** - Display a list of Wordpress tags.
-
-
 ## Summary
 
 + [1) Installing the theme roller](#1-installing-the-theme-roller)
@@ -91,12 +20,12 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 + [3) Let's roll!](#3-lets-roll)
 + [4) Building menus](#4-building-menus)
 + [5) Adding fields](#5-adding-fields)
-+ [6) Display inputs](#6-display-inputs)
-+ [7) Normal inputs](#7-normal-inputs)
-+ [8) Special inputs](#8-special-inputs)
-+ [9) Next inputs](#9-next-inputs)
-+ [10) Example](#10-example)
-+ [11) Get data from Transient](#11-get-data-from-transient)
++ [6) Display fields](#6-display-fields)
++ [7) Common fields](#7-common-fields)
++ [8) Special fields](#8-special-fields)
++ [9) Wordpress fields](#9-wordpress-fields)
++ [10) Next fields](#10-next-fields)
++ [11) Examples](#11-examples)
 + [12) Previews](#12-previews)
 + [13) That's all folkes!](#13-thats-all-folkes)
 + [14) Authors](#14-authors)
@@ -126,7 +55,7 @@ And set details if you want:
     $tea->__setDuration(86400); //Will stock transient for 86400sec, eq. 24h
     $tea->__setDirectory('__YOUR_TEA_TO_CUSTOM_FOLDER__'); //Will define the current Tea TO directory.
 
-NOTA: by default, the **Tea TO** will consider the `tea_theme_options` folder.
+NOTA: by default, the **Tea TO** will consider `tea_theme_options/` folder.
 
 
 ### 3) Let's roll!
@@ -148,13 +77,18 @@ Create your new first page settings (as capability, icon, bigicon and descriptio
 Add all used fields in your page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
     //Add fields
-    $tea_configs = array(
+    $tea_fields = array(
         array(
-            'type' => 'text', //define the input type
-            'title' => 'My first text title', //define the title block
-            'id' => 'my_first_text_id', //define the uniq ID
-            'std' => 'My default text value', //define the default value
-            'description' => 'My first text description' //define the description block
+            //define the input type
+            'type' => 'text',
+            //define the title block
+            'title' => 'My first text title',
+            //define the uniq ID
+            'id' => 'my_first_text_id',
+            //define the default value
+            'std' => 'My default text value',
+            //define the description block
+            'description' => 'My first text description'
         ),
         array(
             'type' => 'textarea',
@@ -166,15 +100,15 @@ Add all used fields in your page (to get definition fields, see below the [Addin
 
 Add your created details in your page and unset arrays:
 
-    $tea->addPage($tea_titles, $tea_configs);
-    unset($tea_titles, $tea_configs);
+    $tea->addPage($tea_titles, $tea_fields);
+    unset($tea_titles, $tea_fields);
 
 Repeat the process as you want/need :)
 
 
 ### 4) Building menus
 
-The last step is to build menus and get your pages available in the admin menu.
+The **last step** is to build menus and get your pages available in the admin menu.
 
     $tea->buildMenus();
 
@@ -186,58 +120,49 @@ NOTA: the **Tea TO** uses [Transient Wordpress API](http://codex.wordpress.org/T
 
 All available types are:
 
-**Display inputs**:
-+ Br
-+ Hr
-+ Heading
-+ P
-+ List
-+ Features
-+ Group
+**Display fields**:
++ Breakline or Horizontal rule - Can be usefull.
++ Heading - Display a simple title.
++ Paragraphe - A simple text content.
++ List items - Show items in an unordered list.
++ Group - Usefull to group some settings and be focused on grouped values.
++ Features - **Special field** used only to build this documentation page (but you can use it as well).
 
-**Normal inputs**:
-+ Text (or Password or Email or Number or Range or Search or Url)
-+ Textarea
-+ Hidden
-+ Checkbox
-+ Radio
-+ Select
+**Common fields**:
++ Basic Text - The most basic of form fields. Basic, but important.
++ Email, number and more - The most basic of form fields extended. You can choose between email, password, number, range, search and url.
++ Hidden field - A hidden field, if you need to store a special data.
++ Textarea - Again basic, but essencial.
++ Checkbox - No need to introduce it...
++ Radio - Its brother (or sister, as you want).
++ Select - Provide a list of possible option values.
++ Multiselect - The same list as previous one but with multichoices.
 
-**Special inputs**:
-+ Color
-+ Font
-+ Image
-+ Social
-+ Background
-+ Wordpress Upload
+**Special fields**:
++ Background - Great for managing a complete background layout with options.
++ Color - Need some custom colors? Use the Wordpress color picker.
++ Date - Provide a calendar widget to select a date.
++ Google Fonts - Want to use a custom font provided by Google Web Fonts? It's easy now.
++ Images - Offers a list of choices with image labels (as radio buttons).
++ RTE - Want a full rich editing experience? Use the Wordpress editor.
++ Social - Who has never needed social links on his website? You can manage them easily here.
++ Wordpress Upload - Upload images (only for now), great for logo or default thumbnail. It uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
-**Wordpress inputs**:
-+ Categories
-+ Menus
-+ Pages
-+ Posts
-+ Posttypes
-+ Tags
-
-**Next inputs**: __IN PROGRESS__
-+ Autocompletion
-+ Date
-+ Geolocalisation
-+ RTE
+**Wordress fields**:
++ Categories - Display a list of Wordpress categories.
++ Menus - Display a list of Wordpress menus.
++ Pages - Display a list of Wordpress pages.
++ Posts - Display a list of Wrdpress posts.
++ Post Types - Display a list of Wordpress posttypes.
++ Tags - Display a list of Wordpress tags.
 
 
-### 6) Display inputs
+### 6) Display fields
 
-Adding a `br`
+Adding a `br` or `hr`
 
     array(
-        'type' => 'br'
-    )
-
-Adding a `hr`
-
-    array(
-        'type' => 'hr'
+        'type' => 'br' //put 'hr' if you want
     )
 
 Adding a `heading`
@@ -266,6 +191,19 @@ Adding a `list`
         )
     )
 
+Adding a `group`
+
+    array(
+        'type' => 'group',
+        'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
+        'contents' => array(
+            //Put here all your needed fields like this one...
+            array(
+                'type' => 'br'
+            )
+        )
+    )
+
 Adding a `features`
 
     array(
@@ -281,21 +219,8 @@ Adding a `features`
         )
     )
 
-Adding a `group`
 
-    array(
-        'type' => 'group',
-        'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
-        'contents' => array(
-            //Put here all your needed fields like this one...
-            array(
-                'type' => 'br'
-            )
-        )
-    )
-
-
-### 7) Normal inputs
+### 7) Common fields
 
 Adding a `text`  
 NOTA: you can define the maxlength optional attribute.
@@ -310,7 +235,7 @@ NOTA: you can define the maxlength optional attribute.
         'maxlength' => 120
     )
 
-NOTA: you can use `email`, `search` or `url` type to use the new HTML5 inputs.
+NOTA: you can use `email`, `search` or `url` type in options to use the new HTML5 inputs.
 
     array(
         'type' => 'text',
@@ -411,7 +336,27 @@ Adding a `multiselect`
     )
 
 
-### 8) Special inputs
+### 8) Special fields
+
+Adding a `background`  
+NOTA: the background input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights). The **Tea TO** package offers a large set of image patterns. If you want them, set the `default` attribute to `true`.
+
+    array(
+        'type' => 'background',
+        'title' => 'A new paint :D',
+        'id' => 'my_background_field_id',
+        'std' => array(
+            'image' => 'my_background_default_url',
+            'color' => '#ffffff',
+            'repeat' => 'no-repeat',
+            'position_x' => ',
+            'position_x_pos' => 'left',
+            'position_y' => ',
+            'position_y_pos' => 'top'
+        ),
+        'description' => 'It\'s tricky :)',
+        'default' => true
+    )
 
 Adding a `color`
 
@@ -421,6 +366,16 @@ Adding a `color`
         'id' => 'my_color_field_id',
         'std' => '#000000',
         'description' => 'Do not choose the Coke Zero, right? ;)'
+    )
+
+Adding a `date`
+
+    array(
+        'type' => 'date',
+        'title' => 'What\'s the day today?',
+        'id' => 'my_date_field_id',
+        'std' => '06-03-2013',
+        'description' => 'Choose your date simply'
     )
 
 Adding a `font`  
@@ -457,6 +412,16 @@ Adding an `image`
         )
     )
 
+Adding a `rte`
+
+    array(
+        'type' => 'wysiwyg',
+        'title' => 'WYSIWYG',
+        'id' => 'simple_wysiwyg',
+        'std' => 'Simple wysiwyg',
+        'description' => 'Simple description to wysiwyg panel'
+    )
+
 Adding a `social`  
 NOTA: use the `default` attribute to list all the included social buttons, from the list below  
 `addthis`, `bloglovin`, `deviantart`, `dribbble`, `facebook`, `flickr`, `forrst`, `friendfeed`, `hellocoton`, `googleplus`, `instagram`, `lastfm`, `linkedin`, `pinterest`, `rss`, `skype`, `tumblr`, `twitter`, `vimeo`, `youtube`
@@ -477,26 +442,6 @@ NOTA: use the `default` attribute to list all the included social buttons, from 
         )
     )
 
-Adding a `background`  
-NOTA: the background input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights). The **Tea TO** package offers a large set of image patterns. If you want them, set the `default` attribute to `true`.
-
-    array(
-        'type' => 'background',
-        'title' => 'A new paint :D',
-        'id' => 'my_background_field_id',
-        'std' => array(
-            'image' => 'my_background_default_url',
-            'color' => '#ffffff',
-            'repeat' => 'no-repeat',
-            'position_x' => ',
-            'position_x_pos' => 'left',
-            'position_y' => ',
-            'position_y_pos' => 'top'
-        ),
-        'description' => 'It\'s tricky :)',
-        'default' => true
-    )
-
 Adding an `upload`  
 NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
@@ -509,7 +454,7 @@ NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress
     )
 
 
-### 9) Wordpress inputs
+### 9) Wordpress fields
 
 Adding a `categories`
 
@@ -566,7 +511,7 @@ Adding a `tags`
     )
 
 
-### 10) Next inputs
+### 10) Next fields
 
 Adding a `address` __IN PROGRESS__
 
@@ -589,26 +534,6 @@ Adding a `autocomplete` __IN PROGRESS__
         'description' => ''
     )
 
-Adding a `date` __IN PROGRESS__
-
-    array(
-        'type' => 'date',
-        'title' => 'What\'s the day today?',
-        'id' => 'my_date_field_id',
-        'std' => '06-03-2013',
-        'description' => 'Choose your date simply'
-    )
-
-Adding a `wysiwyg` __IN PROGRESS__
-
-    array(
-        'type' => 'wysiwyg',
-        'title' => 'WYSIWYG',
-        'id' => 'simple_wysiwyg',
-        'std' => 'Simple wysiwyg',
-        'description' => 'Simple description to wysiwyg panel'
-    )
-
 
 ### 11) Examples
 
@@ -621,19 +546,14 @@ Here is a working example to define in your functions.php theme page.
     //Instanciate a new Tea_Theme_Options
     $tea = new Tea_Theme_Options('tea_options');
 
-    //Build page
-    $tea_configs = array(
+    //Building your first page
+    $tea_titles = array(
         'title' => BLOG_NAME,
         'name' => __('Tea T.O.', TEMPLATE_DICTIONNARY),
         'capability' => 'edit_pages',
-        'icon' => TEMPLATE_DIR_URI . '/img/admin/settings_16.png',
-        'bigicon' => TEMPLATE_DIR_URI . '/img/admin/settings_32.png',
         'description' => ''
     );
-    $tea->addPage($tea_configs);
-
-    //Add fields
-    $tea_configs = array(
+    $tea_fields = array(
         array(
             'type' => 'text',
             'title' => __('Your Google+ profile link.', TEMPLATE_DICTIONNARY),
@@ -653,18 +573,16 @@ Here is a working example to define in your functions.php theme page.
             )
         )
     );
-    $tea->addFields($tea_configs);
+    $tea->addPage($tea_titles, $tea_fields);
+    unset($tea_titles, $tea_fields);
 
-    //Build subpage
-    $tea_configs = array(
+    //Building subpages
+    $tea_titles = array(
         'title' => __('Contents', TEMPLATE_DICTIONNARY),
         'name' => __('Contents', TEMPLATE_DICTIONNARY),
         'slug' => '_contents'
     );
-    $tea->addSubpage($tea_configs);
-
-    //Add fields
-    $tea_configs = array(
+    $tea_fields = array(
         array(
             'type' => 'text',
             'title' => __('Project list title.', TEMPLATE_DICTIONNARY),
@@ -682,18 +600,17 @@ Here is a working example to define in your functions.php theme page.
             'description' => __('The image must be <b>340 * 280 pixels</b> per default.', TEMPLATE_DICTIONNARY)
         )
     );
-    $tea->addFields($tea_configs);
+    $tea->addPage($tea_titles, $tea_fields);
+    unset($tea_titles, $tea_fields);
 
     //Build menus
     $tea->buildMenus();
 
-    //Unset array
-    unset($tea_configs);
-
 Here is how to get data in your template (i.e. in yout header.php)
 
     //Get data from DB
-    $intro = get_option('contents_intro');
+    //NOTA: The _get_option() function is provided by the TTO framework
+    $intro = _get_option('contents_intro');
 
     //Check transitivity
     $intro = false === $intro ? 'No content found...' : $intro;
@@ -702,37 +619,7 @@ Here is how to get data in your template (i.e. in yout header.php)
     echo $intro;
 
 
-### 12) Get data from Transient
-
-To get your data back in your theme, you have to know the ID of what you want to retrieve.  
-Don't forget that the **Tea TO** uses the Transient Wordpress API, and get back data is quite simple.  
-In this example, we will display the `simple_text` data on the screen:
-
-    //`simple_text` is the ID of our text input, defined above
-
-    //get the data from the cache via Transient API
-    $mytext = get_transient('simple_text');
-
-    //checks if the `simple_text` is in cache. And if not...
-    if (false === $mytext)
-    {
-        //get data from DB
-        $mytext_from_option = get_option('simple_text');
-
-        //check if the data is in the DB
-        $mytext = false === $mytext_from_option ? 'default text value' : $mytext_from_option;
-
-        //set the data in the cache via Transient API with name - value - time in cache
-        set_transient('simple_text', $mytext, 86400);
-    }
-
-    //display the data
-    echo $mytext;
-
-You can do more better. Try to test your value before any manipulation.
-
-
-### 13) Previews
+### 12) Previews
 
 Main view with Google font special field
 ![Main view with Google font special field](http://takeatea.com/teato/teato-a.png)
@@ -751,7 +638,7 @@ Social special field
 ![Social special field](http://takeatea.com/teato/teato-e.png)
 
 
-### 14) That's all folkes!
+### 13) That's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -762,7 +649,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-### 15) Authors
+### 14) Authors
 
 **Take a Tea**
 
@@ -777,7 +664,7 @@ That's all to begin working with **Tea TO**
 + http://github.com/crewstyle
 
 
-### 16) Copyright and license
+### 15) Copyright and license
 
 Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
 Infusé par Take a tea ;)
