@@ -84,7 +84,8 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 + **Tags** - Display a list of Wordpress tags.
 
 
-**Summary**
+## Summary
+
 + [1) Installing the theme roller](#1-installing-the-theme-roller)
 + [2) Create a new Tea_Theme_Options object and set details](#2-create-a-new-tea_theme_options-object-and-set-details)
 + [3) Let's roll!](#3-lets-roll)
@@ -102,8 +103,7 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 + [15) Copyright and license](#15-copyright-and-license)
 
 
-1) Installing the theme roller
-------------------------------
+### 1) Installing the theme roller
 
 **To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/__YOUR_TEA_TO_CUSTOM_FOLDER__/`
 
@@ -115,8 +115,7 @@ Include the `tea-theme-options.php` file in your `functions.php`
     include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
 
 
-2) Create a new Tea_Theme_Options object and set details
---------------------------------------------------------
+### 2) Create a new Tea_Theme_Options object and set details
 
 Before starting, in your `functions.php` instanciate a new object with an uniq identifier:
 
@@ -130,8 +129,7 @@ And set details if you want:
 NOTA: by default, the **Tea TO** will consider the `tea_theme_options` folder.
 
 
-3) Let's roll!
---------------
+### 3) Let's roll!
 
 Create your new first page settings (as capability, icon, bigicon and description if you want):
 
@@ -174,16 +172,14 @@ Add your created details in your page and unset arrays:
 Repeat the process as you want/need :)
 
 
-4) Building menus
------------------
+### 4) Building menus
 
 The last step is to build menus and get your pages available in the admin menu.
 
     $tea->buildMenus();
 
 
-5) Adding fields
-----------------
+### 5) Adding fields
 
 Adding fields is quite simple. All you have to do is to create an array and define all inputs nedded in your Wordpress template.  
 NOTA: the **Tea TO** uses [Transient Wordpress API](http://codex.wordpress.org/Transients_API) to stock options.
@@ -230,8 +226,7 @@ All available types are:
 + RTE
 
 
-6) Display inputs
------------------
+### 6) Display inputs
 
 Adding a `br`
 
@@ -300,8 +295,7 @@ Adding a `group`
     )
 
 
-7) Normal inputs
-----------------
+### 7) Normal inputs
 
 Adding a `text`  
 NOTA: you can define the maxlength optional attribute.
@@ -417,8 +411,7 @@ Adding a `multiselect`
     )
 
 
-8) Special inputs
------------------
+### 8) Special inputs
 
 Adding a `color`
 
@@ -516,8 +509,7 @@ NOTA: the upload input uses the [Wordpress Media Manager](http://codex.wordpress
     )
 
 
-9) Wordpress inputs
--------------------
+### 9) Wordpress inputs
 
 Adding a `categories`
 
@@ -574,8 +566,7 @@ Adding a `tags`
     )
 
 
-10) Next inputs
----------------
+### 10) Next inputs
 
 Adding a `address` __IN PROGRESS__
 
@@ -619,8 +610,7 @@ Adding a `wysiwyg` __IN PROGRESS__
     )
 
 
-10) Example
------------
+### 11) Examples
 
 Here is a working example to define in your functions.php theme page.
 
@@ -712,8 +702,7 @@ Here is how to get data in your template (i.e. in yout header.php)
     echo $intro;
 
 
-11) Get data from Transient
----------------------------
+### 12) Get data from Transient
 
 To get your data back in your theme, you have to know the ID of what you want to retrieve.  
 Don't forget that the **Tea TO** uses the Transient Wordpress API, and get back data is quite simple.  
@@ -743,8 +732,7 @@ In this example, we will display the `simple_text` data on the screen:
 You can do more better. Try to test your value before any manipulation.
 
 
-12) Previews
-------------
+### 13) Previews
 
 Main view with Google font special field
 ![Main view with Google font special field](http://takeatea.com/teato/teato-a.png)
@@ -763,8 +751,7 @@ Social special field
 ![Social special field](http://takeatea.com/teato/teato-e.png)
 
 
-13) That's all folkes!
-----------------------
+### 14) That's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -775,8 +762,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-14) Authors
------------
+### 15) Authors
 
 **Take a Tea**
 
@@ -791,8 +777,7 @@ That's all to begin working with **Tea TO**
 + http://github.com/crewstyle
 
 
-15) Copyright and license
--------------------------
+### 16) Copyright and license
 
 Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
 Infusé par Take a tea ;)
