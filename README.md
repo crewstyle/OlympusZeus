@@ -62,6 +62,7 @@ NOTA: by default, the **Tea TO** will consider `tea_theme_options/` folder.
 
 Create your new first page settings (as capability, icon, bigicon and description if you want):
 
+```php
     //Build page
     $tea_titles = array(
         //used in your page
@@ -73,6 +74,7 @@ Create your new first page settings (as capability, icon, bigicon and descriptio
         //used in your page
         'description' => 'Here is a description of my first page'
     );
+```
 
 Add all used fields in your page (to get definition fields, see below the [Adding fields](#5-adding-fields) section):
 
