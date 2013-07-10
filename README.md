@@ -1,11 +1,9 @@
-Tea Theme Options
-=================
+# Tea Theme Options
 
 
-h2. Simple, easy to use and fully integrated Theme Options for Wordpress.
+## Simple, easy to use and fully integrated Theme Options for Wordpress.
 
-The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme.  
-The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
 + [**Options API**](http://codex.wordpress.org/Options_API) - A simple and standardized way of storing data in the database.
 + [**Transients API**](http://codex.wordpress.org/Transients_API) - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
@@ -15,10 +13,10 @@ The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
 
 
-h2. Theme Options Field Types.
+## Theme Options Field Types.
 
 
-h3. Display fields.
+### Display fields.
 
 + **Breakline or Horizontal rule** - Can be usefull.
 
@@ -33,7 +31,7 @@ h3. Display fields.
 + **Features** - **Special field** used only to build this documentation page (but you can use it as well).
 
 
-h3. Commn fields.
+### Commn fields.
 
 + **Basic Text** - The most basic of form fields. Basic, but important.
 
@@ -52,7 +50,7 @@ h3. Commn fields.
 + **Multiselect** - The same list as previous one but with multichoices.
 
 
-h3. Special fields.
+### Special fields.
 
 + **Background** - Great for managing a complete background layout with options.
 
@@ -71,7 +69,7 @@ h3. Special fields.
 + **Wordpress Upload** - Upload images (only for now), great for logo or default thumbnail. It uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
 
 
-h3. Wordress fields
+### Wordress fields
 
 + **Categories** - Display a list of Wordpress categories.
 
