@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.3
+ * @since Tea Theme Options 1.2.4
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.2
+ * @since Tea Theme Options 1.2.4
  * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -43,7 +43,7 @@ class Tea_Theme_Options
     protected $index = null;
     protected $is_admin;
     protected $pages = array();
-    protected static $version = '1.2.3';
+    protected static $version = '1.2.4';
     protected $wp_contents = array();
 
     /**

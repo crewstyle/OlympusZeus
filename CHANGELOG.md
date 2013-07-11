@@ -1,3 +1,11 @@
+## 1.2.4 (July 11, 2013)
+
+README.md up to date with default documentation page
+
+- **Edit:**
+  - README.md
+
+
 ## 1.2.3 (May 27, 2013)
 
 Get real advices from Xavier C. <https://twitter.com/xavismeh> :)
