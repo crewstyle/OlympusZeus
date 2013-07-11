@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.4
+ * @since Tea Theme Options 1.2.5
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.4
+ * @since Tea Theme Options 1.2.5
  * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -462,7 +462,7 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.5
      */
     protected function buildType($contents, $group = false)
     {
@@ -470,7 +470,7 @@ class Tea_Theme_Options
         foreach ($contents as $key => $content)
         {
             //Check if an id is defined at least
-            if (!isset($content['id']) && !in_array($content['type'], array('br', 'features', 'heading', 'hr', 'group', 'list', 'p')))
+            if (!isset($content['id']) && !in_array($content['type'], array('br', 'features', 'include', 'heading', 'hr', 'group', 'list', 'p')))
             {
                 $this->adminmessage = sprintf(__('Something went wrong in your parameters definition: no id is defined for your <b>%s</b> field!'), $content['type']);
                 $this->__showAdminMessage();
@@ -510,6 +510,7 @@ class Tea_Theme_Options
                 case 'checkbox':
                 case 'radio':
                 case 'select':
+                case 'multiselect':
                     $this->__fieldChoice($content['type'], $content, $group);
                     break;
                 case 'hidden':
@@ -538,6 +539,9 @@ class Tea_Theme_Options
                     break;
                 case 'image':
                     $this->__fieldImage($content, $group);
+                    break;
+                case 'include':
+                    $this->__fieldInclude($content);
                     break;
                 case 'rte':
                     $this->__fieldRTE($content, $group);
@@ -996,7 +1000,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.1.1
+     * @since Tea Theme Options 1.2.5
      */
     protected function __fieldImage($content, $group)
     {
@@ -1024,6 +1028,20 @@ class Tea_Theme_Options
 
         //Get template
         include('tpl/fields/__field_image.tpl.php');
+    }
+
+    /**
+     * Build include component.
+     *
+     * @since Tea Theme Options 1.2.5
+     */
+    public function __fieldInclude($content) {
+        //Default variables
+        $title = isset($content['title']) ? $content['title'] : __('Tea Include');
+        $file = isset($content['file']) ? $content['file'] : false;
+
+        //Get template
+        include('tpl/fields/__field_include.tpl.php');
     }
 
     /**

@@ -1,3 +1,13 @@
+## 1.2.5 (July 11, 2013)
+
+New usefull field and fix bug
+
+- **Fix:**
+  - fix <multiselect> forgotten field
+- **New:**
+  - new <include> field to display everything you want
+
+
 ## 1.2.4 (July 11, 2013)
 
 README.md up to date with default documentation page
