@@ -293,6 +293,15 @@ $details = array(
 );'
             ),
             array(
+                'title' => __('Include'),
+                'content' => __('Offers the possibility to include a php file.'),
+                'code' => 'array(
+    "type" => "include",
+    "title" => "My include field title",
+    "file" => "my_path_file"
+);'
+            ),
+            array(
                 'title' => __('RTE'),
                 'content' => __('Want a full rich editing experience? Use the Wordpress editor.'),
                 'code' => 'array(

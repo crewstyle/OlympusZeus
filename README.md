@@ -158,6 +158,7 @@ All available types are:
 + Date - Provide a calendar widget to select a date.
 + Google Fonts - Want to use a custom font provided by Google Web Fonts? It's easy now.
 + Images - Offers a list of choices with image labels (as radio buttons).
++ Include - Offers the possibility to include a php file.
 + RTE - Want a full rich editing experience? Use the Wordpress editor.
 + Social - Who has never needed social links on his website? You can manage them easily here.
 + Wordpress Upload - Upload images (only for now), great for logo or default thumbnail. It uses the [Wordpress Media Manager](http://codex.wordpress.org/Version_3.5#Highlights).
@@ -186,7 +187,7 @@ Adding a `heading`
 ```php
 array(
     'type' => 'heading',
-    'title' => 'Take a tea, simply'
+    'title' => 'Take a tea, simply' //define your title
 )
 ```
 
@@ -205,10 +206,10 @@ Adding a `list`
 array(
     'type' => 'list',
     'contents' => array(
-        'Just admit it:',
-        'this is the best',
-        'Wordpress Theme Options Framework :)',
-        'Thanks to Take a Tea :D'
+        'Just admit it:', //first list item
+        'this is the best', //second list item
+        'Wordpress Theme Options Framework :)', //etc.
+        'Thanks to Take a Tea :D' //...
     )
 )
 ```
@@ -256,8 +257,8 @@ array(
     'type' => 'text',
     'title' => 'What do you like?',
     'id' => 'my_text_field_id',
-    'std' => 'Penguins, I am sure they\'re gonna dominate the World!',
-    'placeholder' => 'McDonald\'s as well',
+    'std' => "Penguins, I am sure they're gonna dominate the World!", //define your default value
+    'placeholder' => "McDonald's as well", //define your placeholder field
     'description' => 'Put in here everything you want.',
     'maxlength' => 120
 )
@@ -273,7 +274,7 @@ array(
     'std' => 100,
     'placeholder' => '50',
     'description' => 'Tell us how much do like Penguins to have a chance to get into our private Penguins community ;)',
-    'options' => array(
+    'options' => array( //define your HTML5 field
         'type' => 'number',
         'min' => 10,
         'max' => 100,
@@ -314,13 +315,13 @@ array(
     'id' => 'my_checkbox_field_id',
     'std' => array('minions', 'lapinscretins'), //define the default choice(s)
     'description' => '',
-    //define the options
+    //define your options
     'options' => array(
         'minions' => 'The Minions', //value => label
         'lapinscretins' => 'The Lapins Crétins',
         'marvel' => 'All Marvel Superheroes',
         'franklin' => 'Franklin (everything is possible)',
-        'spongebob' => 'Spongebob (nothing to say... Love it)'
+        'spongebob' => 'Spongebob (nothing to say... Love it!)'
     )
 )
 ```
@@ -349,7 +350,7 @@ array(
     'title' => 'Prove it: what do they mean by "Bapouet"?',
     'id' => 'my_select_field_id',
     'std' => '',
-    'description' => 'Don\'t cheat: the movie is NOT the solution :)',
+    'description' => "Don't cheat: the movie is NOT the solution :)",
     'options' => array(
         'toy' => 'A simple toy',
         'milk' => 'Just milk',
@@ -419,10 +420,9 @@ Adding a `date`
 ```php
 array(
     'type' => 'date',
-    'title' => 'What\'s the day today?',
+    'title' => 'Whats the day today? I repeat: What is the day today?!',
     'id' => 'my_date_field_id',
-    'std' => '06-03-2013',
-    'description' => 'Choose your date simply'
+    'std' => '11-07-2013'
 )
 ```
 
@@ -461,6 +461,16 @@ array(
         'my_second_image_url',
         'my_third_image_url'
     )
+)
+```
+
+Adding an `include`
+
+```php
+array(
+    'type' => 'include',
+    'title' => 'My custom page',
+    'file' => 'my_file_path'
 )
 ```
 
