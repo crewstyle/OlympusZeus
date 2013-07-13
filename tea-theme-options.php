@@ -43,7 +43,7 @@ class Tea_Theme_Options
     protected $index = null;
     protected $is_admin;
     protected $pages = array();
-    protected static $version = '1.2.4';
+    protected static $version = '1.2.5';
     protected $wp_contents = array();
 
     /**
