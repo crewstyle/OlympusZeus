@@ -1,3 +1,12 @@
+## 1.2.6 (July 23, 2013)
+
+Update Google font field and optimize script
+
+- **Edit:**
+  - delete all switches to let if/else instead
+  - update Google Font field to display to 18 fonts
+
+
 ## 1.2.5 (July 11, 2013)
 
 New usefull field and fix bug

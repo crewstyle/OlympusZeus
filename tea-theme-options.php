@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.5
+ * @since Tea Theme Options 1.2.6
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.5
+ * @since Tea Theme Options 1.2.6
  * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -35,15 +35,16 @@ class Tea_Theme_Options
     protected $categories = array();
     protected $can_upload = false;
     protected $current = '';
-    protected $directory = '';
+    protected $directory = array();
     protected $duration = 86400;
     protected $icon_small = '/img/teato/icn-small.png';
     protected $icon_big = '/img/teato/icn-big.png';
     protected $identifier;
+    protected $includes = array();
     protected $index = null;
     protected $is_admin;
     protected $pages = array();
-    protected static $version = '1.2.5';
+    protected static $version = '1.2.6';
     protected $wp_contents = array();
 
     /**
@@ -174,13 +175,16 @@ class Tea_Theme_Options
      *
      * @uses wp_enqueue_script() - Wordpress
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.6
      */
     public function __assetScripts()
     {
+        //Get directory
+        $directory = $this->getDirectory();
+
         wp_enqueue_script('wp-color-picker');
-        wp_enqueue_script('tea-modal', $this->directory . '/js/teamodal.js', array('jquery'));
-        wp_enqueue_script('tea-to', $this->directory . '/js/teato.js', array('jquery', 'tea-modal'));
+        wp_enqueue_script('tea-modal', $directory . '/js/teamodal.js', array('jquery'));
+        wp_enqueue_script('tea-to', $directory . '/js/teato.js', array('jquery', 'tea-modal'));
     }
 
     /**
@@ -188,13 +192,16 @@ class Tea_Theme_Options
      *
      * @uses wp_enqueue_style() - Wordpress
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.6
      */
     public function __assetStyles()
     {
+        //Get directory
+        $directory = $this->getDirectory();
+
         wp_enqueue_style('media-views');
         wp_enqueue_style('wp-color-picker');
-        wp_enqueue_style('tea-to', $this->directory . '/css/teato.css');
+        wp_enqueue_style('tea-to', $directory . '/css/teato.css');
     }
 
     /**
@@ -273,7 +280,7 @@ class Tea_Theme_Options
      * @uses setDirectory()
      * @uses add_action() - Wordpress
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.6
      */
     public function __buildMenuPage()
     {
@@ -285,7 +292,7 @@ class Tea_Theme_Options
         }
 
         //Get the directory
-        if (empty($this->directory))
+        if (empty($this->directory) || !isset($this->directory['uri']))
         {
             $this->setDirectory();
         }
@@ -293,9 +300,12 @@ class Tea_Theme_Options
         //Set the current page
         $is_page = $this->identifier == $this->current ? true : false;
 
+        //Get directory
+        $directory = $this->getDirectory();
+
         //Set icon
-        $this->icon_small = $this->directory . $this->icon_small;
-        $this->icon_big = $this->directory . $this->icon_big;
+        $this->icon_small = $directory . $this->icon_small;
+        $this->icon_big = $directory . $this->icon_big;
 
         //Add submenu pages
         foreach ($this->pages as $page)
@@ -370,15 +380,16 @@ class Tea_Theme_Options
     /**
      * Build default contents
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.6
      */
     protected function buildDefaults()
     {
-        //Get documentation contents
+        //Get documentation page contents
         include('tpl/layouts/__documentation.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
+        unset($titles, $details);
     }
 
     /**
@@ -462,15 +473,18 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.5
+     * @since Tea Theme Options 1.2.6
      */
     protected function buildType($contents, $group = false)
     {
+        //Get all fields without ID
+        $do_not_have_ids = array('br', 'features', 'include', 'heading', 'hr', 'group', 'list', 'p');
+
         //Iteration on all array
         foreach ($contents as $key => $content)
         {
             //Check if an id is defined at least
-            if (!isset($content['id']) && !in_array($content['type'], array('br', 'features', 'include', 'heading', 'hr', 'group', 'list', 'p')))
+            if (!isset($content['id']) && !in_array($content['type'], $do_not_have_ids))
             {
                 $this->adminmessage = sprintf(__('Something went wrong in your parameters definition: no id is defined for your <b>%s</b> field!'), $content['type']);
                 $this->__showAdminMessage();
@@ -478,90 +492,103 @@ class Tea_Theme_Options
             }
 
             //Get the right template
-            switch ($content['type'])
+
+            //Display inputs
+            if ('br' == $content['type'])
             {
-                //Display inputs
-                case 'br':
-                    $this->__fieldBr();
-                    break;
-                case 'group':
-                    if (!$group)
-                    {
-                        $this->__fieldGroup($content);
-                    }
-                    break;
-                case 'features':
-                    $this->__fieldFeatures($content);
-                    break;
-                case 'heading':
-                    $this->__fieldHeading($content);
-                    break;
-                case 'hr':
-                    $this->__fieldHr();
-                    break;
-                case 'list':
-                    $this->__fieldList($content);
-                    break;
-                case 'p':
-                    $this->__fieldP($content);
-                    break;
+                $this->__fieldBr();
+            }
+            else if ('group' == $content['type'] && !$group)
+            {
+                $this->__fieldGroup($content);
+            }
+            else if ('features' == $content['type'])
+            {
+               $this->__fieldFeatures($content);
+            }
+            else if ('heading' == $content['type'])
+            {
+                $this->__fieldHeading($content);
+            }
+            else if('hr' == $content['type'])
+            {
+                $this->__fieldHr();
+            }
+            else if('list' == $content['type'])
+            {
+                $this->__fieldList($content);
+            }
+            else if('p' == $content['type'])
+            {
+                $this->__fieldP($content);
+            }
 
-                //Normal inputs
-                case 'checkbox':
-                case 'radio':
-                case 'select':
-                case 'multiselect':
-                    $this->__fieldChoice($content['type'], $content, $group);
-                    break;
-                case 'hidden':
-                    $this->__fieldHidden($content);
-                    break;
-                default:
-                case 'text':
-                    $this->__fieldText($content, $group);
-                    break;
-                case 'textarea':
-                    $this->__fieldTextarea($content, $group);
-                    break;
+            //Normal inputs
+            else if(in_array($content['type'], array('checkbox', 'radio', 'select', 'multiselect')))
+            {
+                $this->__fieldChoice($content['type'], $content, $group);
+            }
+            else if('hidden' == $content['type'])
+            {
+                $this->__fieldHidden($content);
+            }
+            else if('text' == $content['type'])
+            {
+                $this->__fieldText($content, $group);
+            }
+            else if('textarea' == $content['type'])
+            {
+                $this->__fieldTextarea($content, $group);
+            }
 
-                //Special inputs
-                case 'background':
-                    $this->__fieldBackground($content, $group);
-                    break;
-                case 'color':
-                    $this->__fieldColor($content, $group);
-                    break;
-                case 'date':
-                    $this->__fieldDate($content, $group);
-                    break;
-                case 'font':
-                    $this->__fieldFont($content, $group);
-                    break;
-                case 'image':
-                    $this->__fieldImage($content, $group);
-                    break;
-                case 'include':
-                    $this->__fieldInclude($content);
-                    break;
-                case 'rte':
-                    $this->__fieldRTE($content, $group);
-                    break;
-                case 'social':
-                    $this->__fieldSocial($content, $group);
-                    break;
-                case 'upload':
-                    $this->__fieldUpload($content, $group);
-                    break;
+            //Special inputs
+            else if('background' == $content['type'])
+            {
+                $this->__fieldBackground($content, $group);
+            }
+            else if('color' == $content['type'])
+            {
+                $this->__fieldColor($content, $group);
+            }
+            else if('date' == $content['type'])
+            {
+                $this->__fieldDate($content, $group);
+            }
+            else if('font' == $content['type'])
+            {
+                $this->__fieldFont($content, $group);
+            }
+            else if('image' == $content['type'])
+            {
+                $this->__fieldImage($content, $group);
+            }
+            else if('include' == $content['type'])
+            {
+                $this->__fieldInclude($content);
+            }
+            else if('rte' == $content['type'])
+            {
+                $this->__fieldRTE($content, $group);
+            }
+            else if('social' == $content['type'])
+            {
+                $this->__fieldSocial($content, $group);
+            }
+            else if('upload' == $content['type'])
+            {
+                $this->__fieldUpload($content, $group);
+            }
 
-                //Wordpress inputs
-                case 'categories':
-                case 'menus':
-                case 'pages':
-                case 'posts':
-                case 'posttypes':
-                case 'tags':
-                    $this->__fieldWordpressContents($content, $group);
-                    break;
+            //Wordpress inputs
+            else if(in_array($content['type'], array('categories', 'menus', 'pages', 'posts', 'posttypes', 'tags')))
+            {
+                $this->__fieldWordpressContents($content, $group);
+            }
+
+            //Default action
+            else
+            {
+                $this->__fieldText($content, $group);
             }
         }
     }
@@ -720,7 +747,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.6
      */
     protected function __fieldChoice($type, $content, $group)
     {
@@ -735,26 +762,22 @@ class Tea_Theme_Options
         $type = 'select' == $type && $multiple ? 'multiselect' : $type;
 
         //Check types
-        switch ($type)
+        if ('checkbox' == $type || 'multiselect' == $type)
         {
-            case 'checkbox':
-            case 'multiselect':
-                //Define default value
-                $std = isset($content['std']) ? $content['std'] : array();
+            //Define default value
+            $std = isset($content['std']) ? $content['std'] : array();
 
-                //Check selected
-                $vals = $this->getOption($id, $std);
-                $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
-                break;
-            default:
-            case 'radio':
-            case 'select':
-                //Define default value
-                $std = isset($content['std']) ? $content['std'] : '';
+            //Check selected
+            $vals = $this->getOption($id, $std);
+            $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
+        }
+        else
+        {
+            //Define default value
+            $std = isset($content['std']) ? $content['std'] : '';
 
-                //Check selected
-                $val = $this->getOption($id, $std);
-                break;
+            //Check selected
+            $val = $this->getOption($id, $std);
         }
 
         //Get template
@@ -790,7 +813,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.1.0
+     * @since Tea Theme Options 1.2.6
      */
     protected function __fieldText($content, $group)
     {
@@ -808,26 +831,19 @@ class Tea_Theme_Options
         $options['type'] = !isset($options['type']) || empty($options['type']) ? 'text' : $options['type'];
 
         //Check options
-        switch ($options['type'])
+        if ('number' == $options['type'] || 'range' == $options['type'])
         {
-            case 'number':
-            case 'range':
-                //Infos
-                $type = $options['type'];
-                //Special variables
-                $min = isset($options['min']) ? 'min="' . $options['min'] . '"' : 'min="1"';
-                $max = isset($options['max']) ? 'max="' . $options['max'] . '"' : 'max="50"';
-                $step = isset($options['step']) ? 'step="' . $options['step'] . '"' : 'step="1"';
-                break;
-            default:
-            case 'email':
-            case 'password':
-            case 'search':
-            case 'text':
-            case 'url':
-                //Infos
-                $type = $options['type'];
-                break;
+            //Infos
+            $type = $options['type'];
+            //Special variables
+            $min = isset($options['min']) ? 'min="' . $options['min'] . '"' : 'min="1"';
+            $max = isset($options['max']) ? 'max="' . $options['max'] . '"' : 'max="50"';
+            $step = isset($options['step']) ? 'step="' . $options['step'] . '"' : 'step="1"';
+        }
+        else
+        {
+            //Infos
+            $type = $options['type'];
         }
 
         //Check selected
@@ -965,7 +981,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.1.0
+     * @since Tea Theme Options 1.2.6
      */
     protected function __fieldFont($content, $group)
     {
@@ -983,6 +999,17 @@ class Tea_Theme_Options
         {
             $defaults = $this->getDefaults('fonts');
             $options = array_merge($defaults, $options);
+        }
+
+        //Get includes
+        $includes = $this->getIncludes();
+        $style = true;
+
+        //Check if Google Font has already been included
+        if (!isset($includes['googlefonts']))
+        {
+            $style = false;
+            $this->setIncludes('googlefonts');
         }
 
         //Radio selected
@@ -1033,9 +1060,10 @@ class Tea_Theme_Options
     /**
      * Build include component.
      *
-     * @since Tea Theme Options 1.2.5
+     * @since Tea Theme Options 1.2.6
      */
-    public function __fieldInclude($content) {
+    protected function __fieldInclude($content)
+    {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Include');
         $file = isset($content['file']) ? $content['file'] : false;
@@ -1079,7 +1107,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.1.1
+     * @since Tea Theme Options 1.2.6
      */
     protected function __fieldSocial($content, $group)
     {
@@ -1088,7 +1116,7 @@ class Tea_Theme_Options
         $title = isset($content['title']) ? $content['title'] : __('Tea Social');
         $std = isset($content['std']) ? $content['std'] : array();
         $description = isset($content['description']) ? $content['description'] : '';
-        $url = $this->directory . '/img/social/icon-';
+        $url = $this->getDirectory() . '/img/social/icon-';
 
         //Get options
         $default = isset($content['default']) ? $content['default'] : array();
@@ -1279,41 +1307,28 @@ class Tea_Theme_Options
     }
 
 
-    //--------------------------------------------------------------------------//
+    //-------------------------------------//
 
     /**
      * Return default values.
      *
      * @return array $defaults All defaults data provided by the Tea TO
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.6
      */
     protected function getDefaults($return = 'images', $wanted = array())
     {
         $defaults = array();
         $directory = $this->getDirectory();
 
-        //Return defauls background
-        if ('images' == $return)
+        //Return defaults background-repeat values
+        if ('background-repeat' == $return)
         {
-            $url = $directory . '/img/patterns/';
-
             $defaults = array(
-                $url . 'none.png' => __('No background'),
-                $url . 'bright_squares.png' => __('Bright squares'),
-                $url . 'circles.png' => __('Circles'),
-                $url . 'crosses.png' => __('Crosses'),
-                $url . 'crosslines.png' => __('Crosslines'),
-                $url . 'cubes.png' => __('Cubes'),
-                $url . 'double_lined.png' => __('Double lined'),
-                $url . 'honeycomb.png' => __('Honeycomb'),
-                $url . 'linen.png' => __('Linen'),
-                $url . 'project_paper.png' => __('Project paper'),
-                $url . 'texture.png' => __('Tetxure'),
-                $url . 'vertical_lines.png' => __('Vertical lines'),
-                $url . 'vichy.png' => __('Vichy'),
-                $url . 'wavecut.png' => __('Wavecut'),
-                $url . 'custom.png' => 'CUSTOM'
+                'no-repeat' => __('Background is displayed only once.'),
+                'repeat-x'  => __('Background is repeated horizontally only.'),
+                'repeat-y'  => __('Background is repeated vertically only.'),
+                'repeat'    => __('Background is repeated.')
             );
         }
         //Return defaults font
@@ -1322,46 +1337,73 @@ class Tea_Theme_Options
             $url = $directory . '/img/fonts/';
 
             $defaults = array(
-                'sansserif' => $url . 'sansserif.png',
-                'Arvo' => $url . 'arvo.png',
-                'Cantarell' => $url . 'cantarell.png',
-                'Copse' => $url . 'copse.png',
-                'Cuprum' => $url . 'cuprum.png',
-                'Lobster' => $url . 'lobster.png',
-                'Lobster+Two' => $url . 'lobstertwo.png',
-                'Qwigley' => $url . 'qwigley.png',
-                'Orbitron' => $url . 'orbitron.png',
-                'Puritan' => $url . 'puritan.png',
-                'Sacramento' => $url . 'sacramento.png',
-                'Titillium+Web' => $url . 'titillium.png',
-                'Vollkorn' => $url . 'vollkorn.png',
-                'Yanone+Kaffeesatz' => $url . 'yanonekaffeesatz.png'
+                'sansserif'         => array('Sans serif', ''),
+                'Arvo'              => array('Arvo', '400,700'),
+                'Bree+Serif'        => array('Bree Serif', '400'),
+                'Cabin'             => array('Cabin', '400,500,600,700'),
+                'Cantarell'         => array('Cantarell', '400,700'),
+                'Copse'             => array('Copse', '400'),
+                'Cuprum'            => array('Cuprum', '400,700'),
+                'Droid+Sans'        => array('Droid Sans', '400,700'),
+                'Lobster+Two'       => array('Lobster Two', '400,700'),
+                'Open+Sans'         => array('Open Sans', '300,400,600,700,800'),
+                'Oswald'            => array('Oswald', '300,400,700'),
+                'Pacifico'          => array('Pacifico', '400'),
+                'Patua+One'         => array('Patua One', '400'),
+                'PT+Sans'           => array('PT Sans', '400,700'),
+                'Puritan'           => array('Puritan', '400,700'),
+                'Qwigley'           => array('Qwigley', '400'),
+                'Titillium+Web'     => array('Titillium Web', '200,300,400,600,700,900'),
+                'Vollkorn'          => array('Vollkorn', '400,700'),
+                'Yanone+Kaffeesatz' => array('Yanone Kaffeesatz', '200,300,400,700')
+            );
+        }
+        //Return defauls background
+        else if ('images' == $return)
+        {
+            $url = $directory . '/img/patterns/';
+
+            $defaults = array(
+                $url . 'none.png'           => __('No background'),
+                $url . 'bright_squares.png' => __('Bright squares'),
+                $url . 'circles.png'        => __('Circles'),
+                $url . 'crosses.png'        => __('Crosses'),
+                $url . 'crosslines.png'     => __('Crosslines'),
+                $url . 'cubes.png'          => __('Cubes'),
+                $url . 'double_lined.png'   => __('Double lined'),
+                $url . 'honeycomb.png'      => __('Honeycomb'),
+                $url . 'linen.png'          => __('Linen'),
+                $url . 'project_paper.png'  => __('Project paper'),
+                $url . 'texture.png'        => __('Tetxure'),
+                $url . 'vertical_lines.png' => __('Vertical lines'),
+                $url . 'vichy.png'          => __('Vichy'),
+                $url . 'wavecut.png'        => __('Wavecut')
             );
         }
         //Return defaults social button
         else if ('social' == $return)
         {
             $socials = array(
-                'addthis' => array(),
-                'bloglovin' => array(__('Follow me on Bloglovin'), __('http://www.bloglovin.com/blog/__userid__/__username__')),
-                'deviantart' => array(__('Follow me on Deviantart'), __('http://__username__.deviantart.com/')),
-                'dribbble' => array(__('Follow me on Dribbble'), __('http://dribbble.com/__username__')),
-                'facebook' => array(__('Follow me on Facebook'), __('http://www.facebook.com/__username__')),
-                'flickr' => array(__('Follow me on Flickr'), __('http://www.flickr.com/photos/__username__')),
-                'forrst' => array(__('Follow me on Forrst'), __('http://forrst.com/people/__username__')),
-                'friendfeed' => array(__('Follow me on FriendFeed'), __('http://friendfeed.com/__username__')),
-                'hellocoton' => array(__('Follow me on Hellocoton'), __('http://www.hellocoton.fr/mapage/__username__')),
-                'googleplus' => array(__('Follow me on Google+'), __('http://plus.google.com/__username__')),
-                'instagram' => array(__('Follow me on Instagram'), __('http://www.instagram.com/__username__')),
-                'lastfm' => array(__('Follow me on LastFM'), __('http://www.lastfm.fr/user/__username__')),
-                'linkedin' => array(__('Follow me on LinkedIn'), __('http://fr.linkedin.com/in/__username__')),
-                'pinterest' => array(__('Follow me on Pinterest'), __('http://pinterest.com/__username__')),
-                'rss' => array(__('Subscribe to my RSS feed')),
-                'skype' => array(__('Connect us on Skype')),
-                'tumblr' => array(__('Follow me on Tumblr'), __('http://')),
-                'twitter' => array(__('Follow me on Twitter'), __('http://www.twitter.com/__username__')),
-                'vimeo' => array(__('Follow me on Vimeo'), __('http://www.vimeo.com/__username__')),
-                'youtube' => array(__('Follow me on Youtube'), __('http://www.youtube.com/user/__username__'))
+                'addthis'       => array(),
+                'bloglovin'     => array(__('Follow me on Bloglovin'), __('http://www.bloglovin.com/blog/__userid__/__username__')),
+                'deviantart'    => array(__('Follow me on Deviantart'), __('http://__username__.deviantart.com/')),
+                'dribbble'      => array(__('Follow me on Dribbble'), __('http://dribbble.com/__username__')),
+                'facebook'      => array(__('Follow me on Facebook'), __('http://www.facebook.com/__username__')),
+                'flickr'        => array(__('Follow me on Flickr'), __('http://www.flickr.com/photos/__username__')),
+                'forrst'        => array(__('Follow me on Forrst'), __('http://forrst.com/people/__username__')),
+                'friendfeed'    => array(__('Follow me on FriendFeed'), __('http://friendfeed.com/__username__')),
+                'hellocoton'    => array(__('Follow me on Hellocoton'), __('http://www.hellocoton.fr/mapage/__username__')),
+                'googleplus'    => array(__('Follow me on Google+'), __('http://plus.google.com/__username__')),
+                'instagram'     => array(__('Follow me on Instagram'), __('http://www.instagram.com/__username__')),
+                'lastfm'        => array(__('Follow me on LastFM'), __('http://www.lastfm.fr/user/__username__')),
+                'linkedin'      => array(__('Follow me on LinkedIn'), __('http://fr.linkedin.com/in/__username__')),
+                'pinterest'     => array(__('Follow me on Pinterest'), __('http://pinterest.com/__username__')),
+                'rss'           => array(__('Subscribe to my RSS feed')),
+                'skype'         => array(__('Connect us on Skype')),
+                'tumblr'        => array(__('Follow me on Tumblr'), __('http://')),
+                'twitter'       => array(__('Follow me on Twitter'), __('http://www.twitter.com/__username__')),
+                'vimeo'         => array(__('Follow me on Vimeo'), __('http://www.vimeo.com/__username__')),
+                'youtube'       => array(__('Follow me on Youtube'), __('http://www.youtube.com/user/__username__'))
             );
 
             $defaults = array();
@@ -1375,15 +1417,6 @@ class Tea_Theme_Options
                 }
             }
         }
-        else if ('background-repeat' == $return)
-        {
-            $defaults = array(
-                'no-repeat' => __('Background is displayed only once.'),
-                'repeat-x' => __('Background is repeated horizontally only.'),
-                'repeat-y' => __('Background is repeated vertically only.'),
-                'repeat' => __('Background is repeated.')
-            );
-        }
 
         //Return the array
         return $defaults;
@@ -1395,25 +1428,28 @@ class Tea_Theme_Options
     /**
      * Get Tea TO directory.
      *
+     * @param string $type Type of the wanted directory
      * @return string $directory Path of the Tea TO directory
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.6
      */
-    protected function getDirectory()
+    protected function getDirectory($type = 'uri')
     {
-        return $this->directory;
+        return $this->directory[$type];
     }
 
     /**
      * Set Tea TO directory.
      *
      * @param string $directory The path of the Tea TO directory
+     * @param string $type Type of the wanted directory
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.6
      */
-    protected function setDirectory($directory = '')
+    protected function setDirectory($directory = '', $type = 'uri')
     {
-        $this->directory = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : $directory;
+        $this->directory['uri'] = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : $dir . '/' . $directory;
+        $this->directory['normal'] = empty($directory) ? get_template_directory() . '/tea_theme_options' : $dir . '/' . $directory;
     }
 
     /**
@@ -1438,6 +1474,31 @@ class Tea_Theme_Options
     protected function setDuration($duration = 86400)
     {
         $this->duration = $duration;
+    }
+
+    /**
+     * Get includes.
+     *
+     * @return array $includes Array of all include files
+     *
+     * @since Tea Theme Options 1.2.6
+     */
+    protected function getIncludes()
+    {
+        return $this->includes;
+    }
+
+    /**
+     * Set includes.
+     *
+     * @param string $context Name of the included file's context
+     *
+     * @since Tea Theme Options 1.2.6
+     */
+    protected function setIncludes($context)
+    {
+        $includes = $this->getIncludes();
+        $this->includes[$context] = true;
     }
 
     /**
@@ -1470,12 +1531,11 @@ class Tea_Theme_Options
      * @param var $value The default value if no one is found
      * @param array $dependancy The default value if no one is found
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.6
      */
     protected function setOption($key, $value, $dependancy = array())
     {
         //Check the category
-        //if (empty($key) || empty($value))
         if (empty($key))
         {
             $this->adminmessage = sprintf(__('Something went wrong. Key "%s" and/or its value is empty.'), $key);
@@ -1485,8 +1545,11 @@ class Tea_Theme_Options
         //Check the key for special "NONE" value
         $value = 'NONE' == $value ? '' : $value;
 
+        //Get duration
+        $duration = $this->getDuration();
+
         //Set the option
-        _set_option($key, $value, $this->duration);
+        _set_option($key, $value, $duration);
 
         //Special usecase: category. We can also register information as title, slug, description and children
         if (false !== strpos($key, '__category'))
@@ -1532,7 +1595,7 @@ class Tea_Theme_Options
             }
 
             //Set the other parameters: width
-            _set_option($key . '_details', $details, $this->duration);
+            _set_option($key . '_details', $details, $duration);
         }
 
         //Special usecase: checkboxes. When it's not checked, no data is sent through the $_POST array
@@ -1544,7 +1607,7 @@ class Tea_Theme_Options
             //Check if it exists (if not that means the user unchecked it) and set the option
             if (!isset($dependancy[$previous]))
             {
-                _set_option($previous, $value, $this->duration);
+                _set_option($previous, $value, $duration);
             }
         }
 
@@ -1562,7 +1625,7 @@ class Tea_Theme_Options
             );
 
             //Set the other parameters
-            _set_option($key . '_details', $details, $this->duration);
+            _set_option($key . '_details', $details, $duration);
         }
     }
 

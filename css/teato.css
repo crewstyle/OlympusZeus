@@ -359,6 +359,29 @@
 }
 
 
+/*--- [GOOGLE FONT] ---*/
+.tea_to.wrap .inside.gfont label {
+    float:left;
+    margin:0 10px 10px 0;
+    text-align:center;
+    width:200px;
+}
+.tea_to.wrap .inside.gfont label span {
+    border:5px solid #fff;
+    display:block;
+    font-size:18px;
+    height:25px;
+    line-height:25px;
+    max-height:25px;
+}
+.tea_to.wrap .inside.gfont label:hover span {
+    border:5px solid #e5f1f7;
+}
+.tea_to.wrap .inside.gfont label.selected span {
+    border:5px solid #298cba;
+}
+
+
 /*--- [SOCIALS] ---*/
 .tea_to.wrap .inside.social div {
     margin:0 0 10px 0;
