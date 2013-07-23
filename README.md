@@ -393,12 +393,12 @@ array(
         'image' => 'my_background_default_url',
         'color' => '#ffffff',
         'repeat' => 'no-repeat',
-        'position_x' => ',
+        'position_x' => '',
         'position_x_pos' => 'left',
-        'position_y' => ',
+        'position_y' => '',
         'position_y_pos' => 'top'
     ),
-    'description' => 'It\'s tricky :)',
+    'description' => "It's tricky :)",
     'default' => true
 )
 ```

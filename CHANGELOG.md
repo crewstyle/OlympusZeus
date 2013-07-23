@@ -5,6 +5,8 @@ Update Google font field and optimize script
 - **Edit:**
   - delete all switches to let if/else instead
   - update Google Font field to display to 18 fonts
+- **Fix:**
+  - Fix small bug on README.md
 
 
 ## 1.2.5 (July 11, 2013)
