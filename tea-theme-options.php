@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.7
+ * @since Tea Theme Options 1.2.8
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 
 //Define the Tea Theme Options last version number
-define('TTO_VERSION', '1.2.7');
+define('TTO_VERSION', '1.2.8');
 
 
 //---------------------------------------------------------------------------------------------------------//
@@ -27,7 +27,7 @@ define('TTO_VERSION', '1.2.7');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.7
+ * @since Tea Theme Options 1.2.8
  * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -489,7 +489,7 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.7
+     * @since Tea Theme Options 1.2.8
      */
     protected function buildType($contents, $group = false)
     {
@@ -565,10 +565,6 @@ class Tea_Theme_Options
             else if('color' == $content['type'])
             {
                 $this->__fieldColor($content, $group);
-            }
-            else if('date' == $content['type'])
-            {
-                $this->__fieldDate($content, $group);
             }
             else if('font' == $content['type'])
             {
@@ -967,30 +963,6 @@ class Tea_Theme_Options
 
         //Get template
         include('tpl/fields/__field_color.tpl.php');
-    }
-
-    /**
-     * Build date component.
-     *
-     * @uses getOption()
-     * @param array $content Contains all data
-     * @param bool $group Define if the field is displayed in group or not
-     *
-     * @since Tea Theme Options 1.2.0
-     */
-    protected function __fieldDate($content, $group)
-    {
-        //Default variables
-        $id = $content['id'];
-        $title = isset($content['title']) ? $content['title'] : __('Tea Date');
-        $std = isset($content['std']) ? $content['std'] : '';
-        $description = isset($content['description']) ? $content['description'] : '';
-
-        //Check selected
-        $val = $this->getOption($id, $std);
-
-        //Get template
-        include('tpl/fields/__field_date.tpl.php');
     }
 
     /**

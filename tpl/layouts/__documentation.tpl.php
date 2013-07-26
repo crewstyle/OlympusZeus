@@ -252,17 +252,6 @@ $details = array(
 );'
             ),
             array(
-                'title' => __('Date'),
-                'content' => __('Privide a calendar widget to select a date.'),
-                'code' => 'array(
-    "type" => "date",
-    "title" => "My date field title",
-    "id" => "my_date_field_id",
-    "std" => "03-24-2013",
-    "description" => "My date field description"
-);'
-            ),
-            array(
                 'title' => __('Google Fonts'),
                 'content' => __('Want to use a custom font provided by Google Web Fonts? It\'s easy now.'),
                 'code' => 'array(

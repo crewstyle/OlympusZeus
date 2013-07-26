@@ -155,7 +155,6 @@ All available types are:
 **Special fields**:
 + Background - Great for managing a complete background layout with options.
 + Color - Need some custom colors? Use the Wordpress color picker.
-+ Date - Provide a calendar widget to select a date.
 + Google Fonts - Want to use a custom font provided by Google Web Fonts? It's easy now.
 + Include - Offers the possibility to include a php file.
 + RTE - Want a full rich editing experience? Use the Wordpress editor.
@@ -409,17 +408,6 @@ array(
     'id' => 'my_color_field_id',
     'std' => '#000000',
     'description' => 'Do not choose the Coke Zero, right? ;)'
-)
-```
-
-Adding a `date`
-
-```php
-array(
-    'type' => 'date',
-    'title' => 'Whats the day today? I repeat: What is the day today?!',
-    'id' => 'my_date_field_id',
-    'std' => '11-07-2013'
 )
 ```
 

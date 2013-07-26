@@ -1,3 +1,11 @@
+## 1.2.8 (July 26, 2013)
+
+Detele Date field.
+
+- **Edit:**
+  - delete <date> field 'cause it useless too...
+
+
 ## 1.2.7 (July 26, 2013)
 
 Update Background field and fix lots of bugs
