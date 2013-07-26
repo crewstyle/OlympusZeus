@@ -229,14 +229,13 @@ $details = array(
     "type" => "background",
     "title" => "My background field title",
     "id" => "my_background_field_id",
+    "default" => true,
     "std" => array(
         "image" => "my_background_default_url",
         "color" => "#ffffff",
         "repeat" => "no-repeat",
-        "position_x" => "",
-        "position_x_pos" => "left",
-        "position_y" => "",
-        "position_y_pos" => "top"
+        "position_x" => "left",
+        "position_y" => "top"
     ),
     "description" => "My background field description"
 );'
@@ -270,25 +269,11 @@ $details = array(
     "type" => "font",
     "title" => "My font field title",
     "id" => "my_font_field_id",
-    "std" => "lobster",
+    "std" => "Lobster",
     "description" => "My font field description",
     "default" => true,
     "options" => array(
-        "my_google_webfont" => "my_font_image_url"
-    )
-);'
-            ),
-            array(
-                'title' => __('Images'),
-                'content' => __('Offers a list of choices with image labels (as radio button).'),
-                'code' => 'array(
-    "type" => "image",
-    "title" => "My image field title",
-    "id" => "my_image_field_id",
-    "description" => "My image field description",
-    "default" => true,
-    "options" => array(
-        "my_custom_image" => "my_custom_image_url"
+        "PT+Sans" => array("PT Sans", "400,700")
     )
 );'
             ),

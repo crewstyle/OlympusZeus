@@ -247,17 +247,9 @@
 .tea_to.wrap .inside.count_50 .bg-details {
     width:100%;
 }
-.tea_to.wrap .inside.background .bg-position input {
+.tea_to.wrap .inside.background .bg-details select {
     float:left;
     width:49%;
-}
-.tea_to.wrap .inside.background .bg-position select {
-    float:right;
-    width:49%;
-}
-.tea_to.wrap .inside.background .bg-position span {
-    clear:both;
-    display:block;
 }
 
 
@@ -296,12 +288,6 @@
 /*--- [COLORS] ---*/
 .tea_to.wrap .inside input.color-picker {
     width:100px;
-}
-.tea_to.wrap .inside .wp-picker-container {
-    position:relative;
-}
-.tea_to.wrap .inside .wp-picker-holder {
-    position:absolute;
 }
 
 

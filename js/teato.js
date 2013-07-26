@@ -80,7 +80,7 @@
             var $code = $self.find('pre');
 
             //Bind the click event
-            $self.live('click', function (e) {
+            $self.bind('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -145,7 +145,7 @@
         });
 
         //Upload input: Wordpress version >= 3.5
-        $.each($('.upload a.add_media:not(.thickbox)'), function (index,elem) {
+        $.each($('.inside a.add_media:not(.thickbox)'), function (index,elem) {
             var $self = $(this);
 
             //Check if parent has the "customized" css class from Tea TO
@@ -162,7 +162,7 @@
             var _wpid = wp.media.model.settings.post.id;
             var _delete = $self.closest('.upload').attr('data-del');
             var _title = $parent.attr('data-title') || 'Media';
-            var _multiple = '1' == $parent.attr('data-multiple') ? true : false;
+            var _multiple = $parent.attr('data-multiple') && '1' == $parent.attr('data-multiple') ? true : false;
             var _type = $parent.attr('data-type') || 'image';
             var _idtarget = $parent.attr('data-target');
 
@@ -273,7 +273,7 @@
         });
 
         //Upload input: delete button
-        $('.upload a.delete').live('click', function (e) {
+        $('.inside a.delete').bind('click', function (e) {
             e.preventDefault();
             var $self = $(this);
             var $parent = $self.parent();
@@ -305,7 +305,7 @@
         });
 
         //Upload input: delete all button
-        $.each($('a.delall'), function (index,elem) {
+        $.each($('.inside a.delall'), function (index,elem) {
             var $self = $(this);
             var $target = $('#' + $self.attr('data-target') + '_upload_content').find('.upload_image_result li');
             var $hidden = $('#' + $self.attr('data-target'));
@@ -333,7 +333,7 @@
         });
 
         //Upload Wordpress default button
-        $.each($('a.insert-media:not(.thickbox)'), function (index,elem) {
+        $.each($('.inside a.insert-media:not(.thickbox)'), function (index,elem) {
             var $self = $(this);
 
             $self.bind('click', function (e) {

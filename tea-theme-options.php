@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.6
+ * @since Tea Theme Options 1.2.7
  */
 
 if (!defined('ABSPATH')) {
@@ -15,12 +15,19 @@ if (!defined('ABSPATH')) {
 //---------------------------------------------------------------------------------------------------------//
 
 
+//Define the Tea Theme Options last version number
+define('TTO_VERSION', '1.2.7');
+
+
+//---------------------------------------------------------------------------------------------------------//
+
+
 /**
  * Tea Theme Option page.
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.6
+ * @since Tea Theme Options 1.2.7
  * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -44,7 +51,7 @@ class Tea_Theme_Options
     protected $index = null;
     protected $is_admin;
     protected $pages = array();
-    protected static $version = '1.2.6';
+    protected static $version = TTO_VERSION;
     protected $wp_contents = array();
 
     /**
@@ -175,13 +182,15 @@ class Tea_Theme_Options
      *
      * @uses wp_enqueue_script() - Wordpress
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.7
      */
     public function __assetScripts()
     {
         //Get directory
         $directory = $this->getDirectory();
 
+        //Enqueue usefull scripts
+        wp_enqueue_media();
         wp_enqueue_script('wp-color-picker');
         wp_enqueue_script('tea-modal', $directory . '/js/teamodal.js', array('jquery'));
         wp_enqueue_script('tea-to', $directory . '/js/teato.js', array('jquery', 'tea-modal'));
@@ -213,7 +222,7 @@ class Tea_Theme_Options
      */
     public function __assetUnloaded()
     {
-        //wp_deregister_script('media-models');
+        //ex: wp_deregister_script('media-models');
     }
 
     /**
@@ -380,10 +389,17 @@ class Tea_Theme_Options
     /**
      * Build default contents
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.7
      */
     protected function buildDefaults()
     {
+        //Get documentation page contents
+        /*include('tpl/layouts/__connections.tpl.php');
+
+        //Build page with contents
+        $this->addPage($titles, $details);
+        unset($titles, $details);*/
+
         //Get documentation page contents
         include('tpl/layouts/__documentation.tpl.php');
 
@@ -473,12 +489,12 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.7
      */
     protected function buildType($contents, $group = false)
     {
         //Get all fields without ID
-        $do_not_have_ids = array('br', 'features', 'include', 'heading', 'hr', 'group', 'list', 'p');
+        $do_not_have_ids = array('br', 'features', 'include', 'instagram', 'heading', 'hr', 'group', 'list', 'p');
 
         //Iteration on all array
         foreach ($contents as $key => $content)
@@ -544,7 +560,7 @@ class Tea_Theme_Options
             //Special inputs
             else if('background' == $content['type'])
             {
-                $this->__fieldBackground($content, $group);
+                $this->__fieldBackground($content);
             }
             else if('color' == $content['type'])
             {
@@ -557,10 +573,6 @@ class Tea_Theme_Options
             else if('font' == $content['type'])
             {
                 $this->__fieldFont($content, $group);
-            }
-            else if('image' == $content['type'])
-            {
-                $this->__fieldImage($content, $group);
             }
             else if('include' == $content['type'])
             {
@@ -585,10 +597,17 @@ class Tea_Theme_Options
                 $this->__fieldWordpressContents($content, $group);
             }
 
+            //Specials
+            else if ('instagram' == $content['type'])
+            {
+                $this->__fieldInstagram($content);
+            }
+
             //Default action
             else
             {
-                $this->__fieldText($content, $group);
+                $this->adminmessage = sprintf(__('Something went wrong in your parameters definition with the id <b>%s</b>: the defined type is unknown!'), $content['id']);
+                $this->__showAdminMessage();
             }
         }
     }
@@ -892,14 +911,14 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.0
+     * @since Tea Theme Options 1.2.7
      */
-    protected function __fieldBackground($content, $group)
+    protected function __fieldBackground($content)
     {
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Background');
-        $std = isset($content['std']) ? $content['std'] : array('image' => '', 'image_custom' => '', 'color' => '', 'repeat' => 'repeat', 'position_x' => '', 'position_x_pos' => 'left', 'position_y' => '', 'position_y_pos' => 'top');
+        $std = isset($content['std']) ? $content['std'] : array('image' => '', 'image_custom' => '', 'color' => '', 'repeat' => 'repeat', 'position_x' => 'left', 'position_y' => 'top');
         $height = isset($content['height']) ? $content['height'] : '60';
         $width = isset($content['width']) ? $content['width'] : '150';
         $description = isset($content['description']) ? $content['description'] : '';
@@ -917,9 +936,9 @@ class Tea_Theme_Options
         }
 
         //Positions
-        $repeats = $this->getDefaults('background-repeat');
+        $details = $this->getDefaults('background-details');
 
-        //Radio selected
+        //Get value
         $val = $this->getOption($id, $std);
 
         //Get template
@@ -1017,44 +1036,6 @@ class Tea_Theme_Options
 
         //Get template
         include('tpl/fields/__field_font.tpl.php');
-    }
-
-    /**
-     * Build image component.
-     *
-     * @uses getDefaults()
-     * @uses getOption()
-     * @param array $content Contains all data
-     * @param bool $group Define if the field is displayed in group or not
-     *
-     * @since Tea Theme Options 1.2.5
-     */
-    protected function __fieldImage($content, $group)
-    {
-        //Default variables
-        $id = $content['id'];
-        $title = isset($content['title']) ? $content['title'] : __('Tea Image');
-        $std = isset($content['std']) ? $content['std'] : '';
-        $height = isset($content['height']) ? $content['height'] : '60';
-        $width = isset($content['width']) ? $content['width'] : '150';
-        $multiple = isset($content['multiple']) ? $content['multiple'] : false;
-        $description = isset($content['description']) ? $content['description'] : '';
-        $type = $multiple ? 'checkbox' : 'radio';
-
-        //Get options
-        $options = isset($content['options']) ? $content['options'] : array();
-
-        if (isset($content['default']) && true === $content['default'])
-        {
-            $defaults = $this->getDefaults('images');
-            $options = array_merge($defaults, $options);
-        }
-
-        //Radio selected
-        $val = $this->getOption($id, $std);
-
-        //Get template
-        include('tpl/fields/__field_image.tpl.php');
     }
 
     /**
@@ -1173,7 +1154,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.7
      */
     protected function __fieldWordpressContents($content, $group)
     {
@@ -1195,103 +1176,113 @@ class Tea_Theme_Options
                 $this->wp_contents[$type][-1] = '---';
             }
 
-            switch ($type)
+            //Get asked contents
+
+            //Menus
+            if ('menus' == $type)
             {
-                default:
-                case 'categories':
-                    //Build request
-                    $categories_obj = get_categories(array('hide_empty' => 0));
+                //Build request
+                $menus_obj = wp_get_nav_menus(array('hide_empty' => false, 'orderby' => 'none'));
 
-                    //Iterate on categories
-                    foreach ($categories_obj as $cat)
+                //Iterate on menus
+                foreach ($menus_obj as $menu)
+                {
+                    //For Wordpress version < 3.0
+                    if (empty($menu->term_id))
                     {
-                        //For Wordpress version < 3.0
-                        if (empty($cat->cat_ID))
-                        {
-                            continue;
-                        }
-
-                        //Get the id and the name
-                        $this->wp_contents[$type][$cat->cat_ID] = $cat->cat_name;
+                        continue;
                     }
-                    break;
-                case 'menus':
-                    //Build request
-                    $menus_obj = wp_get_nav_menus(array('hide_empty' => false, 'orderby' => 'none'));
 
-                    //Iterate on menus
-                    foreach ($menus_obj as $menu)
+                    //Get the id and the name
+                    $this->wp_contents[$type][$menu->term_id] = $menu->name;
+                }
+            }
+            //Pages
+            else if ('pages' == $type)
+            {
+                //Build request
+                $pages_obj = get_pages(array('sort_column' => 'post_parent,menu_order'));
+
+                //Iterate on pages
+                foreach ($pages_obj as $pag)
+                {
+                    //For Wordpress version < 3.0
+                    if (empty($pag->ID))
                     {
-                        //For Wordpress version < 3.0
-                        if (empty($menu->term_id))
-                        {
-                            continue;
-                        }
-
-                        //Get the id and the name
-                        $this->wp_contents[$type][$menu->term_id] = $menu->name;
+                        continue;
                     }
-                    break;
-                case 'pages':
-                    //Build request
-                    $pages_obj = get_pages(array('sort_column' => 'post_parent,menu_order'));
 
-                    //Iterate on pages
-                    foreach ($pages_obj as $pag)
+                    //Get the id and the name
+                    $this->wp_contents[$type][$pag->ID] = $pag->post_title;
+                }
+            }
+            //Posts
+            else if ('posts' == $type)
+            {
+                //Get vars
+                $post = !isset($content['posttype']) ? 'post' : (is_array($content['posttype']) ? implode(',', $content['posttype']) : $content['posttype']);
+                $number = isset($content['number']) ? $content['number'] : 50;
+
+                //Build request
+                $posts_obj = wp_get_recent_posts(array('numberposts' => $number, 'post_type' => $post, 'post_status' => 'publish'), OBJECT);
+
+                //Iterate on posts
+                foreach ($posts_obj as $pos)
+                {
+                    //For Wordpress version < 3.0
+                    if (empty($pos->ID))
                     {
-                        //For Wordpress version < 3.0
-                        if (empty($pag->ID))
-                        {
-                            continue;
-                        }
-
-                        //Get the id and the name
-                        $this->wp_contents[$type][$pag->ID] = $pag->post_title;
+                        continue;
                     }
-                    break;
-                case 'posts':
-                    //Get vars
-                    $post = !isset($content['posttype']) ? 'post' : (is_array($content['posttype']) ? implode(',', $content['posttype']) : $content['posttype']);
-                    $number = isset($content['number']) ? $content['number'] : 50;
 
-                    //Build request
-                    $posts_obj = wp_get_recent_posts(array('numberposts' => $number, 'post_type' => $post, 'post_status' => 'publish'), OBJECT);
+                    //Get the id and the name
+                    $this->wp_contents[$type][$pos->ID] = $pos->post_title;
+                }
+            }
+            //Post types
+            else if ('posttypes' == $type)
+            {
+                //Build request
+                $types_obj = get_post_types(array(), 'object');
 
-                    //Iterate on posts
-                    foreach ($posts_obj as $pos)
+                //Iterate on posttypes
+                foreach ($types_obj as $typ)
+                {
+                    //Get the the name
+                    $this->wp_contents[$type][$typ->name] = $typ->labels->name;
+                }
+            }
+            //Tags
+            else if ('tags' == $type)
+            {
+                //Build request
+                $tags_obj = get_the_tags();
+
+                //Iterate on tags
+                foreach ($tags_obj as $tag)
+                {
+                    //Get the id and the name
+                    $this->wp_contents[$type][$tag->term_id] = $tag->name;
+                }
+            }
+            //Categories
+            else
+            {
+                //Build request
+                $categories_obj = get_categories(array('hide_empty' => 0));
+
+                //Iterate on categories
+                foreach ($categories_obj as $cat)
+                {
+                    //For Wordpress version < 3.0
+                    if (empty($cat->cat_ID))
                     {
-                        //For Wordpress version < 3.0
-                        if (empty($pos->ID))
-                        {
-                            continue;
-                        }
-
-                        //Get the id and the name
-                        $this->wp_contents[$type][$pos->ID] = $pos->post_title;
+                        continue;
                     }
-                    break;
-                case 'posttypes':
-                    //Build request
-                    $types_obj = get_post_types(array(), 'object');
 
-                    //Iterate on posttypes
-                    foreach ($types_obj as $typ)
-                    {
-                        //Get the the name
-                        $this->wp_contents[$type][$typ->name] = $typ->labels->name;
-                    }
-                    break;
-                case 'tags':
-                    //Build request
-                    $tags_obj = get_the_tags();
-
-                    //Iterate on tags
-                    foreach ($tags_obj as $tag)
-                    {
-                        //Get the id and the name
-                        $this->wp_contents[$type][$tag->term_id] = $tag->name;
-                    }
-                    break;
+                    //Get the id and the name
+                    $this->wp_contents[$type][$cat->cat_ID] = $cat->cat_name;
+                }
             }
         }
 
@@ -1310,25 +1301,77 @@ class Tea_Theme_Options
     //-------------------------------------//
 
     /**
+     * Build instagram component.
+     *
+     * @uses getOption()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.6
+     */
+    protected function __fieldInstagram($content)
+    {
+        //Default variables
+        $title = isset($content['title']) ? $content['title'] : __('Tea Instagram');
+        $description = isset($content['description']) ? $content['description'] : '';
+
+        //Get instagram configurations
+        $defaults = $this->getDefaults('instagram');
+
+        //Get includes
+        $includes = $this->getIncludes();
+
+        //Check if Google Font has already been included
+        if (!isset($includes['instagram']))
+        {
+            //$this->setIncludes('instagram');
+            //$directory = $this->getDirectory('normal');
+            //include_once $directory . '/includes/instaphp/instaphp.php';
+        }
+
+
+
+        //Get template
+        include('tpl/fields/__field_instagram.tpl.php');
+    }
+
+
+    //-------------------------------------//
+
+    /**
      * Return default values.
      *
      * @return array $defaults All defaults data provided by the Tea TO
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.7
      */
     protected function getDefaults($return = 'images', $wanted = array())
     {
         $defaults = array();
         $directory = $this->getDirectory();
 
-        //Return defaults background-repeat values
-        if ('background-repeat' == $return)
+        //Return defaults background values
+        if ('background-details' == $return)
         {
             $defaults = array(
-                'no-repeat' => __('Background is displayed only once.'),
-                'repeat-x'  => __('Background is repeated horizontally only.'),
-                'repeat-y'  => __('Background is repeated vertically only.'),
-                'repeat'    => __('Background is repeated.')
+                'position'  => array(
+                    'x'     => array(
+                        'left'      => __('Left'),
+                        'center'    => __('Center'),
+                        'right'     => __('Right')
+                    ),
+                    'y'     => array(
+                        'top'       => __('Top'),
+                        'middle'    => __('Middle'),
+                        'bottom'    => __('Bottom')
+                    )
+                ),
+                'repeat'    => array(
+                    'no-repeat'     => __('Background is displayed only once.'),
+                    'repeat-x'      => __('Background is repeated horizontally only.'),
+                    'repeat-y'      => __('Background is repeated vertically only.'),
+                    'repeat'        => __('Background is repeated.')
+                )
             );
         }
         //Return defaults font
@@ -1358,7 +1401,7 @@ class Tea_Theme_Options
                 'Yanone+Kaffeesatz' => array('Yanone Kaffeesatz', '200,300,400,700')
             );
         }
-        //Return defauls background
+        //Return defauls background images
         else if ('images' == $return)
         {
             $url = $directory . '/img/patterns/';
@@ -1377,7 +1420,18 @@ class Tea_Theme_Options
                 $url . 'texture.png'        => __('Tetxure'),
                 $url . 'vertical_lines.png' => __('Vertical lines'),
                 $url . 'vichy.png'          => __('Vichy'),
-                $url . 'wavecut.png'        => __('Wavecut')
+                $url . 'wavecut.png'        => __('Wavecut'),
+                $url . 'custom.png'         => 'CUSTOM'
+            );
+        }
+        //Return defauls background
+        else if ('instagram' == $return)
+        {
+            $defaults = array(
+                'client_id'     => 'OUYUIDHJSKJSHDKJHSD',
+                'client_secret' => 'OUYUIDHJSKJSHDKJHSD',
+                'redirect_uri'  => 'OUYUIDHJSKJSHDKJHSD',
+                'scope'         => array('likes', 'comments', 'relationships')
             );
         }
         //Return defaults social button
@@ -1444,12 +1498,12 @@ class Tea_Theme_Options
      * @param string $directory The path of the Tea TO directory
      * @param string $type Type of the wanted directory
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.7
      */
     protected function setDirectory($directory = '', $type = 'uri')
     {
-        $this->directory['uri'] = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : $dir . '/' . $directory;
-        $this->directory['normal'] = empty($directory) ? get_template_directory() . '/tea_theme_options' : $dir . '/' . $directory;
+        $this->directory['uri'] = empty($directory) ? get_template_directory_uri() . '/tea_theme_options' : get_template_directory_uri() . '/' . $directory;
+        $this->directory['normal'] = empty($directory) ? get_template_directory() . '/tea_theme_options' : get_template_directory() . '/' . $directory;
     }
 
     /**

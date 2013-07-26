@@ -157,7 +157,6 @@ All available types are:
 + Color - Need some custom colors? Use the Wordpress color picker.
 + Date - Provide a calendar widget to select a date.
 + Google Fonts - Want to use a custom font provided by Google Web Fonts? It's easy now.
-+ Images - Offers a list of choices with image labels (as radio buttons).
 + Include - Offers the possibility to include a php file.
 + RTE - Want a full rich editing experience? Use the Wordpress editor.
 + Social - Who has never needed social links on his website? You can manage them easily here.
@@ -393,10 +392,8 @@ array(
         'image' => 'my_background_default_url',
         'color' => '#ffffff',
         'repeat' => 'no-repeat',
-        'position_x' => '',
-        'position_x_pos' => 'left',
-        'position_y' => '',
-        'position_y_pos' => 'top'
+        'position_x' => 'left',
+        'position_y' => 'top'
     ),
     'description' => "It's tricky :)",
     'default' => true
@@ -438,28 +435,7 @@ array(
     'description' => 'Tell us how to scribe :D',
     'default' => true,
     'options' => array(
-        'my_gorgeous_font' => 'my_gorgeous_font_url',
-        'an_other_font' => 'an_other_font_url'
-    )
-)
-```
-
-Adding an `image`
-
-```php
-array(
-    'type' => 'image',
-    'title' => 'Choose your avatar',
-    'id' => 'my_image_field_id',
-    'std' => 'beach',
-    'description' => 'A uniq avatar to define yourself',
-    'multiselect' => true, //if you need more than one choice
-    'height' => 50, //if you need to define a special height (60px by default)
-    'width' => 50, //if you need to define a special width (150px by default)
-    'options' => array(
-        'my_first_image_url',
-        'my_second_image_url',
-        'my_third_image_url'
+        'PT+Sans' => array('PT Sans', '400,500')
     )
 )
 ```
@@ -478,11 +454,11 @@ Adding a `rte`
 
 ```php
 array(
-    'type' => 'wysiwyg',
-    'title' => 'WYSIWYG',
-    'id' => 'simple_wysiwyg',
-    'std' => 'Simple wysiwyg',
-    'description' => 'Simple description to wysiwyg panel'
+    'type' => 'rte',
+    'title' => 'RTE',
+    'id' => 'simple_rte',
+    'std' => 'Simple rte',
+    'description' => 'Simple description to rte panel'
 )
 ```
 

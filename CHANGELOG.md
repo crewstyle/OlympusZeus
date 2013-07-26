@@ -1,10 +1,21 @@
+## 1.2.7 (July 26, 2013)
+
+Update Background field and fix lots of bugs
+
+- **Edit:**
+  - update <background> field to a better experience
+  - delete <image> field 'cause it was... hum... useless
+- **Fix:**
+  - Enqueue new media script to be compliant with Wordpress 3.5.2
+
+
 ## 1.2.6 (July 23, 2013)
 
 Update Google font field and optimize script
 
 - **Edit:**
   - delete all switches to let if/else instead
-  - update Google Font field to display to 18 fonts
+  - update Google <font> field to display to 18 fonts
 - **Fix:**
   - Fix small bug on README.md
 
