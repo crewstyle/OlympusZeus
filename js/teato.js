@@ -6,8 +6,8 @@
  * Dual licensed under the MIT or GPL Version 2 licenses
  *
 */
-;(function ($) {
-    $(document).ready(function () {
+;(function ($){
+    $(document).ready(function (){
         //Usefull vars
         var file_frame;
         var _wpcolor = jQuery().wpColorPicker ? true : false;
@@ -15,29 +15,29 @@
         var _delcolor = 'ffaaaa';
 
         //Checkbox & Image input
-        $.each($('.inside input[type="checkbox"]'), function (index,elem) {
+        $.each($('.inside input[type="checkbox"]'), function (){
             var $self = $(this);
 
             //Bind the change event
-            $self.bind('change', function (e) {
+            $self.bind('change', function (){
                 $self.is(':checked') ? $self.closest('label').addClass('selected') : $self.closest('label').removeClass('selected');
             });
         });
 
         //Checkbox check all
-        $.each($('.checkboxes .checkall input[type="checkbox"]'), function (index,elem) {
+        $.each($('.checkboxes .checkall input[type="checkbox"]'), function (){
             var $self = $(this);
             var $checks = $self.closest('.checkboxes').find('.inside input[type="checkbox"]');
 
             //Bind the change event
-            $self.bind('change', function (e) {
+            $self.bind('change', function (){
                 $checks.attr('checked', $self.is(':checked'));
                 $self.is(':checked') ? $checks.closest('label').addClass('selected') : $checks.closest('label').removeClass('selected');
             });
         });
 
         //Color input
-        $.each($('.inside .color-picker'), function (index,elem) {
+        $.each($('.inside .color-picker'), function (){
             var $self = $(this);
 
             //Wordpress version < 3.5
@@ -45,7 +45,7 @@
                 //Use functions plugin
                 $self.miniColors({
                     readonly: true,
-                    change: function (hex,rgb) {
+                    change: function (hex,rgb){
                         $self.val('' + hex);
                         $self.css('color', hex);
                     }
@@ -55,7 +55,7 @@
             else {
                 //Use functions plugin
                 $self.wpColorPicker({
-                    change: function (event,ui) {
+                    change: function (event,ui){
                         $self.val($self.wpColorPicker('color'));
                     },
                     clear: function() {
@@ -66,7 +66,7 @@
         });
 
         //Features input
-        $.each($('.features-list li'), function (index,elem) {
+        $.each($('.features-list li'), function (){
             var $self = $(this);
             var $link = $self.find('a');
 
@@ -80,7 +80,7 @@
             var $code = $self.find('pre');
 
             //Bind the click event
-            $self.bind('click', function (e) {
+            $self.bind('click', function (e){
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -99,28 +99,28 @@
         });
 
         //Radio & Image input
-        $.each($('.inside input[type="radio"]'), function (index,elem) {
+        $.each($('.inside input[type="radio"]'), function (){
             var $self = $(this);
 
             //Bind the change event
-            $self.bind('change', function (e) {
+            $self.bind('change', function (){
                 $self.closest('.inside').find('.selected').removeClass('selected');
                 $self.closest('label').addClass('selected');
             });
         });
 
         //Range input
-        $.each($('.inside input[type="range"]'), function (index,elem) {
+        $.each($('.inside input[type="range"]'), function (){
             var $self = $(this);
             var $target = $('#' + this.id + '_output');
 
-            $self.bind('change', function (e) {
+            $self.bind('change', function (){
                 $target.text($self.val());
             });
         });
 
         //Upload input: Wordpress version < 3.5
-        $.each($('.upload a.add_media.thickbox'), function (index,elem) {
+        $.each($('.upload a.add_media.thickbox'), function (){
             var $self = $(this);
             var _id = $self.attr('data-editor');
 
@@ -128,14 +128,14 @@
             $self.attr('id', '' + _id + this.id);
 
             //Bind the click event
-            $self.bind('click', function (e) {
+            $self.bind('click', function (){
                 formfield = _id;
                 tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true&amp;post_id=0');
                 return false;
             });
 
             //Override the default submit function to get the image details
-            window.send_to_editor = function (html) {
+            window.send_to_editor = function (html){
                 //Get the image details
                 imgurl = undefined == html.src ? html.href : html.src;
                 $('#' + _id).val(imgurl);
@@ -145,7 +145,7 @@
         });
 
         //Upload input: Wordpress version >= 3.5
-        $.each($('.inside a.add_media:not(.thickbox)'), function (index,elem) {
+        $.each($('.inside a.add_media:not(.thickbox)'), function (){
             var $self = $(this);
 
             //Check if parent has the "customized" css class from Tea TO
@@ -167,7 +167,7 @@
             var _idtarget = $parent.attr('data-target');
 
             //Bind click event on button
-            $self.bind('click', function (e) {
+            $self.bind('click', function (e){
                 e.preventDefault();
 
                 //Set the wp.media post id so the uploader grabs the ID we want when initialised
@@ -184,7 +184,7 @@
                 });
 
                 //Bind event when medialib popin is opened
-                file_frame.on('open', function () {
+                file_frame.on('open', function (){
                     //Check if there are results
                     if (!$result.length) {
                         return;
@@ -273,7 +273,7 @@
         });
 
         //Upload input: delete button
-        $('.inside a.delete').bind('click', function (e) {
+        $('.inside a.delete').bind('click', function (e){
             e.preventDefault();
             var $self = $(this);
             var $parent = $self.parent();
@@ -299,33 +299,33 @@
             $parent.css('backgroundColor', '#'+_delcolor);
             $parent.animate({
                 opacity: '0'
-            }, 'low', function () {
+            }, 'low', function (){
                 $parent.remove();
             });
         });
 
         //Upload input: delete all button
-        $.each($('.inside a.delall'), function (index,elem) {
+        $.each($('.inside a.delall'), function (){
             var $self = $(this);
             var $target = $('#' + $self.attr('data-target') + '_upload_content').find('.upload_image_result li');
             var $hidden = $('#' + $self.attr('data-target'));
 
             //Bind click event
-            $self.bind('click', function (e) {
+            $self.bind('click', function (e){
                 e.preventDefault();
 
                 //Delete all values
                 $hidden.val('NONE');
 
                 //Deleting animation
-                $.each($target, function (ind,el) {
+                $.each($target, function (){
                     var $that = $(this);
 
                     //Animate and delete item
                     $that.css('backgroundColor', '#'+_delcolor);
                     $that.animate({
                         opacity: '0'
-                    }, 'low', function () {
+                    }, 'low', function (){
                         $that.remove();
                     });
                 });
@@ -333,10 +333,10 @@
         });
 
         //Upload Wordpress default button
-        $.each($('.inside a.insert-media:not(.thickbox)'), function (index,elem) {
+        $.each($('.inside a.insert-media:not(.thickbox)'), function (){
             var $self = $(this);
 
-            $self.bind('click', function (e) {
+            $self.bind('click', function (){
                 if ($self.parent().hasClass('customized')) {
                     return false;
                 }

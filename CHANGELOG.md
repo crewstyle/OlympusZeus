@@ -4,6 +4,7 @@ Detele Date field and add new RTE field.
 
 - **Edit:**
   - delete <date> field 'cause it useless too...
+  - optimize JS scripts
 - **New:**
   - new <rte> field to get all Wordpress powaaa :)
 
