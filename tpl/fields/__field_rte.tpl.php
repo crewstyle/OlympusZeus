@@ -1,13 +1,14 @@
                     <!-- Content rte <?php echo $id ?> -->
-                    <div id="<?php echo $id ?>_rte_content" class="<?php echo $group ? 'smallbox' : 'stuffbox' ?>">
+                    <div id="<?php echo $id ?>_rte_content" class="inside-rte">
                         <h3>
-                            <label for="<?php echo $id ?>"><?php echo $title ?></label>
+                            <label for="<?php echo $id ?>">
+                                <?php echo $title ?>
+                                <small><?php echo $description ?></small>
+                            </label>
                         </h3>
 
-                        <div class="inside rte">
-                            <textarea name="<?php echo $id ?>" id="<?php echo $id ?>" rows="<?php echo $rows ?>" <?php echo $placeholder ?>><?php echo $val ?></textarea>
-
-                            <p><?php echo $description ?></p>
+                        <div id="poststuff">
+                            <?php wp_editor($val, $id) ?>
                         </div>
                     </div>
                     <!-- /Content rte <?php echo $id ?> -->

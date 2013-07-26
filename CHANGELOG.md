@@ -1,9 +1,11 @@
 ## 1.2.8 (July 26, 2013)
 
-Detele Date field.
+Detele Date field and add new RTE field.
 
 - **Edit:**
   - delete <date> field 'cause it useless too...
+- **New:**
+  - new <rte> field to get all Wordpress powaaa :)
 
 
 ## 1.2.7 (July 26, 2013)

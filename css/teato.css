@@ -165,6 +165,12 @@
 }
 
 
+/*--- [RTE] ---*/
+.tea_to.wrap .inside-rte {
+    margin-bottom:20px;
+}
+
+
 /*--- [LISTING] ---*/
 .tea_to.wrap .listing {
     list-style:disc;

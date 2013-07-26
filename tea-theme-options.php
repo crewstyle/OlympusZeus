@@ -28,7 +28,7 @@ define('TTO_VERSION', '1.2.8');
  * To get its own settings
  *
  * @since Tea Theme Options 1.2.8
- * @todo Special field:     RTE, Typeahead, Date, Geolocalisation
+ * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
  *                          Price table, Carousel, Icons
@@ -1032,17 +1032,15 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.1.1
+     * @since Tea Theme Options 1.2.8
      */
     protected function __fieldRTE($content, $group)
     {
         //Default variables
         $id = $content['id'];
-        $title = isset($content['title']) ? $content['title'] : __('Tea Textarea');
+        $title = isset($content['title']) ? $content['title'] : __('Tea RTE');
         $std = isset($content['std']) ? $content['std'] : '';
-        $placeholder = isset($content['placeholder']) ? 'placeholder="' . $content['placeholder'] . '"' : '';
         $description = isset($content['description']) ? $content['description'] : '';
-        $rows = isset($content['rows']) ? $content['rows'] : '8';
 
         //Check selected
         $val = $this->getOption($id, $std);
