@@ -1,0 +1,3 @@
+[submodule "includes/instaphp"]
+	path = includes/instaphp
+	url = https://github.com/sesser/Instaphp.git
