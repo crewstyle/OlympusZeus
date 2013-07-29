@@ -29,8 +29,10 @@
 
     <?php if (!empty($description)): ?><p><?php echo $description ?></p><?php endif ?>
 
+    <?php if ($submit): ?>
     <form method="post" action="admin.php?page=<?php echo $page ?>&updated=true" enctype="multipart/form-data">
         <input type="hidden" name="tea_to_settings" id="tea_to_settings" value="true" />
+    <?php endif ?>
 
         <div id="poststuff">
             <div id="post-body" class="metabox-holder columns-2">

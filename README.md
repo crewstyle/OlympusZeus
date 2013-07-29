@@ -24,12 +24,13 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 + [7) Common fields](#7-common-fields)
 + [8) Special fields](#8-special-fields)
 + [9) Wordpress fields](#9-wordpress-fields)
-+ [10) Next fields](#10-next-fields)
-+ [11) Examples](#11-examples)
-+ [12) Previews](#12-previews)
-+ [13) That's all folkes!](#13-thats-all-folkes)
-+ [14) Authors](#14-authors)
-+ [15) Copyright and license](#15-copyright-and-license)
++ [10) Connection fields](#10-connection-fields)
++ [11) Next fields](#11-next-fields)
++ [12) Examples](#12-examples)
++ [13) Previews](#13-previews)
++ [14) That's all folkes!](#14-thats-all-folkes)
++ [15) Authors](#15-authors)
++ [16) Copyright and license](#16-copyright-and-license)
 
 
 ### 1) Installing the theme roller
@@ -168,6 +169,9 @@ All available types are:
 + Posts - Display a list of Wrdpress posts.
 + Post Types - Display a list of Wordpress posttypes.
 + Tags - Display a list of Wordpress tags.
+
+**Connection fields**:
++ Instagram - Make a bridge between your website and your Instagram profile.
 
 
 ### 6) Display fields
@@ -555,7 +559,20 @@ array(
 ```
 
 
-### 10) Next fields
+### 10) Connection fields
+
+Adding a `instagram`
+
+```php
+array(
+    'type' => 'instagram',
+    'title' => 'My Instagram',
+    'description' => 'Check my instagram'
+)
+```
+
+
+### 11) Next fields
 
 Adding a `address` __IN PROGRESS__
 
@@ -583,7 +600,7 @@ array(
 ```
 
 
-### 11) Examples
+### 12) Examples
 
 Here is a working example to define in your `functions.php` theme page.
 
@@ -671,7 +688,7 @@ echo $intro;
 ```
 
 
-### 12) Previews
+### 13) Previews
 
 Main view with Google font special field
 ![Main view with Google font special field](http://takeatea.com/teato/teato-a.png)
@@ -690,7 +707,7 @@ Social special field
 ![Social special field](http://takeatea.com/teato/teato-e.png)
 
 
-### 13) That's all folkes!
+### 14) That's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -701,7 +718,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-### 14) Authors
+### 15) Authors
 
 **Take a Tea**
 
@@ -716,7 +733,7 @@ That's all to begin working with **Tea TO**
 + http://github.com/crewstyle
 
 
-### 15) Copyright and license
+### 16) Copyright and license
 
 Copyright 2013 [Take a tea](http://takeatea.com "Take a tea")  
 Infusé par Take a tea ;)

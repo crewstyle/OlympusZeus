@@ -1,3 +1,14 @@
+## 1.2.9 (July 29, 2013)
+
+Edit header layout without form, new <instagram> field with API, new _del_option function
+
+- **Edit:**
+  - add submit option in header layout: no form without button ;)
+- **New:**
+  - new <instagram> field with API, connection and more
+  - new _del_option function to delete option from DB and transient
+
+
 ## 1.2.8 (July 26, 2013)
 
 Detele Date field and add new RTE field.

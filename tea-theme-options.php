@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.8
+ * @since Tea Theme Options 1.2.9
  */
 
 if (!defined('ABSPATH')) {
@@ -15,8 +15,9 @@ if (!defined('ABSPATH')) {
 //---------------------------------------------------------------------------------------------------------//
 
 
-//Define the Tea Theme Options last version number
-define('TTO_VERSION', '1.2.8');
+//Usefull definitions for the Tea Theme Options
+define('TTO_VERSION', '1.2.9');
+define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
 
 
 //---------------------------------------------------------------------------------------------------------//
@@ -27,7 +28,7 @@ define('TTO_VERSION', '1.2.8');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.8
+ * @since Tea Theme Options 1.2.9
  * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -57,11 +58,12 @@ class Tea_Theme_Options
     /**
      * Constructor.
      *
+     * @uses connectToNetworks()
      * @uses setDuration()
      * @uses updateOptions()
      * @param string $identifier
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.9
      */
     public function __construct($identifier = 'tea_theme_options')
     {
@@ -77,16 +79,27 @@ class Tea_Theme_Options
         $this->identifier = $identifier;
         $this->is_admin = is_admin() ? true : false;
 
-        //Set default duration
+        //Set default duration and directories
         $this->setDuration();
+        $this->setDirectory();
 
         //Get page
         $this->current = isset($_GET['page']) ? $_GET['page'] : '';
 
-        //Update options
+        //Update options...
         if (isset($_POST['tea_to_settings']))
         {
             $this->updateOptions($_POST, $_FILES);
+        }
+        //...Or make some modifications to the asked network
+        else if (isset($_POST['tea_network']))
+        {
+            $this->dispatchNetwork($_POST, $_GET);
+        }
+        //...Or update network data
+        else if (isset($_GET['tea_callback']))
+        {
+            $this->callbackFromNetwork($_GET);
         }
     }
 
@@ -389,16 +402,16 @@ class Tea_Theme_Options
     /**
      * Build default contents
      *
-     * @since Tea Theme Options 1.2.7
+     * @since Tea Theme Options 1.2.9
      */
     protected function buildDefaults()
     {
         //Get documentation page contents
-        /*include('tpl/layouts/__connections.tpl.php');
+        include('tpl/layouts/__connections.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
-        unset($titles, $details);*/
+        unset($titles, $details);
 
         //Get documentation page contents
         include('tpl/layouts/__documentation.tpl.php');
@@ -411,7 +424,7 @@ class Tea_Theme_Options
     /**
      * Build header layout.
      *
-     * @since Tea Theme Options 1.2.0
+     * @since Tea Theme Options 1.2.9
      */
     protected function buildLayoutHeader()
     {
@@ -421,6 +434,7 @@ class Tea_Theme_Options
         $page = empty($this->current) ? $this->identifier : $this->current;
         $title = empty($this->current) ? $this->pages[$this->identifier]['title'] : $this->pages[$this->current]['title'];
         $description = empty($this->current) ? $this->pages[$this->identifier]['description'] : $this->pages[$this->current]['description'];
+        $submit = empty($this->current) ? $this->pages[$this->identifier]['submit'] : $this->pages[$this->current]['submit'];
 
         //Include template
         include('tpl/layouts/__layout_header.tpl.php');
@@ -489,7 +503,7 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.8
+     * @since Tea Theme Options 1.2.9
      */
     protected function buildType($contents, $group = false)
     {
@@ -1271,19 +1285,21 @@ class Tea_Theme_Options
     //-------------------------------------//
 
     /**
-     * Build instagram component.
+     * Build Instagram component.
      *
      * @uses getOption()
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.9
      */
     protected function __fieldInstagram($content)
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Instagram');
         $description = isset($content['description']) ? $content['description'] : '';
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $display_form = false;
 
         //Get instagram configurations
         $defaults = $this->getDefaults('instagram');
@@ -1294,12 +1310,49 @@ class Tea_Theme_Options
         //Check if Google Font has already been included
         if (!isset($includes['instagram']))
         {
-            //$this->setIncludes('instagram');
-            //$directory = $this->getDirectory('normal');
-            //include_once $directory . '/includes/instaphp/instaphp.php';
+            $this->setIncludes('instagram');
+            $directory = $this->getDirectory('normal');
+            include_once $directory . '/includes/instaphp/instaphp.php';
         }
 
+        //Check if we display form or user informations
+        $token = _get_option('tea_instagram_access_token');
 
+        if (false === $token || empty($token))
+        {
+            //Default vars
+            $display_form = true;
+        }
+        else
+        {
+            //Get user Instagram info from DB
+            $user_info = _get_option('tea_instagram_user_info');
+            $user_recent = _get_option('tea_instagram_user_recent');
+
+            //Check if there is data in DB
+            if (false === $user_info || empty($user_info))
+            {
+                //Get instagram instance with token
+                $api = Instaphp\Instaphp::Instance($token);
+                $response = $api->Users->Info();
+
+                //Update DB with the user info
+                $user_info = $response->data;
+                _set_option('tea_instagram_user_info', $user_info);
+            }
+
+            //Get recent photos from cache
+            if (false === $user_recent || empty($user_recent))
+            {
+                //Get instagram instance with token
+                $api = isset($api) ? $api : Instaphp\Instaphp::Instance($token);
+                $response = $api->Users->Recent('self');
+
+                //Update DB with the user info
+                $user_recent = $response->data;
+                _set_option('tea_instagram_user_recent', $user_recent);
+            }
+        }
 
         //Get template
         include('tpl/fields/__field_instagram.tpl.php');
@@ -1444,6 +1497,227 @@ class Tea_Theme_Options
 
         //Return the array
         return $defaults;
+    }
+
+
+    //--------------------------------------------------------------------------//
+
+    /**
+     * Build dispatch method.
+     *
+     * @uses connectToNetwork()
+     * @uses disconnectToNetwork()
+     * @uses updateNetwork()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function dispatchNetwork($post, $get)
+    {
+        //Check if a network connection is asked
+        if (!isset($post['tea_network']))
+        {
+            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a network to make the connection happens.');
+            return false;
+        }
+
+        //...Or update connection network
+        if (isset($post['tea_connection']))
+        {
+            $this->connectToNetwork($post);
+        }
+        //...Or update disconnection network
+        else if (isset($post['tea_disconnection']))
+        {
+            $this->disconnectToNetwork($post);
+        }
+        //...Or update data from network
+        else if (isset($post['tea_update']))
+        {
+            $this->updateNetwork($post);
+        }
+    }
+
+
+    //-------------------------------------//
+
+    /**
+     * Build data from the asked network.
+     *
+     * @uses getDirectory()
+     * @uses getIncludes()
+     * @uses setIncludes()
+     * @uses _set_option()
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $get Contains all data sent in GET
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function callbackFromNetwork($get)
+    {
+        //Check if a network connection is asked
+        if (!isset($get['tea_callback']))
+        {
+            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a callback network to update the informations.');
+            return false;
+        }
+
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check if token parameter from Instagram
+        if (isset($_GET['instagram_token']))
+        {
+            //Get includes
+            $includes = $this->getIncludes();
+
+            //Check if Google Font has already been included
+            if (!isset($includes['instagram']))
+            {
+                $this->setIncludes('instagram');
+                $directory = $this->getDirectory('normal');
+                include_once $directory . '/includes/instaphp/instaphp.php';
+            }
+
+            //Update DB with the token
+            _set_option('tea_instagram_access_token', $get['instagram_token']);
+            $token = $get['instagram_token'];
+
+            //Get user info
+            $api = Instaphp\Instaphp::Instance($token);
+            $user_info = $api->Users->Info();
+            $user_recent = $api->Users->Recent('self');
+
+            //Uodate DB with the user info
+            _set_option('tea_instagram_user_info', $user_info->data);
+
+            //Update DB with the user info
+            _set_option('tea_instagram_user_recent', $user_recent->data);
+
+            //Build callback
+            $return = add_query_arg(array('page' => $page, 'updated' => 'true'), admin_url('/admin.php'));
+
+            //Redirect
+            wp_redirect($return, 307);
+            exit;
+        }
+    }
+
+    /**
+     * Build connection to the asked network.
+     *
+     * @uses getOption()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function connectToNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Get cookie information
+            $token = _get_option('tea_instagram_access_token');
+
+            //Check the token
+            if (false === $token || empty($token))
+            {
+                //Build callback
+                $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+                $uri = add_query_arg('return_uri', urlencode($return), TTO_INSTAGRAM);
+
+                //Redirect to network
+                wp_redirect($uri, 307);
+                exit;
+            }
+        }
+    }
+
+    /**
+     * Build disconnection to the asked network.
+     *
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $post Contains all data sent in POST
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function disconnectToNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Delete all data from DB
+            _del_option('tea_instagram_access_token');
+            _del_option('tea_instagram_user_info');
+            _del_option('tea_instagram_user_recent');
+
+            //Build callback
+            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+            $uri = add_query_arg(array('return_uri' => urlencode($return), 'logout' => 'true'), TTO_INSTAGRAM);
+
+            //Redirect to network
+            wp_redirect($uri, 307);
+            exit;
+        }
+    }
+
+    /**
+     * Build data from the asked network.
+     *
+     * @uses getDirectory()
+     * @uses getIncludes()
+     * @uses setIncludes()
+     * @uses _get_option()
+     * @uses _set_option()
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $post Contains all data sent in POST
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function updateNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Get includes
+        $includes = $this->getIncludes();
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Check if Google Font has already been included
+            if (!isset($includes['instagram']))
+            {
+                $this->setIncludes('instagram');
+                $directory = $this->getDirectory('normal');
+                include_once $directory . '/includes/instaphp/instaphp.php';
+            }
+
+            //Get token from DB
+            $token = _get_option('tea_instagram_access_token');
+
+            //Get user info
+            $api = Instaphp\Instaphp::Instance($token);
+            $user_info = $api->Users->Info();
+            $user_recent = $api->Users->Recent('self');
+
+            //Uodate DB with the user info
+            _set_option('tea_instagram_user_info', $user_info->data);
+
+            //Update DB with the user info
+            _set_option('tea_instagram_user_recent', $user_recent->data);
+        }
     }
 
 
@@ -1733,6 +2007,24 @@ class Tea_Theme_Options
     }
 }
 
+
+/**
+ * Set a value into options
+ *
+ * @since Tea Theme Options 1.2.9
+ */
+function _del_option($option, $transient = false)
+{
+    //If a transient is asked...
+    if ($transient)
+    {
+        //Delete the transient
+        delete_transient($option);
+    }
+
+    //Delete value from DB
+    delete_option($option);
+}
 
 /**
  * Return a value from options

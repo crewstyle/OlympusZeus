@@ -369,5 +369,20 @@ $details = array(
 
             )
         )
+    ),
+    array(
+        'type' => 'features',
+        'title' => __('Connection fields'),
+        'contents' => array(
+            array(
+                'title' => 'Instagram',
+                'content' => __('Make a bridge between your website and your Instagram profile.'),
+                'code' => 'array(
+    "type" => "instagram",
+    "title" => "Welcome to Instagram",
+    "description" => "It\'s your profile. You, you and you."
+);'
+            )
+        )
     )
 );

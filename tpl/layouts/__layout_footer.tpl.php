@@ -29,5 +29,5 @@
 
             </div>
         </div>
-    </form>
+    <?php if ($submit): ?></form><?php endif ?>
 </div>

@@ -2,7 +2,6 @@
  * jQuery Tea Theme Options
  *
  * Copyright 2013 Take a Tea (http://takeatea.com)
- *
  * Dual licensed under the MIT or GPL Version 2 licenses
  *
 */
@@ -273,34 +272,37 @@
         });
 
         //Upload input: delete button
-        $('.inside a.delete').bind('click', function (e){
-            e.preventDefault();
+        $.each($('.inside a.delete'), function (){
             var $self = $(this);
-            var $parent = $self.parent();
-            var $hidden = $('#' + $self.attr('data-target'));
 
-            //Check if there is multiple medias or not
-            var _multiple = 'FIGURE' == $parent[0].nodeName ? false : true;
+            $self.bind('click', function (e){
+                e.preventDefault();
+                var $parent = $self.parent();
+                var $hidden = $('#' + $self.attr('data-target'));
 
-            //Check if there are multiple medias or not
-            if (_multiple) {
-                //Delete value
-                var todelete = $parent.find('img').attr('id') + ';' + $parent.find('img').attr('src') + '||';
-                var newval = $hidden.val().replace(todelete, '');
-                newval = '' == newval ? 'NONE' : newval;
-                $hidden.val('' + newval);
-            }
-            else {
-                //Delete value
-                $hidden.val('NONE');
-            }
+                //Check if there is multiple medias or not
+                var _multiple = 'FIGURE' == $parent[0].nodeName ? false : true;
 
-            //Deleting animation
-            $parent.css('backgroundColor', '#'+_delcolor);
-            $parent.animate({
-                opacity: '0'
-            }, 'low', function (){
-                $parent.remove();
+                //Check if there are multiple medias or not
+                if (_multiple) {
+                    //Delete value
+                    var todelete = $parent.find('img').attr('id') + ';' + $parent.find('img').attr('src') + '||';
+                    var newval = $hidden.val().replace(todelete, '');
+                    newval = '' == newval ? 'NONE' : newval;
+                    $hidden.val('' + newval);
+                }
+                else {
+                    //Delete value
+                    $hidden.val('NONE');
+                }
+
+                //Deleting animation
+                $parent.css('backgroundColor', '#'+_delcolor);
+                $parent.animate({
+                    opacity: '0'
+                }, 'low', function (){
+                    $parent.remove();
+                });
             });
         });
 
