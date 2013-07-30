@@ -1,5 +1,5 @@
 /*
- * Tea Theme Options v1.2.9 - "KOWABUNGAAAAAAAAAAAAAAA - Tortues Ninja"
+ * Tea Theme Options v1.2.10 - "GOMU GOMU NOOOOOOOOOO BAZOOKKAAAAAAAAA - One Piece"
  * Copyright 2012 Take a Tea
  * By Take a Tea <takeatea.com> :)
  */
@@ -465,6 +465,7 @@
     border-style:solid;
     border-width:1px;
     display:block;
+    margin-bottom:20px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
@@ -509,32 +510,24 @@
 .tea_to.wrap .network-sep {
     margin-right:20px;
 }
-
-
-/*--- [INSTAGRAM] ---*/
-.tea_to.wrap .instagram-recent li {
+.tea_to.wrap .network-recent li {
     border:5px solid #e5f1f7;
     display:inline-block;
     margin:10px;
-    padding-bottom:30px;
     position:relative;
     text-align:center;
 }
-.tea_to.wrap .instagram-recent a,
-.tea_to.wrap .instagram-recent img {
+.tea_to.wrap .network-recent a,
+.tea_to.wrap .network-recent img {
     display:block;
 }
-.tea_to.wrap .instagram-recent div {
+.tea_to.wrap .network-recent div {
     background-color:#e5f1f7;
-    bottom:0;
     color:#298cba;
     height:30px;
-    left:0;
     line-height:30px;
-    position:absolute;
-    right:0;
 }
-.tea_to.wrap .instagram-recent span {
+.tea_to.wrap .network-recent span {
     background-color:transparent;
     background-position:0 50%;
     background-repeat:no-repeat;
@@ -542,10 +535,10 @@
     padding-left:20px;
     padding-right:10px;
 }
-.tea_to.wrap .instagram-recent .comments {
+.tea_to.wrap .network-recent .comments {
     background-image:url(../img/network/comments.png);
 }
-.tea_to.wrap .instagram-recent .likes {
+.tea_to.wrap .network-recent .likes {
     background-image:url(../img/network/likes.png);
 }
 

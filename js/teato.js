@@ -64,6 +64,24 @@
             }
         });
 
+        $.each($('.tea_to #screen-meta'), function (){
+            var $self = $(this);
+            var $links = $self.find('.contextual-help-tabs');
+            var $blocks = $self.find('.contextual-help-tabs-wrap');
+
+            $links.find('ul a').bind('click', function (e){
+                e.preventDefault();
+                var $this = $(this);
+                var $target = $('' + $this.attr('href'));
+
+                $links.find('ul li.active').removeClass('active');
+                $blocks.find('> .active').removeClass('active');
+
+                $this.closest('li').addClass('active');
+                $target.addClass('active');
+            });
+        });
+
         //Features input
         $.each($('.features-list li'), function (){
             var $self = $(this);

@@ -171,6 +171,7 @@ All available types are:
 + Tags - Display a list of Wordpress tags.
 
 **Connection fields**:
++ Flickr - Make a bridge between your website and your Flickr profile.
 + Instagram - Make a bridge between your website and your Instagram profile.
 
 
@@ -561,13 +562,23 @@ array(
 
 ### 10) Connection fields
 
+Adding a `flickr`
+
+```php
+array(
+    'type' => 'flickr',
+    'title' => 'My FlickR',
+    'description' => 'Check my FlickR'
+)
+```
+
 Adding a `instagram`
 
 ```php
 array(
     'type' => 'instagram',
     'title' => 'My Instagram',
-    'description' => 'Check my instagram'
+    'description' => 'Check my Instagram'
 )
 ```
 

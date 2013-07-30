@@ -15,5 +15,10 @@ $details = array(
         'type' => 'instagram',
         'title' => __('Instagram.'),
         'description' => __('Login to your Instagram profile to get all your photos.')
+    ),
+    array(
+        'type' => 'flickr',
+        'title' => __('FlickR.'),
+        'description' => __('Login to your FlickR profile to get all your photos.')
     )
 );

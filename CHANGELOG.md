@@ -1,3 +1,11 @@
+## 1.2.10 (July 30, 2013)
+
+New <flickr> field with API
+
+- **New:**
+  - new <flickr> field with API, connection and more
+
+
 ## 1.2.9 (July 29, 2013)
 
 Edit header layout without form, new <instagram> field with API, new _del_option function

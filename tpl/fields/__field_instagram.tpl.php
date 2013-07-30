@@ -72,7 +72,7 @@
                                                 <small> &bull; <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Update') ?>" /></small>
                                             </h3>
 
-                                            <ul class="instagram-recent">
+                                            <ul class="network-recent">
                                                 <?php
                                                     foreach ($user_recent as $item):
                                                         $link = $item->link;
