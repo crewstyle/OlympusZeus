@@ -75,13 +75,13 @@
                                             <ul class="network-recent">
                                                 <?php
                                                     foreach ($user_recent as $item):
-                                                        $link = $item->link;
-                                                        $url = $item->images->thumbnail->url;
-                                                        $alt = empty($item->caption->text) ? __('Untitled') : $item->caption->text;
-                                                        $width = $item->images->thumbnail->width;
-                                                        $height = $item->images->thumbnail->height;
-                                                        $likes = $item->likes->count;
-                                                        $comments = $item->comments->count;
+                                                        $link = $item['link'];
+                                                        $url = $item['url'];
+                                                        $title = $item['title'];
+                                                        $width = $item['width'];
+                                                        $height = $item['height'];
+                                                        $likes = $item['likes'];
+                                                        $comments = $item['comments'];
                                                 ?>
                                                     <li>
                                                         <a href="<?php echo $link ?>" title="<?php echo $alt ?>">
@@ -96,6 +96,20 @@
                                             </ul>
                                         </form>
                                         <div id="tea-instagram-helpbox" class="help-tab-content">
+                                            <?php /*<h3><?php _e('Update data') ?></h3>
+
+                                            <p><?php _e('You can manually update your data from Instagram by clicking on the "Update" button from the "Recent medias" menu. There are two ways to update automatically the informations :') ?></p>
+                                            <ul>
+                                                <li><b><?php _e('Use the Wordpress default Cron') ?></b> - <?php _e('Used by default.') ?></li>
+                                                <li><b><?php _e('Use your server Cron') ?></b> - <?php _e('You can simply use your own server Cron if you are able to. Follow the next instructions to make the magic happens.') ?></li>
+                                            </ul>
+
+                                            <h4><?php _e('Instructions to use your own server Cron') ?></h4>
+                                            <p><?php _e('First of all, disable the Cron call') ?></p>
+                                            <code>wget -q -O - http://VOTRESITE.COM/wp-cron.php > /dev/null 2>&1</code>
+
+                                            <hr class="network-sep" />*/ ?>
+
                                             <h3><?php _e('Display recent photos') ?></h3>
 
                                             <p><?php _e('To display your recent photos in a widget or else, simply get them from cache by the request:') ?></p>
@@ -105,13 +119,13 @@ if (false !== $recent &amp;&amp; !empty($recent))
 {
     foreach ($recent as $item)
     {
-        $link = $item-&gt;link;
-        $url = $item-&gt;images-&gt;thumbnail-&gt;url;
-        $alt = empty($item-&gt;caption-&gt;text) ? __('Untitled') : $item-&gt;caption-&gt;text;
-        $width = $item-&gt;images-&gt;thumbnail-&gt;width;
-        $height = $item-&gt;images-&gt;thumbnail-&gt;height;
-        $likes = $item-&gt;likes-&gt;count;
-        $comments = $item-&gt;comments-&gt;count;
+        $link = $item['link'];
+        $url = $item['url'];
+        $title = $item['title'];
+        $width = $item['width'];
+        $height = $item['height'];
+        $likes = $item['likes'];
+        $comments = $item['comments'];
 
         echo '&lt;img src="' . $url . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" /&gt;';
     }

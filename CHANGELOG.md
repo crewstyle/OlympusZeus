@@ -1,3 +1,12 @@
+## 1.2.11 (July 30, 2013)
+
+Fix some bugs with Instagram recent medias and FlickR username
+
+- **Fix:**
+  - fix Instagram recent medias bug
+  - fix FlickR username bug
+
+
 ## 1.2.10 (July 30, 2013)
 
 New <flickr> field with API

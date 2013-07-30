@@ -32,7 +32,12 @@
                                             <input type="hidden" name="tea_network" value="flickr" />
 
                                             <p><?php echo $description ?></p>
-                                            <p>http://www.flickr.com/photos/<input type="text" name="tea_flickr_username" id="tea_flickr_username" value="" placeholder="<?php _e('Your username') ?>" />/</p>
+                                            <p>
+                                                <label for="tea_flickr_username" style="display:block">
+                                                    <?php _e('Enter your FlickR username') ?>
+                                                </label>
+                                                <input type="text" name="tea_flickr_username" id="tea_flickr_username" value="" placeholder="<?php _e('Your username') ?>" />
+                                            </p>
 
                                             <?php submit_button(__('Connection to FlickR')) ?>
                                         </form>

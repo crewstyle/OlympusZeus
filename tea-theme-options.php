@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.9
+ * @since Tea Theme Options 1.2.11
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 
 //Usefull definitions for the Tea Theme Options
-define('TTO_VERSION', '1.2.10');
+define('TTO_VERSION', '1.2.11');
 define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
 
 
@@ -28,7 +28,7 @@ define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.9
+ * @since Tea Theme Options 1.2.11
  * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -1381,7 +1381,7 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.11
      */
     protected function __fieldInstagram($content)
     {
@@ -1433,11 +1433,25 @@ class Tea_Theme_Options
             {
                 //Get instagram instance with token
                 $api = isset($api) ? $api : Instaphp\Instaphp::Instance($token);
-                $response = $api->Users->Recent('self');
+                $user_recent = $api->Users->Recent('self');
 
                 //Update DB with the user info
-                $user_recent = $response->data;
-                _set_option('tea_instagram_user_recent', $user_recent);
+                $recents = array();
+                    //Iterate
+                foreach ($user_recent->data as $item)
+                {
+                    $recents[] = array(
+                        'link' => $item->link,
+                        'url' => $item->images->thumbnail->url,
+                        'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
+                        'width' => $item->images->thumbnail->width,
+                        'height' => $item->images->thumbnail->height,
+                        'likes' => $item->likes->count,
+                        'comments' => $item->comments->count
+                    );
+                }
+                    //Update
+                _set_option('tea_instagram_user_recent', $recents);
             }
         }
 
@@ -1638,7 +1652,7 @@ class Tea_Theme_Options
      * @uses wp_redirect()
      * @param array $get Contains all data sent in GET
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.11
      */
     protected function callbackFromNetwork($get)
     {
@@ -1679,7 +1693,22 @@ class Tea_Theme_Options
             _set_option('tea_instagram_user_info', $user_info->data);
 
             //Update DB with the user info
-            _set_option('tea_instagram_user_recent', $user_recent->data);
+            $recents = array();
+                //Iterate
+            foreach ($user_recent->data as $item)
+            {
+                $recents[] = array(
+                    'link' => $item->link,
+                    'url' => $item->images->thumbnail->url,
+                    'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
+                    'width' => $item->images->thumbnail->width,
+                    'height' => $item->images->thumbnail->height,
+                    'likes' => $item->likes->count,
+                    'comments' => $item->comments->count
+                );
+            }
+                //Update
+            _set_option('tea_instagram_user_recent', $recents);
 
             //Build callback
             $return = add_query_arg(array('page' => $page, 'updated' => 'true'), admin_url('/admin.php'));
@@ -1826,7 +1855,7 @@ class Tea_Theme_Options
      * @uses wp_redirect()
      * @param array $post Contains all data sent in POST
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.11
      */
     protected function updateNetwork($post)
     {
@@ -1859,7 +1888,22 @@ class Tea_Theme_Options
             _set_option('tea_instagram_user_info', $user_info->data);
 
             //Update DB with the user info
-            _set_option('tea_instagram_user_recent', $user_recent->data);
+            $recents = array();
+                //Iterate
+            foreach ($user_recent->data as $item)
+            {
+                $recents[] = array(
+                    'link' => $item->link,
+                    'url' => $item->images->thumbnail->url,
+                    'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
+                    'width' => $item->images->thumbnail->width,
+                    'height' => $item->images->thumbnail->height,
+                    'likes' => $item->likes->count,
+                    'comments' => $item->comments->count
+                );
+            }
+                //Update
+            _set_option('tea_instagram_user_recent', $recents);
         }
         else if ('flickr' == $post['tea_network'])
         {
