@@ -1316,7 +1316,7 @@ class Tea_Theme_Options
         {
             $this->setIncludes('flickr');
             $directory = $this->getDirectory('normal');
-            include_once $directory . '/includes/phpFlickr/phpFlickr.php';
+            include_once $directory . '/includes/phpflickr/phpFlickr.php';
         }
 
         //Check if we display form or user informations
@@ -1735,7 +1735,7 @@ class Tea_Theme_Options
             {
                 $this->setIncludes('flickr');
                 $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/phpFlickr/phpFlickr.php';
+                include_once $directory . '/includes/phpflickr/phpFlickr.php';
             }
 
             //Get Flickr instance with token
@@ -1871,7 +1871,7 @@ class Tea_Theme_Options
             {
                 $this->setIncludes('flickr');
                 $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/phpFlickr/phpFlickr.php';
+                include_once $directory . '/includes/phpflickr/phpFlickr.php';
             }
 
             //Get user info
