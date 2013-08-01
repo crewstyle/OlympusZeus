@@ -375,12 +375,30 @@ $details = array(
         'title' => __('Connection fields'),
         'contents' => array(
             array(
+                'title' => 'FlickR',
+                'content' => __('Make a bridge between your website and your FlickR profile.'),
+                'code' => 'array(
+    "type" => "flickr",
+    "title" => "Welcome to FlickR",
+    "description" => "It\'s your medias. Yours, yours and yours."
+);'
+            ),
+            array(
                 'title' => 'Instagram',
                 'content' => __('Make a bridge between your website and your Instagram profile.'),
                 'code' => 'array(
     "type" => "instagram",
     "title" => "Welcome to Instagram",
     "description" => "It\'s your profile. You, you and you."
+);'
+            ),
+            array(
+                'title' => 'Twitter',
+                'content' => __('Make a bridge between your website and your Twitter profile.'),
+                'code' => 'array(
+    "type" => "twitter",
+    "title" => "Welcome to Twitter",
+    "description" => "It\'s your tweets. Yours, yours and yours."
 );'
             )
         )

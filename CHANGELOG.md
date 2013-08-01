@@ -2,6 +2,7 @@
 
 Fix small bug in Twitter template
 Display update date on network templates
+Adds descriptions on documentation page
 
 
 ## 1.2.12 (July 31, 2013)
