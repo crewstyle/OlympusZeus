@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.11
+ * @since Tea Theme Options 1.2.12
  */
 
 if (!defined('ABSPATH')) {
@@ -16,8 +16,9 @@ if (!defined('ABSPATH')) {
 
 
 //Usefull definitions for the Tea Theme Options
-define('TTO_VERSION', '1.2.11');
+define('TTO_VERSION', '1.2.12');
 define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
+define('TTO_TWITTER', 'http://takeatea.com/twitter.php');
 
 
 //---------------------------------------------------------------------------------------------------------//
@@ -28,7 +29,7 @@ define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.11
+ * @since Tea Theme Options 1.2.12
  * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -153,7 +154,7 @@ class Tea_Theme_Options
      *
      * @uses add_action() - Wordpress
      *
-     * @since Tea Theme Options 1.2.2
+     * @since Tea Theme Options 1.2.12
      * @todo
      */
     public function buildMenus()
@@ -177,14 +178,23 @@ class Tea_Theme_Options
         //Initialize the current index page
         $this->index = null;
 
+        //Register admin bar action hook
+        add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
+
         //Register admin page action hook
         add_action('admin_menu', array(&$this, '__buildMenuPage'));
 
         //Register admin message action hook
         add_action('admin_notices', array(&$this, '__showAdminMessage'));
 
-        //Register admin bar action hook
-        add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
+        //Define custom schedule
+        if (!wp_next_scheduled('tea_task_schedule'))
+        {
+            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
+        }
+
+        //Register custom schedule filter
+        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
     }
 
 
@@ -396,6 +406,37 @@ class Tea_Theme_Options
         }
     }
 
+    /**
+     * Display a warning message on the admin panel.
+     *
+     * @since Tea Theme Options 1.2.12
+     */
+    public function __cronSchedules()
+    {
+        //Get networks values from DB
+        $flickr = _get_option('tea_flickr_user_info');
+        $instagram = _get_option('tea_instagram_access_token');
+        $twitter = _get_option('tea_twitter_access_token');
+
+        //Check FlickR
+        if (false !== $flickr && !empty($flickr))
+        {
+            $this->updateNetwork(array('tea_network' => 'flickr'));
+        }
+
+        //Check Instagram
+        if (false !== $instagram && !empty($instagram))
+        {
+            $this->updateNetwork(array('tea_network' => 'instagram'));
+        }
+
+        //Check Twitter
+        if (false !== $twitter && !empty($twitter))
+        {
+            $this->updateNetwork(array('tea_network' => 'twitter'));
+        }
+    }
+
 
     //--------------------------------------------------------------------------//
 
@@ -503,12 +544,12 @@ class Tea_Theme_Options
      * @param array $contents
      * @param bool $group
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.12
      */
     protected function buildType($contents, $group = false)
     {
         //Get all fields without ID
-        $do_not_have_ids = array('br', 'features', 'flickr', 'include', 'instagram', 'heading', 'hr', 'group', 'list', 'p');
+        $do_not_have_ids = array('br', 'features', 'flickr', 'include', 'instagram', 'heading', 'hr', 'group', 'list', 'p', 'twitter');
 
         //Iteration on all array
         foreach ($contents as $key => $content)
@@ -615,6 +656,10 @@ class Tea_Theme_Options
             else if ('instagram' == $content['type'])
             {
                 $this->__fieldInstagram($content);
+            }
+            else if ('twitter' == $content['type'])
+            {
+                $this->__fieldTwitter($content);
             }
 
             //Default action
@@ -1295,29 +1340,16 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.12
      */
     protected function __fieldFlickr($content)
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea FlickR');
         $description = isset($content['description']) ? $content['description'] : '';
+        $icon = $this->getDirectory() . '/img/social/icon-flickr.png';
         $page = empty($this->current) ? $this->identifier : $this->current;
         $display_form = false;
-
-        //Get instagram configurations
-        $defaults = $this->getDefaults('flickr');
-
-        //Get includes
-        $includes = $this->getIncludes();
-
-        //Check if Google Font has already been included
-        if (!isset($includes['flickr']))
-        {
-            $this->setIncludes('flickr');
-            $directory = $this->getDirectory('normal');
-            include_once $directory . '/includes/phpflickr/phpFlickr.php';
-        }
 
         //Check if we display form or user informations
         $user_info = _get_option('tea_flickr_user_info');
@@ -1331,47 +1363,15 @@ class Tea_Theme_Options
         {
             //Get user Flickr info from DB
             $user_details = _get_option('tea_flickr_user_details');
+            $user_details = false === $user_details ? array() : $user_details;
+
+            //Get recent photos from DB
             $user_recent = _get_option('tea_flickr_user_recent');
-
-            //Get recent photos from cache
-            if (false === $user_details || empty($user_details))
-            {
-                //Get Flickr photos from User ID
-                $api = new phpFlickr($defaults['api_key']);
-                $user_details = $api->people_getInfo($user_info['id']);
-
-                //Update DB with the user info
-                _set_option('tea_flickr_user_details', $user_details);
-            }
-
-            //Get recent photos from cache
-            if (false === $user_recent || empty($user_recent))
-            {
-                //Get Flickr photos from User ID
-                $api = isset($api) ? $api : new phpFlickr($defaults['api_key']);
-                $user_recent = $api->people_getPublicPhotos($user_info['id'], null, null, 20, 1);
-
-                //Update DB with the user info
-                $recents = array();
-                    //Iterate
-                foreach ($user_recent['photos']['photo'] as $item)
-                {
-                    $recents[] = array(
-                        'link' => 'http://www.flickr.com/photos/' . $item['owner'] . '/' . $item['id'],
-                        'url' => $api->buildPhotoURL($item, 'medium_640'),
-                        'url_small' => $api->buildPhotoURL($item, 'square'),
-                        'title' => $item['title']
-                    );
-                }
-                    //Update
-                _set_option('tea_flickr_user_recent', $recents);
-                unset($user_recent);
-                $user_recent = $recents;
-            }
+            $user_recent = false === $user_recent ? array() : $user_recent;
         }
 
         //Get template
-        include('tpl/fields/__field_flickr.tpl.php');
+        include('tpl/fields/__field_network_flickr.tpl.php');
     }
 
     /**
@@ -1381,26 +1381,16 @@ class Tea_Theme_Options
      * @param array $content Contains all data
      * @param bool $group Define if the field is displayed in group or not
      *
-     * @since Tea Theme Options 1.2.11
+     * @since Tea Theme Options 1.2.12
      */
     protected function __fieldInstagram($content)
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Instagram');
         $description = isset($content['description']) ? $content['description'] : '';
+        $icon = $this->getDirectory() . '/img/social/icon-instagram.png';
         $page = empty($this->current) ? $this->identifier : $this->current;
         $display_form = false;
-
-        //Get includes
-        $includes = $this->getIncludes();
-
-        //Check if Google Font has already been included
-        if (!isset($includes['instagram']))
-        {
-            $this->setIncludes('instagram');
-            $directory = $this->getDirectory('normal');
-            include_once $directory . '/includes/instaphp/instaphp.php';
-        }
 
         //Check if we display form or user informations
         $token = _get_option('tea_instagram_access_token');
@@ -1414,60 +1404,423 @@ class Tea_Theme_Options
         {
             //Get user Instagram info from DB
             $user_info = _get_option('tea_instagram_user_info');
+            $user_info = false === $user_info ? array() : $user_info;
+
+            //Get recent photos from DB
             $user_recent = _get_option('tea_instagram_user_recent');
-
-            //Check if there is data in DB
-            if (false === $user_info || empty($user_info))
-            {
-                //Get instagram instance with token
-                $api = Instaphp\Instaphp::Instance($token);
-                $response = $api->Users->Info();
-
-                //Update DB with the user info
-                $user_info = $response->data;
-                _set_option('tea_instagram_user_info', $user_info);
-            }
-
-            //Get recent photos from cache
-            if (false === $user_recent || empty($user_recent))
-            {
-                //Get instagram instance with token
-                $api = isset($api) ? $api : Instaphp\Instaphp::Instance($token);
-                $user_recent = $api->Users->Recent('self');
-
-                //Update DB with the user info
-                $recents = array();
-                    //Iterate
-                foreach ($user_recent->data as $item)
-                {
-                    $recents[] = array(
-                        'link' => $item->link,
-                        'url' => $item->images->thumbnail->url,
-                        'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
-                        'width' => $item->images->thumbnail->width,
-                        'height' => $item->images->thumbnail->height,
-                        'likes' => $item->likes->count,
-                        'comments' => $item->comments->count
-                    );
-                }
-                    //Update
-                _set_option('tea_instagram_user_recent', $recents);
-            }
+            $user_recent = false === $user_recent ? array() : $user_recent;
         }
 
         //Get template
-        include('tpl/fields/__field_instagram.tpl.php');
+        include('tpl/fields/__field_network_instagram.tpl.php');
+    }
+
+    /**
+     * Build Instagram component.
+     *
+     * @uses getOption()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.12
+     */
+    protected function __fieldTwitter($content)
+    {
+        //Default variables
+        $title = isset($content['title']) ? $content['title'] : __('Tea Twitter');
+        $description = isset($content['description']) ? $content['description'] : '';
+        $icon = $this->getDirectory() . '/img/social/icon-twitter.png';
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $display_form = false;
+
+        //Check if we display form or user informations
+        $token = _get_option('tea_twitter_access_token');
+
+        if (false === $token || empty($token))
+        {
+            //Default vars
+            $display_form = true;
+        }
+        else
+        {
+            //Get user Instagram info from DB
+            $user_info = _get_option('tea_twitter_user_info');
+            $user_info = false === $user_info ? array() : $user_info;
+
+            //Get recent photos from DB
+            $user_recent = _get_option('tea_twitter_user_recent');
+            $user_recent = false === $user_recent ? array() : $user_recent;
+        }
+
+        //Get template
+        include('tpl/fields/__field_network_twitter.tpl.php');
     }
 
 
-    //-------------------------------------//
+    //--------------------------------------------------------------------------//
+
+    /**
+     * Build dispatch method.
+     *
+     * @uses connectToNetwork()
+     * @uses disconnectToNetwork()
+     * @uses updateNetwork()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.9
+     */
+    protected function dispatchNetwork($post, $get)
+    {
+        //Check if a network connection is asked
+        if (!isset($post['tea_network']))
+        {
+            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a network to make the connection happens.');
+            return false;
+        }
+
+        //...Or update connection network
+        if (isset($post['tea_connection']))
+        {
+            $this->connectToNetwork($post);
+        }
+        //...Or update disconnection network
+        else if (isset($post['tea_disconnection']))
+        {
+            $this->disconnectToNetwork($post);
+        }
+        //...Or update data from network
+        else if (isset($post['tea_update']))
+        {
+            $this->updateNetwork($post);
+        }
+    }
+
+    /**
+     * Build data from the asked network.
+     *
+     * @uses getDirectory()
+     * @uses getIncludes()
+     * @uses setIncludes()
+     * @uses _set_option()
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $get Contains all data sent in GET
+     *
+     * @since Tea Theme Options 1.2.12
+     */
+    protected function callbackFromNetwork($get)
+    {
+        //Check if a network connection is asked
+        if (!isset($get['tea_callback']))
+        {
+            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a callback network to update the informations.');
+            return false;
+        }
+
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check Instagram
+        if (isset($get['instagram_token']))
+        {
+            //Update DB with the token
+            $token = $get['instagram_token'];
+            _set_option('tea_instagram_access_token', $token);
+
+            //Get all data
+            $get['tea_network'] = 'instagram';
+            $this->updateNetwork($get);
+        }
+        //Check Twitter
+        else if (isset($get['twitter_token']))
+        {
+            //Update DB with the token
+            $token = array(
+                'oauth_token' => $get['twitter_token'],
+                'oauth_token_secret' => $get['twitter_secret']
+            );
+            _set_option('tea_twitter_access_token', $token);
+
+            //Get all data
+            $get['tea_network'] = 'twitter';
+            $this->updateNetwork($get);
+        }
+
+        //Build callback
+        $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+
+        //Redirect
+        wp_redirect($return, 307);
+        exit;
+    }
+
+    /**
+     * Build connection to the asked network.
+     *
+     * @uses getOption()
+     * @param array $content Contains all data
+     * @param bool $group Define if the field is displayed in group or not
+     *
+     * @since Tea Theme Options 1.2.12
+     */
+    protected function connectToNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Build callback
+            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+            $uri = add_query_arg('return_uri', urlencode($return), TTO_INSTAGRAM);
+
+            //Redirect to network
+            wp_redirect($uri, 307);
+            exit;
+        }
+        //Check Flickr
+        else if ('flickr' == $post['tea_network'])
+        {
+            $post['tea_flickr_install'] = true;
+            $this->updateNetwork($post);
+        }
+        //Check Twitter
+        else if ('twitter' == $post['tea_network'])
+        {
+            //Build callback
+            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+            $uri = add_query_arg('return_uri', urlencode($return), TTO_TWITTER);
+
+            //Redirect to network
+            wp_redirect($uri, 307);
+            exit;
+        }
+    }
+
+    /**
+     * Build disconnection to the asked network.
+     *
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $post Contains all data sent in POST
+     *
+     * @since Tea Theme Options 1.2.10
+     */
+    protected function disconnectToNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Delete all data from DB
+            _del_option('tea_instagram_access_token');
+            _del_option('tea_instagram_user_info');
+            _del_option('tea_instagram_user_recent');
+
+            //Build callback
+            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+            $uri = add_query_arg(array('return_uri' => urlencode($return), 'logout' => 'true'), TTO_INSTAGRAM);
+
+            //Redirect to network
+            wp_redirect($uri, 307);
+            exit;
+        }
+        //Check Flickr
+        else if ('flickr' == $post['tea_network'])
+        {
+            //Delete all data from DB
+            _del_option('tea_flickr_user_info');
+            _del_option('tea_flickr_user_details');
+            _del_option('tea_flickr_user_recent');
+
+        }
+        //Check Twitter
+        else if ('twitter' == $post['tea_network'])
+        {
+            //Delete all data from DB
+            _del_option('tea_twitter_access_token');
+            _del_option('tea_twitter_user_info');
+            _del_option('tea_twitter_user_recent');
+
+            //Build callback
+            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
+            $uri = add_query_arg(array('return_uri' => urlencode($return), 'logout' => 'true'), TTO_TWITTER);
+
+            //Redirect to network
+            wp_redirect($uri, 307);
+            exit;
+        }
+    }
+
+    /**
+     * Build data from the asked network.
+     *
+     * @uses getDirectory()
+     * @uses getIncludes()
+     * @uses setIncludes()
+     * @uses _get_option()
+     * @uses _set_option()
+     * @uses add_query_arg()
+     * @uses wp_redirect()
+     * @param array $post Contains all data sent in POST
+     *
+     * @since Tea Theme Options 1.2.12
+     */
+    protected function updateNetwork($post)
+    {
+        //Default vars
+        $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Get includes
+        $includes = $this->getIncludes();
+
+        //Check Instagram
+        if ('instagram' == $post['tea_network'])
+        {
+            //Check if Google Font has already been included
+            if (!isset($includes['instagram']))
+            {
+                $this->setIncludes('instagram');
+                $directory = $this->getDirectory('normal');
+                include_once $directory . '/includes/instaphp/instaphp.php';
+            }
+
+            //Get token from DB
+            $token = _get_option('tea_instagram_access_token');
+
+            //Get user info
+            $api = Instaphp\Instaphp::Instance($token);
+            $user_info = $api->Users->Info();
+            $user_recent = $api->Users->Recent('self');
+
+            //Uodate DB with the user info
+            _set_option('tea_instagram_user_info', $user_info->data);
+
+            //Update DB with the user info
+            $recents = array();
+                //Iterate
+            foreach ($user_recent->data as $item)
+            {
+                $recents[] = array(
+                    'link' => $item->link,
+                    'url' => $item->images->thumbnail->url,
+                    'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
+                    'width' => $item->images->thumbnail->width,
+                    'height' => $item->images->thumbnail->height,
+                    'likes' => $item->likes->count,
+                    'comments' => $item->comments->count
+                );
+            }
+                //Update
+            _set_option('tea_instagram_user_recent', $recents);
+        }
+        //Check Flickr
+        else if ('flickr' == $post['tea_network'])
+        {
+            //Get Flickr configurations
+            $defaults = $this->getDefaults('flickr');
+
+            //Check if a username is defined
+            if (isset($post['tea_flickr_install']) && (!isset($post['tea_flickr_username']) || empty($post['tea_flickr_username'])))
+            {
+                $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a username to get connected.');
+                return false;
+            }
+
+            //Check if Flickr has already been included
+            if (!isset($includes['flickr']))
+            {
+                $this->setIncludes('flickr');
+                $directory = $this->getDirectory('normal');
+                include_once $directory . '/includes/phpflickr/phpFlickr.php';
+            }
+
+            //Get Flickr instance with token
+            $api = new phpFlickr($defaults['api_key']);
+
+            //Install a new user
+            if (isset($post['tea_flickr_install']))
+            {
+                //Get Flickr instance with token
+                $user_info = $api->people_findByUsername($post['tea_flickr_username']);
+
+                //Check if the API returns value
+                if (false === $user_info || empty($user_info))
+                {
+                    $this->adminmessage = __('Something went wrong in your parameters definition. The username specified is unknown.');
+                    return false;
+                }
+
+                //Update DB with the user info
+                _set_option('tea_flickr_user_info', $user_info);
+            }
+
+            //Get user info
+            $user_info = isset($user_info) ? $user_info : _get_option('tea_flickr_user_info');
+
+            //Update DB with the user details
+            $user_details = $api->people_getInfo($user_info['id']);
+            _set_option('tea_flickr_user_details', $user_details);
+
+            //Update DB with the user info
+            $user_recent = $api->people_getPublicPhotos($user_info['id'], null, null, 20, 1);
+            $recents = array();
+                //Iterate
+            foreach ($user_recent['photos']['photo'] as $item)
+            {
+                $recents[] = array(
+                    'link' => 'http://www.flickr.com/photos/' . $item['owner'] . '/' . $item['id'],
+                    'url' => $api->buildPhotoURL($item, 'medium_640'),
+                    'url_small' => $api->buildPhotoURL($item, 'square'),
+                    'title' => $item['title']
+                );
+            }
+                //Update
+            _set_option('tea_flickr_user_recent', $recents);
+        }
+        //Check Twitter
+        else if ('twitter' == $post['tea_network'])
+        {
+            //Get Twitter configurations
+            $defaults = $this->getDefaults('twitter');
+
+            //Check if Twitter has already been included
+            if (!isset($includes['twitter']))
+            {
+                $this->setIncludes('twitter');
+                $directory = $this->getDirectory('normal');
+                include_once $directory . '/includes/twitteroauth/twitteroauth.php';
+            }
+
+            //Get token from DB
+            $token = _get_option('tea_twitter_access_token');
+
+            //Build TwitterOAuth object
+            $api = new TwitterOAuth($defaults['consumer_key'], $defaults['consumer_secret'], $token['oauth_token'], $token['oauth_token_secret']);
+
+            //Get user info
+            $user_info = $api->get('account/verify_credentials');
+            _set_option('tea_twitter_user_info', $user_info);
+
+            //Get recent tweets
+            $user_recent = $api->get('statuses/user_timeline');
+            _set_option('tea_twitter_user_recent', $user_recent);
+        }
+    }
+
+
+    //--------------------------------------------------------------------------//
 
     /**
      * Return default values.
      *
      * @return array $defaults All defaults data provided by the Tea TO
      *
-     * @since Tea Theme Options 1.2.10
+     * @since Tea Theme Options 1.2.12
      */
     protected function getDefaults($return = 'images', $wanted = array())
     {
@@ -1498,7 +1851,7 @@ class Tea_Theme_Options
                 )
             );
         }
-        //Return defauls background
+        //Return defauls FLickr API keys
         else if ('flickr' == $return)
         {
             $defaults = array(
@@ -1593,361 +1946,20 @@ class Tea_Theme_Options
                 }
             }
         }
+        //Return defauls Twitter API keys
+        else if ('twitter' == $return)
+        {
+            $defaults = array(
+                'consumer_key'      => 'T6K5yb4oGrS5UTZxsvDdhw',
+                'consumer_secret'   => 'gpamCLVGgNZGN3jprq40A4JD5KzQ2PLqFIu5lUQyw',
+                'access_token'      => '551088210-R1noavpCwlyqzZMMvZMBABj7vqwt7kdswlzjcghY',
+                'access_secret'     => 'Mq89Jwa5num8OW15yETufGuZHyQtWdt6RJva0W6ZajU'
+            );
+        }
 
         //Return the array
         return $defaults;
     }
-
-
-    //--------------------------------------------------------------------------//
-
-    /**
-     * Build dispatch method.
-     *
-     * @uses connectToNetwork()
-     * @uses disconnectToNetwork()
-     * @uses updateNetwork()
-     * @param array $content Contains all data
-     * @param bool $group Define if the field is displayed in group or not
-     *
-     * @since Tea Theme Options 1.2.9
-     */
-    protected function dispatchNetwork($post, $get)
-    {
-        //Check if a network connection is asked
-        if (!isset($post['tea_network']))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a network to make the connection happens.');
-            return false;
-        }
-
-        //...Or update connection network
-        if (isset($post['tea_connection']))
-        {
-            $this->connectToNetwork($post);
-        }
-        //...Or update disconnection network
-        else if (isset($post['tea_disconnection']))
-        {
-            $this->disconnectToNetwork($post);
-        }
-        //...Or update data from network
-        else if (isset($post['tea_update']))
-        {
-            $this->updateNetwork($post);
-        }
-    }
-
-
-    //-------------------------------------//
-
-    /**
-     * Build data from the asked network.
-     *
-     * @uses getDirectory()
-     * @uses getIncludes()
-     * @uses setIncludes()
-     * @uses _set_option()
-     * @uses add_query_arg()
-     * @uses wp_redirect()
-     * @param array $get Contains all data sent in GET
-     *
-     * @since Tea Theme Options 1.2.11
-     */
-    protected function callbackFromNetwork($get)
-    {
-        //Check if a network connection is asked
-        if (!isset($get['tea_callback']))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a callback network to update the informations.');
-            return false;
-        }
-
-        //Default vars
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Check if token parameter from Instagram
-        if (isset($_GET['instagram_token']))
-        {
-            //Get includes
-            $includes = $this->getIncludes();
-
-            //Check if Google Font has already been included
-            if (!isset($includes['instagram']))
-            {
-                $this->setIncludes('instagram');
-                $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/instaphp/instaphp.php';
-            }
-
-            //Update DB with the token
-            _set_option('tea_instagram_access_token', $get['instagram_token']);
-            $token = $get['instagram_token'];
-
-            //Get user info
-            $api = Instaphp\Instaphp::Instance($token);
-            $user_info = $api->Users->Info();
-            $user_recent = $api->Users->Recent('self');
-
-            //Uodate DB with the user info
-            _set_option('tea_instagram_user_info', $user_info->data);
-
-            //Update DB with the user info
-            $recents = array();
-                //Iterate
-            foreach ($user_recent->data as $item)
-            {
-                $recents[] = array(
-                    'link' => $item->link,
-                    'url' => $item->images->thumbnail->url,
-                    'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
-                    'width' => $item->images->thumbnail->width,
-                    'height' => $item->images->thumbnail->height,
-                    'likes' => $item->likes->count,
-                    'comments' => $item->comments->count
-                );
-            }
-                //Update
-            _set_option('tea_instagram_user_recent', $recents);
-
-            //Build callback
-            $return = add_query_arg(array('page' => $page, 'updated' => 'true'), admin_url('/admin.php'));
-
-            //Redirect
-            wp_redirect($return, 307);
-            exit;
-        }
-    }
-
-    /**
-     * Build connection to the asked network.
-     *
-     * @uses getOption()
-     * @param array $content Contains all data
-     * @param bool $group Define if the field is displayed in group or not
-     *
-     * @since Tea Theme Options 1.2.10
-     */
-    protected function connectToNetwork($post)
-    {
-        //Default vars
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Check Instagram
-        if ('instagram' == $post['tea_network'])
-        {
-            //Build callback
-            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
-            $uri = add_query_arg('return_uri', urlencode($return), TTO_INSTAGRAM);
-
-            //Redirect to network
-            wp_redirect($uri, 307);
-            exit;
-        }
-        else if ('flickr' == $post['tea_network'])
-        {
-            //Get instagram configurations
-            $defaults = $this->getDefaults('flickr');
-
-            //Check if a username is defined
-            if (!isset($post['tea_flickr_username']) || empty($post['tea_flickr_username']))
-            {
-                $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a username to get connected.');
-                return false;
-            }
-
-            //Get includes
-            $includes = $this->getIncludes();
-
-            //Check if Google Font has already been included
-            if (!isset($includes['flickr']))
-            {
-                $this->setIncludes('flickr');
-                $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/phpflickr/phpFlickr.php';
-            }
-
-            //Get Flickr instance with token
-            $api = new phpFlickr($defaults['api_key']);
-            $user_info = $api->people_findByUsername($post['tea_flickr_username']);
-
-            //Check if the API returns value
-            if (false === $user_info || empty($user_info))
-            {
-                $this->adminmessage = __('Something went wrong in your parameters definition. The username specified is unknown.');
-                return false;
-            }
-
-            //Update DB with the user info
-            _set_option('tea_flickr_user_info', $user_info);
-
-            //Update DB with the user details
-            $user_details = $api->people_getInfo($user_info['id']);
-            _set_option('tea_flickr_user_details', $user_details);
-
-            //Update DB with the user recent photos
-            $user_recent = $api->people_getPublicPhotos($user_info['id'], null, null, 20, 1);
-            $recents = array();
-                //Iterate
-            foreach ($user_recent['photos']['photo'] as $item)
-            {
-                $recents[] = array(
-                    'link' => 'http://www.flickr.com/photos/' . $item['owner'] . '/' . $item['id'],
-                    'url' => $api->buildPhotoURL($item, 'medium_640'),
-                    'url_small' => $api->buildPhotoURL($item, 'square'),
-                    'title' => $item['title']
-                );
-            }
-                //Update
-            _set_option('tea_flickr_user_recent', $recents);
-        }
-    }
-
-    /**
-     * Build disconnection to the asked network.
-     *
-     * @uses add_query_arg()
-     * @uses wp_redirect()
-     * @param array $post Contains all data sent in POST
-     *
-     * @since Tea Theme Options 1.2.10
-     */
-    protected function disconnectToNetwork($post)
-    {
-        //Default vars
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Check Instagram
-        if ('instagram' == $post['tea_network'])
-        {
-            //Delete all data from DB
-            _del_option('tea_instagram_access_token');
-            _del_option('tea_instagram_user_info');
-            _del_option('tea_instagram_user_recent');
-
-            //Build callback
-            $return = add_query_arg(array('page' => $page), admin_url('/admin.php'));
-            $uri = add_query_arg(array('return_uri' => urlencode($return), 'logout' => 'true'), TTO_INSTAGRAM);
-
-            //Redirect to network
-            wp_redirect($uri, 307);
-            exit;
-        }
-        else if ('flickr' == $post['tea_network'])
-        {
-            //Delete all data from DB
-            _del_option('tea_flickr_user_info');
-            _del_option('tea_flickr_user_details');
-            _del_option('tea_flickr_user_recent');
-
-        }
-    }
-
-    /**
-     * Build data from the asked network.
-     *
-     * @uses getDirectory()
-     * @uses getIncludes()
-     * @uses setIncludes()
-     * @uses _get_option()
-     * @uses _set_option()
-     * @uses add_query_arg()
-     * @uses wp_redirect()
-     * @param array $post Contains all data sent in POST
-     *
-     * @since Tea Theme Options 1.2.11
-     */
-    protected function updateNetwork($post)
-    {
-        //Default vars
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Get includes
-        $includes = $this->getIncludes();
-
-        //Check Instagram
-        if ('instagram' == $post['tea_network'])
-        {
-            //Check if Google Font has already been included
-            if (!isset($includes['instagram']))
-            {
-                $this->setIncludes('instagram');
-                $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/instaphp/instaphp.php';
-            }
-
-            //Get token from DB
-            $token = _get_option('tea_instagram_access_token');
-
-            //Get user info
-            $api = Instaphp\Instaphp::Instance($token);
-            $user_info = $api->Users->Info();
-            $user_recent = $api->Users->Recent('self');
-
-            //Uodate DB with the user info
-            _set_option('tea_instagram_user_info', $user_info->data);
-
-            //Update DB with the user info
-            $recents = array();
-                //Iterate
-            foreach ($user_recent->data as $item)
-            {
-                $recents[] = array(
-                    'link' => $item->link,
-                    'url' => $item->images->thumbnail->url,
-                    'title' => empty($item->caption->text) ? __('Untitled') : $item->caption->text,
-                    'width' => $item->images->thumbnail->width,
-                    'height' => $item->images->thumbnail->height,
-                    'likes' => $item->likes->count,
-                    'comments' => $item->comments->count
-                );
-            }
-                //Update
-            _set_option('tea_instagram_user_recent', $recents);
-        }
-        else if ('flickr' == $post['tea_network'])
-        {
-            //Get instagram configurations
-            $defaults = $this->getDefaults('flickr');
-
-            //Check if Google Font has already been included
-            if (!isset($includes['flickr']))
-            {
-                $this->setIncludes('flickr');
-                $directory = $this->getDirectory('normal');
-                include_once $directory . '/includes/phpflickr/phpFlickr.php';
-            }
-
-            //Get user info
-            $user_info = _get_option('tea_flickr_user_info');
-
-            //Get Flickr instance with token
-            $api = new phpFlickr($defaults['api_key']);
-
-            //Update DB with the user details
-            $user_details = $api->people_getInfo($user_info['id']);
-            _set_option('tea_flickr_user_details', $user_details);
-
-            //Update DB with the user info
-            $user_recent = $api->people_getPublicPhotos($user_info['id'], null, null, 20, 1);
-            $recents = array();
-                //Iterate
-            foreach ($user_recent['photos']['photo'] as $item)
-            {
-                $recents[] = array(
-                    'link' => 'http://www.flickr.com/photos/' . $item['owner'] . '/' . $item['id'],
-                    'url' => $api->buildPhotoURL($item, 'medium_640'),
-                    'url_small' => $api->buildPhotoURL($item, 'square'),
-                    'title' => $item['title']
-                );
-            }
-                //Update
-            _set_option('tea_flickr_user_recent', $recents);
-        }
-    }
-
-
-    //--------------------------------------------------------------------------//
 
     /**
      * Get Tea TO directory.

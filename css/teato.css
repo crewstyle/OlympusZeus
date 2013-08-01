@@ -480,6 +480,20 @@
 .tea_to.wrap .contextual-help-tabs h2 {
     padding-left:16px !important;
 }
+.tea_to.wrap .contextual-help-tabs h2 img {
+    vertical-align:middle;
+}
+.tea_to.wrap .contextual-help-tabs .submitdelete {
+    background:transparent;
+    border:none;
+    color:#bc0b0b;
+    cursor:pointer;
+    margin:0 0 10px 11px;
+}
+.tea_to.wrap .contextual-help-tabs .submitdelete:hover {
+    color:red;
+    text-decoration:underline;
+}
 .tea_to.wrap .contextual-help-tabs-wrap {
     padding:15px 20px 0 20px;
     position:relative;
@@ -490,8 +504,8 @@
 .tea_to.wrap .network-profile {
     border:5px solid #e5f1f7;
     float:left;
-    height:100px;
     margin:0 20px 10px 0;
+    max-height:58px;
 }
 .tea_to.wrap .network-fullname {
     font-size:18px;
@@ -500,6 +514,7 @@
 .tea_to.wrap .network-counts li {
     background-color:#e5f1f7;
     display:inline-block;
+    margin:0 18px 0 0;
     padding:10px 20px;
     text-align:center;
 }
@@ -517,9 +532,18 @@
     position:relative;
     text-align:center;
 }
+.tea_to.wrap .network-recent.twitter-text li {
+    border-width:0 0 2px 0;
+    display:block;
+    padding-bottom:10px;
+    text-align:left;
+}
 .tea_to.wrap .network-recent a,
 .tea_to.wrap .network-recent img {
     display:block;
+}
+.tea_to.wrap .network-recent a {
+    display:inline;
 }
 .tea_to.wrap .network-recent div {
     background-color:#e5f1f7;

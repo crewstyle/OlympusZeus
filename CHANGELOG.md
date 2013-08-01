@@ -1,3 +1,14 @@
+## 1.2.12 (July 31, 2013)
+
+Make all business code in one single function, add <twitter> connection and make new Wordpress CRON schedules to update DB
+
+- **New:**
+  - new <twitter> field with API, connection and more
+  - new Wordpress CRON schedules to update networks contents in DB and cache
+- **Edit:**
+  - business code for networks is now in one single function: updateNetwork
+
+
 ## 1.2.11 (July 30, 2013)
 
 Fix some bugs with Instagram recent medias and FlickR username

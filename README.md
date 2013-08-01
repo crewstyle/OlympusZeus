@@ -173,6 +173,7 @@ All available types are:
 **Connection fields**:
 + Flickr - Make a bridge between your website and your Flickr profile.
 + Instagram - Make a bridge between your website and your Instagram profile.
++ Twitter - Make a bridge between your website and your Twitter profile due to the new API v1.1.
 
 
 ### 6) Display fields
@@ -579,6 +580,16 @@ array(
     'type' => 'instagram',
     'title' => 'My Instagram',
     'description' => 'Check my Instagram'
+)
+```
+
+Adding a `twitter`
+
+```php
+array(
+    'type' => 'twitter',
+    'title' => 'My Twitter',
+    'description' => 'Check my Tweets'
 )
 ```
 
