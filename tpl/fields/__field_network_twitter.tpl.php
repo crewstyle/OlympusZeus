@@ -110,7 +110,7 @@ if (false !== $recent &amp;&amp; !empty($recent))
         $text = preg_replace("/@(\w+)/i", "&lt;a href=\"http://twitter.com/$1\"&gt;$0&lt;/a&gt;", $text);
         $text = preg_replace("/#(\w+)/i", "&lt;a href=\"https://twitter.com/search?q=%23$1&amp;src=hash\"&gt;$0&lt;/a&gt;", $text);
 
-        echo $item->text;
+        echo $text;
     }
 }
 ?&gt;</pre>

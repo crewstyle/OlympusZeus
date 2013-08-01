@@ -1,5 +1,10 @@
 ## 1.2.12 (July 31, 2013)
 
+Fix small bug in Twitter template
+
+
+## 1.2.12 (July 31, 2013)
+
 Make all business code in one single function, add <twitter> connection and make new Wordpress CRON schedules to update DB
 
 - **New:**
