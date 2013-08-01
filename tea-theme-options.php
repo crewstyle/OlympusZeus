@@ -1349,6 +1349,7 @@ class Tea_Theme_Options
         $description = isset($content['description']) ? $content['description'] : '';
         $icon = $this->getDirectory() . '/img/social/icon-flickr.png';
         $page = empty($this->current) ? $this->identifier : $this->current;
+        $update = _get_option('tea_connection_update');
         $display_form = false;
 
         //Check if we display form or user informations
@@ -1368,6 +1369,9 @@ class Tea_Theme_Options
             //Get recent photos from DB
             $user_recent = _get_option('tea_flickr_user_recent');
             $user_recent = false === $user_recent ? array() : $user_recent;
+
+            //Display date of update
+            $update = false === $update ? '' : $update;
         }
 
         //Get template
@@ -1390,6 +1394,7 @@ class Tea_Theme_Options
         $description = isset($content['description']) ? $content['description'] : '';
         $icon = $this->getDirectory() . '/img/social/icon-instagram.png';
         $page = empty($this->current) ? $this->identifier : $this->current;
+        $update = _get_option('tea_connection_update');
         $display_form = false;
 
         //Check if we display form or user informations
@@ -1409,6 +1414,9 @@ class Tea_Theme_Options
             //Get recent photos from DB
             $user_recent = _get_option('tea_instagram_user_recent');
             $user_recent = false === $user_recent ? array() : $user_recent;
+
+            //Display date of update
+            $update = false === $update ? '' : $update;
         }
 
         //Get template
@@ -1431,6 +1439,7 @@ class Tea_Theme_Options
         $description = isset($content['description']) ? $content['description'] : '';
         $icon = $this->getDirectory() . '/img/social/icon-twitter.png';
         $page = empty($this->current) ? $this->identifier : $this->current;
+        $update = _get_option('tea_connection_update');
         $display_form = false;
 
         //Check if we display form or user informations
@@ -1450,6 +1459,9 @@ class Tea_Theme_Options
             //Get recent photos from DB
             $user_recent = _get_option('tea_twitter_user_recent');
             $user_recent = false === $user_recent ? array() : $user_recent;
+
+            //Display date of update
+            $update = false === $update ? '' : $update;
         }
 
         //Get template
@@ -1674,6 +1686,9 @@ class Tea_Theme_Options
     {
         //Default vars
         $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Define date of update
+        _set_option('tea_connection_update', date_i18n(get_option('date_format') . ', ' . get_option('time_format')));
 
         //Get includes
         $includes = $this->getIncludes();

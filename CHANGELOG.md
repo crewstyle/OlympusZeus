@@ -1,6 +1,7 @@
 ## 1.2.12 (July 31, 2013)
 
 Fix small bug in Twitter template
+Display update date on network templates
 
 
 ## 1.2.12 (July 31, 2013)

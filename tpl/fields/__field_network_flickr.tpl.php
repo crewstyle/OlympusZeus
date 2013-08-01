@@ -122,6 +122,10 @@ if (false !== $recent &amp;&amp; !empty($recent))
     }
 }
 ?&gt;</pre>
+
+                                            <?php if (!empty($update)): ?>
+                                                <p><small><?php _e('Medias updated on:') ?> <?php echo $update ?></small></p>
+                                            <?php endif ?>
                                         </div>
                                     <?php endif ?>
                                 </div>
