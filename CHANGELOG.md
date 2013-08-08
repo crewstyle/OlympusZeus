@@ -1,3 +1,8 @@
+## 1.2.13 (August 8, 2013)
+
+Change CRON calls to the constructor method
+
+
 ## 1.2.12 (July 31, 2013)
 
 Fix small bug in Twitter template

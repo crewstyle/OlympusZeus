@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.12
+ * @since Tea Theme Options 1.2.13
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 
 //Usefull definitions for the Tea Theme Options
-define('TTO_VERSION', '1.2.12');
+define('TTO_VERSION', '1.2.13');
 define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
 define('TTO_TWITTER', 'http://takeatea.com/twitter.php');
 
@@ -29,7 +29,7 @@ define('TTO_TWITTER', 'http://takeatea.com/twitter.php');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.12
+ * @since Tea Theme Options 1.2.13
  * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -64,7 +64,7 @@ class Tea_Theme_Options
      * @uses updateOptions()
      * @param string $identifier
      *
-     * @since Tea Theme Options 1.2.9
+     * @since Tea Theme Options 1.2.13
      */
     public function __construct($identifier = 'tea_theme_options')
     {
@@ -102,6 +102,15 @@ class Tea_Theme_Options
         {
             $this->callbackFromNetwork($_GET);
         }
+
+        //Define custom schedule
+        if (!wp_next_scheduled('tea_task_schedule'))
+        {
+            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
+        }
+
+        //Register custom schedule filter
+        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
     }
 
     /**
@@ -154,7 +163,7 @@ class Tea_Theme_Options
      *
      * @uses add_action() - Wordpress
      *
-     * @since Tea Theme Options 1.2.12
+     * @since Tea Theme Options 1.2.13
      * @todo
      */
     public function buildMenus()
@@ -186,15 +195,6 @@ class Tea_Theme_Options
 
         //Register admin message action hook
         add_action('admin_notices', array(&$this, '__showAdminMessage'));
-
-        //Define custom schedule
-        if (!wp_next_scheduled('tea_task_schedule'))
-        {
-            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
-        }
-
-        //Register custom schedule filter
-        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
     }
 
 
@@ -1680,13 +1680,10 @@ class Tea_Theme_Options
      * @uses wp_redirect()
      * @param array $post Contains all data sent in POST
      *
-     * @since Tea Theme Options 1.2.12
+     * @since Tea Theme Options 1.2.13
      */
     protected function updateNetwork($post)
     {
-        //Default vars
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
         //Define date of update
         _set_option('tea_connection_update', date_i18n(get_option('date_format') . ', ' . get_option('time_format')));
 
