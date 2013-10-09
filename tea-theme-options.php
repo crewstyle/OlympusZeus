@@ -4,7 +4,7 @@
  * 
  * @package TakeaTea
  * @subpackage Tea Theme Options
- * @since Tea Theme Options 1.2.13
+ * @since Tea Theme Options 1.2.14
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 
 //Usefull definitions for the Tea Theme Options
-define('TTO_VERSION', '1.2.13');
+define('TTO_VERSION', '1.2.14');
 define('TTO_INSTAGRAM', 'http://takeatea.com/instagram.php');
 define('TTO_TWITTER', 'http://takeatea.com/twitter.php');
 
@@ -29,7 +29,7 @@ define('TTO_TWITTER', 'http://takeatea.com/twitter.php');
  *
  * To get its own settings
  *
- * @since Tea Theme Options 1.2.13
+ * @since Tea Theme Options 1.2.14
  * @todo Special field:     Typeahead, Date, Geolocalisation
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
  *                          Related posts, Private content, RSS Feed, Embed PDF,
@@ -64,7 +64,7 @@ class Tea_Theme_Options
      * @uses updateOptions()
      * @param string $identifier
      *
-     * @since Tea Theme Options 1.2.13
+     * @since Tea Theme Options 1.2.14
      */
     public function __construct($identifier = 'tea_theme_options')
     {
@@ -98,7 +98,7 @@ class Tea_Theme_Options
             $this->dispatchNetwork($_POST, $_GET);
         }
         //...Or update network data
-        else if (isset($_GET['tea_callback']))
+        else if (isset($_GET['tea_to_callback']))
         {
             $this->callbackFromNetwork($_GET);
         }
@@ -111,6 +111,9 @@ class Tea_Theme_Options
 
         //Register custom schedule filter
         add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
+
+        //Build Documentation content
+        $this->buildDefaults();
     }
 
     /**
@@ -163,7 +166,7 @@ class Tea_Theme_Options
      *
      * @uses add_action() - Wordpress
      *
-     * @since Tea Theme Options 1.2.13
+     * @since Tea Theme Options 1.2.14
      * @todo
      */
     public function buildMenus()
@@ -173,9 +176,6 @@ class Tea_Theme_Options
         {
             return false;
         }
-
-        //Build Documentation content
-        $this->buildDefaults();
 
         //Check if no master page is defined
         if (empty($this->pages))
@@ -264,7 +264,7 @@ class Tea_Theme_Options
     /**
      * Hook building admin bar.
      *
-     * @since Tea Theme Options 1.2.3
+     * @since Tea Theme Options 1.2.14
      * @todo
      */
     public function __buildAdminBar()
@@ -281,6 +281,12 @@ class Tea_Theme_Options
         //Add submenu pages
         foreach ($this->pages as $page)
         {
+            //Check the page slug for '?' and '??' characters
+            if ($this->identifier.'?' == $page['slug'])
+            {
+                continue;
+            }
+
             //Check the main page
             if ($this->identifier == $page['slug'])
             {
@@ -312,7 +318,7 @@ class Tea_Theme_Options
      * @uses setDirectory()
      * @uses add_action() - Wordpress
      *
-     * @since Tea Theme Options 1.2.6
+     * @since Tea Theme Options 1.2.14
      */
     public function __buildMenuPage()
     {
@@ -350,12 +356,22 @@ class Tea_Theme_Options
             {
                 //Add page
                 add_menu_page(
-                    $page['title'],                 //page title
+                    $page['name'],                  //page title
                     $page['name'],                  //page name
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
                     array(&$this, 'buildContent'),  //function to display content
                     $this->icon_small               //icon
+                );
+
+                //Add first subpage
+                add_submenu_page(
+                    $this->identifier,              //parent slug
+                    $page['name'],                  //page name
+                    $page['title'],                 //page title
+                    $this->capability,              //capability
+                    $this->identifier,              //parent slug
+                    array(&$this, 'buildContent')   //function to display content
                 );
             }
             else
@@ -371,9 +387,15 @@ class Tea_Theme_Options
                 );
             }
 
+            //Check the page slug for '?' and '??' characters
+            if ($this->identifier.'?' == $page['slug'])
+            {
+                continue;
+            }
+
             //Build breadcrumb
             $this->breadcrumb[] = array(
-                'title' => $page['name'],
+                'title' => $this->identifier == $page['slug'] ? $page['title'] : $page['name'],
                 'slug' => $page['slug']
             );
         }
@@ -443,19 +465,26 @@ class Tea_Theme_Options
     /**
      * Build default contents
      *
-     * @since Tea Theme Options 1.2.9
+     * @since Tea Theme Options 1.2.14
      */
     protected function buildDefaults()
     {
-        //Get documentation page contents
+        //Get dashboard page contents
+        include('tpl/layouts/__dashboard.tpl.php');
+
+        //Build page with contents
+        $this->addPage($titles, $details);
+        unset($titles, $details);
+
+        //Get network connections page contents
         include('tpl/layouts/__connections.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
         unset($titles, $details);
 
-        //Get documentation page contents
-        include('tpl/layouts/__documentation.tpl.php');
+        //Get network connections page contents
+        include('tpl/layouts/__separator.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
@@ -1524,7 +1553,7 @@ class Tea_Theme_Options
     protected function callbackFromNetwork($get)
     {
         //Check if a network connection is asked
-        if (!isset($get['tea_callback']))
+        if (!isset($get['tea_to_callback']))
         {
             $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a callback network to update the informations.');
             return false;
