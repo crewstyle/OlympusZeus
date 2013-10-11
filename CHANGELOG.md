@@ -1,134 +1,16 @@
-## 1.4.9.4 (October 7, 2013)
+## 1.3.0.1 (October 11, 2013)
 
-Make the new version completely compatible with old versions, and add new display and new descriptions on configuration pages.
+Get current dir dynamically
 
 
-## 1.4.9.3 (September 25, 2013)
+## 1.3.0 (October 11, 2013)
 
-Fix bug on static functions.
+NEW VERSION, NEW CODE
 
 
-## 1.4.9.2 (September 25, 2013)
+## 1.2.13 (August 8, 2013)
 
-Fix bug on flush rewrite rules.
-
-
-## 1.4.9.1 (September 25, 2013)
-
-Fix bug on static function and move flush rewrite rules on updating CPT.
-
-
-## 1.4.9 (September 25, 2013)
-
-iOS 7 compliant! Euh... bad subject :p
-New default configuration pages and enhancement about Custom post types: you can now add custom fields on post types.
-
-
-## 1.4.8 (September 18, 2013)
-
-Fix lots of bugs about networks
-
-
-## 1.4.7.5 (September 18, 2013)
-
-Fix CRON access bug
-
-
-## 1.4.7.4 (September 16, 2013)
-
-Add description to pages
-
-
-## 1.4.7.3 (September 16, 2013)
-
-Fix small bug on dashboard edit page
-
-
-## 1.4.7.2 (September 16, 2013)
-
-Fix small bug on font saved contents
-
-
-## 1.4.7.1 (September 15, 2013)
-
-Fix small bug
-
-
-## 1.4.7 (September 15, 2013)
-
-Make this new version works with the old Tea T.O.
-Add separator to submenu.
-
-
-## 1.4.6 (August 25, 2013)
-
-Fix lots of bugs on network field.
-Add new French package.
-
-
-## 1.4.5 (August 23, 2013)
-
-Better integration in fields
-
-
-## 1.4.4 (August 22, 2013)
-
-Add new uninstall.php to make uninstall works
-Fix uninstall bug
-
-
-## 1.4.3 (August 21, 2013)
-
-Better compatibility with Wordpress 3.4.2 and uses of register_uninstall_hook instead of register_desactivation_hook
-
-
-## 1.4.2 (August 21, 2013)
-
-Main class contains now only what she is supposed to do: a container for everything
-
-
-## 1.4.1 (August 21, 2013)
-
-Fix retrocompatibility with Wordpress 3.4 version
-
-- **Fix:**
-  - Bug on footer layout
-
-
-## 1.4.0 (August 20, 2013)
-
-Get real advices from Nicolas A. <https://twitter.com/nicolassing> from Take a Tea :)
-
-- **Edit:**
-  - all components are now in different folders
-  - each field in a single package
-  - <checkbox>, <multiselect>, <radio> and <select> or now uniq (<choice> component is dead)
-- **New:**
-  - Abstract classes are now introduced for fields
-
-
-## 1.3.2.1 (August 14, 2013)
-
-- **Fix:**
-  - fix bug on small icon
-
-
-## 1.3.2 (August 14, 2013)
-
-NEW CUSTOM POST TYPE
-You can now manage all your CPT directly from the Tea TO dashboard
-
-
-## 1.3.1 (August 13, 2013)
-
-Responsified!
-
-
-## 1.3.0 (August 10, 2013)
-
-NEW PLUGIN VERSION
-- with new images
-- with a Wordpress plugin readme version
+Change CRON calls to the constructor method
 
 
 ## 1.2.12 (July 31, 2013)

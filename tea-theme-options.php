@@ -6,7 +6,7 @@
  * @subpackage Tea Theme Options
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.3.0
+ * Version: 1.3.0.1
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add professional looking theme options panels to your WordPress theme.
  * Author: Achraf Chouk
@@ -39,11 +39,11 @@ if (!defined('ABSPATH')) {
 //---------------------------------------------------------------------------------------------------------//
 
 //Usefull definitions for the Tea Theme Options
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.3.0');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.3.0.1');
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 defined('TTO_DURATION')     or define('TTO_DURATION', 86400);
-defined('TTO_URI')          or define('TTO_URI', TEMPLATE_DIR_URI . '/tea_theme_options/');
-defined('TTO_PATH')         or define('TTO_PATH', TEMPLATE_DIR . '/tea_theme_options/');
+defined('TTO_URI')          or define('TTO_URI', TEMPLATE_DIR_URI . '/' . basename(dirname(__FILE__)) . '/');
+defined('TTO_PATH')         or define('TTO_PATH', TEMPLATE_DIR . '/' . basename(dirname(__FILE__)) . '/');
 defined('TTO_ACTION')       or define('TTO_ACTION', 'tea_json_options');
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
 
