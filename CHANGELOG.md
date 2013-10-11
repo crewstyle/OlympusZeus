@@ -1,3 +1,8 @@
+## 1.3.0.2 (October 11, 2013)
+
+Fix small bug on upload field
+
+
 ## 1.3.0.1 (October 11, 2013)
 
 Get current dir dynamically

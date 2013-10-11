@@ -20,7 +20,7 @@
                     <ul>
                         <?php
                         foreach ($vals as $item):
-                            if (empty($item)) {
+                            if (empty($item) || 'NONE' == $item) {
                                 continue;
                             }
 
