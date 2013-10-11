@@ -1,0 +1,1822 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tea Theme Options\n"
+"POT-Creation-Date: 2013-08-25 16:32+0100\n"
+"PO-Revision-Date: 2013-08-25 16:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: Achraf Chouk <ach@takeatea.com>\n"
+"Language: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e;_c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2;plural=n>2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Users/ach/Takeatea/matthieularoche/wp-content/"
+"plugins/tea_theme_options\n"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:114
+#, php-format
+msgid ""
+"Something went wrong in your parameters definition: no title defined for you "
+"<b>%s</b> custom post type. Please, try again by filling the form properly."
+msgstr ""
+"Une erreur est survenue : aucun titre n'est défini pour votre type contenu "
+"personnalisé <b>%s</b>. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:136
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:235
+msgid "Add new"
+msgstr "Ajouter un nouveau"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:137
+#, php-format
+msgid "Add new %s"
+msgstr "Ajouter un nouveau %s"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:138
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:237
+msgid "Edit"
+msgstr "Editer"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:139
+#, php-format
+msgid "Edit %s"
+msgstr "Editer le %s"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:140
+#, php-format
+msgid "New %s"
+msgstr "Nouveau %s"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:141
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:240
+msgid "View"
+msgstr "Voir"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:142
+#, php-format
+msgid "View %s"
+msgstr "Voir le %s"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:143
+#, php-format
+msgid "Search %s"
+msgstr "Rechercher un %s"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:144
+#, php-format
+msgid "No %s found"
+msgstr "Pas de %s trouvé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:145
+#, php-format
+msgid "No %s found in Trash"
+msgstr "Pas de %s trouvé dans la Corbeille"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-custom-post-types.php:146
+#, php-format
+msgid "Parent %s"
+msgstr "%s parent"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:69
+#, php-format
+msgid ""
+"Something went wrong in your parameters definition: no id is defined for "
+"your <b>%s</b> field!"
+msgstr ""
+"Une erreur est survenue : aucun identifiant n'est défini pour votre champ <b>"
+"%s</b> !"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:93
+msgid "Left"
+msgstr "Gauche"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:94
+msgid "Center"
+msgstr "Centre"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:95
+msgid "Right"
+msgstr "Droite"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:98
+msgid "Top"
+msgstr "Haut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:99
+msgid "Middle"
+msgstr "Milieu"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:100
+msgid "Bottom"
+msgstr "Bas"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:104
+msgid "Background is displayed only once."
+msgstr "Le fond n'est affiché qu'une seule fois."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:105
+msgid "Background is repeated horizontally only."
+msgstr "Le fond est répété à l'horizontale uniquement."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:106
+msgid "Background is repeated vertically only."
+msgstr "Le fond est répété à la verticale seulement."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:107
+msgid "Background is repeated."
+msgstr "Le fond est répété."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:158
+msgid "No background"
+msgstr "Pas de fond"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:159
+msgid "Bright squares"
+msgstr "Bright squares"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:160
+msgid "Circles"
+msgstr "Circles"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:161
+msgid "Crosses"
+msgstr "Crosses"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:162
+msgid "Crosslines"
+msgstr "Crosslines"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:163
+msgid "Cubes"
+msgstr "Cubes"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:164
+msgid "Double lined"
+msgstr "Double lined"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:165
+msgid "Honeycomb"
+msgstr "Honeycomb"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:166
+msgid "Linen"
+msgstr "Linen"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:167
+msgid "Project paper"
+msgstr "Project paper"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:168
+msgid "Texture"
+msgstr "Texture"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:169
+msgid "Vertical lines"
+msgstr "Vertical lines"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:170
+msgid "Vichy"
+msgstr "Vichy"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:171
+msgid "Wavecut"
+msgstr "Wavecut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:179
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/in_dashboard.tpl.php:2
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:10
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:44
+msgid "FlickR"
+msgstr "FlickR"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:180
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:10
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:44
+msgid "Instagram"
+msgstr "Instagram"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:181
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:10
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:44
+msgid "Twitter"
+msgstr "Twitter"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:197
+msgid "Follow me on Bloglovin"
+msgstr "Suivez-moi sur Bloglovin"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:197
+msgid "http://www.bloglovin.com/blog/__userid__/__username__"
+msgstr "http://www.bloglovin.com/blog/__userid__/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:198
+msgid "Follow me on Deviantart"
+msgstr "Suivez-moi sur Deviantart"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:198
+msgid "http://__username__.deviantart.com/"
+msgstr "http://__username__.deviantart.com/"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:199
+msgid "Follow me on Dribbble"
+msgstr "Suivez-moi sur Dribbble"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:199
+msgid "http://dribbble.com/__username__"
+msgstr "http://dribbble.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:200
+msgid "Follow me on Facebook"
+msgstr "Suivez-moi sur Facebook"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:200
+msgid "http://www.facebook.com/__username__"
+msgstr "http://www.facebook.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:201
+msgid "Follow me on Flickr"
+msgstr "Suivez-moi sur FlickR"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:201
+msgid "http://www.flickr.com/photos/__username__"
+msgstr "http://www.flickr.com/photos/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:202
+msgid "Follow me on Forrst"
+msgstr "Suivez-moi sur Forrst"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:202
+msgid "http://forrst.com/people/__username__"
+msgstr "http://forrst.com/people/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:203
+msgid "Follow me on FriendFeed"
+msgstr "Suivez-moi sur FriendFeed"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:203
+msgid "http://friendfeed.com/__username__"
+msgstr "http://friendfeed.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:204
+msgid "Follow me on Hellocoton"
+msgstr "Suivez-moi sur Hellocoton"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:204
+msgid "http://www.hellocoton.fr/mapage/__username__"
+msgstr "http://www.hellocoton.fr/mapage/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:205
+msgid "Follow me on Google+"
+msgstr "Suivez-moi sur Google+"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:205
+msgid "http://plus.google.com/__username__"
+msgstr "http://plus.google.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:206
+msgid "Follow me on Instagram"
+msgstr "Suivez-moi sur Instagram"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:206
+msgid "http://www.instagram.com/__username__"
+msgstr "http://www.instagram.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:207
+msgid "Follow me on LastFM"
+msgstr "Suivez-moi sur LastFM"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:207
+msgid "http://www.lastfm.fr/user/__username__"
+msgstr "http://www.lastfm.fr/user/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:208
+msgid "Follow me on LinkedIn"
+msgstr "Suivez-moi sur LinkedIn"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:208
+msgid "http://fr.linkedin.com/in/__username__"
+msgstr "http://fr.linkedin.com/in/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:209
+msgid "Follow me on Pinterest"
+msgstr "Suivez-moi sur Pinterest"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:209
+msgid "http://pinterest.com/__username__"
+msgstr "http://pinterest.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:210
+msgid "Subscribe to my RSS feed"
+msgstr "Abonnez-vous à mon flux RSS"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:211
+msgid "Connect us on Skype"
+msgstr "Connectons-nous sur Skype"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:212
+msgid "Follow me on Tumblr"
+msgstr "Suivez-moi sur Tumblr"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:212
+msgid "http://"
+msgstr "http://"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:213
+msgid "Follow me on Twitter"
+msgstr "Suivez-moi sur Twitter"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:213
+msgid "http://www.twitter.com/__username__"
+msgstr "http://www.twitter.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:214
+msgid "Follow me on Vimeo"
+msgstr "Suivez-moi sur Vimeo"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:214
+msgid "http://www.vimeo.com/__username__"
+msgstr "http://www.vimeo.com/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:215
+msgid "Follow me on Youtube"
+msgstr "Abonnez-vous à ma chaîne Youtube"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:215
+msgid "http://www.youtube.com/user/__username__"
+msgstr "http://www.youtube.com/user/__username__"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:248
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:3
+msgid "Text"
+msgstr "Texte"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:249
+msgid "Email"
+msgstr "Email"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:250
+msgid "Number"
+msgstr "Nombre"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:251
+msgid "Range"
+msgstr "Tranche"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:252
+msgid "Password"
+msgstr "Mot de passe"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:253
+msgid "Search"
+msgstr "Recherche"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:254
+msgid "URL"
+msgstr "URL"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:261
+msgid "Display fields"
+msgstr "Champs d'affichage"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:262
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/br/in_dashboard.tpl.php:2
+msgid "Breakline"
+msgstr "Saut de ligne"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:263
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/heading/in_dashboard.tpl.php:2
+msgid "Heading"
+msgstr "Titre"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:264
+msgid "Horizontal rule"
+msgstr "Ligne horizontale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:265
+msgid "List items"
+msgstr "Liste d'items"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:266
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/p/in_dashboard.tpl.php:2
+msgid "Paragraph"
+msgstr "Paragraphe"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:268
+msgid "Common fields"
+msgstr "Champs communs"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:269
+msgid "Basic text, password, email, number and more"
+msgstr "Texte basique, mot de passe, email, nombre et plus"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:270
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:3
+msgid "Checkbox"
+msgstr "Case à cocher"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:271
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/hidden/in_dashboard.tpl.php:3
+msgid "Hidden"
+msgstr "Champ caché"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:272
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:3
+msgid "Multiselect"
+msgstr "Liste de sélection multiple"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:273
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:3
+msgid "Radio"
+msgstr "Bouton radio"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:274
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:3
+msgid "Select"
+msgstr "Liste de sélection"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:275
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/in_dashboard.tpl.php:3
+msgid "Textarea"
+msgstr "Zone de texte"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:277
+msgid "Special fields"
+msgstr "Champs spéciaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:278
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:3
+msgid "Background"
+msgstr "Image de fond"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:279
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:41
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/color/in_dashboard.tpl.php:3
+msgid "Color"
+msgstr "Couleur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:280
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:3
+msgid "Google Fonts"
+msgstr "Google Fonts"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:281
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/include/in_dashboard.tpl.php:2
+msgid "Include PHP file"
+msgstr "Inclusion de fichier PHP"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:282
+msgid "Social Links"
+msgstr "Liens sociaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:283
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/rte/in_dashboard.tpl.php:3
+msgid "Wordpress RTE"
+msgstr "Editeur de texte riche Wordpress"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:284
+msgid "Wordpress Upload"
+msgstr "Upload Wordpress"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:286
+msgid "Wordress fields"
+msgstr "Champs Wordpress"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:287
+msgid "Categories, menus, pages, posts, posttypes and tags"
+msgstr "Catégories, menus, pages, articles, types d'articles et mots-clés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:302
+msgid "Categories"
+msgstr "Catégories"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:303
+msgid "Menus"
+msgstr "Menus"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:304
+msgid "Pages"
+msgstr "Pages"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:305
+msgid "Posts"
+msgstr "Articles"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:306
+msgid "Post types"
+msgstr "Types d'articles"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-fields.php:307
+msgid "Tags"
+msgstr "Mots-clés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:62
+msgid ""
+"Something went wrong in your parameters definition. You need at least an "
+"identifier."
+msgstr ""
+"Une erreur est survenue : vous avez besoin au minimum d'un identifiant."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:126
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:392
+msgid ""
+"Something went wrong in your parameters definition: no master page found. "
+"You can simply do that by using the addPage public function."
+msgstr ""
+"Une erreur est survenue : aucune page principale n'a été trouvée. Vous "
+"pouvez simplement en ajouter une via la fonction publique \"addPage\"."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:273
+msgid ""
+"Something went wrong in your parameters definition: no master page defined!"
+msgstr "Une erreur est survenue : aucune page principale n'a été trouvée !"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:324
+msgid "You are NOT able to make this AJAX call."
+msgstr "Vous n'êtes pas autorisé à exécuter cette requête AJAX."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:336
+msgid ""
+"It seems your session is out-dated. Please, refresh your page and try again."
+msgstr ""
+"Il semblerait que votre session soit dépassée. Merci de rafraichir votre "
+"page et de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:349
+msgid "The specified content type is unknown. Please, try again."
+msgstr "Le type de contenu spécifié est inconnu. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:501
+msgid ""
+"Something went wrong in your parameters definition: your configs are empty. "
+"See README.md for more explanations."
+msgstr ""
+"Une erreur est survenue : votre configuration est incomplète. Merci de lire "
+"le fichier README.md pour plus d'explications."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:506
+msgid ""
+"Something went wrong in your parameters definition: your contents are empty. "
+"See README.md for more explanations."
+msgstr ""
+"Une erreur est survenue : vos contenus sont vides. Merci de lire le fichier "
+"README.md pour plus d'explications."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:585
+msgid ""
+"Something went wrong: it seems you forgot to attach contents to the current "
+"page. Use of addFields() function to make the magic."
+msgstr ""
+"Une erreur est survenue : il semblerait que vous ayez oublié de créer du "
+"contenu pour la page courante. Utilisez la fonction \"addFields\"."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:710
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_dashboard.tpl.php:4
+msgid "Tea Theme Options"
+msgstr "Tea Theme Options"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:763
+#, php-format
+msgid ""
+"Something went wrong in your parameters definition with the id <b>%s</b>: "
+"the defined type is unknown!"
+msgstr ""
+"Une erreur est survenue avec l'identifiant <b>%s</b> : le type défini est "
+"inconnu."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:787
+#, php-format
+msgid ""
+"Something went wrong in your parameters definition: the file <b>%s</b> does "
+"not exist!"
+msgstr "Une erreur est survenue : le fichier <b>%s</b> n'existe pas !"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:972
+#, php-format
+msgid "Something went wrong. Key \"%s\" and/or its value is empty."
+msgstr "Une erreur est survenue : la clé \"%s\" et/ou sa valeur est vide."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/class-tea-pages.php:1117
+msgid ""
+"Something went wrong in your parameters definition. You need to specify a "
+"network to make the connection happens."
+msgstr ""
+"Une erreur est survenue : vous devez spécifier un réseau pour permettre sa "
+"connexion."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/class-tea-fields-background.php:98
+msgid "Tea Background"
+msgstr "Tea Image de fond"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/class-tea-fields-background.php:104
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/class-tea-fields-upload.php:90
+msgid "Delete selection"
+msgstr "Supprimer la sélection"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/color/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/heading/in_dashboard.tpl.php:5
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/include/in_dashboard.tpl.php:5
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/in_dashboard.tpl.php:5
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/rte/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_dashboard.tpl.php:6
+msgid "Title"
+msgstr "Titre"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/color/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/rte/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_dashboard.tpl.php:11
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_dashboard.tpl.php:11
+msgid "Description"
+msgstr "Description"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:17
+msgid "Display included Background images?"
+msgstr "Afficher les images de fond par défaut ?"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:21
+msgid "Displayed image width"
+msgstr "Largeur d'image"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:26
+msgid "Displayed image height"
+msgstr "Hauteur d'image"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:32
+msgid "Default values"
+msgstr "Valeurs par défaut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:36
+msgid "Custom image"
+msgstr "Image personnalisée"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:48
+msgid "Background horizontal position"
+msgstr "Position horizontale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:61
+msgid "Background vertical position"
+msgstr "Position verticale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_dashboard.tpl.php:74
+msgid "Background repeat"
+msgstr "Répétition"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_pages.tpl.php:40
+msgid "To upload your own background, check the \"CUSTOM\" image."
+msgstr ""
+"Pour uploader votre propre image de fond, sélectionnez l'image \"CUSTOM\"."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/background/in_pages.tpl.php:64
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_pages.tpl.php:49
+msgid "It seems you are not able to upload files."
+msgstr "Il semble que vous ne pouvez pas uploader de fichiers."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/br/in_dashboard.tpl.php:3
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/hr/in_dashboard.tpl.php:3
+msgid "This field has no options"
+msgstr "Le champ n'a pas d'options"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/class-tea-fields-checkbox.php:84
+msgid "Tea Checkbox"
+msgstr "Tea Cases à cocher"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:340
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:45
+msgid "Options"
+msgstr "Options"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:21
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:45
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:21
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:21
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:21
+msgid "Default"
+msgstr "Valeur par défaut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:24
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:24
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:24
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:24
+msgid "Label"
+msgstr "Label"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:34
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:59
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:34
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:59
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:34
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:59
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:34
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:59
+msgid "Your label option"
+msgstr "Option de label"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_dashboard.tpl.php:66
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:103
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_dashboard.tpl.php:66
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/in_dashboard.tpl.php:66
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/in_dashboard.tpl.php:66
+msgid "Add a new option"
+msgstr "Ajouter une nouvelle option"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/checkbox/in_pages.tpl.php:7
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/in_pages.tpl.php:7
+msgid "Un/select all options"
+msgstr "Dé/sélectionner toutes les options"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/color/class-tea-fields-color.php:83
+msgid "Tea Color"
+msgstr "Tea Couleur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/color/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/hidden/in_dashboard.tpl.php:6
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/rte/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:21
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/in_dashboard.tpl.php:21
+msgid "Default value"
+msgstr "Valeur par défaut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:73
+msgid "Tea Dashboard"
+msgstr "Tea Accueil"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:178
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:255
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:361
+msgid ""
+"Something went wrong in your form: no title is defined. Please, try again by "
+"filling properly the form."
+msgstr ""
+"Une erreur est survenue : aucun titre n'est défini. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:196
+msgid ""
+"Something went wrong in your form: a page with your title already exists. "
+"Please, try another one."
+msgstr ""
+"Une erreur est survenue : une page avec ce titre existe déjà. Merci de "
+"réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:224
+msgid ""
+"Something went wrong in your form: no page is defined. Please, try again by "
+"filling properly the form."
+msgstr ""
+"Une erreur est survenue : aucune page n'est définie. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:236
+msgid ""
+"Something went wrong in your form: the defined page does not exist. Please, "
+"try again by using the form properly."
+msgstr ""
+"Une erreur est survenue : la page définie n'existe pas. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:297
+#, php-format
+msgid "No title defined for your <b>%s</b> field."
+msgstr "Pas de titre défini pour le champ <b>%s</b>."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:343
+msgid "Something went wrong in your form:"
+msgstr "Une erreur est survenue :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:343
+msgid "Please, try again by filling properly the form."
+msgstr "Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:376
+msgid ""
+"Something went wrong in your form: a custom post type with your title "
+"already exists. Please, try another one."
+msgstr ""
+"Une erreur est survenue : un type de contenu personnalisé avec ce titre "
+"existe déjà. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:401
+msgid ""
+"Something went wrong in your form: no custom post type is defined. Please, "
+"try again by filling properly the form."
+msgstr ""
+"Une erreur est survenue : aucun type d'article personnalisé n'est défini. "
+"Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:413
+msgid ""
+"Something went wrong in your form: the defined custom post type does not "
+"exist. Please, try again by using the form properly."
+msgstr ""
+"Une erreur est survenue : le type contenu personnalisé spécifié n'existe "
+"pas. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/class-tea-fields-dashboard.php:438
+#, php-format
+msgid ""
+"Something went wrong in your form: no title defined for your <b>%s</b> "
+"Custom post type. Please, try again by filling properly the form."
+msgstr ""
+"Une erreur est survenue : aucun titre n'est défini pour votre type contenu "
+"personnalisé <b>%s</b>. Merci de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:28
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:44
+msgid "Page title"
+msgstr "Titre de page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:32
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:49
+msgid "Page description"
+msgstr "Description de page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:36
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:54
+msgid "Display submit button?"
+msgstr "Afficher le bouton de validation"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:38
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:56
+msgid "Yes"
+msgstr "Oui"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:39
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:57
+msgid "No"
+msgstr "Non"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:42
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:46
+msgid "Edit page"
+msgstr "Editer la page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:65
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:80
+msgid "Delete"
+msgstr "Supprimer"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:82
+msgid "Choose content type:"
+msgstr "Choisissez un type de contenu :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:97
+msgid "Add"
+msgstr "Ajouter"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:110
+msgid "Delete page"
+msgstr "Supprimer la page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:114
+msgid "Save page"
+msgstr "Enregistrer la page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:162
+msgid "Configurations"
+msgstr "Configurations"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:165
+msgid "Plural title"
+msgstr "Titre au pluriel"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:166
+msgid "Items"
+msgstr "Items"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:171
+msgid "Singular title"
+msgstr "Titre au singulier"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:172
+msgid "Item"
+msgstr "Item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:177
+msgid "Description of your custom post type"
+msgstr "Description"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:178
+msgid "Item description"
+msgstr "Description de l'item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:182
+msgid "Menu position"
+msgstr "Position des menus"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:187
+msgid "Below posts"
+msgstr "Sous les articles"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:188
+msgid "Below media"
+msgstr "Sous les médias"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:189
+msgid "Below links"
+msgstr "Sous les liens"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:190
+msgid "Below pages"
+msgstr "Sous les pages"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:191
+msgid "Below comments"
+msgstr "Sous les commentaires"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:192
+msgid "Below first separator"
+msgstr "Sous le 1er séparateur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:193
+msgid "Below plugins"
+msgstr "Sous les extensions"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:194
+msgid "Below users"
+msgstr "Sous les utilisateurs"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:195
+msgid "Below tools"
+msgstr "Sous les outils"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:196
+msgid "Below settings"
+msgstr "Sous les réglages"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:197
+msgid "Below second separator"
+msgstr "Sous le 2nd séparateur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:212
+msgid "Icons"
+msgstr "Icônes"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:216
+msgid "Small icon"
+msgstr "Petite icône"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:222
+msgid "Large icon"
+msgstr "Grande icône"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:230
+msgid "Labels"
+msgstr "Labels"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:233
+msgid "The menu name on the administration panel"
+msgstr "Nom du menu dans le panneau d'administration"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:234
+msgid "The text used to list all items"
+msgstr "Texte utilisé pour lister tous les items"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:234
+msgid "All items"
+msgstr "Tous les items"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:235
+msgid "The menu item for adding a new post"
+msgstr "Item de menu pour ajouter un nouvel article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:236
+msgid "The header shown when creating a new post"
+msgstr "Entête affiché lors de la création d'un nouvel article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:236
+msgid "Add new item"
+msgstr "Ajouter un nouvel item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:237
+msgid "The menu item for editing posts"
+msgstr "Item de menu pour éditer un article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:238
+msgid "The header shown when editing a post"
+msgstr "Entête affiché lors de l'édition d'un article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:238
+msgid "Edit item"
+msgstr "Editer l'item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:239
+msgid "Shown in the favorites menu in the admin header"
+msgstr "Affiché dans le menu des favoris dans l'entête de l'administration"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:239
+msgid "New item"
+msgstr "Nouvel item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:240
+msgid "Used as text in a link to view the post"
+msgstr "Label du lien pour voir l'article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:241
+msgid "Shown alongside the permalink on the edit post screen"
+msgstr "Label de lien dans la page d'édition"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:241
+msgid "View item"
+msgstr "Voir l'item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:242
+msgid "Button text for the search box on the edit posts screen"
+msgstr "Label du bouton de la boîte de recherche dans la page d'édition"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:242
+msgid "Search item"
+msgstr "Rechercher l'item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:243
+msgid "Text to display when no posts are found through search in the admin"
+msgstr ""
+"Texte à afficher lorsqu'aucun article n'est trouvé durant la recherche dans "
+"l'administration"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:243
+msgid "No item found"
+msgstr "Pas d'item trouvé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:244
+msgid "Text to display when no posts are in the trash"
+msgstr "Texte à afficher lorsqu'il n'y a pas d'articles dans la corbeille"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:244
+msgid "No item found in Trash"
+msgstr "Pas d'item trouvé dans la Corbeille"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:245
+msgid ""
+"Used as a label for a parent post on the edit posts screen. Only useful for "
+"hierarchical post types"
+msgstr ""
+"Utilisé comme label pour un article parent dans la page d'édition. Utile "
+"uniquement pour les types d'article hiérarchisés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:245
+msgid "Parent item"
+msgstr "Item parent"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:260
+msgid "capability type"
+msgstr "Type de capacité"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:261
+msgid ""
+"The <code>capability_type</code> argument is another catchall argument for "
+"several more specific arguments and defaults to post. It allows you to "
+"define a custom set of capabilities, which are permissions to edit, create, "
+"and read your custom post type"
+msgstr ""
+"L'argument <code>capability_type</code> permet de définir un pack de "
+"capacités personnalisé, représentant les permissions d'édition, de création, "
+"et de lecture d'un type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:266
+msgid "Post"
+msgstr "Article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:267
+msgid "Page"
+msgstr "Page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:268
+msgid "Link"
+msgstr "Lien"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:269
+msgid "Custom post type"
+msgstr "Type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:285
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:286
+msgid ""
+"If you have some preexisting taxonomies, you can allow posts of this type to "
+"also use those taxonomies. You just have to set an array of taxonomy names "
+"that you’d like for it to use. WordPress will handle all the administration "
+"features for you."
+msgstr ""
+"Si vous utilisez les taxonomies, vous pouvez autoriser ce type d'articles à "
+"les utiliser. Vous devez simplement définir un tableau de taxonomies que "
+"vous souhaitez utiliser. Wordpress se chargera de tout le reste."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:291
+msgid "Tag"
+msgstr "Mot-clé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:292
+msgid "Category"
+msgstr "Catégorie"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:309
+msgid "Supports"
+msgstr "Supports"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:311
+msgid ""
+"The <code>supports</code> argument allows you to define what meta boxes and "
+"other fields will appear on the screen when editing or creating a new post. "
+"This defaults to <code>title</code> and <code>editor</code>. There are "
+"several available options:"
+msgstr ""
+"L'argument <code>supports</code> vous permet de définir les options qui "
+"apparaitront dans les pages de création et d'édition. Par défaut, le "
+"<code>title</code> et le <code>editor</code> sont présents. Il y a plusieurs "
+"options :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:315
+msgid "Text input field to create a post title"
+msgstr "Champ de titre d'article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:316
+msgid "Content input box for writing"
+msgstr "Champ de contenu pour l'écriture"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:317
+msgid "Ability to turn comments on/off"
+msgstr "Choix d'activer ou de désactiver les commentaires"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:318
+msgid "Ability to turn trackbacks and pingbacks on/off"
+msgstr "Choix d'activer ou de désactiver les trackbacks et pingbacks"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:319
+msgid "Allows revisions to be made of your post"
+msgstr "Autoriser l'historique des articles"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:320
+msgid "Displays a select box for changing the post author"
+msgstr "Liste de sélection de l'auteur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:321
+msgid "A textarea for writing a custom excerpt"
+msgstr "Champ de contenu pour l'extrait"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:322
+msgid "The thumbnail (featured image in 3.0) uploading box"
+msgstr ""
+"Boîte d'upload de la vignette miniature (fonctionnalité depuis la version "
+"3.0)"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:323
+msgid "Custom fields input area"
+msgstr "Champs personnalisés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:324
+msgid ""
+"The attributes box shown for pages. This is important for hierarchical post "
+"types, so you can select the parent post"
+msgstr ""
+"Boîtes d'attributs affichées dans les pages. Ceci est important pour les "
+"types d'articles hiérarchisés, ce qui vous autorise de sélectionner "
+"l'article parent"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:345
+msgid ""
+"The <code>public</code> argument is a kind of catchall argument for several "
+"other arguments and defaults to <code>false</code>"
+msgstr ""
+"L'argument <code>public</code> vous permet de rendre publique le type "
+"d'article (désactivé par défaut)"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:346
+msgid "Whether to show the administration screens"
+msgstr "Autorise l'affichage dans le panneau d'administration"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:347
+msgid "Whether queries for this post type can be performed from the front end"
+msgstr ""
+"Autorise les requêtes pour ce type d'article à être exécutées sur le site "
+"publique"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:348
+msgid "Whether the posts should appear in search results"
+msgstr "Autorise les articles a apparaitre dans les résultats de recherche"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:349
+msgid ""
+"The <code>hierarchical</code> argument allows you to choose whether you want "
+"your post type to be hierarchical"
+msgstr ""
+"L'argument <code>hierarchical</code> vous permet de hiérarchiser ou non "
+"votre type d'article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:350
+msgid ""
+"The <code>query_var</code> argument allows you to control the query variable "
+"used to get posts of this type"
+msgstr ""
+"L'argument <code>query_var</code> vous permet de contrôler le paramètre à "
+"utiliser pour récupérer les articles de ce type"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:351
+msgid ""
+"The <code>can_export</code> argument allows you to decide whether posts of "
+"your post type can be exportable via the WordPress export tool"
+msgstr ""
+"L'argument <code>can_export</code> vows permet l'export de ce type d'article"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:376
+msgid "Delete custom post type"
+msgstr "Supprimer le type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:380
+msgid "Save custom post type"
+msgstr "Enregistrer le type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:394
+msgid "Use this menu to create your page settings and your custom post types."
+msgstr ""
+"Utilisez ce menu pour créer vos pages de configuration et vos types "
+"d'article personnalisés."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_content.tpl.php:395
+msgid ""
+"As you can see, create a page or a custom post type is quite simple. The "
+"only thing you have to do is to follow the instructions and have fun :)"
+msgstr ""
+"Comme vous pouvez le voir, créer une page ou un type de contenu personnalisé "
+"est très simple. La seule chose à faire est de suivre les instructions et de "
+"s'amuser :)"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:11
+msgid "Custom pages"
+msgstr "Pages personnalisées"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:28
+msgid "No page found."
+msgstr "Pas de page trouvée."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:39
+msgid "Add custom page"
+msgstr "Ajouter une page personnalisée"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:61
+msgid "Create page"
+msgstr "Créer une page"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:69
+msgid "Custom post types"
+msgstr "Types d'article personnalisés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:86
+msgid "No custom post type found."
+msgstr "Pas de type d'article personnalisé trouvé."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:97
+msgid "Add custom post type"
+msgstr "Ajouter un type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:102
+msgid "Custom post type title"
+msgstr "Titre de type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/dashboard/in_pages_menu.tpl.php:106
+msgid "Create custom post type"
+msgstr "Créer un type d'article personnalisé"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/features/class-tea-fields-features.php:72
+msgid "Tea Features"
+msgstr "Tea Fonctionnalités"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/features/in_pages.tpl.php:13
+msgid "See how does it work"
+msgstr "Voir comment cela fonctionne"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/class-tea-fields-font.php:88
+msgid "Tea Font"
+msgstr "Tea Font"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:17
+msgid "Display included Google Fonts?"
+msgstr "Afficher les Google Font inclues ?"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:21
+msgid "Select the Google Font you want to select by default"
+msgstr "Sélectionnez la Google Font que vous souhaitez par défaut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:40
+msgid "Custom Google Font"
+msgstr "Google Font personnalisée"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:48
+msgid "Google name"
+msgstr "Nom Google"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:51
+msgid "CSS name"
+msgstr "Nom CSS"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:54
+msgid "Size(s)"
+msgstr "Taille(s)"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:63
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:90
+msgid "Google name, ex: &quot;PT+Sans&quot;"
+msgstr "Nom Google, ex : &quot;PT+Sans&quot;"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:66
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:93
+msgid "CSS Name, ex: &quot;PT Sans&quot;"
+msgstr "Nom CSS, ex : &quot;PT Sans&quot;"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:69
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/font/in_dashboard.tpl.php:96
+msgid "Size(s), ex: &quot;400,700&quot;"
+msgstr "Taille(s), ex : &quot;400,700&quot;"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/heading/class-tea-fields-heading.php:76
+msgid "Tea Heading"
+msgstr "Tea Entête"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/hr/in_dashboard.tpl.php:2
+msgid "Horizontal line"
+msgstr "Ligne horizontale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/include/class-tea-fields-include.php:77
+msgid "Tea Include"
+msgstr "Tea Inclusion"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/include/in_dashboard.tpl.php:10
+msgid "Path to your PHP file"
+msgstr "Chemin de votre fichier PHP"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/list/in_dashboard.tpl.php:2
+msgid "List"
+msgstr "Liste"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/list/in_dashboard.tpl.php:5
+msgid "Contents"
+msgstr "Contenus"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/list/in_dashboard.tpl.php:12
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/list/in_dashboard.tpl.php:31
+msgid "Your text"
+msgstr "Votre texte"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/list/in_dashboard.tpl.php:38
+msgid "Add a new item"
+msgstr "Ajouter un nouvel item"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/class-tea-fields-multiselect.php:84
+msgid "Tea Multiselect"
+msgstr "Tea Liste de sélection multiple"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/multiselect/in_pages.tpl.php:23
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/in_dashboard.tpl.php:23
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_pages.tpl.php:18
+msgid ""
+"Press the <code>CTRL</code> or <code>CMD</code> button to select more than "
+"one option."
+msgstr ""
+"Appuyez sur le bouton <code>CTRL</code> ou <code>CMD</code> pour choisir "
+"plusieurs options."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/class-tea-fields-network.php:81
+msgid "Tea Network"
+msgstr "Tea Réseaux sociaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/class-tea-fields-network.php:87
+msgid ""
+"Something went wrong with parameters definition: it seems there is no "
+"network to connect to."
+msgstr ""
+"Une erreur est survenue : il semblerait qu'aucun réseau social ne soit "
+"présent pour vous y connecter."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/in_dashboard.tpl.php:10
+msgid "Choose all your networks you want to connect to."
+msgstr ""
+"Choisissez tous les réseaux sociaux auxquels vous souhaitez vous connecter."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/in_dashboard.tpl.php:14
+msgid "Networks"
+msgstr "Réseaux sociaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/class-tea-fields-networks-flickr.php:108
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/class-tea-fields-networks-instagram.php:110
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/class-tea-fields-networks-twitter.php:110
+msgid ""
+"Something went wrong in your parameters definition. You need to specify a "
+"callback network to update the informations."
+msgstr ""
+"Une erreur est survenue : vous avez besoin de définir une méthode de retour "
+"afin de mettre à jour les informations."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/class-tea-fields-networks-flickr.php:185
+msgid ""
+"Something went wrong in your parameters definition. You need to specify a "
+"username to get connected."
+msgstr ""
+"Une erreur est survenue : vous avez besoin de définir un nom d'utilisateur "
+"pour vous connecter."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/class-tea-fields-networks-flickr.php:217
+msgid ""
+"Something went wrong in your parameters definition. The username specified "
+"is unknown."
+msgstr ""
+"Une erreur est survenue : le nom d'utilisateur spécifié est inconnu. Merci "
+"de réessayer."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:15
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:15
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:15
+msgid "Connection"
+msgstr "Connexion"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:22
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:73
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:83
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:22
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:58
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:76
+msgid "Medias"
+msgstr "Médias"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:25
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:107
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:25
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:108
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:25
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:99
+msgid "Help"
+msgstr "Aide"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:33
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:33
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:33
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:47
+msgid "Enter your FlickR username"
+msgstr "Entrez votre nom d'utilisateur FlickR"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:49
+msgid "Your username"
+msgstr "Votre nom d'utilisateur"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:52
+msgid "Connection to FlickR"
+msgstr "Connexion à FlickR"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:60
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:53
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:53
+msgid "See profile"
+msgstr "Voir le profil"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:69
+msgid "First date taken"
+msgstr "Date d'ancienneté"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:84
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:77
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:77
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_footer.tpl.php:6
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:89
+msgid "You have no medias in your FlickR account."
+msgstr "Vous n'avez pas de médias attachés à votre compte FlickR."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:109
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:110
+msgid ""
+"To display your recent medias in a widget or else, simply get them from "
+"cache by the request:"
+msgstr ""
+"Pour afficher vos médias récents dans un widget ou autre, récupérez-les "
+"simplement depuis le cache via la requête suivante :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/flickr/in_pages.tpl.php:127
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:131
+msgid "Medias updated on:"
+msgstr "Mise à jour des médias le :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/class-tea-fields-networks-instagram.php:234
+msgid "Untitled"
+msgstr "Sans titre"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:45
+msgid "Connection to Instagram"
+msgstr "Connexion à Instagram"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:62
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:62
+msgid "Followers"
+msgstr "Abonnés"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:66
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:66
+msgid "Following"
+msgstr "Abonnements"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/instagram/in_pages.tpl.php:82
+msgid "You have no medias in your Instagram account."
+msgstr "Vous n'avez pas de médias attachés à votre compte Instagram."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:22
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:58
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:76
+msgid "Tweets"
+msgstr "Tweets"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:45
+msgid "Connection to Twitter"
+msgstr "Connexion à Twitter"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:82
+msgid "You have no tweets in your Twitter account."
+msgstr "Vous n'avez pas de tweets attachés à votre compte Twitter."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:101
+msgid ""
+"To display your recent tweets in a widget or else, simply get them from "
+"cache by the request:"
+msgstr ""
+"Pour afficher vos tweets récents dans un widget ou autre, récupérez-les "
+"simplement depuis le cache via la requête suivante :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/network/networks/twitter/in_pages.tpl.php:119
+msgid "Tweets updated on:"
+msgstr "Mise à jour des tweets le :"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/p/in_dashboard.tpl.php:5
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:31
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_dashboard.tpl.php:16
+msgid "Content"
+msgstr "Contenu"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/radio/class-tea-fields-radio.php:84
+msgid "Tea Radio"
+msgstr "Tea Radio bouton"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/rte/class-tea-fields-rte.php:83
+msgid "Tea RTE"
+msgstr "Tea Editeur de Texte Riche"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/select/class-tea-fields-select.php:84
+msgid "Tea Select"
+msgstr "Tea Liste de sélection"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/class-tea-fields-social.php:88
+msgid "Tea Social"
+msgstr "Tea Liens sociaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/in_dashboard.tpl.php:3
+msgid "Social networks"
+msgstr "Réseaux sociaux"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/social/in_dashboard.tpl.php:16
+msgid "Select all social networks you want to include"
+msgstr "Choisissez tous les réseaux sociaux que vous souhaitez inclure"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/class-tea-fields-text.php:95
+msgid "Tea Text"
+msgstr "Tea Texte"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:16
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/in_dashboard.tpl.php:16
+msgid "Placeholder"
+msgstr "Paramètre fictif"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:26
+msgid "Max length"
+msgstr "Longueur maximale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:49
+msgid "Min value"
+msgstr "Valeur minimale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:54
+msgid "Max value"
+msgstr "Valeur maximale"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/text/in_dashboard.tpl.php:59
+msgid "Step"
+msgstr "Etape"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/textarea/class-tea-fields-textarea.php:84
+msgid "Tea Textarea"
+msgstr "Tea Zone de texte"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/class-tea-fields-upload.php:84
+msgid "Tea Upload"
+msgstr "Tea Upload"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_dashboard.tpl.php:3
+msgid "Upload"
+msgstr "Upload"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_dashboard.tpl.php:17
+msgid "Enable multi-upload?"
+msgstr "Activer l'upload multiple ?"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_dashboard.tpl.php:21
+msgid "URL of your default image"
+msgstr "URL de votre image par défaut"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/upload/in_pages.tpl.php:6
+msgid "Delete all medias"
+msgstr "Supprimer tous les médias"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/class-tea-fields-wordpress.php:89
+msgid "Tea Wordpress Contents"
+msgstr "Tea Contenus Wordpress"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_dashboard.tpl.php:3
+msgid "Wordpress"
+msgstr "Wordpress"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_dashboard.tpl.php:29
+msgid "Enable multiple selection?"
+msgstr "Activer la sélection multiple ?"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_pages.tpl.php:22
+#, php-format
+msgid "There are no %s found."
+msgstr "Pas de %s trouvés."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/fields/wordpress/in_pages.tpl.php:22
+#, php-format
+msgid "There is no %s found."
+msgstr "Pas de %s trouvé."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_connections.tpl.php:4
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_connections.tpl.php:5
+msgid "Connections"
+msgstr "Connexions"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_connections.tpl.php:12
+msgid ""
+"Simple, use these boxes to fully integrate your Tea Theme Options for "
+"Wordpress with your favorites social networks."
+msgstr ""
+"Utilisez simplement ces boîtes pour intégrer complètement votre Tea Theme "
+"Options avec vos réseaux sociaux préférés."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_dashboard.tpl.php:5
+msgid "Tea T.O."
+msgstr "Tea T.O."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_dashboard.tpl.php:12
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:12
+msgid "Simple, easy to use and fully integrated Theme Options for Wordpress."
+msgstr "Simple, facile à utiliser et complètement intégré à Wordpress."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:4
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:5
+msgid "Documentation"
+msgstr "Documentation"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:16
+msgid ""
+"The <a href=\"https://github.com/Takeatea/tea_theme_options\" title=\"Tea "
+"Theme Options\" class=\"openit\">Tea Theme Options</a> (or <b>Tea TO</b>) "
+"allows you to easily add professional looking theme options panels to your "
+"WordPress theme.<br/>The <b>Tea TO</b> is built for <a href=\"http://"
+"wordpress.org\" target=\"_blank\">Wordpress</a> v3.x and uses the Wordpress "
+"built-in pages."
+msgstr ""
+"Le <a href=\"https://github.com/Takeatea/tea_theme_options\" title=\"Tea "
+"Theme Options\" class=\"openit\">Tea Theme Options</a> (ou <b>Tea TO</b>) "
+"vows permet d'ajouter facilement des pages à votre thème Wordpress avec une "
+"apparence professionnelle.<br/>Le <b>Tea TO</b> a été construit sur les "
+"versions de <a href=\"http://wordpress.org\" target=\"_blank\">Wordpress</a> "
+"3.x et utilise le moteur de rendu de pages Wordpress."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:21
+msgid ""
+"<b>Option API</b> - A simple and standardized way of storing data in the "
+"database."
+msgstr ""
+"<b>Option API</b> - Une façon simple et standardisée d'enregistrer des "
+"données en base."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:22
+msgid ""
+"<b>Transient API</b> - Very similar to the Options API but with the added "
+"feature of an expiration time, which simplifies the process of using the "
+"wp_options database table to temporarily store cached information."
+msgstr ""
+"<b>Transient API</b> - Très similaire à l'API Option avec cependant la "
+"fonctionnalité de temps d'expiration, ce qui simplifie le processus "
+"d'utilisation de la table wp_options pour le stockage de données en cache."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:23
+msgid ""
+"<b>Wordpress Media Manager</b> - Beautiful interface: A streamlined, all-new "
+"experience where you can create galleries faster with drag-and-drop "
+"reordering, inline caption editing, and simplified controls."
+msgstr ""
+"<b>Wordpress Media Manager</b> - Belle interface : toute nouvelle expérience "
+"où vous pouvez créer rapidement des galeries avec un simple glissé-déposé, "
+"éditer des informations en direct, avec des contrôles simplifiés."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:24
+msgid ""
+"<b>Full of Options</b> - 3 kind of options used to display information, "
+"store fields values or get data from your Wordpress database. The options "
+"are made to build your Wordpress pages easily."
+msgstr ""
+"<b>Tout plein d'options</b> - 3 types d'options utilisées pour afficher des "
+"données, enregistrer les valeurs de champs ou les récupérer depuis la base "
+"de données Wordpress. Les options sont faites pour construire des pages "
+"Wordpress facilement."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:25
+msgid ""
+"<b>Easier for administrators</b> - The interface is thought to be the most "
+"userfriendly. The Tea TO core adds some extra interface customisations to "
+"make your life easier."
+msgstr ""
+"<b>Plus facile pour les webmasteurs</b> - L'interface est pensée pour être "
+"la plus user-friendly. Le noyau du Tea T.O.  ajoute quelques "
+"personnalisations à l'interface pour le rendre encore plus intuitif."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/contents/__content_documentation.tpl.php:26
+msgid ""
+"<b>Easier for developers</b> - Create a new admin panel easily with the new "
+"dashboard. The Tea TO core is made to allow non-developer profiles to easily "
+"create the settings they need to customise their templates."
+msgstr ""
+"<b>Plus facile pour les développeurs</b> - Créer un panneau d'administration "
+"n'aura jamais été aussi simple. Le noyau du Tea T.O. est fait pour permettre "
+"aux non-développeurs de créer les configurations dont ils ont besoin afin de "
+"personnaliser leurs thèmes."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_footer.tpl.php:18
+msgid "Informations"
+msgstr "Informations"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_footer.tpl.php:22
+#, php-format
+msgid "Your Tea Theme Option is in <b>version %s</b>"
+msgstr "Votre Tea Theme Options est en <b>version %s</b>"
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_footer.tpl.php:23
+#, php-format
+msgid ""
+"Please, contact <a href=\"mailto:teatime@takeatea.com?subject=Tea Theme "
+"Options on %s - version %s\"><b>teatime@takeatea.com</b></a> if you have any "
+"suggestions."
+msgstr ""
+"Merci d'envoyer un mail à <a href=\"mailto:teatime@takeatea.com?subject=Tea "
+"Theme Options sur %s - version %s\"><b>teatime@takeatea.com</b></a> si vous "
+"avez une remarque, suggestion ou question."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_footer.tpl.php:26
+msgid "&copy; 2013, Take a tea. All rights reserved."
+msgstr "&copy; 2013, Take a tea. Tous droits réservés."
+
+#: /Users/ach/Takeatea/matthieularoche/wp-content/plugins/tea_theme_options/classes/tpl/layouts/__layout_header.tpl.php:34
+msgid "The Tea Theme Options is updated."
+msgstr "Mise à jour du Tea Theme Options."
+
+#~ msgid "RTE"
+#~ msgstr "Editeur de Texte Riche"
+
+#~ msgid "Social"
+#~ msgstr "Social"
+
+#~ msgid "Wordpress fields"
+#~ msgstr "Champs Wordpress"
+
+#~ msgid "Post Types"
+#~ msgstr "Types d'articles"
+
+#~ msgid "Connection fields"
+#~ msgstr "Champs de connexion"
+
+#~ msgid "Tetxure"
+#~ msgstr "Texture"
