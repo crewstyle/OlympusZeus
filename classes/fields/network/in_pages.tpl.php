@@ -1,1 +1,0 @@
-<h2 class="tea-clear"><?php echo $title ?></h2>
