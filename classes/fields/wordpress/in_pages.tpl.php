@@ -1,16 +1,26 @@
 <!-- Content Wordpress <?php echo $mode ?> <?php echo $id ?> -->
-<div id="<?php echo $id ?>_<?php echo $mode ?>_content" class="tea_to_wrap stuffbox">
-    <h3>
+<div id="<?php echo $id ?>_<?php echo $mode ?>_content" class="tea_to_wrap">
+    <h3 class="tea_title">
         <label for="<?php echo $id ?>"><?php echo $title ?></label>
     </h3>
 
-    <div class="inside <?php echo $mode ?>">
+    <div class="inside tea-inside <?php echo $mode ?>">
         <?php if (!empty($contents) && 2 <= count($contents)): ?>
             <?php $squares = $multiple ? '[]' : '' ?>
             <select name="<?php echo $id.$squares ?>" id="<?php echo $id ?>" <?php echo $multiple ? 'multiple="true" size="5"' : '' ?>>
-                <?php foreach ($contents as $key => $option): ?>
-                    <?php $selected = is_array($vals) && in_array($key, $vals) ? true : ($key == $vals ? true : false) ?>
-                    <option value="<?php echo $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
+                <?php foreach ($contents as $key => $optgroup): ?>
+                    <?php if (!empty($key)): ?>
+                        <optgroup label="<?php echo $key ?>">
+                    <?php endif ?>
+
+                    <?php foreach ($optgroup as $k => $option): ?>
+                        <?php $sel = is_array($vals) && in_array($k, $vals) ? true : ($k == $vals ? true : false) ?>
+                        <option value="<?php echo $k ?>" <?php echo $sel ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
+                    <?php endforeach ?>
+
+                    <?php if (!empty($key)): ?>
+                        </optgroup>
+                    <?php endif ?>
                 <?php endforeach ?>
             </select>
 

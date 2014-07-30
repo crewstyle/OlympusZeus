@@ -1,10 +1,10 @@
 <!-- Content background <?php echo $id ?> -->
-<div id="<?php echo $id ?>_background_content" class="tea_to_wrap checkboxes stuffbox">
-    <h3>
+<div id="<?php echo $id ?>_background_content" class="tea_to_wrap checkboxes">
+    <h3 class="tea_title">
         <label><?php echo $title ?></label>
     </h3>
 
-    <div class="inside background">
+    <div class="inside tea-inside background">
         <p><?php echo $description ?></p>
 
         <?php if ($default): ?>

@@ -1,21 +1,20 @@
 <!-- Content checkbox <?php echo $id ?> -->
-<div id="<?php echo $id ?>_checkbox_content" class="tea_to_wrap checkboxes stuffbox">
-    <h3>
+<div id="<?php echo $id ?>_checkbox_content" class="tea_to_wrap checkboxes">
+    <h3 class="tea_title">
         <label><?php echo $title ?></label>
-        <?php if (2 < count($options)): ?>
+        <?php if (2 < $count): ?>
             <label for="checkall" class="checkall">
                 <?php _e('Un/select all options') ?>
-                <input type="checkbox" id="checkall" />
+                <input type="checkbox" id="checkall" <?php echo $count == count($vals) ? 'checked="checked"' : '' ?> />
             </label>
         <?php endif ?>
     </h3>
 
-    <div class="inside checkbox">
+    <div class="inside tea-inside checkbox">
         <fieldset>
             <?php
                 foreach ($options as $key => $option):
-                    if (empty($option))
-                    {
+                    if (empty($option)) {
                         continue;
                     }
 

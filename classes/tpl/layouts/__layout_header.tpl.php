@@ -1,40 +1,33 @@
-<!-- colorpicker -->
-<style>
-    <?php if (!empty($icon)): ?>.tea_icon div{background:transparent url(<?php echo $icon ?>) no-repeat 0 0;}<?php endif ?>
-</style>
-
 <div class="wrap tea_to">
-    <div class="tea_icon">
-        <?php screen_icon() ?>
-    </div>
+    <nav class="tea-main-nav" role="navigation">
+        <ul>
+            <li class="tea-logo"><img src="<?php echo $icon ?>" alt="" /> <?php _e('Tea T.O.', TTO_I18N) ?></li>
+            <?php
+                $count = count($links);
 
-    <h2><?php echo $title ?></h2>
+                foreach ($links as $key => $link):
+                    $slug = $link['slug'];
+                    $class = $slug == $page ? ' class="current"' : '';
 
-    <ul class="subsubsub">
-        <?php
-            $count = count($links);
-
-            foreach ($links as $key => $link):
-                $slug = $link['slug'];
-                $title = $link['title'];
-                $class = $slug == $page ? ' class="current"' : '';
-                $sep = $key+1 < $count ? ' |' : '';
-        ?>
-            <li class="all">
-                <a href="admin.php?page=<?php echo $slug ?>"<?php echo $class ?>><?php echo $title ?></a>
-                <?php echo $sep ?>
-            </li>
-        <?php endforeach ?>
-    </ul>
-
-    <br class="clear" />
+                    //Check title
+                    if (preg_match('/<span style=\"color\:\#([a-zA-Z0-9]{3,6})\">(.*)<\/span>/i', $link['title'], $matches)) {
+                        $title = '<b style="border-bottom:1px solid #' . $matches[1] . '">' . $matches[2] . '</b>';
+                    }
+                    else {
+                        $title = $link['title'];
+                    }
+            ?>
+                <li class="tea-page">
+                    <a href="admin.php?page=<?php echo $slug ?>"<?php echo $class ?>><?php echo $title ?></a>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </nav>
 
     <?php if (isset($_GET['updated'])): ?>
         <div class="alert alert-success">
             <p><?php _e('The Tea Theme Options is updated.', TTO_I18N) ?></p>
         </div>
-
-        <br class="clear" />
     <?php endif ?>
 
     <?php if (!empty($description)): ?><p><?php echo $description ?></p><?php endif ?>
@@ -45,7 +38,7 @@
     <?php endif ?>
 
         <div id="poststuff">
-            <div id="post-body" class="metabox-holder columns-2">
+            <div id="post-body" class="metabox-holder">
 
                 <!-- Content block -->
                 <div id="post-body-content">

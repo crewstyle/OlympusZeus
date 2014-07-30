@@ -1,0 +1,9 @@
+{
+    "name": "takeatea/tea-theme-options",
+    "description": "",
+    "type": "wordpress-plugin",
+
+    "require": {
+        "ruflin/Elastica": "dev-master"
+    }
+}

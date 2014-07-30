@@ -1,10 +1,21 @@
 <?php
 /**
- * Tea TO backend functions and definitions
+ * TEA PAGES
  * 
- * @package TakeaTea
- * @subpackage Tea Pages
- * @since Tea Theme Options 1.3.0
+ * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -13,14 +24,17 @@ if (!defined('ABSPATH')) {
 }
 
 
-//---------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
 /**
  * Tea Pages
  *
- * To get its own Pages
+ * To get its own pages.
  *
- * @since Tea Theme Options 1.3.0
+ * @package Tea Theme Options
+ * @subpackage Tea Pages
+ * @author Achraf Chouk <ach@takeatea.com>
+ * @since 1.4.0
  *
  */
 class Tea_Pages
@@ -32,10 +46,9 @@ class Tea_Pages
     protected $categories = array();
     protected $can_upload = false;
     protected $current = '';
-    protected $directory = array();
-    protected $duration = 86400;
-    protected $icon_small = '/img/teato/icn-small.png';
-    protected $icon_big = '/img/teato/icn-big.png';
+    protected $duration = TTO_DURATION;
+    protected $icon_small = '/assets/img/teato/teato-tiny.svg';
+    protected $icon_big = '/assets/img/teato/teato.svg';
     protected $identifier;
     protected $includes = array();
     protected $index = null;
@@ -46,91 +59,70 @@ class Tea_Pages
     /**
      * Constructor.
      *
-     * @since Tea Theme Options 1.3.0
+     * @uses current_user_can()
+     * @param string $identifier Define the main slug
+     * @param boolean $connect Define if we can display connections page
+     * @param boolean $elastic Define if we can display elasticsearch page
+     *
+     * @since 1.4.0
      */
-    public function __construct($identifier)
+    public function __construct($identifier, $connect = true, $elastic = true)
     {
-        //Check if we are in admin panel
-        $this->setIsAdmin();
-
         //Admin panel
-        if ($this->getIsAdmin())
-        {
-            //Check identifier
-            if (empty($identifier))
-            {
-                $this->adminmessage = __('Something went wrong in your parameters definition. You need at least an identifier.', TTO_I18N);
-                return false;
-            }
-
-            //Define parameters
-            $this->can_upload = current_user_can('upload_files');
-            $this->identifier = $identifier;
-
-            //Set default duration and directories
-            $this->setDuration();
-            $this->setDirectory();
-
-            //Get current page
-            $this->current = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
-
-            //Build Dashboard contents
-            $this->buildDefaults();
-
-            //Update options...
-            if (isset($_REQUEST['tea_to_settings']))
-            {
-                $this->updateOptions($_REQUEST, $_FILES);
-            }
-            //...Or update network data
-            else if (isset($_REQUEST['tea_to_callback']) || isset($_REQUEST['tea_to_network']))
-            {
-                $this->updateNetworks($_REQUEST);
-            }
+        if (!TTO_IS_ADMIN) {
+            return;
         }
+
+        //Check identifier
+        if (empty($identifier)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition. You need at least an identifier.', TTO_I18N);
+            return;
+        }
+
+        //Define parameters
+        $this->can_upload = current_user_can('upload_files');
+        $this->identifier = $identifier;
+
+        //Set default duration
+        $this->setDuration();
+
+        //Get current page
+        $this->current = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
+
+        //Build Dashboard contents
+        $this->buildDefaults($connect, $elastic);
+
+        //Update options...
+        if (isset($_REQUEST['tea_to_settings'])) {
+
+            $this->updateOptions($_REQUEST, $_FILES);
+        }
+        //...Or update elasticsearch options...
+        else if (isset($_REQUEST['tea_to_elasticsearch'])) {
+
+            $this->updateElasticsearch($_REQUEST);
+        }
+        //...Or update network data
+        else if (isset($_REQUEST['tea_to_callback']) || isset($_REQUEST['tea_to_network'])) {
+            $this->updateNetworks($_REQUEST);
+        }
+
+        //Add custom CSS colors
+        wp_admin_css_color(
+            'teatocss',
+            __('Tea T.O.'),
+            TTO_URI . '/assets/css/teato_admin.css',
+            array('#222', '#303231', '#55bb3a', '#91d04d')
+        );
     }
 
 
-    //--------------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
 
     /**
-     * MAIN FUNCTIONS
+     * WORDPRESS USED HOOKS
      **/
-
-    /**
-     * Register menus.
-     *
-     * @uses add_action()
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    public function buildMenus()
-    {
-        //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
-        }
-
-        //Check if no master page is defined
-        if (empty($this->pages))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.', TTO_I18N);
-            return false;
-        }
-
-        //Initialize the current index page
-        $this->index = null;
-
-        //Register admin bar action hook
-        add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
-
-        //Register admin page action hook
-        add_action('admin_menu', array(&$this, '__buildMenuPage'));
-
-        //Register admin message action hook
-        add_action('admin_notices', array(&$this, '__showAdminMessage'));
-    }
 
     /**
      * Hook building scripts.
@@ -138,34 +130,60 @@ class Tea_Pages
      * @uses wp_enqueue_media()
      * @uses wp_enqueue_script()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __assetScripts()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
-        //Get directory
-        $directory = $this->getDirectory();
+        //Check if we are in TeaTO context
+        /*if (!isset($this->pages[$this->current])) {
+            return;
+        }*/
 
-        //Enqueue usefull scripts
-        if (function_exists('wp_enqueue_media'))
-        {
+        //Get jQuery
+        $jq = array('jquery');
+        $jm = array('tea-md');
+
+        //Enqueue media and colorpicker scripts
+        if (function_exists('wp_enqueue_media')) {
             wp_enqueue_media();
             wp_enqueue_script('wp-color-picker');
             wp_enqueue_script('accordion');
         }
-        else
-        {
+        else {
             wp_enqueue_script('media-upload');
             wp_enqueue_script('farbtastic');
         }
 
-        wp_enqueue_script('tea-modal', $directory . '/js/teamodal.js', array('jquery'));
-        wp_enqueue_script('tea-to', $directory . '/js/teato.js', array('jquery', 'tea-modal'));
+        // @todo: minify all JS
+
+        //Enqueue modal
+        wp_enqueue_script('tea-md', TTO_URI . '/assets/js/tea.modal.js', $jq);
+        //Enqueue usefull scripts
+        wp_enqueue_script('tea-ca', TTO_URI . '/assets/js/tea.checkall.js', $jm);
+        wp_enqueue_script('tea-ci', TTO_URI . '/assets/js/tea.checkit.js', $jm);
+        wp_enqueue_script('tea-cl', TTO_URI . '/assets/js/tea.color.js', $jm);
+        wp_enqueue_script('tea-ga', TTO_URI . '/assets/js/tea.gallery.js', $jm);
+        wp_enqueue_script('tea-lb', TTO_URI . '/assets/js/tea.labelize.js', $jm);
+        wp_enqueue_script('tea-rg', TTO_URI . '/assets/js/tea.range.js', $jm);
+        wp_enqueue_script('tea-sc', TTO_URI . '/assets/js/tea.social.js', $jm);
+        wp_enqueue_script('tea-up', TTO_URI . '/assets/js/tea.upload.js', $jm);
+        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/teato.js', array(
+            'jquery',
+            'tea-md',
+            'tea-ca',
+            'tea-ci',
+            'tea-cl',
+            'tea-ga',
+            'tea-lb',
+            'tea-rg',
+            'tea-sc',
+            'tea-up'
+        ));
     }
 
     /**
@@ -173,24 +191,29 @@ class Tea_Pages
      *
      * @uses wp_enqueue_style()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __assetStyles()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
-        //Get directory
-        $directory = $this->getDirectory();
+        //Check if we are in TeaTO context
+        /*if (!isset($this->pages[$this->current])) {
+            return;
+        }*/
 
         //Enqueue usefull styles
-        wp_enqueue_style('media-views');
-        wp_enqueue_style('farbtastic');
-        wp_enqueue_style('wp-color-picker');
-        wp_enqueue_style('tea-to', $directory . '/css/teato.css');
+        if (isset($this->pages[$this->current])) {
+            wp_enqueue_style('media-views');
+            wp_enqueue_style('farbtastic');
+            wp_enqueue_style('wp-color-picker');
+        }
+
+        wp_enqueue_style('tea-fa', TTO_URI . '/assets/css/font-awesome.css');
+        wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.css');
     }
 
     /**
@@ -198,17 +221,38 @@ class Tea_Pages
      *
      * @uses wp_deregister_script()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __assetUnloaded()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //wp_deregister_script('media-models');
+    }
+
+    /**
+     * Hook unload scripts.
+     *
+     * @uses wp_deregister_script()
+     *
+     * @since 1.4.0
+     */
+    public function __bodyStyle($admin_body_class = '')
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we are in TeaTO context
+        if (!isset($this->pages[$this->current])) {
+            return;
+        }
+
+        return $admin_body_class . ' teato-mainwrap';
     }
 
     /**
@@ -216,38 +260,29 @@ class Tea_Pages
      *
      * @uses add_menu()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __buildAdminBar()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Check if there is no problems on page definitions
-        if (!isset($this->pages[$this->identifier]) || empty($this->pages))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition: no master page defined!', TTO_I18N);
-            return false;
+        if (!isset($this->pages[$this->identifier]) || empty($this->pages)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition: no master page defined!', TTO_I18N);
+            return;
         }
 
         //Get the Wordpress globals
         global $wp_admin_bar;
 
         //Add submenu pages
-        foreach ($this->pages as $page)
-        {
-            //Check the page slug for '?' character
-            if ($this->identifier.'?' == $page['slug'])
-            {
-                continue;
-            }
-
+        foreach ($this->pages as $page) {
             //Check the main page
-            if ($this->identifier == $page['slug'])
-            {
+            if ($this->identifier == $page['slug']) {
                 //Build WP menu in admin bar
                 $wp_admin_bar->add_menu(array(
                     'id' => $this->identifier,
@@ -255,8 +290,7 @@ class Tea_Pages
                     'href' => admin_url('admin.php?page=' . $this->identifier)
                 ));
             }
-            else
-            {
+            else {
                 //Build the subpages
                 $wp_admin_bar->add_menu(array(
                     'parent' => $this->identifier,
@@ -276,64 +310,58 @@ class Tea_Pages
      * @uses add_menu_page()
      * @uses add_submenu_page()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __buildMenuPage()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Check if no master page is defined
-        if (empty($this->pages))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition: no master page found. You can simply do that by using the addPage public function.', TTO_I18N);
-            return false;
+        if (empty($this->pages)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition: no master page found. You can simply do that by 
+                using the addPage public function.', TTO_I18N);
+            return;
         }
 
         //Set the current page
         $is_page = $this->identifier == $this->current ? true : false;
 
-        //Get directory
-        $directory = $this->getDirectory();
-
         //Set icon
-        $this->icon_small = $directory . $this->icon_small;
-        $this->icon_big = $directory . $this->icon_big;
+        $this->icon_small = TTO_URI . $this->icon_small;
+        $this->icon_big = TTO_URI . $this->icon_big;
 
         //Add submenu pages
-        foreach ($this->pages as $page)
-        {
+        foreach ($this->pages as $page) {
             //Build slug and check it
             $is_page = $page['slug'] == $this->current ? true : $is_page;
 
             //Check the main page
-            if ($this->identifier == $page['slug'])
-            {
+            if ($this->identifier == $page['slug']) {
                 //Add page
                 add_menu_page(
-                    $page['name'],                  //page title
-                    $page['name'],                  //page name
+                    $page['title'],                 //page title
+                    $page['title'],                 //page name
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
-                    array(&$this, 'buildContent'),  //function to display content
+                    array(&$this, 'buildContent'),  //display content
                     $this->icon_small               //icon
                 );
 
                 //Add first subpage
                 add_submenu_page(
                     $this->identifier,              //parent slug
-                    $page['name'],                  //page name
                     $page['title'],                 //page title
+                    $page['name'],                  //page name
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
-                    array(&$this, 'buildContent')   //function to display content
+                    array(&$this, 'buildContent')   //display content
                 );
             }
-            else
-            {
+            else {
                 //Add subpage
                 add_submenu_page(
                     $this->identifier,              //parent slug
@@ -341,58 +369,51 @@ class Tea_Pages
                     $page['name'],                  //page name
                     $this->capability,              //capability
                     $page['slug'],                  //menu slug
-                    array(&$this, 'buildContent')   //function to display content
+                    array(&$this, 'buildContent')   //display content
                 );
-            }
-
-            //Check the page slug for '?' character
-            if ($this->identifier.'?' == $page['slug'])
-            {
-                continue;
             }
 
             //Build breadcrumb
             $this->breadcrumb[] = array(
-                'title' => $this->identifier == $page['slug'] ? $page['title'] : $page['name'],
+                'title' => $page['name'],
                 'slug' => $page['slug']
             );
         }
 
         //Unload unwanted assets
-        if (!empty($this->current) && $is_page)
-        {
+        if (!empty($this->current) && $is_page) {
             add_action('admin_head', array(&$this, '__assetUnloaded'));
         }
 
         //Load assets action hook
         add_action('admin_print_scripts', array(&$this, '__assetScripts'));
         add_action('admin_print_styles', array(&$this, '__assetStyles'));
+        add_filter('admin_body_class', array(&$this, '__bodyStyle'));
     }
 
     /**
      * Display a warning message on the admin panel.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function __showAdminMessage()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
+        //Get content
         $content = $this->adminmessage;
 
-        if (!empty($content))
-        {
-            //Get template
-            include('tpl/layouts/__layout_admin_message.tpl.php');
+        //Get template and display content
+        if (!empty($content)) {
+            include(TTO_PATH . '/classes/tpl/layouts/__layout_admin_message.tpl.php');
         }
     }
 
     /**
-     * BUILD METHODS
+     * MAIN FUNCTIONS
      **/
 
     /**
@@ -401,26 +422,27 @@ class Tea_Pages
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function addPage($configs = array(), $contents = array())
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Check params and if a master page already exists
-        if (empty($configs))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition: your configs are empty. See README.md for more explanations.', TTO_I18N);
-            return false;
+        if (empty($configs)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition: your <b>configs</b> are empty. See README.md for 
+                more explanations.', TTO_I18N);
+            return;
         }
-        else if (empty($contents))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition: your contents are empty. See README.md for more explanations.', TTO_I18N);
-            return false;
+        else if (empty($contents)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition: your <b>contents</b> are empty. See README.md for 
+                more explanations.', TTO_I18N);
+            return;
         }
 
         //Update capabilities
@@ -434,8 +456,8 @@ class Tea_Pages
 
         //Define page configurations
         $this->pages[$slug] = array(
-            'title' => isset($configs['title']) ? $configs['title'] : 'Theme Options',
-            'name' => isset($configs['name']) ? $configs['name'] : 'Tea Theme Options',
+            'title' => isset($configs['title']) ? $configs['title'] : __('Tea T.O.', TTO_I18N),
+            'name' => isset($configs['name']) ? $configs['name'] : __('Tea T.O.', TTO_I18N),
             'position' => isset($configs['position']) ? $configs['position'] : null,
             'description' => isset($configs['description']) ? $configs['description'] : '',
             'submit' => isset($configs['submit']) ? $configs['submit'] : true,
@@ -445,18 +467,55 @@ class Tea_Pages
     }
 
     /**
+     * Register menus.
+     *
+     * @uses add_action()
+     *
+     * @since 1.4.0
+     */
+    public function buildPages()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if no master page is defined
+        if (empty($this->pages)) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition: no master page found. You can simply do that by 
+                using the addPage public function.', TTO_I18N);
+            return;
+        }
+
+        //Initialize the current index page
+        $this->index = null;
+
+        //Register admin bar action hook
+        add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
+
+        //Register admin page action hook
+        add_action('admin_menu', array(&$this, '__buildMenuPage'));
+
+        //Register admin message action hook
+        add_action('admin_notices', array(&$this, '__showAdminMessage'));
+    }
+
+
+    //------------------------------------------------------------------------//
+
+    /**
      * Build connection content.
      *
      * @param array $contents Contains all data
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function buildConnection($contents)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Default variables
@@ -464,13 +523,12 @@ class Tea_Pages
         $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['network']))
-        {
+        if (!isset($includes['network'])) {
             //Set the include
             $this->setIncludes('network');
 
             //Require file
-            require_once(TTO_PATH . 'classes/fields/network/class-tea-fields-network.php');
+            require_once(TTO_PATH . '/classes/networks/class-tea-fields-network.php');
         }
 
         //Make the magic
@@ -482,44 +540,43 @@ class Tea_Pages
     /**
      * Build content layout.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function buildContent()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Get current infos
         $current = empty($this->current) ? $this->identifier : $this->current;
 
         //Checks contents
-        if (empty($this->pages[$current]['contents']))
-        {
-            $this->adminmessage = __('Something went wrong: it seems you forgot to attach contents to the current page. Use of addFields() function to make the magic.', TTO_I18N);
-            return false;
+        if (empty($this->pages[$current]['contents'])) {
+            $this->adminmessage = __('Something went wrong: it seems you 
+                forgot to attach contents to the current page.', TTO_I18N);
+            return;
         }
 
         //Build header
         $this->buildLayoutHeader();
 
-        //Get globals
-        $icon = $this->icon_big;
-
         //Get contents
         $title = $this->pages[$current]['title'];
         $contents = $this->pages[$current]['contents'];
 
-        //Build contents relatively to the type (special case: Dashboard and Connection pages)
-        if ($this->identifier.'_connections' == $current)
-        {
+        //Build contents relatively to the type (special cases: Connections page)
+        if ($this->identifier . '_connections' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildConnection($contents);
         }
-        else
-        {
+        //Build contents relatively to the type (special cases: Elasticsearh page)
+        else if ($this->identifier . '_elasticsearch' == $current) {
+            $contents = 1 == count($contents) ? $contents[0] : $contents;
+            $this->buildElasticsearch($contents);
+        }
+        else {
             $this->buildType($contents);
         }
 
@@ -531,133 +588,182 @@ class Tea_Pages
      * Build default contents
      *
      * @param number $step Define which default pages do we need
+     * @param boolean $connect Define if we can display connections page
+     * @param boolean $elastic Define if we can display elasticsearch page
+     * @todo find a better way to integrate defaults
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    protected function buildDefaults()
+    protected function buildDefaults($connect = true, $elastic = true)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Get dashboard page contents
-        include('tpl/contents/__content_dashboard.tpl.php');
+        include(TTO_PATH . '/classes/tpl/contents/__content_dashboard.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
         unset($titles, $details);
 
         //Get network connections page contents
-        include('tpl/contents/__content_connections.tpl.php');
+        if ($connect) {
+            include(TTO_PATH . '/classes/tpl/contents/__content_connections.tpl.php');
 
-        //Build page with contents
-        $this->addPage($titles, $details);
-        unset($titles, $details);
+            //Build page with contents
+            $this->addPage($titles, $details);
+            unset($titles, $details);
+        }
 
-        //Get separator
-        include('tpl/contents/__content_separator.tpl.php');
+        //Get network connections page contents
+        if ($elastic) {
+            include(TTO_PATH . '/classes/tpl/contents/__content_elasticsearch.tpl.php');
 
-        //Build page with contents
-        $this->addPage($titles, $details);
-        unset($titles, $details);
+            //Build page with contents
+            $this->addPage($titles, $details);
+            unset($titles, $details);
+        }
+    }
+
+    /**
+     * Build elasticsearch content.
+     *
+     * @param array $contents Contains all data
+     *
+     * @since 1.4.0
+     */
+    protected function buildElasticsearch($contents)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Default variables
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $includes = $this->getIncludes();
+
+        //Include class field
+        if (!isset($includes['elasticsearch'])) {
+            //Set the include
+            $this->setIncludes('elasticsearch');
+
+            //Require file
+            require_once(TTO_PATH . '/classes/elasticsearch/class-tea-fields-elasticsearch.php');
+        }
+
+        //Make the magic
+        $field = new Tea_Fields_Elasticsearch();
+        $field->setCurrentPage($page);
+        $field->templatePages($contents);
     }
 
     /**
      * Build header layout.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function buildLayoutHeader()
     {
-        //Get all pages with link, icon and title
+        //Get all pages with link, icon and slug
         $links = $this->breadcrumb;
         $icon = $this->icon_big;
         $page = empty($this->current) ? $this->identifier : $this->current;
-        $title = empty($this->current) ? $this->pages[$this->identifier]['title'] : $this->pages[$this->current]['title'];
+
+        //Works on title
+        $title = empty($this->current) ? 
+            $this->pages[$this->identifier]['title'] : 
+            $this->pages[$this->current]['title'];
         $title = empty($title) ? __('Tea Theme Options', TTO_I18N) : $title;
-        $description = empty($this->current) ? $this->pages[$this->identifier]['description'] : $this->pages[$this->current]['description'];
-        $submit = empty($this->current) ? $this->pages[$this->identifier]['submit'] : $this->pages[$this->current]['submit'];
+
+        //Works on description
+        $description = empty($this->current) ? 
+            $this->pages[$this->identifier]['description'] : 
+            $this->pages[$this->current]['description'];
+
+        //Works on submit button
+        $submit = empty($this->current) ? 
+            $this->pages[$this->identifier]['submit'] : 
+            $this->pages[$this->current]['submit'];
 
         //Include template
-        include('tpl/layouts/__layout_header.tpl.php');
+        include(TTO_PATH . '/classes/tpl/layouts/__layout_header.tpl.php');
     }
 
     /**
      * Build footer layout.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function buildLayoutFooter()
     {
         //Get all pages with submit button
-        $submit = empty($this->current) ? $this->pages[$this->identifier]['submit'] : $this->pages[$this->current]['submit'];
+        $submit = empty($this->current) ? 
+            $this->pages[$this->identifier]['submit'] : 
+            $this->pages[$this->current]['submit'];
+
+        //Display version
         $version = TTO_VERSION;
 
         //Include template
-        include('tpl/layouts/__layout_footer.tpl.php');
+        include(TTO_PATH . '/classes/tpl/layouts/__layout_footer.tpl.php');
     }
 
     /**
      * Build each type content.
      *
      * @param array $contents Contains all data
+     * @todo try to include CUSTOM fields outside the Tea T.O.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function buildType($contents)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Get includes
         $includes = $this->getIncludes();
 
         //Get all default fields in the Tea T.O. package
-        require_once(TTO_PATH . 'classes/class-tea-fields.php');
+        require_once(TTO_PATH . '/classes/fields/class-tea-fields.php');
         $defaults_fields = Tea_Fields::getDefaults('fields');
         $wps = Tea_Fields::getDefaults('wordpress');
 
         //Iteration on all array
-        foreach ($contents as $key => $content)
-        {
+        foreach ($contents as $key => $content) {
             //Get type
             $type = $content['type'];
 
             //Check if the asked field is unknown
-            if (!in_array($type, $defaults_fields))
-            {
-                $this->adminmessage = sprintf(__('Something went wrong in your parameters definition with the id <b>%s</b>: the defined type is unknown!', TTO_I18N), $content['id']);
+            if (!in_array($type, $defaults_fields)) {
+                $this->adminmessage = sprintf(__('Something went wrong in your 
+                    parameters definition with the id <b>%s</b>: 
+                    the defined type is unknown!', TTO_I18N), $content['id']);
                 continue;
-            }
-
-            //Set types in special case
-            if(array_key_exists($type, $wps))
-            {
-                $type = 'wordpress';
             }
 
             //Set vars
             $class = 'Tea_Fields_' . ucfirst($type);
-            $inc = TTO_PATH . 'classes/fields/' . $type . '/class-tea-fields-' . $type . '.php';
+            $inc = TTO_PATH . '/classes/fields/' . $type . '/class-' . $type . '.php';
             $includes = $this->getIncludes();
 
             //Include class field
-            if (!isset($includes[$type]))
-            {
-                //Set the include
-                $this->setIncludes($type);
-
+            if (!isset($includes[$type])) {
                 //Check if the class file exists
-                if (!file_exists($inc))
-                {
-                    $this->adminmessage = sprintf(__('Something went wrong in your parameters definition: the file <b>%s</b> does not exist!', TTO_I18N), $inc);
+                if (!file_exists($inc)) {
+                    $this->adminmessage = sprintf(__('Something went wrong in 
+                        your parameters definition: the file <b>%s</b> 
+                        does not exist!', TTO_I18N), $inc);
                     continue;
                 }
+
+                //Set the include
+                $this->setIncludes($type);
 
                 //Require file
                 require_once($inc);
@@ -670,56 +776,32 @@ class Tea_Pages
     }
 
     /**
-     * ACCESSORS METHODS
+     * ACCESSORS
      **/
-
-    /**
-     * Get Tea TO directory.
-     *
-     * @param string $type Type of the wanted directory
-     * @return string $directory Path of the Tea TO directory
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    protected function getDirectory($type = 'uri')
-    {
-        return $this->directory[$type];
-    }
-
-    /**
-     * Set Tea TO directory.
-     *
-     * @param string $type Type of the wanted directory
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    protected function setDirectory($type = 'uri')
-    {
-        $this->directory['uri'] = TTO_URI;
-        $this->directory['normal'] = TTO_PATH;
-    }
 
     /**
      * Get transient duration.
      *
      * @return number $duration Transient duration in secondes
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.3.0
      */
     protected function getDuration()
     {
+        //Return value
         return $this->duration;
     }
 
     /**
      * Set transient duration.
      *
-     * @param number $duration Transient duration in secondes
+     * @param integer $duration Transient duration in secondes
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    protected function setDuration($duration = 86400)
+    protected function setDuration($duration = TTO_DURATION)
     {
+        //Define value
         $this->duration = $duration;
     }
 
@@ -728,10 +810,11 @@ class Tea_Pages
      *
      * @return array $includes Array of all included files
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.3.0
      */
     protected function getIncludes()
     {
+        //Return value
         return $this->includes;
     }
 
@@ -740,36 +823,12 @@ class Tea_Pages
      *
      * @param string $context Name of the included file's context
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.3.0
      */
     protected function setIncludes($context)
     {
         $includes = $this->getIncludes();
         $this->includes[$context] = true;
-    }
-
-    /**
-     * Get is_admin.
-     *
-     * @return bool $is_admin Define if we are in admin panel or not
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    protected function getIsAdmin()
-    {
-        return $this->is_admin;
-    }
-
-    /**
-     * Set is_admin.
-     *
-     * @param bool $is_admin Define if we are in admin panel or not
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    protected function setIsAdmin()
-    {
-        $this->is_admin = is_admin() ? true : false;
     }
 
     /**
@@ -779,14 +838,13 @@ class Tea_Pages
      * @param var $default The default value if no one is found
      * @return var $value
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function getOption($key, $default)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Return value from DB
@@ -804,22 +862,22 @@ class Tea_Pages
      * @param string $key The name of the transient
      * @param var $value The default value if no one is found
      * @param array $dependancy The default value if no one is found
+     * @todo find a better way for the plugin version
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function setOption($key, $value, $dependancy = array())
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Check the category
-        if (empty($key))
-        {
-            $this->adminmessage = sprintf(__('Something went wrong. Key "%s" and/or its value is empty.', TTO_I18N), $key);
-            return false;
+        if (empty($key)) {
+            $this->adminmessage = sprintf(__('Something went wrong. Key "%s" 
+                and/or its value is empty.', TTO_I18N), $key);
+            return;
         }
 
         //Check the key for special "NONE" value
@@ -831,9 +889,9 @@ class Tea_Pages
         //Set the option
         _set_option($key, $value, $duration);
 
-        //Special usecase: category. We can also register information as title, slug, description and children
-        if (false !== strpos($key, '__category'))
-        {
+        //Special usecase: category. We can also register information 
+        //as title, slug, description and children
+        if (false !== strpos($key, '__category')) {
             //Make the value as an array
             $value = !is_array($value) ? array($value) : $value;
 
@@ -841,15 +899,16 @@ class Tea_Pages
             $details = array();
 
             //Iterate on categories
-            foreach ($value as $c)
-            {
+            foreach ($value as $c) {
                 //Get all children
-                $cats = get_categories(array('child_of' => $c, 'hide_empty' => 0));
+                $cats = get_categories(array(
+                    'child_of' => $c,
+                    'hide_empty' => 0
+                ));
                 $children = array();
 
                 //Iterate on children to get ID only
-                foreach ($cats as $ca)
-                {
+                foreach ($cats as $ca) {
                     //Idem
                     $children[$ca->cat_ID] = array(
                         'id' => $ca->cat_ID,
@@ -874,26 +933,25 @@ class Tea_Pages
                 );
             }
 
-            //Set the other parameters: width
+            //Set the other parameters: details as children
             _set_option($key . '_details', $details, $duration);
         }
 
-        //Special usecase: checkboxes. When it's not checked, no data is sent through the $_POST array
-        else if (false !== strpos($key, '__checkbox') && !empty($dependancy))
-        {
+        //Special usecase: checkboxes. When it's not checked, no data is sent 
+        //through the $_POST array
+        else if (false !== strpos($key, '__checkbox') && !empty($dependancy)) {
             //Get the key
             $previous = str_replace('__checkbox', '', $key);
 
             //Check if it exists (if not that means the user unchecked it) and set the option
-            if (!isset($dependancy[$previous]))
-            {
+            if (!isset($dependancy[$previous])) {
                 _set_option($previous, $value, $duration);
             }
         }
 
-        //Special usecase: image. We can also register information as width, height, mimetype from upload and image inputs
-        else if (false !== strpos($key, '__upload'))
-        {
+        //Special usecase: image. We can also register information as 
+        //width, height, mimetype from upload and image inputs
+        else if (false !== strpos($key, '__upload')) {
             //Get the image details
             $image = getimagesize($value);
 
@@ -915,21 +973,13 @@ class Tea_Pages
      * @uses wp_handle_upload()
      * @param array $request Contains all data in $_POST
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    protected function updateNetworks($request)
+    protected function updateElasticsearch($request)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
-        }
-
-        //Check if a network connection is asked
-        if (!isset($request['tea_to_callback']) && !isset($request['tea_to_network']))
-        {
-            $this->adminmessage = __('Something went wrong in your parameters definition. You need to specify a network to make the connection happens.', TTO_I18N);
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Defaults variables
@@ -937,13 +987,54 @@ class Tea_Pages
         $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['network']))
-        {
+        if (!isset($includes['elasticsearch'])) {
+            //Set the include
+            $this->setIncludes('elasticsearch');
+
+            //Require file
+            require_once(TTO_PATH . '/classes/elasticsearch/class-tea-fields-elasticsearch.php');
+        }
+
+        //Make the magic
+        $field = new Tea_Fields_Elasticsearch();
+        $field->setCurrentPage($page);
+        $field->actionElasticsearch($request);
+    }
+
+    /**
+     * Register $_POST and $_FILES into transients.
+     *
+     * @uses wp_handle_upload()
+     * @param array $request Contains all data in $_POST
+     *
+     * @since 1.4.0
+     */
+    protected function updateNetworks($request)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if a network connection is asked
+        if (!isset($request['tea_to_callback']) && !isset($request['tea_to_network'])) {
+            $this->adminmessage = __('Something went wrong in your parameters 
+                definition. You need to specify a network to make the 
+                connection happens.', TTO_I18N);
+            return;
+        }
+
+        //Defaults variables
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $includes = $this->getIncludes();
+
+        //Include class field
+        if (!isset($includes['network'])) {
             //Set the include
             $this->setIncludes('network');
 
             //Require file
-            require_once(TTO_PATH . 'classes/fields/network/class-tea-fields-network.php');
+            require_once(TTO_PATH . '/classes/networks/class-tea-fields-network.php');
         }
 
         //Make the magic
@@ -959,26 +1050,24 @@ class Tea_Pages
      * @param array $request Contains all data in $_REQUEST
      * @param array $files Contains all data in $_FILES
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     protected function updateOptions($request, $files)
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Set all options in transient
-        foreach ($request as $k => $v)
-        {
+        foreach ($request as $k => $v) {
             //Don't register this default value
-            if ('tea_to_settings' == $k || 'submit' == $k)
-            {
+            if ('tea_to_settings' == $k || 'submit' == $k) {
                 continue;
             }
 
-            //Special usecase: checkboxes. When it's not checked, no data is sent through the $_POST array
+            //Special usecase: checkboxes. When it's not checked, 
+            //no data is sent through the $_POST array
             $p = false !== strpos($k, '__checkbox') ? $request : array();
 
             //Register option and transient
@@ -986,19 +1075,16 @@ class Tea_Pages
         }
 
         //Check if files are attempting to be uploaded
-        if (!empty($files))
-        {
+        if (!empty($files)) {
             //Get required files
             require_once(ABSPATH . 'wp-admin/includes/image.php');
             require_once(ABSPATH . 'wp-admin/includes/file.php');
             require_once(ABSPATH . 'wp-admin/includes/media.php');
 
             //Set all URL in transient
-            foreach ($files as $k => $v)
-            {
+            foreach ($files as $k => $v) {
                 //Don't do nothing if no file is defined
-                if (empty($v['tmp_name']))
-                {
+                if (empty($v['tmp_name'])) {
                     continue;
                 }
 
@@ -1017,10 +1103,11 @@ class Tea_Pages
      * @param string $slug
      * @return string $identifier.$slug
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.3.0
      */
     protected function getSlug($slug = '')
     {
+        //Return value
         return $this->identifier . $slug;
     }
 }

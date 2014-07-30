@@ -1,20 +1,17 @@
 <?php
 /**
- * Tea TO backend functions and definitions
- * 
- * @package TakeaTea
- * @subpackage Tea Theme Options
+ * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.3.0.1
- * Snippet URI: https://github.com/Takeatea/tea_theme_options
- * Description: The Tea Theme Options (or "Tea TO") allows you to easily add professional looking theme options panels to your WordPress theme.
+ * Version: 1.4.0
+ * Snippet URI: http://git.tools.takeatea.com/crewstyle/tea_theme_options
+ * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
+ * professional looking theme options panels to your WordPress theme.
  * Author: Achraf Chouk
  * Author URI: http://takeatea.com/
  * License: GPL v3
  *
- * Tea Theme Options Plugin
- * Copyright (C) 2013, Achraf Chouk - ach@takeatea.com
+ * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,84 +33,103 @@ if (!defined('ABSPATH')) {
 }
 
 
-//---------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
-//Usefull definitions for the Tea Theme Options
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.3.0.1');
+include(__DIR__ . '/vendor/autoload.php');
+
+//----------------------------------------------------------------------------//
+
+//The current theme URI.
+defined('TEMPLATE_DIR_URI') or define('TEMPLATE_DIR_URI', get_template_directory_uri());
+//The current version
+defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
+//The current version
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.0');
+//The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
+//The transient expiration duration
 defined('TTO_DURATION')     or define('TTO_DURATION', 86400);
-defined('TTO_URI')          or define('TTO_URI', TEMPLATE_DIR_URI . '/' . basename(dirname(__FILE__)) . '/');
-defined('TTO_PATH')         or define('TTO_PATH', TEMPLATE_DIR . '/' . basename(dirname(__FILE__)) . '/');
-defined('TTO_ACTION')       or define('TTO_ACTION', 'tea_json_options');
+//The transient expiration duration
+defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
+//The URI
+defined('TTO_URI')          or define('TTO_URI', TEMPLATE_DIR_URI . '/' . basename(dirname(__FILE__)));
+//The path
+defined('TTO_PATH')         or define('TTO_PATH', __DIR__); //TEMPLATE_DIR . '/' . basename(dirname(__FILE__))
+//The nonce ajax value
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
 
 
-//---------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
 /**
- * Tea Theme Option page.
+ * Tea Theme Option master class.
  *
- * To get its own settings
+ * To get its own settings, define all functions used to build custom pages and 
+ * custom post types.
  *
- * @since Tea Theme Options 1.3.0
- * @todo Special field:     Typeahead, Date, Geolocalisation
- * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, Google Adsense,
- *                          Related posts, Private content, RSS Feed, Embed PDF,
- *                          Price table, Carousel, Icons
+ * @package Tea Theme Options
+ * @author Achraf Chouk <ach@takeatea.com>
+ * @since 1.4.0
+ *
+ * @todo Special field:     Typeahead
+ * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
+ *                          Google Adsense, Related posts, Private content, 
+ *                          RSS Feed, Embed PDF, Price table, Carousel, Icons
+ *
  */
 class Tea_Theme_Options
 {
     //Define protected vars
-    protected $is_admin;
     protected $pages = null;
     protected $customposttypes = null;
+    protected $canbuildpages = false;
+    protected $canbuildcpts = false;
+    protected $elasticsearch = null;
 
     /**
      * Constructor.
      *
      * @uses add_filter()
      * @uses load_plugin_textdomain()
-     * @uses register_activation_hook()
-     * @uses register_uninstall_hook()
      * @uses wp_next_scheduled()
      * @uses wp_schedule_event()
-     * @param string $identifier Define the plugin main slug
+     * @param string $identifier Define the main slug
+     * @param boolean $connect Define if we can display connections page
+     * @param boolean $elastic Define if we can display elasticsearch page
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    public function __construct($identifier = 'tea_theme_options')
+    public function __construct($identifier = 'tea_theme_options', $connect = true, $elastic = true)
     {
-        //Check if we are in admin panel
-        $this->setIsAdmin();
-        $is_admin = $this->getIsAdmin();
-
         //Admin panel
-        if ($is_admin)
-        {
+        if (TTO_IS_ADMIN) {
             //i18n
             load_plugin_textdomain(TTO_I18N, false, TTO_PATH . '/languages');
 
             //Page component
-            require_once(TTO_PATH . 'classes/class-tea-pages.php');
-            $this->pages = new Tea_Pages($identifier);
+            require_once(TTO_PATH . '/classes/class-tea-pages.php');
+            $this->pages = new Tea_Pages($identifier, $connect, $elastic);
         }
 
         //Define custom schedule
-        if (!wp_next_scheduled('tea_task_schedule'))
-        {
+        if (!wp_next_scheduled('tea_task_schedule')) {
             wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
         }
 
         //Register custom schedule filter
         add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
 
-        //Page component
-        require_once(TTO_PATH . 'classes/class-tea-custom-post-types.php');
-        $this->customposttypes = new Tea_Custom_Post_Types($is_admin);
+        //CPT component
+        require_once(TTO_PATH . '/classes/class-tea-custom-post-types.php');
+        $this->customposttypes = new Tea_Custom_Post_Types();
+
+        //Elasticsearch component
+        require_once(TTO_PATH . '/classes/elasticsearch/class-tea-elasticsearch.php');
+        $this->elasticsearch = new Tea_Elasticsearch();
     }
 
 
-    //--------------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
 
     /**
      * WORDPRESS USED HOOKS
@@ -122,12 +138,13 @@ class Tea_Theme_Options
     /**
      * Display a warning message on the admin panel.
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
+     * @todo: make social connection with http://teato.me
      */
     public function __cronSchedules()
     {
         //Require file
-        require_once(TTO_PATH . 'classes/fields/network/class-tea-fields-network.php');
+        require_once(TTO_PATH . '/classes/networks/class-tea-fields-network.php');
 
         //Make the magic
         $field = new Tea_Fields_Network();
@@ -135,7 +152,7 @@ class Tea_Theme_Options
     }
 
     /**
-     * CONTENTS METHODS
+     * MAIN FUNCTIONS
      **/
 
     /**
@@ -144,18 +161,18 @@ class Tea_Theme_Options
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function addPage($configs = array(), $contents = array())
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Add page
         $this->pages->addPage($configs, $contents);
+        $this->canbuildpages = true;
     }
 
     /**
@@ -163,18 +180,22 @@ class Tea_Theme_Options
      *
      * @uses add_action()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    public function buildMenus()
+    public function buildPages()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we got pages
+        if (!$this->canbuildpages) {
+            return;
         }
 
         //Build menus
-        $this->pages->buildMenus();
+        $this->pages->buildPages();
     }
 
     /**
@@ -183,18 +204,18 @@ class Tea_Theme_Options
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function addCPT($configs = array(), $contents = array())
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
         //Add page
         $this->customposttypes->addCPT($configs, $contents);
+        $this->canbuildcpts = true;
     }
 
     /**
@@ -202,14 +223,18 @@ class Tea_Theme_Options
      *
      * @uses add_action()
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
     public function buildCPTs()
     {
         //Check if we are in admin panel
-        if (!$this->getIsAdmin())
-        {
-            return false;
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we got cpts
+        if (!$this->canbuildcpts) {
+            return;
         }
 
         //Build menus
@@ -217,40 +242,28 @@ class Tea_Theme_Options
     }
 
     /**
-     * Get is_admin.
+     * Get elasticsearch.
      *
-     * @return bool $is_admin Define if we are in admin panel or not
+     * @return object $elasticearch
      *
-     * @since Tea Theme Options 1.3.0
+     * @since 1.4.0
      */
-    protected function getIsAdmin()
+    public function getElasticsearch()
     {
-        return $this->is_admin;
-    }
-
-    /**
-     * Set is_admin.
-     *
-     * @param bool $is_admin Define if we are in admin panel or not
-     *
-     * @since Tea Theme Options 1.3.0
-     */
-    protected function setIsAdmin()
-    {
-        $this->is_admin = is_admin() ? true : false;
+        //Return value
+        return $this->elasticsearch;
     }
 }
 
 /**
  * Set a value into options
  *
- * @since Tea Theme Options 1.3.0
+ * @since 1.4.0
  */
 function _del_option($option, $transient = false)
 {
     //If a transient is asked...
-    if ($transient)
-    {
+    if ($transient) {
         //Delete the transient
         delete_transient($option);
     }
@@ -262,18 +275,16 @@ function _del_option($option, $transient = false)
 /**
  * Return a value from options
  *
- * @since Tea Theme Options 1.3.0
+ * @since 1.4.0
  */
 function _get_option($option, $default = '', $transient = false)
 {
     //If a transient is asked...
-    if ($transient)
-    {
+    if ($transient) {
         //Get value from transient
         $value = get_transient($option);
 
-        if (false === $value)
-        {
+        if (false === $value) {
             //Get it from DB
             $value = get_option($option);
 
@@ -285,8 +296,7 @@ function _get_option($option, $default = '', $transient = false)
         }
     }
     //Else...
-    else
-    {
+    else {
         //Get value from DB
         $value = get_option($option);
 
@@ -301,13 +311,12 @@ function _get_option($option, $default = '', $transient = false)
 /**
  * Set a value into options
  *
- * @since Tea Theme Options 1.3.0
+ * @since 1.4.0
  */
 function _set_option($option, $value, $transient = false)
 {
     //If a transient is asked...
-    if ($transient)
-    {
+    if ($transient) {
         //Set the transient for this value
         set_transient($option, $value, TTO_DURATION);
     }

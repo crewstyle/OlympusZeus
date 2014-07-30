@@ -1,3 +1,12 @@
+## 1.4.0 (April 9, 2014)
+
+Update code to the new version
+
+- **New:**
+  - new <map> field
+  - new <date> field
+
+
 ## 1.3.0.2 (October 11, 2013)
 
 Fix small bug on upload field

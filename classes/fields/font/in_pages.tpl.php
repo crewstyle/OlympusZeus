@@ -8,12 +8,12 @@
 <?php endif ?>
 
 <!-- Content font <?php echo $id ?> -->
-<div id="<?php echo $id ?>_font_content" class="tea_to_wrap stuffbox">
-    <h3>
+<div id="<?php echo $id ?>_font_content" class="tea_to_wrap">
+    <h3 class="tea_title">
         <label><?php echo $title ?></label>
     </h3>
 
-    <div class="inside gfont gfont-radio">
+    <div class="inside tea-inside gfont gfont-radio">
         <fieldset>
             <?php foreach ($options as $option): ?>
                 <?php

@@ -1,15 +1,14 @@
 <!-- Content multiselect <?php echo $id ?> -->
-<div id="<?php echo $id ?>_content" class="tea_to_wrap stuffbox">
-    <h3>
+<div id="<?php echo $id ?>_content" class="tea_to_wrap">
+    <h3 class="tea_title">
         <label for="<?php echo $id ?>"><?php echo $title ?></label>
     </h3>
 
-    <div class="inside multiselect">
+    <div class="inside tea-inside multiselect">
         <select name="<?php echo $id ?>[]" id="<?php echo $id ?>" multiple="multiple" size="5">
             <?php
                 foreach ($options as $key => $option):
-                    if (empty($key))
-                    {
+                    if (empty($key)) {
                         continue;
                     }
 

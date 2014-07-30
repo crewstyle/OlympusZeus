@@ -1,8 +1,7 @@
 <ul class="listing">
     <?php
         foreach ($contents as $l):
-            if (empty($l))
-            {
+            if (empty($l)) {
                 continue;
             }
     ?>

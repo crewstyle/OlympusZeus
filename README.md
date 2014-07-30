@@ -1,12 +1,12 @@
-# Tea Theme Options (v1.3.0.2)
+# Tea Theme Options (v1.4.0)
 
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.
 
-The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+The [Tea Theme Options](http://git.tools.takeatea.com/crewstyle/tea_theme_options) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
-+ [**Options API**](http://codex.wordpress.org/Options_API) - A simple and standardized way of storing data in the database.
-+ [**Transients API**](http://codex.wordpress.org/Transients_API) - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
++ **[Options API](http://codex.wordpress.org/Options_API)** - A simple and standardized way of storing data in the database.
++ **[Transients API](http://codex.wordpress.org/Transients_API)** - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
 + **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
 + **Full of Options** - 3 kinds of options used to display information, store fields values or get data from your Wordpress database. The options are made to build your Wordpress pages easily.
 + **Easier for administrators** - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.
@@ -35,15 +35,16 @@ The [Tea Theme Options](http://takeatea.github.com/tea_to_wp/) (or **Tea TO**) a
 
 ### 1) Installing the theme roller
 
-**To get started, checkout** https://github.com/takeatea/tea_to_wp into the `wp-content/your_template/__YOUR_TEA_TO_CUSTOM_FOLDER__/`
+**To get started, checkout** http://git.tools.takeatea.com/crewstyle/tea_theme_options.git into the `wp-content/your_template/`
 
-    git clone https://github.com/takeatea/tea_to_wp __YOUR_TEA_TO_CUSTOM_FOLDER__
+    cd wp-content/themes/your_template/
+    git clone http://git.tools.takeatea.com/crewstyle/tea_theme_options.git
 
-Check your new `__YOUR_TEA_TO_CUSTOM_FOLDER__` folder is created in your template directory.  
+Check your new `tea_theme_options` folder is created in your template directory.  
 Include the `tea-theme-options.php` file in your `functions.php`
 
 ```php
-include('__YOUR_TEA_TO_CUSTOM_FOLDER__/tea-theme-options.php');
+include('tea_theme_options/tea-theme-options.php');
 ```
 
 
@@ -205,21 +206,6 @@ array(
         'this is the best', //second list item
         'Wordpress Theme Options Framework :)', //etc.
         'Thanks to Take a Tea :D' //...
-    )
-)
-```
-
-Adding a `group`
-
-```php
-array(
-    'type' => 'group',
-    'title' => 'Everybooooodyyyyy need someboooodddyyyyy',
-    'contents' => array(
-        //Put here all your needed fields like this one...
-        array(
-            'type' => 'br'
-        )
     )
 )
 ```

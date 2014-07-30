@@ -1,1 +1,1 @@
-<h2 class="tea-clear"><?php echo $title ?></h2>
+<<?php echo $level ?>><?php echo $title ?></<?php echo $level ?>>
