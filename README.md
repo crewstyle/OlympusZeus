@@ -3,7 +3,7 @@
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.
 
-The [Tea Theme Options](http://git.tools.takeatea.com/crewstyle/tea_theme_options) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
+The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea TO**) allows you to easily add professional looking theme options panels to your WordPress theme. The **Tea TO** is built for [Wordpress](http://wordpress.org "CMS Wordpress") v3.x and uses the Wordpress built-in pages.
 
 + **[Options API](http://codex.wordpress.org/Options_API)** - A simple and standardized way of storing data in the database.
 + **[Transients API](http://codex.wordpress.org/Transients_API)** - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
@@ -35,10 +35,10 @@ The [Tea Theme Options](http://git.tools.takeatea.com/crewstyle/tea_theme_option
 
 ### 1) Installing the theme roller
 
-**To get started, checkout** http://git.tools.takeatea.com/crewstyle/tea_theme_options.git into the `wp-content/your_template/`
+**To get started, checkout** https://github.com/Takeatea/tea_theme_options.git into the `wp-content/your_template/`
 
     cd wp-content/themes/your_template/
-    git clone http://git.tools.takeatea.com/crewstyle/tea_theme_options.git
+    git clone https://github.com/Takeatea/tea_theme_options.git
 
 Check your new `tea_theme_options` folder is created in your template directory.  
 Include the `tea-theme-options.php` file in your `functions.php`
