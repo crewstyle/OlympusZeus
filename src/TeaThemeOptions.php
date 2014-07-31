@@ -52,7 +52,7 @@ defined('TTO_DURATION')     or define('TTO_DURATION', 86400);
 //The transient expiration duration
 defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
 //The URI
-defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri() . '/' . basename(dirname(__FILE__)));
+defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri() . '/vendor/takeatea/tea-theme-options');
 //The path
 defined('TTO_PATH')         or define('TTO_PATH', __DIR__);
 //The nonce ajax value
@@ -68,7 +68,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.0
+ * @since 1.4.1
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
@@ -246,74 +246,74 @@ class TeaThemeOptions
         //Return value
         return $this->elasticsearch;
     }
-}
 
-/**
- * Set a value into options
- *
- * @since 1.4.0
- */
-function _del_option($option, $transient = false)
-{
-    //If a transient is asked...
-    if ($transient) {
-        //Delete the transient
-        delete_transient($option);
+    /**
+     * Set a value into options
+     *
+     * @since 1.4.0
+     */
+    public static function del_option($option, $transient = false)
+    {
+        //If a transient is asked...
+        if ($transient) {
+            //Delete the transient
+            delete_transient($option);
+        }
+
+        //Delete value from DB
+        delete_option($option);
     }
 
-    //Delete value from DB
-    delete_option($option);
-}
+    /**
+     * Return a value from options
+     *
+     * @since 1.4.0
+     */
+    public static function get_option($option, $default = '', $transient = false)
+    {
+        //If a transient is asked...
+        if ($transient) {
+            //Get value from transient
+            $value = get_transient($option);
 
-/**
- * Return a value from options
- *
- * @since 1.4.0
- */
-function _get_option($option, $default = '', $transient = false)
-{
-    //If a transient is asked...
-    if ($transient) {
-        //Get value from transient
-        $value = get_transient($option);
+            if (false === $value) {
+                //Get it from DB
+                $value = get_option($option);
 
-        if (false === $value) {
-            //Get it from DB
+                //Put the default value if not
+                $value = false === $value ? $default : $value;
+
+                //Set the transient for this value
+                set_transient($option, $value, TTO_DURATION);
+            }
+        }
+        //Else...
+        else {
+            //Get value from DB
             $value = get_option($option);
 
             //Put the default value if not
             $value = false === $value ? $default : $value;
+        }
 
+        //Return value
+        return $value;
+    }
+
+    /**
+     * Set a value into options
+     *
+     * @since 1.4.0
+     */
+    public static function set_option($option, $value, $transient = false)
+    {
+        //If a transient is asked...
+        if ($transient) {
             //Set the transient for this value
             set_transient($option, $value, TTO_DURATION);
         }
+
+        //Set value into DB
+        update_option($option, $value);
     }
-    //Else...
-    else {
-        //Get value from DB
-        $value = get_option($option);
-
-        //Put the default value if not
-        $value = false === $value ? $default : $value;
-    }
-
-    //Return value
-    return $value;
-}
-
-/**
- * Set a value into options
- *
- * @since 1.4.0
- */
-function _set_option($option, $value, $transient = false)
-{
-    //If a transient is asked...
-    if ($transient) {
-        //Set the transient for this value
-        set_transient($option, $value, TTO_DURATION);
-    }
-
-    //Set value into DB
-    update_option($option, $value);
 }

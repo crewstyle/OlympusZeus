@@ -1,8 +1,9 @@
 <?php
 namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\Fields\Elasticsearch;
-use Takeatea\TeaThemeOptions\Fields\Network;
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
+use Takeatea\TeaThemeOptions\Fields\Elasticsearch\Elasticsearch;
+use Takeatea\TeaThemeOptions\Fields\Network\Network;
 
 /**
  * TEA PAGES
@@ -52,8 +53,8 @@ class TeaPages
     protected $can_upload = false;
     protected $current = '';
     protected $duration = TTO_DURATION;
-    protected $icon_small = '/assets/img/teato/teato-tiny.svg';
-    protected $icon_big = '/assets/img/teato/teato.svg';
+    protected $icon_small = '/assets/img/teato-tiny.svg';
+    protected $icon_big = '/assets/img/teato.svg';
     protected $identifier;
     protected $includes = array();
     protected $index = null;
@@ -117,7 +118,7 @@ class TeaPages
         wp_admin_css_color(
             'teatocss',
             __('Tea T.O.'),
-            TTO_URI . '/assets/css/teato_admin.css',
+            TTO_URI . '/assets/css/teato.admin.css',
             array('#222', '#303231', '#55bb3a', '#91d04d')
         );
     }
@@ -151,7 +152,6 @@ class TeaPages
 
         //Get jQuery
         $jq = array('jquery');
-        $jm = array('tea-md');
 
         //Enqueue media and colorpicker scripts
         if (function_exists('wp_enqueue_media')) {
@@ -164,31 +164,8 @@ class TeaPages
             wp_enqueue_script('farbtastic');
         }
 
-        // @todo: minify all JS
-
-        //Enqueue modal
-        wp_enqueue_script('tea-md', TTO_URI . '/assets/js/tea.modal.js', $jq);
-        //Enqueue usefull scripts
-        wp_enqueue_script('tea-ca', TTO_URI . '/assets/js/tea.checkall.js', $jm);
-        wp_enqueue_script('tea-ci', TTO_URI . '/assets/js/tea.checkit.js', $jm);
-        wp_enqueue_script('tea-cl', TTO_URI . '/assets/js/tea.color.js', $jm);
-        wp_enqueue_script('tea-ga', TTO_URI . '/assets/js/tea.gallery.js', $jm);
-        wp_enqueue_script('tea-lb', TTO_URI . '/assets/js/tea.labelize.js', $jm);
-        wp_enqueue_script('tea-rg', TTO_URI . '/assets/js/tea.range.js', $jm);
-        wp_enqueue_script('tea-sc', TTO_URI . '/assets/js/tea.social.js', $jm);
-        wp_enqueue_script('tea-up', TTO_URI . '/assets/js/tea.upload.js', $jm);
-        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/teato.js', array(
-            'jquery',
-            'tea-md',
-            'tea-ca',
-            'tea-ci',
-            'tea-cl',
-            'tea-ga',
-            'tea-lb',
-            'tea-rg',
-            'tea-sc',
-            'tea-up'
-        ));
+        //Enqueue all minified scripts
+        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/tea.min.js', $jq);
     }
 
     /**
@@ -217,8 +194,8 @@ class TeaPages
             wp_enqueue_style('wp-color-picker');
         }
 
-        wp_enqueue_style('tea-fa', TTO_URI . '/assets/css/font-awesome.css');
-        wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.css');
+        //Enqueue all minified styles
+        wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.min.css');
     }
 
     /**
@@ -747,6 +724,7 @@ class TeaPages
 
             //Set vars
             $class = ucfirst($type);
+            $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
             $includes = $this->getIncludes();
 
             //Include class field
@@ -764,8 +742,8 @@ class TeaPages
             }
 
             //Make the magic
-            $class = "\Takeatea\TeaThemeOptions\Fields\$class";
             $field = new $class();
+
             $field->templatePages($content);
         }
     }
@@ -843,7 +821,7 @@ class TeaPages
         }
 
         //Return value from DB
-        return _get_option($key, $default);
+        return TeaThemeOptions::get_option($key, $default);
     }
 
     /**
@@ -882,7 +860,7 @@ class TeaPages
         $duration = $this->getDuration();
 
         //Set the option
-        _set_option($key, $value, $duration);
+        TeaThemeOptions::set_option($key, $value, $duration);
 
         //Special usecase: category. We can also register information 
         //as title, slug, description and children
@@ -929,7 +907,7 @@ class TeaPages
             }
 
             //Set the other parameters: details as children
-            _set_option($key . '_details', $details, $duration);
+            TeaThemeOptions::set_option($key . '_details', $details, $duration);
         }
 
         //Special usecase: checkboxes. When it's not checked, no data is sent 
@@ -940,7 +918,7 @@ class TeaPages
 
             //Check if it exists (if not that means the user unchecked it) and set the option
             if (!isset($dependancy[$previous])) {
-                _set_option($previous, $value, $duration);
+                TeaThemeOptions::set_option($previous, $value, $duration);
             }
         }
 
@@ -958,7 +936,7 @@ class TeaPages
             );
 
             //Set the other parameters
-            _set_option($key . '_details', $details, $duration);
+            TeaThemeOptions::set_option($key . '_details', $details, $duration);
         }
     }
 

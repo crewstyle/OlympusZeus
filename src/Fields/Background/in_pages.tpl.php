@@ -43,26 +43,27 @@
         <?php endif ?>
 
         <!-- Custom image -->
-        <fieldset class="bg-upload" data-del="<?php echo $delete ?>">
+        <fieldset class="bg-upload" data-type="<?php echo $library ?>">
             <?php $imaging = isset($val['image_custom']) && !empty($val['image_custom']) ? $val['image_custom'] : '' ?>
             <input type="hidden" name="<?php echo $id ?>[image_custom]" id="<?php echo $id ?>_image_custom" value="<?php echo $imaging ?>" />
 
             <div class="upload_image_result">
-                <figure>
-                    <?php if (!empty($imaging)): ?>
+                <?php if (!empty($imaging)): ?>
+                    <figure>
                         <img src="<?php echo $imaging ?>" id="<?php echo $id ?>_image" alt="" />
-                        <a href="#" class="delete" data-target="<?php echo $id ?>_image_custom"><?php echo $delete ?></a>
-                    <?php endif ?>
-                </figure>
-            </div>
+                        <a href="#" class="del_image" data-target="<?php echo $id ?>_image_custom">&times;</a>
+                    </figure>
+                <?php endif ?>
 
-            <?php if ($can_upload): ?>
-                <div id="wp-<?php echo $id ?>-editor-tools" class="wp-editor-tools customized hide-if-no-js" data-target="<?php echo $id ?>_image_custom" data-type="image" data-multiple="0">
-                    <?php do_action('media_buttons', $id) ?>
-                </div>
-            <?php else: ?>
-                <?php _e('It seems you are not able to upload files.', TTO_I18N) ?>
-            <?php endif ?>
+                <?php if ($can_upload): ?>
+                    <div class="upload-time hide-if-no-js <?php echo !empty($imaging) ? 'item-added' : '' ?>" data-target="<?php echo $id ?>_image_custom">
+                        <a href="#" class="add_image" title="<?php echo esc_html(__('Add background', TTO_I18N)) ?>">
+                            <i class="fa fa-cloud-upload fa-lg"></i> <?php _e('Add background', TTO_I18N) ?>
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <?php _e('It seems you are not able to upload files.', TTO_I18N) ?>
+                <?php endif ?>
         </fieldset>
         <!-- /Custom image -->
 

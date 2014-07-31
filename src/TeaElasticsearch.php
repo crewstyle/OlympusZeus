@@ -14,6 +14,7 @@ use Elastica\Suggest;
 use Elastica\Suggest\Term as SuggestTerm;
 use Elastica\Suggest\Phrase as SuggestPhrase;
 use Elastica\Type\Mapping;
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
  * Tea TO backend functions and definitions
@@ -57,7 +58,7 @@ class TeaElasticsearch
     public function __construct($write = false, $hook = true)
     {
         //Get custom data
-        $ctn = _get_option('tea_elastic', array());
+        $ctn = TeaThemeOptions::get_option('tea_elastic', array());
         $this->setConfig($ctn);
 
         //Check integrity
@@ -298,7 +299,7 @@ class TeaElasticsearch
         $index->refresh();
 
         //Set and return count
-        _set_option('tea_elastic_index', $count);
+        TeaThemeOptions::set_option('tea_elastic_index', $count);
         return $count;
     }
 
@@ -946,8 +947,8 @@ class TeaElasticsearch
             $type->deleteById($post->ID);
 
             //Update counter
-            $count = _get_option('tea_elastic_index', 0);
-            _set_option('tea_elastic_index', $count-1);
+            $count = TeaThemeOptions::get_option('tea_elastic_index', 0);
+            TeaThemeOptions::set_option('tea_elastic_index', $count-1);
         } catch (NotFoundException $ex){}
     }
 

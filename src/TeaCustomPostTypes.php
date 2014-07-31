@@ -1,6 +1,8 @@
 <?php
 namespace Takeatea\TeaThemeOptions;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
+
 /**
  * TEA CUSTOM POST TYPES
  * 
@@ -54,7 +56,7 @@ class TeaCustomPostTypes
     public function __construct()
     {
         //Get registered CPTs
-        $this->cpts = _get_option('tea_config_cpts', array());
+        $this->cpts = TeaThemeOptions::get_option('tea_config_cpts', array());
 
         //Check params and if a master page already exists
         if (empty($this->cpts)) {
@@ -218,6 +220,7 @@ class TeaCustomPostTypes
 
                 //Set vars
                 $class = ucfirst($type);
+                $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
 
                 //Include class field
                 if (!isset($includes[$type])) {
@@ -349,7 +352,7 @@ class TeaCustomPostTypes
         }
 
         //Define cpt configurations
-        _set_option('tea_config_cpts', $cpts);
+        TeaThemeOptions::set_option('tea_config_cpts', $cpts);
     }
 
     /**

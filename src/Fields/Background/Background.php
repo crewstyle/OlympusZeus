@@ -32,7 +32,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *         'image_custom' => 'my_custom_default_background_url',
  *         'color' => '#ffffff',
  *         'repeat' => 'no-repeat',
- *         'position' array(
+ *         'position' => array(
  *             'x' => 'left',
  *             'y' => 'top'
  *         )
@@ -127,7 +127,7 @@ class Background extends TeaFields
 
         //Positions
         $details = $this->getDefaults('background-details');
-        $url = TTO_URI . '/Fields/Background/img/';
+        $url = TTO_URI . '/src/Fields/Background/img/';
 
         //Check selected
         $val = $this->getOption($id, $std);

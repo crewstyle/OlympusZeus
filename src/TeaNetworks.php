@@ -1,6 +1,8 @@
 <?php
 namespace Takeatea\TeaThemeOptions;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
+
 /**
  * Tea TO backend functions and definitions
  * 
@@ -69,7 +71,7 @@ abstract class TeaNetworks
      */
     protected function getTokens($network)
     {
-        $tokens = _get_option('tea_networks_connections', array());
+        $tokens = TeaThemeOptions::get_option('tea_networks_connections', array());
 
         if (empty($tokens)) {
             return false;

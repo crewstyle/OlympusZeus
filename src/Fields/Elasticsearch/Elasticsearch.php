@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Elasticsearch;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaElasticsearch;
 use Takeatea\TeaThemeOptions\TeaFields;
 
@@ -67,7 +68,7 @@ class Elasticsearch extends TeaFields
         $title = isset($content['title']) ? $content['title'] : __('Tea Elasticsearch', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
         $page = $this->getCurrentPage();
-        $index = _get_option('tea_elastic_index', 0);
+        $index = TeaThemeOptions::get_option('tea_elastic_index', 0);
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array(
@@ -84,7 +85,7 @@ class Elasticsearch extends TeaFields
         );
 
         //Get scores
-        $scores = Tea_Elasticsearch::getFields();
+        $scores = TeaElasticsearch::getFields();
 
         //Check selected
         $vals = $this->getOption($id, $std);
@@ -154,13 +155,13 @@ class Elasticsearch extends TeaFields
         }
 
         //Get datas
-        $ctn = _get_option($id, array());
+        $ctn = TeaThemeOptions::get_option($id, array());
 
         //Enable or disable Elasticsearch
         $ctn['enable'] = $request[$id]['enable'];
 
         //Update datas
-        _set_option($id, $ctn);
+        TeaThemeOptions::set_option($id, $ctn);
     }
 
     /**
@@ -214,13 +215,13 @@ class Elasticsearch extends TeaFields
 
         //Check values integrity
         $id = $this->getId();
-        $ctn = _get_option($id, array());
+        $ctn = TeaThemeOptions::get_option($id, array());
 
         //Update all datas
         $new = array_merge($ctn, $request[$id]);
 
         //Define data in DB
-        _set_option($id, $new);
+        TeaThemeOptions::set_option($id, $new);
     }
 
     /**

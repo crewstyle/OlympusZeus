@@ -14,7 +14,7 @@ $details = array(
     array(
         'type' => 'section',
         'color' => 'green',
-        'image' => TTO_URI . '/assets/img/teato/teato-flask.svg',
+        'image' => TTO_URI . '/assets/img/teato-logo.svg',
         'position' => 'left',
         'content' => __('<h2>The <a href="https://github.com/Takeatea/tea_theme_options" title="Tea Theme Options" class="openit">Tea Theme Options</a> (or <b>Tea T.O.</b>) allows you to easily add professional looking theme options panels to your WordPress theme.</h2>
             <ul>
@@ -26,7 +26,7 @@ $details = array(
     ),
     array(
         'type' => 'section',
-        'image' => TTO_URI . '/assets/img/teato/teato-cogs.svg',
+        'image' => TTO_URI . '/assets/img/teato-cogs.svg',
         'position' => 'right',
         'content' => __('<h2>The <b>Tea T.O.</b> is built for <a href="http://wordpress.org" target="_blank">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>
             <ul>
@@ -37,7 +37,7 @@ $details = array(
     array(
         'type' => 'section',
         'color' => 'green',
-        'image' => TTO_URI . '/assets/img/teato/teato-wp.svg',
+        'image' => TTO_URI . '/assets/img/teato-wp.svg',
         'position' => 'left',
         'content' => __('<h2>How to get values in your Wordpress template?</h2>
             <p>The <b>Tea T.O.</b> allows you to easily get back values and use them into your WordPress theme.<br/>There are 2 ways to get them back.</p>

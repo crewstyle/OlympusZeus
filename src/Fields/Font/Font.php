@@ -119,7 +119,8 @@ class Font extends TeaFields
                     continue;
                 }
 
-                $linkstylesheet .= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=' . $option[0] . ':' . $option[2] . '" />' . "\n";
+                $opt = isset($option[2]) ? ':'.$option[2] : '';
+                $linkstylesheet .= '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=' . $option[0] . $opt . '" />' . "\n";
                 $gfontstyle .= '.gfont_' . str_replace(' ', '_', $option[1]) . ' {font-family:\'' . $option[1] . '\',sans-serif;}' . "\n";
             }
         }

@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Networks\Facebook;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
@@ -48,7 +49,7 @@ class Facebook extends TeaNetworks
         $keys = $this->getTokens('facebook');
 
         //Check if we display form or user informations
-        /*$token = _get_option('tea_twitter_access_token', '');
+        /*$token = TeaThemeOptions::get_option('tea_twitter_access_token', '');
 
         if (false === $token || empty($token)) {
             //Default vars
@@ -56,15 +57,15 @@ class Facebook extends TeaNetworks
         }
         else {
             //Get user Instagram info from DB
-            $user_info = _get_option('tea_twitter_user_info', array());
+            $user_info = TeaThemeOptions::get_option('tea_twitter_user_info', array());
             $user_info = false === $user_info ? array() : $user_info;
 
             //Get recent photos from DB
-            $user_recent = _get_option('tea_twitter_user_recent', array());
+            $user_recent = TeaThemeOptions::get_option('tea_twitter_user_recent', array());
             $user_recent = false === $user_recent ? array() : $user_recent;
 
             //Display date of update
-            $update = _get_option('tea_twitter_connection_update', '');
+            $update = TeaThemeOptions::get_option('tea_twitter_connection_update', '');
             $update = false === $update || empty($update) ? '' : $update;
         }*/
 

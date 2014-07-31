@@ -1,6 +1,8 @@
 <?php
 namespace Takeatea\TeaThemeOptions;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
+
 /**
  * TEA FIELDS
  * 
@@ -83,7 +85,7 @@ abstract class TeaFields
         $class = ucfirst($type);
 
         //Make the magic
-        $class = "\Takeatea\TeaThemeOptions\Fields\$class";
+        $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
         $field = new $class();
         $field->templatePages($args, $post);
     }
@@ -219,7 +221,7 @@ abstract class TeaFields
             $defaults = array(
                 'twitter'       => __('Twitter', TTO_I18N),
                 'facebook'      => __('Facebook', TTO_I18N),
-                'google-plus'   => __('Google+', TTO_I18N),
+                'googleplus'   => __('Google+', TTO_I18N),
                 'instagram'     => __('Instagram', TTO_I18N),
             );
         }
@@ -465,7 +467,7 @@ abstract class TeaFields
     protected function getOption($key, $default)
     {
         //Return value from DB
-        return _get_option($key, $default);
+        return TeaThemeOptions::get_option($key, $default);
     }
 
     /**
