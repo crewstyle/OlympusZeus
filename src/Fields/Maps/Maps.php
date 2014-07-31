@@ -133,6 +133,6 @@ class Maps extends TeaFields
         }
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Maps/in_pages.tpl.php');
     }
 }

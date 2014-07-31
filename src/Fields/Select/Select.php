@@ -112,6 +112,6 @@ class Select extends TeaFields
         }
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Select/in_pages.tpl.php');
     }
 }

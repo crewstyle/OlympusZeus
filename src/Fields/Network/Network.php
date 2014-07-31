@@ -89,7 +89,7 @@ class Network extends TeaFields
 
         //Get template
         $area = 'head';
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
 
         //Others vars
         $default_networks = $this->getDefaults('networks');
@@ -117,7 +117,7 @@ class Network extends TeaFields
 
         //Get template
         $area = 'footer';
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
     }
 
     /**

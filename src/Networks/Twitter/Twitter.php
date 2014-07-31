@@ -48,7 +48,7 @@ class Twitter extends TeaNetworks
         $keys = $this->getTokens('twitter');
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Networks/Twitter/in_pages.tpl.php');
     }
 
 

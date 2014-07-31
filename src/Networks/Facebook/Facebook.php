@@ -70,7 +70,7 @@ class Facebook extends TeaNetworks
         }*/
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Networks/Facebook/in_pages.tpl.php');
     }
 
 

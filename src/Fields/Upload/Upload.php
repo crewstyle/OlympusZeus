@@ -109,6 +109,6 @@ class Upload extends TeaFields
         }
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Upload/in_pages.tpl.php');
     }
 }

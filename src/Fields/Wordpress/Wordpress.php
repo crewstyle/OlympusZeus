@@ -165,6 +165,6 @@ class Wordpress extends TeaFields
         }
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Wordpress/in_pages.tpl.php');
     }
 }

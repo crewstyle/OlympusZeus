@@ -132,6 +132,6 @@ class Social extends TeaFields
         $vals = $this->getOption($id, $std);
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Social/in_pages.tpl.php');
     }
 }

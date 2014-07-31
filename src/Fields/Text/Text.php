@@ -147,6 +147,6 @@ class Text extends TeaFields
         }
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Text/in_pages.tpl.php');
     }
 }

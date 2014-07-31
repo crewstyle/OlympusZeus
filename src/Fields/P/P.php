@@ -78,6 +78,6 @@ class P extends TeaFields
         $content = isset($content['content']) ? $content['content'] : '';
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/P/in_pages.tpl.php');
     }
 }

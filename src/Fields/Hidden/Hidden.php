@@ -86,6 +86,6 @@ class Hidden extends TeaFields
         $val = $this->getOption($id, $title);
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Hidden/in_pages.tpl.php');
     }
 }

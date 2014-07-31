@@ -45,10 +45,10 @@ class Googleplus extends TeaNetworks
     public function templatePages()
     {
         //Default variables
-        $keys = $this->getTokens('google-plus');
+        $keys = $this->getTokens('googleplus');
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Networks/Googleplus/in_pages.tpl.php');
     }
 
 

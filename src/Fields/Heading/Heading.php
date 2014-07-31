@@ -79,6 +79,6 @@ class Heading extends TeaFields
         $level = isset($content['level']) ? $content['level'] : 'h2';
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Heading/in_pages.tpl.php');
     }
 }

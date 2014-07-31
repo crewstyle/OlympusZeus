@@ -92,7 +92,7 @@ class Elasticsearch extends TeaFields
         $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
 
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Elasticsearch/in_pages.tpl.php');
     }
 
     /**

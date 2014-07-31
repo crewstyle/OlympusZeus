@@ -74,6 +74,6 @@ class Br extends TeaFields
     public function templatePages($content, $post = array())
     {
         //Get template
-        include('in_pages.tpl.php');
+        include(TTO_PATH . '/Fields/Br/in_pages.tpl.php');
     }
 }
