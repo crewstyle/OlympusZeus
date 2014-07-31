@@ -39,11 +39,6 @@ if (!defined('ABSPATH')) {
     die('You are not authorized to directly access to this page');
 }
 
-
-//----------------------------------------------------------------------------//
-
-include(__DIR__ . '/vendor/autoload.php');
-
 //----------------------------------------------------------------------------//
 
 //The current version
