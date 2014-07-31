@@ -1074,7 +1074,20 @@ class TeaElasticsearch
     protected function getConfig()
     {
         //Return value
-        return $this->config;
+        $default = array(
+            'enable' => 'no',
+            'server_host' => 'localhost',
+            'server_port' => '9200',
+            'index_name' => 'teasearch',
+            'read_timeout' => 5,
+            'write_timeout' => 10,
+            'template' => 'no',
+            'scores' => array(),
+            'index_post' => array(),
+            'index_tax' => array()
+        );
+        $ctn = array_merge($default, $this->config);
+        return $ctn;
     }
 
     /**
