@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9bf5ad4305caff7f48a31b18b19fefce",
+    "hash": "f4738c7b4fffcfdaa0d8393aa7a25da1",
     "packages": [
         {
             "name": "ruflin/elastica",
