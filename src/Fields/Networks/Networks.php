@@ -110,7 +110,8 @@ class Networks extends TeaFields
 
             //Display it
             $class = ucfirst($net);
-            $field = new \Takeatea\TeaThemeOptions\Networks\$class();
+            $class = "\Takeatea\TeaThemeOptions\Networks\$class";
+            $field = new $class();
             $field->templatePages();
         }
 
@@ -159,7 +160,8 @@ class Networks extends TeaFields
 
         //Make the magic
         $class = ucfirst($net);
-        $field = new \TakeaTea\TeaThemeOptions\Networks\$class();
+        $class = "\Takeatea\TeaThemeOptions\Networks\$class";
+        $field = new $class();
         $field->setCurrentPage($page);
 
         //Update connection network
@@ -200,7 +202,8 @@ class Networks extends TeaFields
 
                 //Display it
                 $class = ucfirst($net);
-                $field = new \Takeatea\TeaThemeOptions\Networks\$class();
+                $class = "\Takeatea\TeaThemeOptions\Networks\$class";
+                $field = new $class();
                 $field->setCurrentPage($page);
                 $field->getCallback($request);
 
@@ -230,7 +233,8 @@ class Networks extends TeaFields
 
             //Display it
             $class = ucfirst($net);
-            $field = new \Takeatea\TeaThemeOptions\Networks\$class();
+            $class = "\Takeatea\TeaThemeOptions\Networks\$class";
+            $field = new $class();
             $field->getUpdate();
         }
     }

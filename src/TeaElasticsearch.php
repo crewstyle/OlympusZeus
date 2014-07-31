@@ -206,7 +206,7 @@ class TeaElasticsearch
 
         //Check page
         if (is_search() && !TTO_IS_ADMIN && isset($ctn['template']) && 'no' == $ctn['template']) {
-            include(TTO_PATH . '/src/Fields/Elasticsearch/in_search.tpl.php');
+            include(TTO_PATH . '/Fields/Elasticsearch/in_search.tpl.php');
             exit;
         }
     }

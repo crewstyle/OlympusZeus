@@ -413,7 +413,7 @@ class TeaPages
 
         //Get template and display content
         if (!empty($content)) {
-            include(TTO_PATH . '/src/Tpl/layouts/__layout_admin_message.tpl.php');
+            include(TTO_PATH . '/Tpl/layouts/__layout_admin_message.tpl.php');
         }
     }
 
@@ -604,7 +604,7 @@ class TeaPages
         }
 
         //Get dashboard page contents
-        include(TTO_PATH . '/src/Tpl/contents/__content_dashboard.tpl.php');
+        include(TTO_PATH . '/Tpl/contents/__content_dashboard.tpl.php');
 
         //Build page with contents
         $this->addPage($titles, $details);
@@ -612,7 +612,7 @@ class TeaPages
 
         //Get network connections page contents
         if ($connect) {
-            include(TTO_PATH . '/src/Tpl/contents/__content_connections.tpl.php');
+            include(TTO_PATH . '/Tpl/contents/__content_connections.tpl.php');
 
             //Build page with contents
             $this->addPage($titles, $details);
@@ -621,7 +621,7 @@ class TeaPages
 
         //Get network connections page contents
         if ($elastic) {
-            include(TTO_PATH . '/src/Tpl/contents/__content_elasticsearch.tpl.php');
+            include(TTO_PATH . '/Tpl/contents/__content_elasticsearch.tpl.php');
 
             //Build page with contents
             $this->addPage($titles, $details);
@@ -688,7 +688,7 @@ class TeaPages
             $this->pages[$this->current]['submit'];
 
         //Include template
-        include(TTO_PATH . '/src/Tpl/layouts/__layout_header.tpl.php');
+        include(TTO_PATH . '/Tpl/layouts/__layout_header.tpl.php');
     }
 
     /**
@@ -707,7 +707,7 @@ class TeaPages
         $version = TTO_VERSION;
 
         //Include template
-        include(TTO_PATH . '/src/Tpl/layouts/__layout_footer.tpl.php');
+        include(TTO_PATH . '/Tpl/layouts/__layout_footer.tpl.php');
     }
 
     /**
@@ -729,7 +729,6 @@ class TeaPages
         $includes = $this->getIncludes();
 
         //Get all default fields in the Tea T.O. package
-        //require_once(TTO_PATH . '/src/fields/class-tea-fields.php');
         $defaults_fields = TeaFields::getDefaults('fields');
         $wps = TeaFields::getDefaults('wordpress');
 
@@ -765,7 +764,8 @@ class TeaPages
             }
 
             //Make the magic
-            $field = new \Takeatea\TeaThemeOptions\Fields\$class();
+            $class = "\Takeatea\TeaThemeOptions\Fields\$class";
+            $field = new $class();
             $field->templatePages($content);
         }
     }

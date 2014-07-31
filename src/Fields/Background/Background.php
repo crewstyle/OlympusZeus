@@ -127,7 +127,7 @@ class Background extends TeaFields
 
         //Positions
         $details = $this->getDefaults('background-details');
-        $url = TTO_URI . '/src/Fields/Background/img/';
+        $url = TTO_URI . '/Fields/Background/img/';
 
         //Check selected
         $val = $this->getOption($id, $std);

@@ -83,7 +83,8 @@ abstract class TeaFields
         $class = ucfirst($type);
 
         //Make the magic
-        $field = new \Takeatea\TeaThemeOptions\Fields\$class();
+        $class = "\Takeatea\TeaThemeOptions\Fields\$class";
+        $field = new $class();
         $field->templatePages($args, $post);
     }
 
@@ -494,7 +495,7 @@ abstract class TeaFields
     protected function setAdminMessage($content = '')
     {
         if (!empty($content)) {
-            include_once(TTO_PATH . '/src/Tpl/layouts/__layout_admin_message.tpl.php');
+            include_once(TTO_PATH . '/Tpl/layouts/__layout_admin_message.tpl.php');
         }
     }
 

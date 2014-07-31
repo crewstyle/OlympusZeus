@@ -93,7 +93,7 @@ class Maps extends TeaFields
         $description = isset($content['description']) ? $content['description'] : '';
         $can_upload = $this->getCanUpload();
         $delete = __('Delete selection', TTO_I18N);
-        $url = TTO_URI . '/src/Fields/Maps/img/marker@2x.png';
+        $url = TTO_URI . '/Fields/Maps/img/marker@2x.png';
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array();

@@ -119,7 +119,7 @@ abstract class TeaNetworks
 
         if (!empty($content)) {
             //Get template
-            include(TTO_PATH . '/src/Tpl/layouts/__layout_admin_message.tpl.php');
+            include(TTO_PATH . '/Tpl/layouts/__layout_admin_message.tpl.php');
         }
     }
 }
