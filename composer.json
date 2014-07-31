@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Takteatea\\TeaThemeOptions\\": "src/"
+            "Takeatea\\TeaThemeOptions\\": "src"
         }
     }
 }
