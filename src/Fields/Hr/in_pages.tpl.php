@@ -1,0 +1,1 @@
+<hr class="clear widget" />
