@@ -165,7 +165,7 @@ class TeaPages
         }
 
         //Enqueue all minified scripts
-        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/tea.min.js', $jq);
+        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/teato.min.js', $jq);
     }
 
     /**
