@@ -1,9 +1,22 @@
 {
     "name": "takeatea/tea-theme-options",
-    "description": "",
+    "description": "The Tea Theme Options for all Wordpress Theme",
+    "keywords": ["wordpress","teathemeoptions","tto","teato","theme","options"],
+    "homepage": "http://takeatea.com/",
+    "license": "GPL v3",
     "type": "wordpress-plugin",
-
+    "authors": [
+        {
+            "name": "Achraf Chouk",
+            "homepage": "http://takeatea.com/"
+        }
+    ],
     "require": {
         "ruflin/Elastica": "1.3.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Takteatea": "tea-theme-options/"
+        }
     }
 }
