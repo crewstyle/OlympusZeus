@@ -25,13 +25,13 @@
                     $link = isset($vals[$key]['link']) ? $vals[$key]['link'] : '';
 
                     //Treat contents
-                    $selected = !empty($display) && 'yes' == $display ? true : false;
+                    $selected = !empty($display) && '1' == $display ? true : false;
                     $for = $id . '_' . $key;
                 ?>
                 <div data-network="<?php echo $key ?>">
                     <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                         <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
-                        <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>][display]" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
+                        <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>][display]" id="<?php echo $for ?>" value="1" <?php echo $selected ? 'checked="checked" ' : '' ?> />
                         <i class="fa fa-<?php echo $key ?> fa-lg"></i>
                     </label>
 
