@@ -72,7 +72,7 @@ class P extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Default variables
         $content = isset($content['content']) ? $content['content'] : '';

@@ -178,6 +178,9 @@ hr {
 
 
 /*--- [TEA_TO_WRAP] ---*/
+.tea_tax_main {
+    margin-top:30px;
+}
 .tea_to_wrap {
     background:#fff;
     border:1px solid #e5e5e5;
@@ -188,10 +191,32 @@ hr {
     -moz-box-shadow:0 1px 1px rgba(0,0,0,.04);
     box-shadow:0 1px 1px rgba(0,0,0,.04);
 }
+.tea_tax_main .tea_to_wrap,
+.tea_tax_wrap .tea_to_wrap {
+    background:transparent;
+    border:none;
+    clear:both;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none;
+}
+.tea_tax_wrap .tea_to_wrap > h3 {
+    float:left;
+    margin:0;
+    padding:0 10px 0 0;
+    width:200px;
+}
 .tea_to_wrap .inside {
     font-size:13px;
     line-height:1.4em;
     padding:0 12px 12px;
+}
+.tea_tax_main .tea_to_wrap > .inside {
+    padding:0;
+}
+.tea_tax_wrap .tea_to_wrap > .inside {
+    margin-left:210px;
+    padding:0 10px;
 }
 .meta-box-sortables .tea_to_wrap {
     border:none;
@@ -1252,10 +1277,7 @@ a.tea-connection:before {
     position:relative;
 }
 .tea_to_wrap.tea_to_review .contextual-help-tabs li .details {
-    margin-top:-6px;
-    position:absolute;
-    right:10px;
-    top:50%;
+    float:right;
 }
 .tea_to_wrap .contextual-help-tabs hr {
     margin-left:4px;

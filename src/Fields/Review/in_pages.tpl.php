@@ -10,8 +10,6 @@
                     <?php foreach ($users as $k => $author): ?>
                         <li class="<?php echo !$k ? 'active' : '' ?>">
                             <a href="#<?php echo $id ?>-author-<?php echo $author ?>">
-                                <?php echo get_avatar(get_the_author_meta('user_email', $author), 50) ?>
-
                                 <span class="details">
                                     <?php if ($auth == $author): ?>
                                         <i class="fa fa-mortar-board fa-lg"></i>
@@ -20,6 +18,8 @@
                                         <i class="fa fa-pencil fa-lg"></i>
                                     <?php endif ?>
                                 </span>
+
+                                <?php echo get_the_author_meta('display_name', $author) ?>
                             </a>
                         </li>
                     <?php endforeach ?>

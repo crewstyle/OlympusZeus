@@ -98,7 +98,7 @@ class TeaCustomPostTypes
             //Check if no master page is defined
             if (!isset($cpt['title']) || empty($cpt['title'])) {
                 echo sprintf(__('Something went wrong in your parameters 
-                    definition: no title defined for you <b>%s</b> 
+                    definition: no title defined for your <b>%s</b> 
                     custom post type. Please, try again by 
                     filling the form properly.', TTO_I18N), $key);
                 continue;

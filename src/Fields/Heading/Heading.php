@@ -72,7 +72,7 @@ class Heading extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Heading', TTO_I18N);

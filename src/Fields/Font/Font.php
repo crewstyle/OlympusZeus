@@ -79,7 +79,7 @@ class Font extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Do not display field on CPTs
         if (!empty($post)) {
@@ -126,7 +126,7 @@ class Font extends TeaFields
         }
 
         //Check selected
-        $val = $this->getOption($id, $std);
+        $val = $this->getOption($prefix.$id, $std);
 
         //Get template
         include(TTO_PATH . '/Fields/Font/in_pages.tpl.php');

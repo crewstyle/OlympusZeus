@@ -80,7 +80,7 @@ class Radio extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Check if an id is defined at least
         if (empty($post)) {
@@ -103,7 +103,7 @@ class Radio extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = $this->getOption($id, $std);
+            $val = $this->getOption($prefix.$id, $std);
         }
         //On CPT
         else {

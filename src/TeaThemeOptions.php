@@ -3,6 +3,7 @@ namespace Takeatea\TeaThemeOptions;
 
 use Takeatea\TeaThemeOptions\Fields\Network;
 use Takeatea\TeaThemeOptions\TeaCustomPostTypes;
+use Takeatea\TeaThemeOptions\TeaCustomTaxonomies;
 use Takeatea\TeaThemeOptions\TeaElasticsearch;
 use Takeatea\TeaThemeOptions\TeaPages;
 
@@ -10,10 +11,13 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.1
- * Snippet URI: http://git.tools.takeatea.com/crewstyle/tea_theme_options
+ * Version: 1.4.2
+ * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
  * professional looking theme options panels to your WordPress theme.
+ * It offers the best and easy way to create custom post types and
+ * custom taxonomies.
+ *
  * Author: Achraf Chouk
  * Author URI: http://takeatea.com/
  * License: GPL v3
@@ -44,7 +48,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.1');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.2');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -54,7 +58,7 @@ defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
 //The URI
 defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri() . '/vendor/takeatea/tea-theme-options');
 //The path
-defined('TTO_PATH')         or define('TTO_PATH', __DIR__);
+defined('TTO_PATH')         or define('TTO_PATH', dirname(__FILE__));
 //The nonce ajax value
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
 
@@ -81,8 +85,10 @@ class TeaThemeOptions
     //Define protected vars
     protected $pages = null;
     protected $customposttypes = null;
+    protected $customtaxonomies = null;
     protected $canbuildpages = false;
     protected $canbuildcpts = false;
+    protected $canbuildtaxonomies = false;
     protected $elasticsearch = null;
 
     /**
@@ -119,6 +125,9 @@ class TeaThemeOptions
 
         //CPT component
         $this->customposttypes = new TeaCustomPostTypes();
+
+        //Taxonomies component
+        $this->customtaxonomies = new TeaCustomTaxonomies();
 
         //Elasticsearch component
         $this->elasticsearch = new TeaElasticsearch();
@@ -232,6 +241,49 @@ class TeaThemeOptions
 
         //Build menus
         $this->customposttypes->buildCPTs();
+    }
+
+    /**
+     * Add a CPT to the theme options panel.
+     *
+     * @param array $configs Array containing all configurations
+     * @param array $contents Contains all data
+     *
+     * @since 1.4.0
+     */
+    public function addTaxonomy($configs = array(), $contents = array())
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Add page
+        $this->customtaxonomies->addTaxonomy($configs, $contents);
+        $this->canbuildtaxonomies = true;
+    }
+
+    /**
+     * Register taxonomies.
+     *
+     * @uses add_action()
+     *
+     * @since 1.4.0
+     */
+    public function buildTaxonomies()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we got cpts
+        if (!$this->canbuildtaxonomies) {
+            return;
+        }
+
+        //Build menus
+        $this->customtaxonomies->buildTaxonomies();
     }
 
     /**

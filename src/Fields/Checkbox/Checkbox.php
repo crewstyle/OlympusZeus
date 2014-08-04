@@ -83,7 +83,7 @@ class Checkbox extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Check current post on CPTs
         if (empty($post)) {
@@ -106,7 +106,7 @@ class Checkbox extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = $this->getOption($id, $std);
+            $vals = $this->getOption($prefix.$id, $std);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT

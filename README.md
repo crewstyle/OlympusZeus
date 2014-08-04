@@ -1,4 +1,4 @@
-# Tea Theme Options (v1.4.1)
+# Tea Theme Options (v1.4.2)
 
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.
@@ -8,6 +8,8 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 + **[Options API](http://codex.wordpress.org/Options_API)** - A simple and standardized way of storing data in the database.
 + **[Transients API](http://codex.wordpress.org/Transients_API)** - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.
 + **[Elasticsearch API](http://www.elasticsearch.org/)** - Elasticsearch creates scaleable, real-time search for your website by indexing all your datas millions of times a day.
++ **[Custom Post Types](http://codex.wordpress.org/Post_Types)** - Here is the simpliest way to create Wordpress Custom Post Types! A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way.
++ **[Custom Taxonomies](http://codex.wordpress.org/Taxonomies)** - Since the **1.4.2 version**, you are now able to create easily Wordpress Custom Taxonomies with a couple of lines code. The Tea TO permit to add custom fields as you want.
 + **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.+ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
 + **Easier for administrators** - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
@@ -33,7 +35,7 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
     "type": "wordpress-theme",
     "minimum-stability": "dev",
     "require": {
-        "takeatea/tea-theme-options": "1.4.1"
+        "takeatea/tea-theme-options": "1.4.2"
     }
 }
 ```
@@ -65,7 +67,7 @@ The next step is to make your theme and the Tea Theme Options work together.
 
 To create your first new settings page, simply follow the instructions.
 
-**1. First of all, use the operator `use` to include the library _-at the very top-_ of your `functions.php` file:**
+**1. First of all, use the operator `use` to include the library _- at the very top -_ of your `functions.php` file:**
 
 ```php
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -110,11 +112,11 @@ $tea_contents = array(
     ),
     array(
         'type' => 'heading',
-        'title' => __('Footer.', TEMPLATE_DICTIONARY)
+        'title' => __('Footer.')
     ),
     array(
         'type' => 'text',
-        'title' => __('Copyright.', TEMPLATE_DICTIONARY),
+        'title' => __('Copyright.'),
         'id' => 'footer_copyright',
         'std' => __('&copy; MyWebsite.com, all rights reserved ~ Built with passion and Tea Theme Options!')
     ),

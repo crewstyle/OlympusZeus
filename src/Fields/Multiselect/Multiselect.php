@@ -81,7 +81,7 @@ class Multiselect extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Check if an id is defined at least
         if (empty($post)) {
@@ -103,7 +103,7 @@ class Multiselect extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = $this->getOption($id, $std);
+            $vals = $this->getOption($prefix.$id, $std);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT

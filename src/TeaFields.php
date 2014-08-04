@@ -63,7 +63,7 @@ abstract class TeaFields
      * ABSTRACT & STATIC FUNCTIONS
      **/
 
-    abstract protected function templatePages($content, $post = array());
+    abstract protected function templatePages($content, $post = array(), $prefix = '');
 
     /**
      * Build HTML component.

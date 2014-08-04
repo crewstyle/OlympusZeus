@@ -73,7 +73,7 @@ class Hidden extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Check if an id is defined at least
         $this->checkId($content);
@@ -83,7 +83,7 @@ class Hidden extends TeaFields
         $title = isset($content['title']) ? $content['title'] : '';
 
         //Check selected
-        $val = $this->getOption($id, $title);
+        $val = $this->getOption($prefix.$id, $title);
 
         //Get template
         include(TTO_PATH . '/Fields/Hidden/in_pages.tpl.php');

@@ -56,7 +56,7 @@ class Elasticsearch extends TeaFields
      *
      * @since 1.4.0
      */
-    public function templatePages($content, $post = array())
+    public function templatePages($content, $post = array(), $prefix = '')
     {
         //Do not display Elasticsearch field on CPTs
         if (!empty($post)) {
@@ -88,8 +88,9 @@ class Elasticsearch extends TeaFields
         $scores = TeaElasticsearch::getFields();
 
         //Check selected
-        $vals = $this->getOption($id, $std);
+        $vals = $this->getOption($prefix.$id, $std);
         $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
+        $vals = array_merge($std, $vals);
 
         //Get template
         include(TTO_PATH . '/Fields/Elasticsearch/in_pages.tpl.php');
