@@ -1,3 +1,24 @@
+## 1.4.2 (August 4, 2014)
+
+Update code to the new version
+
+- **New:**
+  - new Custom Taxonomies
+
+
+## 1.4.1 (August 1, 2014)
+
+Update code to the new version
+
+- **New:**
+  - new <review> field
+  - new <elasticsearch> field
+  - new folder structure
+  - use of namespaces
+  - use of composer
+  - use of GruntJS
+
+
 ## 1.4.0 (April 9, 2014)
 
 Update code to the new version
