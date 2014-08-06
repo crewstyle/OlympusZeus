@@ -5,7 +5,7 @@
     </h3>
 
     <div class="inside tea-inside <?php echo $mode ?>">
-        <?php if (!empty($contents) && 2 <= count($contents)): ?>
+        <?php if (!empty($contents) && 1 <= count($contents)): ?>
             <?php $squares = $multiple ? '[]' : '' ?>
             <select name="<?php echo $id.$squares ?>" id="<?php echo $id ?>" <?php echo $multiple ? 'multiple="true" size="5"' : '' ?>>
                 <?php foreach ($contents as $key => $optgroup): ?>
