@@ -48,9 +48,10 @@ class TeaPages
     //Define protected vars
     protected $adminmessage;
     protected $breadcrumb = array();
-    protected $capability = 'edit_pages';
-    protected $categories = array();
     protected $can_upload = false;
+    protected $capability = TTO_CAP;
+    protected $caps = false;
+    protected $categories = array();
     protected $current = '';
     protected $duration = TTO_DURATION;
     protected $icon_small = '/assets/img/teato-tiny.svg';
@@ -70,7 +71,7 @@ class TeaPages
      * @param boolean $connect Define if we can display connections page
      * @param boolean $elastic Define if we can display elasticsearch page
      *
-     * @since 1.4.0
+     * @since 1.4.3
      */
     public function __construct($identifier, $connect = true, $elastic = true)
     {
@@ -89,6 +90,12 @@ class TeaPages
         //Define parameters
         $this->can_upload = current_user_can('upload_files');
         $this->identifier = $identifier;
+        $this->caps = TeaThemeOptions::get_option('tea_capabilities', false);
+
+        //Set capabilities if needed
+        if (!$this->caps) {
+            $this->updateCapabilities(false);
+        }
 
         //Set default duration
         $this->setDuration();
@@ -96,22 +103,45 @@ class TeaPages
         //Get current page
         $this->current = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
 
+        //Define activated connection
+        $isactive = TeaThemeOptions::getAccessToken(true);
+        $isdismissed = TeaThemeOptions::get_option('tea_dismiss', false);
+
+        //Check connection
+        if (empty($isactive) && !$isdismissed) {
+            // Show connect notice on dashboard and plugins pages
+            add_action('load-index.php', array(&$this, '__getNotices'));
+            add_action('load-plugins.php', array(&$this, '__getNotices'));
+        }
+
         //Build Dashboard contents
         $this->buildDefaults($connect, $elastic);
 
-        //Update options...
-        if (isset($_REQUEST['tea_to_settings'])) {
+        //Make some actions
+        if (isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']) {
+            //Get the kind of action asked
+            $for = isset($_REQUEST['for']) ? $_REQUEST['for'] : '';
 
-            $this->updateOptions($_REQUEST, $_FILES);
-        }
-        //...Or update elasticsearch options...
-        else if (isset($_REQUEST['tea_to_elasticsearch'])) {
-
-            $this->updateElasticsearch($_REQUEST);
-        }
-        //...Or update network data
-        else if (isset($_REQUEST['tea_to_callback']) || isset($_REQUEST['tea_to_network'])) {
-            $this->updateNetworks($_REQUEST);
+            //Update capabilities...
+            if ('caps' == $for) {
+                $this->updateCapabilities();
+            }
+            //...Or update options...
+            else if ('settings' == $for) {
+                $this->updateOptions($_REQUEST, $_FILES);
+            }
+            //...Or update elasticsearch options...
+            else if ('elasticsearch' == $for) {
+                $this->updateElasticsearch($_REQUEST);
+            }
+            //...Or update network data
+            else if ('callback' == $for || 'network' == $for) {
+                $this->updateNetworks($_REQUEST);
+            }
+            //...Or dismiss admin notice
+            else if ('dismiss' == $for) {
+                $this->updateNotice(true);
+            }
         }
 
         //Add custom CSS colors
@@ -188,11 +218,9 @@ class TeaPages
         }*/
 
         //Enqueue usefull styles
-        if (isset($this->pages[$this->current])) {
-            wp_enqueue_style('media-views');
-            wp_enqueue_style('farbtastic');
-            wp_enqueue_style('wp-color-picker');
-        }
+        wp_enqueue_style('media-views');
+        wp_enqueue_style('farbtastic');
+        wp_enqueue_style('wp-color-picker');
 
         //Enqueue all minified styles
         wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.min.css');
@@ -268,7 +296,7 @@ class TeaPages
                 //Build WP menu in admin bar
                 $wp_admin_bar->add_menu(array(
                     'id' => $this->identifier,
-                    'title' => $page['name'],
+                    'title' => $page['title'],
                     'href' => admin_url('admin.php?page=' . $this->identifier)
                 ));
             }
@@ -320,6 +348,9 @@ class TeaPages
         foreach ($this->pages as $page) {
             //Build slug and check it
             $is_page = $page['slug'] == $this->current ? true : $is_page;
+            $capability = in_array($page['slug'], array($this->identifier.'_connections', $this->identifier.'_elasticsearch')) 
+                ? TTO_CAP_MAX 
+                : $this->capability;
 
             //Check the main page
             if ($this->identifier == $page['slug']) {
@@ -349,7 +380,7 @@ class TeaPages
                     $this->identifier,              //parent slug
                     $page['title'],                 //page title
                     $page['name'],                  //page name
-                    $this->capability,              //capability
+                    $capability,                    //capability
                     $page['slug'],                  //menu slug
                     array(&$this, 'buildContent')   //display content
                 );
@@ -371,6 +402,42 @@ class TeaPages
         add_action('admin_print_scripts', array(&$this, '__assetScripts'));
         add_action('admin_print_styles', array(&$this, '__assetStyles'));
         add_filter('admin_body_class', array(&$this, '__bodyStyle'));
+    }
+
+    /**
+     * Display the admin notice.
+     *
+     * @since 1.4.3
+     */
+    public function __displayNotice()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check user capability
+        if (!current_user_can(TTO_CAP_MAX)) {
+            return;
+        }
+
+        //Define contents
+        $connect = admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=connect');
+        $dismiss = admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=dismiss');
+
+        //Display all
+        include(TTO_PATH . '/Tpl/layouts/__layout_admin_connect.tpl.php');
+    }
+
+    /**
+     * Hook to display admin notice.
+     *
+     * @since 1.4.3
+     */
+    public function __getNotices()
+    {
+        //Make the magic
+        add_action('admin_notices', array(&$this, '__displayNotice'));
     }
 
     /**
@@ -428,7 +495,7 @@ class TeaPages
         }
 
         //Update capabilities
-        $this->capability = 'manage_options';
+        $this->capability = TTO_CAP;
 
         //Define the slug
         $slug = isset($configs['slug']) ? $this->getSlug($configs['slug']) : $this->getSlug();
@@ -583,12 +650,15 @@ class TeaPages
         //Get dashboard page contents
         include(TTO_PATH . '/Tpl/contents/__content_dashboard.tpl.php');
 
+        //Get current user capabilities
+        $canuser = current_user_can(TTO_CAP_MAX);
+
         //Build page with contents
         $this->addPage($titles, $details);
         unset($titles, $details);
 
         //Get network connections page contents
-        if ($connect) {
+        if ($connect && $canuser) {
             include(TTO_PATH . '/Tpl/contents/__content_connections.tpl.php');
 
             //Build page with contents
@@ -597,7 +667,7 @@ class TeaPages
         }
 
         //Get network connections page contents
-        if ($elastic) {
+        if ($elastic && $canuser) {
             include(TTO_PATH . '/Tpl/contents/__content_elasticsearch.tpl.php');
 
             //Build page with contents
@@ -626,7 +696,6 @@ class TeaPages
 
         //Include class field
         if (!isset($includes['elasticsearch'])) {
-            //Set the include
             $this->setIncludes('elasticsearch');
         }
 
@@ -639,7 +708,7 @@ class TeaPages
     /**
      * Build header layout.
      *
-     * @since 1.4.0
+     * @since 1.4.3
      */
     protected function buildLayoutHeader()
     {
@@ -647,6 +716,9 @@ class TeaPages
         $links = $this->breadcrumb;
         $icon = $this->icon_big;
         $page = empty($this->current) ? $this->identifier : $this->current;
+
+        //Works on params
+        $updated = isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action'] && isset($_REQUEST['for']) && 'settings' == $_REQUEST['for'] ? true : false;
 
         //Works on title
         $title = empty($this->current) ? 
@@ -682,6 +754,9 @@ class TeaPages
 
         //Display version
         $version = TTO_VERSION;
+
+        //Display pages
+        $capurl = current_user_can(TTO_CAP_MAX) ? admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=caps') : '';
 
         //Include template
         include(TTO_PATH . '/Tpl/layouts/__layout_footer.tpl.php');
@@ -743,7 +818,6 @@ class TeaPages
 
             //Make the magic
             $field = new $class();
-
             $field->templatePages($content);
         }
     }
@@ -941,6 +1015,44 @@ class TeaPages
     }
 
     /**
+     * Create roles and capabilities.
+     *
+     * @param string $key The name of the transient
+     *
+     * @since 1.4.3
+     */
+    protected function updateCapabilities($redirect = true)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Get global WP roles
+        global $wp_roles;
+
+        //Check them
+        if (class_exists('WP_Roles')) {
+            $wp_roles = !isset($wp_roles) ? new WP_Roles() : $wp_roles;
+        }
+
+        if (!is_object($wp_roles)) {
+            return;
+        }
+
+        //Add custom role
+        $wp_roles->add_cap('administrator', TTO_CAP_MAX);
+
+        //Update DB
+        TeaThemeOptions::set_option('tea_capabilities', true);
+
+        //Redirect to Tea TO homepage
+        if ($redirect) {
+            wp_safe_redirect(admin_url('admin.php?page='.$this->identifier));
+        }
+    }
+
+    /**
      * Register $_POST and $_FILES into transients.
      *
      * @uses wp_handle_upload()
@@ -977,7 +1089,7 @@ class TeaPages
      * @uses wp_handle_upload()
      * @param array $request Contains all data in $_POST
      *
-     * @since 1.4.0
+     * @since 1.4.3
      */
     protected function updateNetworks($request)
     {
@@ -986,8 +1098,11 @@ class TeaPages
             return;
         }
 
+        //Get action
+        $for = isset($request['for']) ? $request['for'] : '';
+
         //Check if a network connection is asked
-        if (!isset($request['tea_to_callback']) && !isset($request['tea_to_network'])) {
+        if ('callback' != $for && 'network' != $for) {
             $this->adminmessage = __('Something went wrong in your parameters 
                 definition. You need to specify a network to make the 
                 connection happens.', TTO_I18N);
@@ -1011,13 +1126,31 @@ class TeaPages
     }
 
     /**
+     * Hide or unhide notice admin message.
+     *
+     * @param boolean $dismiss Define if we have to hide or unhide notice
+     *
+     * @since 1.4.3
+     */
+    protected function updateNotice($dismiss)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Set default
+        TeaThemeOptions::set_option('tea_dismiss', $dismiss);
+    }
+
+    /**
      * Register $_POST and $_FILES into transients.
      *
      * @uses wp_handle_upload()
      * @param array $request Contains all data in $_REQUEST
      * @param array $files Contains all data in $_FILES
      *
-     * @since 1.4.0
+     * @since 1.4.3
      */
     protected function updateOptions($request, $files)
     {
@@ -1029,7 +1162,7 @@ class TeaPages
         //Set all options in transient
         foreach ($request as $k => $v) {
             //Don't register this default value
-            if ('tea_to_settings' == $k || 'submit' == $k) {
+            if ('action' == $k || 'for' == $k || 'updated' == $k || 'submit' == $k) {
                 continue;
             }
 

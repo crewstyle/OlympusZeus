@@ -24,7 +24,7 @@
         </ul>
     </nav>
 
-    <?php if (isset($_GET['updated'])): ?>
+    <?php if ($updated): ?>
         <div class="alert alert-success">
             <p><?php _e('The Tea Theme Options is updated.', TTO_I18N) ?></p>
         </div>
@@ -33,8 +33,8 @@
     <?php if (!empty($description)): ?><p><?php echo $description ?></p><?php endif ?>
 
     <?php if ($submit): ?>
-    <form method="post" action="admin.php?page=<?php echo $page ?>&updated=true" enctype="multipart/form-data">
-        <input type="hidden" name="tea_to_settings" id="tea_to_settings" value="true" />
+    <form method="post" action="admin.php?page=<?php echo $page ?>&action=tea_action&for=settings" enctype="multipart/form-data">
+        <input type="hidden" name="updated" id="updated" value="true" />
     <?php endif ?>
 
         <div id="poststuff">

@@ -90,9 +90,10 @@ class Network extends TeaFields
         //Get template
         $area = 'head';
         include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
+        echo __('Coming soon...', TTO_I18N);
 
         //Others vars
-        $default_networks = $this->getDefaults('networks');
+        /*$default_networks = $this->getDefaults('networks');
         $includes = $this->getIncludes();
         $page = $this->getCurrentPage();
 
@@ -113,7 +114,7 @@ class Network extends TeaFields
             $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
             $field = new $class();
             $field->templatePages();
-        }
+        }*/
 
         //Get template
         $area = 'footer';

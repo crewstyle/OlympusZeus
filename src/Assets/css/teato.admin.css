@@ -23,6 +23,7 @@
 /*--- [MAIN CONTENT] ---*/
 html {
     background-color:#f7f7f7;
+    background-image:url(../img/section-square.png);
 }
 h1, h2, h3 {
     font-family:'Raleway','Open Sans',sans-serif;
@@ -42,6 +43,50 @@ a {
     text-decoration:none;
 }
 a:focus, a:hover {
+    color:#91d04d;
+}
+
+
+/*--- [ADMINBAR] ---*/
+#wpadminbar {
+    -webkit-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    -moz-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    box-shadow:0 3px 0 rgba(0,0,0,.25);
+}
+#wpadminbar #adminbarsearch:before,
+#wpadminbar .ab-icon:before,
+#wpadminbar .ab-item:before {
+    color:#fff;
+}
+#wpadminbar .ab-top-menu>li.hover>.ab-item,
+#wpadminbar .ab-top-menu>li:hover>.ab-item,
+#wpadminbar .ab-top-menu>li>.ab-item:focus,
+#wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus {
+    background:#111;
+    color:#91d04d;
+}
+#wpadminbar .menupop .ab-sub-wrapper,
+#wpadminbar .shortlink-input {
+    background:#111;
+    -webkit-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    -moz-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    box-shadow:0 3px 0 rgba(0,0,0,.25);
+}
+#wpadminbar .quicklinks .menupop ul li a:focus,
+#wpadminbar .quicklinks .menupop ul li a:focus strong,
+#wpadminbar .quicklinks .menupop ul li a:hover,
+#wpadminbar .quicklinks .menupop ul li a:hover strong,
+#wpadminbar .quicklinks .menupop.hover ul li a:focus,
+#wpadminbar .quicklinks .menupop.hover ul li a:hover,
+#wpadminbar li .ab-item:focus:before,
+#wpadminbar li a:focus .ab-icon:before,
+#wpadminbar li.hover .ab-icon:before,
+#wpadminbar li.hover .ab-item:before,
+#wpadminbar li:hover #adminbarsearch:before,
+#wpadminbar li:hover .ab-icon:before,
+#wpadminbar li:hover .ab-item:before,
+#wpadminbar.nojs .quicklinks .menupop:hover ul li a:focus,
+#wpadminbar.nojs .quicklinks .menupop:hover ul li a:hover {
     color:#91d04d;
 }
 
@@ -69,6 +114,7 @@ ul#adminmenu .wp-submenu li.current a:hover,
 ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu li.current a {
     color:#91d04d;
 }
+#adminmenu li.current a.menu-top,
 ul#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu {
     background:#3b3d3c;
     color:#fff;
@@ -93,6 +139,9 @@ ul#adminmenu .wp-submenu,
 .folded ul#adminmenu .wp-has-current-submenu .wp-submenu,
 .folded ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu {
     background:#303231;
+    -webkit-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    -moz-box-shadow:0 3px 0 rgba(0,0,0,.25);
+    box-shadow:0 3px 0 rgba(0,0,0,.25);
 }
 ul#adminmenu .wp-submenu a {
     color:#fff;
@@ -156,6 +205,7 @@ input[type=checkbox]:checked:before {
 .plugins .active td, .plugins .active th {
     background-color:#f7f7f7;
 }
+.star-rating .star,
 .wp-list-table a.row-title {
     color:#3b3d3c;
 }

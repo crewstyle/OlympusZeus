@@ -1,4 +1,4 @@
-# Tea Theme Options (v1.4.2)
+# Tea Theme Options (v1.4.3)
 
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.

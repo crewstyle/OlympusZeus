@@ -111,7 +111,7 @@ class Elasticsearch extends TeaFields
         }
 
         //Check if this action was properly called
-        if (!isset($request['tea_to_elasticsearch'])) {
+        if (!isset($request['for']) || 'elasticsearch' != $request['for']) {
             return;
         }
 

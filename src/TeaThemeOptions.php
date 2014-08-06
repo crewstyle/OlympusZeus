@@ -11,7 +11,7 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.2
+ * Version: 1.4.3
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
  * professional looking theme options panels to your WordPress theme.
@@ -48,7 +48,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.2');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -59,6 +59,10 @@ defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
 defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri() . '/vendor/takeatea/tea-theme-options');
 //The path
 defined('TTO_PATH')         or define('TTO_PATH', dirname(__FILE__));
+//The path
+defined('TTO_CAP')          or define('TTO_CAP', 'edit_posts');
+//The path
+defined('TTO_CAP_MAX')      or define('TTO_CAP_MAX', 'manage_tea_theme_options');
 //The nonce ajax value
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
 
@@ -72,7 +76,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.1
+ * @since 1.4.3
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
@@ -284,6 +288,61 @@ class TeaThemeOptions
 
         //Build menus
         $this->customtaxonomies->buildTaxonomies();
+    }
+
+    /**
+     * Return the access token got from teato.me
+     *
+     * @param integer $user_id The user ID stored in DB for the connection
+     * @return array $array Contains all data for the connection
+     *
+     * @since 1.4.3
+     */
+    public static function getAccessToken($user_id = 0)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return array();
+        }
+
+        //Check user ID
+        if ($user_id) {
+            //Get datas
+            //$userid = $this->get_option('tea_to_userid', 0);
+            $tokens = TeaThemeOptions::get_option('tea_to_tokens', array());
+
+            //Check integrity
+            if (/*empty($userid) || */empty($tokens)) {
+                return array();
+            }
+
+            //Get user token
+            $single = isset($tokens[$user_id]) ? $tokens[$user_id] : '';
+            $chunks = explode('.', $single);
+
+            //Check chunks
+            if (empty($chunks[0]) || empty($chunks[1])) {
+                return array();
+            }
+
+            //Define token
+            $token = $token_chunks[0].'.'.$token_chunks[1];
+        }
+        else {
+            //Get stored blog token
+            $token = TeaThemeOptions::get_option('tea_to_token_blog', '');
+
+            //Check the token
+            if (empty($token)) {
+                return array();
+            }
+        }
+
+        //Return datas
+        return array(
+            'secret' => $token,
+            'external_user_id' => $user_id,
+        );
     }
 
     /**

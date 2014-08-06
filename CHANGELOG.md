@@ -1,3 +1,8 @@
+## 1.4.3 (August 6, 2014)
+
+Add capabilities, admin notice, and so much more.
+
+
 ## 1.4.2 (August 4, 2014)
 
 Update code to the new version

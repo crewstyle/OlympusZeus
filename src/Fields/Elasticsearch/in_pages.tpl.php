@@ -37,15 +37,13 @@
 
                 <div class="forms">
                     <?php if ('yes' == $vals['enable'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
-                        <form action="admin.php?page=<?php echo $page ?>&updated=true" method="post">
-                            <input type="hidden" name="tea_to_elasticsearch" value="1" />
+                        <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post">
                             <input type="hidden" name="tea_elastic_index" value="1" />
                             <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>
                         </form>
                     <?php endif ?>
 
-                    <form action="admin.php?page=<?php echo $page ?>&updated=true" method="post">
-                        <input type="hidden" name="tea_to_elasticsearch" value="1" />
+                    <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post">
                         <input type="hidden" name="tea_elastic_enable" value="1" />
 
                         <?php if ('no' == $vals['enable']): ?>
@@ -59,8 +57,7 @@
                 </div>
             </div>
 
-            <form action="admin.php?page=<?php echo $page ?>&updated=true" method="post" class="contextual-help-tabs-wrap">
-                <input type="hidden" name="tea_to_elasticsearch" value="1" />
+            <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post" class="contextual-help-tabs-wrap">
                 <input type="hidden" name="<?php echo $id ?>[enable]" value="yes" />
 
                 <!-- Globals -->
@@ -210,23 +207,6 @@
                                 <?php endforeach ?>
                             </fieldset>
                         </div>
-
-                        <?php /*hr class="clear"/>
-
-                        <h3><?php _e('Result scoring', TTO_I18N) ?></h3>
-                        <p><?php _e('Here you can define the <b>importance order</b> of your fields. Remember that <i>0</i> means the fields has no influence on search.', TTO_I18N) ?>
-
-                        <?php
-                            foreach ($scores as $sc):
-                                $for = $id . '_scores_' . $sc;
-                        ?>
-                            <div class="inside tea-inside select">
-                                <label for="<?php echo $for ?>" class="inlineblock"><?php echo ucfirst($sc) ?></label>
-                                <input type="number" name="<?php echo $id ?>[scores][<?php echo $sc ?>]" id="<?php echo $for ?>" value="<?php echo $vals['scores'][$sc] ?>" style="width:200px" maxlength="2" min="0" max="20" step="1" />
-                            </div>
-
-                            <br class="clear"/>
-                        <?php endforeach*/ ?>
 
                         <br class="clear"/>
 
