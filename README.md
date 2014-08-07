@@ -15,6 +15,9 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
 
 
+## [To learn more about the Tea TO, read the docs](https://github.com/Takeatea/tea_theme_options/wiki)
+
+
 ## Summary
 
 + [1) Installation the theme roller](#1-installing-the-theme-roller)
