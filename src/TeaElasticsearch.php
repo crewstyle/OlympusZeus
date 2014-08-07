@@ -17,12 +17,7 @@ use Elastica\Type\Mapping;
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
- * Tea TO backend functions and definitions
- * 
- * @package TakeaTea
- * @subpackage Tea Elasticsearch
- * @since 1.4.0
- *
+ * TEA ELASTICSEARCH
  */
 
 if (!defined('ABSPATH')) {

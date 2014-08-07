@@ -2,15 +2,15 @@
  * tea.upload.js v1.0.0
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 20xx Take a Tea, Inc.
+ * Copyright 2014 Take a Tea (http://takeatea.com)
  * ===================================================
  * Example:
  *      $('.tea-inside.upload').tea_upload({
- *          wpid: null,
- *          media: wp.media,
- *          multiple: $self.attr('data-multiple') || false,
- *          title: $self.attr('data-title') || 'Media',
- *          type: $self.attr('data-type') || 'image'
+ *          wpid: null,                         //Contains Wordpress textarea ID
+ *          media: wp.media,                    //Contains Wordpress media element
+ *          multiple: false,                    //Define if user can have multiple selection in modal
+ *          title: 'Media',                     //Title of the media popin
+ *          type: 'image'                       //Define the kind of items to display in modal
  *      });
  * =================================================== */
 

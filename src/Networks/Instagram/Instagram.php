@@ -4,12 +4,7 @@ namespace Takeatea\TeaThemeOptions\Networks\Instagram;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
- * Tea Theme Options Instagram network
- * 
- * @package TakeaTea
- * @subpackage Tea Networks Instagram
- * @since 1.4.0
- *
+ * TEA INSTAGRAM NETWORK
  */
 
 if (!defined('ABSPATH')) {

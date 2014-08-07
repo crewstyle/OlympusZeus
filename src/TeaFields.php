@@ -5,22 +5,6 @@ use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
  * TEA FIELDS
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if (!defined('ABSPATH')) {
@@ -39,7 +23,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Fields
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.0
+ * @since 1.4.3.2
  *
  */
 abstract class TeaFields
@@ -119,7 +103,7 @@ abstract class TeaFields
      * @return array $defaults All defaults data provided by the Tea TO
      * @todo find a better way to social networks
      *
-     * @since 1.4.0
+     * @since 1.4.3.2
      */
     static function getDefaults($return = 'images')
     {
@@ -146,27 +130,6 @@ abstract class TeaFields
                     'repeat-y'      => __('Background is repeated vertically only.', TTO_I18N),
                     'repeat'        => __('Background is repeated all the way.', TTO_I18N),
                 ),
-            );
-        }
-
-        //Return defaults TTO fields for CPTs
-        else if ('fieldscpts' == $return) {
-            $defaults = array(
-                'checkbox', 'radio', 'select', 'multiselect',
-                'text', 'textarea', 'background', 'color',
-                'rte', 'upload', 'wordpress', 'gallery',
-                'maps', 'review',
-            );
-        }
-
-        //Return defaults TTO fields
-        else if ('fields' == $return) {
-            $defaults = array(
-                'br', 'heading', 'hr', 'p', 'checkbox',
-                'hidden', 'radio', 'select', 'multiselect',
-                'text', 'textarea', 'background', 'color', 'font',
-                'includes', 'rte', 'social', 'upload', 'wordpress',
-                'gallery', 'maps', 'section', 'review',
             );
         }
 
@@ -219,10 +182,16 @@ abstract class TeaFields
         //Return defaults TTO types and only networks
         else if ('networks' == $return) {
             $defaults = array(
-                'twitter'       => __('Twitter', TTO_I18N),
                 'facebook'      => __('Facebook', TTO_I18N),
                 'googleplus'   => __('Google+', TTO_I18N),
                 'instagram'     => __('Instagram', TTO_I18N),
+                'twitter'       => __('Twitter', TTO_I18N),
+            );
+        }
+
+        //Return defaults TTO networks callback
+        else if ('networks_callback' == $return) {
+            $defaults = array(
             );
         }
 
@@ -358,96 +327,10 @@ abstract class TeaFields
             );
         }
 
-        //Return defaults text types
-        else if ('texts' == $return) {
+        //Return defaults unauthorized TTO fields
+        else if ('unauthorized' == $return) {
             $defaults = array(
-                'text' => __('Text', TTO_I18N),
-                'email' => __('Email', TTO_I18N),
-                'number' => __('Number', TTO_I18N),
-                'range' => __('Range', TTO_I18N),
-                'password' => __('Password', TTO_I18N),
-                'search' => __('Search', TTO_I18N),
-                'url' => __('URL', TTO_I18N),
-            );
-        }
-
-        //Return defaults TTO types for pages
-        else if ('types' == $return) {
-            $defaults = array(
-                __('Display fields', TTO_I18N) => array(
-                    'br' => __('Breakline', TTO_I18N),
-                    'heading' => __('Heading', TTO_I18N),
-                    'hr' => __('Horizontal rule', TTO_I18N),
-                    'list' => __('List items', TTO_I18N),
-                    'p' => __('Paragraph', TTO_I18N),
-                ),
-                __('Common fields', TTO_I18N) => array(
-                    'text' => __('Basic text, password, email, number and more', TTO_I18N),
-                    'checkbox' => __('Checkbox', TTO_I18N),
-                    'hidden' => __('Hidden', TTO_I18N),
-                    'multiselect' => __('Multiselect', TTO_I18N),
-                    'radio' => __('Radio', TTO_I18N),
-                    'select' => __('Select', TTO_I18N),
-                    'textarea' => __('Textarea', TTO_I18N),
-                ),
-                __('Special fields', TTO_I18N) => array(
-                    'background' => __('Background', TTO_I18N),
-                    'color' => __('Color', TTO_I18N),
-                    'gallery' => __('Gallery', TTO_I18N),
-                    'font' => __('Google Fonts', TTO_I18N),
-                    'includes' => __('Include PHP file', TTO_I18N),
-                    'social' => __('Social Links', TTO_I18N),
-                    'rte' => __('Wordpress RTE', TTO_I18N),
-                    'upload' => __('Wordpress Upload', TTO_I18N),
-                ),
-                __('Wordress fields', TTO_I18N) => array(
-                    'wordpress' => __('Categories, menus, pages, posts, posttypes and tags', TTO_I18N),
-                ),
-            );
-        }
-
-        //Return defaults TTO types for CPTs
-        else if ('typescpts' == $return) {
-            $defaults = array(
-                __('Common fields', TTO_I18N) => array(
-                    'text' => __('Basic text, password, email, number and more', TTO_I18N),
-                    'checkbox' => __('Checkbox', TTO_I18N),
-                    'multiselect' => __('Multiselect', TTO_I18N),
-                    'radio' => __('Radio', TTO_I18N),
-                    'select' => __('Select', TTO_I18N),
-                    'textarea' => __('Textarea', TTO_I18N),
-                ),
-                __('Special fields', TTO_I18N) => array(
-                    'background' => __('Background', TTO_I18N),
-                    'color' => __('Color', TTO_I18N),
-                    'gallery' => __('Gallery', TTO_I18N),
-                    'font' => __('Google Fonts', TTO_I18N),
-                    'social' => __('Social Links', TTO_I18N),
-                    'rte' => __('Wordpress RTE', TTO_I18N),
-                    'upload' => __('Wordpress Upload', TTO_I18N),
-                ),
-                __('Wordress fields', TTO_I18N) => array(
-                    'wordpress' => __('Categories, menus, pages, posts, posttypes and tags', TTO_I18N),
-                ),
-            );
-        }
-
-        //Return defaults TTO fields without ids
-        else if ('withoutids' == $return) {
-            $defaults = array(
-                'br', 'heading', 'hr', 'p', 'includes',
-            );
-        }
-
-        //Return defaults TTO types and only Wordpress
-        else if ('wordpress' == $return) {
-            $defaults = array(
-                'categories' => __('Categories', TTO_I18N),
-                'menus' => __('Menus', TTO_I18N),
-                'pages' => __('Pages', TTO_I18N),
-                'posts' => __('Posts', TTO_I18N),
-                'posttypes' => __('Post types', TTO_I18N),
-                'tags' => __('Tags', TTO_I18N),
+                'elasticsearch', 'network', 'section',
             );
         }
 

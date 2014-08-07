@@ -5,12 +5,7 @@ use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
- * Tea Theme Options Facebook network
- * 
- * @package TakeaTea
- * @subpackage Tea Networks Facebook
- * @since 1.4.0
- *
+ * TEA FACEBOOK NETWORK
  */
 
 if (!defined('ABSPATH')) {

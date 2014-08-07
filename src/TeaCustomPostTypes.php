@@ -5,22 +5,6 @@ use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
  * TEA CUSTOM POST TYPES
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if (!defined('ABSPATH')) {
@@ -121,8 +105,12 @@ class TeaCustomPostTypes
             }
 
             //Treat arrays
-            $sups = isset($cpt['supports']) && !empty($cpt['supports']) ? $cpt['supports'] : array('title', 'editor', 'thumbnail');
-            $taxs = isset($cpt['taxonomies']) ? $cpt['taxonomies'] : array('category', 'post_tag');
+            $sups = isset($cpt['supports']) && !empty($cpt['supports']) 
+                ? $cpt['supports'] 
+                : array('title', 'editor', 'thumbnail');
+            $taxs = isset($cpt['taxonomies']) 
+                ? $cpt['taxonomies'] 
+                : array('category', 'post_tag');
 
             //Build labels
             $labels = array(
@@ -199,7 +187,7 @@ class TeaCustomPostTypes
         }
 
         //Get all authorized fields
-        $authorized = TeaFields::getDefaults('fieldscpts');
+        $unauthorized = TeaFields::getDefaults('unauthorized');
 
         //Iterate on each cpt
         foreach ($this->contents as $cpt) {
@@ -214,7 +202,7 @@ class TeaCustomPostTypes
                 $type = $ctn['type'];
 
                 //Check if we are authorized to use this field in CPTs
-                if(!in_array($type, $authorized)) {
+                if(in_array($type, $unauthorized)) {
                     continue;
                 }
 

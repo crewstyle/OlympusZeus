@@ -2,11 +2,11 @@
  * tea.social.js v1.0.0
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 20xx Take a Tea, Inc.
+ * Copyright 2014 Take a Tea (http://takeatea.com)
  * ===================================================
  * Example:
  *      $('.tea-inside.social').tea_social({
- *          modal: '#modal-social'
+ *          modal: '#modal-social'              //modal block ID
  *      });
  * =================================================== */
 

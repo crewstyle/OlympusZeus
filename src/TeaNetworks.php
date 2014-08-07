@@ -4,12 +4,7 @@ namespace Takeatea\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
- * Tea TO backend functions and definitions
- * 
- * @package TakeaTea
- * @subpackage Tea Networks
- * @since 1.3.0
- *
+ * TEA NETWORKS
  */
 
 if (!defined('ABSPATH')) {
@@ -17,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 
-//---------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
 /**
  * Tea Networks
@@ -45,7 +40,7 @@ abstract class TeaNetworks
     }
 
 
-    //--------------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
 
     /**
      * FUNCTIONS
@@ -65,19 +60,19 @@ abstract class TeaNetworks
      * Get includes.
      *
      * @param string $network Contains the network name to check
-     * @return boolean $tokens Answear to the question.
+     * @return boolean $tks Answear to the question.
      *
      * @since 1.4.0
      */
     protected function getTokens($network)
     {
-        $tokens = TeaThemeOptions::get_option('tea_networks_connections', array());
+        $tks = TeaThemeOptions::get_option('tea_networks_connections', array());
 
-        if (empty($tokens)) {
+        if (empty($tks)) {
             return false;
         }
 
-        return array_key_exists($network, $tokens);
+        return array_key_exists($network, $tks);
     }
 
     /**

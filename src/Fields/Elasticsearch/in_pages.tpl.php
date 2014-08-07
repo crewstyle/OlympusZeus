@@ -37,13 +37,13 @@
 
                 <div class="forms">
                     <?php if ('yes' == $vals['enable'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
-                        <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post">
+                        <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
                             <input type="hidden" name="tea_elastic_index" value="1" />
                             <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>
                         </form>
                     <?php endif ?>
 
-                    <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post">
+                    <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
                         <input type="hidden" name="tea_elastic_enable" value="1" />
 
                         <?php if ('no' == $vals['enable']): ?>
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <form action="admin.php?page=<?php echo $page ?>&action=tea_action&elasticsearch=1" method="post" class="contextual-help-tabs-wrap">
+            <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post" class="contextual-help-tabs-wrap">
                 <input type="hidden" name="<?php echo $id ?>[enable]" value="yes" />
 
                 <!-- Globals -->

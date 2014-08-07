@@ -2,14 +2,14 @@
  * tea.checkall.js v1.0.0
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 20xx Take a Tea, Inc.
+ * Copyright 2014 Take a Tea (http://takeatea.com)
  * ===================================================
  * Example:
  *      $('.master input[type="checkbox"]').tea_checkall({
- *          container: '.container',
- *          items: 'input[type="checkbox"]',
- *          closest: 'label',
- *          selected: 'selected'
+ *          container: '.container',            //node containing all items to un/check
+ *          items: 'input[type="checkbox"]',    //item node to un/check
+ *          closest: 'label',                   //closest node to item to add the selected class
+ *          selected: 'selected'                //selected class
  *      });
  * =================================================== */
 

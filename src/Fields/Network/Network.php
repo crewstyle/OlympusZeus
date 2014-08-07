@@ -4,29 +4,8 @@ namespace Takeatea\TeaThemeOptions\Fields\Network;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
- * TEA NETWORKS FIELD
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * To add this field, simply make the same as follow: @todo
- * array(
- *     'type' => 'networks',
- *     'content' => 'Hello and welcome to the "Tea Test Academy"'
- * )
+ * TEA NETWORK FIELD
+ * You do not have to use it
  *
  */
 
@@ -76,26 +55,17 @@ class Network extends TeaFields
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Network', TTO_I18N);
 
-        //Get social networks
-        $socials = TeaFields::getDefaults('networks');
-
-        //Check for networks
-        if (empty($socials)) {
-            $adminmessage = __('Something went wrong with parameters definition:
-                it seems there is no network to connect to.', TTO_I18N);
-            $this->setAdminMessage($adminmessage);
-            return;
-        }
-
         //Get template
         $area = 'head';
         include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
         echo __('Coming soon...', TTO_I18N);
 
         //Others vars
-        /*$default_networks = $this->getDefaults('networks');
-        $includes = $this->getIncludes();
+        /*$includes = $this->getIncludes();
         $page = $this->getCurrentPage();
+
+        //Get social networks
+        $socials = TeaFields::getDefaults('networks');
 
         //Iterate on networks
         foreach ($socials as $net => $work) {

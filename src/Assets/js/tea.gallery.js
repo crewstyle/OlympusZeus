@@ -2,13 +2,14 @@
  * tea.gallery.js v1.0.0
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 20xx Take a Tea, Inc.
+ * Copyright 2014 Take a Tea (http://takeatea.com)
  * ===================================================
  * Example:
  *      $('.tea-inside.upload').tea_gallery({
- *          wpid: null,
- *          media: wp.media,
- *          title: $self.attr('data-title') || 'Media',
+ *          wpid: null,                         //Contains Wordpress textarea ID
+ *          media: wp.media,                    //Contains Wordpress media element
+ *          color: '#ffaaaa',                   //Color defined for the delete animation
+ *          title: 'Media'                      //Title of the media popin
  *      });
  * =================================================== */
 

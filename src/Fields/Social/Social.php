@@ -5,21 +5,6 @@ use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
  * TEA SOCIAL FIELD
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
  * To add this field, simply make the same as follow:
@@ -29,25 +14,25 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_social_field_id',
  *     'description' => '...Or not!',
  *     'std' => array(
- *          'facebook' => array(
- *              'display' => 'yes',
- *              'label' => __('Become a fan', TEMPLATE_DICTIONARY),
- *              'link' => __('http://www.facebook.com/takeatea', TEMPLATE_DICTIONARY)
- *          ),
- *          'twitter' => array(
- *              'display' => 'yes',
- *              'label' => __('Follow us', TEMPLATE_DICTIONARY),
- *              'link' => __('https://twitter.com/takeatea', TEMPLATE_DICTIONARY)
- *          ),
- *          'instagram' => array(
- *              'display' => 'no',
- *              'label' => __('Take a shot', TEMPLATE_DICTIONARY),
- *              'link' => __('http://instagram.com/takeatea', TEMPLATE_DICTIONARY)
- *          ),
- *          'rss' => array(
- *              'label' => __('Subscribe to our feed', TEMPLATE_DICTIONARY)
- *          )
- *      )
+ *         'facebook' => array(
+ *             'display' => 'yes',
+ *             'label' => __('Become a fan', TEMPLATE_DICTIONARY),
+ *             'link' => __('http://www.facebook.com/takeatea', TEMPLATE_DICTIONARY)
+ *         ),
+ *         'twitter' => array(
+ *             'display' => 'yes',
+ *             'label' => __('Follow us', TEMPLATE_DICTIONARY),
+ *             'link' => __('https://twitter.com/takeatea', TEMPLATE_DICTIONARY)
+ *         ),
+ *         'instagram' => array(
+ *             'display' => 'no',
+ *             'label' => __('Take a shot', TEMPLATE_DICTIONARY),
+ *             'link' => __('http://instagram.com/takeatea', TEMPLATE_DICTIONARY)
+ *         ),
+ *         'rss' => array(
+ *             'label' => __('Subscribe to our feed', TEMPLATE_DICTIONARY)
+ *         )
+ *     )
  * )
  *
  */

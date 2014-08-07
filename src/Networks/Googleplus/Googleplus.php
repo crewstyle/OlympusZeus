@@ -4,12 +4,7 @@ namespace Takeatea\TeaThemeOptions\Networks\Googleplus;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
- * Tea Theme Options Googleplus network
- * 
- * @package TakeaTea
- * @subpackage Tea Networks Googleplus
- * @since 1.4.0
- *
+ * TEA GOOGLEPLUS NETWORK
  */
 
 if (!defined('ABSPATH')) {

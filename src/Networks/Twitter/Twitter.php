@@ -4,12 +4,7 @@ namespace Takeatea\TeaThemeOptions\Networks\Twitter;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
- * Tea Theme Options Twitter network
- * 
- * @package TakeaTea
- * @subpackage Tea Networks Twitter
- * @since 1.4.0
- *
+ * TEA TWITTER NETWORK
  */
 
 if (!defined('ABSPATH')) {

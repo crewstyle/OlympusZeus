@@ -17,8 +17,7 @@
         <fieldset>
             <?php foreach ($options as $option): ?>
                 <?php
-                    if (empty($option[0]))
-                    {
+                    if (empty($option[0])) {
                         continue;
                     }
 

@@ -2,13 +2,13 @@
  * tea.checkit.js v1.0.0
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 20xx Take a Tea, Inc.
+ * Copyright 2014 Take a Tea (http://takeatea.com)
  * ===================================================
  * Example:
  *      $('input[type="radio"],input[type="checkbox"]').tea_checkit({
- *          container: '.inside',
- *          closest: 'label',
- *          selected: 'selected'
+ *          container: '.inside',               //node containing all items to un/check
+ *          closest: 'label',                   //closest node to item to add the selected class
+ *          selected: 'selected'                //selected class
  *      });
  * =================================================== */
 

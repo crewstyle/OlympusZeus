@@ -12,7 +12,7 @@
     },
     "keywords": ["wordpress","teathemeoptions","tto","teato","theme","options"],
     "author": "Achraf Chouk <achrafchouk@gmail.com>",
-    "license": "http://www.gnu.org/licenses/gpl-3.0.html",
+    "license": "http://opensource.org/licenses/MIT",
     "devDependencies": {
         "grunt": "~0.4.5",
         "grunt-contrib-jshint": "~0.10.0",

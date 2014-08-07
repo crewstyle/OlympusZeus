@@ -7,22 +7,6 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
 
 /**
  * TEA PAGES
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if (!defined('ABSPATH')) {
@@ -40,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.0
+ * @since 1.4.3.2
  *
  */
 class TeaPages
@@ -339,6 +323,7 @@ class TeaPages
 
         //Set the current page
         $is_page = $this->identifier == $this->current ? true : false;
+        $tocheck = array($this->identifier.'_connections', $this->identifier.'_elasticsearch');
 
         //Set icon
         $this->icon_small = TTO_URI . $this->icon_small;
@@ -348,7 +333,7 @@ class TeaPages
         foreach ($this->pages as $page) {
             //Build slug and check it
             $is_page = $page['slug'] == $this->current ? true : $is_page;
-            $capability = in_array($page['slug'], array($this->identifier.'_connections', $this->identifier.'_elasticsearch')) 
+            $capability = in_array($page['slug'], $tocheck) 
                 ? TTO_CAP_MAX 
                 : $this->capability;
 
@@ -615,12 +600,12 @@ class TeaPages
         $title = $this->pages[$current]['title'];
         $contents = $this->pages[$current]['contents'];
 
-        //Build contents relatively to the type (special cases: Connections page)
+        //Build contents relatively to the type (special cases: Connections)
         if ($this->identifier . '_connections' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildConnection($contents);
         }
-        //Build contents relatively to the type (special cases: Elasticsearh page)
+        //Build contents relatively to the type (special cases: Elasticsearh)
         else if ($this->identifier . '_elasticsearch' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildElasticsearch($contents);
@@ -721,7 +706,11 @@ class TeaPages
         $page = empty($this->current) ? $this->identifier : $this->current;
 
         //Works on params
-        $updated = isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action'] && isset($_REQUEST['for']) && 'settings' == $_REQUEST['for'] ? true : false;
+        $updated = 
+               isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action'] 
+            && isset($_REQUEST['for']) && 'settings' == $_REQUEST['for'] 
+            ? true 
+            : false;
 
         //Works on title
         $title = empty($this->current) ? 
@@ -759,7 +748,9 @@ class TeaPages
         $version = TTO_VERSION;
 
         //Display pages
-        $capurl = current_user_can(TTO_CAP_MAX) ? admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=caps') : '';
+        $capurl = current_user_can(TTO_CAP_MAX) 
+            ? admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=caps') 
+            : '';
 
         //Include template
         include(TTO_PATH . '/Tpl/layouts/__layout_footer.tpl.php');
@@ -771,7 +762,7 @@ class TeaPages
      * @param array $contents Contains all data
      * @todo try to include CUSTOM fields outside the Tea T.O.
      *
-     * @since 1.4.0
+     * @since 1.4.3.2
      */
     protected function buildType($contents)
     {
@@ -784,8 +775,7 @@ class TeaPages
         $includes = $this->getIncludes();
 
         //Get all default fields in the Tea T.O. package
-        $defaults_fields = TeaFields::getDefaults('fields');
-        $wps = TeaFields::getDefaults('wordpress');
+        $unauthorized = TeaFields::getDefaults('unauthorized');
 
         //Iteration on all array
         foreach ($contents as $key => $content) {
@@ -793,7 +783,7 @@ class TeaPages
             $type = $content['type'];
 
             //Check if the asked field is unknown
-            if (!in_array($type, $defaults_fields)) {
+            if (in_array($type, $unauthorized)) {
                 $this->adminmessage = sprintf(__('Something went wrong in your 
                     parameters definition with the id <b>%s</b>: 
                     the defined type is unknown!', TTO_I18N), $content['id']);
@@ -993,7 +983,7 @@ class TeaPages
             //Get the key
             $previous = str_replace('__checkbox', '', $key);
 
-            //Check if it exists (if not that means the user unchecked it) and set the option
+            //Check if it exists (= unchecked) and set the option
             if (!isset($dependancy[$previous])) {
                 TeaThemeOptions::set_option($previous, $value, $duration);
             }
@@ -1153,7 +1143,7 @@ class TeaPages
      * @param array $request Contains all data in $_REQUEST
      * @param array $files Contains all data in $_FILES
      *
-     * @since 1.4.3
+     * @since 1.4.3.2
      */
     protected function updateOptions($request, $files)
     {
@@ -1165,7 +1155,7 @@ class TeaPages
         //Set all options in transient
         foreach ($request as $k => $v) {
             //Don't register this default value
-            if ('action' == $k || 'for' == $k || 'updated' == $k || 'submit' == $k) {
+            if (in_array($k, array('action', 'for', 'updated', 'submit'))) {
                 continue;
             }
 

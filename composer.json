@@ -3,7 +3,7 @@
     "description": "Simple, easy to use and fully integrated Theme Options for Wordpress.",
     "keywords": ["wordpress","teathemeoptions","tto","teato","theme","options"],
     "homepage": "http://takeatea.com/",
-    "license": "GPL v3",
+    "license": "MIT",
     "type": "wordpress-plugin",
     "authors": [
         {

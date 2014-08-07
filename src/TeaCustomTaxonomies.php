@@ -5,22 +5,6 @@ use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
  * TEA CUSTOM TAXONOMIES
- * 
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if (!defined('ABSPATH')) {
@@ -210,7 +194,7 @@ class TeaCustomTaxonomies
         }
 
         //Get all authorized fields
-        $authorized = TeaFields::getDefaults('fieldscpts');
+        $unauthorized = TeaFields::getDefaults('unauthorized');
         $isobject = is_object($term);
         $tax = $isobject ? $term->taxonomy : $term;
 
@@ -233,7 +217,7 @@ class TeaCustomTaxonomies
             $type = $ctn['type'];
 
             //Check if we are authorized to use this field in CPTs
-            if(!in_array($type, $authorized)) {
+            if(in_array($type, $unauthorized)) {
                 continue;
             }
 
@@ -304,9 +288,6 @@ class TeaCustomTaxonomies
         if (!isset($request['taxonomy'])) {
             return $term_id;
         }
-
-        //Get all authorized fields
-        $authorized = TeaFields::getDefaults('fieldscpts');
 
         //Iterate on each tax
         foreach ($this->contents as $tax) {

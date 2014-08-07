@@ -6,11 +6,8 @@ use Takeatea\TeaThemeOptions\TeaElasticsearch;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
- * Tea Theme Options Elasticsearch field
- * 
- * @package TakeaTea
- * @subpackage Tea Fields Elasticsearch
- * @since 1.4.0
+ * TEA ELASTICSEARCH FIELD
+ * You do not have to use it
  *
  */
 

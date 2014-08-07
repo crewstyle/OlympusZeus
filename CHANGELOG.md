@@ -1,3 +1,8 @@
+## 1.4.3.2 (August 7, 2014)
+
+Change licence and headings. Delete the BR field (useless)
+
+
 ## 1.4.3.1 (August 7, 2014)
 
 Fix bug on taxonomies, add optimizations on Maps field, normalize GET actions
