@@ -1380,6 +1380,10 @@ a.tea-connection:before {
     color:red;
     text-decoration:underline;
 }
+.tea_to_wrap .contextual-help-tabs .forms .button.button-primary {
+    display:block;
+    margin:0 auto;
+}
 .tea_to_wrap .contextual-help-tabs-wrap {
     padding:15px 20px;
     position:relative;
