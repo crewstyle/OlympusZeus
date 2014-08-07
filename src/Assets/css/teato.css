@@ -1,6 +1,6 @@
-/*
- * Tea Theme Options v1.4.6 - "BAAAAAAAAAAAAAkkkkaaaaa - Gintama"
- * Copyright 2013 Take a Tea
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Copyright 20xx Take a Tea
  * By Take a Tea <takeatea.com> :)
  */
 
@@ -58,6 +58,12 @@ h1 {
 
 
 /*--- [MESSAGE] ---*/
+#update-nag,
+.update-nag {
+    border:1px solid #ffba00;
+    display:block;
+    margin:32px 18px 32px 0px;
+}
 div.tea_to_message {
     background-color:#91d04d;
     background-image:url(../img/section-square.png);
@@ -147,24 +153,6 @@ div.tea_to_message p strong {
     top:10px;
     width:367px;
     z-index:1;
-    -webkit-animation:animcog 15s linear infinite;
-    -moz-animation:animcog 15s linear infinite;
-    animation:animcog 15s linear infinite;
-}
-@-webkit-keyframes animcog {
-    100% {
-        -webkit-transform:rotate(-360deg);
-    }
-}
-@-moz-keyframes animcog {
-    100% {
-        -moz-transform:rotate(-360deg);
-    }
-}
-@keyframes animcog {
-    100% {
-        transform:rotate(-360deg);
-    }
 }
 .tea-main-nav li {
     color:#fff;

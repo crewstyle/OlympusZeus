@@ -97,27 +97,29 @@ class Maps extends TeaFields
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array();
-        $std['address'] = isset($content['std']['address']) ? $content['std']['address'] : '';
-        $std['marker'] = isset($content['std']['marker']) ? $content['std']['marker'] : $url;
-        $std['width'] = isset($content['std']['width']) ? $content['std']['width'] : '500';
-        $std['height'] = isset($content['std']['height']) ? $content['std']['height'] : '250';
-        $std['zoom'] = isset($content['std']['zoom']) ? $content['std']['zoom'] : '14';
-        $std['type'] = isset($content['std']['type']) ? $content['std']['type'] : 'ROADMAP';
-        $std['enable'] = isset($content['std']['enable']) ? $content['std']['enable'] : 'no';
-        $std['json'] = isset($content['std']['json']) ? $content['std']['json'] : '';
+        $std['address'] = isset($std['address']) ? $std['address'] : '';
+        $std['marker'] = isset($std['marker']) ? $std['marker'] : $url;
+        $std['width'] = isset($std['width']) ? $std['width'] : '500';
+        $std['height'] = isset($std['height']) ? $std['height'] : '250';
+        $std['zoom'] = isset($std['zoom']) ? $std['zoom'] : '14';
+        $std['type'] = isset($std['type']) ? $std['type'] : 'ROADMAP';
+        $std['enable'] = isset($std['enable']) ? $std['enable'] : 'no';
+        $std['json'] = isset($std['json']) ? $std['json'] : '';
 
         //Default options
-        $std['dragndrop'] = isset($std['dragndrop']) ? $std['dragndrop'] : 'no';
-        $std['mapcontrol'] = isset($std['mapcontrol']) ? $std['mapcontrol'] : 'no';
-        $std['pancontrol'] = isset($std['pancontrol']) ? $std['pancontrol'] : 'no';
-        $std['zoomcontrol'] = isset($std['zoomcontrol']) ? $std['zoomcontrol'] : 'no';
-        $std['scalecontrol'] = isset($std['scalecontrol']) ? $std['scalecontrol'] : 'no';
-        $std['scrollwheel'] = isset($std['scrollwheel']) ? $std['scrollwheel'] : 'no';
-        $std['streetview'] = isset($std['streetview']) ? $std['streetview'] : 'no';
-        $std['rotatecontrol'] = isset($std['rotatecontrol']) ? $std['rotatecontrol'] : 'no';
-        $std['rotatecontroloptions'] = isset($std['rotatecontroloptions']) ? $std['rotatecontroloptions'] : 'no';
-        $std['overviewmapcontrol'] = isset($std['overviewmapcontrol']) ? $std['overviewmapcontrol'] : 'no';
-        $std['overviewmapcontroloptions'] = isset($std['overviewmapcontroloptions']) ? $std['overviewmapcontroloptions'] : 'no';
+        $std['options'] = array(
+            'dragndrop' => isset($std['options']['dragndrop']) ? $std['options']['dragndrop'] : 'no',
+            'mapcontrol' => isset($std['options']['mapcontrol']) ? $std['options']['mapcontrol'] : 'no',
+            'pancontrol' => isset($std['options']['pancontrol']) ? $std['options']['pancontrol'] : 'no',
+            'zoomcontrol' => isset($std['options']['zoomcontrol']) ? $std['options']['zoomcontrol'] : 'no',
+            'scalecontrol' => isset($std['options']['scalecontrol']) ? $std['options']['scalecontrol'] : 'no',
+            'scrollwheel' => isset($std['options']['scrollwheel']) ? $std['options']['scrollwheel'] : 'no',
+            'streetview' => isset($std['options']['streetview']) ? $std['options']['streetview'] : 'no',
+            'rotatecontrol' => isset($std['options']['rotatecontrol']) ? $std['options']['rotatecontrol'] : 'no',
+            'rotatecontroloptions' => isset($std['options']['rotatecontroloptions']) ? $std['options']['rotatecontroloptions'] : 'no',
+            'overviewmapcontrol' => isset($std['options']['overviewmapcontrol']) ? $std['options']['overviewmapcontrol'] : 'no',
+            'overviewmapcontroloptions' => isset($std['options']['overviewmapcontroloptions']) ? $std['options']['overviewmapcontroloptions'] : 'no',
+        );
 
         //Default way
         if (empty($post)) {

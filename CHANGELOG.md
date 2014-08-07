@@ -1,3 +1,8 @@
+## 1.4.3.1 (August 7, 2014)
+
+Fix bug on taxonomies, add optimizations on Maps field, normalize GET actions
+
+
 ## 1.4.3 (August 6, 2014)
 
 Add capabilities, admin notice, and so much more.

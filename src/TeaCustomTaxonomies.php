@@ -38,7 +38,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Taxonomies
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.2
+ * @since 1.4.3.1
  *
  */
 class TeaCustomTaxonomies
@@ -81,7 +81,7 @@ class TeaCustomTaxonomies
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.4.2
+     * @since 1.4.3.1
      */
     public function __buildMenuCustomTaxonomy()
     {
@@ -113,61 +113,55 @@ class TeaCustomTaxonomies
                 continue;
             }
 
+            //Define slug
+            $slug = $tax['slug'];
+
             //Get contents
             if (!empty($tax['contents'])) {
-                $this->contents[] = $tax['slug'];
+                $this->contents[] = $slug;
             }
 
             //Special case: define a category/post_tag
-            if (in_array($tax['slug'], array('attachment', 'attachment_id', 'author', 'author_name', 'calendar', 'cat', 'category', 'category__and', 'category__in', 'category__not_in', 'category_name', 'comments_per_page', 'comments_popup', 'customize_messenger_channel', 'customized', 'cpage', 'day', 'debug', 'error', 'exact', 'feed', 'hour', 'link_category', 'm', 'minute', 'monthnum', 'more', 'name', 'nav_menu', 'nonce', 'nopaging', 'offset', 'order', 'orderby', 'p', 'page', 'page_id', 'paged', 'pagename', 'pb', 'perm', 'post', 'post__in', 'post__not_in', 'post_format', 'post_mime_type', 'post_status', 'post_tag', 'post_type', 'posts', 'posts_per_archive_page', 'posts_per_page', 'preview', 'robots', 's', 'search', 'second', 'sentence', 'showposts', 'static', 'subpost', 'subpost_id', 'tag', 'tag__and', 'tag__in', 'tag__not_in', 'tag_id', 'tag_slug__and', 'tag_slug__in', 'taxonomy', 'tb', 'term', 'theme', 'type', 'w', 'withcomments', 'withoutcomments', 'year'))) {
-                continue;
+            if (!in_array($slug, array('attachment', 'attachment_id', 'author', 'author_name', 'calendar', 'cat', 'category', 'category__and', 'category__in', 'category__not_in', 'category_name', 'comments_per_page', 'comments_popup', 'customize_messenger_channel', 'customized', 'cpage', 'day', 'debug', 'error', 'exact', 'feed', 'hour', 'link_category', 'm', 'minute', 'monthnum', 'more', 'name', 'nav_menu', 'nonce', 'nopaging', 'offset', 'order', 'orderby', 'p', 'page', 'page_id', 'paged', 'pagename', 'pb', 'perm', 'post', 'post__in', 'post__not_in', 'post_format', 'post_mime_type', 'post_status', 'post_tag', 'post_type', 'posts', 'posts_per_archive_page', 'posts_per_page', 'preview', 'robots', 's', 'search', 'second', 'sentence', 'showposts', 'static', 'subpost', 'subpost_id', 'tag', 'tag__and', 'tag__in', 'tag__not_in', 'tag_id', 'tag_slug__and', 'tag_slug__in', 'taxonomy', 'tb', 'term', 'theme', 'type', 'w', 'withcomments', 'withoutcomments', 'year')) && !taxonomy_exists($slug)) {
+                //Build labels
+                $title = ucfirst($slug);
+                $labels = array(
+                    'name' => $title,
+                    'singular_name' => $title,
+                    'search_items' => sprintf(__('Search %s'), $title),
+                    'popular_items' => sprintf(__('Popular %s'), $title),
+                    'all_items' => sprintf(__('All %s'), $title),
+                    'parent_item' => null,
+                    'parent_item_colon' => null,
+                    'edit_item' => sprintf(__('Edit %s'), $title),
+                    'update_item' => sprintf(__('Update %s'), $title),
+                    'add_new_item' => sprintf(__('Add New %s'), $title),
+                    'new_item_name' => sprintf(__('New %s Name'), $title),
+                    'separate_items_with_commas' => sprintf(__('Separate %s with commas'), $title),
+                    'add_or_remove_items' => sprintf(__('Add or remove %s'), $title),
+                    'choose_from_most_used' => sprintf(__('Choose from the most used %s'), $title),
+                    'not_found' => sprintf(__('No %s found.'), $title),
+                    'menu_name' => sprintf(__('%s'), $title),
+                );
+                $labels = array_merge($labels, $tax['labels']);
+
+                //Check rewrite
+                $tax['labels'] = $labels;
+                $tax['rewrite'] = isset($tax['rewrite']) ? $tax['rewrite'] : $tax['title'];
+
+                //Build args
+                $args = array(
+                    'hierarchical' => false,
+                    'labels' => $labels,
+                    'show_ui' => true,
+                    'show_admin_column' => true,
+                    'query_var' => true,
+                );
+                $args = array_merge($args, $tax);
+
+                //Action to register
+                register_taxonomy($slug, $tax['post_type'], $args);
             }
-
-            //Check if post type already exists
-            if (taxonomy_exists($tax['slug'])) {
-                continue;
-            }
-
-            //Build labels
-            $title = ucfirst($tax['slug']);
-            $labels = array(
-                'name' => $title,
-                'singular_name' => $title,
-                'search_items' => sprintf(__('Search %s'), $title),
-                'popular_items' => sprintf(__('Popular %s'), $title),
-                'all_items' => sprintf(__('All %s'), $title),
-                'parent_item' => null,
-                'parent_item_colon' => null,
-                'edit_item' => sprintf(__('Edit %s'), $title),
-                'update_item' => sprintf(__('Update %s'), $title),
-                'add_new_item' => sprintf(__('Add New %s'), $title),
-                'new_item_name' => sprintf(__('New %s Name'), $title),
-                'separate_items_with_commas' => sprintf(__('Separate %s with commas'), $title),
-                'add_or_remove_items' => sprintf(__('Add or remove %s'), $title),
-                'choose_from_most_used' => sprintf(__('Choose from the most used %s'), $title),
-                'not_found' => sprintf(__('No %s found.'), $title),
-                'menu_name' => sprintf(__('%s'), $title),
-            );
-            $labels = array_merge($labels, $tax['labels']);
-
-            //Check rewrite
-            $tax['labels'] = $labels;
-            $tax['rewrite'] = isset($tax['rewrite']) ? $tax['rewrite'] : $tax['title'];
-
-            //Build args
-            $args = array(
-                'hierarchical' => false,
-                'labels' => $labels,
-                'show_ui' => true,
-                'show_admin_column' => true,
-                'query_var' => true,
-            );
-            $args = array_merge($args, $tax);
-
-            //Action to register
-            //$args['meta_box_cb'] = array(&$this, '__fieldsCustomTaxonomy');
-            $slug = $tax['slug'];
-            register_taxonomy($tax['slug'], $tax['post_type'], $args);
 
             //Get all admin details
             if (TTO_IS_ADMIN) {
@@ -190,7 +184,7 @@ class TeaCustomTaxonomies
      *
      * @uses add_meta_box()
      *
-     * @since 1.4.2
+     * @since 1.4.3.1
      */
     public function __fieldsCustomTaxonomy($term)
     {
@@ -218,52 +212,55 @@ class TeaCustomTaxonomies
         //Get all authorized fields
         $authorized = TeaFields::getDefaults('fieldscpts');
         $isobject = is_object($term);
+        $tax = $isobject ? $term->taxonomy : $term;
+
+        //Check if we have taxonomy
+        if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax])) {
+            return;
+        }
+
+        //Check if we have taxonomy
+        if (!isset($taxonomies[$tax]['contents']) || empty($taxonomies[$tax]['contents'])) {
+            return;
+        }
 
         //Display header wrap
         echo $isobject ? '<div class="tea_tax_wrap">' : '<div class="tea_tax_main">';
 
-        //Iterate on each tax
-        foreach ($this->contents as $tax) {
-            //Check if tax exists or if its contents are empty
-            if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax]['contents'])) {
+        //Iterate on each contents
+        foreach ($taxonomies[$tax]['contents'] as $ctn) {
+            //Define vars
+            $type = $ctn['type'];
+
+            //Check if we are authorized to use this field in CPTs
+            if(!in_array($type, $authorized)) {
                 continue;
             }
 
-            //Do it works!
-            foreach ($taxonomies[$tax]['contents'] as $ctn) {
-                //Define vars
-                $type = $ctn['type'];
+            //Set vars
+            $class = ucfirst($type);
+            $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
 
-                //Check if we are authorized to use this field in CPTs
-                if(!in_array($type, $authorized)) {
+            //Include class field
+            if (!isset($includes[$type])) {
+                //Check if the class file exists
+                if (!class_exists($class)) {
+                    echo sprintf(__('Something went wrong in your
+                        parameters definition: the class <b>%s</b>
+                        does not exist!', TTO_I18N), $class);
                     continue;
                 }
 
-                //Set vars
-                $class = ucfirst($type);
-                $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
-
-                //Include class field
-                if (!isset($includes[$type])) {
-                    //Check if the class file exists
-                    if (!class_exists($class)) {
-                        echo sprintf(__('Something went wrong in your
-                            parameters definition: the class <b>%s</b>
-                            does not exist!', TTO_I18N), $class);
-                        continue;
-                    }
-
-                    //Set the include
-                    $this->setIncludes($type);
-                }
-
-                //Set prefix
-                $prefix = $isobject ? $term->term_id.'-'.$tax.'-' : $tax.'-';
-
-                //Title
-                $item = new $class();
-                $item->templatePages($ctn, array(), $prefix);
+                //Set the include
+                $this->setIncludes($type);
             }
+
+            //Set prefix
+            $prefix = $isobject ? $term->term_id.'-'.$tax.'-' : $tax.'-';
+
+            //Title
+            $item = new $class();
+            $item->templatePages($ctn, array(), $prefix);
         }
 
         //Display footer wrap

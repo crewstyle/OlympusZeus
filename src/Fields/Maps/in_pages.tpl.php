@@ -146,17 +146,17 @@
                             <input type="checkbox" id="checkall" data-target="#<?php echo $id ?>-options input[type='checkbox']" <?php echo count($opt_details) == count($vals) ? 'checked="checked"' : '' ?> />
                         </label>
                     </h3>
-                    <div id="<?php echo $id ?>-options" class="inside checkbox">
+                    <div id="<?php echo $id ?>-options" class="inside tea-inside checkbox">
                         <fieldset>
                             <?php
                                 foreach ($opt_details as $key => $option):
-                                    $selected = isset($vals[$key]) && 'yes' == $vals[$key] ? ' checked="checked"' : '';
+                                    $sel = isset($vals['options'][$key]) && 'yes' == $vals['options'][$key] ? ' checked="checked"' : '';
                                     $for = $id . '-params_' . $key;
                                 ?>
                                 <p class="item">
-                                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
+                                    <label for="<?php echo $for ?>" class="<?php echo $sel ? 'selected' : '' ?>">
                                         <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
-                                        <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>]" id="<?php echo $for ?>" value="yes" <?php echo $selected ?> />
+                                        <input type="checkbox" name="<?php echo $id ?>[options][<?php echo $key ?>]" id="<?php echo $for ?>" value="yes" <?php echo $sel ?> />
                                         <?php echo $option ?>
                                     </label>
                                 </p>

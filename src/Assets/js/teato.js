@@ -1,6 +1,6 @@
 /* ===================================================
  * jQuery Tea Theme Options
- * http://git.tools.takeatea.com/crewstyle/tea_theme_options
+ * https://github.com/Takeatea/tea_theme_options
  * ===================================================
  * Copyright 20xx Take a Tea (http://takeatea.com)
  * ===================================================
@@ -122,7 +122,7 @@
             });
         });
 
-        //Connection input
+        //Screen-meta input
         $.each($('.tea_to .tea-screen-meta'), function (){
             var $self = $(this);
             var $links = $self.find('.contextual-help-tabs');
@@ -140,172 +140,5 @@
                 $target.addClass('active');
             });
         });
-
-        /*//Dashboard input - Add content
-        $.each($('.inside-dashboard .dashboard-add-content'), function (){
-            var $self = $(this);
-            var $select = $self.find('select.tea_add_content_type');
-            var $button = $self.find('.button-secondary');
-            var $target = $self.closest('.tea-post-body-content').find('.dashboard-contents-all');
-            var _ajax = $self.attr('data-ajax');
-            var _delete = $self.attr('data-delete');
-
-            //Check the content type
-            if (!$select.length)
-            {
-                return;
-            }
-
-            //Add index
-            var _index = $target.find('> .dashboard-content').length || 0;
-
-            //Bind the click event
-            $self.find('input[type="submit"]').bind('click', function (e){
-                e.preventDefault();
-
-                //Check the content type
-                if (!$select.find('option:selected').length || '' == $select.find('option:selected').val())
-                {
-                    return;
-                }
-
-                //Get the value
-                var _value = $select.find('option:selected').val();
-
-                //Make an Ajax call to get all field options
-                $.ajax({
-                    type: 'GET',
-                    url: _ajax,
-                    dataType: 'html',
-                    cache: false,
-                    data: {
-                        action: $self.find('input.tea_add_action').val(),
-                        nonce: $self.find('input.tea_add_nonce').val(),
-                        content: _value,
-                    },
-                    statusCode: {
-                        403: function (response){
-                            alert('403');
-                        },
-                        500: function (response){
-                            alert('500');
-                        }
-                    },
-                    beforeSend: function (){
-                        $button.attr('disabled', true);
-                    },
-                    success: function (response){
-                        //Create our new element
-                        var $content = $(document.createElement('div')).addClass('dashboard-content');
-                        var $del = $(document.createElement('a')).attr('href', '#').addClass('delete').text(_delete);
-
-                        //Treat html
-                        var _html = response;
-                        _html = _html.replace(/__NUM__/g, _index);
-                        _index++;
-
-                        //Display response, append it to container and enable button
-                        $content.append($del);
-                        $content.append(_html);
-                        $target.append($content);
-
-                        //Get defaults
-                        $button.attr('disabled', false);
-                        $select.val('');
-                    }
-                });
-            });
-        });
-
-        //Dashboard input - Delete content
-        $('.inside-dashboard .dashboard-contents-all .delete').live('click', function (e){
-            e.preventDefault();
-            var $self = $(this);
-            var $parent = $self.closest('.dashboard-content');
-
-            $parent.css('backgroundColor', '#ffaaaa');
-            $parent.animate({
-                opacity: '0'
-            }, 'low', function (){
-                $parent.remove();
-            });
-        });
-
-        //Dashboard input - Display options
-        $('.inside-dashboard .select-options').live('change', function (e){
-            e.preventDefault();
-            var $self = $(this);
-            var $target = $self.closest('.dashboard-content').find('.label-edit-options');
-
-            //Check if we need options
-            if ($self.find('option:selected').hasClass('display-options'))
-            {
-                $target.css('display', 'block');
-            }
-            else
-            {
-                $target.css('display', 'none');
-            }
-        });
-
-        //Dashboard input - Edit page
-        $.each($('.inside-dashboard .tea-edit-screen-link a'), function (){
-            var $self = $(this);
-            var $target = $self.closest('.tea-nav-aside').find('> ' + $self.attr('data-target'));
-            var _class = 'screen-meta-active';
-            var _isopened = $self.hasClass(_class) ? true : false;
-
-            //Bind the click event
-            $self.bind('click', function (e){
-                e.preventDefault();
-
-                //Close panel
-                if (_isopened)
-                {
-                    $target.slideUp('fast', function (){
-                        $self.removeClass(_class);
-                        _isopened = false;
-                    });
-                }
-                //Open panel
-                else
-                {
-                    $target.slideDown('fast', function (){
-                        $self.addClass(_class);
-                        _isopened = true;
-                    });
-                }
-            });
-        });
-
-        //Dashboard input - Page listing
-        $.each($('.inside-dashboard .dashboard-page-listing li'), function (){
-            var $self = $(this);
-            var $link = $self.find('a');
-
-            //Check if link
-            if (!$link.length)
-            {
-                return;
-            }
-
-            //Get target
-            var _href = $link.attr('href').replace('#', '');
-            var $ul = $self.closest('ul');
-            var $target = $self.closest('.nav-menus-php').find('.tea-menu-management-liquid');
-
-            //Bind the click event
-            $link.bind('click', function (e){
-                e.preventDefault();
-
-                //Update links
-                $ul.find('li').removeClass('active');
-                $self.addClass('active');
-
-                //Display contents
-                $target.find('.tea-dashoard-content').removeClass('open');
-                $target.find('.tea-dashoard-content.' + _href).addClass('open');
-            });
-        });*/
     });
 })(jQuery);

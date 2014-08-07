@@ -1,4 +1,4 @@
-=== Tea Theme Options (v1.4.3) ===
+=== Tea Theme Options (v1.4.3.1) ===
 
 
 == Simple, easy to use and fully integrated Theme Options for Wordpress. ==
@@ -35,7 +35,7 @@ The Tea Theme Options (https://github.com/Takeatea/tea_theme_options) (or **Tea 
     "type": "wordpress-theme",
     "minimum-stability": "dev",
     "require": {
-        "takeatea/tea-theme-options": "1.4.2"
+        "takeatea/tea-theme-options": "1.4.3.1"
     }
 }
 ```
