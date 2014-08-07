@@ -1,3 +1,8 @@
+## 1.4.3.3 (August 7, 2014)
+
+Add global array configuration, fix some CSS bugs
+
+
 ## 1.4.3.2 (August 7, 2014)
 
 Change licence and headings. Delete the BR field (useless)

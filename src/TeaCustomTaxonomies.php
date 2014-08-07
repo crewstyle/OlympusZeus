@@ -40,7 +40,7 @@ class TeaCustomTaxonomies
     public function __construct()
     {
         //Get registered taxonomies
-        $this->taxonomies = TeaThemeOptions::get_option('tea_config_taxonomies', array());
+        $this->taxonomies = TeaThemeOptions::getConfigs('customtaxonomies');
 
         //Check params and if a master page already exists
         if (empty($this->taxonomies)) {
@@ -361,7 +361,7 @@ class TeaCustomTaxonomies
         }
 
         //Define cpt configurations
-        TeaThemeOptions::set_option('tea_config_taxonomies', $taxonomies);
+        TeaThemeOptions::setConfigs('customtaxonomies', $taxonomies);
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Textarea;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -84,7 +85,7 @@ class Textarea extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = $this->getOption($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $std);
             $val = stripslashes($val);
         }
         //On CPT

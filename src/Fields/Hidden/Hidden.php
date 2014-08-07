@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Hidden;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -68,7 +69,7 @@ class Hidden extends TeaFields
         $title = isset($content['title']) ? $content['title'] : '';
 
         //Check selected
-        $val = $this->getOption($prefix.$id, $title);
+        $val = TeaThemeOptions::get_option($prefix.$id, $title);
 
         //Get template
         include(TTO_PATH . '/Fields/Hidden/in_pages.tpl.php');

@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Checkbox;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -91,7 +92,7 @@ class Checkbox extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = $this->getOption($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT

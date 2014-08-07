@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Background;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -115,7 +116,7 @@ class Background extends TeaFields
         $url = TTO_URI . '/src/Fields/Background/img/';
 
         //Check selected
-        $val = $this->getOption($prefix.$id, $std);
+        $val = TeaThemeOptions::get_option($prefix.$id, $std);
 
         //Get template
         include(TTO_PATH . '/Fields/Background/in_pages.tpl.php');

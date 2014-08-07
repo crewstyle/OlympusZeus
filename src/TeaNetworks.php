@@ -66,7 +66,7 @@ abstract class TeaNetworks
      */
     protected function getTokens($network)
     {
-        $tks = TeaThemeOptions::get_option('tea_networks_connections', array());
+        $tks = TeaThemeOptions::getConfigs('networks');
 
         if (empty($tks)) {
             return false;

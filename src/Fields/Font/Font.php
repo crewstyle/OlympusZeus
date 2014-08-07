@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Font;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -111,7 +112,7 @@ class Font extends TeaFields
         }
 
         //Check selected
-        $val = $this->getOption($prefix.$id, $std);
+        $val = TeaThemeOptions::get_option($prefix.$id, $std);
 
         //Get template
         include(TTO_PATH . '/Fields/Font/in_pages.tpl.php');

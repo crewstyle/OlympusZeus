@@ -27,7 +27,7 @@
 
                     <?php if ('yes' == $vals['enable'] && !empty($index)): ?>
                         <li>
-                            <a href="#<?php echo $id ?>-stats"><?php _e('Statistics', TTO_I18N) ?></a>
+                            <a href="#<?php echo $id ?>-stats"><?php _e('Statistics', TTO_I18N) ?> (<?php _e('Coming soon', TTO_I18N) ?>)</a>
                         </li>
                         <li class="hr">
                             <hr/>
@@ -135,7 +135,7 @@
 
                         <p>
                             <?php _e('Choose in this section which contents you want to index. This page list all post types and taxonomies defined in your template.<br/>', TTO_I18N) ?>
-                            <?php if (0 == $index): ?>
+                            <?php if (empty($index)): ?>
                                 <b><i class="fa fa-angle-right fa-lg"></i> <?php _e('It seems there is no post indexed yet. Don\'t matter, just click on the <span class="button">Index contents</span> button.', TTO_I18N) ?></b>
                             <?php else: ?>
                                 <b><i class="fa fa-angle-right fa-lg"></i> <?php _e('Some of your posts have already been indexed. Gorgeous!', TTO_I18N) ?></b>
@@ -216,8 +216,9 @@
                 <?php if ('yes' == $vals['enable'] && !empty($index)): ?>
                     <!-- Statistics -->
                     <div id="<?php echo $id ?>-stats" class="help-tab-content">
-                        <h3><?php _e('Statistics', TTO_I18N) ?> <b style="color:red">@todo</b></h3>
+                        <h3><?php _e('Statistics', TTO_I18N) ?></h3>
                         <p><?php _e('Retrieve here all your stats.', TTO_I18N) ?></p>
+                        <p><?php _e('Coming soon', TTO_I18N) ?></p>
 
                         <br class="clear"/>
                     </div>

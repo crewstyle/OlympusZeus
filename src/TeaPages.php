@@ -74,7 +74,10 @@ class TeaPages
         //Define parameters
         $this->can_upload = current_user_can('upload_files');
         $this->identifier = $identifier;
-        $this->caps = TeaThemeOptions::get_option('tea_capabilities', false);
+
+        //Define caps
+        $caps = TeaThemeOptions::getConfigs('capabilities');
+        $this->caps = empty($caps) ? false : true;
 
         //Set capabilities if needed
         if (!$this->caps) {
@@ -88,11 +91,11 @@ class TeaPages
         $this->current = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
 
         //Define activated connection
-        $isactive = TeaThemeOptions::getAccessToken(true);
-        $isdismissed = TeaThemeOptions::get_option('tea_dismiss', false);
+        $isactive = TeaThemeOptions::access_token(true);
+        $isdismissed = TeaThemeOptions::getConfigs('dismiss');
 
         //Check connection
-        if (empty($isactive) && !$isdismissed) {
+        if (empty($isactive) && empty($isdismissed)) {
             // Show connect notice on dashboard and plugins pages
             add_action('load-index.php', array(&$this, '__getNotices'));
             add_action('load-plugins.php', array(&$this, '__getNotices'));
@@ -773,9 +776,11 @@ class TeaPages
 
         //Get includes
         $includes = $this->getIncludes();
+        $ident = $this->identifier;
 
         //Get all default fields in the Tea T.O. package
         $unauthorized = TeaFields::getDefaults('unauthorized');
+        $specials = in_array($this->current, array($ident, $ident.'_connections', $ident.'_elasticsearch'));
 
         //Iteration on all array
         foreach ($contents as $key => $content) {
@@ -783,7 +788,7 @@ class TeaPages
             $type = $content['type'];
 
             //Check if the asked field is unknown
-            if (in_array($type, $unauthorized)) {
+            if (in_array($type, $unauthorized) && !$specials) {
                 $this->adminmessage = sprintf(__('Something went wrong in your 
                     parameters definition with the id <b>%s</b>: 
                     the defined type is unknown!', TTO_I18N), $content['id']);
@@ -1037,7 +1042,7 @@ class TeaPages
         $wp_roles->add_cap('administrator', TTO_CAP_MAX);
 
         //Update DB
-        TeaThemeOptions::set_option('tea_capabilities', true);
+        TeaThemeOptions::setConfigs('capabilities', true);
 
         //Redirect to Tea TO homepage
         if ($redirect) {
@@ -1133,7 +1138,7 @@ class TeaPages
         }
 
         //Set default
-        TeaThemeOptions::set_option('tea_dismiss', $dismiss);
+        TeaThemeOptions::setConfigs('dismiss', $dismiss);
     }
 
     /**

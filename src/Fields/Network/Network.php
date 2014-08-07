@@ -58,7 +58,7 @@ class Network extends TeaFields
         //Get template
         $area = 'head';
         include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
-        echo __('Coming soon...', TTO_I18N);
+        echo '<p>'.__('Coming soon', TTO_I18N).'</p>';
 
         //Others vars
         /*$includes = $this->getIncludes();

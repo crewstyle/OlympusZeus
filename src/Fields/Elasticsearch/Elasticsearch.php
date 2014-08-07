@@ -22,14 +22,14 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.0
+ * @since 1.4.3.3
  *
  */
 class Elasticsearch extends TeaFields
 {
     //Define protected vars
     private $currentpage;
-    private $id = 'tea_elastic';
+    private $id = 'elastic';
 
     /**
      * Constructor.
@@ -51,7 +51,7 @@ class Elasticsearch extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.4.3.3
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -65,7 +65,7 @@ class Elasticsearch extends TeaFields
         $title = isset($content['title']) ? $content['title'] : __('Tea Elasticsearch', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
         $page = $this->getCurrentPage();
-        $index = TeaThemeOptions::get_option('tea_elastic_index', 0);
+        $index = TeaThemeOptions::getConfigs('elastic_index');
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array(
@@ -82,10 +82,10 @@ class Elasticsearch extends TeaFields
         );
 
         //Get scores
-        $scores = TeaElasticsearch::getFields();
+        //$scores = TeaElasticsearch::getFields();
 
         //Check selected
-        $vals = $this->getOption($prefix.$id, $std);
+        $vals = TeaThemeOptions::getConfigs($id);
         $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         $vals = array_merge($std, $vals);
 
@@ -135,7 +135,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.0
+     * @since 1.4.3.3
      */
     public function enableElasticsearch($request)
     {
@@ -153,13 +153,13 @@ class Elasticsearch extends TeaFields
         }
 
         //Get datas
-        $ctn = TeaThemeOptions::get_option($id, array());
+        $ctn = TeaThemeOptions::getConfigs($id, array());
 
         //Enable or disable Elasticsearch
         $ctn['enable'] = $request[$id]['enable'];
 
         //Update datas
-        TeaThemeOptions::set_option($id, $ctn);
+        TeaThemeOptions::setConfigs($id, $ctn);
     }
 
     /**
@@ -202,7 +202,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.0
+     * @since 1.4.3.3
      */
     public function updateElasticsearch($request)
     {
@@ -213,13 +213,13 @@ class Elasticsearch extends TeaFields
 
         //Check values integrity
         $id = $this->getId();
-        $ctn = TeaThemeOptions::get_option($id, array());
+        $ctn = TeaThemeOptions::getConfigs($id);
 
         //Update all datas
         $new = array_merge($ctn, $request[$id]);
 
         //Define data in DB
-        TeaThemeOptions::set_option($id, $new);
+        TeaThemeOptions::setConfigs($id, $new);
     }
 
     /**
@@ -270,9 +270,9 @@ class Elasticsearch extends TeaFields
      *
      * @param string $id Get the current id
      *
-     * @since 1.4.0
+     * @since 1.4.3.3
      */
-    public function setId($id = 'tea_elastic')
+    public function setId($id = 'elastic')
     {
         //Define value
         $this->id = $id;

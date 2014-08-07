@@ -40,7 +40,7 @@ class TeaCustomPostTypes
     public function __construct()
     {
         //Get registered CPTs
-        $this->cpts = TeaThemeOptions::get_option('tea_config_cpts', array());
+        $this->cpts = TeaThemeOptions::getConfigs('customposttypes');
 
         //Check params and if a master page already exists
         if (empty($this->cpts)) {
@@ -340,7 +340,7 @@ class TeaCustomPostTypes
         }
 
         //Define cpt configurations
-        TeaThemeOptions::set_option('tea_config_cpts', $cpts);
+        TeaThemeOptions::setConfigs('customposttypes', $cpts);
     }
 
     /**

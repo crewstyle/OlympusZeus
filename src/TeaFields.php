@@ -339,21 +339,6 @@ abstract class TeaFields
     }
 
     /**
-     * Return option's value from transient.
-     *
-     * @param string $key The name of the transient
-     * @param string $default The default value if no one is found
-     * @return string $value
-     *
-     * @since 1.4.0
-     */
-    protected function getOption($key, $default)
-    {
-        //Return value from DB
-        return TeaThemeOptions::get_option($key, $default);
-    }
-
-    /**
      * ACCESSORS
      **/
 

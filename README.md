@@ -1,4 +1,4 @@
-# Tea Theme Options (v1.4.3.1)
+# Tea Theme Options
 
 [![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](https://packagist.org/packages/takeatea/tea-theme-options)
 

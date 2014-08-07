@@ -44,7 +44,7 @@ class Facebook extends TeaNetworks
         $keys = $this->getTokens('facebook');
 
         //Check if we display form or user informations
-        /*$token = TeaThemeOptions::get_option('tea_twitter_access_token', '');
+        /*$token = TeaThemeOptions::getConfigs('twitter_access_token');
 
         if (false === $token || empty($token)) {
             //Default vars
@@ -52,15 +52,15 @@ class Facebook extends TeaNetworks
         }
         else {
             //Get user Instagram info from DB
-            $user_info = TeaThemeOptions::get_option('tea_twitter_user_info', array());
+            $user_info = TeaThemeOptions::getConfigs('twitter_user_info');
             $user_info = false === $user_info ? array() : $user_info;
 
             //Get recent photos from DB
-            $user_recent = TeaThemeOptions::get_option('tea_twitter_user_recent', array());
+            $user_recent = TeaThemeOptions::getConfigs('twitter_user_recent');
             $user_recent = false === $user_recent ? array() : $user_recent;
 
             //Display date of update
-            $update = TeaThemeOptions::get_option('tea_twitter_connection_update', '');
+            $update = TeaThemeOptions::getConfigs('twitter_connection_update');
             $update = false === $update || empty($update) ? '' : $update;
         }*/
 

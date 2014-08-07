@@ -53,7 +53,7 @@ class TeaElasticsearch
     public function __construct($write = false, $hook = true)
     {
         //Get custom data
-        $ctn = TeaThemeOptions::get_option('tea_elastic', array());
+        $ctn = TeaThemeOptions::getConfigs('elastic');
         $this->setConfig($ctn);
 
         //Check integrity
@@ -294,7 +294,7 @@ class TeaElasticsearch
         $index->refresh();
 
         //Set and return count
-        TeaThemeOptions::set_option('tea_elastic_index', $count);
+        TeaThemeOptions::setConfigs('elastic_index', $count);
         return $count;
     }
 
@@ -434,7 +434,9 @@ class TeaElasticsearch
         $index = $this->getIndex();
 
         //Get search datas
-        $search = isset($request['s']) ? str_replace('\"', '"', $request['s']) : '';
+        $search = isset($request['s']) 
+            ? str_replace('\"', '"', $request['s']) 
+            : '';
 
         //Return everything
         if (empty($search)) {
@@ -444,8 +446,12 @@ class TeaElasticsearch
 
         //Get search datas
         $type = isset($request['type']) ? $request['type'] : '';
-        $paged = isset($request['paged']) && !empty($request['paged']) ? $request['paged'] - 1 : 0;
-        $perpage = isset($request['perpage']) ? $request['perpage'] : get_option('posts_per_page');
+        $paged = isset($request['paged']) && !empty($request['paged']) 
+            ? $request['paged'] - 1 
+            : 0;
+        $perpage = isset($request['perpage']) 
+            ? $request['perpage'] 
+            : TeaThemeOptions::get_option('posts_per_page', 10);
 
         //Build query string
         $es_querystring = new QueryString();
@@ -942,8 +948,11 @@ class TeaElasticsearch
             $type->deleteById($post->ID);
 
             //Update counter
-            $count = TeaThemeOptions::get_option('tea_elastic_index', 0);
-            TeaThemeOptions::set_option('tea_elastic_index', $count-1);
+            $count = TeaThemeOptions::getConfigs('elastic_index');
+            $count = empty($count) ? 0 : $count[0] - 1;
+
+            //Save in DB
+            TeaThemeOptions::setConfigs('elastic_index', $count);
         } catch (NotFoundException $ex){}
     }
 

@@ -11,7 +11,7 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.3.1
+ * Version: 1.4.3.3
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
  * professional looking theme options panels to your WordPress theme.
@@ -55,7 +55,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.1');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.3');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -83,7 +83,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3
+ * @since 1.4.3.3
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
@@ -298,14 +298,72 @@ class TeaThemeOptions
     }
 
     /**
+     * Get configs.
+     *
+     * @param string $option Define the option asked
+     * @return array $configs Define configurations
+     *
+     * @since 1.4.3.3
+     */
+    public static function getConfigs($option = 'capabilities')
+    {
+        //Get datas from DB
+        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+
+        //Check if data is available
+        $return = isset($configs[$option]) ? $configs[$option] : array();
+        $return = !is_array($return) ? array($return) : $return;
+
+        //Return value
+        return $return;
+    }
+
+    /**
+     * Set configs.
+     *
+     * @param string $option Define the option to update
+     * @param array|integer|string $value Define the value
+     *
+     * @since 1.4.3.3
+     */
+    public static function setConfigs($option = 'capabilities', $value = 'manage_tea_theme_options')
+    {
+        //Get datas from DB
+        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+
+        //Define the data
+        $configs[$option] = $value;
+
+        //Update DB
+        TeaThemeOptions::set_option('tea_to_configs', $configs);
+    }
+
+    /**
+     * Get elasticsearch.
+     *
+     * @return object $elasticearch
+     *
+     * @since 1.4.0
+     */
+    public function getElasticsearch()
+    {
+        //Return value
+        return $this->elasticsearch;
+    }
+
+    /**
+     * STATICS
+     **/
+
+    /**
      * Return the access token got from teato.me
      *
      * @param integer $user_id The user ID stored in DB for the connection
      * @return array $array Contains all data for the connection
      *
-     * @since 1.4.3
+     * @since 1.4.3.3
      */
-    public static function getAccessToken($user_id = 0)
+    public static function access_token($user_id = 0)
     {
         //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
@@ -315,8 +373,8 @@ class TeaThemeOptions
         //Check user ID
         if ($user_id) {
             //Get datas
-            //$userid = $this->get_option('tea_to_userid', 0);
-            $tokens = TeaThemeOptions::get_option('tea_to_tokens', array());
+            //$userid = $this->getConfigs('token_userid', 0);
+            $tokens = TeaThemeOptions::getConfigs('tokens');
 
             //Check integrity
             if (/*empty($userid) || */empty($tokens)) {
@@ -337,7 +395,7 @@ class TeaThemeOptions
         }
         else {
             //Get stored blog token
-            $token = TeaThemeOptions::get_option('tea_to_token_blog', '');
+            $token = TeaThemeOptions::getConfigs('token_blog');
 
             //Check the token
             if (empty($token)) {
@@ -347,22 +405,9 @@ class TeaThemeOptions
 
         //Return datas
         return array(
-            'secret' => $token,
+            'secret' => $token[0],
             'external_user_id' => $user_id,
         );
-    }
-
-    /**
-     * Get elasticsearch.
-     *
-     * @return object $elasticearch
-     *
-     * @since 1.4.0
-     */
-    public function getElasticsearch()
-    {
-        //Return value
-        return $this->elasticsearch;
     }
 
     /**

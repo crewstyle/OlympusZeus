@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Wordpress;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -139,7 +140,7 @@ class Wordpress extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = $this->getOption($prefix.$id, array());
+            $vals = TeaThemeOptions::get_option($prefix.$id, array());
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT

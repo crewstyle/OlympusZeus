@@ -1,6 +1,7 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Fields\Upload;
 
+use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaFields;
 
 /**
@@ -85,7 +86,7 @@ class Upload extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = $this->getOption($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $std);
         }
         //On CPT
         else {
