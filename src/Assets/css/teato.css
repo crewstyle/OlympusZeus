@@ -67,6 +67,7 @@ h1 {
 div.tea_to_message {
     background-color:#91d04d;
     background-image:url(../img/section-square.png);
+    clear:both;
     color:#fff;
     overflow:hidden;
     position:relative;

@@ -40,7 +40,7 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
     "type": "wordpress-theme",
     "minimum-stability": "dev",
     "require": {
-        "takeatea/tea-theme-options": "1.4.3.3"
+        "takeatea/tea-theme-options": "1.4.3.x"
     }
 }
 ```

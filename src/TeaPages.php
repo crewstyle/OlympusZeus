@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.2
+ * @since 1.4.3.4
  *
  */
 class TeaPages
@@ -55,7 +55,7 @@ class TeaPages
      * @param boolean $connect Define if we can display connections page
      * @param boolean $elastic Define if we can display elasticsearch page
      *
-     * @since 1.4.3
+     * @since 1.4.3.4
      */
     public function __construct($identifier, $connect = true, $elastic = true)
     {
@@ -131,12 +131,26 @@ class TeaPages
             }
         }
 
-        //Add custom CSS colors
+        //Add custom CSS colors ~ Green
         wp_admin_css_color(
-            'teatocss',
-            __('Tea T.O.'),
-            TTO_URI . '/assets/css/teato.admin.css',
+            'teatocss-green',
+            __('Tea T.O. ~ Earth tea'),
+            TTO_URI . '/assets/css/teato.admin.green.css',
             array('#222', '#303231', '#55bb3a', '#91d04d')
+        );
+        //Add custom CSS colors ~ Red
+        wp_admin_css_color(
+            'teatocss-red',
+            __('Tea T.O. ~ Vulcan tea'),
+            TTO_URI . '/assets/css/teato.admin.red.css',
+            array('#222', '#303231', '#bb3a3a', '#d04d4d')
+        );
+        //Add custom CSS colors ~ Blue
+        wp_admin_css_color(
+            'teatocss-blue',
+            __('Tea T.O. ~ Ocean tea'),
+            TTO_URI . '/assets/css/teato.admin.blue.css',
+            array('#222', '#303231', '#3a80bb', '#4d9dd0')
         );
     }
 

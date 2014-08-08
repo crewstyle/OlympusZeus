@@ -1,3 +1,8 @@
+## 1.4.3.4 (August 8, 2014)
+
+Add two new administration theme colors
+
+
 ## 1.4.3.3 (August 7, 2014)
 
 Add global array configuration, fix some CSS bugs
