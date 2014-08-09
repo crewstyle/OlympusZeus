@@ -1,3 +1,8 @@
+## 1.4.3.5 (August 9, 2014)
+
+Add new login page
+
+
 ## 1.4.3.4 (August 8, 2014)
 
 Add two new administration theme colors

@@ -54,6 +54,9 @@ module.exports = function(grunt) {
                     ],
                     'assets/css/teato.admin.blue.css': [
                         'src/Assets/css/teato.admin.blue.css',
+                    ],
+                    'assets/css/teato.login.css': [
+                        'src/Assets/css/teato.login.css',
                     ]
                 }
             }

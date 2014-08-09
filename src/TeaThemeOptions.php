@@ -11,7 +11,7 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.3.4
+ * Version: 1.4.3.5
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
  * professional looking theme options panels to your WordPress theme.
@@ -55,7 +55,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.4');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.5');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -83,7 +83,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.3
+ * @since 1.4.3.5
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
@@ -142,6 +142,9 @@ class TeaThemeOptions
 
         //Elasticsearch component
         $this->elasticsearch = new TeaElasticsearch();
+
+        //Add custom css to login page
+        add_action('login_head', array(&$this, '__loginPage'));
     }
 
 
@@ -162,6 +165,16 @@ class TeaThemeOptions
         //Make the magic
         $field = new Network();
         $field->updateNetworks();
+    }
+
+    /**
+     * Display CSS form login page.
+     *
+     * @since 1.4.3.5
+     */
+    public function __loginPage()
+    {
+        echo '<link href="' . TTO_URI . '/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
     }
 
     /**
