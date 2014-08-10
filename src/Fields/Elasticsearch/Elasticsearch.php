@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.3.3
+ * @since 1.4.3.6
  *
  */
 class Elasticsearch extends TeaFields
@@ -135,7 +135,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.3
+     * @since 1.4.3.6
      */
     public function enableElasticsearch($request)
     {
@@ -160,6 +160,27 @@ class Elasticsearch extends TeaFields
 
         //Update datas
         TeaThemeOptions::setConfigs($id, $ctn);
+
+        //Do we have to check connection?
+        if ('no' == $ctn['enable']) {
+            return;
+        }
+
+        //Create new occurrence
+        $els = new TeaElasticsearch(false, false);
+        $req = $els->elasticaConnection();
+
+        //Check request
+        if (!$req || 200 != $req->getStatus()) {
+            //Update datas
+            $ctn['enable'] = 'no';
+            TeaThemeOptions::setConfigs($id, $ctn);
+
+            //Display alert
+            $this->adminmessage = __('Something went wrong: it seems we 
+                have lost the connection. Check your parameters.', TTO_I18N);
+            return;
+        }
     }
 
     /**

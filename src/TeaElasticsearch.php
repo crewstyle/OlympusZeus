@@ -2,6 +2,7 @@
 namespace Takeatea\TeaThemeOptions;
 
 use Elastica\Client;
+use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Filter\Bool;
@@ -9,6 +10,7 @@ use Elastica\Filter\Term;
 use Elastica\Filter\Type;
 use Elastica\Query;
 use Elastica\Query\QueryString;
+use Elastica\Request;
 use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Suggest\Term as SuggestTerm;
@@ -32,7 +34,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Search
  *
- * @since 1.4.0
+ * @since 1.4.3.6
  *
  */
 class TeaElasticsearch
@@ -48,7 +50,7 @@ class TeaElasticsearch
      * @param boolean $write Define if we write or read data from Elastica
      * @param boolean $hook Define if we need to call hooks
      *
-     * @since 1.4.0
+     * @since 1.4.3.6
      */
     public function __construct($write = false, $hook = true)
     {
@@ -925,6 +927,39 @@ class TeaElasticsearch
 
         //Return the created client
         return $client;
+    }
+
+    /**
+     * Check Elastica Connection.
+     *
+     * @return boolean $connection Check if the Elastica Connection is done or not
+     *
+     * @since 1.4.3.6
+     */
+    public function elasticaConnection()
+    {
+        //Get search datas
+        $ctn = $this->getConfig();
+
+        //Check Elastica
+        if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
+            return false;
+        }
+
+        //Create connection
+        $connection = new Connection(array(
+            'host' => isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost',
+            'port' => isset($ctn['server_port']) ? (int) $ctn['server_port'] : 9200,
+            'path' => isset($ctn['index_name']) ? $ctn['index_name'].'/' : '',
+            'timeout' => isset($ctn['read_timeout']) ? ((int) $ctn['read_timeout']) * 100 : 300
+        ));
+
+        //Create request
+        $request = new Request('_status', Request::GET);
+        $request->setConnection($connection);
+
+        //Check request
+        return $request->send();
     }
 
     /**

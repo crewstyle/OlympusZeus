@@ -1,3 +1,8 @@
+## 1.4.3.6 (August 10, 2014)
+
+Add Elasticsearch check before check
+
+
 ## 1.4.3.5 (August 9, 2014)
 
 Add new login page

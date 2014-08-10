@@ -374,3 +374,6 @@ textarea:focus {
     -moz-box-shadow:0 0 0 1px #fff,0 0 0 2px #91d04d;
     box-shadow:0 0 0 1px #fff,0 0 0 2px #91d04d;
 }
+.media-progress-bar div {
+    background-color:#91d04d;
+}
