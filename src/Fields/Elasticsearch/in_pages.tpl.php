@@ -1,9 +1,9 @@
 <!-- Content elasticsearch -->
 <h2><?php echo $title ?></h2>
 
-<?php if ('yes' == $vals['enable'] && 200 != $vals['index']): ?>
+<?php if ('yes' == $vals['enable'] && 200 != $vals['status']): ?>
     <div class="alert alert-danger">
-        <?php if (202 == $vals['index']): ?>
+        <?php if (202 == $vals['status']): ?>
             <p>
                 <?php _e('The connection seems good but there is no "Index name" well configured. Check your parameters in the "Configurations" tab.', TTO_I18N) ?>
             </p>
@@ -50,7 +50,7 @@
                 </ul>
 
                 <div class="forms">
-                    <?php if ('yes' == $vals['enable'] && 200 == $vals['index'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
+                    <?php if ('yes' == $vals['enable'] && 200 == $vals['status'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
                         <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
                             <input type="hidden" name="tea_elastic_index" value="1" />
                             <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>
@@ -149,9 +149,7 @@
 
                         <p>
                             <?php _e('Choose in this section which contents you want to index. This page list all post types and taxonomies defined in your template.<br/>', TTO_I18N) ?>
-                            <?php if (empty($index)): ?>
-                                <b><i class="fa fa-angle-right fa-lg"></i> <?php _e('It seems there is no post indexed yet. Don\'t matter, just click on the <span class="button">Index contents</span> button.', TTO_I18N) ?></b>
-                            <?php else: ?>
+                            <?php if (!empty($index)): ?>
                                 <b><i class="fa fa-angle-right fa-lg"></i> <?php _e('Some of your posts have already been indexed. Gorgeous!', TTO_I18N) ?></b>
                             <?php endif ?>
                         </p>

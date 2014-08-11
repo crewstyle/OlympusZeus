@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.3.8
+ * @since 1.4.3.9
  *
  */
 class Elasticsearch extends TeaFields
@@ -51,7 +51,7 @@ class Elasticsearch extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.3.8
+     * @since 1.4.3.9
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -70,7 +70,7 @@ class Elasticsearch extends TeaFields
         //Default values
         $std = isset($content['std']) ? $content['std'] : array(
             'enable' => 'no',
-            'index' => 404,
+            'status' => 404,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',
@@ -132,47 +132,6 @@ class Elasticsearch extends TeaFields
     }
 
     /**
-     * Check Elasticsearch connection with curl
-     *
-     * @param array $ctn Contains all configurations
-     *
-     * @since 1.4.3.8
-     */
-    public function checkElasticsearch($ctn)
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get datas
-        $id = $this->getId();
-
-        //Do we have to check connection?
-        if (!isset($ctn['enable']) || 'no' == $ctn['enable']) {
-            return;
-        }
-
-        //Create new occurrence
-        $els = new TeaElasticsearch(false, false);
-        $req = $els->elasticaConnection();
-
-        //Check request
-        if ($req && 200 == $req) {
-            $ctn['index'] = 200;
-        }
-        else if ($req && 202 == $req) {
-            $ctn['index'] = 202;
-        }
-        else {
-            $ctn['index'] = !$req ? 404 : $req;
-        }
-
-        //Update datas
-        TeaThemeOptions::setConfigs($id, $ctn);
-    }
-
-    /**
      * Index all search datas.
      *
      * @param array $request Contains all data sent in $_REQUEST method
@@ -199,13 +158,10 @@ class Elasticsearch extends TeaFields
 
         //Enable or disable Elasticsearch
         $ctn['enable'] = $request[$id]['enable'];
-        $ctn['index'] = 404;
+        $ctn['status'] = 404;
 
         //Update datas
         TeaThemeOptions::setConfigs($id, $ctn);
-
-        //Check Elasticsearch
-        $this->checkElasticsearch($ctn);
     }
 
     /**
@@ -248,7 +204,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.8
+     * @since 1.4.3.9
      */
     public function updateElasticsearch($request)
     {
@@ -264,11 +220,21 @@ class Elasticsearch extends TeaFields
         //Update all datas
         $new = array_merge($ctn, $request[$id]);
 
+        //Get Connection status
+        $new['status'] = TeaElasticsearch::elasticaConnection($new);
+
+        //Check status
+        if (202 == $new['status']) {
+            //Create index
+            $els = new TeaElasticsearch(true, false);
+            $res = $els->indexContents(false);
+
+            //Try another connection
+            $new['status'] = TeaElasticsearch::elasticaConnection($new);
+        }
+
         //Define data in DB
         TeaThemeOptions::setConfigs($id, $new);
-
-        //Check Elasticsearch
-        $this->checkElasticsearch($new);
     }
 
     /**

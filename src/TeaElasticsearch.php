@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Search
  *
- * @since 1.4.3.8
+ * @since 1.4.3.9
  *
  */
 class TeaElasticsearch
@@ -50,7 +50,7 @@ class TeaElasticsearch
      * @param boolean $write Define if we write or read data from Elastica
      * @param boolean $hook Define if we need to call hooks
      *
-     * @since 1.4.3.8
+     * @since 1.4.3.9
      */
     public function __construct($write = false, $hook = true)
     {
@@ -58,15 +58,8 @@ class TeaElasticsearch
         $ctn = TeaThemeOptions::getConfigs('elastic');
         $this->setConfig($ctn);
 
-        //Check integrity
-        if (isset($ctn['enable']) && 'yes' == $ctn['enable']) {
-            //Set client
-            $client = $this->elasticaClient($write);
-            $index = $this->elasticaIndex();
-        }
-
         //Check index
-        if (isset($ctn['index']) && true === $ctn['index']) {
+        if (isset($ctn['status']) && 200 == $ctn['status']) {
             //Add WP Hooks
             if ($hook && TTO_IS_ADMIN) {
                 add_action('save_post', array(&$this, '__save_post'));
@@ -219,9 +212,12 @@ class TeaElasticsearch
     /**
      * Index contents.
      *
-     * @since 1.4.0
+     * @param boolean $idxctn Define it we have to index contents or just create index
+     * @return int $count Get number of items indexed
+     *
+     * @since 1.4.3.9
      */
-    public function indexContents()
+    public function indexContents($idxctn = true)
     {
         //Get search datas
         $ctn = $this->getConfig();
@@ -245,6 +241,14 @@ class TeaElasticsearch
             $index = $this->elasticaIndex();
         }
 
+        //Create analysers and mappers for Posts
+        $index = $this->elasticaAnalysis($index, $ctn['index_post'], $ctn['index_tax']);
+
+        //Do we have to index contents
+        if (!$idxctn) {
+            return 0;
+        }
+
         //Build args to the next request
         $pargs = array(
             'posts_per_page' => -1,
@@ -263,9 +267,6 @@ class TeaElasticsearch
         $posts = get_posts($pargs);
         $taxes = get_terms($ctn['index_tax'], $targs);
         $count = 0;
-
-        //Create analysers and mappers for Posts
-        $index = $this->elasticaAnalysis($index, $ctn['index_post'], $ctn['index_tax']);
 
         //Iterate on all posts to create documents
         foreach ($posts as $post) {
@@ -935,24 +936,24 @@ class TeaElasticsearch
     /**
      * Check Elastica Connection.
      *
-     * @return int $code HTTP header status curl code
+     * @param array $ctn Contains all stored datas
+     * @return int $status HTTP header status curl code
      *
-     * @since 1.4.3.8
+     * @since 1.4.3.9
      */
-    public function elasticaConnection()
+    public static function elasticaConnection($ctn)
     {
-        //Get search datas
-        $ctn = $this->getConfig();
-        $req = 404;
-
-        //Check Elastica
-        if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
-            return $req;
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
-        //Check index name
-        if (!isset($ctn['index_name']) || empty($ctn['index_name'])) {
-            return 202;
+        //Get search datas
+        $status = 404;
+
+        //Do we have to check connection?
+        if (!isset($ctn['enable']) || 'no' == $ctn['enable']) {
+            return $status;
         }
 
         //Build url
@@ -968,11 +969,19 @@ class TeaElasticsearch
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $head = curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        //Return HTTP header code
-        return $code;
+        //Check request
+        if ($status && 200 == $status) {
+            return 200;
+        }
+        else if ($status && 202 == $status) {
+            return 202;
+        }
+
+        //Update datas
+        return !$status ? 404 : $status;
     }
 
     /**
@@ -1128,7 +1137,7 @@ class TeaElasticsearch
         //Return value
         $default = array(
             'enable' => 'no',
-            'index' => 404,
+            'status' => 404,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',

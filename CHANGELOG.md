@@ -1,3 +1,8 @@
+## 1.4.3.9 (August 11, 2014)
+
+Enhance Elasticsearch check while updating
+
+
 ## 1.4.3.8 (August 10, 2014)
 
 Enhance Elasticsearch check... again...
