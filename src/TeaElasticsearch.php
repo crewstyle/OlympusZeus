@@ -59,7 +59,7 @@ class TeaElasticsearch
         $this->setConfig($ctn);
 
         //Check integrity
-        if (isset($ctn['enable']) && 'yes' == $ctn['enable']) {
+        if (isset($ctn['index']) && true === $ctn['index']) {
             //Set client
             $client = $this->elasticaClient($write);
             $index = $this->elasticaIndex();
@@ -932,7 +932,7 @@ class TeaElasticsearch
     /**
      * Check Elastica Connection.
      *
-     * @return boolean $connection Check if the Elastica Connection is done or not
+     * @return int $code HTTP header status curl code
      *
      * @since 1.4.3.6
      */
@@ -940,26 +940,31 @@ class TeaElasticsearch
     {
         //Get search datas
         $ctn = $this->getConfig();
+        $req = 404;
 
         //Check Elastica
         if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
-            return false;
+            return $req;
         }
 
-        //Create connection
-        $connection = new Connection(array(
-            'host' => isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost',
-            'port' => isset($ctn['server_port']) ? (int) $ctn['server_port'] : 9200,
-            'path' => isset($ctn['index_name']) ? $ctn['index_name'].'/' : '',
-            'timeout' => isset($ctn['read_timeout']) ? ((int) $ctn['read_timeout']) * 100 : 300
-        ));
+        //Build url
+        $url = 'http://';
+        $url .= isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost';
+        $url .= isset($ctn['server_port']) ? ':'.$ctn['server_port'].'/' : ':9200/';
+        $url .= isset($ctn['index_name']) ? $ctn['index_name'].'/' : '';
+        $url .= '_status';
 
-        //Create request
-        $request = new Request('_status', Request::GET);
-        $request->setConnection($connection);
+        //Make curl
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $head = curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        //Check request
-        return $request->send();
+        //Return HTTP header code
+        return $code;
     }
 
     /**
@@ -1115,6 +1120,7 @@ class TeaElasticsearch
         //Return value
         $default = array(
             'enable' => 'no',
+            'index' => false,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',

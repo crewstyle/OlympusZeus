@@ -1,3 +1,8 @@
+## 1.4.3.7 (August 10, 2014)
+
+Enhance Elasticsearch check
+
+
 ## 1.4.3.6 (August 10, 2014)
 
 Add Elasticsearch check before check

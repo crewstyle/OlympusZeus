@@ -581,7 +581,6 @@ hr {
 .tea_to.wrap .alert {
     background-color:#fcf8e3;
     border:1px solid #fbeed5;
-    border-radius:4px;
     color:#c09853;
     margin:10px 19px 0;
     padding:0 10px;
@@ -600,6 +599,12 @@ hr {
     background-color:#dff0d8;
     border-color:#d6e9c6;
     color:#468847;
+}
+.tea_to.wrap .alert-danger {
+    background-color:#f2dede;
+    border-color:#ebccd1;
+    color:#a94442;
+    margin:0 5px -3px;
 }
 
 

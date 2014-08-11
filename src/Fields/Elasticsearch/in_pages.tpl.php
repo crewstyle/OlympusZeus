@@ -1,6 +1,12 @@
 <!-- Content elasticsearch -->
 <h2><?php echo $title ?></h2>
 
+<?php if ('yes' == $vals['enable'] && false === $vals['index']): ?>
+    <div class="alert alert-danger">
+        <p><?php _e('It seems there is a problem with your connection parameters. Please, check the "Configurations" tab.', TTO_I18N) ?></p>
+    </div>
+<?php endif ?>
+
 <div class="tea-screen-meta tea_to_wrap">
     <div class="tea-contextual-help-wrap">
         <div class="tea-contextual-help-back"></div>
@@ -36,7 +42,7 @@
                 </ul>
 
                 <div class="forms">
-                    <?php if ('yes' == $vals['enable'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
+                    <?php if ('yes' == $vals['enable'] && true === $vals['index'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
                         <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
                             <input type="hidden" name="tea_elastic_index" value="1" />
                             <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>

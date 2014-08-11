@@ -70,6 +70,7 @@ class Elasticsearch extends TeaFields
         //Default values
         $std = isset($content['std']) ? $content['std'] : array(
             'enable' => 'no',
+            'index' => false,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',
@@ -131,11 +132,55 @@ class Elasticsearch extends TeaFields
     }
 
     /**
+     * Check Elasticsearch connection with curl
+     *
+     * @param array $ctn Contains all configurations
+     *
+     * @since 1.4.3.7
+     */
+    public function checkElasticsearch($ctn)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Get datas
+        $id = $this->getId();
+
+        //Do we have to check connection?
+        if (!isset($ctn['enable']) || 'no' == $ctn['enable']) {
+            return;
+        }
+
+        //Create new occurrence
+        $els = new TeaElasticsearch(false, false);
+        $req = $els->elasticaConnection();
+
+        //Check request
+        if ($req && 200 == $req) {
+            //Update datas
+            $ctn['index'] = true;
+            TeaThemeOptions::setConfigs($id, $ctn);
+        }
+        else {
+            //Update data
+            $ctn['index'] = false;
+            TeaThemeOptions::setConfigs($id, $ctn);
+
+            //Display alert
+            $this->adminmessage = __('Something went wrong: it seems we 
+                have lost the connection. Check your parameters.', TTO_I18N);
+            return;
+        }
+    }
+
+    /**
      * Index all search datas.
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.6
+     * @since 1.4.3.7
      */
     public function enableElasticsearch($request)
     {
@@ -157,30 +202,13 @@ class Elasticsearch extends TeaFields
 
         //Enable or disable Elasticsearch
         $ctn['enable'] = $request[$id]['enable'];
+        $ctn['index'] = false;
 
         //Update datas
         TeaThemeOptions::setConfigs($id, $ctn);
 
-        //Do we have to check connection?
-        if ('no' == $ctn['enable']) {
-            return;
-        }
-
-        //Create new occurrence
-        $els = new TeaElasticsearch(false, false);
-        $req = $els->elasticaConnection();
-
-        //Check request
-        if (!$req || 200 != $req->getStatus()) {
-            //Update datas
-            $ctn['enable'] = 'no';
-            TeaThemeOptions::setConfigs($id, $ctn);
-
-            //Display alert
-            $this->adminmessage = __('Something went wrong: it seems we 
-                have lost the connection. Check your parameters.', TTO_I18N);
-            return;
-        }
+        //Check Elasticsearch
+        $this->checkElasticsearch($ctn);
     }
 
     /**
@@ -223,7 +251,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.3
+     * @since 1.4.3.7
      */
     public function updateElasticsearch($request)
     {
@@ -241,6 +269,9 @@ class Elasticsearch extends TeaFields
 
         //Define data in DB
         TeaThemeOptions::setConfigs($id, $new);
+
+        //Check Elasticsearch
+        $this->checkElasticsearch($ctn);
     }
 
     /**
