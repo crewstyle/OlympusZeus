@@ -11,7 +11,7 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.3.7
+ * Version: 1.4.3.8
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
  * professional looking theme options panels to your WordPress theme.
@@ -55,7 +55,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.7');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.8');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -83,7 +83,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.7
+ * @since 1.4.3.8
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 

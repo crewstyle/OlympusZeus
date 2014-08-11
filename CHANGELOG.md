@@ -1,3 +1,9 @@
+## 1.4.3.8 (August 10, 2014)
+
+Enhance Elasticsearch check... again...
+Fix small bug on Elasticsearch save paramters
+
+
 ## 1.4.3.7 (August 10, 2014)
 
 Enhance Elasticsearch check

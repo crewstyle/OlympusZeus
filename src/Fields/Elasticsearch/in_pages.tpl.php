@@ -1,9 +1,17 @@
 <!-- Content elasticsearch -->
 <h2><?php echo $title ?></h2>
 
-<?php if ('yes' == $vals['enable'] && false === $vals['index']): ?>
+<?php if ('yes' == $vals['enable'] && 200 != $vals['index']): ?>
     <div class="alert alert-danger">
-        <p><?php _e('It seems there is a problem with your connection parameters. Please, check the "Configurations" tab.', TTO_I18N) ?></p>
+        <?php if (202 == $vals['index']): ?>
+            <p>
+                <?php _e('The connection seems good but there is no "Index name" well configured. Check your parameters in the "Configurations" tab.', TTO_I18N) ?>
+            </p>
+        <?php else: ?>
+            <p>
+                <?php _e('It seems there is a problem with your connection parameters. Please, check the "Configurations" tab.', TTO_I18N) ?>
+            </p>
+        <?php endif ?>
     </div>
 <?php endif ?>
 
@@ -42,7 +50,7 @@
                 </ul>
 
                 <div class="forms">
-                    <?php if ('yes' == $vals['enable'] && true === $vals['index'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
+                    <?php if ('yes' == $vals['enable'] && 200 == $vals['index'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
                         <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
                             <input type="hidden" name="tea_elastic_index" value="1" />
                             <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>

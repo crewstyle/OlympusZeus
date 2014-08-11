@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Search
  *
- * @since 1.4.3.6
+ * @since 1.4.3.8
  *
  */
 class TeaElasticsearch
@@ -50,7 +50,7 @@ class TeaElasticsearch
      * @param boolean $write Define if we write or read data from Elastica
      * @param boolean $hook Define if we need to call hooks
      *
-     * @since 1.4.3.6
+     * @since 1.4.3.8
      */
     public function __construct($write = false, $hook = true)
     {
@@ -59,11 +59,14 @@ class TeaElasticsearch
         $this->setConfig($ctn);
 
         //Check integrity
-        if (isset($ctn['index']) && true === $ctn['index']) {
+        if (isset($ctn['enable']) && 'yes' == $ctn['enable']) {
             //Set client
             $client = $this->elasticaClient($write);
             $index = $this->elasticaIndex();
+        }
 
+        //Check index
+        if (isset($ctn['index']) && true === $ctn['index']) {
             //Add WP Hooks
             if ($hook && TTO_IS_ADMIN) {
                 add_action('save_post', array(&$this, '__save_post'));
@@ -934,7 +937,7 @@ class TeaElasticsearch
      *
      * @return int $code HTTP header status curl code
      *
-     * @since 1.4.3.6
+     * @since 1.4.3.8
      */
     public function elasticaConnection()
     {
@@ -945,6 +948,11 @@ class TeaElasticsearch
         //Check Elastica
         if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
             return $req;
+        }
+
+        //Check index name
+        if (!isset($ctn['index_name']) || empty($ctn['index_name'])) {
+            return 202;
         }
 
         //Build url
@@ -1113,14 +1121,14 @@ class TeaElasticsearch
      *
      * @return array $search Array of all search datas
      *
-     * @since 1.4.0
+     * @since 1.4.3.8
      */
     protected function getConfig()
     {
         //Return value
         $default = array(
             'enable' => 'no',
-            'index' => false,
+            'index' => 404,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',
