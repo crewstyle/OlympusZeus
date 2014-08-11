@@ -92,12 +92,18 @@ body.login div#login form .input:-webkit-autofill {
     -webkit-box-shadow:0 0 0 40px #3b3d3c inset;
 }
 body.login div#login form p.forgetmenot {
+    float:none;
+    margin-top:10px;
+}
+body.login div#login form p.submit {
     margin-top:25px;
 }
 body.login div#login form p.submit input#wp-submit {
     background:#91d04d;
     border-color:#55bb3a;
-    margin-top:20px;
+    float:none;
+    margin-top:0;
+    width:100%;
     -webkit-box-shadow:inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
     -moz-box-shadow:inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
     box-shadow:inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
