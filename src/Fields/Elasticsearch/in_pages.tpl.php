@@ -2,16 +2,22 @@
 <h2><?php echo $title ?></h2>
 
 <?php if ('yes' == $vals['enable'] && 200 != $vals['status']): ?>
-    <div class="alert alert-danger">
-        <?php if (202 == $vals['status']): ?>
+    <div class="alert alert-warning">
+        <?php if (404 == $vals['status']): ?>
             <p>
-                <?php _e('The connection seems good but there is no "Index name" well configured. Check your parameters in the "Configurations" tab.', TTO_I18N) ?>
+                <?php _e('The connection seems good but there is no "Index name" as you have set. Click on the "Create index" button.', TTO_I18N) ?>
             </p>
         <?php else: ?>
             <p>
                 <?php _e('It seems there is a problem with your connection parameters. Please, check the "Configurations" tab.', TTO_I18N) ?>
             </p>
         <?php endif ?>
+    </div>
+<?php elseif ('yes' == $vals['enable'] && empty($index)): ?>
+    <div class="alert alert-success">
+        <p>
+            <?php _e('Your parameters are well configured. You can now use Elasticsearch in your website. Here is the last step: click on the "Index contents" button to index your old posts.', TTO_I18N) ?>
+        </p>
     </div>
 <?php endif ?>
 
@@ -39,22 +45,29 @@
                         <hr/>
                     </li>
 
-                    <?php if ('yes' == $vals['enable'] && !empty($index)): ?>
+                    <?php /*if ('yes' == $vals['enable'] && !empty($index)): ?>
                         <li>
                             <a href="#<?php echo $id ?>-stats"><?php _e('Statistics', TTO_I18N) ?> (<?php _e('Coming soon', TTO_I18N) ?>)</a>
                         </li>
                         <li class="hr">
                             <hr/>
                         </li>
-                    <?php endif ?>
+                    <?php endif*/ ?>
                 </ul>
 
                 <div class="forms">
-                    <?php if ('yes' == $vals['enable'] && 200 == $vals['status'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
-                        <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
-                            <input type="hidden" name="tea_elastic_index" value="1" />
-                            <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>
-                        </form>
+                    <?php if ('yes' == $vals['enable'] && (!empty($vals['index_post']) || !empty($vals['index_tax']))): ?>
+                        <?php if (404 == $vals['status']): ?>
+                            <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
+                                <input type="hidden" name="tea_elastic_create" value="1" />
+                                <button type="submit" class="button button-create"><?php _e('Create index', TTO_I18N) ?></button>
+                            </form>
+                        <?php elseif (200 == $vals['status']): ?>
+                            <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
+                                <input type="hidden" name="tea_elastic_index" value="1" />
+                                <button type="submit" class="button button-index"><?php _e('Index contents', TTO_I18N) ?></button>
+                            </form>
+                        <?php endif ?>
                     <?php endif ?>
 
                     <form action="admin.php?page=<?php echo $page ?>&action=tea_action&for=elasticsearch" method="post">
@@ -225,7 +238,7 @@
                         <button type="submit" class="button button-primary"><?php _e('Submit', TTO_I18N) ?></button>
                     </div>
                 <?php endif ?>
-                <?php if ('yes' == $vals['enable'] && !empty($index)): ?>
+                <?php /*if ('yes' == $vals['enable'] && !empty($index)): ?>
                     <!-- Statistics -->
                     <div id="<?php echo $id ?>-stats" class="help-tab-content">
                         <h3><?php _e('Statistics', TTO_I18N) ?></h3>
@@ -234,7 +247,7 @@
 
                         <br class="clear"/>
                     </div>
-                <?php endif ?>
+                <?php endif*/ ?>
             </form>
         </div>
     </div>

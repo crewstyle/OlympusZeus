@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.3.9
+ * @since 1.4.3.10
  *
  */
 class Elasticsearch extends TeaFields
@@ -51,7 +51,7 @@ class Elasticsearch extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.3.9
+     * @since 1.4.3.10
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -66,11 +66,12 @@ class Elasticsearch extends TeaFields
         $description = isset($content['description']) ? $content['description'] : '';
         $page = $this->getCurrentPage();
         $index = TeaThemeOptions::getConfigs('elastic_index');
+        $index = $index[0];
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array(
             'enable' => 'no',
-            'status' => 404,
+            'status' => 0,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',
@@ -99,7 +100,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.0
+     * @since 1.4.3.10
      */
     public function actionElasticsearch($request)
     {
@@ -117,8 +118,12 @@ class Elasticsearch extends TeaFields
         $id = $this->getId();
 
         //Check if this action was properly called
-        if (isset($request['tea_elastic_enable'])) {
-            //Index datas
+        if (isset($request['tea_elastic_create'])) {
+            //Create index
+            $this->createElasticsearch();
+        }
+        else if (isset($request['tea_elastic_enable'])) {
+            //Dis/anable Elasticsearch
             $this->enableElasticsearch($request);
         }
         else if (isset($request['tea_elastic_index'])) {
@@ -132,11 +137,52 @@ class Elasticsearch extends TeaFields
     }
 
     /**
+     * Create the index for all datas.
+     *
+     * @since 1.4.3.10
+     */
+    public function createElasticsearch()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Get id
+        $id = $this->getId();
+
+        //Get datas
+        $ctn = TeaThemeOptions::getConfigs($id, array());
+
+        //Check if this action was properly called
+        if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
+            return;
+        }
+
+        //Check status
+        if (!isset($ctn['status']) || 404 != $ctn['status']) {
+            //We do not need to create the Index
+            return;
+        }
+
+        //Create new occurrence
+        $els = new TeaElasticsearch(false);
+        $els->createElasticsearch();
+
+        //Get Connection status
+        $ctn['status'] = TeaElasticsearch::elasticaConnection($ctn);
+
+        //Define data in DB
+        TeaThemeOptions::setConfigs($id, $ctn);
+        TeaThemeOptions::setConfigs('elastic_index', 0);
+    }
+
+    /**
      * Index all search datas.
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.7
+     * @since 1.4.3.10
      */
     public function enableElasticsearch($request)
     {
@@ -158,16 +204,17 @@ class Elasticsearch extends TeaFields
 
         //Enable or disable Elasticsearch
         $ctn['enable'] = $request[$id]['enable'];
-        $ctn['status'] = 404;
+        $ctn['status'] = 0;
 
         //Update datas
         TeaThemeOptions::setConfigs($id, $ctn);
+        TeaThemeOptions::setConfigs('elastic_index', 0);
     }
 
     /**
      * Index all search datas.
      *
-     * @since 1.4.0
+     * @since 1.4.3.10
      */
     public function indexElasticsearch()
     {
@@ -177,8 +224,9 @@ class Elasticsearch extends TeaFields
         }
 
         //Create new occurrence
-        $els = new TeaElasticsearch(true, false);
+        $els = new TeaElasticsearch(false);
         $results = $els->indexContents();
+        TeaThemeOptions::setConfigs('elastic_index', $results);
 
         //Checks contents
         if (!$results) {
@@ -204,7 +252,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.9
+     * @since 1.4.3.10
      */
     public function updateElasticsearch($request)
     {
@@ -217,19 +265,22 @@ class Elasticsearch extends TeaFields
         $id = $this->getId();
         $ctn = TeaThemeOptions::getConfigs($id);
 
+        //Check old vars vs new
+        $shost = $request[$id]['server_host'] != $ctn['server_host'] ? 1 : 0;
+        $sport = $request[$id]['server_port'] != $ctn['server_port'] ? 1 : 0;
+        $sname = $request[$id]['index_name'] != $ctn['index_name'] ? 1 : 0;
+
+        //Check old values
+        if ($shost || $sport || $sname) {
+            TeaThemeOptions::setConfigs('elastic_index', 0);
+            $ctn['status'] = 0;
+        }
+
         //Update all datas
         $new = array_merge($ctn, $request[$id]);
 
         //Get Connection status
-        $new['status'] = TeaElasticsearch::elasticaConnection($new);
-
-        //Check status
-        if (202 == $new['status']) {
-            //Create index
-            $els = new TeaElasticsearch(true, false);
-            $res = $els->indexContents(false);
-
-            //Try another connection
+        if (0 == $new['status']) {
             $new['status'] = TeaElasticsearch::elasticaConnection($new);
         }
 
@@ -278,18 +329,5 @@ class Elasticsearch extends TeaFields
     {
         //Return value
         return $this->id;
-    }
-
-    /**
-     * Define the $id value
-     *
-     * @param string $id Get the current id
-     *
-     * @since 1.4.3.3
-     */
-    public function setId($id = 'elastic')
-    {
-        //Define value
-        $this->id = $id;
     }
 }

@@ -1,3 +1,8 @@
+## 1.4.3.10 (August 18, 2014)
+
+Add new process for create index and index contents in Elasticsearch
+
+
 ## 1.4.3.9 (August 11, 2014)
 
 Enhance Elasticsearch check while updating

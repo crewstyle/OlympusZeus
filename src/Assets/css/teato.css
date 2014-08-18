@@ -599,11 +599,15 @@ hr {
     background-color:#dff0d8;
     border-color:#d6e9c6;
     color:#468847;
+    margin:0 5px -3px;
 }
 .tea_to.wrap .alert-danger {
     background-color:#f2dede;
     border-color:#ebccd1;
     color:#a94442;
+    margin:0 5px -3px;
+}
+.tea_to.wrap .alert-warning {
     margin:0 5px -3px;
 }
 
@@ -1274,7 +1278,7 @@ a.tea-connection:before {
 }
 
 
-/*--- [CONNECTION BOX] ---*/
+/*--- [CONNECTION & ELASTICSEARCH BOXES] ---*/
 .tea_to_wrap.tea-screen-meta {
     background-color:#f1f1f1;
     border:1px solid #ccc;
@@ -1307,6 +1311,7 @@ a.tea-connection:before {
 .tea_to_wrap .tea-contextual-help-columns {
     position:relative;
 }
+/* Menu */
 .tea_to_wrap .contextual-help-tabs {
     width:220px;
 }
@@ -1349,11 +1354,30 @@ a.tea-connection:before {
 .tea_to_wrap .contextual-help-tabs hr {
     margin-left:4px;
 }
+.tea_to_wrap .contextual-help-tabs .button-create {
+    background:#91d04d;
+    border-color:#55bb3a;
+    color:#fff;
+    display:block;
+    font-size:16px;
+    height:auto;
+    line-height:50px;
+    margin:0 auto 10px;
+    -webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);
+    -moz-box-shadow:0 1px 0 rgba(0,0,0,.15);
+    box-shadow:0 1px 0 rgba(0,0,0,.15);
+}
+.tea_to_wrap .contextual-help-tabs .button-create:hover {
+    background:#55bb3a;
+}
 .tea_to_wrap .contextual-help-tabs .button-index {
     color:#fff;
     border-color:#0074a2;
     background:#2ea2cc;
     display:block;
+    font-size:16px;
+    height:auto;
+    line-height:50px;
     margin:0 auto 10px;
     -webkit-box-shadow:0 1px 0 rgba(0,0,0,.08);
     -moz-box-shadow:0 1px 0 rgba(0,0,0,.08);
@@ -1390,6 +1414,7 @@ a.tea-connection:before {
     display:block;
     margin:0 auto;
 }
+/* Content */
 .tea_to_wrap .contextual-help-tabs-wrap {
     padding:15px 20px;
     position:relative;

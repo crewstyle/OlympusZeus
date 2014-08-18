@@ -47,12 +47,11 @@ class TeaElasticsearch
     /**
      * Constructor.
      *
-     * @param boolean $write Define if we write or read data from Elastica
      * @param boolean $hook Define if we need to call hooks
      *
-     * @since 1.4.3.9
+     * @since 1.4.3.10
      */
-    public function __construct($write = false, $hook = true)
+    public function __construct($hook = true)
     {
         //Get custom data
         $ctn = TeaThemeOptions::getConfigs('elastic');
@@ -75,10 +74,6 @@ class TeaElasticsearch
     }
 
     //------------------------------------------------------------------------//
-
-    /**
-     * FUNCTIONS
-     **/
 
     /**
      * HOOK FUNCTIONS
@@ -205,413 +200,7 @@ class TeaElasticsearch
         }
     }
 
-    /**
-     * MAIN FUNCTIONS
-     **/
-
-    /**
-     * Index contents.
-     *
-     * @param boolean $idxctn Define it we have to index contents or just create index
-     * @return int $count Get number of items indexed
-     *
-     * @since 1.4.3.9
-     */
-    public function indexContents($idxctn = true)
-    {
-        //Get search datas
-        $ctn = $this->getConfig();
-
-        //Check if we can index some post types
-        if (!isset($ctn['index_post']) || empty($ctn['index_post'])) {
-            return;
-        }
-
-        //Get client and index
-        $client = $this->getClient();
-        $index = $this->getIndex();
-
-        //Check integrity
-        if (!isset($client) || empty($client)) {
-            $client = $this->elasticaClient(true);
-        }
-
-        //Check integrity
-        if (!isset($index) || empty($index)) {
-            $index = $this->elasticaIndex();
-        }
-
-        //Create analysers and mappers for Posts
-        $index = $this->elasticaAnalysis($index, $ctn['index_post'], $ctn['index_tax']);
-
-        //Do we have to index contents
-        if (!$idxctn) {
-            return 0;
-        }
-
-        //Build args to the next request
-        $pargs = array(
-            'posts_per_page' => -1,
-            'numberposts' => -1,
-            'post_type' => $ctn['index_post'],
-            'post_status' => 'publish',
-            'orderby' => 'post_date',
-            'order' => 'DESC',
-        );
-        $targs = array(
-            'orderby' => 'slug',
-            'hide_empty' => false,
-        );
-
-        //Get all wanted posts
-        $posts = get_posts($pargs);
-        $taxes = get_terms($ctn['index_tax'], $targs);
-        $count = 0;
-
-        //Iterate on all posts to create documents
-        foreach ($posts as $post) {
-            //Check post type
-            if (!array_key_exists($post->post_type, $ctn['index_post'])) {
-                continue;
-            }
-
-            //Update document
-            $this->elasticaUpdatePost($post, $index);
-
-            //Update counter
-            $count++;
-        }
-
-        //Iterate on all posts to create documents
-        foreach ($taxes as $tax) {
-            //Check post type
-            if (!array_key_exists($tax->taxonomy, $ctn['index_tax'])) {
-                continue;
-            }
-
-            //Update document
-            $this->elasticaUpdateTax($tax, $index);
-
-            //Update counter
-            $count++;
-        }
-
-        //Refresh index
-        $index->refresh();
-
-        //Set and return count
-        TeaThemeOptions::setConfigs('elastic_index', $count);
-        return $count;
-    }
-
-    /**
-     * Search children.
-     *
-     * @param string $type Post type
-     * @param int $parent Parent ID to get all children
-     * @param string $order Order way
-     * @return array $elasticsearches Combine of all results, total and aggregations
-     *
-     * @since 1.4.0
-     */
-    public function searchChildren($type, $parent, $order = 'desc')
-    {
-        //Check page
-        if (is_search() || TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Return array
-        $return = array(
-            'parent' => $parent,
-            'total' => 0,
-            'results' => array()
-        );
-
-        //Check request
-        if (empty($parent)) {
-            return $return;
-        }
-
-        //Get query vars
-        $results = array();
-        $types = array();
-        $total = 0;
-
-        //Get Elasticsearch datas
-        $ctn = $this->getConfig();
-        $index = $this->getIndex();
-
-        //Create the actual search object with some data.
-        $es_query = new Query();
-
-        //Define term
-        $es_term = new Term();
-        $es_term->setTerm($type.'.parent', $parent);
-
-        //Filter 'And'
-        $es_filter = new Bool();
-        $es_filter->addMust($es_term);
-
-        //Add filter to the search object
-        $es_query->setFilter($es_filter);
-
-        //Add sort
-        $es_query->setSort(array($type.'.date' => array('order' => $order)));
-
-        //Search!
-        $es_resultset = $index->search($es_query);
-
-        //Retrieve data
-        $es_results = $es_resultset->getResults();
-
-        //Check results
-        if (null == $es_results || empty($es_results)) {
-            return $return;
-        }
-
-        //Iterate to retrieve all IDs
-        foreach ($es_results as $res) {
-            $typ = $res->getType();
-
-            //Save type
-            $types[$typ] = $typ;
-
-            //Save datas
-            $results[$typ][] = array(
-                'id' => $res->getId(),
-                'score' => $res->getScore(),
-                'source' => $res->getSource(),
-            );
-        }
-
-        //Get total
-        $total = $es_resultset->getTotalHits();
-
-        //Return everything
-        $return = array(
-            'parent' => $parent,
-            'total' => $total,
-            'results' => $results
-        );
-        return $return;
-    }
-
-    /**
-     * Search contents.
-     *
-     * @return array $elasticsearches Combine of all results, total and aggregations
-     *
-     * @since 1.4.0
-     */
-    public function searchContents()
-    {
-        //Check page
-        if (!is_search() || TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Return array
-        $return = array(
-            'query' => array(
-                'search' => '',
-                'type' => '',
-                'paged' => 0,
-                'perpage' => 0
-            ),
-            'total' => 0,
-            'types' => array(),
-            'results' => array()
-        );
-
-        //Get query vars
-        $request = isset($_REQUEST) ? $_REQUEST : array();
-        $results = array();
-        $types = array();
-        $total = 0;
-
-        //Check request
-        if (empty($request)) {
-            return $return;
-        }
-
-        //Get Elasticsearch datas
-        $ctn = $this->getConfig();
-        $index = $this->getIndex();
-
-        //Get search datas
-        $search = isset($request['s']) 
-            ? str_replace('\"', '"', $request['s']) 
-            : '';
-
-        //Return everything
-        if (empty($search)) {
-            $return['query']['search'] = str_replace(' ', '+', $search);
-            return $return;
-        }
-
-        //Get search datas
-        $type = isset($request['type']) ? $request['type'] : '';
-        $paged = isset($request['paged']) && !empty($request['paged']) 
-            ? $request['paged'] - 1 
-            : 0;
-        $perpage = isset($request['perpage']) 
-            ? $request['perpage'] 
-            : TeaThemeOptions::get_option('posts_per_page', 10);
-
-        //Build query string
-        $es_querystring = new QueryString();
-
-        //'And' or 'Or' default: 'Or'
-        $es_querystring->setDefaultOperator('OR');
-        $es_querystring->setQuery($search);
-
-        //Create the actual search object with some data.
-        $es_query = new Query();
-        $es_query->setQuery($es_querystring);
-
-        //Define options
-        $es_query->setFrom($paged);     //Start
-        $es_query->setLimit($perpage);  //How many
-
-        //Search!
-        $es_resultset = $index->search($es_query);
-
-        //Retrieve data
-        $es_results = $es_resultset->getResults();
-
-        //Check results
-        if (null == $es_results || empty($es_results)) {
-            $return['query']['search'] = str_replace(' ', '+', $search);
-            return $return;
-        }
-
-        //Iterate to retrieve all IDs
-        foreach ($es_results as $res) {
-            $typ = $res->getType();
-
-            //Save type
-            $types[$typ] = $typ;
-
-            //Save datas
-            $results[$typ][] = array(
-                'id' => $res->getId(),
-                'score' => $res->getScore(),
-                'source' => $res->getSource(),
-            );
-        }
-
-        //Get total
-        $total = $es_resultset->getTotalHits();
-
-        //Return everything
-        $return = array(
-            'query' => array(
-                'search' => str_replace(' ', '+', $search),
-                'type' => $type,
-                'paged' => $paged,
-                'perpage' => $perpage
-            ),
-            'total' => $total,
-            'types' => $types,
-            'results' => $results
-        );
-        return $return;
-    }
-
-    /**
-     * Search suggest.
-     *
-     * @param string $type Post type
-     * @param int $post Post ID to get all suggestions
-     * @param array $tags Array contains all post tags
-     * @return array $elasticsearches Combine of all results, total and aggregations
-     *
-     * @since 1.4.0
-     */
-    public function searchSuggest($type, $post, $tags)
-    {
-        //Check page
-        if (!is_search() || TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Return array
-        $return = array(
-            'post' => $post,
-            'tags' => $tags,
-            'total' => 0,
-            'results' => array()
-        );
-
-        //Check request
-        if (empty($post)) {
-            return $return;
-        }
-
-        //Get query vars
-        $results = array();
-        $total = 0;
-
-        //Get Elasticsearch datas
-        $ctn = $this->getConfig();
-        $index = $this->getIndex();
-
-        //Create suggestion
-        $es_suggest = new Suggest();
-
-        //Iterate on all tags
-        foreach ($tags as $k => $tag) {
-            //CReate Term with options
-            $es_term = new SuggestTerm('tags_suggest_'.$k, '_all');
-            $es_term->setText($tag);
-            $es_term->setSize($number);
-            $es_term->setAnalyzer('simple');
-
-            //Add Term to current suggestion
-            $es_suggest->addSuggestion($es_term);
-        }
-
-        //Search!
-        $es_resultset = $index->search($es_suggest);
-
-        //Retrieve data
-        $es_results = $es_resultset->getSuggests();
-
-        //Check results
-        if (null == $es_results || empty($es_results)) {
-            return $return;
-        }
-
-        //Iterate to retrieve all IDs
-        foreach ($es_results as $res) {
-            //Check suggestions
-            if (empty($res[0]['options'])) {
-                continue;
-            }
-
-            //Iterate on all options
-            foreach ($res[0]['options'] as $opt) {
-                //Save datas
-                $results[$opt['text']] = array(
-                    'score' => $opt['score'],
-                    'freq' => $opt['freq'],
-                );
-            }
-        }
-
-        //Get total
-        $total = $es_resultset->getTotalHits();
-
-        //Return everything
-        $return = array(
-            'post' => $post,
-            'tags' => $tags,
-            'total' => $total,
-            'results' => $results
-        );
-        return $return;
-    }
+    //------------------------------------------------------------------------//
 
     /**
      * ELASTICA FUNCTIONS
@@ -726,13 +315,18 @@ class TeaElasticsearch
      * @param array $taxonomies Array containing all taxonomies
      * @return object $index Elastica Index
      *
-     * @since 1.4.0
+     * @since 1.4.3.10
      */
     protected function elasticaAnalysis($index, $posttypes, $taxonomies)
     {
         //Check integrity
         if (!isset($index) || empty($index)) {
-            return;
+            return null;
+        }
+
+        //Check integrity
+        if (empty($posttypes) && empty($taxonomies)) {
+            return null;
         }
 
         //Define properties
@@ -781,121 +375,170 @@ class TeaElasticsearch
             ),
         );
 
-        //Check integrity
-        if (!isset($posttypes) || empty($posttypes)) {
-            return;
+        //Set analysis
+        if (isset($posttypes) && !empty($posttypes)) {
+            foreach ($posttypes as $k) {
+                $index->create(array(
+                    'number_of_shards' => 4,
+                    'number_of_replicas' => 1,
+                    'analysis' => array(
+                        'analyzer' => array(
+                            'indexAnalyzer' => array(
+                                'type' => 'custom',
+                                'tokenizer' => 'standard',
+                                'filter' => array('lowercase', 'asciifolding', 'filter_' . $k),
+                            ),
+                            'searchAnalyzer' => array(
+                                'type' => 'custom',
+                                'tokenizer' => 'standard',
+                                'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_' . $k),
+                            )
+                        ),
+                        'filter' => array(
+                            'filter_' . $k => array(
+                                'type' => 'standard',
+                                'language' => TTO_LOCAL,
+                                'ignoreCase' => true,
+                            )
+                        ),
+                    ),
+                ), true);
+
+                //Define new Type
+                $type = $index->getType($k);
+
+                //Define a new Elastica Mapper
+                $mapping = new Mapping();
+                $mapping->setType($type);
+                $mapping->setParam('index_analyzer', 'indexAnalyzer');
+                $mapping->setParam('search_analyzer', 'searchAnalyzer');
+
+                //Define boost field
+                $mapping->setParam('_boost', array(
+                    'name' => '_boost',
+                    'null_value' => 1.0
+                ));
+
+                //Set mapping
+                $mapping->setProperties($props);
+
+                // Send mapping to type
+                $mapping->send();
+            }
         }
 
         //Set analysis
-        foreach ($posttypes as $k) {
-            $index->create(array(
-                'number_of_shards' => 4,
-                'number_of_replicas' => 1,
-                'analysis' => array(
-                    'analyzer' => array(
-                        'indexAnalyzer' => array(
-                            'type' => 'custom',
-                            'tokenizer' => 'standard',
-                            'filter' => array('lowercase', 'asciifolding', 'filter_' . $k),
+        if (isset($taxonomies) && !empty($taxonomies)) {
+            foreach ($taxonomies as $t) {
+                $index->create(array(
+                    'number_of_shards' => 4,
+                    'number_of_replicas' => 1,
+                    'analysis' => array(
+                        'analyzer' => array(
+                            'indexAnalyzer' => array(
+                                'type' => 'custom',
+                                'tokenizer' => 'standard',
+                                'filter' => array('lowercase', 'asciifolding', 'filter_' . $t),
+                            ),
+                            'searchAnalyzer' => array(
+                                'type' => 'custom',
+                                'tokenizer' => 'standard',
+                                'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_' . $t),
+                            )
                         ),
-                        'searchAnalyzer' => array(
-                            'type' => 'custom',
-                            'tokenizer' => 'standard',
-                            'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_' . $k),
-                        )
-                    ),
-                    'filter' => array(
-                        'filter_' . $k => array(
-                            'type' => 'standard',
-                            'language' => TTO_LOCAL,
-                            'ignoreCase' => true,
-                        )
-                    ),
-                ),
-            ), true);
-
-            //Define new Type
-            $type = $index->getType($k);
-
-            //Define a new Elastica Mapper
-            $mapping = new Mapping();
-            $mapping->setType($type);
-            $mapping->setParam('index_analyzer', 'indexAnalyzer');
-            $mapping->setParam('search_analyzer', 'searchAnalyzer');
-
-            //Define boost field
-            $mapping->setParam('_boost', array(
-                'name' => '_boost',
-                'null_value' => 1.0
-            ));
-
-            //Set mapping
-            $mapping->setProperties($props);
-
-            // Send mapping to type
-            $mapping->send();
-        }
-
-        //Check integrity
-        if (!isset($taxonomies) || empty($taxonomies)) {
-            return;
-        }
-
-        //Set analysis
-        foreach ($taxonomies as $t) {
-            $index->create(array(
-                'number_of_shards' => 4,
-                'number_of_replicas' => 1,
-                'analysis' => array(
-                    'analyzer' => array(
-                        'indexAnalyzer' => array(
-                            'type' => 'custom',
-                            'tokenizer' => 'standard',
-                            'filter' => array('lowercase', 'asciifolding', 'filter_' . $t),
+                        'filter' => array(
+                            'filter_' . $t => array(
+                                'type' => 'standard',
+                                'language' => TTO_LOCAL,
+                                'ignoreCase' => true,
+                            )
                         ),
-                        'searchAnalyzer' => array(
-                            'type' => 'custom',
-                            'tokenizer' => 'standard',
-                            'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_' . $t),
-                        )
                     ),
-                    'filter' => array(
-                        'filter_' . $t => array(
-                            'type' => 'standard',
-                            'language' => TTO_LOCAL,
-                            'ignoreCase' => true,
-                        )
-                    ),
-                ),
-            ), true);
+                ), true);
 
-            //Define new Type
-            $type = $index->getType($t);
+                //Define new Type
+                $type = $index->getType($t);
 
-            //Define a new Elastica Mapper
-            $mapping = new Mapping();
-            $mapping->setType($type);
-            $mapping->setParam('index_analyzer', 'indexAnalyzer');
-            $mapping->setParam('search_analyzer', 'searchAnalyzer');
+                //Define a new Elastica Mapper
+                $mapping = new Mapping();
+                $mapping->setType($type);
+                $mapping->setParam('index_analyzer', 'indexAnalyzer');
+                $mapping->setParam('search_analyzer', 'searchAnalyzer');
 
-            //Define boost field
-            $mapping->setParam('_boost', array(
-                'name' => '_boost',
-                'null_value' => 1.0
-            ));
+                //Define boost field
+                $mapping->setParam('_boost', array(
+                    'name' => '_boost',
+                    'null_value' => 1.0
+                ));
 
-            //Set mapping
-            $mapping->setProperties($props);
+                //Set mapping
+                $mapping->setProperties($props);
 
-            // Send mapping to type
-            $mapping->send();
+                // Send mapping to type
+                $mapping->send();
+            }
         }
-
-        //Update index
-        $this->setIndex($index);
 
         //Return index
         return $index;
+    }
+
+    /**
+     * Check Elastica Connection.
+     *
+     * @param array $ctn Contains all stored datas
+     * @return int $status HTTP header status curl code
+     *
+     * @since 1.4.3.10
+     */
+    public static function elasticaConnection($ctn)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Do we have to check connection?
+        if (!isset($ctn['enable']) || 'yes' != $ctn['enable']) {
+            return 0;
+        }
+
+        //Build url
+        $url = 'http://';
+        $url .= isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost';
+        $url .= isset($ctn['server_port']) ? ':'.$ctn['server_port'].'/' : ':9200/';
+        $url .= isset($ctn['index_name']) ? $ctn['index_name'].'/' : '';
+        $url .= '_status';
+
+        //Make curl
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $head = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        //Get JSON head
+        $json = json_decode($head);
+
+        //Check errors
+        if (!$status && null === $json) {
+            //Hum... Nothing good over here.
+            return 0;
+        }
+        else if ($status && 404 == $status) {
+            //Okay, only the brave, by Diesel
+            $error = 'IndexMissingException[['.$ctn['index_name'].'] missing]';
+            return isset($json->error) && $error == $json->error ? 404 : 0;
+        }
+        else if ($status && 200 == $status) {
+            //Everything is good, everything is CocaCola!
+            return 200;
+        }
+
+        //Update datas
+        return 0;
     }
 
     /**
@@ -904,9 +547,9 @@ class TeaElasticsearch
      * @param boolean $write Define if we are writing transactions or reading them
      * @return object $client Elastica Client
      *
-     * @since 1.4.0
+     * @since 1.4.3.10
      */
-    protected function elasticaClient($write = false)
+    protected function elasticaCreateClient($write = false)
     {
         //Get Elastica Client
         $client = $this->getClient();
@@ -934,54 +577,42 @@ class TeaElasticsearch
     }
 
     /**
-     * Check Elastica Connection.
+     * Create Elastica Index.
      *
-     * @param array $ctn Contains all stored datas
-     * @return int $status HTTP header status curl code
+     * @param object $client Elastica Client
+     * @return object $index Elastica Index
      *
-     * @since 1.4.3.9
+     * @since 1.4.3.10
      */
-    public static function elasticaConnection($ctn)
+    protected function elasticaCreateIndex($client)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
+        //Check integrity
+        if (!isset($client) || empty($client) || null === $client) {
+            return null;
+        }
+
+        //Get Elastica Index
+        $index = $this->getIndex();
+
+        //Check integrity
+        if (isset($index) && !empty($index) && null !== $index) {
+            /**
+             * @todo destroy old index instead of returning it?
+             */
+            return $index;
         }
 
         //Get search datas
-        $status = 404;
+        $ctn = $this->getConfig();
 
-        //Do we have to check connection?
-        if (!isset($ctn['enable']) || 'no' == $ctn['enable']) {
-            return $status;
-        }
+        //Update index
+        $index = $client->getIndex($ctn['index_name']);
 
-        //Build url
-        $url = 'http://';
-        $url .= isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost';
-        $url .= isset($ctn['server_port']) ? ':'.$ctn['server_port'].'/' : ':9200/';
-        $url .= isset($ctn['index_name']) ? $ctn['index_name'].'/' : '';
-        $url .= '_status';
+        //Update Index var
+        $this->setIndex($index);
 
-        //Make curl
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $head = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        //Check request
-        if ($status && 200 == $status) {
-            return 200;
-        }
-        else if ($status && 202 == $status) {
-            return 202;
-        }
-
-        //Update datas
-        return !$status ? 404 : $status;
+        //Return the created client
+        return $index;
     }
 
     /**
@@ -1014,44 +645,6 @@ class TeaElasticsearch
     }
 
     /**
-     * Create Elastica Index.
-     *
-     * @return object $index Elastica Index
-     *
-     * @since 1.4.0
-     */
-    protected function elasticaIndex()
-    {
-        //Get Elastica Client
-        $client = $this->getClient();
-
-        //Check integrity
-        if (!isset($client) || empty($client)) {
-            $client = $this->elasticaClient();
-        }
-
-        //Get Elastica Index
-        $index = $this->getIndex();
-
-        //Check integrity
-        if (isset($index) && !empty($index)) {
-            return $index;
-        }
-
-        //Get search datas
-        $ctn = $this->getConfig();
-
-        //Update index
-        $index = $client->getIndex($ctn['index_name']);
-
-        //Update Index var
-        $this->setIndex($index);
-
-        //Return the created client
-        return $index;
-    }
-
-    /**
      * Update or Add a post into Elastica Client.
      *
      * @param object $post Post to update or add
@@ -1062,7 +655,12 @@ class TeaElasticsearch
     protected function elasticaUpdatePost($post, $index = null)
     {
         //Get index
-        $index = null != $index ? $index : $this->getIndex();
+        $index = null !== $index ? $index : $this->getIndex();
+
+        //Check index
+        if (null === $index) {
+            return;
+        }
 
         //Try to update or add post
         try {
@@ -1086,6 +684,11 @@ class TeaElasticsearch
         //Get index
         $index = null != $index ? $index : $this->getIndex();
 
+        //Check index
+        if (null === $index) {
+            return;
+        }
+
         //Try to update or add post
         try {
             //Make the magic
@@ -1094,6 +697,479 @@ class TeaElasticsearch
             $type->addDocument(new Document($tax->term_id, $doc));
         } catch (NotFoundException $ex){}
     }
+
+    //------------------------------------------------------------------------//
+
+    /**
+     * MAIN FUNCTIONS
+     **/
+
+    /**
+     * Index contents.
+     *
+     * @param boolean $idxctn Define it we have to index contents or just create index
+     * @return int $count Get number of items indexed
+     *
+     * @since 1.4.3.10
+     */
+    public function createElasticsearch()
+    {
+        //Check page
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Get client and index
+        $client = $this->getClient();
+        $index = $this->getIndex();
+
+        //Check integrity
+        if (!isset($client) || empty($client)) {
+            $client = $this->elasticaCreateClient(true);
+        }
+
+        //Check integrity
+        if (!isset($index) || empty($index)) {
+            $index = $this->elasticaCreateIndex($client);
+        }
+
+        //Get search datas
+        $ctn = $this->getConfig();
+
+        //Get datas for mapping
+        $idp = isset($ctn['index_post']) ? $ctn['index_post'] : array();
+        $idt = isset($ctn['index_tax']) ? $ctn['index_tax'] : array();
+
+        //Create analysers and mappers for Posts
+        $index = $this->elasticaAnalysis($index, $idp, $idt);
+
+        //Update index
+        $this->setIndex($index);
+    }
+
+    /**
+     * Index contents.
+     *
+     * @param boolean $idxctn Define it we have to index contents or just create index
+     * @return int $count Get number of items indexed
+     *
+     * @since 1.4.3.10
+     */
+    public function indexContents($idxctn = true)
+    {
+        //Check page
+        if (!TTO_IS_ADMIN) {
+            return 0;
+        }
+
+        //Get search datas
+        $ctn = $this->getConfig();
+
+        //Check if we can index some post types
+        if (!isset($ctn['index_post']) || empty($ctn['index_post'])) {
+            return 0;
+        }
+
+        //Get index
+        $index = $this->getIndex();
+        $idp = $ctn['index_post'];
+        $idt = isset($ctn['index_tax']) && !empty($ctn['index_tax']) 
+            ? $ctn['index_tax'] 
+            : array();
+
+        //Check index
+        if (null === $index || empty($index)) {
+            return 0;
+        }
+
+        //Do we have to index contents
+        if (!$idxctn) {
+            return 0;
+        }
+
+        //Build args to the next request
+        $pargs = array(
+            'posts_per_page' => -1,
+            'numberposts' => -1,
+            'post_type' => $idp,
+            'post_status' => 'publish',
+            'orderby' => 'post_date',
+            'order' => 'DESC',
+        );
+        $targs = array(
+            'orderby' => 'slug',
+            'hide_empty' => false,
+        );
+
+        //Get all wanted posts
+        $posts = get_posts($pargs);
+        $count = 0;
+//echo '<pre>'; var_dump($idp, $posts); die();
+        //Iterate on all posts to create documents
+        foreach ($posts as $post) {
+            //Check post type
+            if (!array_key_exists($post->post_type, $idp)) {
+                continue;
+            }
+
+            //Update document
+            $this->elasticaUpdatePost($post, $index);
+
+            //Update counter
+            $count++;
+        }
+
+        //Check taxonomies
+        if (!empty($idt)) {
+            //Get all wanted taxonomies
+            $taxes = get_terms($idt, $targs);
+
+            //Iterate on all posts to create documents
+            foreach ($taxes as $tax) {
+                //Check post type
+                if (!array_key_exists($tax->taxonomy, $idt)) {
+                    continue;
+                }
+
+                //Update document
+                $this->elasticaUpdateTax($tax, $index);
+
+                //Update counter
+                $count++;
+            }
+        }
+
+        //Refresh index
+        $index->refresh();
+
+        //Set and return count
+        return $count;
+    }
+
+    /**
+     * Search children.
+     *
+     * @param string $type Post type
+     * @param int $parent Parent ID to get all children
+     * @param string $order Order way
+     * @return array $elasticsearches Combine of all results, total and aggregations
+     *
+     * @since 1.4.3.10
+     */
+    public function searchChildren($type, $parent, $order = 'desc')
+    {
+        //Check page
+        if (is_search() || TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Return array
+        $return = array(
+            'parent' => $parent,
+            'total' => 0,
+            'results' => array()
+        );
+
+        //Check request
+        if (empty($parent)) {
+            return $return;
+        }
+
+        //Get query vars
+        $results = array();
+        $types = array();
+        $total = 0;
+
+        //Get Elasticsearch datas
+        $ctn = $this->getConfig();
+        $index = $this->getIndex();
+
+        //Check index
+        if (null === $index || empty($index)) {
+            return $return;
+        }
+
+        //Create the actual search object with some data.
+        $es_query = new Query();
+
+        //Define term
+        $es_term = new Term();
+        $es_term->setTerm($type.'.parent', $parent);
+
+        //Filter 'And'
+        $es_filter = new Bool();
+        $es_filter->addMust($es_term);
+
+        //Add filter to the search object
+        $es_query->setFilter($es_filter);
+
+        //Add sort
+        $es_query->setSort(array($type.'.date' => array('order' => $order)));
+
+        //Search!
+        $es_resultset = $index->search($es_query);
+
+        //Retrieve data
+        $es_results = $es_resultset->getResults();
+
+        //Check results
+        if (null == $es_results || empty($es_results)) {
+            return $return;
+        }
+
+        //Iterate to retrieve all IDs
+        foreach ($es_results as $res) {
+            $typ = $res->getType();
+
+            //Save type
+            $types[$typ] = $typ;
+
+            //Save datas
+            $results[$typ][] = array(
+                'id' => $res->getId(),
+                'score' => $res->getScore(),
+                'source' => $res->getSource(),
+            );
+        }
+
+        //Get total
+        $total = $es_resultset->getTotalHits();
+
+        //Return everything
+        $return = array(
+            'parent' => $parent,
+            'total' => $total,
+            'results' => $results
+        );
+        return $return;
+    }
+
+    /**
+     * Search contents.
+     *
+     * @return array $elasticsearches Combine of all results, total and aggregations
+     *
+     * @since 1.4.3.10
+     */
+    public function searchContents()
+    {
+        //Check page
+        if (!is_search() || TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Return array
+        $return = array(
+            'query' => array(
+                'search' => '',
+                'type' => '',
+                'paged' => 0,
+                'perpage' => 0
+            ),
+            'total' => 0,
+            'types' => array(),
+            'results' => array()
+        );
+
+        //Get query vars
+        $request = isset($_REQUEST) ? $_REQUEST : array();
+        $results = array();
+        $types = array();
+        $total = 0;
+
+        //Check request
+        if (empty($request)) {
+            return $return;
+        }
+
+        //Get Elasticsearch datas
+        $ctn = $this->getConfig();
+        $index = $this->getIndex();
+
+        //Check index
+        if (null === $index || empty($index)) {
+            return $return;
+        }
+
+        //Get search datas
+        $search = isset($request['s']) 
+            ? str_replace('\"', '"', $request['s']) 
+            : '';
+
+        //Return everything
+        if (empty($search)) {
+            return $return;
+        }
+
+        //Get search datas
+        $type = isset($request['type']) ? $request['type'] : '';
+        $paged = isset($request['paged']) && !empty($request['paged']) 
+            ? $request['paged'] - 1 
+            : 0;
+        $perpage = isset($request['perpage']) 
+            ? $request['perpage'] 
+            : TeaThemeOptions::get_option('posts_per_page', 10);
+
+        //Build query string
+        $es_querystring = new QueryString();
+
+        //'And' or 'Or' default: 'Or'
+        $es_querystring->setDefaultOperator('OR');
+        $es_querystring->setQuery($search);
+
+        //Create the actual search object with some data.
+        $es_query = new Query();
+        $es_query->setQuery($es_querystring);
+
+        //Define options
+        $es_query->setFrom($paged);     //Start
+        $es_query->setLimit($perpage);  //How many
+
+        //Search!
+        $es_resultset = $index->search($es_query);
+
+        //Retrieve data
+        $es_results = $es_resultset->getResults();
+
+        //Check results
+        if (null == $es_results || empty($es_results)) {
+            $return['query']['search'] = str_replace(' ', '+', $search);
+            return $return;
+        }
+
+        //Iterate to retrieve all IDs
+        foreach ($es_results as $res) {
+            $typ = $res->getType();
+
+            //Save type
+            $types[$typ] = $typ;
+
+            //Save datas
+            $results[$typ][] = array(
+                'id' => $res->getId(),
+                'score' => $res->getScore(),
+                'source' => $res->getSource(),
+            );
+        }
+
+        //Get total
+        $total = $es_resultset->getTotalHits();
+
+        //Return everything
+        $return = array(
+            'query' => array(
+                'search' => str_replace(' ', '+', $search),
+                'type' => $type,
+                'paged' => $paged,
+                'perpage' => $perpage
+            ),
+            'total' => $total,
+            'types' => $types,
+            'results' => $results
+        );
+        return $return;
+    }
+
+    /**
+     * Search suggest.
+     *
+     * @param string $type Post type
+     * @param int $post Post ID to get all suggestions
+     * @param array $tags Array contains all post tags
+     * @return array $elasticsearches Combine of all results, total and aggregations
+     *
+     * @since 1.4.3.10
+     */
+    public function searchSuggest($type, $post, $tags)
+    {
+        //Check page
+        if (!is_search() || TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Return array
+        $return = array(
+            'post' => $post,
+            'tags' => $tags,
+            'total' => 0,
+            'results' => array()
+        );
+
+        //Check request
+        if (empty($post)) {
+            return $return;
+        }
+
+        //Get query vars
+        $results = array();
+        $total = 0;
+
+        //Get Elasticsearch datas
+        $ctn = $this->getConfig();
+        $index = $this->getIndex();
+
+        //Check index
+        if (null === $index || empty($index)) {
+            return $return;
+        }
+
+        //Create suggestion
+        $es_suggest = new Suggest();
+
+        //Iterate on all tags
+        foreach ($tags as $k => $tag) {
+            //CReate Term with options
+            $es_term = new SuggestTerm('tags_suggest_'.$k, '_all');
+            $es_term->setText($tag);
+            $es_term->setSize($number);
+            $es_term->setAnalyzer('simple');
+
+            //Add Term to current suggestion
+            $es_suggest->addSuggestion($es_term);
+        }
+
+        //Search!
+        $es_resultset = $index->search($es_suggest);
+
+        //Retrieve data
+        $es_results = $es_resultset->getSuggests();
+
+        //Check results
+        if (null == $es_results || empty($es_results)) {
+            return $return;
+        }
+
+        //Iterate to retrieve all IDs
+        foreach ($es_results as $res) {
+            //Check suggestions
+            if (empty($res[0]['options'])) {
+                continue;
+            }
+
+            //Iterate on all options
+            foreach ($res[0]['options'] as $opt) {
+                //Save datas
+                $results[$opt['text']] = array(
+                    'score' => $opt['score'],
+                    'freq' => $opt['freq'],
+                );
+            }
+        }
+
+        //Get total
+        $total = $es_resultset->getTotalHits();
+
+        //Return everything
+        $return = array(
+            'post' => $post,
+            'tags' => $tags,
+            'total' => $total,
+            'results' => $results
+        );
+        return $return;
+    }
+
+    //------------------------------------------------------------------------//
 
     /**
      * ACCESSORS
@@ -1137,7 +1213,7 @@ class TeaElasticsearch
         //Return value
         $default = array(
             'enable' => 'no',
-            'status' => 404,
+            'status' => 0,
             'server_host' => 'localhost',
             'server_port' => '9200',
             'index_name' => 'teasearch',
@@ -1187,6 +1263,24 @@ class TeaElasticsearch
      */
     protected function getIndex()
     {
+
+        if (null === $this->index) {
+            //Get configs
+            $ctn = $this->getConfig();
+
+            //Index name
+            $idname = isset($ctn['index_name']) ? $ctn['index_name'] : 'teasearch';
+
+            //Set client
+            $client = new Client(array(
+                'host' => isset($ctn['server_host']) ? $ctn['server_host'] : 'localhost',
+                'port' => isset($ctn['server_port']) ? $ctn['server_port'] : 9200,
+            ));
+
+            $index = $client->getIndex($idname);
+            $this->index = $index;
+        }
+
         //Return value
         return $this->index;
     }

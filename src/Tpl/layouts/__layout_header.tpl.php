@@ -8,13 +8,11 @@
                 foreach ($links as $key => $link):
                     $slug = $link['slug'];
                     $class = $slug == $page ? ' class="current"' : '';
+                    $title = $link['title'];
 
                     //Check title
-                    if (preg_match('/<span style=\"color\:\#([a-zA-Z0-9]{3,6})\">(.*)<\/span>/i', $link['title'], $matches)) {
-                        $title = '<b style="border-bottom:1px solid #' . $matches[1] . '">' . $matches[2] . '</b>';
-                    }
-                    else {
-                        $title = $link['title'];
+                    if (preg_match('/<span style=\"color\:\#([a-zA-Z0-9]{3,6})\">(.*)<\/span>/i', $title, $matches)) {
+                        $title = '<b style="color:#' . $matches[1] . '">' . $matches[2] . '</b>';
                     }
             ?>
                 <li class="tea-page">
