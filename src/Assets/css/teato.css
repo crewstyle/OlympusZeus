@@ -134,6 +134,7 @@ div.tea_to_message p strong {
     box-shadow:inset 0 -4px 10px rgba(0,0,0,.3);
     overflow:hidden;
     padding-top:3px;
+    position:relative;
     z-index:2;
 }
 .tea-main-nav .tea-menu-resp:before {
@@ -146,6 +147,7 @@ div.tea_to_message p strong {
     outline:0;
     padding:0;
     position:absolute;
+    right:-100px;
     text-align:center;
     text-decoration:none;
     top:9px;
@@ -724,8 +726,6 @@ hr {
 }
 .tea-inside.inside-section div.right {
     float:right;
-    padding-left:25px;
-    padding-right:50px;
 }
 .tea-inside.inside-section h2,
 #poststuff .tea-inside.inside-section h2 {
@@ -743,6 +743,9 @@ hr {
     list-style:none;
     margin:0;
     padding:0;
+}
+.tea-inside.inside-section .right ul {
+    padding:0 50px 0 25px;
 }
 .tea-inside.inside-section p,
 .tea-inside.inside-section li {
