@@ -1,3 +1,8 @@
+## 1.4.3.12 (August 19, 2014)
+
+Fix some CSS bugs
+
+
 ## 1.4.3.11 (August 19, 2014)
 
 Add responsive menu
