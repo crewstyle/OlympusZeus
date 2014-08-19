@@ -131,29 +131,54 @@ div.tea_to_message p strong {
 .tea-main-nav {
     background-color:#91d04d;
     background-image:url(../img/section-square.png);
-    position:relative;
+    box-shadow:inset 0 -4px 10px rgba(0,0,0,.3);
+    overflow:hidden;
+    padding-top:3px;
     z-index:2;
 }
+.tea-main-nav .tea-menu-resp:before {
+    border:0;
+    content:'\f228';
+    display:inline-block;
+    height:44px;
+    font:400 40px/45px Dashicons;
+    margin:0;
+    outline:0;
+    padding:0;
+    position:absolute;
+    text-align:center;
+    text-decoration:none;
+    top:9px;
+    vertical-align:middle;
+    width:50px;
+    z-index:2;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+.tea-main-nav .tea-logo {
+    float:left;
+    font-family:Verdana,Arial,sans-serif;
+    font-size:16px;
+    font-weight:700;
+    line-height:60px;
+    margin-right:5px;
+    text-transform:uppercase;
+}
+.tea-main-nav .tea-logo img {
+    margin:-6px 10px 0 0;
+    max-height:54px;
+    vertical-align:middle;
+}
 .tea-main-nav ul {
-    box-shadow:inset 0 -4px 10px rgba(0,0,0,.3);
     font-size:0;
     list-style:none;
     margin:0;
     overflow:hidden;
-    padding:0 14px;
+    padding:0 14px 0 0;
     position:relative;
-}
-.tea-main-nav ul:after {
-    background-image:url(../img/cog-gray.svg);
-    background-repeat:no-repeat;
-    content:"";
-    display:block;
-    height:367px;
-    position:absolute;
-    right:-120px;
-    top:10px;
-    width:367px;
-    z-index:1;
 }
 .tea-main-nav li {
     color:#fff;
@@ -168,17 +193,8 @@ div.tea_to_message p strong {
     vertical-align:top;
     z-index:2;
 }
-.tea-main-nav li.tea-logo {
-    font-family:Verdana,Arial,sans-serif;
-    font-size:16px;
-    font-weight:700;
-    margin-right:10px;
-    text-transform:uppercase;
-}
-.tea-main-nav li.tea-logo img {
-    margin:-2px 10px 0 0;
-    max-height:54px;
-    vertical-align:middle;
+.tea-main-nav li.close {
+    display:none;
 }
 .tea-main-nav a {
     color:#fff;
@@ -1618,6 +1634,51 @@ a.tea-connection:before {
         -webkit-transform:none;
         -moz-transform:none;
         transform:none;
+    }
+}
+@media (max-width:900px) {
+    .tea-main-nav .tea-menu-resp:before {
+        right:5px;
+    }
+    .tea-main-nav ul {
+        background-color:#222;
+        bottom:0;
+        font-size:0;
+        list-style:none;
+        margin:0;
+        overflow-y:auto;
+        padding:65px 0 0;
+        position:fixed;
+        right:-250px;
+        top:0;
+        width:250px;
+        z-index:3;
+    }
+    .tea-main-nav ul li,
+    .tea-main-nav li.close {
+        display:block;
+        padding:0;
+    }
+    .tea-main-nav ul a.current,
+    .tea-main-nav ul a:focus,
+    .tea-main-nav ul a:hover {
+        background-color:#3b3d3c;
+    }
+    .opened .tea-main-nav ul {
+        right:0;
+    }
+    .opened .tea-main-nav li.close .fallback {
+        background-color:rgba(0,0,0,.7);
+        bottom:0;
+        left:0;
+        position:fixed;
+        right:250px;
+        top:0;
+        z-index:2;
+    }
+    #poststuff .tea-inside.inside-section,
+    .tea-inside.inside-section {
+        margin:0 -17px;
     }
 }
 @media (max-width:782px) {

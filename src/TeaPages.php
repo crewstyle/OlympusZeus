@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.4
+ * @since 1.4.3.11
  *
  */
 class TeaPages
@@ -713,14 +713,15 @@ class TeaPages
     /**
      * Build header layout.
      *
-     * @since 1.4.3
+     * @since 1.4.3.11
      */
     protected function buildLayoutHeader()
     {
         //Get all pages with link, icon and slug
+        $identifier = $this->identifier;
         $links = $this->breadcrumb;
         $icon = $this->icon_big;
-        $page = empty($this->current) ? $this->identifier : $this->current;
+        $page = empty($this->current) ? $identifier : $this->current;
 
         //Works on params
         $updated = 

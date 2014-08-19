@@ -9,6 +9,27 @@
     "use strict";
 
     $(document).ready(function (){
+        //Mobile menu
+        $.each($('.tea-main-nav .tea-menu-resp, .tea-main-nav .close a'), function (){
+            var $self = $(this);
+            var $body = $('body');
+            var $target = $('.tea-main-nav ul');
+            var _width = $target.outerWidth();
+
+            //bind click event
+            $self.bind('click', function (e){
+                e.preventDefault();
+
+                //opening & closing
+                !$body.hasClass('opened') ? $body.addClass('opened') : $body.removeClass('opened');
+
+                //bind orientation change and close menu
+                $(window).bind('orientationchange', function (){
+                    $body.removeClass('opened');
+                });
+            });
+        });
+
         //Plugin
         $('.label-edit-options .label-button').tea_labelize({
             parent: '.label-edit-options',

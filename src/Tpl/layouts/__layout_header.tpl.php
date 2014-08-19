@@ -1,7 +1,11 @@
 <div class="wrap tea_to">
     <nav class="tea-main-nav" role="navigation">
-        <ul>
-            <li class="tea-logo"><img src="<?php echo $icon ?>" alt="" /> <?php _e('Tea T.O.', TTO_I18N) ?></li>
+        <a href="#" class="tea-menu-resp" title=""></a>
+        <a href="admin.php?page=<?php echo $identifier ?>" class="tea-logo">
+            <img src="<?php echo $icon ?>" alt="" /> <?php _e('Tea T.O.', TTO_I18N) ?>
+        </a>
+
+        <ul class="tea-pages">
             <?php
                 $count = count($links);
 
@@ -15,10 +19,12 @@
                         $title = '<b style="color:#' . $matches[1] . '">' . $matches[2] . '</b>';
                     }
             ?>
-                <li class="tea-page">
-                    <a href="admin.php?page=<?php echo $slug ?>"<?php echo $class ?>><?php echo $title ?></a>
-                </li>
+                <li><a href="admin.php?page=<?php echo $slug ?>"<?php echo $class ?>><?php echo $title ?></a></li>
             <?php endforeach ?>
+            <li class="close">
+                <a href="#" title="" class="fallback"></a>
+                <a href="#" title=""><?php _e('Close &times;', TTO_I18N) ?></a>
+            </li>
         </ul>
     </nav>
 
