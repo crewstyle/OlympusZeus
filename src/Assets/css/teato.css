@@ -689,7 +689,7 @@ hr {
     font-size:26px;
     line-height:32px;
     margin:0 -26px;
-    padding:100px 0;
+    padding:100px 25px;
     position:relative;
 }
 .tea-inside.inside-section a,
@@ -721,8 +721,6 @@ hr {
 }
 .tea-inside.inside-section div.left {
     float:left;
-    padding-left:50px;
-    padding-right:25px;
 }
 .tea-inside.inside-section div.right {
     float:right;
@@ -743,9 +741,6 @@ hr {
     list-style:none;
     margin:0;
     padding:0;
-}
-.tea-inside.inside-section .right ul {
-    padding:0 50px 0 25px;
 }
 .tea-inside.inside-section p,
 .tea-inside.inside-section li {
@@ -1691,9 +1686,11 @@ a.tea-connection:before {
     /* Homepage */
     .tea-inside.inside-section div.right,
     .tea-inside.inside-section div.left {
-        max-width:70%;
+        float:none;
+        margin-left:5%;
+        max-width:90%;
         position:relative;
-        width:70%;
+        width:90%;
         z-index:2;
     }
     .tea-inside.inside-section div.right.imaged,
