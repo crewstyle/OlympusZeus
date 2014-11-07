@@ -33,48 +33,44 @@
                         $rate = isset($vals[$author]['rate']) ? $vals[$author]['rate'] : '';
                 ?>
                     <div id="<?php echo $id ?>-author-<?php echo $author ?>" class="help-tab-content<?php echo !$k ? ' active' : '' ?>">
-                        <?php if ($note): ?>
-                            <div class="inside tea-inside radio">
-                                <fieldset class="radio-rate">
-                                    <?php
-                                        for ($i = 1; $i <= 5; $i++):
-                                            $sel = $i == $note ? true : false;
-                                            $for = $id . '_' . $author . '_note_' . $i;
-                                        ?>
-                                        <p>
-                                            <label for="<?php echo $for ?>" class="<?php echo $sel ? 'selected' : '' ?>">
-                                                <?php if ($current == $author || $review_all): ?>
-                                                    <input type="radio" name="<?php echo $id ?>[<?php echo $author ?>][note]" id="<?php echo $for ?>" value="<?php echo $i ?>" <?php echo $sel ? 'checked="checked" ' : '' ?> />
-                                                <?php endif ?>
+                        <div class="inside tea-inside radio">
+                            <fieldset class="radio-rate">
+                                <?php
+                                    for ($i = 1; $i <= 5; $i++):
+                                        $sel = $i == $note ? true : false;
+                                        $for = $id . '_' . $author . '_note_' . $i;
+                                    ?>
+                                    <p>
+                                        <label for="<?php echo $for ?>" class="<?php echo $sel ? 'selected' : '' ?>">
+                                            <?php if ($current == $author || $review_all): ?>
+                                                <input type="radio" name="<?php echo $id ?>[<?php echo $author ?>][note]" id="<?php echo $for ?>" value="<?php echo $i ?>" <?php echo $sel ? 'checked="checked" ' : '' ?> />
+                                            <?php endif ?>
 
-                                                <?php for ($j = 1; $j <= 5; $j++): ?>
-                                                    <i class="fa fa-star<?php echo $j > $i ? '-o' : '' ?> fa-lg"></i>
-                                                <?php endfor ?>
-                                            </label>
-                                        </p>
-                                    <?php endfor ?>
+                                            <?php for ($j = 1; $j <= 5; $j++): ?>
+                                                <i class="fa fa-star<?php echo $j > $i ? '-o' : '' ?> fa-lg"></i>
+                                            <?php endfor ?>
+                                        </label>
+                                    </p>
+                                <?php endfor ?>
 
-                                    <?php if ($current != $author && !$review_all): ?>
-                                        <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][note]" value="<?php echo $note ?>" />
-                                    <?php endif ?>
-                                </fieldset>
-                            </div>
-                        <?php endif ?>
-
-                        <?php if ((!$rate && $current == $author) || $rate): ?>
-                            <div class="inside tea-inside textarea">
-                                <?php if ($current == $author || $review_all): ?>
-                                    <?php wp_editor(stripcslashes($rate), $id . '_' . $author . '_rate', array(
-                                        'media_buttons' => false,
-                                        'textarea_rows' => 8,
-                                        'textarea_name' => $id . '[' . $author . '][rate]'
-                                    )) ?>
-                                <?php else: ?>
-                                    <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][rate]" value="<?php echo esc_html($rate) ?>" />
-                                    <div><?php echo stripcslashes($rate) ?></div>
+                                <?php if ($current != $author && !$review_all): ?>
+                                    <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][note]" value="<?php echo $note ?>" />
                                 <?php endif ?>
-                            </div>
-                        <?php endif ?>
+                            </fieldset>
+                        </div>
+
+                        <div class="inside tea-inside textarea">
+                            <?php if ($current == $author || $review_all): ?>
+                                <?php wp_editor(stripcslashes($rate), $id . '_' . $author . '_rate', array(
+                                    'media_buttons' => false,
+                                    'textarea_rows' => 8,
+                                    'textarea_name' => $id . '[' . $author . '][rate]'
+                                )) ?>
+                            <?php else: ?>
+                                <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][rate]" value="<?php echo esc_html($rate) ?>" />
+                                <div><?php echo stripcslashes($rate) ?></div>
+                            <?php endif ?>
+                        </div>
                     </div>
                 <?php endforeach ?>
             </div>

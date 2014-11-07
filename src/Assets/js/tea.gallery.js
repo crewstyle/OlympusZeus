@@ -1,48 +1,63 @@
-/* ===================================================
- * tea.gallery.js v1.0.0
+/* =====================================================
+ * tea.gallery.js v1.2.0
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * This plugin adds a complete upload integration with
+ * TinyMCE compatibility. Each item have its own
+ * contents.
+ * =====================================================
  * Example:
  *      $('.tea-inside.upload').tea_gallery({
- *          wpid: null,                         //Contains Wordpress textarea ID
- *          media: wp.media,                    //Contains Wordpress media element
- *          color: '#ffaaaa',                   //Color defined for the delete animation
- *          title: 'Media'                      //Title of the media popin
+ *          wpid: null,                                 //Contains Wordpress textarea ID
+ *          media: wp.media,                            //Contains Wordpress media element
+ *          color: '#ffaaaa',                           //Color defined for the delete animation
+ *          title: 'Media',                             //Title of the media popin
+ *          add: 'add_item',                            //Define the add image button CSS class
+ *          del: 'del_item',                            //Define the delete image button CSS class
+ *          delall: 'del_all_items'                     //Define the delete all images button CSS class
  *      });
- * =================================================== */
+ * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var tea_gallery = function ($el,options){
+    var Tea_gallery = function ($el,options){
         var _tea = this;
         _tea.$el = $el;
         _tea.options = options;
+
+        //initialize
+        _tea.init();
+    };
+
+    Tea_gallery.prototype.$el = null;
+    Tea_gallery.prototype.options = null;
+
+    Tea_gallery.prototype.init = function (){
+        var _tea = this;
 
         //get wp id
         _tea.options.wpid = _tea.options.media.model.settings.post.id;
 
         //bind event on click
-        _tea.$el.find('a.add_item').on('click', $.proxy(_tea.add_item, _tea));
-        _tea.$el.find('a.del_item').on('click', $.proxy(_tea.del_item, _tea));
-        _tea.$el.parent('div').find('a.del_all_items').on('click', $.proxy(_tea.del_all_items, _tea));
+        _tea.$el.find(_tea.options.add).on('click', $.proxy(_tea.add_item, _tea));
+        _tea.$el.find(_tea.options.del).on('click', $.proxy(_tea.del_item, _tea));
+        _tea.$el.parent('div').find(_tea.options.delall).on('click', $.proxy(_tea.del_items_all, _tea));
     };
 
-    tea_gallery.prototype.$el = null;
-    tea_gallery.prototype.options = null;
-
-    tea_gallery.prototype.add_item = function (e){
+    Tea_gallery.prototype.add_item = function (e){
         e.preventDefault();
         var _tea = this;
 
         //vars
         var $parent = _tea.$el.find('.upload-time');
         var $result = _tea.$el.find('.upload_image_result');
-        var $inside = _tea.$el;
-        var _wp = _tea.options.media;
-        var _idtarget = $parent.attr('data-target');
+        var _wp = _tea.options.media,
+            _id = $parent.attr('data-target');
 
         //create the media frame.
         var file_frame = _wp.frames.file_frame = _wp({
@@ -72,12 +87,12 @@
         });
 
         //bind event when an media is selected
-        file_frame.on('select', function (evt) {
+        file_frame.on('select', function () {
             var _selection = file_frame.state().get('selection');
 
             //Get all selections
-            var _attachments = _selection.toJSON();
-            var _identity = '';
+            var attach = _selection.toJSON();
+            var idtity = '';
             var $itm = null,
                 $in1 = null,
                 $in2 = null,
@@ -85,45 +100,35 @@
                 $txt = null,
                 $del = null;
 
-            //tinyMCE initialization
-            /*tinyMCE.init({
-                selector:'textarea',
-                language: 'wp-langs-en',
-                mode : 'teeny',
-                theme_advanced_buttons1 : "bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,close,|,youtube",
-                theme_advanced_buttons2 : "formatselect,underline,justifyfull,forecolor",
-                theme_advanced_buttons3 : ""
-            });*/
-
             //Iterates on them
-            for (var i = 0, len = _attachments.length; i < len; i++) {
-                if ($result.find('.item[data-id="' + _attachments[i].id + '"]').length) {
+            for (var i = 0, len = attach.length; i < len; i++) {
+                if ($result.find('.item[data-id="' + attach[i].id + '"]').length) {
                     continue;
                 }
 
-                _identity = _idtarget + '_' + _attachments[i].id + '_' + Math.floor(Math.random()*99999999);
+                //id definition
+                idtity = _id + '_' + attach[i].id + '_content';
 
-                //Built item
-                $itm = $(document.createElement('div')).addClass('item').attr('data-id', _attachments[i].id);
+                //Build item
+                $itm = $(document.createElement('div')).addClass('item').attr('data-id', attach[i].id);
                 $del = $(document.createElement('a')).addClass('del_image').attr({
                     href: '#',
-                    'data-target': _idtarget
+                    'data-target': _id
                 }).html('&times;');
                 $in1 = $(document.createElement('input')).attr({
                     type: 'hidden',
-                    name: _idtarget + '[' + _attachments[i].id + '][0]',
-                    value: _attachments[i].url
+                    name: _id + '[' + attach[i].id + '][image]',
+                    value: attach[i].url
                 });
                 $in2 = $(document.createElement('input')).attr({
                     type: 'hidden',
-                    name: _idtarget + '[' + _attachments[i].id + '][1]',
-                    value: _attachments[i].id
+                    name: _id + '[' + attach[i].id + '][id]',
+                    value: attach[i].id
                 });
                 $img = $(document.createElement('img')).attr({
-                    src: _attachments[i].url,
-                    id: _attachments[i].id
+                    src: attach[i].url
                 });
-                $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea rows="4" class="wp-editor-area" name="' + _idtarget + '[' + _attachments[i].id + '][2]' + '" id="' + _identity + '"></textarea>');
+                $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea id="' + idtity + '" rows="4" class="wp-editor-area" name="' + _id + '[' + attach[i].id + '][content]' + '"></textarea>');
 
                 //Add click event
                 $del.on('click', $.proxy(_tea.del_item, _tea));
@@ -137,19 +142,28 @@
                 $itm.insertBefore($result.find('.upload-time'));
 
                 //Init tinyMCE textarea
-                //tinyMCE.execCommand('mceAddControl', false, _identity);
+                if ('undefined' !== typeof tinyMCE) {
+                    tinyMCE.init({
+                        selector:'textarea#' + idtity,
+                        //language: 'wp-langs-en',
+                        mode :'teeny',
+                        theme_advanced_buttons1 : "bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,close,|,youtube",
+                        theme_advanced_buttons2 : "formatselect,underline,justifyfull,forecolor",
+                        theme_advanced_buttons3 : ""
+                    });
+                }
             }
 
             //Restore the main post ID and delete file_frame
             _wp.model.settings.post.id = _tea.options.wpid;
-            delete this;
+            //delete this.get()[0];
         });
 
         //Open the modal
         file_frame.open();
     };
 
-    tea_gallery.prototype.del_item = function (e){
+    Tea_gallery.prototype.del_item = function (e){
         e.preventDefault();
         var _tea = this;
 
@@ -175,7 +189,7 @@
         }
     };
 
-    tea_gallery.prototype.del_all_items = function (e){
+    Tea_gallery.prototype.del_items_all = function (e){
         e.preventDefault();
         var _tea = this;
 
@@ -212,7 +226,10 @@
                 media: null,
                 target: null,
                 color: '#ffaaaa',
-                title: 'Title'
+                title: 'Title',
+                add: '.add_item',
+                del: '.del_item',
+                delall: '.del_all_items'
             };
 
             return this.each(function (){
@@ -220,7 +237,7 @@
                     $.extend(settings, options);
                 }
 
-                new tea_gallery($(this), settings);
+                new Tea_gallery($(this), settings);
             });
         },
         update: function (){},
@@ -235,7 +252,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_gallery');
+            $.error('Method ' + method + ' does not exist on Tea_gallery');
             return false;
         }
     };

@@ -1,7 +1,6 @@
 <?php
-namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
+namespace Takeatea\TeaThemeOptions;
 
 /**
  * TEA NETWORKS
@@ -19,25 +18,20 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.0
+ * @since 1.5.0
  *
  */
 abstract class TeaNetworks
 {
     //Define protected/private vars
     private $includes = array();
-    protected $adminmessage = '';
 
     /**
      * Constructor.
      *
-     * @since 1.3.0
+     * @since 1.5.0
      */
-    public function __construct()
-    {
-        //Adds an admin notice
-        add_action('admin_notices', array(&$this, '__showAdminMessage'));
-    }
+    public function __construct(){}
 
 
     //------------------------------------------------------------------------//
@@ -102,21 +96,5 @@ abstract class TeaNetworks
     protected function setIncludes($context)
     {
         $this->includes[$context] = true;
-    }
-
-    /**
-     * Display a warning message on the admin panel.
-     *
-     * @since 1.4.0
-     */
-    public function __showAdminMessage()
-    {
-        //Get admin message
-        $content = $this->adminmessage;
-
-        if (!empty($content)) {
-            //Get template
-            include(TTO_PATH . '/Tpl/layouts/__layout_admin_message.tpl.php');
-        }
     }
 }

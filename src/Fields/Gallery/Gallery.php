@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Gallery;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -64,7 +65,7 @@ class Gallery extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -105,6 +106,6 @@ class Gallery extends TeaFields
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Gallery/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Gallery/in_pages.tpl.php');
     }
 }

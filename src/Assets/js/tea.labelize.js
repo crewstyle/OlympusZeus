@@ -1,40 +1,53 @@
-/* ===================================================
- * tea.labelize.js v1.0.0
+/* =====================================================
+ * tea.labelize.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * In the plugin version, all fields are dynamically
+ * created from the TeaTO interface. This plugin is
+ * usefull in this case especially.
+ * =====================================================
  * Example:
- *      $('.label-edit-options .label-button').tea_labelize({
- *          parent: '.label-edit-options',      //coming soon...
- *          count: '.label-option',             //coming soon...
- *          model: '.label-model'               //coming soon...
+ *      $('.label-button').tea_labelize({
+ *          parent: '.label-edit-options',              //coming soon...
+ *          count: '.label-option',                     //coming soon...
+ *          model: '.label-model'                       //coming soon...
  *      });
- * =================================================== */
+ * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var tea_labelize = function ($el,options){
-        //Vars
-        var _parent = options.parent;
-        var _count = options.count;
-        var _model = options.model;
+    var Tea_labelize = function ($el,options){
+        //vars
+        var _tea = this;
+        _tea.$el = $el;
+        _tea.options = options;
 
-        $el.on('click', function (e){
-            e.preventDefault();
+        //bind click event
+        _tea.$el.on('click', $.proxy(_tea.labelize, _tea));
+    };
 
-            //Get infos
-            var $parent = $el.closest(_parent);
+    Tea_labelize.prototype.$el = null;
+    Tea_labelize.prototype.options = null;
 
-            //Transform content
-            var count = $parent.find('> ' + _count).length;
-            var model = $parent.find('> ' + _model).html();
-            model = model.replace(/__OPTNUM__/g, count);
+    Tea_labelize.prototype.labelize = function (e){
+        e.preventDefault();
+        var _tea = this;
 
-            //Repeat sequence
-            $el.before(model);
-        });
+        //get infos
+        var $parent = _tea.$el.closest(_tea.options.parent);
+
+        //transform content
+        var count = $parent.find('> ' + _tea.options.count).length;
+        var model = $parent.find('> ' + _tea.options.model).html();
+        model = model.replace(/__OPTNUM__/g, count);
+
+        //repeat sequence
+        _tea.$el.before(model);
     };
 
     var methods = {
@@ -54,7 +67,7 @@
                     $.extend(settings, options);
                 }
 
-                new tea_labelize($(this), settings);
+                new Tea_labelize($(this), settings);
             });
         },
         update: function (){},
@@ -69,7 +82,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_labelize');
+            $.error('Method ' + method + ' does not exist on Tea_labelize');
             return false;
         }
     };

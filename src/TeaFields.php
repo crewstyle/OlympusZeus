@@ -1,7 +1,6 @@
 <?php
-namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
+namespace Takeatea\TeaThemeOptions;
 
 /**
  * TEA FIELDS
@@ -23,30 +22,43 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Fields
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.2
+ * @since 1.5.0
  *
  */
 abstract class TeaFields
 {
     //Define protected/private vars
-    private $adminmessage;
+    public $adminmessage = null;
     private $includes = array();
     private $wpcontents = array();
 
     /**
      * Constructor.
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
-    public function __construct(){}
+    public function __construct()
+    {
+        //Init errors
+        $this->adminmessage = new TeaAdminMessage();
+    }
 
 
     //------------------------------------------------------------------------//
 
     /**
      * ABSTRACT & STATIC FUNCTIONS
-     **/
+     */
 
+    /**
+     * Display HTML component.
+     *
+     * @param array $content Contains all field data
+     * @param array $post Contains all post data
+     * @param string $prefix Contains prefix name
+     *
+     * @since 1.4.0
+     */
     abstract protected function templatePages($content, $post = array(), $prefix = '');
 
     /**
@@ -61,7 +73,7 @@ abstract class TeaFields
     {
         //If autosave...
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return $post->ID;
+            return isset($post->ID) ? $post->ID : 0;
         }
 
         //Get values
@@ -69,7 +81,7 @@ abstract class TeaFields
         $class = ucfirst($type);
 
         //Make the magic
-        $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
+        $class = '\Takeatea\TeaThemeOptions\Fields\\'.$class.'\\'.$class;
         $field = new $class();
         $field->templatePages($args, $post);
     }
@@ -83,16 +95,19 @@ abstract class TeaFields
      *
      * @param array $content Contains all field data
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
     protected function checkId($content)
     {
         //Check if an id is defined at least
         if (!isset($content['id'])) {
-            $this->setAdminMessage(sprintf(__('Something went wrong in your 
-                parameters definition: no id is defined 
-                for your <b>%s</b> field!', TTO_I18N), $content['type']));
-            return;
+            //Set type
+            $type = isset($content['type']) 
+                ? $content['type'] 
+                : __('undefined (?)', TTO_I18N);
+
+            //Display message
+            $this->updateAdminMessage('<b>'.$type.'</b>');
         }
     }
 
@@ -183,7 +198,7 @@ abstract class TeaFields
         else if ('networks' == $return) {
             $defaults = array(
                 'facebook'      => __('Facebook', TTO_I18N),
-                'googleplus'   => __('Google+', TTO_I18N),
+                'googleplus'    => __('Google+', TTO_I18N),
                 'instagram'     => __('Instagram', TTO_I18N),
                 'twitter'       => __('Twitter', TTO_I18N),
             );
@@ -198,130 +213,130 @@ abstract class TeaFields
         //Return defaults social button
         else if ('social' == $return) {
             $defaults = array(
-                'behance' => array(
+                'behance'       => array(
                     __('See my portfolio on Behance', TTO_I18N),
                     __('http://www.behance.com/__username__', TTO_I18N),
                 ),
-                'bloglovin' => array(
+                'bloglovin'     => array(
                     __('Follow me on Bloglovin', TTO_I18N),
                     __('http://www.bloglovin.com/blog/__userid__/__username__', TTO_I18N),
                 ),
-                'bitbucket' => array(
+                'bitbucket'     => array(
                     __('Follow me on Bitbucket', TTO_I18N),
                     __('https://bitbucket.org/__username__', TTO_I18N),
                 ),
-                'codepen' => array(
+                'codepen'       => array(
                     __('Follow me on Codepen.io', TTO_I18N),
                     __('http://codepen.io/__username__', TTO_I18N),
                 ),
-                'delicious' => array(
+                'delicious'     => array(
                     __('Follow me on Delicious', TTO_I18N),
                     __('https://delicious.com/__username__', TTO_I18N),
                 ),
-                'deviantart' => array(
+                'deviantart'    => array(
                     __('Follow me on Deviantart', TTO_I18N),
                     __('http://__username__.deviantart.com/', TTO_I18N),
                 ),
-                'dribbble' => array(
+                'dribbble'      => array(
                     __('Follow me on Dribbble', TTO_I18N),
                     __('http://dribbble.com/__username__', TTO_I18N),
                 ),
-                'facebook' => array(
+                'facebook'      => array(
                     __('Follow me on Facebook', TTO_I18N),
                     __('http://www.facebook.com/__username__', TTO_I18N),
                 ),
-                'flickr' => array(
+                'flickr'        => array(
                     __('Follow me on Flickr', TTO_I18N),
                     __('http://www.flickr.com/photos/__username__', TTO_I18N),
                 ),
-                'forrst' => array(
+                'forrst'        => array(
                     __('Follow me on Forrst', TTO_I18N),
                     __('http://forrst.com/people/__username__', TTO_I18N),
                 ),
-                'foursquare' => array(
+                'foursquare'    => array(
                     __('See me on Foursquare', TTO_I18N),
                     __('https://fr.foursquare.com/__username__', TTO_I18N),
                 ),
-                'friendfeed' => array(
+                'friendfeed'    => array(
                     __('Follow me on FriendFeed', TTO_I18N),
                     __('http://friendfeed.com/__username__', TTO_I18N),
                 ),
-                'github' => array(
+                'github'        => array(
                     __('Follow me on Github', TTO_I18N),
                     __('https://github.com/__username__', TTO_I18N),
                 ),
-                'gittip' => array(
+                'gittip'        => array(
                     __('Follow me on Gittip', TTO_I18N),
                     __('https://www.gittip.com/__username__', TTO_I18N),
                 ),
-                'hellocoton' => array(
+                'hellocoton'    => array(
                     __('Follow me on Hellocoton', TTO_I18N),
                     __('http://www.hellocoton.fr/mapage/__username__', TTO_I18N),
                 ),
-                'google-plus' => array(
+                'google-plus'   => array(
                     __('Follow me on Google+', TTO_I18N),
                     __('http://plus.google.com/__username__', TTO_I18N),
                 ),
-                'instagram' => array(
+                'instagram'     => array(
                     __('Follow me on Instagram', TTO_I18N),
                     __('http://www.instagram.com/__username__', TTO_I18N),
                 ),
-                'lastfm' => array(
+                'lastfm'        => array(
                     __('Follow me on LastFM', TTO_I18N),
                     __('http://www.lastfm.fr/user/__username__', TTO_I18N),
                 ),
-                'linkedin' => array(
+                'linkedin'      => array(
                     __('Follow me on LinkedIn', TTO_I18N),
                     __('http://www.linkedin.com/in/__username__', TTO_I18N),
                 ),
-                'pinterest' => array(
+                'pinterest'     => array(
                     __('Follow me on Pinterest', TTO_I18N),
                     __('http://pinterest.com/__username__', TTO_I18N),
                 ),
-                'reddit' => array(
+                'reddit'        => array(
                     __('Follow me on Reddit', TTO_I18N),
                     __('http://www.reddit.com/user/__username__', TTO_I18N),
                 ),
-                'skype' => array(
+                'skype'         => array(
                     __('Connect us on Skype', TTO_I18N),
                 ),
-                'soundcloud' => array(
+                'soundcloud'    => array(
                     __('Follow me on Soundcloud', TTO_I18N),
                     __('https://soundcloud.com/__username__', TTO_I18N),
                 ),
-                'stumbleupon' => array(
+                'stumbleupon'   => array(
                     __('Follow me on Stumbleupon', TTO_I18N),
                     __('http://www.stumbleupon.com/stumbler/__username__', TTO_I18N),
                 ),
-                'tumblr' => array(
+                'tumblr'        => array(
                     __('Follow me on Tumblr', TTO_I18N),
                     __('http://', TTO_I18N),
                 ),
-                'twitter' => array(
+                'twitter'       => array(
                     __('Follow me on Twitter', TTO_I18N),
                     __('http://www.twitter.com/__username__', TTO_I18N),
                 ),
-                'vimeo' => array(
+                'vimeo'         => array(
                     __('Follow me on Vimeo', TTO_I18N),
                     __('http://www.vimeo.com/__username__', TTO_I18N),
                 ),
-                'vine' => array(
+                'vine'          => array(
                     __('Follow me on Vine.co', TTO_I18N),
                     __('https://vine.co/__username__', TTO_I18N),
                 ),
-                'vk' => array(
+                'vk'            => array(
                     __('Follow me on VK.com', TTO_I18N),
                     __('http://vk.com/__username__', TTO_I18N),
                 ),
-                'weibo' => array(
+                'weibo'         => array(
                     __('Follow me on Weibo', TTO_I18N),
                     __('http://www.weibo.com/__username__', TTO_I18N),
                 ),
-                'youtube' => array(
+                'youtube'       => array(
                     __('Follow me on Youtube', TTO_I18N),
                     __('http://www.youtube.com/user/__username__', TTO_I18N),
                 ),
-                'rss' => array(
+                'rss'           => array(
                     __('Subscribe to my RSS feed', TTO_I18N),
                 ),
             );
@@ -343,33 +358,6 @@ abstract class TeaFields
      **/
 
     /**
-     * Retrieve the $adminmessage value
-     *
-     * @return string $content Get the defined warning
-     *
-     * @since 1.4.0
-     */
-    protected function getAdminMessage()
-    {
-        //Return value
-        return $this->adminmessage;
-    }
-
-    /**
-     * Define the $adminmessage value
-     *
-     * @param string $content Set the defined warning
-     *
-     * @since 1.4.0
-     */
-    protected function setAdminMessage($content = '')
-    {
-        if (!empty($content)) {
-            include_once(TTO_PATH . '/Tpl/layouts/__layout_admin_message.tpl.php');
-        }
-    }
-
-    /**
      * Retrieve the $can_upload value
      *
      * @uses current_user_can()
@@ -381,6 +369,22 @@ abstract class TeaFields
     {
         //Return value
         return current_user_can('upload_files');
+    }
+
+    /**
+     * Update adminmessage.
+     *
+     * @param string $content Contains field type in error
+     *
+     * @since 1.5.0
+     */
+    public function updateAdminMessage($content)
+    {
+        if (null === $this->adminmessage) {
+            $this->adminmessage = new TeaAdminMessage();
+        }
+
+        $this->adminmessage->addFieldError($content);
     }
 
     /**
@@ -401,11 +405,10 @@ abstract class TeaFields
      *
      * @param string $context Name of the included file's context
      *
-     * @since 1.3.0
+     * @since 1.5.0
      */
     protected function setIncludes($context)
     {
-        $includes = $this->getIncludes();
         $this->includes[$context] = true;
     }
 
@@ -553,11 +556,8 @@ abstract class TeaFields
             $request = array();
             $args = array_merge($request, $options);
 
-            /**
-             * @todo
-             */
             //Build request
-            $types_obj = get_post_types(array(), 'object');
+            $types_obj = get_post_types($args, 'object');
 
             //Iterate on posttypes
             if (!empty($types_obj)) {

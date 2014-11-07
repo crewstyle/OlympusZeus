@@ -100,6 +100,6 @@ class Multiselect extends TeaFields
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Multiselect/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Multiselect/in_pages.tpl.php');
     }
 }

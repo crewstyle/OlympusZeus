@@ -2,6 +2,7 @@
 namespace Takeatea\TeaThemeOptions\Fields\Elasticsearch;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
+use Takeatea\TeaThemeOptions\TeaAdminMessage;
 use Takeatea\TeaThemeOptions\TeaElasticsearch;
 use Takeatea\TeaThemeOptions\TeaFields;
 
@@ -92,7 +93,7 @@ class Elasticsearch extends TeaFields
         $vals = array_merge($std, $vals);
 
         //Get template
-        include(TTO_PATH . '/Fields/Elasticsearch/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Elasticsearch/in_pages.tpl.php');
     }
 
     /**
@@ -230,20 +231,21 @@ class Elasticsearch extends TeaFields
 
         //Checks contents
         if (!$results) {
-            $this->adminmessage = __('Something went wrong: it seems you 
-                forgot to attach contents to the current page.', TTO_I18N);
-            return;
+            TeaAdminMessage::__display(
+                __('Something went wrong: it seems you 
+                forgot to attach contents to the current page.', TTO_I18N)
+            );
         }
         else if (1 == $results) {
-            $this->adminmessage = __('Great: your post has been indexed!', TTO_I18N);
-            return;
+            TeaAdminMessage::__display(
+                __('Great: your post has been indexed!', TTO_I18N)
+            );
         }
         else {
-            $this->adminmessage = sprintf(
+            TeaAdminMessage::__display(sprintf(
                 __('Good job: %d posts have been indexed!', TTO_I18N),
                 $results
-            );
-            return;
+            ));
         }
     }
 

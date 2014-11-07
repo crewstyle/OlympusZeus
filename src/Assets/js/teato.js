@@ -9,32 +9,29 @@
     "use strict";
 
     $(document).ready(function (){
+        var $body = $('body');
+
         //Mobile menu
         $.each($('.tea-main-nav .tea-menu-resp, .tea-main-nav .close a'), function (){
             var $self = $(this);
-            var $body = $('body');
-            var $target = $('.tea-main-nav ul');
-            var _width = $target.outerWidth();
 
             //bind click event
             $self.bind('click', function (e){
                 e.preventDefault();
 
                 //opening & closing
-                !$body.hasClass('opened') ? $body.addClass('opened') : $body.removeClass('opened');
+                if (!$body.hasClass('opened')) {
+                    $body.addClass('opened');
+                }
+                else {
+                    $body.removeClass('opened');
+                }
 
                 //bind orientation change and close menu
                 $(window).bind('orientationchange', function (){
                     $body.removeClass('opened');
                 });
             });
-        });
-
-        //Plugin
-        $('.label-edit-options .label-button').tea_labelize({
-            parent: '.label-edit-options',
-            count: '.label-option',
-            model: '.label-model'
         });
 
         //Checkbox & Radio & Image input
@@ -70,6 +67,40 @@
         //Color input
         $('.tea-inside .color-picker').tea_color();
 
+        //Date input
+        $.each($('.tea-inside input.pickadate'), function (){
+            var $self = $(this);
+
+            //pickadate
+            $self.tea_date({
+                format: $self.attr('data-format') || 'd mmmm, yyyy',
+                formatSubmit: $self.attr('data-submit') || 'yyyy.mm.dd',
+                today: $self.attr('data-today') || 'Today',
+                clear: $self.attr('data-clear') || 'Clear',
+                close: $self.attr('data-close') || 'Close'
+            });
+        });
+
+        //Elasticsearch template
+        $('.tea-inside .elastica-template').on('click', function (e){
+            e.preventDefault();
+            $('#modal-elasticsearch').tea_modal();
+        });
+
+        //Gallery input
+        $.each($('.tea-inside.gallery'), function (){
+            var $self = $(this);
+
+            $self.tea_gallery({
+                wpid: null,
+                media: wp.media,
+                title: $self.attr('data-title') || 'Gallery'
+            });
+        });
+
+        //Link input
+        $('.tea-inside.link .block-link input').tea_link();
+
         //Range input
         $('.tea-inside input[type="range"]').tea_range();
 
@@ -85,25 +116,8 @@
             });
         });
 
-        //Elasticsearch template
-        $('.tea-inside .elastica-template').on('click', function (e){
-            e.preventDefault();
-            var $self = $(this);
-
-            //Open Tea TO modal box
-            $('#modal-elasticsearch').tea_modal();
-        });
-
-        //Upload input
-        $.each($('.tea-inside.gallery'), function (){
-            var $self = $(this);
-
-            $self.tea_gallery({
-                wpid: null,
-                media: wp.media,
-                title: $self.attr('data-title') || 'Gallery'
-            });
-        });
+        //Textarea input
+        $('.tea-inside textarea.textarea').tea_textarea();
 
         //Upload input
         $.each($('.tea-inside.background .bg-upload'), function (){
@@ -129,6 +143,15 @@
                 title: $self.attr('data-title') || 'Media',
                 type: $self.attr('data-type') || 'image'
             });
+        });
+
+        /* OLD ONES? Huh! */
+
+        //Plugin
+        $('.label-edit-options .label-button').tea_labelize({
+            parent: '.label-edit-options',
+            count: '.label-option',
+            model: '.label-model'
         });
 
         //Screen-meta input

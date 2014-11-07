@@ -43,7 +43,7 @@ class Googleplus extends TeaNetworks
         $keys = $this->getTokens('googleplus');
 
         //Get template
-        include(TTO_PATH . '/Networks/Googleplus/in_pages.tpl.php');
+        include(TTO_PATH.'/Networks/Googleplus/in_pages.tpl.php');
     }
 
 

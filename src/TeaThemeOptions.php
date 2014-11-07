@@ -1,19 +1,17 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\Fields\Network;
-use Takeatea\TeaThemeOptions\TeaCustomPostTypes;
-use Takeatea\TeaThemeOptions\TeaCustomTaxonomies;
-use Takeatea\TeaThemeOptions\TeaElasticsearch;
-use Takeatea\TeaThemeOptions\TeaPages;
+use Takeatea\TeaThemeOptions\Fields\Network\Network;
 
 /**
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.4.3.12
+ * Version: 1.5.0
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
- * Description: The Tea Theme Options (or "Tea TO") allows you to easily add 
+ * Read The Doc: http://tea-theme-options.readme.io/
+ * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
  * professional looking theme options panels to your WordPress theme.
  * It offers the best and easy way to create custom post types and
  * custom taxonomies.
@@ -23,19 +21,19 @@ use Takeatea\TeaThemeOptions\TeaPages;
  * License: The MIT License (MIT)
  *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -55,20 +53,24 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.4.3.12');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.0');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
 defined('TTO_DURATION')     or define('TTO_DURATION', 86400);
-//The transient expiration duration
+//The blog home url
+defined('TTO_HOME')         or define('TTO_HOME', get_option('home'));
+//The language blog
 defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
 //The URI
-defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri() . '/vendor/takeatea/tea-theme-options');
+defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri().'/vendor/takeatea/tea-theme-options');
 //The path
 defined('TTO_PATH')         or define('TTO_PATH', dirname(__FILE__));
-//The path
+//The wp-includes URI
+defined('TTO_INC')          or define('TTO_INC', includes_url());
+//The capabilities
 defined('TTO_CAP')          or define('TTO_CAP', 'edit_posts');
-//The path
+//The custom capabilities
 defined('TTO_CAP_MAX')      or define('TTO_CAP_MAX', 'manage_tea_theme_options');
 //The nonce ajax value
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
@@ -78,17 +80,17 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
 /**
  * Tea Theme Option master class.
  *
- * To get its own settings, define all functions used to build custom pages and 
+ * To get its own settings, define all functions used to build custom pages and
  * custom post types.
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.8
+ * @since 1.5.0
  *
  * @todo Special field:     Typeahead
- * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Google Maps, 
- *                          Google Adsense, Related posts, Private content, 
- *                          RSS Feed, Embed PDF, Price table, Carousel, Icons
+ * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
+ * @todo Shortcodes panel:  Google Adsense, Related posts, Private content,
+ * @todo Shortcodes panel:  RSS Feed, Price table, Carousel, Icons
  *
  */
 class TeaThemeOptions
@@ -106,24 +108,32 @@ class TeaThemeOptions
      * Constructor.
      *
      * @uses add_filter()
-     * @uses load_plugin_textdomain()
+     * @uses load_textdomain()
      * @uses wp_next_scheduled()
      * @uses wp_schedule_event()
      * @param string $identifier Define the main slug
-     * @param boolean $connect Define if we can display connections page
-     * @param boolean $elastic Define if we can display elasticsearch page
+     * @param array $options Contains all options to dis/enable
+     * @internal param bool $connect Define if we can display connections page
+     * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
-    public function __construct($identifier = 'tea_theme_options', $connect = true, $elastic = true)
+    public function __construct($identifier = 'tea_theme_options', $options = array())
     {
         //Admin panel
         if (TTO_IS_ADMIN) {
             //i18n
-            load_plugin_textdomain(TTO_I18N, false, TTO_PATH . '/languages');
+            $locale = apply_filters('theme_locale', get_locale(), TTO_I18N);
+            load_textdomain(TTO_I18N, TTO_PATH.'/languages/'.$locale.'.mo');
+
+            //Build options
+            $opts = array(
+                'connect' => isset($options['connect']) ? $options['connect'] : true,
+                'elastic' => isset($options['elastic']) ? $options['elastic'] : true,
+            );
 
             //Page component
-            $this->pages = new TeaPages($identifier, $connect, $elastic);
+            $this->pages = new TeaPages($identifier, $opts);
         }
 
         //Define custom schedule
@@ -174,7 +184,7 @@ class TeaThemeOptions
      */
     public function __loginPage()
     {
-        echo '<link href="' . TTO_URI . '/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
+        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
     }
 
     /**
@@ -374,7 +384,7 @@ class TeaThemeOptions
      * @param integer $user_id The user ID stored in DB for the connection
      * @return array $array Contains all data for the connection
      *
-     * @since 1.4.3.3
+     * @since 1.5.0
      */
     public static function access_token($user_id = 0)
     {
@@ -386,7 +396,6 @@ class TeaThemeOptions
         //Check user ID
         if ($user_id) {
             //Get datas
-            //$userid = $this->getConfigs('token_userid', 0);
             $tokens = TeaThemeOptions::getConfigs('tokens');
 
             //Check integrity
@@ -404,7 +413,7 @@ class TeaThemeOptions
             }
 
             //Define token
-            $token = $token_chunks[0].'.'.$token_chunks[1];
+            $token = $chunks[0].'.'.$chunks[1];
         }
         else {
             //Get stored blog token
@@ -426,12 +435,15 @@ class TeaThemeOptions
     /**
      * Set a value into options
      *
-     * @since 1.4.0
+     * @param string $option Contains option name to delete from DB
+     * @param integer $transient Define if we use transiant API or not
+     *
+     * @since 1.5.0
      */
-    public static function del_option($option, $transient = false)
+    public static function del_option($option, $transient = 0)
     {
         //If a transient is asked...
-        if ($transient) {
+        if (!empty($transient)) {
             //Delete the transient
             delete_transient($option);
         }
@@ -443,12 +455,17 @@ class TeaThemeOptions
     /**
      * Return a value from options
      *
-     * @since 1.4.0
+     * @param string $option Contains option name to retrieve from DB
+     * @param string $default Contains default value if no data was found
+     * @param integer $transient Define if we use transiant API or not
+     * @return mixed|string|void
+     *
+     * @since 1.5.0
      */
-    public static function get_option($option, $default = '', $transient = false)
+    public static function get_option($option, $default = '', $transient = 0)
     {
         //If a transient is asked...
-        if ($transient) {
+        if (!empty($transient)) {
             //Get value from transient
             $value = get_transient($option);
 
@@ -479,12 +496,16 @@ class TeaThemeOptions
     /**
      * Set a value into options
      *
-     * @since 1.4.0
+     * @param string $option Contains option name to update from DB
+     * @param string $value Contains value to insert
+     * @param integer $transient Define if we use transiant API or not
+     *
+     * @since 1.5.0
      */
-    public static function set_option($option, $value, $transient = false)
+    public static function set_option($option, $value, $transient = 0)
     {
         //If a transient is asked...
-        if ($transient) {
+        if (!empty($transient)) {
             //Set the transient for this value
             set_transient($option, $value, TTO_DURATION);
         }

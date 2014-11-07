@@ -98,6 +98,6 @@ class Radio extends TeaFields
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Radio/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Radio/in_pages.tpl.php');
     }
 }

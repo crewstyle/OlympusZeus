@@ -5,7 +5,7 @@
     </h3>
 
     <div class="inside tea-inside textarea">
-        <textarea name="<?php echo $id ?>" id="<?php echo $id ?>" rows="<?php echo $rows ?>" <?php echo $placeholder ?>><?php echo $val ?></textarea>
+        <textarea name="<?php echo $id ?>" id="<?php echo $id ?>" rows="<?php echo $rows ?>" class="textarea" <?php echo $placeholder ?>><?php echo $val ?></textarea>
 
         <p><?php echo $description ?></p>
     </div>

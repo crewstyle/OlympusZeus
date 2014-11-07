@@ -18,12 +18,12 @@
 
     <footer class="teato-footer">
         <?php if (!empty($capurl)): ?>
-            <p><a href="<?php echo $capurl ?>"><?php _e('Update capabilities', TTO_I18N) ?></a></p>
+            <p><a href="<?php echo $capurl ?>"><b><?php _e('Update capabilities', TTO_I18N) ?></b></a></p>
         <?php endif ?>
         <hr/>
         <p><?php _e('Brewed to you by Take a Tea &copy; 20xx Take a Tea. All rights reserved.', TTO_I18N) ?></p>
         <p><?php echo sprintf(__('Please, contact <a href="mailto:teatime@takeatea.com?subject=Tea Theme Options on %s - version %s"><b>teatime@takeatea.com</b></a> if you have any suggestions.', TTO_I18N), get_bloginfo('name'), $version) ?></p>
-        <p><i><?php echo sprintf(__('Your Tea Theme Option is in <b>version %s</b>', TTO_I18N), $version) ?></i></p>
+        <p><small><?php echo sprintf(__('Your Tea Theme Option is in <b>version %s</b>', TTO_I18N), $version) ?></small></p>
     </footer>
 </div>
 

@@ -1,22 +1,17 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions;
 
 use Elastica\Client;
-use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Filter\Bool;
 use Elastica\Filter\Term;
-use Elastica\Filter\Type;
 use Elastica\Query;
 use Elastica\Query\QueryString;
-use Elastica\Request;
-use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Suggest\Term as SuggestTerm;
-use Elastica\Suggest\Phrase as SuggestPhrase;
 use Elastica\Type\Mapping;
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
 
 /**
  * TEA ELASTICSEARCH
@@ -34,7 +29,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Search
  *
- * @since 1.4.3.9
+ * @since 1.5.0
  *
  */
 class TeaElasticsearch
@@ -82,6 +77,8 @@ class TeaElasticsearch
     /**
      * Hook on deleting post.
      *
+     * @param number $post_id Contains post ID
+     *
      * @since 1.4.0
      */
     public function __delete_post($post_id)
@@ -110,6 +107,8 @@ class TeaElasticsearch
 
     /**
      * Hook on saving post.
+     *
+     * @param number $post_id Contains post ID
      *
      * @since 1.4.0
      */
@@ -151,6 +150,8 @@ class TeaElasticsearch
     /**
      * Hook on search.
      *
+     * @param object $wp_query Contains query post sent by WP core
+     *
      * @since 1.4.0
      */
     public function __search_process($wp_query)
@@ -169,6 +170,9 @@ class TeaElasticsearch
 
     /**
      * Hook on search.
+     *
+     * @param array $posts Contains all posts sent by WP core
+     * @return array $posts Send an empty array
      *
      * @since 1.4.0
      */
@@ -195,7 +199,7 @@ class TeaElasticsearch
 
         //Check page
         if (is_search() && !TTO_IS_ADMIN && isset($ctn['template']) && 'no' == $ctn['template']) {
-            include(TTO_PATH . '/Fields/Elasticsearch/in_search.tpl.php');
+            include(TTO_PATH.'/Fields/Elasticsearch/in_search.tpl.php');
             exit;
         }
     }
@@ -707,7 +711,7 @@ class TeaElasticsearch
     /**
      * Index contents.
      *
-     * @param boolean $idxctn Define it we have to index contents or just create index
+     * @internal param bool $idxctn Define it we have to index contents or just create index
      * @return int $count Get number of items indexed
      *
      * @since 1.4.3.10
@@ -804,7 +808,7 @@ class TeaElasticsearch
         //Get all wanted posts
         $posts = get_posts($pargs);
         $count = 0;
-//echo '<pre>'; var_dump($idp, $posts); die();
+
         //Iterate on all posts to create documents
         foreach ($posts as $post) {
             //Check post type
@@ -878,10 +882,10 @@ class TeaElasticsearch
         //Get query vars
         $results = array();
         $types = array();
-        $total = 0;
+        //$total = 0;
 
         //Get Elasticsearch datas
-        $ctn = $this->getConfig();
+        //$ctn = $this->getConfig();
         $index = $this->getIndex();
 
         //Check index
@@ -949,7 +953,7 @@ class TeaElasticsearch
      *
      * @return array $elasticsearches Combine of all results, total and aggregations
      *
-     * @since 1.4.3.10
+     * @since 1.5.0
      */
     public function searchContents()
     {
@@ -975,7 +979,7 @@ class TeaElasticsearch
         $request = isset($_REQUEST) ? $_REQUEST : array();
         $results = array();
         $types = array();
-        $total = 0;
+        //$total = 0;
 
         //Check request
         if (empty($request)) {
@@ -983,7 +987,7 @@ class TeaElasticsearch
         }
 
         //Get Elasticsearch datas
-        $ctn = $this->getConfig();
+        //$ctn = $this->getConfig();
         $index = $this->getIndex();
 
         //Check index
@@ -1078,7 +1082,7 @@ class TeaElasticsearch
      * @param array $tags Array contains all post tags
      * @return array $elasticsearches Combine of all results, total and aggregations
      *
-     * @since 1.4.3.10
+     * @since 1.5.0
      */
     public function searchSuggest($type, $post, $tags)
     {
@@ -1102,10 +1106,10 @@ class TeaElasticsearch
 
         //Get query vars
         $results = array();
-        $total = 0;
+        //$total = 0;
 
         //Get Elasticsearch datas
-        $ctn = $this->getConfig();
+        //$ctn = $this->getConfig();
         $index = $this->getIndex();
 
         //Check index
@@ -1121,7 +1125,7 @@ class TeaElasticsearch
             //CReate Term with options
             $es_term = new SuggestTerm('tags_suggest_'.$k, '_all');
             $es_term->setText($tag);
-            $es_term->setSize($number);
+            $es_term->setSize(5);
             $es_term->setAnalyzer('simple');
 
             //Add Term to current suggestion

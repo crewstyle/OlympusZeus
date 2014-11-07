@@ -1,0 +1,1386 @@
+# Tea Theme Options package.
+# Copyright (C) 2014
+# This file is distributed under the same license as the Tea Theme Options package.
+# Achraf Chouk <ach@takeatea.com>, 2014.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tea-theme-options 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-07 13:06+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: src/Fields/Background/Background.php:88
+msgid "Tea Background"
+msgstr ""
+
+#: src/Fields/Background/Background.php:94 src/Fields/Gallery/Gallery.php:88
+#: src/Fields/Maps/Maps.php:103 src/Fields/Upload/Upload.php:84
+msgid "Delete selection"
+msgstr ""
+
+#: src/Fields/Background/in_pages.tpl.php:40
+msgid "To upload your own background, check the \"CUSTOM\" image."
+msgstr ""
+
+#: src/Fields/Background/in_pages.tpl.php:60
+#: src/Fields/Background/in_pages.tpl.php:61
+msgid "Add background"
+msgstr ""
+
+#: src/Fields/Background/in_pages.tpl.php:65
+#: src/Fields/Gallery/in_pages.tpl.php:57 src/Fields/Maps/in_pages.tpl.php:58
+#: src/Fields/Upload/in_pages.tpl.php:97
+msgid "It seems you are not able to upload files."
+msgstr ""
+
+#: src/Fields/Checkbox/Checkbox.php:86
+msgid "Tea Checkbox"
+msgstr ""
+
+#: src/Fields/Checkbox/in_pages.tpl.php:7
+#: src/Fields/Elasticsearch/in_pages.tpl.php:181
+#: src/Fields/Elasticsearch/in_pages.tpl.php:214
+#: src/Fields/Maps/in_pages.tpl.php:145 src/Fields/Network/in_pages.tpl.php:6
+#: src/Fields/Social/in_pages.tpl.php:7
+msgid "Un/select all options"
+msgstr ""
+
+#: src/Fields/Color/Color.php:78
+msgid "Tea Color"
+msgstr ""
+
+#: src/Fields/Date/Date.php:81
+msgid "Tea Date"
+msgstr ""
+
+#: src/Fields/Elasticsearch/Elasticsearch.php:66
+msgid "Tea Elasticsearch"
+msgstr ""
+
+#: src/Fields/Elasticsearch/Elasticsearch.php:235
+msgid ""
+"Something went wrong: it seems you \n"
+"                forgot to attach contents to the current page."
+msgstr ""
+
+#: src/Fields/Elasticsearch/Elasticsearch.php:241
+msgid "Great: your post has been indexed!"
+msgstr ""
+
+#: src/Fields/Elasticsearch/Elasticsearch.php:246
+#, php-format
+msgid "Good job: %d posts have been indexed!"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:8
+msgid ""
+"The connection seems good but there is no \"Index name\" as you have set. "
+"Click on the \"Create index\" button."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:12
+msgid ""
+"It seems there is a problem with your connection parameters. Please, check "
+"the \"Configurations\" tab."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:19
+msgid ""
+"Your parameters are well configured. You can now use Elasticsearch in your "
+"website. Here is the last step: click on the \"Index contents\" button to "
+"index your old posts."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:30
+#: src/Tpl/contents/__content_elasticsearch.tpl.php:4
+msgid "Elasticsearch"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:33
+#: src/Fields/Maps/in_pages.tpl.php:11
+msgid "Globals"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:37
+#: src/Fields/Maps/in_pages.tpl.php:14
+msgid "Configurations"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:40
+#: src/Fields/Elasticsearch/in_pages.tpl.php:161
+msgid "Indexing contents"
+msgstr ""
+
+#. /a>
+#. </li>
+#. <li class="hr">
+#. <hr/>
+#. </li>
+#. <?php endif
+#: src/Fields/Elasticsearch/in_pages.tpl.php:63
+msgid "Create index"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:68
+msgid "Index contents"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:78
+msgid "Enable Elasticsearch"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:81
+msgid "Disable Elasticsearch"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:92
+msgid ""
+"Elasticsearch is an Open Source Distributed Real Time Search &amp; Analytics"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:102
+msgid "Server URL"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:110
+#, php-format
+msgid ""
+"If your search provider has given you a connection URL, use that instead of "
+"filling out server information..<br/>http://<code>%s</code>:<code>%d</code> "
+"are good values."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:116
+msgid "Index name"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:120
+#, php-format
+msgid ""
+"Use a uniq name in lowercase with no special character.<br/><code>%s</code> "
+"is a good value."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:126
+msgid "Read timeout"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:130
+#, php-format
+msgid ""
+"The maximum time (in seconds) that read requests should wait for server "
+"response. If the call times out, wordpress will fallback to standard search."
+"<br/><code>%s</code> is a good value."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:136
+msgid "Write timeout"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:140
+#, php-format
+msgid ""
+"The maximum time (in seconds) that write requests should wait for server "
+"response. This should be set long enough to index your entire site.<br/"
+"><code>%s</code> is a good value."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:145
+msgid "Search template?"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:148
+msgid "Use the Tea T.O. Search default template."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:149
+msgid "Use your own Search theme template."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:151
+msgid ""
+"You can <a href=\"#\" class=\"elastica-template\">click here</a> to see how "
+"you can integrate Tea T.O. Elasticsearch results in your template."
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:156
+#: src/Fields/Elasticsearch/in_pages.tpl.php:238
+msgid "Submit"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:164
+msgid ""
+"Choose in this section which contents you want to index. This page list all "
+"post types and taxonomies defined in your template.<br/>"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:166
+msgid "Some of your posts have already been indexed. Gorgeous!"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:178
+msgid "Post types"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_pages.tpl.php:211
+msgid "Taxonomies"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_search.tpl.php:32
+#, php-format
+msgid "%s (%d)"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_search.tpl.php:60
+msgid "See all"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_search.tpl.php:104
+#, php-format
+msgid ""
+"By <a href=\"%s\" itemprop=\"author\">%s</a> on <time datetime=\"%s\" "
+"itemprop=\"datePublished\">%s</time>"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_search.tpl.php:116
+msgid "Read more"
+msgstr ""
+
+#: src/Fields/Elasticsearch/in_search.tpl.php:128
+msgid ""
+"Apologies, but no results were found for the requested archive. Perhaps "
+"searching will help find a related post."
+msgstr ""
+
+#: src/Fields/Font/Font.php:80
+msgid "Tea Font"
+msgstr ""
+
+#: src/Fields/Gallery/Gallery.php:84
+msgid "Tea Gallery"
+msgstr ""
+
+#: src/Fields/Gallery/in_pages.tpl.php:5
+msgid "Delete all galleries"
+msgstr ""
+
+#: src/Fields/Gallery/in_pages.tpl.php:48 src/TeaCustomPostTypes.php:124
+msgid "Edit"
+msgstr ""
+
+#: src/Fields/Gallery/in_pages.tpl.php:49
+#: src/Fields/Gallery/in_pages.tpl.php:50
+msgid "Add item"
+msgstr ""
+
+#: src/Fields/Heading/Heading.php:63
+msgid "Tea Heading"
+msgstr ""
+
+#: src/Fields/Includes/Includes.php:64
+msgid "Tea Include"
+msgstr ""
+
+#: src/Fields/Link/Link.php:85
+msgid "Tea Link"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:9
+msgid "Web address"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:11
+msgid "Go to the Website"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:14
+msgid "Title"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:18
+msgid "Target"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:21
+msgid "Opens the linked document in a new window or tab"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:24
+msgid "Opens the linked document in the same frame as it was clicked"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:27
+msgid "Opens the linked document in the parent frame"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:30
+msgid "Opens the linked document in the full body of the window"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:35
+msgid "Relationship"
+msgstr ""
+
+#: src/Fields/Link/in_pages.tpl.php:37
+msgid ""
+"You can set the <code>nofollow</code> value to avoid bots following the "
+"linked document."
+msgstr ""
+
+#: src/Fields/Maps/Maps.php:100
+msgid "Tea Maps"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:17
+msgid "Customizations"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:28
+msgid "Address"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:32
+msgid "Define your default address in which the maps will be centered."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:39
+msgid "Marker"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:53 src/Fields/Maps/in_pages.tpl.php:54
+msgid "Add marker"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:66
+msgid "Width"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:70
+msgid "Define the width maps in pixels."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:74
+msgid "Height"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:78
+msgid "Define the height maps in pixels."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:89
+msgid "Zoom"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:93
+msgid "Define your default zoom."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:99
+msgid "Type"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:104
+msgid "Roadmap"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:105
+msgid "Satellite"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:106
+msgid "Hybrid"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:107
+msgid "Terrain"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:117
+msgid "Define your default type."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:127
+msgid "Drag'n drop"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:128
+msgid "Street View"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:129
+msgid "Zoom control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:131
+msgid "Map control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:132
+msgid "Scale control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:133
+msgid "Pan control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:135
+msgid "Rotate control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:136
+msgid "Rotate control options"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:137
+msgid "Scroll Wheel"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:139
+msgid "Overview Map control"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:140
+msgid "Overview Map control options"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:143
+msgid "Options"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:166
+msgid "Define your default options."
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:175
+msgid "Enable JSON design?"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:177
+msgid "Yes"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:178
+msgid "No"
+msgstr ""
+
+#: src/Fields/Maps/in_pages.tpl.php:185
+msgid ""
+"To customize your Google map, go to <a href=\"http://snazzymaps.com/\" "
+"target=\"_blank\"><b>SnazzyMaps</b></a> website, choose a theme and copy/"
+"paste the <code>Javascript style array</code> code in this textarea."
+msgstr ""
+
+#: src/Fields/Multiselect/Multiselect.php:84
+msgid "Tea Multiselect"
+msgstr ""
+
+#: src/Fields/Multiselect/in_pages.tpl.php:22
+#: src/Fields/Wordpress/in_pages.tpl.php:28
+msgid ""
+"Press the <code>CTRL</code> or <code>CMD</code> button to select more than "
+"one option."
+msgstr ""
+
+#: src/Fields/Network/Network.php:56
+msgid "Tea Network"
+msgstr ""
+
+#: src/Fields/Network/Network.php:61
+msgid "Coming soon"
+msgstr ""
+
+#: src/Fields/Radio/Radio.php:83
+msgid "Tea Radio"
+msgstr ""
+
+#: src/Fields/Review/Review.php:83
+msgid "Tea Review"
+msgstr ""
+
+#: src/Fields/Rte/Rte.php:78
+msgid "Tea RTE"
+msgstr ""
+
+#: src/Fields/Select/Select.php:84
+msgid "Tea Select"
+msgstr ""
+
+#: src/Fields/Social/Social.php:95
+msgid "Tea Social"
+msgstr ""
+
+#: src/Fields/Social/in_pages.tpl.php:50 src/Fields/Social/in_pages.tpl.php:51
+msgid "Add social networks"
+msgstr ""
+
+#: src/Fields/Social/in_pages.tpl.php:64
+msgid "Choose the social networks you want to display"
+msgstr ""
+
+#: src/Fields/Text/Text.php:96
+msgid "Tea Text"
+msgstr ""
+
+#: src/Fields/Textarea/Textarea.php:79
+msgid "Tea Textarea"
+msgstr ""
+
+#: src/Fields/Upload/Upload.php:78
+msgid "Tea Upload"
+msgstr ""
+
+#: src/Fields/Upload/in_pages.tpl.php:6
+msgid "Delete all medias"
+msgstr ""
+
+#: src/Fields/Upload/in_pages.tpl.php:52 src/Fields/Upload/in_pages.tpl.php:53
+msgid "Add medias"
+msgstr ""
+
+#: src/Fields/Upload/in_pages.tpl.php:89 src/Fields/Upload/in_pages.tpl.php:90
+msgid "Add media"
+msgstr ""
+
+#: src/Fields/Wordpress/Wordpress.php:132
+msgid "Tea Wordpress Contents"
+msgstr ""
+
+#: src/Fields/Wordpress/in_pages.tpl.php:32
+#, php-format
+msgid "There are no %s found."
+msgstr ""
+
+#: src/Fields/Wordpress/in_pages.tpl.php:32
+#, php-format
+msgid "There is no %s found."
+msgstr ""
+
+#: src/Networks/Facebook/in_pages.tpl.php:6
+#: src/Networks/Facebook/in_pages.tpl.php:13
+msgid "Facebook connection"
+msgstr ""
+
+#: src/Networks/Googleplus/in_pages.tpl.php:6
+#: src/Networks/Googleplus/in_pages.tpl.php:13
+msgid "Google+ connection"
+msgstr ""
+
+#: src/Networks/Instagram/in_pages.tpl.php:6
+#: src/Networks/Instagram/in_pages.tpl.php:13
+msgid "Instagram connection"
+msgstr ""
+
+#: src/Networks/Twitter/in_pages.tpl.php:6
+#: src/Networks/Twitter/in_pages.tpl.php:13
+msgid "Twitter connection"
+msgstr ""
+
+#: src/TeaAdminMessage.php:87
+#, php-format
+msgid ""
+"Something went wrong in your \n"
+"                parameters definition: no id(s) defined\n"
+"                for the following field(s) %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:85
+#, php-format
+msgid ""
+"Something went wrong in your parameters\n"
+"                    definition: no title defined for your %s\n"
+"                    custom post type. Please, try again by\n"
+"                    filling the form properly."
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:122
+msgid "Add new"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:123
+#, php-format
+msgid "Add new %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:125 src/TeaCustomTaxonomies.php:119
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:126
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:127
+msgid "View"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:128
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:129 src/TeaCustomTaxonomies.php:114
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:130
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:131
+#, php-format
+msgid "No %s found in Trash"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:132
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:235
+#, php-format
+msgid ""
+"Something went wrong in your\n"
+"                            parameters definition: the class %s\n"
+"                            does not exist!"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:246
+msgid "Metabox"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:283
+msgid "Tea Custom Permalinks"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:310
+msgid "example"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:83
+#, php-format
+msgid ""
+"Something went wrong in your parameters \n"
+"                    definition: no slug defined for your <b>%s</b> \n"
+"                    custom taxonomy. Please, try again by \n"
+"                    filling the form properly."
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:92
+#, php-format
+msgid ""
+"Something went wrong in your parameters \n"
+"                    definition: no post type defined for your <b>%s</b> \n"
+"                    custom taxonomy. Please, try again by \n"
+"                    filling the form properly."
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:115
+#, php-format
+msgid "Popular %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:116
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:120
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:121
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:122
+#, php-format
+msgid "New %s Name"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:123
+#, php-format
+msgid "Separate %s with commas"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:124
+#, php-format
+msgid "Add or remove %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:125
+#, php-format
+msgid "Choose from the most used %s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:126
+#, php-format
+msgid "No %s found."
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:127
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: src/TeaCustomTaxonomies.php:232
+#, php-format
+msgid ""
+"Something went wrong in your\n"
+"                        parameters definition: the class <b>%s</b>\n"
+"                        does not exist!"
+msgstr ""
+
+#: src/TeaFields.php:107
+msgid "undefined (?)"
+msgstr ""
+
+#: src/TeaFields.php:132
+msgid "Left"
+msgstr ""
+
+#: src/TeaFields.php:133
+msgid "Center"
+msgstr ""
+
+#: src/TeaFields.php:134
+msgid "Right"
+msgstr ""
+
+#: src/TeaFields.php:137
+msgid "Top"
+msgstr ""
+
+#: src/TeaFields.php:138
+msgid "Middle"
+msgstr ""
+
+#: src/TeaFields.php:139
+msgid "Bottom"
+msgstr ""
+
+#: src/TeaFields.php:143
+msgid "Background is displayed only once."
+msgstr ""
+
+#: src/TeaFields.php:144
+msgid "Background is repeated horizontally only."
+msgstr ""
+
+#: src/TeaFields.php:145
+msgid "Background is repeated vertically only."
+msgstr ""
+
+#: src/TeaFields.php:146
+msgid "Background is repeated all the way."
+msgstr ""
+
+#: src/TeaFields.php:179
+msgid "No background"
+msgstr ""
+
+#: src/TeaFields.php:180
+msgid "Bright squares"
+msgstr ""
+
+#: src/TeaFields.php:181
+msgid "Circles"
+msgstr ""
+
+#: src/TeaFields.php:182
+msgid "Crosses"
+msgstr ""
+
+#: src/TeaFields.php:183
+msgid "Crosslines"
+msgstr ""
+
+#: src/TeaFields.php:184
+msgid "Cubes"
+msgstr ""
+
+#: src/TeaFields.php:185
+msgid "Double lined"
+msgstr ""
+
+#: src/TeaFields.php:186
+msgid "Honeycomb"
+msgstr ""
+
+#: src/TeaFields.php:187
+msgid "Linen"
+msgstr ""
+
+#: src/TeaFields.php:188
+msgid "Project paper"
+msgstr ""
+
+#: src/TeaFields.php:189
+msgid "Texture"
+msgstr ""
+
+#: src/TeaFields.php:190
+msgid "Vertical lines"
+msgstr ""
+
+#: src/TeaFields.php:191
+msgid "Vichy"
+msgstr ""
+
+#: src/TeaFields.php:192
+msgid "Wavecut"
+msgstr ""
+
+#: src/TeaFields.php:200
+msgid "Facebook"
+msgstr ""
+
+#: src/TeaFields.php:201
+msgid "Google+"
+msgstr ""
+
+#: src/TeaFields.php:202
+msgid "Instagram"
+msgstr ""
+
+#: src/TeaFields.php:203
+msgid "Twitter"
+msgstr ""
+
+#: src/TeaFields.php:217
+msgid "See my portfolio on Behance"
+msgstr ""
+
+#: src/TeaFields.php:218
+msgid "http://www.behance.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:221
+msgid "Follow me on Bloglovin"
+msgstr ""
+
+#: src/TeaFields.php:222
+msgid "http://www.bloglovin.com/blog/__userid__/__username__"
+msgstr ""
+
+#: src/TeaFields.php:225
+msgid "Follow me on Bitbucket"
+msgstr ""
+
+#: src/TeaFields.php:226
+msgid "https://bitbucket.org/__username__"
+msgstr ""
+
+#: src/TeaFields.php:229
+msgid "Follow me on Codepen.io"
+msgstr ""
+
+#: src/TeaFields.php:230
+msgid "http://codepen.io/__username__"
+msgstr ""
+
+#: src/TeaFields.php:233
+msgid "Follow me on Delicious"
+msgstr ""
+
+#: src/TeaFields.php:234
+msgid "https://delicious.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:237
+msgid "Follow me on Deviantart"
+msgstr ""
+
+#: src/TeaFields.php:238
+msgid "http://__username__.deviantart.com/"
+msgstr ""
+
+#: src/TeaFields.php:241
+msgid "Follow me on Dribbble"
+msgstr ""
+
+#: src/TeaFields.php:242
+msgid "http://dribbble.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:245
+msgid "Follow me on Facebook"
+msgstr ""
+
+#: src/TeaFields.php:246
+msgid "http://www.facebook.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:249
+msgid "Follow me on Flickr"
+msgstr ""
+
+#: src/TeaFields.php:250
+msgid "http://www.flickr.com/photos/__username__"
+msgstr ""
+
+#: src/TeaFields.php:253
+msgid "Follow me on Forrst"
+msgstr ""
+
+#: src/TeaFields.php:254
+msgid "http://forrst.com/people/__username__"
+msgstr ""
+
+#: src/TeaFields.php:257
+msgid "See me on Foursquare"
+msgstr ""
+
+#: src/TeaFields.php:258
+msgid "https://fr.foursquare.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:261
+msgid "Follow me on FriendFeed"
+msgstr ""
+
+#: src/TeaFields.php:262
+msgid "http://friendfeed.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:265
+msgid "Follow me on Github"
+msgstr ""
+
+#: src/TeaFields.php:266
+msgid "https://github.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:269
+msgid "Follow me on Gittip"
+msgstr ""
+
+#: src/TeaFields.php:270
+msgid "https://www.gittip.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:273
+msgid "Follow me on Hellocoton"
+msgstr ""
+
+#: src/TeaFields.php:274
+msgid "http://www.hellocoton.fr/mapage/__username__"
+msgstr ""
+
+#: src/TeaFields.php:277
+msgid "Follow me on Google+"
+msgstr ""
+
+#: src/TeaFields.php:278
+msgid "http://plus.google.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:281
+msgid "Follow me on Instagram"
+msgstr ""
+
+#: src/TeaFields.php:282
+msgid "http://www.instagram.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:285
+msgid "Follow me on LastFM"
+msgstr ""
+
+#: src/TeaFields.php:286
+msgid "http://www.lastfm.fr/user/__username__"
+msgstr ""
+
+#: src/TeaFields.php:289
+msgid "Follow me on LinkedIn"
+msgstr ""
+
+#: src/TeaFields.php:290
+msgid "http://www.linkedin.com/in/__username__"
+msgstr ""
+
+#: src/TeaFields.php:293
+msgid "Follow me on Pinterest"
+msgstr ""
+
+#: src/TeaFields.php:294
+msgid "http://pinterest.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:297
+msgid "Follow me on Reddit"
+msgstr ""
+
+#: src/TeaFields.php:298
+msgid "http://www.reddit.com/user/__username__"
+msgstr ""
+
+#: src/TeaFields.php:301
+msgid "Connect us on Skype"
+msgstr ""
+
+#: src/TeaFields.php:304
+msgid "Follow me on Soundcloud"
+msgstr ""
+
+#: src/TeaFields.php:305
+msgid "https://soundcloud.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:308
+msgid "Follow me on Stumbleupon"
+msgstr ""
+
+#: src/TeaFields.php:309
+msgid "http://www.stumbleupon.com/stumbler/__username__"
+msgstr ""
+
+#: src/TeaFields.php:312
+msgid "Follow me on Tumblr"
+msgstr ""
+
+#: src/TeaFields.php:313
+msgid "http://"
+msgstr ""
+
+#: src/TeaFields.php:316
+msgid "Follow me on Twitter"
+msgstr ""
+
+#: src/TeaFields.php:317
+msgid "http://www.twitter.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:320
+msgid "Follow me on Vimeo"
+msgstr ""
+
+#: src/TeaFields.php:321
+msgid "http://www.vimeo.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:324
+msgid "Follow me on Vine.co"
+msgstr ""
+
+#: src/TeaFields.php:325
+msgid "https://vine.co/__username__"
+msgstr ""
+
+#: src/TeaFields.php:328
+msgid "Follow me on VK.com"
+msgstr ""
+
+#: src/TeaFields.php:329
+msgid "http://vk.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:332
+msgid "Follow me on Weibo"
+msgstr ""
+
+#: src/TeaFields.php:333
+msgid "http://www.weibo.com/__username__"
+msgstr ""
+
+#: src/TeaFields.php:336
+msgid "Follow me on Youtube"
+msgstr ""
+
+#: src/TeaFields.php:337
+msgid "http://www.youtube.com/user/__username__"
+msgstr ""
+
+#: src/TeaFields.php:340
+msgid "Subscribe to my RSS feed"
+msgstr ""
+
+#: src/TeaPages.php:69
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition. You need at least an identifier."
+msgstr ""
+
+#: src/TeaPages.php:141
+msgid "Tea T.O. ~ Earth tea"
+msgstr ""
+
+#: src/TeaPages.php:148
+msgid "Tea T.O. ~ Vulcan tea"
+msgstr ""
+
+#: src/TeaPages.php:155
+msgid "Tea T.O. ~ Ocean tea"
+msgstr ""
+
+#: src/TeaPages.php:300
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition: no master page defined!"
+msgstr ""
+
+#: src/TeaPages.php:351 src/TeaPages.php:537
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition: no master page found. You can simply do that by\n"
+"                using the addPage public function."
+msgstr ""
+
+#: src/TeaPages.php:486
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition: your configs are empty. See README.md for\n"
+"                more explanations."
+msgstr ""
+
+#: src/TeaPages.php:493
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition: your contents are empty. See README.md for\n"
+"                more explanations."
+msgstr ""
+
+#: src/TeaPages.php:510 src/TeaPages.php:511
+#: src/Tpl/contents/__content_dashboard.tpl.php:4
+#: src/Tpl/layouts/__layout_header.tpl.php:5
+msgid "Tea T.O."
+msgstr ""
+
+#: src/TeaPages.php:604
+msgid ""
+"Something went wrong: it seems you\n"
+"                forgot to attach contents to the current page."
+msgstr ""
+
+#: src/TeaPages.php:736
+msgid "Tea Theme Options"
+msgstr ""
+
+#: src/TeaPages.php:807
+#, php-format
+msgid ""
+"Something went wrong in your\n"
+"                    parameters definition with the id %s:\n"
+"                    the defined type is unknown!"
+msgstr ""
+
+#: src/TeaPages.php:823
+#, php-format
+msgid ""
+"Something went wrong in\n"
+"                        your parameters definition: the class %s\n"
+"                        does not exist!"
+msgstr ""
+
+#: src/TeaPages.php:971
+#, php-format
+msgid ""
+"Something went wrong. Key \"%s\"\n"
+"                and/or its value is empty."
+msgstr ""
+
+#: src/TeaPages.php:1184
+msgid ""
+"Something went wrong in your parameters\n"
+"                definition. You need to specify a network to make the\n"
+"                connection happens."
+msgstr ""
+
+#: src/Tpl/contents/__content_connections.tpl.php:4
+msgid "Connections"
+msgstr ""
+
+#: src/Tpl/contents/__content_connections.tpl.php:5
+msgid "<span style=\"color:#3a71bb\">Connections</span>"
+msgstr ""
+
+#: src/Tpl/contents/__content_connections.tpl.php:11
+msgid ""
+"Simple, use these boxes to fully integrate your Tea Theme Options for "
+"Wordpress with your favorites social networks."
+msgstr ""
+
+#: src/Tpl/contents/__content_dashboard.tpl.php:5
+msgid "<span style=\"color:#55bb3a\">Welcome</span>"
+msgstr ""
+
+#: src/Tpl/contents/__content_dashboard.tpl.php:12
+msgid ""
+"<h1 style=\"text-align:center\">Your simple, easy to use<br/>and fully "
+"integrated<br/><strong>theme options for Wordpress</strong></h1>"
+msgstr ""
+
+#: src/Tpl/contents/__content_dashboard.tpl.php:19
+msgid ""
+"<h2>The <a href=\"https://github.com/Takeatea/tea_theme_options\" title="
+"\"Tea Theme Options\" class=\"openit\">Tea Theme Options</a> (or <b>Tea T.O."
+"</b>) allows you to easily add professional looking theme options panels to "
+"your WordPress theme.</h2>\n"
+"            <ul>\n"
+"                <li><b>Option API</b> - A simple and standardized way of "
+"storing data in the database.</li>\n"
+"                <li><b>Transient API</b> - Very similar to the Options API "
+"but with the added feature of an expiration time, which simplifies the "
+"process of using the wp_options database table to temporarily store cached "
+"information.</li>\n"
+"                <li><b>Easier for administrators</b> - The interface is "
+"thought to be the most userfriendly. The Tea TO core adds some extra "
+"interface customisations to make your life easier.</li>\n"
+"                <li><b>Easier for developers</b> - Create a new admin panel "
+"easily with the new dashboard. The Tea TO core is made to allow non-"
+"developer profiles to easily create the settings they need to customise "
+"their templates.</li>\n"
+"                <li><b>Elasticsearch API</b> - Elasticsearch creates "
+"scaleable, real-time search for your website by indexing all your datas "
+"millions of times a day.</li>\n"
+"            </ul>"
+msgstr ""
+
+#: src/Tpl/contents/__content_dashboard.tpl.php:32
+msgid ""
+"<h2>The <b>Tea T.O.</b> is built for <a href=\"http://wordpress.org\" target="
+"\"_blank\">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>\n"
+"            <ul>\n"
+"                <li><b>Custom Post Types</b> - Here is the simpliest way to "
+"create Wordpress Custom Post Types! A new experience with dashicons, "
+"complete customisable backend panels, custom fields and datas saved in DB as "
+"the good way.</li>\n"
+"                <li><b>Custom Taxonomies</b> - Since the 1.4.2 version, you "
+"are now able to create easily Wordpress Custom Taxonomies with a couple of "
+"lines code. The Tea TO permit to add custom fields as you want.</li>\n"
+"                <li><b>Wordpress Media Manager</b> - Beautiful interface: A "
+"streamlined, all-new experience where you can create galleries faster with "
+"drag-and-drop reordering, inline caption editing, and simplified controls.</"
+"li>\n"
+"                <li><b>Full of Options</b> - 3 kind of options used to "
+"display information, store fields values or get data from your Wordpress "
+"database. The options are made to build your Wordpress pages easily.</li>\n"
+"            </ul>"
+msgstr ""
+
+#: src/Tpl/contents/__content_dashboard.tpl.php:45
+msgid ""
+"<h2>How to get values in your Wordpress template?</h2>\n"
+"            <p>The <b>Tea T.O.</b> allows you to easily get back values and "
+"use them into your WordPress theme.<br/>There are 2 ways to get them back.</"
+"p>\n"
+"            <ul>\n"
+"                <li><b>Wordpress way</b> - By using the <code>get_option</"
+"code> method.</li>\n"
+"                <li><b>Tea T.O. way</b> - Very similar to the Wordpress "
+"solution, simply use the <code>_get_option</code> method (pay attention to "
+"the first underscore) to get values from Transient API.</li>\n"
+"            </ul>"
+msgstr ""
+
+#: src/Tpl/contents/__content_elasticsearch.tpl.php:5
+msgid "<span style=\"color:#3a71bb\">Elasticsearch</span>"
+msgstr ""
+
+#: src/Tpl/contents/__content_elasticsearch.tpl.php:12
+msgid "Elasticsearh: an Open Source, Distributed and RESTful Search Engine."
+msgstr ""
+
+#: src/Tpl/contents/__content_elasticsearch.tpl.php:13
+msgid ""
+"\n"
+"            <p>Elasticsearch is a search server based on Lucene. It provides "
+"a distributed, multitenant-capable full-text search engine with a RESTful "
+"web interface and schema-free JSON documents. Elasticsearch is developed in "
+"Java and is released as open source under the terms of the Apache License.</"
+"p>\n"
+"            <p>Elasticsearch can be used to search all kinds of documents. "
+"It provides scalable search, has near real-time search, and supports "
+"multitenancy. \"ElasticSearch is distributed, which means that indices can "
+"be divided into shards and each shard can have zero or more replicas. Each "
+"node hosts one or more shards, and acts as a coordinator to delegate "
+"operations to the correct shard(s). Rebalancing and routing are done "
+"automatically [...]\".</p>\n"
+"            <p>It uses Lucene and tries to make all features of it available "
+"through the JSON and Java API. It supports facetting and percolating, which "
+"can be useful for notifying if new documents match for registered queries.</"
+"p>\n"
+"            <p>Another feature is called \"gateway\" and handles the long "
+"term persistence of the index; for example, an index can be recovered from "
+"the gateway in a case of a server crash. Elasticsearch supports real-time "
+"GET requests, which makes it suitable as a NoSQL solution, but it lacks "
+"distributed transactions.</p>\n"
+"            <p>To learn more about Elasticsearch, <a href=\"http://www."
+"elasticsearch.org/\" target=\"_blank\">please see the official website</a>."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:2
+msgid "Dismiss this notice."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:7
+msgid ""
+"<strong>Your Tea Theme Options is almost ready!</strong> Connect your "
+"profile to enable social features and get full of functionalities ;)"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:12
+msgid "Connect"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_permalinks.tpl.php:2
+msgid ""
+"The following structure uses the same rules than post's permalink structure "
+"that you can built with <code>%year%</code>, <code>%monthnum%</code>, <code>"
+"%day%</code>, <code>%hour%</code>, <code>%minute%</code>, <code>%second%</"
+"code>, <code>%post_id%</code>, <code>%category%</code>, <code>%author%</"
+"code> and <code>%pagename%</code>. If you need to display the <code>%postname"
+"%</code>, simply use the custom post type's slug instead."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:6
+msgid "Update"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:21
+msgid "Update capabilities"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:24
+msgid ""
+"Brewed to you by Take a Tea &copy; 20xx Take a Tea. All rights reserved."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:25
+#, php-format
+msgid ""
+"Please, contact <a href=\"mailto:teatime@takeatea.com?subject=Tea Theme "
+"Options on %s - version %s\"><b>teatime@takeatea.com</b></a> if you have any "
+"suggestions."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:26
+#, php-format
+msgid "Your Tea Theme Option is in <b>version %s</b>"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_footer.tpl.php:33
+msgid "Search template"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_header.tpl.php:26
+msgid "Close &times;"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_header.tpl.php:33
+msgid "The Tea Theme Options is updated."
+msgstr ""

@@ -16,22 +16,22 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'description' => '...Or not!',
  *     'std' => array(
  *         'facebook' => array(
- *             'display' => 'yes',
- *             'label' => __('Become a fan', TEMPLATE_DICTIONARY),
- *             'link' => __('http://www.facebook.com/takeatea', TEMPLATE_DICTIONARY)
+ *             'display' => '1',
+ *             'label' => 'Become a fan',
+ *             'link' => 'http://www.facebook.com/takeatea'
  *         ),
  *         'twitter' => array(
- *             'display' => 'yes',
- *             'label' => __('Follow us', TEMPLATE_DICTIONARY),
- *             'link' => __('https://twitter.com/takeatea', TEMPLATE_DICTIONARY)
+ *             'display' => '1',
+ *             'label' => 'Follow us',
+ *             'link' => 'https://twitter.com/takeatea'
  *         ),
  *         'instagram' => array(
- *             'display' => 'no',
- *             'label' => __('Take a shot', TEMPLATE_DICTIONARY),
- *             'link' => __('http://instagram.com/takeatea', TEMPLATE_DICTIONARY)
+ *             'display' => '0',
+ *             'label' => 'Take a shot',
+ *             'link' => 'http://instagram.com/takeatea'
  *         ),
  *         'rss' => array(
- *             'label' => __('Subscribe to our feed', TEMPLATE_DICTIONARY)
+ *             'label' => 'Subscribe to our feed'
  *         )
  *     )
  * )
@@ -117,17 +117,17 @@ class Social extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, array());
+            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
-            $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, $multiple);
+            $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Social/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Social/in_pages.tpl.php');
     }
 }

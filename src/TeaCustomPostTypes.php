@@ -1,7 +1,6 @@
 <?php
-namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
+namespace Takeatea\TeaThemeOptions;
 
 /**
  * TEA CUSTOM POST TYPES
@@ -22,7 +21,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Post Types
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.0
+ * @since 1.5.0
  *
  */
 class TeaCustomPostTypes
@@ -62,10 +61,12 @@ class TeaCustomPostTypes
      * Hook building menus for CPTS.
      *
      * @uses add_action()
+     * @uses add_permastruct()
+     * @uses add_rewrite_tag()
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
     public function __buildMenuCustomPostType()
     {
@@ -81,10 +82,10 @@ class TeaCustomPostTypes
         foreach ($cpts as $key => $cpt) {
             //Check if no master page is defined
             if (!isset($cpt['title']) || empty($cpt['title'])) {
-                echo sprintf(__('Something went wrong in your parameters 
-                    definition: no title defined for your <b>%s</b> 
-                    custom post type. Please, try again by 
-                    filling the form properly.', TTO_I18N), $key);
+                echo sprintf(__('Something went wrong in your parameters
+                    definition: no title defined for your %s
+                    custom post type. Please, try again by
+                    filling the form properly.', TTO_I18N), '<b>'.$key.'</b>');
                 continue;
             }
 
@@ -93,7 +94,7 @@ class TeaCustomPostTypes
                 $this->contents[] = $cpt['slug'];
             }
 
-            //Special case: define a post/page as title 
+            //Special case: define a post/page as title
             //to edit default post/page component
             if (in_array($cpt['slug'], array('post', 'page'))) {
                 continue;
@@ -105,11 +106,11 @@ class TeaCustomPostTypes
             }
 
             //Treat arrays
-            $sups = isset($cpt['supports']) && !empty($cpt['supports']) 
-                ? $cpt['supports'] 
+            $sups = isset($cpt['supports']) && !empty($cpt['supports'])
+                ? $cpt['supports']
                 : array('title', 'editor', 'thumbnail');
-            $taxs = isset($cpt['taxonomies']) 
-                ? $cpt['taxonomies'] 
+            $taxs = isset($cpt['taxonomies'])
+                ? $cpt['taxonomies']
                 : array('category', 'post_tag');
 
             //Build labels
@@ -135,28 +136,45 @@ class TeaCustomPostTypes
             $args = array(
                 'labels' => $labels,
                 'public' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
-                'publicly_queryable' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
                 'show_ui' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
                 'show_in_menu' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
                 'hierarchical' => isset($cpt['options']['hierarchical']) && $cpt['options']['hierarchical'] ? true : false,
                 'has_archive' => isset($cpt['options']['has_archive']) && $cpt['options']['has_archive'] ? true : false,
-                'rewrite' => isset($cpt['options']['rewrite']) ? $cpt['options']['rewrite'] : array('slug' => $cpt['slug']),
-                'query_var' => isset($cpt['options']['query_var']) && $cpt['options']['query_var'] ? true : false,
                 'menu_icon' => isset($cpt['menu_icon']) ? $cpt['menu_icon'] : '',
                 'menu_position' => isset($cpt['menu_position']) ? $cpt['menu_position'] : 100,
                 'permalink_epmask' => EP_PERMALINK,
                 'supports' => $sups,
-                'taxonomies' => $taxs
+                'taxonomies' => $taxs,
+                'publicly_queryable' => true,
+                'query_var' => true,
+                'rewrite' => false,
             );
 
             //Action to register
             register_post_type($cpt['slug'], $args);
+
+            //Option
+            $opt = $cpt['slug'].'_tea_structure';
+
+            //Get value
+            $structure = TeaThemeOptions::get_option($opt, '/'.$cpt['slug']);
+
+            //Change structure
+            add_rewrite_tag('%'.$cpt['slug'].'%', '([^/]+)', $cpt['slug'].'=');
+            add_permastruct($cpt['slug'], $structure, false);
         }
+
+        //Translate permalink structure
+        //add_action('init', array(&$this, '__addPermalinkStructure'));
+        add_action('post_type_link', array(&$this, '__translatePermalink'), 10, 3);
 
         //Get all admin details
         if (TTO_IS_ADMIN) {
             //Display CPT custom fields
             add_action('admin_init', array(&$this, '__fieldsCustomPostType'));
+
+            //Display settings in permalinks page
+            add_action('admin_init', array(&$this, '__registerPermalinks'));
 
             //Save CPT custom fields
             add_action('save_post', array(&$this, '__saveCustomPostType'));
@@ -215,7 +233,7 @@ class TeaCustomPostTypes
                     //Check if the class file exists
                     if (!class_exists($class)) {
                         echo sprintf(__('Something went wrong in your
-                            parameters definition: the class <b>%s</b>
+                            parameters definition: the class %s
                             does not exist!', TTO_I18N), $class);
                         continue;
                     }
@@ -239,6 +257,102 @@ class TeaCustomPostTypes
                 );
             }
         }
+    }
+
+    /**
+     * Hook building custom options in Permalink settings page.
+     *
+     * @uses register_setting()
+     * @uses add_settings_field()
+     *
+     * @since 1.5.0
+     */
+    public function __registerPermalinks()
+    {
+        //Get all registered pages
+        $cpts = $this->cpts;
+
+        //Check if we have some CPTS to initialize
+        if (empty($cpts)) {
+            return false;
+        }
+
+        //Add section
+        add_settings_section(
+            'tea_custom_permalinks',                //ID
+            __('Tea Custom Permalinks', TTO_I18N),  //Title
+            array(&$this,'__permalinksTitle'),      //Callback
+            'permalink'                             //Page
+        );
+
+        //Flush all rewrite rules
+        if (isset($_POST['tea_custom_permalink_flush'])) {
+            flush_rewrite_rules();
+        }
+
+        //Iterate on each cpt
+        foreach ($cpts as $cpt) {
+            //Special case: do not change post/page component
+            if (in_array($cpt['slug'], array('post', 'page'))) {
+                continue;
+            }
+
+            //Option
+            $opt = $cpt['slug'].'_tea_structure';
+
+            //Check POST
+            if (isset($_POST[$opt])) {
+                $value = $_POST[$opt];
+                TeaThemeOptions::set_option($opt, $value);
+            }
+
+            //Get value
+            $structure = TeaThemeOptions::get_option($opt, '/'.__('example', TTO_I18N).'-'.$cpt['slug']);
+
+            //Add fields
+            add_settings_field(
+                $opt,                                   //Identifier
+                $cpt['title'],                          //Title
+                array(&$this,'__permalinksFields'),     //Callback function
+                'permalink',                            //Page
+                'tea_custom_permalinks',                //Section
+                array(
+                    'name' => $cpt['slug'].'_tea_structure',
+                    'value' => $structure,
+                )
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * Hook to display input value on Permalink settings page.
+     *
+     * @param array $opt Contains all usefull data
+     *
+     * @since 1.5.0
+     */
+    public function __permalinksFields($opt)
+    {
+        if (!empty($opt)) {
+            //Display settings
+            include(TTO_PATH.'/Tpl/layouts/__layout_admin_permalinks.tpl.php');
+        }
+    }
+
+    /**
+     * Hook to display hidden input on Permalink settings title page.
+     *
+     * @since 1.5.0
+     */
+    public function __permalinksTitle()
+    {
+        //Display settings
+        $this->__permalinksFields(array(
+            'name' => 'tea_custom_permalink_flush',
+            'value' => '1',
+        ));
     }
 
     /**
@@ -285,6 +399,101 @@ class TeaCustomPostTypes
 
         //Everything is allright!
         return true;
+    }
+
+    /**
+     * Hook building custom fields for CPTS.
+     * From: http://shibashake.com/wordpress-theme/custom-post-type-permalinks-part-2
+     *
+     * @uses update_post_meta()
+     *
+     * @param string $permalink Contains permalink structure
+     * @param integer $post_id Contains post ID
+     * @param boolean $leavename Defeine wether to use postname or not
+     * @return string $permalink Permalink final structure
+     *
+     * @since 1.5.0
+     */
+    public function __translatePermalink($permalink, $post_id, $leavename)
+    {
+        //Get post's datas
+        $post = get_post($post_id);
+
+        //Define permalink structure
+        $rewritecode = array(
+            '%year%',
+            '%monthnum%',
+            '%day%',
+            '%hour%',
+            '%minute%',
+            '%second%',
+            $leavename ? '' : '%postname%',
+            '%post_id%',
+            '%category%',
+            '%author%',
+            $leavename ? '' : '%pagename%',
+        );
+
+        if ('' == $permalink || in_array($post->post_status, array('draft', 'pending', 'auto-draft'))) {
+            return $permalink;
+        }
+
+        //Need time
+        $unixtime = strtotime($post->post_date);
+        $date = explode(' ', date('Y m d H i s', $unixtime));
+
+        //Need category
+        $category = '';
+
+        //Get categories
+        if (strpos($permalink, '%category%') !== false) {
+            $cats = get_the_category($post->ID);
+
+            if ($cats) {
+                usort($cats, '_usort_terms_by_ID');
+                $category = $cats[0]->slug;
+
+                if ($parent = $cats[0]->parent) {
+                    $category = get_category_parents($parent, false, '/', true) . $category;
+                }
+            }
+
+            //Show default category in permalinks, without having to assign it explicitly
+            if (empty($category)) {
+                $default_category = get_category(get_option('default_category'));
+                $category = is_wp_error($default_category) ? '' : $default_category->slug;
+            }
+        }
+
+        //Need author
+        $author = '';
+
+        //Get authors
+        if (strpos($permalink, '%author%') !== false) {
+            $authordata = get_userdata($post->post_author);
+            $author = $authordata->__get('user_nicename');
+        }
+
+        //Define permalink values
+        $rewritereplace = array(
+            $date[0],
+            $date[1],
+            $date[2],
+            $date[3],
+            $date[4],
+            $date[5],
+            $post->post_name,
+            $post->ID,
+            $category,
+            $author,
+            $post->post_name,
+        );
+
+        //Change structure
+        $permalink = str_replace($rewritecode, $rewritereplace, $permalink);
+
+        //Return permalink
+        return $permalink;
     }
 
     /**

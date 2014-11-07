@@ -59,6 +59,6 @@ class Hr extends TeaFields
     public function templatePages($content, $post = array(), $prefix = '')
     {
         //Get template
-        include(TTO_PATH . '/Fields/Hr/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Hr/in_pages.tpl.php');
     }
 }

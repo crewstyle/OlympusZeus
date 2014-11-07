@@ -65,6 +65,6 @@ class Includes extends TeaFields
         $file = isset($content['file']) ? $content['file'] : false;
 
         //Get template
-        include(TTO_PATH . '/Fields/Includes/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Includes/in_pages.tpl.php');
     }
 }

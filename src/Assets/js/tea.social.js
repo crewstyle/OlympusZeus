@@ -1,19 +1,24 @@
-/* ===================================================
- * tea.social.js v1.0.0
+/* =====================================================
+ * tea.social.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * This plugin adds a complete integration width a
+ * social buttons modal box.
+ * =====================================================
  * Example:
  *      $('.tea-inside.social').tea_social({
- *          modal: '#modal-social'              //modal block ID
+ *          modal: '#modal-social'                      //modal block ID
  *      });
- * =================================================== */
+ * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var tea_social = function ($el,options){
+    var Tea_social = function ($el,options){
         var _tea = this;
         _tea.$el = $el;
         _tea.options = options;
@@ -22,11 +27,11 @@
         _tea.$el.find('a.add_social').on('click', $.proxy(_tea.open_social, _tea));
     };
 
-    tea_social.prototype.$el = null;
-    tea_social.prototype.options = null;
-    tea_social.prototype.networks = [];
+    Tea_social.prototype.$el = null;
+    Tea_social.prototype.options = null;
+    Tea_social.prototype.networks = [];
 
-    tea_social.prototype.open_social = function (e){
+    Tea_social.prototype.open_social = function (e){
         e.preventDefault();
         var _tea = this;
         _tea.networks = [];
@@ -50,13 +55,13 @@
 
             //Check if network is already used
             if ($lnk.attr('data-network') in _tea.networks) {
-                $lnk.removeClass('button-secondary').addClass('button-primary')
+                $lnk.removeClass('button-secondary').addClass('button-primary');
                 $lnk.on('click', $.proxy(_tea.remove_social, _tea));
             }
             else {
                 $lnk.on('click', $.proxy(_tea.add_social, _tea));
             }
-        })
+        });
 
         //Open Tea TO modal box
         _tea.$modal.tea_modal({
@@ -66,7 +71,7 @@
         });
     };
 
-    tea_social.prototype.add_social = function (e){
+    Tea_social.prototype.add_social = function (e){
         e.preventDefault();
         var _tea = this;
 
@@ -83,7 +88,7 @@
             return false;
         }
 
-        //Update modal content and add binding event ------ $target.append(...);
+        //Update modal content and add binding event
         var $div = $(document.createElement('div')).attr('data-network', _key);
         var $main = $(document.createElement('label')).attr('for', _tea.options.label + '_' + _key);
         var $key = $(document.createElement('i')).addClass('fa fa-' + _key + ' fa-lg');
@@ -147,7 +152,7 @@
             .on('click', $.proxy(_tea.remove_social, _tea));
     };
 
-    tea_social.prototype.remove_social = function (e){
+    Tea_social.prototype.remove_social = function (e){
         e.preventDefault();
         var _tea = this;
 
@@ -193,7 +198,7 @@
                     $.extend(settings, options);
                 }
 
-                new tea_social($(this), settings);
+                new Tea_social($(this), settings);
             });
         },
         update: function (){},
@@ -208,7 +213,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_social');
+            $.error('Method ' + method + ' does not exist on Tea_social');
             return false;
         }
     };

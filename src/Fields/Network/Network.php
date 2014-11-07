@@ -57,7 +57,7 @@ class Network extends TeaFields
 
         //Get template
         $area = 'head';
-        include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Network/in_pages.tpl.php');
         echo '<p>'.__('Coming soon', TTO_I18N).'</p>';
 
         //Others vars
@@ -88,7 +88,7 @@ class Network extends TeaFields
 
         //Get template
         $area = 'footer';
-        include(TTO_PATH . '/Fields/Network/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Network/in_pages.tpl.php');
     }
 
     /**

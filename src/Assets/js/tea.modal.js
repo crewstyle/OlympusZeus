@@ -1,54 +1,60 @@
-/* ===================================================
- * tea.modal.js v1.0.0
+/* =====================================================
+ * tea.modal.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * This plugin adds range display in all range flieds.
+ * =====================================================
  * Example:
  *      $('.modal-box').tea_modal();
- * =================================================== */
+ * ===================================================== */
 
-!function ($){
+(function ($){
     "use strict";
 
-    var tea_modal = function ($el,options){
+    var Tea_modal = function ($el,options){
         var _tea = this;
         _tea.$el = $el;
         _tea.options = options;
+        _tea.$modal = $('.tea-modal-backdrop');
 
         //Open modal
         _tea.open();
     };
 
-    tea_modal.prototype.$el = null;
-    tea_modal.prototype.options = null;
+    Tea_modal.prototype.$el = null;
+    Tea_modal.prototype.$modal = null;
+    Tea_modal.prototype.options = null;
 
-    tea_modal.prototype.open = function (){
+    Tea_modal.prototype.open = function (){
         //e.preventDefault();
         var _tea = this;
 
         //check if modal is already shown
-        if (true == _tea.$el.data('isShown')) {
+        if (true === _tea.$el.data('isShown')) {
             return;
         }
 
         //Open modal
-        $('.tea-modal-backdrop').addClass('opened');
+        _tea.$modal.addClass('opened');
         _tea.$el.show();
         _tea.$el.data('isShown', true);
 
         //Bind close button
         _tea.$el.find('header .close').on('click', $.proxy(_tea.close, _tea));
-        $('.tea-modal-backdrop').on('click', $.proxy(_tea.close, _tea));
+        _tea.$modal.on('click', $.proxy(_tea.close, _tea));
     };
 
-    tea_modal.prototype.close = function (e){
+    Tea_modal.prototype.close = function (e){
         e.preventDefault();
         var _tea = this;
 
         _tea.$el.hide();
         _tea.$el.data('isShown', false);
-        $('.tea-modal-backdrop').removeClass('opened');
+        _tea.$modal.removeClass('opened');
 
         //Check if close option is defined and is a function, then execute it
         if ('function' === typeof _tea.options.afterclose) {
@@ -71,7 +77,7 @@
                     $.extend(settings, options);
                 }
 
-                new tea_modal($(this), settings);
+                new Tea_modal($(this), settings);
             });
         },
         update: function (){},
@@ -86,8 +92,8 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_modal');
+            $.error('Method ' + method + ' does not exist on Tea_modal');
             return false;
         }
     };
-}(window.jQuery);
+})(window.jQuery);

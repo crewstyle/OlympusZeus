@@ -1,3 +1,21 @@
+## 1.5.0 (November 07, 2014)
+
+Lots of new features with new core update version
+
+- **New:**
+  - new <date> field
+  - new <link> field
+  - new TeaAdminMessage class
+- **enhance:**
+  - all JS packages
+  - JShint validation
+- **Fix:**
+  - fix bugs on <review> field
+  - fix bugs on <gallery> field
+
+And so much more...
+
+
 ## 1.4.3.12 (August 19, 2014)
 
 Fix some CSS bugs

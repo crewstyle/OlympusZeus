@@ -1,7 +1,6 @@
 <?php
 namespace Takeatea\TeaThemeOptions\Networks\Facebook;
 
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
@@ -65,7 +64,7 @@ class Facebook extends TeaNetworks
         }*/
 
         //Get template
-        include(TTO_PATH . '/Networks/Facebook/in_pages.tpl.php');
+        include(TTO_PATH.'/Networks/Facebook/in_pages.tpl.php');
     }
 
 

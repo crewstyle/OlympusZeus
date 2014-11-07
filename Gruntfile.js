@@ -1,87 +1,189 @@
+/* ===================================================
+ * Tea Theme Options jQuery
+ * https://github.com/Takeatea/tea_theme_options
+ * ===================================================
+ * Copyright 2014 Take a Tea (http://takeatea.com)
+ * =================================================== */
+
 module.exports = function(grunt) {
     //------ [REGISTER CONFIGURATION] ------//
 
     grunt.initConfig({
+        //project settings
+        teato: {
+            path: {
+                src: 'src/Assets',
+                tar: 'assets'
+            },
+            flatten: true
+        },
+
         //pachakes are listed here
         pkg: grunt.file.readJSON('package.json'),
 
-        // Before generating any new files, remove any previously-created files.
+        //remove any previously-created files
         clean: [
-            'assets/css/*',
-            'assets/js/*'
+            '<%= teato.path.tar %>/css/*',
+            '<%= teato.path.tar %>/fonts/*',
+            '<%= teato.path.tar %>/img/*',
+            '<%= teato.path.tar %>/js/*'
         ],
 
-        // JShint validation
-        jshint: {
-            all: [
-                'assets/js/*.js'
-            ]
+        //move fonts and images into the destinated folder
+        copy: {
+            main: {
+                files: [
+                    {
+                        //Fonts
+                        expand: true,
+                        flatten: '<%= teato.flatten %>',
+                        src: [
+                            '<%= teato.path.src %>/fonts/*'
+                        ],
+                        dest: '<%= teato.path.tar %>/fonts/'
+                    },
+                    {
+                        //Images
+                        expand: true,
+                        flatten: '<%= teato.flatten %>',
+                        src: [
+                            '<%= teato.path.src %>/img/*'
+                        ],
+                        dest: '<%= teato.path.tar %>/img/'
+                    }
+                ]
+            }
         },
 
-        // Uglify JS files
-        uglify: {
-            my_target: {
+        //minify CSS files
+        cssmin: {
+            compress: {
                 files: {
-                    'assets/js/teato.min.js': [
-                        'src/Assets/js/tea.modal.js',
-                        'src/Assets/js/tea.checkall.js',
-                        'src/Assets/js/tea.checkit.js',
-                        'src/Assets/js/tea.color.js',
-                        'src/Assets/js/tea.gallery.js',
-                        'src/Assets/js/tea.labelize.js',
-                        'src/Assets/js/tea.range.js',
-                        'src/Assets/js/tea.social.js',
-                        'src/Assets/js/tea.upload.js',
-                        'src/Assets/js/teato.js',
+                    '<%= teato.path.tar %>/css/teato.min.css': [
+                        '<%= teato.path.src %>/css/pickadate/classic.css',
+                        '<%= teato.path.src %>/css/pickadate/classic.date.css',
+                        '<%= teato.path.src %>/css/pickadate/classic.time.css',
+                        '<%= teato.path.src %>/css/font-awesome.css',
+                        '<%= teato.path.src %>/css/teato.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.green.css': [
+                        '<%= teato.path.src %>/css/teato.admin.green.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.red.css': [
+                        '<%= teato.path.src %>/css/teato.admin.red.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.blue.css': [
+                        '<%= teato.path.src %>/css/teato.admin.blue.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.login.css': [
+                        '<%= teato.path.src %>/css/teato.login.css'
                     ]
                 }
             }
         },
 
-        // Minify CSS files
-        cssmin: {
-            compress: {
+        //JShint validation
+        jshint: {
+            all: [
+                '<%= teato.path.src %>/js/*.js'
+            ]
+        },
+
+        //uglify JS files
+        uglify: {
+            my_target: {
                 files: {
-                    'assets/css/teato.min.css': [
-                        'src/Assets/css/font-awesome.css',
-                        'src/Assets/css/teato.css'
-                    ],
-                    'assets/css/teato.admin.green.css': [
-                        'src/Assets/css/teato.admin.green.css',
-                    ],
-                    'assets/css/teato.admin.red.css': [
-                        'src/Assets/css/teato.admin.red.css',
-                    ],
-                    'assets/css/teato.admin.blue.css': [
-                        'src/Assets/css/teato.admin.blue.css',
-                    ],
-                    'assets/css/teato.login.css': [
-                        'src/Assets/css/teato.login.css',
+                    '<%= teato.path.tar %>/js/teato.min.js': [
+                        '<%= teato.path.src %>/js/pickadate/picker.js',
+                        '<%= teato.path.src %>/js/pickadate/picker.date.js',
+                        '<%= teato.path.src %>/js/pickadate/picker.time.js',
+                        '<%= teato.path.src %>/js/pickadate/legacy.js',
+                        '<%= teato.path.src %>/js/tea.modal.js',
+                        '<%= teato.path.src %>/js/tea.checkall.js',
+                        '<%= teato.path.src %>/js/tea.checkit.js',
+                        '<%= teato.path.src %>/js/tea.color.js',
+                        '<%= teato.path.src %>/js/tea.date.js',
+                        '<%= teato.path.src %>/js/tea.gallery.js',
+                        '<%= teato.path.src %>/js/tea.labelize.js',
+                        '<%= teato.path.src %>/js/tea.link.js',
+                        '<%= teato.path.src %>/js/tea.range.js',
+                        '<%= teato.path.src %>/js/tea.social.js',
+                        '<%= teato.path.src %>/js/tea.textarea.js',
+                        '<%= teato.path.src %>/js/tea.upload.js',
+                        '<%= teato.path.src %>/js/teato.js'
                     ]
                 }
+            }
+        },
+
+        //create POT file
+        pot: {
+            options:{
+                text_domain: 'tea_theme_options',
+                dest: 'languages/',
+                keywords: [
+                    '__:1',
+                    '_e:1',
+                    '_x:1,2c',
+                    'esc_html__:1',
+                    'esc_html_e:1',
+                    'esc_html_x:1,2c',
+                    'esc_attr__:1',
+                    'esc_attr_e:1',
+                    'esc_attr_x:1,2c',
+                    '_ex:1,2c',
+                    '_n:1,2',
+                    '_nx:1,2,4c',
+                    '_n_noop:1,2',
+                    '_nx_noop:1,2,3c'
+                ],
+            },
+            files:{
+                src: ['**/*.php'],
+                expand: true
+            }
+        },
+
+        //create MO file
+        po2mo: {
+            files: {
+                src: 'languages/*.po',
+                expand: true
             }
         }
     });
 
     //------ [REGISTER MODULES] ------//
 
-    // Clean files
+    //remove any previously-created files
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    // JShint validation
+    //move fonts and images into the destinated folder
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
+    //minify CSS files
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+    //JShint validation
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    // Uglify JS files
+    //uglify JS files
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // Minify CSS files
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    //create POT file
+    grunt.loadNpmTasks('grunt-pot');
+
+    //create MO file
+    grunt.loadNpmTasks('grunt-po2mo');
 
     //------ [REGISTER TASKS] ------//
 
-    // JShint validation
-    grunt.registerTask('jshint', ['jshint']);
+    //JShint validation task: grunt jshint
+    grunt.registerTask('hint', ['jshint']);
 
-    // Default task(s): grunt default
-    grunt.registerTask('default', ['clean', 'uglify', 'cssmin']);
+    //languages task: grunt lang
+    grunt.registerTask('lang', ['pot', 'po2mo']);
+
+    //Default task: grunt default
+    grunt.registerTask('default', ['clean', 'cssmin', 'copy', 'uglify']);
 };

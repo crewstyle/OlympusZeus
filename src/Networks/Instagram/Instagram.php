@@ -43,7 +43,7 @@ class Instagram extends TeaNetworks
         $keys = $this->getTokens('instagram');
 
         //Get template
-        include(TTO_PATH . '/Networks/Instagram/in_pages.tpl.php');
+        include(TTO_PATH.'/Networks/Instagram/in_pages.tpl.php');
     }
 
 

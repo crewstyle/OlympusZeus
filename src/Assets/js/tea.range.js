@@ -1,30 +1,46 @@
-/* ===================================================
- * tea.range.js v1.0.0
+/* =====================================================
+ * tea.range.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * This plugin adds range display in all range flieds.
+ * =====================================================
  * Example:
  *      $('input[type="range"]').tea_range();
- * =================================================== */
+ * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var tea_range = function ($el){
-        //Vars
+    var Tea_range = function ($el){
+        //vars
+        var _tea = this;
+        _tea.$el = $el;
 
-        //Treat all elements
-        $.each($el, function (){
-            var $self = $(this);
-            var $output = $(document.createElement('<output></output>'));
-            $output.insertAfter($self);
+        //initialize
+        _tea.init();
+    };
 
-            //Bind the change event
-            $self.bind('change', function (){
-                $output.text($self.val());
-            });
-        });
+    Tea_range.prototype.$el = null;
+    Tea_range.prototype.$output = null;
+
+    Tea_range.prototype.init = function (){
+        var _tea = this;
+
+        //create output
+        _tea.$output = $(document.createElement('<output></output>'));
+        _tea.$output.insertAfter(_tea.$el);
+
+        //bind the change event
+        _tea.$el.on('change', $.proxy(_tea.change, _tea));
+    };
+
+    Tea_range.prototype.change = function (){
+        var _tea = this;
+        _tea.$output.text(_tea.$el.val());
     };
 
     var methods = {
@@ -34,7 +50,7 @@
             }
 
             return this.each(function (){
-                new tea_range($(this));
+                new Tea_range($(this));
             });
         },
         update: function (){},
@@ -49,7 +65,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_range');
+            $.error('Method ' + method + ' does not exist on Tea_range');
             return false;
         }
     };

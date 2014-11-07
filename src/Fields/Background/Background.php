@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Background;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -68,8 +69,7 @@ class Background extends TeaFields
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
-     * @todo get default background values on FIELD abstract class and 
-     * use of array_merge() to get user's default values.
+     * @todo get default background values on FIELD abstract class and use of array_merge() to get user's default values
      *
      * @since 1.4.0
      */
@@ -119,6 +119,6 @@ class Background extends TeaFields
         $val = TeaThemeOptions::get_option($prefix.$id, $std);
 
         //Get template
-        include(TTO_PATH . '/Fields/Background/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Background/in_pages.tpl.php');
     }
 }

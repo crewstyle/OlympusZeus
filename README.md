@@ -14,134 +14,13 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 + **[Custom Taxonomies](http://codex.wordpress.org/Taxonomies)** - Since the **1.4.2 version**, you are now able to create easily Wordpress Custom Taxonomies with a couple of lines code. The Tea TO permit to add custom fields as you want.
 + **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.+ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
 + **Easier for administrators** - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.
-+ **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.  
++ **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.
 
 
-## [To learn more about the Tea TO, read the docs](https://github.com/Takeatea/tea_theme_options/wiki)
+## [To learn more about the Tea TO, read the docs](http://tea-theme-options.readme.io/)
 
 
-## Summary
-
-+ [1) Installation the theme roller](#1-installing-the-theme-roller)
-+ [2) Let's roll!](#2-lets-roll)
-+ [3) Tiny example](#3-tiny-example)
-+ [4) That's all folkes!](#4-thats-all-folkes)
-+ [5) Authors and Copyright](#5-authors-and-copyright)
-
-
-### 1) Installing the theme roller
-
-**To get started**, go to into your template folder `wp-content/your_template/` and create a `composer.json` with these lines:
-
-```json
-{
-    "name": "takeatea/your_template_name",
-    "description": "",
-    "type": "wordpress-theme",
-    "minimum-stability": "dev",
-    "require": {
-        "takeatea/tea-theme-options": "1.4.3.x"
-    }
-}
-```
-
-
-Now, you have to install Composer and use it to download and install the Tea Theme Options with all its dependancies.  
-To do so, follow the next command lines:
-
-```
-curl -s http://getcomposer.org/installer | php
-php composer.phar install
-# use this command if Composer is note up to date:
-# php composer.phar self-update
-```
-
-
-### 2) Let's roll!
-
-Check your theme folder and see the new `vendor` folder created.  
-In it, you are supposed to find `composer`, `ruflin` and `takeatea` directories.
-
-That's all!
-
-The next step is to make your theme and the Tea Theme Options work together.  
-(And it's pretty simple... :))
-
-
-### 3) Tiny example
-
-To create your first new settings page, simply follow the instructions.
-
-**1. First of all, use the operator `use` to include the library _- at the very top -_ of your `functions.php` file:**
-
-```php
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
-```
-
-
-**2 Next, just instanciate a TeaThemeOptions object:**
-
-```php
-//Include composer autoload
-require_once __DIR__.'/vendor/autoload.php';
-
-//Instanciate a new TeaThemeOptions
-$tea = new TeaThemeOptions();
-```
-
-
-**3 Specify your wanted components:**
-
-```php
-//Define page
-$tea_titles = array(
-    'title' => __('Example page'),
-    'name' => __('Example page'),
-    'slug' => '_example_page'
-);
-//Define fields
-$tea_contents = array(
-    array(
-        'type' => 'heading',
-        'title' => __('Header.')
-    ),
-    array(
-        'type' => 'radio',
-        'title' => __('Fix the main menu bar to the top of the screen?'),
-        'id' => 'header_menu_position',
-        'std' => 'yes',
-        'options' => array(
-            'yes' => __('Yes'),
-            'no' => __('No')
-        )
-    ),
-    array(
-        'type' => 'heading',
-        'title' => __('Footer.')
-    ),
-    array(
-        'type' => 'text',
-        'title' => __('Copyright.'),
-        'id' => 'footer_copyright',
-        'std' => __('&copy; MyWebsite.com, all rights reserved ~ Built with passion and Tea Theme Options!')
-    ),
-);
-//Add fields to the page
-$tea->addPage($tea_titles, $tea_contents);
-//Delete variables because we love our server!
-unset($tea_titles, $tea_contents);
-```
-
-
-**4 Build the page:**
-
-```php
-//Build menus
-$tea->buildPages();
-```
-
-
-### 4) That's all folkes!
+### That's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -152,7 +31,7 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-### 5) Authors and Copyright
+### Authors and Copyright
 
 **Take a Tea**
 
@@ -166,5 +45,5 @@ That's all to begin working with **Tea TO**
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
-Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")  
+Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")
 Brewed by Take a tea ;)

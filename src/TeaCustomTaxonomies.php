@@ -1,7 +1,6 @@
 <?php
-namespace Takeatea\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\TeaThemeOptions;
+namespace Takeatea\TeaThemeOptions;
 
 /**
  * TEA CUSTOM TAXONOMIES
@@ -167,6 +166,7 @@ class TeaCustomTaxonomies
      * Hook building custom fields for Taxonomies.
      *
      * @uses add_meta_box()
+     * @param string|object $term Contain term used by function
      *
      * @since 1.4.3.1
      */
@@ -255,6 +255,8 @@ class TeaCustomTaxonomies
      * Hook building custom fields for CPTS.
      *
      * @uses update_post_meta()
+     * @param number $term_id Contain term ID
+     * @return number $return
      *
      * @since 1.4.2
      */

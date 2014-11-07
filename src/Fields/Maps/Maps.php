@@ -13,8 +13,8 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'maps',
  *     'title' => 'Choose your final stage',
  *     'id' => 'my_maps_field_id',
- *     'description' => 'Do not choose the black hole World'
- *     'std' => array( //optional
+ *     'description' => 'Do not choose the black hole World',
+ *     'std' => array( //every attribute is optional
  *         'address' => '3 avenue Secretan, Paris, France',
  *         'marker' => get_template_directory_uri() . 'img/my_marker.png',
  *         'width' => 500,
@@ -143,6 +143,6 @@ class Maps extends TeaFields
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Maps/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Maps/in_pages.tpl.php');
     }
 }

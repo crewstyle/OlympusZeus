@@ -5,7 +5,7 @@
         <a href="#" class="del_all_items" data-target="<?php echo $id ?>"><?php _e('Delete all galleries', TTO_I18N) ?></a>
     </h3>
 
-    <div class="inside tea-inside gallery">
+    <div class="inside tea-inside gallery" data-title="<?php echo $title ?>">
         <p><?php echo $description ?></p>
         <input type="hidden" name="<?php echo $id ?>[]" id="<?php echo $id ?>" value="" />
         <?php wp_print_styles('editor-buttons') ?>
@@ -14,29 +14,26 @@
             <?php if (!empty($vals)): ?>
                 <?php
                 foreach ($vals as $key => $item):
-                    if (empty($item) || 'NONE' == $item) {
+                    if (empty($item)) {
                         continue;
                     }
-
-                    $img = $item[0];
-                    $iid = $item[1];
-                    $val = $item[2];
-                    $for = $id . '_' . $iid;
                 ?>
-                    <div class="item" data-id="<?php echo $iid ?>">
-                        <input type="hidden" name="<?php echo $id ?>[<?php echo $iid ?>][0]" value="<?php echo $img ?>" />
-                        <input type="hidden" name="<?php echo $id ?>[<?php echo $iid ?>][1]" value="<?php echo $iid ?>" />
+                    <div class="item" data-id="<?php echo $item['id'] ?>">
+                        <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][image]" value="<?php echo $item['image'] ?>" />
+                        <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][id]" value="<?php echo $item['id'] ?>" />
+                        <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]" value="<?php echo $item['content'] ?>" />
 
-                        <a href="#" class="del_item" data-target="<?php echo $id ?>">&times;</a>
+                        <a href="#" class="del_item" data-target="<?php echo $item['id'] ?>">&times;</a>
 
-                        <img src="<?php echo $img ?>" alt="" />
+                        <img src="<?php echo $item['image'] ?>" alt="" />
 
                         <div class="gallery-editor">
-                            <?php wp_editor($val, $id . '_' . $iid . '_2', array(
+                            <?php wp_editor($item['content'], $id . '_' . $item['id'] . '_content', array(
                                 'media_buttons' => false,
                                 'textarea_rows' => 3,
-                                'textarea_name' => $id . '[' . $iid . '][2]',
+                                'textarea_name' => $id . '[' . $item['id'] . '][content]',
                                 'teeny' => true,
+                                'skin' => 'wordpress',
                                 'tinymce' => array(
                                     'theme_advanced_buttons1' => 'bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,close,|,youtube',
                                     'theme_advanced_buttons2' => 'formatselect,underline,justifyfull,forecolor',

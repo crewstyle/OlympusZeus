@@ -93,6 +93,6 @@ class Rte extends TeaFields
         }
 
         //Get template
-        include(TTO_PATH . '/Fields/Rte/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Rte/in_pages.tpl.php');
     }
 }

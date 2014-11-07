@@ -115,6 +115,6 @@ class Font extends TeaFields
         $val = TeaThemeOptions::get_option($prefix.$id, $std);
 
         //Get template
-        include(TTO_PATH . '/Fields/Font/in_pages.tpl.php');
+        include(TTO_PATH.'/Fields/Font/in_pages.tpl.php');
     }
 }

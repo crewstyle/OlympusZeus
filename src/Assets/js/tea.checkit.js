@@ -1,41 +1,59 @@
-/* ===================================================
- * tea.checkit.js v1.0.0
+/* =====================================================
+ * tea.checkit.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
- * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
- * ===================================================
+ * =====================================================
+ * ~ Copyright since 2014 ~
+ * Take a Tea (http://takeatea.com)
+ * Tea Theme Options (http://teato.me)
+ * =====================================================
+ * This plugin adds a display comportment with checkbox
+ * and radio buttons.
+ * =====================================================
  * Example:
- *      $('input[type="radio"],input[type="checkbox"]').tea_checkit({
- *          container: '.inside',               //node containing all items to un/check
- *          closest: 'label',                   //closest node to item to add the selected class
- *          selected: 'selected'                //selected class
+ *      $(':checkbox,:radio').tea_checkit({
+ *          container: '.inside',                       //node containing all items to un/check
+ *          closest: 'label',                           //closest node to item to add the selected class
+ *          selected: 'selected'                        //selected class
  *      });
- * =================================================== */
+ * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var tea_checkit = function ($el,options){
-        //Vars
-        var _container = options.container;
-        var _closest = options.closest;
-        var _selected = options.selected;
+    var Tea_checkit = function ($el,options){
+        //vars
+        var _tea = this;
+        _tea.$el = $el;
+        _tea.options = options;
 
-        //Treat all elements
-        $.each($el, function (){
-            var $self = $(this);
+        //bind the change event
+        _tea.$el.on('change', $.proxy(_tea.change, _tea));
+    };
 
-            //Bind the change event
-            $self.bind('change', function (){
-                if ('radio' == $self.attr('type')) {
-                    $self.closest(_container).find('.' + _selected).removeClass(_selected);
-                    $self.closest(_closest).addClass(_selected);
-                }
-                else if ('checkbox' == $self.attr('type')) {
-                    $self.is(':checked') ? $self.closest(_closest).addClass(_selected) : $self.closest(_closest).removeClass(_selected);
-                }
-            });
-        });
+    Tea_checkit.prototype.$el = null;
+    Tea_checkit.prototype.options = null;
+
+    Tea_checkit.prototype.change = function (){
+        var _tea = this;
+
+        //vars
+        var _ctn = _tea.options.container;
+        var _clt = _tea.options.closest;
+        var _sel = _tea.options.selected;
+
+        //check type
+        if ('radio' == _tea.$el.attr('type')) {
+            _tea.$el.closest(_ctn).find('.' + _sel).removeClass(_sel);
+            _tea.$el.closest(_clt).addClass(_sel);
+        }
+        else if ('checkbox' == _tea.$el.attr('type')) {
+            if (_tea.$el.is(':checked')) {
+                _tea.$el.closest(_clt).addClass(_sel);
+            }
+            else {
+                _tea.$el.closest(_clt).removeClass(_sel);
+            }
+        }
     };
 
     var methods = {
@@ -55,7 +73,7 @@
                     $.extend(settings, options);
                 }
 
-                new tea_checkit($(this), settings);
+                new Tea_checkit($(this), settings);
             });
         },
         update: function (){},
@@ -70,7 +88,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_checkit');
+            $.error('Method ' + method + ' does not exist on Tea_checkit');
             return false;
         }
     };
