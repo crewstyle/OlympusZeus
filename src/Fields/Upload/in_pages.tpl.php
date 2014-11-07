@@ -12,6 +12,10 @@
 
         <div class="upload_image_result">
             <?php if ($multiple): ?>
+                <input type="hidden" name="<?php echo $id ?>[0][url]" value="" />
+                <input type="hidden" name="<?php echo $id ?>[0][id]" value="" />
+                <input type="hidden" name="<?php echo $id ?>[0][name]" value="" />
+
                 <ul>
                     <?php
                         foreach ($vals as $item):
@@ -45,10 +49,6 @@
 
                     <?php if ($can_upload): ?>
                         <li class="upload-time hide-if-no-js" data-target="<?php echo $id ?>">
-                            <input type="hidden" name="<?php echo $id ?>[0][url]" value="" />
-                            <input type="hidden" name="<?php echo $id ?>[0][id]" value="" />
-                            <input type="hidden" name="<?php echo $id ?>[0][name]" value="" />
-
                             <a href="#" class="add_image" title="<?php echo esc_html(__('Add medias', TTO_I18N)) ?>">
                                 <i class="fa fa-cloud-upload fa-lg"></i> <?php _e('Add medias', TTO_I18N) ?>
                             </a>
@@ -56,6 +56,10 @@
                     <?php endif ?>
                 </ul>
             <?php else: ?>
+                <input type="hidden" name="<?php echo $id ?>[url]" value="" />
+                <input type="hidden" name="<?php echo $id ?>[id]" value="" />
+                <input type="hidden" name="<?php echo $id ?>[name]" value="" />
+
                 <?php
                     if (!empty($vals)):
                         $ids = isset($vals['id']) ? $vals['id'] : '';
@@ -82,10 +86,6 @@
                 <?php endif ?>
 
                 <div class="upload-time hide-if-no-js <?php echo !empty($vals) ? 'item-added' : '' ?>" data-target="<?php echo $id ?>">
-                    <input type="hidden" name="<?php echo $id ?>[url]" value="" />
-                    <input type="hidden" name="<?php echo $id ?>[id]" value="" />
-                    <input type="hidden" name="<?php echo $id ?>[name]" value="" />
-
                     <a href="#" class="add_image" title="<?php echo esc_html(__('Add media', TTO_I18N)) ?>">
                         <i class="fa fa-cloud-upload fa-lg"></i> <?php _e('Add media', TTO_I18N) ?>
                     </a>

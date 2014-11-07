@@ -1,3 +1,8 @@
+## 1.5.0-1 (November 07, 2014)
+
+Fix bugs on <upload> field, add some CSS enhancements
+
+
 ## 1.5.0 (November 07, 2014)
 
 Lots of new features with new core update version

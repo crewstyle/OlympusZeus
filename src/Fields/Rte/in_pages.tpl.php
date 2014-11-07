@@ -7,6 +7,8 @@
         </label>
     </h3>
 
-    <?php wp_editor($val, $id, array('textarea_rows' => '10')) ?>
+    <div class="inside tea-inside rte">
+        <?php wp_editor($val, $id, array('textarea_rows' => '10')) ?>
+    </div>
 </div>
 <!-- /Content rte <?php echo $id ?> -->

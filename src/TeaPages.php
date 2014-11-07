@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0
+ * @since 1.5.0-1
  *
  */
 class TeaPages
@@ -171,7 +171,7 @@ class TeaPages
      * @uses wp_enqueue_media()
      * @uses wp_enqueue_script()
      *
-     * @since 1.4.0
+     * @since 1.5.0-1
      */
     public function __assetScripts()
     {
@@ -197,13 +197,6 @@ class TeaPages
         else {
             wp_enqueue_script('media-upload');
             wp_enqueue_script('farbtastic');
-        }
-
-        //Enqueue TinyMCE only in the TeaTO context
-        if (isset($this->pages[$this->current])) {
-            wp_enqueue_script('tea-mce', TTO_INC . '/js/tinymce/tinymce.min.js', $jq);
-            wp_enqueue_script('tea-plg', TTO_INC . '/js/tinymce/plugins/compat3x/plugin.min.js', 'tea-mce');
-            $jq = array('jquery', 'tea-mce', 'tea-plg');
         }
 
         //Enqueue all minified scripts

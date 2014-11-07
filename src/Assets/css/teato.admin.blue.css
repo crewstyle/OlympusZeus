@@ -201,6 +201,12 @@ ul#adminmenu .wp-menu-image img {
 #collapse-button div:after {
     color:#3b3d3c;
 }
+#adminmenu li.wp-menu-separator {
+    border-bottom:1px solid #333;
+    border-top:1px solid #111;
+    height:0px;
+    margin:10px 0;
+}
 
 
 /*--- [LINKS & BUTTONS] ---*/
@@ -303,7 +309,6 @@ input[type=checkbox]:checked:before {
 
 /*--- [POSTBOX] ---*/
 .postbox {
-    overflow:hidden;
     -webkit-box-shadow:0 3px 0 rgba(0,0,0,.05);
     -moz-box-shadow:0 3px 0 rgba(0,0,0,.05);
     box-shadow:0 3px 0 rgba(0,0,0,.05);
@@ -363,6 +368,8 @@ textarea:focus {
 .tea-inside.date .picker__day--selected:hover {
     background:#4d9dd0;
 }
+.tea-inside.date .picker--focused .picker__day--highlighted,
+.tea-inside.date .picker__day--highlighted:hover,
 .tea-inside.date .picker__nav--next:hover,
 .tea-inside.date .picker__nav--prev:hover,
 .tea-inside.date .picker__day--infocus:hover,
