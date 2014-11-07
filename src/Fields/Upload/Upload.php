@@ -98,7 +98,7 @@ class Upload extends TeaFields
             $vals = array();
 
             //Retro-compatibility
-            if (isset($oldv[0]) && is_string($oldv[0])) {
+            if (1 == count($oldv) && is_string($oldv[0]) && strpos($oldv[0], '||')) {
                 $oldv = !empty($oldv) ? explode('||', $oldv[0]) : array();
 
                 //Create the TeaTO index 0
@@ -115,10 +115,8 @@ class Upload extends TeaFields
                 }
             }
             else {
-                $vals = $oldv;
+                $vals = empty($oldv) ? $std : (is_array($oldv) ? $oldv[0] : array($oldv));
             }
-
-            //$vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Fix array bug
