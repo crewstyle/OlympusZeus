@@ -144,19 +144,23 @@
                 //Init tinyMCE textarea
                 if ('undefined' !== typeof tinyMCE) {
                     tinyMCE.init({
-                        selector:'textarea#' + idtity,
                         //language: 'wp-langs-en',
-                        mode :'teeny',
-                        theme_advanced_buttons1 : "bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,close,|,youtube",
-                        theme_advanced_buttons2 : "formatselect,underline,justifyfull,forecolor",
-                        theme_advanced_buttons3 : ""
+                        selector: 'textarea#' + idtity,
+                        mode: 'teeny',
+                        resize: 'vertical',
+                        wpautop: false,
+                        menubar: false,
+                        toolbar1: 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen,wp_adv',
+                        toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                        toolbar3: '',
+                        toolbar4: '',
+                        body_class: 'post-format-standard'
                     });
                 }
             }
 
             //Restore the main post ID and delete file_frame
             _wp.model.settings.post.id = _tea.options.wpid;
-            //delete this.get()[0];
         });
 
         //Open the modal

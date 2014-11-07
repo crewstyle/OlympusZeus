@@ -1,3 +1,8 @@
+## 1.5.0-4 (November 07, 2014)
+
+Fix bugs on <gallery> finally! TinyMCE improvements
+
+
 ## 1.5.0-3 (November 07, 2014)
 
 Fix bugs on <upload>... too bad...

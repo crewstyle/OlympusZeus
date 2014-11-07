@@ -12,6 +12,20 @@
 
         <div class="upload_image_result">
             <?php if (!empty($vals)): ?>
+                <ul class="upload-listing">
+                    <?php
+                    foreach ($vals as $key => $item):
+                        if (empty($item)) {
+                            continue;
+                        }
+                    ?>
+                        <li class="list" data-id="<?php echo $item['id'] ?>">
+                            <a href="#" class="del_item" data-target="<?php echo $item['id'] ?>">&times;</a>
+                            <img src="<?php echo $item['image'] ?>" alt="" />
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+
                 <?php
                 foreach ($vals as $key => $item):
                     if (empty($item)) {
@@ -21,11 +35,6 @@
                     <div class="item" data-id="<?php echo $item['id'] ?>">
                         <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][image]" value="<?php echo $item['image'] ?>" />
                         <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][id]" value="<?php echo $item['id'] ?>" />
-                        <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]" value="<?php echo $item['content'] ?>" />
-
-                        <a href="#" class="del_item" data-target="<?php echo $item['id'] ?>">&times;</a>
-
-                        <img src="<?php echo $item['image'] ?>" alt="" />
 
                         <div class="gallery-editor">
                             <?php wp_editor($item['content'], $id . '_' . $item['id'] . '_content', array(

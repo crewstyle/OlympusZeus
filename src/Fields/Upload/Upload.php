@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Upload;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -82,8 +83,7 @@ class Upload extends TeaFields
         $multiple = isset($content['multiple']) && (true === $content['multiple'] || '1' == $content['multiple']) ? '1' : '0';
         $can_upload = $this->getCanUpload();
         $delete = __('Delete selection', TTO_I18N);
-        $wplink = includes_url() . 'images/media/document.png';
-
+        $wplink = TTO_INC . 'images/media/document.png';
 
         //Default way
         if (empty($post)) {
@@ -120,6 +120,7 @@ class Upload extends TeaFields
         }
 
         //Fix array bug
+        $vals = is_string($vals) ? array(0 => array('url' => '', 'id' => '', 'name' => '')) : $vals;
         unset($vals[0]);
 
         //Get template
