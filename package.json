@@ -1,6 +1,6 @@
 {
   "name": "tea-theme-options",
-  "version": "1.5.0-4",
+  "version": "1.5.1",
   "description": "Simple, easy to use and fully integrated Theme Options for Wordpress.",
   "main": "assets/js/teato.min.js",
   "scripts": {
@@ -26,8 +26,10 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-nodeunit": "~0.4.0",
     "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-po2mo": "~0.1.0",
     "grunt-pot": "~0.2.0"
   }

@@ -4,6 +4,9 @@
         <a href="admin.php?page=<?php echo $identifier ?>" class="tea-logo">
             <img src="<?php echo $icon ?>" alt="" /> <?php _e('Tea T.O.', TTO_I18N) ?>
         </a>
+        <?php if ($identifier != $page): ?>
+            <span class="tea-breadcrumb"><i class="fa fa-long-arrow-right fa-lg"></i> <?php echo $title ?></span>
+        <?php endif ?>
 
         <ul class="tea-pages">
             <?php
@@ -21,11 +24,8 @@
             ?>
                 <li><a href="admin.php?page=<?php echo $slug ?>"<?php echo $class ?>><?php echo $title ?></a></li>
             <?php endforeach ?>
-            <li class="close">
-                <a href="#" title="" class="fallback"></a>
-                <a href="#" title=""><?php _e('Close &times;', TTO_I18N) ?></a>
-            </li>
         </ul>
+        <a href="#" title="" class="fallback"></a>
     </nav>
 
     <?php if ($updated): ?>

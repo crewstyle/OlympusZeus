@@ -1,0 +1,34 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Tea T.O. plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+
+.tea-main-nav {
+    padding-top: 3px;
+}
+.tea_to .tea-main-nav li a:focus:after,
+.tea_to .tea-main-nav li a:hover:after,
+.tea_to .tea-main-nav li a.current:after {
+    border: none;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    margin-top: 0;
+    position: absolute;
+    width: 6px;
+    top: 0;
+}
+.tea_to .tea-main-nav li a:focus,
+.tea_to .tea-main-nav li a:hover {
+    color: @primary;
+}
+.tea_to .tea-main-nav li a:focus:after,
+.tea_to .tea-main-nav li a:hover:after {
+    background: #303231;
+}
+.tea_to .tea-main-nav li a.current:after {
+    background: @primary;
+}

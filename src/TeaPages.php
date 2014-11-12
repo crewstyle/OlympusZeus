@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0-1
+ * @since 1.5.1
  *
  */
 class TeaPages
@@ -278,7 +278,7 @@ class TeaPages
      *
      * @uses add_menu()
      *
-     * @since 1.4.0
+     * @since 1.5.1
      */
     public function __buildAdminBar()
     {
@@ -308,6 +308,15 @@ class TeaPages
                     'title' => $page['title'],
                     'href' => admin_url('admin.php?page=' . $this->identifier)
                 ));
+
+                //Build the subpages
+                $wp_admin_bar->add_menu(array(
+                    'parent' => $this->identifier,
+                    'id' => $this->getSlug($page['slug']),
+                    'href' => admin_url('admin.php?page=' . $page['slug']),
+                    'title' => $page['name'],
+                    'meta' => false
+                ));
             }
             else {
                 //Build the subpages
@@ -315,7 +324,7 @@ class TeaPages
                     'parent' => $this->identifier,
                     'id' => $this->getSlug($page['slug']),
                     'href' => admin_url('admin.php?page=' . $page['slug']),
-                    'title' => $page['title'],
+                    'title' => $page['name'],
                     'meta' => false
                 ));
             }
@@ -329,7 +338,7 @@ class TeaPages
      * @uses add_menu_page()
      * @uses add_submenu_page()
      *
-     * @since 1.4.0
+     * @since 1.5.1
      */
     public function __buildMenuPage()
     {
@@ -399,7 +408,7 @@ class TeaPages
 
             //Build breadcrumb
             $this->breadcrumb[] = array(
-                'title' => $page['name'],
+                'title' => $page['title'],
                 'slug' => $page['slug']
             );
         }
@@ -464,7 +473,7 @@ class TeaPages
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since 1.4.0
+     * @since 1.5.1
      */
     public function addPage($configs = array(), $contents = array())
     {
@@ -494,6 +503,7 @@ class TeaPages
 
         //Define the slug
         $slug = isset($configs['slug']) ? $this->getSlug($configs['slug']) : $this->getSlug();
+        $name = isset($configs['name']) ? $configs['name'] : (isset($configs['title']) ? $configs['title'] : '');
 
         //Update the current page index
         $this->index = $slug;
@@ -501,7 +511,7 @@ class TeaPages
         //Define page configurations
         $this->pages[$slug] = array(
             'title' => isset($configs['title']) ? $configs['title'] : __('Tea T.O.', TTO_I18N),
-            'name' => isset($configs['name']) ? $configs['name'] : __('Tea T.O.', TTO_I18N),
+            'name' => !empty($name) ? $name : __('Tea T.O.', TTO_I18N),
             'position' => isset($configs['position']) ? $configs['position'] : null,
             'description' => isset($configs['description']) ? $configs['description'] : '',
             'submit' => isset($configs['submit']) ? $configs['submit'] : true,
@@ -949,7 +959,7 @@ class TeaPages
      * @param array $dependancy The default value if no one is found
      * @todo find a better way for the plugin version
      *
-     * @since 1.4.0
+     * @since 1.5.0
      */
     protected function setOption($key, $value, $dependancy = array())
     {
@@ -1159,7 +1169,7 @@ class TeaPages
      * @uses wp_handle_upload()
      * @param array $request Contains all data in $_POST
      *
-     * @since 1.4.3
+     * @since 1.5.0
      */
     protected function updateNetworks($request)
     {

@@ -23,6 +23,7 @@ module.exports = function(grunt) {
 
         //remove any previously-created files
         clean: [
+            '<%= teato.path.src %>/css/teato-less.css',
             '<%= teato.path.tar %>/css/*',
             '<%= teato.path.tar %>/fonts/*',
             '<%= teato.path.tar %>/img/*',
@@ -150,6 +151,99 @@ module.exports = function(grunt) {
                 src: 'languages/*.po',
                 expand: true
             }
+        },
+
+        //less compilation
+        less: {
+            teato: {
+                options: {
+                    //compress: true,
+                    //yuicompress: true,
+                    optimization: 2
+                },
+                files: {
+                    //main css
+                    '<%= teato.path.src %>/css/teato.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_global.less',
+                        '<%= teato.path.src %>/less/_navigation.less',
+                        '<%= teato.path.src %>/less/_messages.less',
+                        '<%= teato.path.src %>/less/plugins/*.less',
+                        '<%= teato.path.src %>/less/_responsive.less'
+                    ]
+                }
+            },
+            earth: {
+                options: {
+                    modifyVars: {
+                        primary: '#91d04d',
+                        second: '#e5f7e5'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/teato.admin.green.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_theme.less',
+                        '<%= teato.path.src %>/less/themes/*.less'
+                    ]
+                }
+            },
+            ocean: {
+                options: {
+                    modifyVars: {
+                        primary: '#4d9dd0',
+                        second: '#e5edf7'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/teato.admin.blue.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_theme.less',
+                        '<%= teato.path.src %>/less/themes/*.less'
+                    ]
+                }
+            },
+            vulcan: {
+                options: {
+                    modifyVars: {
+                        primary: '#d04d4d',
+                        second: '#f7e5e5'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/teato.admin.red.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_theme.less',
+                        '<%= teato.path.src %>/less/themes/*.less'
+                    ]
+                }
+            },
+            login: {
+                options: {
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/teato.login.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_login.less',
+                        '<%= teato.path.src %>/less/login/*.less'
+                    ]
+                }
+            }
+        },
+
+        //watch for compiling
+        watch: {
+            styles: {
+                files: ['<%= teato.path.src %>/less/**/*.less'],
+                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:login', 'cssmin', 'copy', 'uglify'],
+                options: {
+                    nospawn: true
+                }
+            }
         }
     });
 
@@ -176,14 +270,29 @@ module.exports = function(grunt) {
     //create MO file
     grunt.loadNpmTasks('grunt-po2mo');
 
+    //less compilation
+    grunt.loadNpmTasks('grunt-contrib-less');
+
+    //watch for compiling
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
     //------ [REGISTER TASKS] ------//
 
     //JShint validation task: grunt jshint
-    grunt.registerTask('hint', ['jshint']);
+    grunt.registerTask('hint',      ['jshint']);
 
     //languages task: grunt lang
-    grunt.registerTask('lang', ['pot', 'po2mo']);
+    grunt.registerTask('lang',      ['pot','po2mo']);
 
-    //Default task: grunt default
-    grunt.registerTask('default', ['clean', 'cssmin', 'copy', 'uglify']);
+    //Watch task: grunt default
+    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:login','cssmin','uglify','copy']);
+
+    //CSS and JS tasks: grunt css / grunt js
+    grunt.registerTask('start',     ['clean']);
+    grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:login','cssmin']);
+    grunt.registerTask('js',        ['uglify']);
+    grunt.registerTask('move',      ['copy']);
+
+    //watch less compiling
+    grunt.registerTask('sniper',    ['watch']);
 };

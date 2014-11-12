@@ -1,0 +1,127 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Messages and alerts
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> :)
+ */
+
+
+/*--- [MESSAGES] ---*/
+#update-nag,
+.update-nag {
+    border: 1px solid #ffba00;
+    display: block;
+    margin: 32px 18px 32px 0px;
+}
+div.tea_to_message {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    font-size: 13px;
+    line-height: 2.1em;
+    margin: 16px 0;
+    overflow: hidden;
+    padding: 23px 25px 0;
+    position: relative;
+}
+div.tea_to_message:after {
+    background: url(../img/cog-gray.svg) no-repeat;
+    bottom: -100px;
+    content: "";
+    display: block;
+    height: 284px;
+    position: absolute;
+    right: -120px;
+    width: 284px;
+    z-index: 1;
+}
+div.tea_to_message .dismiss-button {
+    color: #000;
+    float: right;
+    margin-top: 5px;
+    opacity: .4;
+    position: relative;
+    z-index: 3;
+}
+div.tea_to_message .dismiss-button:focus,
+div.tea_to_message .dismiss-button:hover {
+    opacity: 1;
+}
+div.tea_to_message .logo {
+    float: left;
+    margin:0 20px 0 0;
+    width: 35px;
+}
+div.tea_to_message h3 {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+}
+div.tea_to_message h4 {
+    font-size: 16px;
+    margin:20px 0 0;
+}
+div.tea_to_message p {
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+}
+div.tea_to_message p.about {
+    color: #777;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+div.tea_to_message li {
+    line-height:1.5;
+}
+div.tea_to_message .button {
+    margin:15px 0 3px;
+}
+div.tea_to_message .panel {
+    clear: both;
+    overflow: hidden;
+    position: relative;
+}
+div.tea_to_message .column {
+    float: left;
+    min-width: 200px;
+    width: 32%;
+}
+
+
+/*--- [ALERTS] ---*/
+.tea_to.wrap .alert {
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    color: #c09853;
+    margin: 10px 19px 0;
+    padding: 0 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.tea_to.wrap .alert h4 {
+    margin: 0;
+}
+.tea_to.wrap .alert .close {
+    line-height: 20px;
+    position: relative;
+    right: -21px;
+    top: -2px;
+}
+.tea_to.wrap .alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    margin: 0 5px -3px;
+}
+.tea_to.wrap .alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    margin: 0 5px -3px;
+}
+.tea_to.wrap .alert-warning {
+    margin: 0 5px -3px;
+}

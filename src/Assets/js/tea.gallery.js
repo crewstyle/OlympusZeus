@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.gallery.js v1.2.0
+ * tea.gallery.js v1.3.0
  * https://github.com/Takeatea/tea_theme_options
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -36,9 +36,11 @@
 
     Tea_gallery.prototype.$el = null;
     Tea_gallery.prototype.options = null;
+    Tea_gallery.prototype.current = '';
 
     Tea_gallery.prototype.init = function (){
         var _tea = this;
+        var $items = _tea.$el.find('.upload-items .item');
 
         //get wp id
         _tea.options.wpid = _tea.options.media.model.settings.post.id;
@@ -47,6 +49,21 @@
         _tea.$el.find(_tea.options.add).on('click', $.proxy(_tea.add_item, _tea));
         _tea.$el.find(_tea.options.del).on('click', $.proxy(_tea.del_item, _tea));
         _tea.$el.parent('div').find(_tea.options.delall).on('click', $.proxy(_tea.del_items_all, _tea));
+
+        //bind event on load
+        if ($items.length) {
+            //Get first child
+            var $firsti = _tea.$el.find('.upload-items .item:first-child');
+            var $firstl = _tea.$el.find('.upload-listing li:first-child');
+
+            //Change selected
+            $firsti.addClass('selected');
+            $firstl.addClass('selected');
+
+            //Add tinyMCE
+            _tea.add_tinymce($firsti.attr('data-id'));
+
+        }
     };
 
     Tea_gallery.prototype.add_item = function (e){
@@ -54,8 +71,9 @@
         var _tea = this;
 
         //vars
-        var $parent = _tea.$el.find('.upload-time');
-        var $result = _tea.$el.find('.upload_image_result');
+        var $parent  = _tea.$el.find('.upload-time');
+        var $result  = _tea.$el.find('.upload-items');
+        var $listing = _tea.$el.find('.upload-listing');
         var _wp = _tea.options.media,
             _id = $parent.attr('data-target');
 
@@ -94,8 +112,10 @@
             var attach = _selection.toJSON();
             var idtity = '';
             var $itm = null,
+                $lis = null,
                 $in1 = null,
                 $in2 = null,
+                $lnk = null,
                 $img = null,
                 $txt = null,
                 $del = null;
@@ -111,10 +131,6 @@
 
                 //Build item
                 $itm = $(document.createElement('div')).addClass('item').attr('data-id', attach[i].id);
-                $del = $(document.createElement('a')).addClass('del_image').attr({
-                    href: '#',
-                    'data-target': _id
-                }).html('&times;');
                 $in1 = $(document.createElement('input')).attr({
                     type: 'hidden',
                     name: _id + '[' + attach[i].id + '][image]',
@@ -125,24 +141,37 @@
                     name: _id + '[' + attach[i].id + '][id]',
                     value: attach[i].id
                 });
+                $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea id="' + idtity + '" rows="4" class="wp-editor-area" name="' + _id + '[' + attach[i].id + '][content]' + '"></textarea>');
+
+                //Build list
+                $lis = $(document.createElement('li')).attr('data-id', attach[i].id);
+                $lnk = $(document.createElement('a')).attr('href', '#').addClass('itm');
                 $img = $(document.createElement('img')).attr({
                     src: attach[i].url
                 });
-                $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea id="' + idtity + '" rows="4" class="wp-editor-area" name="' + _id + '[' + attach[i].id + '][content]' + '"></textarea>');
+                $del = $(document.createElement('a')).addClass(_tea.options.del.replace('.', '')).attr({
+                    href: '#',
+                    'data-target': _id
+                }).html('&times;');
 
                 //Add click event
+                $lis.on('click', $.proxy(_tea.change_item, _tea));
                 $del.on('click', $.proxy(_tea.del_item, _tea));
 
                 //Display item
-                $itm.append($del);
                 $itm.append($in1);
                 $itm.append($in2);
-                $itm.append($img);
                 $itm.append($txt);
-                $itm.insertBefore($result.find('.upload-time'));
+                $result.prepend($itm);
+
+                //Display list
+                $lnk.append($img);
+                $lis.append($del);
+                $lis.append($lnk);
+                $listing.prepend($lis);
 
                 //Init tinyMCE textarea
-                if ('undefined' !== typeof tinyMCE) {
+                /*if ('undefined' !== typeof tinyMCE) {
                     tinyMCE.init({
                         //language: 'wp-langs-en',
                         selector: 'textarea#' + idtity,
@@ -156,8 +185,17 @@
                         toolbar4: '',
                         body_class: 'post-format-standard'
                     });
-                }
+                }*/
             }
+
+            //Open the first one
+            $result.find('.item.selected').removeClass('selected');
+            $result.find('.item:first-child').addClass('selected');
+            $listing.find('li.selected').removeClass('selected');
+            $listing.find('li:first-child').addClass('selected');
+
+            //Add tinyMCE
+            _tea.add_tinymce($result.find('.item.selected').attr('data-id'));
 
             //Restore the main post ID and delete file_frame
             _wp.model.settings.post.id = _tea.options.wpid;
@@ -167,30 +205,91 @@
         file_frame.open();
     };
 
+    Tea_gallery.prototype.add_tinymce = function (id){
+        var _tea = this;
+
+        //Init tinyMCE textarea
+        if ('undefined' !== typeof tinyMCE) {
+            var idtity = _tea.$el.find('.upload-time').attr('data-target') + '_' + id + '_content';
+
+            //Remove to the old one
+            if ('' != _tea.current) {
+                tinyMCE.EditorManager.execCommand('mceRemoveEditor', true, _tea.current);
+            }
+
+            //Init tinyMCE
+            tinyMCE.init({
+                //language: 'wp-langs-en',
+                selector: 'textarea#' + idtity,
+                mode: 'teeny',
+                resize: 'vertical',
+                wpautop: false,
+                menubar: false,
+                toolbar1: 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen,wp_adv',
+                toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                toolbar3: '',
+                toolbar4: '',
+                body_class: 'post-format-standard'
+            });
+
+            //Add controls
+            tinyMCE.EditorManager.execCommand('mceAddEditor', true, idtity);
+
+            //Fix current
+            _tea.current = idtity;
+        }
+    };
+
+    Tea_gallery.prototype.change_item = function (e){
+        e.preventDefault();
+        var _tea = this;
+
+        //vars
+        var $self = $(e.target || e.currentTarget);
+        var $lis = $self.closest('li');
+
+        //Remove selected
+        _tea.$el.find('.upload-listing li.selected').removeClass('selected');
+        _tea.$el.find('.upload-items .item.selected').removeClass('selected');
+
+        //Change selected
+        _tea.$el.find('.upload-items .item[data-id="' + $lis.attr('data-id') + '"]').addClass('selected');
+        $lis.addClass('selected');
+
+        //Add tinyMCE
+        _tea.add_tinymce($lis.attr('data-id'));
+    };
+
     Tea_gallery.prototype.del_item = function (e){
         e.preventDefault();
         var _tea = this;
 
         //vars
         var $self = $(e.target || e.currentTarget);
-        var $parent = $self.parent();
-        var $upload = _tea.$el.find('.upload-time');
-
-        //Delete value
-        $upload.removeClass('item-added');
+        var $lis = $self.closest('li');
+        var $itm = _tea.$el.find('.upload-items .item[data-id="' + $lis.attr('data-id') + '"]');
 
         //Deleting animation
-        $parent.css('background', _tea.options.color);
-        $parent.animate({
+        $lis.css('background', _tea.options.color);
+        $lis.animate({
             opacity: '0'
         }, 'slow', function (){
-            $parent.remove();
-        });
+            if ($lis.hasClass('selected')) {
+                $lis.next().addClass('selected');
+            }
 
-        //update data
-        if (!_tea.$el.find('.upload_image_result .item').length) {
-            $('#' + $self.attr('data-target')).val('NONE');
-        }
+            $lis.remove();
+        });
+        $itm.css('background', _tea.options.color);
+        $itm.animate({
+            opacity: '0'
+        }, 'slow', function (){
+            if ($itm.hasClass('selected')) {
+                $itm.next().addClass('selected');
+            }
+
+            $itm.remove();
+        });
     };
 
     Tea_gallery.prototype.del_items_all = function (e){
@@ -198,15 +297,22 @@
         var _tea = this;
 
         //vars
-        var $self = $(e.target || e.currentTarget);
-        var $hidden = $('#' + $self.attr('data-target'));
-        var $target = $('#' + $self.attr('data-target') + '_gallery_content').find('.upload_image_result .item');
-
-        //update data
-        $hidden.val('NONE');
+        var $result  = _tea.$el.find('.upload-items .item');
+        var $listing = _tea.$el.find('.upload-listing li:not(.upload-time)');
 
         //Deleting animation
-        $.each($target, function (){
+        $.each($result, function (){
+            var $that = $(this);
+
+            //Animate and delete item
+            $that.css('background', _tea.options.color);
+            $that.animate({
+                opacity: '0'
+            }, 'slow', function (){
+                $that.remove();
+            });
+        });
+        $.each($listing, function (){
             var $that = $(this);
 
             //Animate and delete item

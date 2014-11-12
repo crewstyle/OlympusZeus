@@ -21,7 +21,7 @@
     </div>
 <?php endif ?>
 
-<div class="tea-screen-meta tea_to_wrap">
+<div class="tea-screen-meta tea_to_wrap elasticsearch">
     <div class="tea-contextual-help-wrap">
         <div class="tea-contextual-help-back"></div>
 

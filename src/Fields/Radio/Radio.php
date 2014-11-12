@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Radio
- * @since 1.4.0
+ * @since 1.5.1
  *
  */
 class Radio extends TeaFields
@@ -64,7 +64,7 @@ class Radio extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.5.1
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -83,7 +83,7 @@ class Radio extends TeaFields
         $title = isset($content['title']) ? $content['title'] : __('Tea Radio', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
         $std = isset($content['std']) ? $content['std'] : '';
-        $mode = isset($content['mode']) ? $content['mode'] : '';
+        $mode = isset($content['mode']) && 'image' == $content['mode'] ? 'image' : '';
         $options = isset($content['options']) ? $content['options'] : array();
 
         //Default way

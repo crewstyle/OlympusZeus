@@ -1,0 +1,76 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Menu plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+
+ul#adminmenu div.wp-menu-image:before,
+ul#adminmenu a {
+    color: #fff;
+}
+#collapse-menu:hover,
+#collapse-menu:hover #collapse-button div:after,
+ul#adminmenu li:focus div.wp-menu-image:before,
+ul#adminmenu li:hover div.wp-menu-image:before,
+ul#adminmenu a:focus div.wp-menu-image:before,
+ul#adminmenu a:hover div.wp-menu-image:before,
+ul#adminmenu .wp-submenu a:focus,
+ul#adminmenu .wp-submenu a:hover,
+ul#adminmenu a:hover,
+ul#adminmenu li.menu-top>a:focus,
+ul#adminmenu .opensub .wp-submenu li.current a,
+ul#adminmenu .wp-submenu li.current,
+ul#adminmenu .wp-submenu li.current a,
+ul#adminmenu .wp-submenu li.current a:focus,
+ul#adminmenu .wp-submenu li.current a:hover,
+ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu li.current a {
+    color: @primary;
+}
+#adminmenu li.current a.menu-top,
+ul#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu {
+    background: #3b3d3c;
+    color: #fff;
+}
+ul#adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after,
+ul#adminmenu a.wp-has-current-submenu:after,
+ul#adminmenu>li.current>a.current:after {
+    background: @primary;
+    border: none;
+    bottom: 0;
+    content: " ";
+    height: auto;
+    margin-top: 0;
+    width: 6px;
+    top: 0;
+}
+ul#adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after,
+ul#adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after {
+    background: #303231;
+}
+ul#adminmenu .wp-submenu,
+.folded ul#adminmenu .wp-has-current-submenu .wp-submenu,
+.folded ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu {
+    background: #303231;
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    box-shadow: 0 3px 0 rgba(0,0,0,.25);
+}
+ul#adminmenu .wp-submenu a {
+    color: #fff;
+}
+ul#adminmenu .wp-menu-image img {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+#collapse-menu,
+#collapse-button div:after {
+    color: #3b3d3c;
+}
+#adminmenu li.wp-menu-separator {
+    border-bottom: 1px solid #333;
+    border-top: 1px solid #111;
+    height: 0px;
+    margin: 10px 0;
+}

@@ -12,7 +12,7 @@
         var $body = $('body');
 
         //Mobile menu
-        $.each($('.tea-main-nav .tea-menu-resp, .tea-main-nav .close a'), function (){
+        $.each($('.tea-main-nav .tea-menu-resp, .tea-main-nav .fallback'), function (){
             var $self = $(this);
 
             //bind click event

@@ -1,0 +1,46 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Inputs plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+
+input[type=checkbox]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=radio]:focus,
+input[type=search]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=url]:focus,
+select:focus,
+textarea:focus {
+    border: 1px solid @primary;
+    color: @primary;
+    outline: 0;
+    -webkit-box-shadow: 0 0 2px rgba(229,229,247,.8);
+    -moz-box-shadow: 0 0 2px rgba(229,229,247,.8);
+    box-shadow: 0 0 2px rgba(229,229,247,.8);
+}
+.drag-drop #drag-drop-area {
+    background-color: #fff;
+    border: 4px solid #fff;
+    position: relative;
+    -webkit-box-shadow: 0 3px 0 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 3px 0 1px rgba(0,0,0,.05);
+    box-shadow: 0 3px 0 1px rgba(0,0,0,.05);
+}
+.drag-drop.drag-over #drag-drop-area {
+    border-color: @primary;
+}
+.drag-drop .drag-drop-inside {
+    left: 50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    -moz-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}

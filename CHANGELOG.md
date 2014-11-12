@@ -1,3 +1,9 @@
+## 1.5.1 (November 12, 2014)
+
+Fix bugs on <gallery>, on <upload>, on much more.
+Improve package with LESS compilation.
+
+
 ## 1.5.0-4 (November 07, 2014)
 
 Fix bugs on <gallery> finally! TinyMCE improvements
