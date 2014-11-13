@@ -119,30 +119,21 @@
         //Textarea input
         $('.tea-inside textarea.textarea').tea_textarea();
 
-        //Upload input
-        $.each($('.tea-inside.background .bg-upload'), function (){
-            var $self = $(this);
-
-            $self.tea_upload({
-                wpid: null,
-                media: wp.media,
-                multiple: false,
-                title: $self.attr('data-title') || 'Media',
-                type: 'image'
-            });
+        //Background input
+        $('.tea-inside.background .bg-upload').tea_upload({
+            wpid: null,
+            media: wp.media,
+            multiple: false,
+            title: 'data-title'
         });
 
         //Upload input
-        $.each($('.tea-inside.upload'), function (){
-            var $self = $(this);
-
-            $self.tea_upload({
-                wpid: null,
-                media: wp.media,
-                multiple: $self.attr('data-multiple') || false,
-                title: $self.attr('data-title') || 'Media',
-                type: $self.attr('data-type') || 'image'
-            });
+        $('.tea-inside.upload').tea_upload({
+            wpid: null,
+            media: wp.media,
+            multiple: 'data-multiple',
+            title: 'data-title',
+            type: 'data-type'
         });
 
         /* OLD ONES? Huh! */

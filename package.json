@@ -1,6 +1,6 @@
 {
   "name": "tea-theme-options",
-  "version": "1.5.1-1",
+  "version": "1.5.1-2",
   "description": "Simple, easy to use and fully integrated Theme Options for Wordpress.",
   "main": "assets/js/teato.min.js",
   "scripts": {

@@ -1,3 +1,8 @@
+## 1.5.1-2 (November 13, 2014)
+
+Fix bugs on JS for widgets.
+
+
 ## 1.5.1-1 (November 13, 2014)
 
 Update less compilation, add new messages display.

@@ -213,7 +213,7 @@
             var idtity = _tea.$el.find('.upload-time').attr('data-target') + '_' + id + '_content';
 
             //Remove to the old one
-            if ('' != _tea.current) {
+            if ('' !== _tea.current) {
                 tinyMCE.EditorManager.execCommand('mceRemoveEditor', true, _tea.current);
             }
 

@@ -44,6 +44,22 @@
         //get wp id
         _tea.options.wpid = _tea.options.media.model.settings.post.id;
 
+        //check title
+        if (false !== _tea.options.title) {
+            _tea.options.title = _tea.$el.attr(_tea.options.title);
+        }
+        else {
+            _tea.options.title = 'Media';
+        }
+
+        //check type
+        if (false !== _tea.options.type) {
+            _tea.options.type = _tea.$el.attr(_tea.options.type);
+        }
+        else {
+            _tea.options.type = 'image';
+        }
+
         //bind event on click
         if (_tea.options.multiple) {
             _tea.$el.find('.'+_tea.options.add).on('click', $.proxy(_tea.add_multiple, _tea));
@@ -338,9 +354,9 @@
                 media: null,
                 target: null,
                 multiple: false,
+                type: false,
+                title: false,
                 color: '#ffaaaa',
-                title: 'Title',
-                type: 'image',
                 add: 'add_image',
                 del: 'del_image',
                 delall: 'del_all_images'
