@@ -31,6 +31,30 @@
         _tea.$el = $el;
         _tea.options = options;
 
+        //check multiple
+        if (false !== _tea.options.multiple) {
+            _tea.options.multiple = _tea.$el.attr(options.multiple);
+        }
+        else {
+            _tea.options.multiple = false;
+        }
+
+        //check title
+        if (false !== _tea.options.title) {
+            _tea.options.title = _tea.$el.attr(options.title);
+        }
+        else {
+            _tea.options.title = 'Media';
+        }
+
+        //check type
+        if (false !== _tea.options.type) {
+            _tea.options.type = _tea.$el.attr(options.type);
+        }
+        else {
+            _tea.options.type = 'image';
+        }
+
         //initialize
         _tea.init();
     };
@@ -43,22 +67,6 @@
 
         //get wp id
         _tea.options.wpid = _tea.options.media.model.settings.post.id;
-
-        //check title
-        if (false !== _tea.options.title) {
-            _tea.options.title = _tea.$el.attr(_tea.options.title);
-        }
-        else {
-            _tea.options.title = 'Media';
-        }
-
-        //check type
-        if (false !== _tea.options.type) {
-            _tea.options.type = _tea.$el.attr(_tea.options.type);
-        }
-        else {
-            _tea.options.type = 'image';
-        }
 
         //bind event on click
         if (_tea.options.multiple) {
@@ -354,8 +362,8 @@
                 media: null,
                 target: null,
                 multiple: false,
-                type: false,
                 title: false,
+                type: false,
                 color: '#ffaaaa',
                 add: 'add_image',
                 del: 'del_image',

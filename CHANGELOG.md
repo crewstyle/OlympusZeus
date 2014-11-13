@@ -1,3 +1,4 @@
+## 1.5.1-3 (November 13, 2014)
 ## 1.5.1-2 (November 13, 2014)
 
 Fix bugs on JS for widgets.

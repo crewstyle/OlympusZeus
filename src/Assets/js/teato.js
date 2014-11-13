@@ -123,7 +123,6 @@
         $('.tea-inside.background .bg-upload').tea_upload({
             wpid: null,
             media: wp.media,
-            multiple: false,
             title: 'data-title'
         });
 
