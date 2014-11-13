@@ -15,8 +15,8 @@ body.login {
     background: transparent;
 }
 body.login div#login {
-    background: #111;
-    border-bottom: 2px solid #91d04d;
+    background: @grayblack;
+    border-bottom: 2px solid @primary;
     left: 50%;
     margin: 0;
     padding-top: 0;
@@ -26,13 +26,13 @@ body.login div#login {
     -webkit-transform: translateY(-50%) translateX(-50%);
     -moz-transform: translateY(-50%) translateX(-50%);
     transform: translateY(-50%) translateX(-50%);
-    -webkit-box-shadow: 0 5px 5px 0 rgba(0,0,0,.5);
-    -moz-box-shadow: 0 5px 5px 0 rgba(0,0,0,.5);
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 5px 5px 0 fade(@black, 50%);
+    -moz-box-shadow: 0 5px 5px 0 fade(@black, 50%);
+    box-shadow: 0 5px 5px 0 fade(@black, 50%);
 }
 body.login div#login h1 a {
     background: none;
-    color: #fff;
+    color: @white;
     height: auto;
     margin: 0;
     padding: 30px 20px 15px;

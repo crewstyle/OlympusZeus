@@ -3,91 +3,100 @@
  * Modal box
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 .tea-modal {
-    background:#fff;
-    display:none;
-    height:70%;
-    left:50%;
-    overflow:hidden;
-    position:fixed;
-    text-align:center;
-    top:50%;
-    width:70%;
-    z-index:10001;
-    -webkit-box-shadow:0 1px 20px 5px rgba(0,0,0,0.1);
-    -moz-box-shadow:0 1px 20px 5px rgba(0,0,0,0.1);
-    box-shadow:0 1px 20px 5px rgba(0,0,0,0.1);
-    -webkit-transform:translateX(-50%) translateY(-50%);
-    -moz-transform:translateX(-50%) translateY(-50%);
-    transform:translateX(-50%) translateY(-50%);
+    background: @white;
+    display: none;
+    height: 70%;
+    left: 50%;
+    overflow: hidden;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    width: 70%;
+    z-index: 10001;
+    -webkit-box-shadow: 0 1px 20px 5px fade(@black, 10%);
+    -moz-box-shadow: 0 1px 20px 5px fade(@black, 10%);
+    box-shadow: 0 1px 20px 5px fade(@black, 10%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
 }
 .tea-modal header {
-    border-bottom:1px solid #eee;
-    height:50px;
-    line-height:50px;
-    overflow:hidden;
-    text-align:left;
+    border-bottom: 1px solid lighten(@gray, 80%);
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: left;
 }
 #poststuff .tea-modal header h2,
 .tea-modal header h2 {
-    color:#777;
-    display:inline-block;
-    font-size:22px;
-    font-weight:normal;
-    line-height:50px;
-    margin:0;
-    padding-left:20px;
+    color: darken(@gray, 30%);
+    display: inline-block;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 50px;
+    margin: 0;
+    padding-left: 20px;
 }
 .tea-modal header .close {
-    border-left:1px solid #eee;
-    color:#777;
-    display:block;
-    float:right;
-    font-size:30px;
-    line-height:50px;
-    padding:0 20px;
-    text-decoration:none;
+    border-left: 1px solid lighten(@gray, 80%);
+    color: darken(@gray, 30%);
+    display: block;
+    float: right;
+    font-size: 30px;
+    line-height: 50px;
+    padding: 0 20px;
+    text-decoration: none;
 }
 .tea-modal header .close:hover {
-    background-color:#fafafa;
+    background-color: @graylighter;
 }
 .tea-modal .content-container {
-    background:#fff;
-    bottom:40px;
-    left:40px;
-    overflow-y:auto;
-    position:absolute;
-    right:40px;
-    top:90px;
+    background: @white;
+    bottom: 40px;
+    left: 40px;
+    overflow-y: auto;
+    position: absolute;
+    right: 40px;
+    top: 90px;
 }
 .tea-modal.social-modal .content a {
-    display:inline-block;
-    margin:0 20px 20px 0;
-    text-align:center;
-    width:200px;
+    display: inline-block;
+    margin: 0 20px 20px 0;
+    text-align: center;
+    width: 200px;
 }
 .tea-modal .content pre {
-    color:#000;
-    font-family:inherit;
-    margin:0;
-    text-align:left;
-    white-space:pre-wrap;
+    color: @black;
+    font-family: inherit;
+    margin: 0;
+    text-align: left;
+    white-space: pre-wrap;
 }
 .tea-modal-backdrop {
-    background:#000;
-    bottom:0;
-    display:none;
-    min-height:360px;
-    left:0;
-    opacity:.7;
-    position:fixed;
-    right:0;
-    top:0;
-    z-index:1000;
+    background: @black;
+    bottom: 0;
+    display: none;
+    min-height: 360px;
+    left: 0;
+    opacity: .7;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
 }
 .tea-modal-backdrop.opened {
-    display:block;
+    display: block;
+}
+
+@media (max-width: 782px) {
+    #poststuff .tea-modal header h2,
+    .tea-modal header h2 {
+        display: block;
+        font-size: 14px;
+        overflow: hidden;
+    }
 }

@@ -3,15 +3,15 @@
  * WP Adminbar plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 #wpadminbar {
     border-top: 2px solid @primary;
     height: 52px;
-    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    -moz-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 3px 0 fade(@black, 25%);
+    -moz-box-shadow: 0 3px 0 fade(@black, 25%);
+    box-shadow: 0 3px 0 fade(@black, 25%);
 }
 #wpadminbar * {
     line-height: 52px;
@@ -19,21 +19,21 @@
 #wpadminbar #adminbarsearch:before,
 #wpadminbar .ab-icon:before,
 #wpadminbar .ab-item:before {
-    color: #fff;
+    color: @white;
 }
 #wpadminbar .ab-top-menu>li.hover>.ab-item,
 #wpadminbar .ab-top-menu>li:hover>.ab-item,
 #wpadminbar .ab-top-menu>li>.ab-item:focus,
 #wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus {
-    background: #111;
+    background: @grayblack;
     color: @primary;
 }
 #wpadminbar .menupop .ab-sub-wrapper,
 #wpadminbar .shortlink-input {
-    background: #111;
-    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    -moz-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    background: @grayblack;
+    -webkit-box-shadow: 0 3px 0 fade(@black, 25%);
+    -moz-box-shadow: 0 3px 0 fade(@black, 25%);
+    box-shadow: 0 3px 0 fade(@black, 25%);
 }
 #wpadminbar .quicklinks .menupop ul li a:focus,
 #wpadminbar .quicklinks .menupop ul li a:focus strong,
@@ -91,6 +91,14 @@
 }
 #wpadminbar #wp-admin-bar-user-info span {
     line-height: 26px;
+}
+.nav-tab-active,
+.nav-tab-active:hover,
+#wp-content-editor-tools {
+    background-color: @graylighter;
+}
+.manage-menus {
+    background-color: @white;
 }
 
 

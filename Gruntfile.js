@@ -159,6 +159,25 @@ module.exports = function(grunt) {
                 options: {
                     //compress: true,
                     //yuicompress: true,
+                    modifyVars: {
+                        primary: '#91d04d',
+                        second: '#e5f7e5',
+                        main: '#55bb3a',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        orange: '#ffba00',
+                        blue: '#2ea2cc',
+                        red: '#ff0000',
+                        danger: '#dd3d36',
+
+                        graylighter: '#fbfbfb',
+                        graylight: '#f1f1f1',
+                        gray: '#aaaaaa',
+                        graydark: '#3b3d3c',
+                        graydarker: '#303231',
+                        grayblack: '#111111'
+                    },
                     optimization: 2
                 },
                 files: {
@@ -177,7 +196,20 @@ module.exports = function(grunt) {
                 options: {
                     modifyVars: {
                         primary: '#91d04d',
-                        second: '#e5f7e5'
+                        second: '#e5f7e5',
+                        main: '#55bb3a',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        orange: '#ffba00',
+                        red: '#ff0000',
+
+                        graylighter: '#fbfbfb',
+                        graylight: '#f1f1f1',
+                        gray: '#aaaaaa',
+                        graydark: '#3b3d3c',
+                        graydarker: '#303231',
+                        grayblack: '#111111'
                     },
                     optimization: 2
                 },
@@ -193,7 +225,20 @@ module.exports = function(grunt) {
                 options: {
                     modifyVars: {
                         primary: '#4d9dd0',
-                        second: '#e5edf7'
+                        second: '#e5edf7',
+                        main: '#3a80bb',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        orange: '#ffba00',
+                        red: '#ff0000',
+
+                        graylighter: '#fbfbfb',
+                        graylight: '#f1f1f1',
+                        gray: '#aaaaaa',
+                        graydark: '#3b3d3c',
+                        graydarker: '#303231',
+                        grayblack: '#111111'
                     },
                     optimization: 2
                 },
@@ -209,7 +254,20 @@ module.exports = function(grunt) {
                 options: {
                     modifyVars: {
                         primary: '#d04d4d',
-                        second: '#f7e5e5'
+                        second: '#f7e5e5',
+                        main: '#bb3a3a',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        orange: '#ffba00',
+                        red: '#ff0000',
+
+                        graylighter: '#fbfbfb',
+                        graylight: '#f1f1f1',
+                        gray: '#aaaaaa',
+                        graydark: '#3b3d3c',
+                        graydarker: '#303231',
+                        grayblack: '#111111'
                     },
                     optimization: 2
                 },
@@ -223,6 +281,20 @@ module.exports = function(grunt) {
             },
             login: {
                 options: {
+                    modifyVars: {
+                        primary: '#91d04d',
+                        main: '#55bb3a',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        blue: '#2ea2cc',
+                        danger: '#dd3d36',
+
+                        gray: '#aaaaaa',
+                        graydark: '#999999',
+                        graydarker: '#3b3d3c',
+                        grayblack: '#111111'
+                    },
                     optimization: 2
                 },
                 files: {

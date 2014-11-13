@@ -8,7 +8,7 @@
 
 ul#adminmenu div.wp-menu-image:before,
 ul#adminmenu a {
-    color: #fff;
+    color: @white;
 }
 #collapse-menu:hover,
 #collapse-menu:hover #collapse-button div:after,
@@ -30,8 +30,8 @@ ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu li.current a {
 }
 #adminmenu li.current a.menu-top,
 ul#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu {
-    background: #3b3d3c;
-    color: #fff;
+    background: @graydark;
+    color: @white;
 }
 ul#adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after,
 ul#adminmenu a.wp-has-current-submenu:after,
@@ -47,18 +47,18 @@ ul#adminmenu>li.current>a.current:after {
 }
 ul#adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after,
 ul#adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after {
-    background: #303231;
+    background: @graydarker;
 }
 ul#adminmenu .wp-submenu,
 .folded ul#adminmenu .wp-has-current-submenu .wp-submenu,
 .folded ul#adminmenu a.wp-has-current-submenu:focus+.wp-submenu {
-    background: #303231;
-    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    -moz-box-shadow: 0 3px 0 rgba(0,0,0,.25);
-    box-shadow: 0 3px 0 rgba(0,0,0,.25);
+    background: @graydarker;
+    -webkit-box-shadow: 0 3px 0 fade(@black, 25%);
+    -moz-box-shadow: 0 3px 0 fade(@black, 25%);
+    box-shadow: 0 3px 0 fade(@black, 25%);
 }
 ul#adminmenu .wp-submenu a {
-    color: #fff;
+    color: @white;
 }
 ul#adminmenu .wp-menu-image img {
     opacity: 1;
@@ -66,11 +66,11 @@ ul#adminmenu .wp-menu-image img {
 }
 #collapse-menu,
 #collapse-button div:after {
-    color: #3b3d3c;
+    color: @graydark;
 }
 #adminmenu li.wp-menu-separator {
-    border-bottom: 1px solid #333;
-    border-top: 1px solid #111;
+    border-bottom: 1px solid @graydarker;
+    border-top: 1px solid @grayblack;
     height: 0px;
     margin: 10px 0;
 }

@@ -29,7 +29,7 @@
     </nav>
 
     <?php if ($updated): ?>
-        <div class="alert alert-success">
+        <div class="updated headsup below-h2">
             <p><?php _e('The Tea Theme Options is updated.', TTO_I18N) ?></p>
         </div>
     <?php endif ?>

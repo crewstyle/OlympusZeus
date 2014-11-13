@@ -3,14 +3,14 @@
  * Textarea plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 .tea-inside.textarea {
     position: relative;
 }
 .tea-inside.textarea .counter {
-    background-color: #ccc;
+    background-color: lighten(@gray, 20%);
     font-size: 10px;
     left: 98%;
     margin-left: -12px;
@@ -22,6 +22,6 @@
     transition: background ease .5s;
 }
 .tea-inside.textarea .counter.on {
-    background-color: rgba(85,187,58,.3);
-    box-shadow: 0 0 0 2px rgba(85,187,58,.3);
+    background-color: fade(@main, 30%);
+    box-shadow: 0 0 0 2px fade(@main, 30%);
 }

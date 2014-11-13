@@ -3,7 +3,7 @@
  * @font-face
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 @font-face {
   font-family: 'Raleway';
@@ -23,7 +23,7 @@
  * Global CSS
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 /*--- [GLOBALS] ---*/
 html {
@@ -72,7 +72,7 @@ h1 {
 }
 .tea_to_wrap .del_all_items,
 .tea_to_wrap .del_all_images {
-  color: #bc0b0b;
+  color: #990000;
   float: right;
   font-size: 12px;
   line-height: 20px;
@@ -80,7 +80,7 @@ h1 {
 }
 .tea_to_wrap .del_all_items:hover,
 .tea_to_wrap .del_all_images:hover {
-  color: red;
+  color: #ff0000;
 }
 /*--- [MAIN FOOTER] ---*/
 .teato-footer {
@@ -95,15 +95,15 @@ h1 {
   margin: 5px 0;
 }
 .teato-footer a {
-  /*color: #008246;*/
+  /*color: @primary;*/
   text-decoration: none;
 }
 .teato-footer a:focus,
 .teato-footer a:hover {
-  /*color: #55bb3a;*/
+  /*color: @main;*/
 }
 hr {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ffffff;
 }
 /*--- [CLEARFIX] ---*/
 .clearfix:before,
@@ -120,8 +120,8 @@ hr {
   margin-top: 30px;
 }
 .tea_to_wrap {
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  border: 1px solid #dddddd;
   line-height: 1;
   margin-bottom: 20px;
   padding: 0;
@@ -191,7 +191,7 @@ hr {
 .tea_to_wrap input[type="time"],
 .tea_to_wrap input[type="url"],
 .tea_to_wrap input[type="week"] {
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
   outline: 0;
   width: 98%;
   -webkit-appearance: none;
@@ -202,7 +202,7 @@ hr {
   transition: border ease .5s;
 }
 .tea_to_wrap select {
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
   outline: 0;
   width: 98%;
   -webkit-transition: border ease .5s;
@@ -227,14 +227,16 @@ hr {
 .tea_to_wrap input[type="week"]:focus {
   border-color: #55bb3a;
   box-shadow: 0 0 0 2px rgba(85, 187, 58, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  color: #55bb3a;
   outline: 0;
 }
 .tea_to_wrap .inside textarea {
+  color: #000000;
   resize: none;
 }
 .tea_to_wrap input[readonly] {
-  border-color: #b3b6b7;
-  box-shadow: 0 0 0 2px rgba(179, 182, 183, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-color: #f6f6f6;
+  box-shadow: 0 0 0 2px rgba(246, 246, 246, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 /*--- [SECTION] ---*/
 .tea-inside.inside-section,
@@ -248,7 +250,7 @@ hr {
 }
 .tea-inside.inside-section a,
 #poststuff .tea-inside.inside-section a {
-  color: #008246;
+  color: #91d04d;
   text-decoration: none;
 }
 .tea-inside.inside-section a:focus,
@@ -260,7 +262,7 @@ hr {
 .tea-inside.inside-section.green {
   background: #91d04d url(../img/section-square.png);
   box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.3), inset 0 4px 10px rgba(0, 0, 0, 0.3);
-  color: #fff;
+  color: #ffffff;
 }
 .tea-inside.inside-section div {
   max-width: 50%;
@@ -288,7 +290,7 @@ hr {
 }
 .tea-inside.inside-section.green h2,
 #poststuff .tea-inside.inside-section.green h2 {
-  color: #fff;
+  color: #ffffff;
 }
 .tea-inside.inside-section ul {
   list-style: none;
@@ -307,7 +309,7 @@ hr {
  * Main navigation
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-main-nav {
   background: #91d04d url(../img/section-square.png);
@@ -361,12 +363,12 @@ hr {
   vertical-align: middle;
 }
 .tea-main-nav .tea-breadcrumb {
-  color: #fff;
+  color: #ffffff;
   font-size: 16px;
   line-height: 60px;
 }
 .tea-main-nav ul {
-  background-color: #222;
+  background-color: #232323;
   bottom: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
   font-size: 0;
@@ -388,7 +390,7 @@ hr {
   right: 0;
 }
 .tea-main-nav li {
-  color: #fff;
+  color: #ffffff;
   display: block;
   font-size: 14px;
   font-weight: normal;
@@ -401,7 +403,7 @@ hr {
   z-index: 2;
 }
 .tea-main-nav a {
-  color: #fff;
+  color: #ffffff;
   display: block;
   line-height: 44px;
   padding: 0 14px;
@@ -412,12 +414,12 @@ hr {
 }
 .tea-main-nav li a:focus,
 .tea-main-nav li a:hover {
-  background-color: #111;
+  background-color: #111111;
   color: #91d04d;
 }
 .tea-main-nav li a.current {
   background-color: #3b3d3c;
-  color: #fff;
+  color: #ffffff;
 }
 .tea-main-nav a.fallback {
   background-color: rgba(0, 0, 0, 0.7);
@@ -437,7 +439,7 @@ hr {
  * Messages and alerts
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 /*--- [MESSAGES] ---*/
 #update-nag,
@@ -447,8 +449,8 @@ hr {
   margin: 32px 18px 32px 0px;
 }
 div.tea_to_message {
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  border: 1px solid #ffffff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   font-size: 13px;
   line-height: 2.1em;
@@ -501,7 +503,7 @@ div.tea_to_message p {
   z-index: 2;
 }
 div.tea_to_message p.about {
-  color: #777;
+  color: #5e5e5e;
   font-size: 16px;
   margin: 0;
   padding: 0;
@@ -523,37 +525,25 @@ div.tea_to_message .column {
   width: 32%;
 }
 /*--- [ALERTS] ---*/
-.tea_to.wrap .alert {
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  color: #c09853;
-  margin: 10px 19px 0;
-  padding: 0 10px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+.tea_to.wrap div.error {
+  border: 1px solid #dd3d36;
+  background: #ffffff;
+  -webkit-box-shadow: 0 0 0 2px rgba(221, 61, 54, 0.3);
+  -moz-box-shadow: 0 0 0 2px rgba(221, 61, 54, 0.3);
+  box-shadow: 0 0 0 2px rgba(221, 61, 54, 0.3);
+  padding: 1px 12px;
 }
-.tea_to.wrap .alert h4 {
-  margin: 0;
+.tea_to.wrap div.updated {
+  border: 1px solid #55bb3a;
+  background: #ffffff;
+  -webkit-box-shadow: 0 0 0 2px rgba(85, 187, 58, 0.3);
+  -moz-box-shadow: 0 0 0 2px rgba(85, 187, 58, 0.3);
+  box-shadow: 0 0 0 2px rgba(85, 187, 58, 0.3);
+  padding: 1px 12px;
 }
-.tea_to.wrap .alert .close {
-  line-height: 20px;
-  position: relative;
-  right: -21px;
-  top: -2px;
-}
-.tea_to.wrap .alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
-  margin: 0 5px -3px;
-}
-.tea_to.wrap .alert-danger {
-  background-color: #f2dede;
-  border-color: #ebccd1;
-  color: #a94442;
-  margin: 0 5px -3px;
-}
-.tea_to.wrap .alert-warning {
-  margin: 0 5px -3px;
+.tea_to.wrap div.headsup.error,
+.tea_to.wrap div.headsup.updated {
+  margin: 35px 2% 0;
 }
 
 /*!
@@ -561,10 +551,10 @@ div.tea_to_message .column {
  * Background plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.background hr {
-  border: 1px solid #ececec;
+  border: 1px solid #ffffff;
   margin: 5px 0 20px;
 }
 .tea-inside.background .bg-image label {
@@ -573,7 +563,7 @@ div.tea_to_message .column {
   text-align: center;
 }
 .tea-inside.background .bg-image label img {
-  border: 5px solid #fff;
+  border: 5px solid #ffffff;
   display: block;
 }
 .tea-inside.background .bg-image label:hover img {
@@ -591,7 +581,7 @@ div.tea_to_message .column {
   width: 49%;
 }
 .tea-inside.background .bg-repeat label {
-  background-color: #fff;
+  background-color: #ffffff;
   display: block;
   padding: 5px;
 }
@@ -604,7 +594,7 @@ div.tea_to_message .column {
 .tea-inside.background label .image-to-show span {
   background: #e5f7e5;
   bottom: 0;
-  color: #000;
+  color: #000000;
   display: none;
   left: 0;
   padding: 5px;
@@ -615,7 +605,7 @@ div.tea_to_message .column {
 }
 .tea-inside.background label.selected .image-to-show span {
   background: #91d04d;
-  color: #fff;
+  color: #ffffff;
   display: block;
 }
 
@@ -624,10 +614,10 @@ div.tea_to_message .column {
  * Checkbox plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.checkbox {
-  background: #fff;
+  background: #ffffff;
 }
 .tea-inside.checkbox .item {
   float: left;
@@ -638,7 +628,7 @@ div.tea_to_message .column {
   clear: left;
 }
 .tea-inside.checkbox label {
-  background-color: #fff;
+  background-color: #ffffff;
   border-left: 5px solid #e5f7e5;
   display: block;
   padding: 5px;
@@ -659,159 +649,10 @@ div.tea_to_message .column {
  * Color plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside input.color-picker {
   width: 100px;
-}
-
-/*!
- * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
- * Connection plugin
- *
- * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
- */
-/*--- [GLOBALS] ---*/
-.tea_to_wrap.connection.tea-screen-meta {
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: block;
-  margin: 0 5px 20px;
-  position: relative;
-}
-.tea_to_wrap.connection .tea-contextual-help-wrap {
-  margin: 0 0 0 -4px;
-  overflow: auto;
-  padding: 0;
-  position: relative;
-}
-.tea_to_wrap.connection .tea-contextual-help-back {
-  background-color: #fff;
-  border-color: #ccc;
-  border-style: solid;
-  border-width: 0 1px;
-  bottom: 0;
-  left: 220px;
-  position: absolute;
-  right: 20px;
-  top: 0;
-}
-.postbox .tea_to_wrap.connection.tea_to_review .tea-contextual-help-back {
-  left: 140px;
-}
-.tea_to_wrap.connection .tea-contextual-help-columns {
-  position: relative;
-}
-/*--- [MENU] ---*/
-.tea_to_wrap.connection .contextual-help-tabs {
-  width: 220px;
-}
-.postbox .tea_to_wrap.connection.tea_to_review .contextual-help-tabs {
-  width: 140px;
-}
-.tea_to_wrap.connection .contextual-help-tabs h2 {
-  padding-left: 16px !important;
-}
-.tea_to_wrap.connection .contextual-help-tabs h2 img {
-  vertical-align: middle;
-}
-.tea_to_wrap.connection .contextual-help-tabs a {
-  color: #55bb3a;
-}
-.tea_to_wrap.connection .contextual-help-tabs a:focus,
-.tea_to_wrap.connection .contextual-help-tabs a:hover {
-  color: #000;
-}
-.tea_to_wrap.connection .contextual-help-tabs .active {
-  background: #fff;
-  border-left: 2px solid #91d04d;
-}
-.tea_to_wrap.connection .contextual-help-tabs .active a {
-  color: #000;
-}
-.tea_to_wrap.connection.tea_to_review .contextual-help-tabs li {
-  text-align: center;
-}
-.postbox .tea_to_wrap.connection.tea_to_review .contextual-help-tabs li {
-  text-align: left;
-}
-.tea_to_wrap.connection.tea_to_review .contextual-help-tabs li a {
-  padding-left: 5px;
-  position: relative;
-}
-.tea_to_wrap.connection.tea_to_review .contextual-help-tabs li .details {
-  float: right;
-}
-.tea_to_wrap.connection .contextual-help-tabs hr {
-  margin-left: 4px;
-}
-.tea_to_wrap.connection .contextual-help-tabs .button-create {
-  background: #91d04d;
-  border-color: #55bb3a;
-  color: #fff;
-  display: block;
-  font-size: 16px;
-  height: auto;
-  line-height: 50px;
-  margin: 0 auto 10px;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-}
-.tea_to_wrap.connection .contextual-help-tabs .button-create:hover {
-  background: #55bb3a;
-}
-.tea_to_wrap.connection .contextual-help-tabs .button-index {
-  color: #fff;
-  border-color: #0074a2;
-  background: #2ea2cc;
-  display: block;
-  font-size: 16px;
-  height: auto;
-  line-height: 50px;
-  margin: 0 auto 10px;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-}
-.tea_to_wrap.connection .contextual-help-tabs .button-index:hover {
-  background: #0074a2;
-}
-.tea_to_wrap.connection .contextual-help-tabs .submitsuccess {
-  background: transparent;
-  border: none;
-  color: #3a71bb;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto 10px;
-}
-.tea_to_wrap.connection .contextual-help-tabs .submitsuccess:hover {
-  color: #1a4279;
-  text-decoration: underline;
-}
-.tea_to_wrap.connection .contextual-help-tabs .submitdelete {
-  background: transparent;
-  border: none;
-  color: #bc0b0b;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto 10px;
-}
-.tea_to_wrap.connection .contextual-help-tabs .submitdelete:hover {
-  color: red;
-  text-decoration: underline;
-}
-.tea_to_wrap.connection .contextual-help-tabs .forms .button.button-primary {
-  display: block;
-  margin: 0 auto;
-}
-/*--- [CONTENTS] ---*/
-.tea_to_wrap.connection .contextual-help-tabs-wrap {
-  padding: 15px 20px;
-  position: relative;
 }
 
 /*!
@@ -831,11 +672,11 @@ div.tea_to_message .column {
  * Elasticsearch plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea_to_wrap.elasticsearch.tea-screen-meta {
   background-color: #f1f1f1;
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: block;
@@ -849,8 +690,8 @@ div.tea_to_message .column {
   position: relative;
 }
 .tea_to_wrap.elasticsearch .tea-contextual-help-back {
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: #ffffff;
+  border-color: #dddddd;
   border-style: solid;
   border-width: 0 1px;
   bottom: 0;
@@ -883,14 +724,14 @@ div.tea_to_message .column {
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs a:focus,
 .tea_to_wrap.elasticsearch .contextual-help-tabs a:hover {
-  color: #000;
+  color: #000000;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .active {
-  background: #fff;
+  background: #ffffff;
   border-left: 2px solid #91d04d;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .active a {
-  color: #000;
+  color: #000000;
 }
 .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs li {
   text-align: center;
@@ -911,7 +752,7 @@ div.tea_to_message .column {
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-create {
   background: #91d04d;
   border-color: #55bb3a;
-  color: #fff;
+  color: #ffffff;
   display: block;
   font-size: 16px;
   height: auto;
@@ -925,8 +766,8 @@ div.tea_to_message .column {
   background: #55bb3a;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-index {
-  color: #fff;
-  border-color: #0074a2;
+  color: #ffffff;
+  border-color: #2581a2;
   background: #2ea2cc;
   display: block;
   font-size: 16px;
@@ -938,24 +779,24 @@ div.tea_to_message .column {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-index:hover {
-  background: #0074a2;
+  background: #2581a2;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitsuccess {
   background: transparent;
   border: none;
-  color: #3a71bb;
+  color: #2ea2cc;
   cursor: pointer;
   display: block;
   margin: 0 auto 10px;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitsuccess:hover {
-  color: #1a4279;
+  color: #1b6079;
   text-decoration: underline;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitdelete {
   background: transparent;
   border: none;
-  color: #bc0b0b;
+  color: #dd3d36;
   cursor: pointer;
   display: block;
   margin: 0 auto 10px;
@@ -979,7 +820,7 @@ div.tea_to_message .column {
  * Font plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.gfont label {
   float: left;
@@ -989,7 +830,7 @@ div.tea_to_message .column {
   width: 200px;
 }
 .tea-inside.gfont label span {
-  border: 5px solid #fff;
+  border: 5px solid #ffffff;
   display: block;
   font-size: 18px;
   height: 25px;
@@ -1008,17 +849,17 @@ div.tea_to_message .column {
  * Gallery plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 /*--- [LISTING] ---*/
 .tea-inside.gallery .upload-listing {
-  border-right: 1px solid #eee;
+  border-right: 1px solid #ffffff;
   float: left;
   width: 140px;
 }
 .tea-inside.gallery .upload-listing li {
   background: url(../img/bg-upload.png) 0 0;
-  border: 1px solid #fff;
+  border: 1px solid #ffffff;
   display: inline-block;
   height: 60px;
   margin: 5px 6px 5px 0;
@@ -1040,8 +881,8 @@ div.tea_to_message .column {
   width: 50px;
 }
 .tea-inside.gallery .upload-listing li .del_item {
-  background-color: #fff;
-  color: #bc0b0b;
+  background-color: #ffffff;
+  color: #990000;
   display: block;
   font-size: 14px;
   font-weight: 700;
@@ -1115,7 +956,7 @@ div.tea_to_message .column {
  * ??????????????? plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.image label {
   float: left;
@@ -1123,7 +964,7 @@ div.tea_to_message .column {
   text-align: center;
 }
 .tea-inside.image label img {
-  border: 5px solid #fff;
+  border: 5px solid #ffffff;
   display: block;
 }
 .tea-inside.image label:hover img {
@@ -1138,7 +979,7 @@ div.tea_to_message .column {
  * Label plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea_to_wrap label.inlineblock {
   display: inline-block;
@@ -1150,7 +991,7 @@ div.tea_to_message .column {
  * Link plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.link label {
   display: block;
@@ -1178,10 +1019,10 @@ div.tea_to_message .column {
  * Modal box
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-modal {
-  background: #fff;
+  background: #ffffff;
   display: none;
   height: 70%;
   left: 50%;
@@ -1199,7 +1040,7 @@ div.tea_to_message .column {
   transform: translateX(-50%) translateY(-50%);
 }
 .tea-modal header {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ffffff;
   height: 50px;
   line-height: 50px;
   overflow: hidden;
@@ -1207,7 +1048,7 @@ div.tea_to_message .column {
 }
 #poststuff .tea-modal header h2,
 .tea-modal header h2 {
-  color: #777;
+  color: #5e5e5e;
   display: inline-block;
   font-size: 22px;
   font-weight: normal;
@@ -1216,8 +1057,8 @@ div.tea_to_message .column {
   padding-left: 20px;
 }
 .tea-modal header .close {
-  border-left: 1px solid #eee;
-  color: #777;
+  border-left: 1px solid #ffffff;
+  color: #5e5e5e;
   display: block;
   float: right;
   font-size: 30px;
@@ -1226,10 +1067,10 @@ div.tea_to_message .column {
   text-decoration: none;
 }
 .tea-modal header .close:hover {
-  background-color: #fafafa;
+  background-color: #fbfbfb;
 }
 .tea-modal .content-container {
-  background: #fff;
+  background: #ffffff;
   bottom: 40px;
   left: 40px;
   overflow-y: auto;
@@ -1244,14 +1085,14 @@ div.tea_to_message .column {
   width: 200px;
 }
 .tea-modal .content pre {
-  color: #000;
+  color: #000000;
   font-family: inherit;
   margin: 0;
   text-align: left;
   white-space: pre-wrap;
 }
 .tea-modal-backdrop {
-  background: #000;
+  background: #000000;
   bottom: 0;
   display: none;
   min-height: 360px;
@@ -1265,18 +1106,26 @@ div.tea_to_message .column {
 .tea-modal-backdrop.opened {
   display: block;
 }
+@media (max-width: 782px) {
+  #poststuff .tea-modal header h2,
+  .tea-modal header h2 {
+    display: block;
+    font-size: 14px;
+    overflow: hidden;
+  }
+}
 
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
  * Network plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-connection {
-  background-color: #000;
-  border: 5px solid #f7f7f7;
-  color: #fff;
+  background-color: #000000;
+  border: 5px solid #f1f1f1;
+  color: #ffffff;
   display: inline-block;
   font-size: 20px;
   line-height: 30px;
@@ -1306,7 +1155,7 @@ a.tea-connection:before {
 .tea-connection.is-active,
 .tea-connection:focus,
 .tea-connection:hover {
-  color: #fff;
+  color: #ffffff;
   -webkit-box-shadow: inset 0 -90px 0 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow: inset 0 -90px 0 0 rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 -90px 0 0 rgba(0, 0, 0, 0.5);
@@ -1358,7 +1207,7 @@ a.tea-connection:before {
   background-color: #ff3a00;
 }
 .tea-connection.tea-stumbleupon {
-  background-color: #EB4823;
+  background-color: #eb4823;
 }
 .tea-connection.tea-tumblr {
   background-color: #32506d;
@@ -1376,10 +1225,24 @@ a.tea-connection:before {
   background-color: #21759b;
 }
 .tea-connection.tea-yahoo {
-  background-color: #7B0099;
+  background-color: #7b0099;
 }
 .tea-connection.tea-youtube {
   background-color: #bb0000;
+}
+@media (max-width: 782px) {
+  .tea-connection {
+    display: block;
+    margin: 20px auto;
+    max-width: 88%;
+    padding: 20px 15px;
+    width: 88%;
+  }
+  .tea-connection .fa-stack {
+    height: 60px;
+    line-height: 60px;
+    width: 40px;
+  }
 }
 
 /*!
@@ -1387,13 +1250,13 @@ a.tea-connection:before {
  * Radio plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.radio p {
   margin: 0 0 10px;
 }
 .tea-inside.radio label {
-  background-color: #fff;
+  background-color: #ffffff;
   border-left: 5px solid #e5f7e5;
   display: block;
   padding: 5px;
@@ -1445,15 +1308,221 @@ a.tea-connection:before {
  * RTE plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
+
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Screen meta plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+/*--- [GLOBALS] ---*/
+.tea_to_wrap.tea-screen-meta {
+  background-color: #f1f1f1;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: block;
+  margin: 0 5px 20px;
+  position: relative;
+}
+.tea_to_wrap.tea-screen-meta .tea-contextual-help-wrap {
+  margin: 0 0 0 -4px;
+  overflow: auto;
+  padding: 0;
+  position: relative;
+}
+.tea_to_wrap.tea-screen-meta .tea-contextual-help-back {
+  background-color: #ffffff;
+  border-color: #dddddd;
+  border-style: solid;
+  border-width: 0 1px;
+  bottom: 0;
+  left: 220px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+.postbox .tea_to_wrap.tea-screen-meta.tea_to_review .tea-contextual-help-back {
+  left: 140px;
+}
+.tea_to_wrap.tea-screen-meta .tea-contextual-help-columns {
+  position: relative;
+}
+/*--- [MENU] ---*/
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs {
+  width: 220px;
+}
+.postbox .tea_to_wrap.tea-screen-meta.tea_to_review .contextual-help-tabs {
+  width: 140px;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs h2 {
+  padding-left: 16px !important;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs h2 img {
+  vertical-align: middle;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs a {
+  color: #55bb3a;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs a:focus,
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs a:hover {
+  color: #000000;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .active {
+  background: #ffffff;
+  border-left: 2px solid #91d04d;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .active a {
+  color: #000000;
+}
+.tea_to_wrap.tea-screen-meta.tea_to_review .contextual-help-tabs li {
+  text-align: center;
+}
+.postbox .tea_to_wrap.tea-screen-meta.tea_to_review .contextual-help-tabs li {
+  text-align: left;
+}
+.tea_to_wrap.tea-screen-meta.tea_to_review .contextual-help-tabs li a {
+  padding-left: 5px;
+  position: relative;
+}
+.tea_to_wrap.tea-screen-meta.tea_to_review .contextual-help-tabs li .details {
+  float: right;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs hr {
+  margin-left: 4px;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .button-create {
+  background: #91d04d;
+  border-color: #55bb3a;
+  color: #ffffff;
+  display: block;
+  font-size: 16px;
+  height: auto;
+  line-height: 50px;
+  margin: 0 auto 10px;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .button-create:hover {
+  background: #55bb3a;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .button-index {
+  color: #ffffff;
+  border-color: #2581a2;
+  background: #2ea2cc;
+  display: block;
+  font-size: 16px;
+  height: auto;
+  line-height: 50px;
+  margin: 0 auto 10px;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .button-index:hover {
+  background: #2581a2;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .submitsuccess {
+  background: transparent;
+  border: none;
+  color: #2ea2cc;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 10px;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .submitsuccess:hover {
+  color: #1b6079;
+  text-decoration: underline;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .submitdelete {
+  background: transparent;
+  border: none;
+  color: #dd3d36;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 10px;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .submitdelete:hover {
+  color: red;
+  text-decoration: underline;
+}
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs .forms .button.button-primary {
+  display: block;
+  margin: 0 auto;
+}
+/*--- [CONTENTS] ---*/
+.tea_to_wrap.tea-screen-meta .contextual-help-tabs-wrap {
+  padding: 15px 20px;
+  position: relative;
+}
+/*--- [RESPONSIVE] ---*/
+@media (max-width: 782px) {
+  .tea_to_wrap .tea-contextual-help-wrap {
+    margin-left: 0;
+  }
+  .tea_to_wrap .tea-contextual-help-back {
+    left: 10px;
+    right: 10px;
+    top: 0;
+  }
+  .tea_to_wrap .contextual-help-tabs {
+    float: none;
+    padding: 0 11px;
+    width: auto;
+  }
+  .tea_to_wrap .contextual-help-tabs ul {
+    background-color: #f1f1f1;
+    border: 1px solid #dddddd;
+    border-width: 1px 0;
+    margin: 0 -1px;
+    padding: 3px 1px;
+  }
+  .tea_to_wrap .contextual-help-tabs li {
+    border-width: 0 0 2px 0;
+    display: inline-block;
+  }
+  .tea_to_wrap .contextual-help-tabs .active {
+    border-bottom: 2px solid #91d04d;
+    border-left: 0;
+    margin-right: 0;
+  }
+  .tea_to_wrap .contextual-help-tabs a {
+    padding: 5px 12px;
+  }
+  .tea_to_wrap .contextual-help-tabs .active a {
+    border: none;
+  }
+  .tea_to_wrap .contextual-help-tabs hr {
+    display: none;
+  }
+  .tea_to_wrap .contextual-help-tabs .forms {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 350px;
+  }
+  .tea_to_wrap .contextual-help-tabs .forms form {
+    float: right;
+    margin: 0 5px;
+  }
+  .tea_to_wrap .contextual-help-tabs .forms .submitdelete {
+    margin: 5px auto;
+  }
+  .tea_to_wrap .help-tab-content {
+    margin: 0;
+  }
+}
 
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
  * Social plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.social div {
   margin: 0 0 10px 0;
@@ -1469,19 +1538,29 @@ a.tea-connection:before {
   vertical-align: middle;
   width: 300px;
 }
+@media (max-width: 782px) {
+  .tea_to_wrap .inside.social label {
+    margin-right: 1%;
+    width: 14%;
+  }
+  .tea_to_wrap .inside.social input[type="text"] {
+    margin-right: 0;
+    width: 41%;
+  }
+}
 
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
  * Textarea plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.textarea {
   position: relative;
 }
 .tea-inside.textarea .counter {
-  background-color: #ccc;
+  background-color: #dddddd;
   font-size: 10px;
   left: 98%;
   margin-left: -12px;
@@ -1502,7 +1581,7 @@ a.tea-connection:before {
  * Upload plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 .tea-inside.upload .upload_image_result {
   margin-top: 10px;
@@ -1561,8 +1640,8 @@ a.tea-connection:before {
 }
 .tea-inside.upload .upload_image_result li.upload-time a,
 .tea-inside.upload .upload_image_result div.upload-time a {
-  background: #fafafa;
-  border: 1px solid #ccc;
+  background: #fbfbfb;
+  border: 1px solid #dddddd;
   box-shadow: 0 0 0 4px rgba(85, 187, 58, 0.3);
   color: #91d04d;
   display: block;
@@ -1604,8 +1683,8 @@ a.tea-connection:before {
 }
 .tea-inside.upload .upload_image_result .del_item,
 .tea-inside.upload .upload_image_result .del_image {
-  background-color: #fff;
-  color: #bc0b0b;
+  background-color: #ffffff;
+  color: #dd3d36;
   display: block;
   font-size: 18px;
   font-weight: 700;
@@ -1621,7 +1700,7 @@ a.tea-connection:before {
 }
 .tea-inside.upload .upload_image_result .del_item:hover,
 .tea-inside.upload .upload_image_result .del_image:hover {
-  color: red;
+  color: #ff0000;
 }
 
 /*!
@@ -1629,7 +1708,7 @@ a.tea-connection:before {
  * Responsive CSS
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 @media (max-width: 1300px) {
   .tea_to_wrap .tea-nav-menus-frame {
@@ -1687,7 +1766,6 @@ a.tea-connection:before {
   .tea-inside.inside-section {
     margin: 0 -17px;
   }
-  /* Homepage */
   .tea-inside.inside-section div.right,
   .tea-inside.inside-section div.left {
     float: none;
@@ -1721,89 +1799,5 @@ a.tea-connection:before {
 @media (max-width: 782px) {
   .teato-mainwrap #wpbody-content .wrap {
     margin-left: -10px;
-  }
-  /* Modal */
-  #poststuff .tea-modal header h2,
-  .tea-modal header h2 {
-    display: block;
-    font-size: 14px;
-    overflow: hidden;
-  }
-  /* Connections */
-  .tea-connection {
-    display: block;
-    margin: 20px auto;
-    max-width: 88%;
-    padding: 20px 15px;
-    width: 88%;
-  }
-  .tea-connection .fa-stack {
-    height: 60px;
-    line-height: 60px;
-    width: 40px;
-  }
-  /* Maps & Elasticsearch */
-  .tea_to_wrap .tea-contextual-help-wrap {
-    margin-left: 0;
-  }
-  .tea_to_wrap .tea-contextual-help-back {
-    left: 10px;
-    right: 10px;
-    top: 0;
-  }
-  .tea_to_wrap .contextual-help-tabs {
-    float: none;
-    padding: 0 11px;
-    width: auto;
-  }
-  .tea_to_wrap .contextual-help-tabs ul {
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-width: 1px 0;
-    margin: 0 -1px;
-    padding: 3px 1px;
-  }
-  .tea_to_wrap .contextual-help-tabs li {
-    border-width: 0 0 2px 0;
-    display: inline-block;
-  }
-  .tea_to_wrap .contextual-help-tabs .active {
-    border-bottom: 2px solid #91d04d;
-    border-left: 0;
-    margin-right: 0;
-  }
-  .tea_to_wrap .contextual-help-tabs a {
-    padding: 5px 12px;
-  }
-  .tea_to_wrap .contextual-help-tabs .active a {
-    border: none;
-  }
-  .tea_to_wrap .contextual-help-tabs hr {
-    display: none;
-  }
-  .tea_to_wrap .contextual-help-tabs .forms {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    width: 350px;
-  }
-  .tea_to_wrap .contextual-help-tabs .forms form {
-    float: right;
-    margin: 0 5px;
-  }
-  .tea_to_wrap .contextual-help-tabs .forms .submitdelete {
-    margin: 5px auto;
-  }
-  .tea_to_wrap .help-tab-content {
-    margin: 0;
-  }
-  /* Social */
-  .tea_to_wrap .inside.social label {
-    margin-right: 1%;
-    width: 14%;
-  }
-  .tea_to_wrap .inside.social input[type="text"] {
-    margin-right: 0;
-    width: 41%;
   }
 }

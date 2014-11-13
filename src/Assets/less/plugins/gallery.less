@@ -3,19 +3,19 @@
  * Gallery plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 
 /*--- [LISTING] ---*/
 .tea-inside.gallery .upload-listing {
-    border-right: 1px solid #eee;
+    border-right: 1px solid lighten(@gray, 80%);
     float: left;
     width: 140px;
 }
 .tea-inside.gallery .upload-listing li {
     background: url(../img/bg-upload.png) 0 0;
-    border: 1px solid #fff;
+    border: 1px solid @white;
     display: inline-block;
     height: 60px;
     margin: 5px 6px 5px 0;
@@ -28,7 +28,7 @@
     width: 60px;
 }
 .tea-inside.gallery .upload-listing li.selected {
-    border-color: #91d04d;
+    border-color: @primary;
 }
 .tea-inside.gallery .upload-listing li .itm {
     display: block;
@@ -37,8 +37,8 @@
     width: 50px;
 }
 .tea-inside.gallery .upload-listing li .del_item {
-    background-color: #fff;
-    color: #bc0b0b;
+    background-color: @white;
+    color: darken(@red, 20%);
     display: block;
     font-size: 14px;
     font-weight: 700;

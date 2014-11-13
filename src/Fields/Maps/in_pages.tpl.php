@@ -180,7 +180,7 @@
                         </label>
                     </h3>
                     <div class="inside tea-inside textarea">
-                        <textarea name="<?php echo $id ?>[json]" id="<?php echo $id ?>-json" rows="16" placeholder="[{'featureType':'administrative', 'stylers':[{'visibility':'off'}] }]"><?php echo stripslashes($vals['json']) ?></textarea>
+                        <textarea name="<?php echo $id ?>[json]" id="<?php echo $id ?>-json" rows="16" class="textarea" placeholder="[{'featureType':'administrative', 'stylers':[{'visibility':'off'}] }]"><?php echo stripslashes($vals['json']) ?></textarea>
 
                         <p><?php _e('To customize your Google map, go to <a href="http://snazzymaps.com/" target="_blank"><b>SnazzyMaps</b></a> website, choose a theme and copy/paste the <code>Javascript style array</code> code in this textarea.', TTO_I18N) ?></p>
                     </div>

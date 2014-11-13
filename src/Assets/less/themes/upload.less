@@ -1,6 +1,6 @@
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
- * Modals plugin
+ * Upload plugin
  *
  * Copyright 20xx Take a Tea
  * By Take a Tea <takeatea.com> ;)
@@ -11,26 +11,26 @@
     color: @primary;
 }
 .media-frame a:hover {
-    color: #3a80bb;
+    color: @main;
 }
 .wp-core-ui .button-primary-disabled,
 .wp-core-ui .button-primary.disabled,
 .wp-core-ui .button-primary:disabled,
 .wp-core-ui .button-primary[disabled] {
-    color: #aaa!important;
-    border-color: #ddd!important;
-    background: #f7f7f7!important;
+    color: @gray !important;
+    border-color: lighten(@gray, 60%) !important;
+    background: @graylight !important;
 }
 .attachment.details {
-    -webkit-box-shadow: 0 0 0 1px #fff,0 0 0 5px @primary;
-    -moz-box-shadow: 0 0 0 1px #fff,0 0 0 5px @primary;
-    box-shadow: 0 0 0 1px #fff,0 0 0 5px @primary;
+    -webkit-box-shadow: 0 0 0 2px @primary;
+    -moz-box-shadow: 0 0 0 2px @primary;
+    box-shadow: 0 0 0 2px @primary;
 }
 .attachment.details .check {
     background-color: @primary;
-    -webkit-box-shadow: 0 0 0 1px #fff,0 0 0 2px @primary;
-    -moz-box-shadow: 0 0 0 1px #fff,0 0 0 2px @primary;
-    box-shadow: 0 0 0 1px #fff,0 0 0 2px @primary;
+    -webkit-box-shadow: 0 0 0 1px @primary;
+    -moz-box-shadow: 0 0 0 1px @primary;
+    box-shadow: 0 0 0 1px @primary;
 }
 .media-progress-bar div {
     background-color: @primary;

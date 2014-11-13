@@ -1,3 +1,9 @@
+## 1.5.1-1 (November 13, 2014)
+
+Update less compilation, add new messages display.
+Theme are now lessables.
+
+
 ## 1.5.1 (November 12, 2014)
 
 Fix bugs on <gallery>, on <upload>, on much more.

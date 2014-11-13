@@ -7,18 +7,18 @@
  */
 
 .wrap .add-new-h2, .wrap .add-new-h2:active {
-    background: #3b3d3c;
+    background: @graydark;
     border-left: 6px solid @primary;
     border-radius: 0;
-    color: #fff;
+    color: @white;
     font-weight: 700;
     padding: 6px 14px;
     text-transform: uppercase;
 }
 .wrap .add-new-h2:hover {
     background: @primary;
-    border-left: 6px solid #3b3d3c;
-    color: #fff;
+    border-left: 6px solid @graydark;
+    color: @white;
 }
 .view-switch a.current:before {
     color: @primary;
@@ -39,18 +39,18 @@ input[type=checkbox]:checked:before {
 }
 .wp-core-ui .button-primary {
     background: @primary;
-    border-color: #3a80bb;
-    -webkit-box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
-    -moz-box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
+    border-color: @main;
+    -webkit-box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
 }
 .wp-core-ui .button-primary.focus,
 .wp-core-ui .button-primary.hover,
 .wp-core-ui .button-primary:focus,
 .wp-core-ui .button-primary:hover {
-    background: #3a80bb;
-    border-color: #3a80bb;
-    -webkit-box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
-    -moz-box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 1px 0 rgba(77,77,208,.5),0 1px 0 rgba(0,0,0,.15);
+    background: @main;
+    border-color: @main;
+    -webkit-box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@main, 50%),0 1px 0 fade(@black, 15%);
 }

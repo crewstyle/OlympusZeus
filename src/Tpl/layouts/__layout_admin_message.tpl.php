@@ -1,5 +1,3 @@
-<div id="message" class="error">
-    <ul>
-        <?php echo $content ?>
-    </ul>
+<div class="error">
+    <p><?php echo $content ?></p>
 </div>

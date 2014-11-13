@@ -7,13 +7,13 @@
  */
 
 .postbox {
-    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,.05);
-    -moz-box-shadow: 0 3px 0 rgba(0,0,0,.05);
-    box-shadow: 0 3px 0 rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 3px 0 fade(@black, 5%);
+    -moz-box-shadow: 0 3px 0 fade(@black, 5%);
+    box-shadow: 0 3px 0 fade(@black, 5%);
 }
 .postbox > h3 {
-    background: #ddd;
-    -webkit-box-shadow: inset 0 -10px 10px -5px rgba(0,0,0,.1);
-    -moz-box-shadow: inset 0 -10px 10px -5px rgba(0,0,0,.1);
-    box-shadow: inset 0 -10px 10px -5px rgba(0,0,0,.1);
+    background: lighten(@gray, 20%);
+    -webkit-box-shadow: inset 0 -10px 10px -5px fade(@black, 10%);
+    -moz-box-shadow: inset 0 -10px 10px -5px fade(@black, 10%);
+    box-shadow: inset 0 -10px 10px -5px fade(@black, 10%);
 }

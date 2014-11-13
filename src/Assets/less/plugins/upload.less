@@ -3,7 +3,7 @@
  * Upload plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 .tea-inside.upload .upload_image_result {
@@ -63,10 +63,10 @@
 }
 .tea-inside.upload .upload_image_result li.upload-time a,
 .tea-inside.upload .upload_image_result div.upload-time a {
-    background: #fafafa;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 0 4px rgba(85,187,58,.3);
-    color: #91d04d;
+    background: @graylighter;
+    border: 1px solid lighten(@gray, 20%);
+    box-shadow: 0 0 0 4px fade(@main, 30%);
+    color: @primary;
     display: block;
     font-size: 30px;
     padding: 38px;
@@ -80,9 +80,9 @@
 .tea-inside.upload .upload_image_result li.upload-time a:hover,
 .tea-inside.upload .upload_image_result div.upload-time a:focus,
 .tea-inside.upload .upload_image_result div.upload-time a:hover {
-    color: #55bb3a;
-    border: 1px solid #55bb3a;
-    box-shadow: 0 0 0 4px rgba(85,187,58,.6);
+    color: @main;
+    border: 1px solid @main;
+    box-shadow: 0 0 0 4px fade(@main, 60%);
 }
 .tea-inside.upload .upload_image_result li.upload-time a {
     display: block;
@@ -106,8 +106,8 @@
 }
 .tea-inside.upload .upload_image_result .del_item,
 .tea-inside.upload .upload_image_result .del_image {
-    background-color: #fff;
-    color: #bc0b0b;
+    background-color: @white;
+    color: @danger;
     display: block;
     font-size: 18px;
     font-weight: 700;
@@ -123,5 +123,5 @@
 }
 .tea-inside.upload .upload_image_result .del_item:hover,
 .tea-inside.upload .upload_image_result .del_image:hover {
-    color: red;
+    color: @red;
 }

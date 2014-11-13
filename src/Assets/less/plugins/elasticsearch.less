@@ -3,146 +3,146 @@
  * Elasticsearch plugin
  *
  * Copyright 20xx Take a Tea
- * By Take a Tea <takeatea.com> :)
+ * By Take a Tea <takeatea.com> ;)
  */
 
 .tea_to_wrap.elasticsearch.tea-screen-meta {
-    background-color:#f1f1f1;
-    border:1px solid #ccc;
-    border-radius:3px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.05);
-    display:block;
-    margin:0 5px 20px;
-    position:relative;
+    background-color: @graylight;
+    border: 1px solid lighten(@gray, 20%);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px fade(@black, 5%);
+    display: block;
+    margin: 0 5px 20px;
+    position: relative;
 }
 .tea_to_wrap.elasticsearch .tea-contextual-help-wrap {
-    margin:0 0 0 -4px;
-    overflow:auto;
-    padding:0;
-    position:relative;
+    margin: 0 0 0 -4px;
+    overflow: auto;
+    padding: 0;
+    position: relative;
 }
 .tea_to_wrap.elasticsearch .tea-contextual-help-back {
-    background-color:#fff;
-    border-color:#ccc;
-    border-style:solid;
-    border-width:0 1px;
-    bottom:0;
-    left:220px;
-    position:absolute;
-    right:20px;
-    top:0;
+    background-color: @white;
+    border-color: lighten(@gray, 20%);
+    border-style: solid;
+    border-width: 0 1px;
+    bottom: 0;
+    left: 220px;
+    position: absolute;
+    right: 20px;
+    top: 0;
 }
 .postbox .tea_to_wrap.elasticsearch.tea_to_review .tea-contextual-help-back {
-    left:140px;
+    left: 140px;
 }
 .tea_to_wrap.elasticsearch .tea-contextual-help-columns {
-    position:relative;
+    position: relative;
 }
 /* Menu */
 .tea_to_wrap.elasticsearch .contextual-help-tabs {
-    width:220px;
+    width: 220px;
 }
 .postbox .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs {
-    width:140px;
+    width: 140px;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs h2 {
-    padding-left:16px !important;
+    padding-left: 16px !important;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs h2 img {
-    vertical-align:middle;
+    vertical-align: middle;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs a {
-    color:#55bb3a;
+    color: @main;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs a:focus,
 .tea_to_wrap.elasticsearch .contextual-help-tabs a:hover {
-    color:#000;
+    color: @black;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .active {
-    background:#fff;
-    border-left:2px solid #91d04d;
+    background: @white;
+    border-left: 2px solid @primary;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .active a {
-    color:#000;
+    color: @black;
 }
 .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs li {
-    text-align:center;
+    text-align: center;
 }
 .postbox .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs li {
-    text-align:left;
+    text-align: left;
 }
 .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs li a {
-    padding-left:5px;
-    position:relative;
+    padding-left: 5px;
+    position: relative;
 }
 .tea_to_wrap.elasticsearch.tea_to_review .contextual-help-tabs li .details {
-    float:right;
+    float: right;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs hr {
-    margin-left:4px;
+    margin-left: 4px;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-create {
-    background:#91d04d;
-    border-color:#55bb3a;
-    color:#fff;
-    display:block;
-    font-size:16px;
-    height:auto;
-    line-height:50px;
-    margin:0 auto 10px;
-    -webkit-box-shadow:0 1px 0 rgba(0,0,0,.15);
-    -moz-box-shadow:0 1px 0 rgba(0,0,0,.15);
-    box-shadow:0 1px 0 rgba(0,0,0,.15);
+    background: @primary;
+    border-color: @main;
+    color: @white;
+    display: block;
+    font-size: 16px;
+    height: auto;
+    line-height: 50px;
+    margin: 0 auto 10px;
+    -webkit-box-shadow: 0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: 0 1px 0 fade(@black, 15%);
+    box-shadow: 0 1px 0 fade(@black, 15%);
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-create:hover {
-    background:#55bb3a;
+    background: @main;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-index {
-    color:#fff;
-    border-color:#0074a2;
-    background:#2ea2cc;
-    display:block;
-    font-size:16px;
-    height:auto;
-    line-height:50px;
-    margin:0 auto 10px;
-    -webkit-box-shadow:0 1px 0 rgba(0,0,0,.08);
-    -moz-box-shadow:0 1px 0 rgba(0,0,0,.08);
-    box-shadow:0 1px 0 rgba(0,0,0,.08);
+    color: @white;
+    border-color: darken(@blue, 10%);
+    background: @blue;
+    display: block;
+    font-size: 16px;
+    height: auto;
+    line-height: 50px;
+    margin: 0 auto 10px;
+    -webkit-box-shadow: 0 1px 0 fade(@black, 8%);
+    -moz-box-shadow: 0 1px 0 fade(@black, 8%);
+    box-shadow: 0 1px 0 fade(@black, 8%);
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .button-index:hover {
-    background:#0074a2;
+    background: darken(@blue, 10%);
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitsuccess {
-    background:transparent;
-    border:none;
-    color:#3a71bb;
-    cursor:pointer;
-    display:block;
-    margin:0 auto 10px;
+    background: transparent;
+    border: none;
+    color: @blue;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 10px;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitsuccess:hover {
-    color:#1a4279;
-    text-decoration:underline;
+    color: darken(@blue, 20%);
+    text-decoration: underline;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitdelete {
-    background:transparent;
-    border:none;
-    color:#bc0b0b;
-    cursor:pointer;
-    display:block;
-    margin:0 auto 10px;
+    background: transparent;
+    border: none;
+    color: @danger;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 10px;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .submitdelete:hover {
-    color:red;
-    text-decoration:underline;
+    color: red;
+    text-decoration: underline;
 }
 .tea_to_wrap.elasticsearch .contextual-help-tabs .forms .button.button-primary {
-    display:block;
-    margin:0 auto;
+    display: block;
+    margin: 0 auto;
 }
 /* Content */
 .tea_to_wrap.elasticsearch .contextual-help-tabs-wrap {
-    padding:15px 20px;
-    position:relative;
+    padding: 15px 20px;
+    position: relative;
 }

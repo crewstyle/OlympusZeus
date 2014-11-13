@@ -21,12 +21,12 @@ body.login div#login form {
     box-shadow: none;
 }
 body.login div#login form label {
-    color: #999;
+    color: @graydark;
 }
 body.login div#login form .input {
-    background: #3b3d3c;
-    border: 1px solid #3b3d3c;
-    color: #999;
+    background: @graydarker;
+    border: 1px solid @graydarker;
+    color: @graydark;
     font-size: 16px;
     line-height: 20px;
     margin: 0;
@@ -35,9 +35,9 @@ body.login div#login form .input {
 }
 input:-webkit-autofill,
 body.login div#login form .input:-webkit-autofill {
-    background-color: #3b3d3c !important;
-    color: #999 !important;
-    -webkit-box-shadow: 0 0 0 40px #3b3d3c inset;
+    background-color: @graydarker !important;
+    color: @graydark !important;
+    -webkit-box-shadow: 0 0 0 40px @graydarker inset;
 }
 body.login div#login form p.forgetmenot {
     float: none;
@@ -47,20 +47,20 @@ body.login div#login form p.submit {
     margin-top: 25px;
 }
 body.login div#login form p.submit input#wp-submit {
-    background: #91d04d;
-    border-color: #55bb3a;
+    background: @primary;
+    border-color: @main;
     float: none;
     margin-top: 0;
     width: 100%;
-    -webkit-box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
-    -moz-box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
 }
 body.login div#login form p.submit input#wp-submit:focus,
 body.login div#login form p.submit input#wp-submit:hover {
-    background: #55bb3a;
-    border-color: #55bb3a;
-    -webkit-box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
-    -moz-box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 1px 0 rgba(145,208,77,.5),0 1px 0 rgba(0,0,0,.15);
+    background: @main;
+    border-color: @main;
+    -webkit-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
 }
