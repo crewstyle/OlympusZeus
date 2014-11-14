@@ -912,6 +912,13 @@ div.tea_to_message .column {
   -moz-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
+.tea-inside.gallery .upload-time a {
+  color: #91d04d;
+}
+.tea-inside.gallery .upload-time a:focus,
+.tea-inside.gallery .upload-time a:hover {
+  color: #55bb3a;
+}
 /*--- [ITEMS] ---*/
 .tea-inside.gallery .upload-none {
   display: none;

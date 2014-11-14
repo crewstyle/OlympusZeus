@@ -13,13 +13,6 @@ use Takeatea\TeaThemeOptions\TeaFields;
  * array(
  *     'type' => 'gallery',
  *     'title' => 'Show me your treasures...',
- *     'contents' => array(
- *         array(
- *             'content' => 'Yeah, I am the best at Super Bomberman 2 on SNES :D',
- *             'image' => 39 //Use image ID
- *         )
- *         //You can repeat this array as much as you want
- *     ),
  *     'id' => 'my_gallery_field_id'
  * )
  *
@@ -38,7 +31,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Gallery
- * @since 1.4.0
+ * @since 1.5.1-4
  *
  */
 class Gallery extends TeaFields

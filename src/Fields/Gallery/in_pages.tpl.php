@@ -7,7 +7,7 @@
 
     <div class="inside tea-inside gallery" data-title="<?php echo $title ?>">
         <p><?php echo $description ?></p>
-        <input type="hidden" name="<?php echo $id ?>[]" id="<?php echo $id ?>" value="" />
+        <input type="hidden" name="<?php echo $id ?>" id="<?php echo $id ?>" value="" />
         <?php wp_print_styles('editor-buttons') ?>
 
         <div class="uploads">

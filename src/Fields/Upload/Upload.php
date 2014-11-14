@@ -14,7 +14,6 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'upload',
  *     'title' => 'Upload',
  *     'id' => 'simple_upload',
- *     'std' => get_template_directory_uri() . 'img/my_default_image.png',
  *     'description' => 'Simple description to upload panel'
  * )
  *
@@ -33,7 +32,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Upload
- * @since 1.5.0-2
+ * @since 1.5.1-4
  *
  */
 class Upload extends TeaFields

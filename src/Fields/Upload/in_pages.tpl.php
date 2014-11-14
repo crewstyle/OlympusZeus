@@ -12,9 +12,7 @@
 
         <div class="upload_image_result">
             <?php if ($multiple): ?>
-                <input type="hidden" name="<?php echo $id ?>[0][url]" value="" />
-                <input type="hidden" name="<?php echo $id ?>[0][id]" value="" />
-                <input type="hidden" name="<?php echo $id ?>[0][name]" value="" />
+                <input type="hidden" name="<?php echo $id ?>" value="" />
 
                 <ul>
                     <?php
