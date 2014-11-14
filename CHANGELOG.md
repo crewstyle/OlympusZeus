@@ -1,3 +1,8 @@
+## 1.5.1-5 (November 15, 2014)
+
+Please, welcome to the new 4th elements: new custom admin themes.
+
+
 ## 1.5.1-4 (November 14, 2014)
 
 Fix bugs on <upload> and <gallery> fields.

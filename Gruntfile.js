@@ -23,7 +23,9 @@ module.exports = function(grunt) {
 
         //remove any previously-created files
         clean: [
-            '<%= teato.path.src %>/css/teato-less.css',
+            '<%= teato.path.src %>/css/teato.css',
+            '<%= teato.path.src %>/css/teato.admin.*.css',
+            '<%= teato.path.src %>/css/teato.login.css',
             '<%= teato.path.tar %>/css/*',
             '<%= teato.path.tar %>/fonts/*',
             '<%= teato.path.tar %>/img/*',
@@ -67,14 +69,17 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/css/font-awesome.css',
                         '<%= teato.path.src %>/css/teato.css'
                     ],
-                    '<%= teato.path.tar %>/css/teato.admin.green.css': [
-                        '<%= teato.path.src %>/css/teato.admin.green.css'
+                    '<%= teato.path.tar %>/css/teato.admin.earth.css': [
+                        '<%= teato.path.src %>/css/teato.admin.earth.css'
                     ],
-                    '<%= teato.path.tar %>/css/teato.admin.red.css': [
-                        '<%= teato.path.src %>/css/teato.admin.red.css'
+                    '<%= teato.path.tar %>/css/teato.admin.ocean.css': [
+                        '<%= teato.path.src %>/css/teato.admin.ocean.css'
                     ],
-                    '<%= teato.path.tar %>/css/teato.admin.blue.css': [
-                        '<%= teato.path.src %>/css/teato.admin.blue.css'
+                    '<%= teato.path.tar %>/css/teato.admin.vulcan.css': [
+                        '<%= teato.path.src %>/css/teato.admin.vulcan.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.wind.css': [
+                        '<%= teato.path.src %>/css/teato.admin.wind.css'
                     ],
                     '<%= teato.path.tar %>/css/teato.login.css': [
                         '<%= teato.path.src %>/css/teato.login.css'
@@ -214,7 +219,7 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    '<%= teato.path.src %>/css/teato.admin.green.css': [
+                    '<%= teato.path.src %>/css/teato.admin.earth.css': [
                         '<%= teato.path.src %>/less/_fontface.less',
                         '<%= teato.path.src %>/less/_theme.less',
                         '<%= teato.path.src %>/less/themes/*.less'
@@ -243,7 +248,7 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    '<%= teato.path.src %>/css/teato.admin.blue.css': [
+                    '<%= teato.path.src %>/css/teato.admin.ocean.css': [
                         '<%= teato.path.src %>/less/_fontface.less',
                         '<%= teato.path.src %>/less/_theme.less',
                         '<%= teato.path.src %>/less/themes/*.less'
@@ -272,7 +277,36 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    '<%= teato.path.src %>/css/teato.admin.red.css': [
+                    '<%= teato.path.src %>/css/teato.admin.vulcan.css': [
+                        '<%= teato.path.src %>/less/_fontface.less',
+                        '<%= teato.path.src %>/less/_theme.less',
+                        '<%= teato.path.src %>/less/themes/*.less'
+                    ]
+                }
+            },
+            wind: {
+                options: {
+                    modifyVars: {
+                        primary: '#69d2e7',
+                        second: '#e3f6fa',
+                        main: '#a7dbd8',
+
+                        white: '#ffffff',
+                        black: '#000000',
+                        orange: '#ffba00',
+                        red: '#ff0000',
+
+                        graylighter: '#fbfbfb',
+                        graylight: '#f1f1f1',
+                        gray: '#aaaaaa',
+                        graydark: '#3b3d3c',
+                        graydarker: '#303231',
+                        grayblack: '#111111'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/teato.admin.wind.css': [
                         '<%= teato.path.src %>/less/_fontface.less',
                         '<%= teato.path.src %>/less/_theme.less',
                         '<%= teato.path.src %>/less/themes/*.less'
@@ -311,7 +345,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['<%= teato.path.src %>/less/**/*.less'],
-                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:login', 'cssmin', 'copy', 'uglify'],
+                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:wind', 'less:login', 'cssmin', 'copy', 'uglify'],
                 options: {
                     nospawn: true
                 }
@@ -357,7 +391,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lang',      ['pot','po2mo']);
 
     //Watch task: grunt default
-    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:login','cssmin','uglify','copy']);
+    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy']);
 
     //CSS and JS tasks: grunt css / grunt js
     grunt.registerTask('start',     ['clean']);

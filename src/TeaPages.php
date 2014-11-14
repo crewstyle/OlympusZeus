@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.1
+ * @since 1.5.1-5
  *
  */
 class TeaPages
@@ -54,7 +54,7 @@ class TeaPages
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display connections and elasticsearch pages
      *
-     * @since 1.5.0
+     * @since 1.5.1-5
      */
     public function __construct($identifier, $options)
     {
@@ -135,26 +135,33 @@ class TeaPages
             }
         }
 
-        //Add custom CSS colors ~ Green
+        //Add custom CSS colors ~ Earth
         wp_admin_css_color(
-            'teatocss-green',
-            __('Tea T.O. ~ Earth tea'),
-            TTO_URI . '/assets/css/teato.admin.green.css',
+            'teatocss-earth',
+            __('Tea T.O. ~ Earth'),
+            TTO_URI . '/assets/css/teato.admin.earth.css',
             array('#222', '#303231', '#55bb3a', '#91d04d')
         );
-        //Add custom CSS colors ~ Red
+        //Add custom CSS colors ~ Ocean
         wp_admin_css_color(
-            'teatocss-red',
-            __('Tea T.O. ~ Vulcan tea'),
-            TTO_URI . '/assets/css/teato.admin.red.css',
+            'teatocss-ocean',
+            __('Tea T.O. ~ Ocean'),
+            TTO_URI . '/assets/css/teato.admin.ocean.css',
+            array('#222', '#303231', '#3a80bb', '#4d9dd0')
+        );
+        //Add custom CSS colors ~ Vulcan
+        wp_admin_css_color(
+            'teatocss-vulcan',
+            __('Tea T.O. ~ Vulcan'),
+            TTO_URI . '/assets/css/teato.admin.vulcan.css',
             array('#222', '#303231', '#bb3a3a', '#d04d4d')
         );
-        //Add custom CSS colors ~ Blue
+        //Add custom CSS colors ~ Wind
         wp_admin_css_color(
-            'teatocss-blue',
-            __('Tea T.O. ~ Ocean tea'),
-            TTO_URI . '/assets/css/teato.admin.blue.css',
-            array('#222', '#303231', '#3a80bb', '#4d9dd0')
+            'teatocss-wind',
+            __('Tea T.O. ~ Wind'),
+            TTO_URI . '/assets/css/teato.admin.wind.css',
+            array('#222', '#303231', '#69d2e7', '#a7dbd8')
         );
     }
 
