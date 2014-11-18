@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Code
- * @since 1.5.1-6
+ * @since 1.5.1-7
  *
  */
 class Code extends TeaFields
@@ -60,7 +60,7 @@ class Code extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.1-6
+     * @since 1.5.1-7
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -83,8 +83,10 @@ class Code extends TeaFields
 
         //Default values
         $std = isset($content['std']) ? $content['std'] : array();
-        $std['mode'] = isset($std['mode']) ? $std['mode'] : 'application/json';
-        $std['code'] = isset($std['code']) ? $std['code'] : '';
+        $std = array(
+            'mode' => isset($std['mode']) ? $std['mode'] : 'application/json',
+            'code' => isset($std['code']) ? $std['code'] : ''
+        );
 
         //Default way
         if (empty($post)) {

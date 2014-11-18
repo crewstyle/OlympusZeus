@@ -1,59 +1,39 @@
-## 1.5.1-7 (November 18, 2014)
-## 1.5.1-6 (November 18, 2014)
+## 1.5.1-8 (November 18, 2014)
+Fix bug with PHP in <code> field.
 
+## 1.5.1-6 ~ 1.5.1-7 (November 18, 2014)
 New <code> field with CodeMirror component. You can now add easily snippets CPT if you need it :)
 
-
 ## 1.5.1-5 (November 15, 2014)
-
 Please, welcome to the new 4th elements: new custom admin themes.
 
-
 ## 1.5.1-4 (November 14, 2014)
-
 Fix bugs on <upload> and <gallery> fields.
 
-
-## 1.5.1-3 (November 13, 2014)
-## 1.5.1-2 (November 13, 2014)
-
+## 1.5.1-2 ~ 1.5.1-3 (November 13, 2014)
 Fix bugs on JS for widgets.
 
-
 ## 1.5.1-1 (November 13, 2014)
-
 Update less compilation, add new messages display.
 Theme are now lessables.
 
-
 ## 1.5.1 (November 12, 2014)
-
 Fix bugs on <gallery>, on <upload>, on much more.
 Improve package with LESS compilation.
 
-
 ## 1.5.0-4 (November 07, 2014)
-
 Fix bugs on <gallery> finally! TinyMCE improvements
 
-
 ## 1.5.0-3 (November 07, 2014)
-
 Fix bugs on <upload>... too bad...
 
-
 ## 1.5.0-2 (November 07, 2014)
-
 Fix bugs on <upload> field for galleries
 
-
 ## 1.5.0-1 (November 07, 2014)
-
 Fix bugs on <upload> field, add some CSS enhancements
 
-
 ## 1.5.0 (November 07, 2014)
-
 Lots of new features with new core update version
 
 - **New:**
@@ -70,82 +50,54 @@ Lots of new features with new core update version
 And so much more...
 
 
-## 1.4.3.12 (August 19, 2014)
 
+## 1.4.3.12 (August 19, 2014)
 Fix some CSS bugs
 
-
 ## 1.4.3.11 (August 19, 2014)
-
 Add responsive menu
 
-
 ## 1.4.3.10 (August 18, 2014)
-
 Add new process for create index and index contents in Elasticsearch
 
-
 ## 1.4.3.9 (August 11, 2014)
-
 Enhance Elasticsearch check while updating
 
-
 ## 1.4.3.8 (August 10, 2014)
-
 Enhance Elasticsearch check... again...
 Fix small bug on Elasticsearch save paramters
 
-
 ## 1.4.3.7 (August 10, 2014)
-
 Enhance Elasticsearch check
 
-
 ## 1.4.3.6 (August 10, 2014)
-
 Add Elasticsearch check before check
 
-
 ## 1.4.3.5 (August 9, 2014)
-
 Add new login page
 
-
 ## 1.4.3.4 (August 8, 2014)
-
 Add two new administration theme colors
 
-
 ## 1.4.3.3 (August 7, 2014)
-
 Add global array configuration, fix some CSS bugs
 
-
 ## 1.4.3.2 (August 7, 2014)
-
 Change licence and headings. Delete the BR field (useless)
 
-
 ## 1.4.3.1 (August 7, 2014)
-
 Fix bug on taxonomies, add optimizations on Maps field, normalize GET actions
 
-
 ## 1.4.3 (August 6, 2014)
-
 Add capabilities, admin notice, and so much more.
 
-
 ## 1.4.2 (August 4, 2014)
-
 Update code to the new version
 
 - **New:**
   - new Custom Taxonomies
 
-
 ## 1.4.1 (August 1, 2014)
-
 Update code to the new version
 
 - **New:**
@@ -156,9 +108,7 @@ Update code to the new version
   - use of composer
   - use of GruntJS
 
-
 ## 1.4.0 (April 9, 2014)
-
 Update code to the new version
 
 - **New:**
@@ -166,25 +116,20 @@ Update code to the new version
   - new <date> field
 
 
-## 1.3.0.2 (October 11, 2013)
 
+## 1.3.0.2 (October 11, 2013)
 Fix small bug on upload field
 
-
 ## 1.3.0.1 (October 11, 2013)
-
 Get current dir dynamically
 
-
 ## 1.3.0 (October 11, 2013)
+**NEW VERSION, NEW CODE**
 
-NEW VERSION, NEW CODE
 
 
 ## 1.2.13 (August 8, 2013)
-
 Change CRON calls to the constructor method
-
 
 ## 1.2.12 (July 31, 2013)
 
@@ -192,9 +137,7 @@ Fix small bug in Twitter template
 Display update date on network templates
 Adds descriptions on documentation page
 
-
 ## 1.2.12 (July 31, 2013)
-
 Make all business code in one single function, add <twitter> connection and make new Wordpress CRON schedules to update DB
 
 - **New:**
@@ -203,26 +146,20 @@ Make all business code in one single function, add <twitter> connection and make
 - **Edit:**
   - business code for networks is now in one single function: updateNetwork
 
-
 ## 1.2.11 (July 30, 2013)
-
 Fix some bugs with Instagram recent medias and FlickR username
 
 - **Fix:**
   - fix Instagram recent medias bug
   - fix FlickR username bug
 
-
 ## 1.2.10 (July 30, 2013)
-
 New <flickr> field with API
 
 - **New:**
   - new <flickr> field with API, connection and more
 
-
 ## 1.2.9 (July 29, 2013)
-
 Edit header layout without form, new <instagram> field with API, new _del_option function
 
 - **Edit:**
@@ -231,9 +168,7 @@ Edit header layout without form, new <instagram> field with API, new _del_option
   - new <instagram> field with API, connection and more
   - new _del_option function to delete option from DB and transient
 
-
 ## 1.2.8 (July 26, 2013)
-
 Detele Date field and add new RTE field.
 
 - **Edit:**
@@ -242,9 +177,7 @@ Detele Date field and add new RTE field.
 - **New:**
   - new <rte> field to get all Wordpress powaaa :)
 
-
 ## 1.2.7 (July 26, 2013)
-
 Update Background field and fix lots of bugs
 
 - **Edit:**
@@ -253,9 +186,7 @@ Update Background field and fix lots of bugs
 - **Fix:**
   - Enqueue new media script to be compliant with Wordpress 3.5.2
 
-
 ## 1.2.6 (July 23, 2013)
-
 Update Google font field and optimize script
 
 - **Edit:**
@@ -264,9 +195,7 @@ Update Google font field and optimize script
 - **Fix:**
   - Fix small bug on README.md
 
-
 ## 1.2.5 (July 11, 2013)
-
 New usefull field and fix bug
 
 - **Fix:**
@@ -274,17 +203,13 @@ New usefull field and fix bug
 - **New:**
   - new <include> field to display everything you want
 
-
 ## 1.2.4 (July 11, 2013)
-
 README.md up to date with default documentation page
 
 - **Edit:**
   - README.md
 
-
 ## 1.2.3 (May 27, 2013)
-
 Get real advices from Xavier C. <https://twitter.com/xavismeh> :)
 
 - **Edit:**
@@ -300,15 +225,11 @@ Get real advices from Xavier C. <https://twitter.com/xavismeh> :)
   - new <features> and <list> fields to display contents
   - new way to disable Wordpress scripts/styles on the TeaTO custom pages
 
-
 ## 1.2.2 (May 27, 2013)
-
 Fix some bugs, adds new fields, adds new default documentation page, better media-views integration, new scripts, and more...
 Details on the next commit
 
-
 ## 1.2.1 (May 14, 2013)
-
 Fix some small bugs
 
 - **Fix:**
@@ -316,9 +237,7 @@ Fix some small bugs
 - **New:**
   - add TeaTO version
 
-
 ## 1.2.0 (May 14, 2013)
-
 Add some new fields and fix small bugs
 
 - **Edit:**
@@ -332,8 +251,8 @@ Add some new fields and fix small bugs
   - prepare default documentation page with no options
 
 
-## 1.1.1 (May 03, 2013)
 
+## 1.1.1 (May 03, 2013)
 Add some new fields and fix small bugs
 
 - **Edit:**
@@ -346,9 +265,7 @@ Add some new fields and fix small bugs
   - add rows option to <textarea> field
   - prepare RTE and Date new fields
 
-
 ## 1.1.0 (April 25, 2013)
-
 Add some new fields and fix small bugs
 
 - **Edit:**
@@ -361,25 +278,21 @@ Add some new fields and fix small bugs
   - add Choice field with some extra options instead of checkbox/radio/select/multiselect fields
 
 
-## 1.0.3 (March 31, 2013)
 
+## 1.0.3 (March 31, 2013)
 Some improvments on checkbox fields and new social icons
 
 - **New:**
   - add an "Un/select all checkboxes" on image and social fields
   - add Bloglovin, Hellocoton and Youtube social icons
 
-
 ## 1.0.2 (March 31, 2013)
-
 Add a small checkbox feature
 
 - **New:**
   - add an "Un/select all checkboxes" on checkbox field
 
-
 ## 1.0.1 (March 26, 2013)
-
 List now all next todos and add some extra features
 
 - **Fix:**
@@ -392,7 +305,5 @@ List now all next todos and add some extra features
   - add admin warning messages
   - add Instagram social button
 
-
 ## v1.0.0 (October 30, 2012)
-
-- **Initial release**
+**INITIAL RELEASE**

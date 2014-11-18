@@ -112,6 +112,7 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/js/pickadate/legacy.js',
                         //Codemirror
                         '<%= teato.path.src %>/js/codemirror/codemirror.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/clike/clike.js',
                         '<%= teato.path.src %>/js/codemirror/mode/css/css.js',
                         '<%= teato.path.src %>/js/codemirror/mode/diff/diff.js',
                         '<%= teato.path.src %>/js/codemirror/mode/htmlmixed/htmlmixed.js',

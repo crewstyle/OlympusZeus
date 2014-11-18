@@ -32,7 +32,7 @@
                 <?php endforeach ?>
             </select>
 
-            <textarea name="<?php echo $id ?>[code]" id="<?php echo $id ?>_code" rows="<?php echo $rows ?>" class="code"><?php echo esc_textarea($vals['code']) ?></textarea>
+            <textarea name="<?php echo $id ?>[code]" id="<?php echo $id ?>_code" rows="<?php echo $rows ?>" class="code"><?php echo stripslashes($vals['code']) ?></textarea>
         </div>
 
         <p><?php echo $description ?></p>
