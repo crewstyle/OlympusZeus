@@ -645,6 +645,49 @@ div.tea_to_message .column {
 }
 
 /*!
+ * Tea Theme Options v1.5.1-6 - "Sogeking no shima deeeeeee - One Piece"
+ * Code plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+.tea-inside.code {
+  position: relative;
+}
+.tea-inside.code .CodeMirror-all {
+  background-color: #f1f1f1;
+  border: 1px solid rgba(170, 170, 170, 0.7);
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px rgba(241, 241, 241, 0.7), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
+}
+.tea-inside.code .CodeMirror-all.focused {
+  border-color: #55bb3a;
+  box-shadow: 0 0 0 2px rgba(85, 187, 58, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.tea-inside.code .CodeMirror-all .change-mode {
+  float: right;
+  height: 25px;
+  margin: 5px 5px 5px 0;
+  width: 200px;
+}
+.tea-inside.code .CodeMirror {
+  clear: both;
+  font-size: 12px;
+  height: auto;
+}
+.tea-inside.code .CodeMirror-gutters {
+  background-color: transparent;
+  border: none;
+  border-right: 10px solid transparent;
+  bottom: 0;
+  height: auto;
+}
+.tea-inside.code .CodeMirror-linenumber {
+  color: #bebebe;
+}
+
+/*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
  * Color plugin
  *

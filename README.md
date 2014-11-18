@@ -12,7 +12,7 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 + **[Elasticsearch API](http://www.elasticsearch.org/)** - Elasticsearch creates scaleable, real-time search for your website by indexing all your datas millions of times a day.
 + **[Custom Post Types](http://codex.wordpress.org/Post_Types)** - Here is the simpliest way to create Wordpress Custom Post Types! A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way.
 + **[Custom Taxonomies](http://codex.wordpress.org/Taxonomies)** - Since the **1.4.2 version**, you are now able to create easily Wordpress Custom Taxonomies with a couple of lines code. The Tea TO permit to add custom fields as you want.
-+ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.+ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
++ **Wordpress Media Manager** - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
 + **Easier for administrators** - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.
 

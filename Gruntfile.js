@@ -63,9 +63,14 @@ module.exports = function(grunt) {
             compress: {
                 files: {
                     '<%= teato.path.tar %>/css/teato.min.css': [
+                        //Pickadate
                         '<%= teato.path.src %>/css/pickadate/classic.css',
                         '<%= teato.path.src %>/css/pickadate/classic.date.css',
                         '<%= teato.path.src %>/css/pickadate/classic.time.css',
+                        //Codemirror
+                        '<%= teato.path.src %>/css/codemirror/codemirror.css',
+                        '<%= teato.path.src %>/css/codemirror/monokai.css',
+                        //TeaTO
                         '<%= teato.path.src %>/css/font-awesome.css',
                         '<%= teato.path.src %>/css/teato.css'
                     ],
@@ -100,13 +105,30 @@ module.exports = function(grunt) {
             my_target: {
                 files: {
                     '<%= teato.path.tar %>/js/teato.min.js': [
+                        //Pickadate
                         '<%= teato.path.src %>/js/pickadate/picker.js',
                         '<%= teato.path.src %>/js/pickadate/picker.date.js',
                         '<%= teato.path.src %>/js/pickadate/picker.time.js',
                         '<%= teato.path.src %>/js/pickadate/legacy.js',
+                        //Codemirror
+                        '<%= teato.path.src %>/js/codemirror/codemirror.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/css/css.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/diff/diff.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/htmlmixed/htmlmixed.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/javascript/javascript.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/markdown/markdown.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/php/php.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/python/python.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/ruby/ruby.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/shell/shell.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/sql/sql.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/xml/xml.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/yaml/yaml.js',
+                        //TeaTO
                         '<%= teato.path.src %>/js/tea.modal.js',
                         '<%= teato.path.src %>/js/tea.checkall.js',
                         '<%= teato.path.src %>/js/tea.checkit.js',
+                        '<%= teato.path.src %>/js/tea.code.js',
                         '<%= teato.path.src %>/js/tea.color.js',
                         '<%= teato.path.src %>/js/tea.date.js',
                         '<%= teato.path.src %>/js/tea.gallery.js',

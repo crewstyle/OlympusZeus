@@ -27,6 +27,8 @@
             </div>
 
             <div class="contextual-help-tabs-wrap">
+                <input type="hidden" name="<?php echo $id ?>" value="" />
+
                 <?php
                     foreach ($users as $k => $author):
                         $note = isset($vals[$author]['note']) && !empty($vals[$author]['note']) ? $vals[$author]['note'] : 1;
@@ -36,7 +38,7 @@
                         <div class="inside tea-inside radio">
                             <fieldset class="radio-rate">
                                 <?php
-                                    for ($i = 1; $i <= 5; $i++):
+                                    for ($i = 0; $i <= 5; $i++):
                                         $sel = $i == $note ? true : false;
                                         $for = $id . '_' . $author . '_note_' . $i;
                                     ?>
@@ -46,7 +48,7 @@
                                                 <input type="radio" name="<?php echo $id ?>[<?php echo $author ?>][note]" id="<?php echo $for ?>" value="<?php echo $i ?>" <?php echo $sel ? 'checked="checked" ' : '' ?> />
                                             <?php endif ?>
 
-                                            <?php for ($j = 1; $j <= 5; $j++): ?>
+                                            <?php for ($j = 0; $j <= 5; $j++): ?>
                                                 <i class="fa fa-star<?php echo $j > $i ? '-o' : '' ?> fa-lg"></i>
                                             <?php endfor ?>
                                         </label>

@@ -1,3 +1,8 @@
+## 1.5.1-6 (November 18, 2014)
+
+New <code> field with CodeMirror component. You can now add easily snippets CPT if you need it :)
+
+
 ## 1.5.1-5 (November 15, 2014)
 
 Please, welcome to the new 4th elements: new custom admin themes.

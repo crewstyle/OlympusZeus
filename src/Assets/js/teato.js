@@ -64,6 +64,9 @@
             selected:'is-active'
         });
 
+        //Code input
+        $('.tea-inside textarea.code').tea_code();
+
         //Color input
         $('.tea-inside .color-picker').tea_color();
 
