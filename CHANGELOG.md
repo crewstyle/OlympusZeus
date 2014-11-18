@@ -1,3 +1,4 @@
+## 1.5.1-7 (November 18, 2014)
 ## 1.5.1-6 (November 18, 2014)
 
 New <code> field with CodeMirror component. You can now add easily snippets CPT if you need it :)

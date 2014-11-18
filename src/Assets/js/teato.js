@@ -65,7 +65,14 @@
         });
 
         //Code input
-        $('.tea-inside textarea.code').tea_code();
+        $.each($('.tea-inside.code'), function (){
+            var $self = $(this);
+
+            //CodeMirror
+            $self.find('textarea.code').tea_code({
+                mode: $self.find('.change-mode').val(),
+            });
+        });
 
         //Color input
         $('.tea-inside .color-picker').tea_color();
