@@ -145,7 +145,7 @@
                 $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea id="' + idtity + '" rows="4" class="wp-editor-area" name="' + _id + '[' + attach[i].id + '][content]' + '"></textarea>');
 
                 //Build list
-                $lis = $(document.createElement('li')).attr('data-id', attach[i].id).addClass('draggable');
+                $lis = $(document.createElement('li')).attr('data-id', attach[i].id).addClass('movendrop');
                 $lnk = $(document.createElement('a')).attr('href', '#').addClass('itm');
                 $img = $(document.createElement('img')).attr({
                     src: attach[i].url

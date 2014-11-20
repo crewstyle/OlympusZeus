@@ -24,7 +24,7 @@
                         $selected = !empty($display) && '1' == $display ? true : false;
                         $for = $id . '_' . $k;
                     ?>
-                    <div class="draggable" data-network="<?php echo $k ?>">
+                    <div class="movendrop" data-network="<?php echo $k ?>">
                         <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $k ?>][display]" value="" />
                             <input type="checkbox" name="<?php echo $id ?>[<?php echo $k ?>][display]" id="<?php echo $for ?>" value="1" <?php echo $selected ? 'checked="checked" ' : '' ?> />

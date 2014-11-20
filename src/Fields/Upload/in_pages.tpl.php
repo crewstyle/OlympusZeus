@@ -29,7 +29,7 @@
                             $cls = 'image' == $library ? ' class="image"' : '';
                             $det = 'image' == $library ? '' : '<br/><small>' . $name . '</small>';
                     ?>
-                        <li class="draggable" data-id="<?php echo $id ?>__<?php echo $item['id'] ?>">
+                        <li class="movendrop" data-id="<?php echo $id ?>__<?php echo $item['id'] ?>">
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][url]" value="<?php echo $url ?>" />
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][id]" value="<?php echo $ids ?>" />
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][name]" value="<?php echo $name ?>" />

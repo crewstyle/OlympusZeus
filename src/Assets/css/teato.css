@@ -309,13 +309,13 @@ hr {
   line-height: 20px;
   margin: 10px 0;
 }
-/*--- [DRAGGABLE] ---*/
-.draggable {
+/*--- [MOVE'N DROP] ---*/
+.movendrop {
   font-family: FontAwesome;
   padding-left: 30px;
   position: relative;
 }
-.draggable:before {
+.movendrop:before {
   color: #303231;
   content: "\f142";
   cursor: move;
@@ -330,7 +330,7 @@ hr {
   -moz-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.draggable.ui-sortable-helper {
+.movendrop.ui-sortable-helper {
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   padding-bottom: 4px;
@@ -1039,8 +1039,8 @@ div.tea_to_message .column {
   height: 230px;
   width: 100%;
 }
-/*--- [DRAGGABLE] ---*/
-.tea-inside.gallery .draggable:before {
+/*--- [MOVE'N DROP] ---*/
+.tea-inside.gallery .movendrop:before {
   background-color: #ffffff;
   bottom: 0;
   cursor: move;
@@ -1826,8 +1826,8 @@ a.tea-connection:before {
 .tea-inside.upload .upload_image_result .del_image:hover {
   color: #ff0000;
 }
-/*--- [DRAGGABLE] ---*/
-.tea-inside.upload .draggable:before {
+/*--- [MOVE'N DROP] ---*/
+.tea-inside.upload .movendrop:before {
   background-color: #ffffff;
   bottom: 0;
   cursor: move;

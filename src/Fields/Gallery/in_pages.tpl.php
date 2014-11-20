@@ -21,7 +21,7 @@
                             continue;
                         }
                     ?>
-                        <li class="draggable" data-id="<?php echo $item['id'] ?>">
+                        <li class="movendrop" data-id="<?php echo $item['id'] ?>">
                             <a href="#" class="del_item" data-target="<?php echo $item['id'] ?>">&times;</a>
                             <img src="<?php echo $item['image'] ?>" alt="" />
                         </li>

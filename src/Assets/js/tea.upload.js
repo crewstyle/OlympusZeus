@@ -258,7 +258,7 @@
                 }
 
                 //built item
-                $itm = $(document.createElement('li')).attr('data-id', target + '__' + attach[i].id).addClass('draggable');
+                $itm = $(document.createElement('li')).attr('data-id', target + '__' + attach[i].id).addClass('movendrop');
 
                 //check library
                 if ('image' == _tea.options.type) {

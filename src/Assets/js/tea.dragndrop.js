@@ -11,9 +11,9 @@
  * http://farhadi.ir/projects/html5sortable
  * =====================================================
  * Example:
- *      $('.draggable').tea_dragndrop({
+ *      $('.movendrop').tea_dragndrop({
  *          handle: false,
- *          items: '.draggable',
+ *          items: '.movendrop',
  *          reorder: {
  *              parent: '.uploads',
  *              element: '.upload-items',
@@ -83,7 +83,7 @@
 
             var settings = {
                 handle: false,
-                items: '.draggable',
+                items: '.movendrop',
                 reorder: false
             };
 

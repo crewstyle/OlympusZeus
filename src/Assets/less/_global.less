@@ -300,13 +300,13 @@ hr {
 }
 
 
-/*--- [DRAGGABLE] ---*/
-.draggable {
+/*--- [MOVE'N DROP] ---*/
+.movendrop {
     font-family: FontAwesome;
     padding-left: 30px;
     position: relative;
 }
-.draggable:before {
+.movendrop:before {
     color: @graydarker;
     content: "\f142";
     cursor: move;
@@ -321,7 +321,7 @@ hr {
     -moz-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-.draggable.ui-sortable-helper {
+.movendrop.ui-sortable-helper {
     background-color: fade(@white, 70%);
     box-shadow: 0 1px 2px fade(@black, 20%);
     padding-bottom: 4px;

@@ -1,3 +1,6 @@
+## 1.5.2-2 (November 20, 2014)
+Remove [HTML5 Sortable](http://farhadi.ir/projects/html5sortable) jQuery component already installe din WP core
+
 ## 1.5.2-1 (November 20, 2014)
 Fix lots of bugs and add update CPTs from footer
 
