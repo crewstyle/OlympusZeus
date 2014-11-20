@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2
+ * @since 1.5.2-1
  *
  */
 class TeaPages
@@ -54,7 +54,7 @@ class TeaPages
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display connections and elasticsearch pages
      *
-     * @since 1.5.1-5
+     * @since 1.5.2-1
      */
     public function __construct($identifier, $options)
     {
@@ -131,6 +131,10 @@ class TeaPages
             }
             //...Or dismiss admin notice
             else if ('dismiss' == $for) {
+                $this->updateNotice(true);
+            }
+            //...Or display message on dashboard
+            else if ('dashboard' == $for) {
                 $this->updateNotice(true);
             }
         }
@@ -388,7 +392,8 @@ class TeaPages
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
                     array(&$this, 'buildContent'),  //display content
-                    $this->icon_small               //icon
+                    $this->icon_small,              //icon
+                    3                               //position
                 );
 
                 //Add first subpage
@@ -557,7 +562,7 @@ class TeaPages
         add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
 
         //Register admin page action hook
-        add_action('admin_menu', array(&$this, '__buildMenuPage'));
+        add_action('admin_menu', array(&$this, '__buildMenuPage'), 999);
     }
 
 
@@ -722,7 +727,7 @@ class TeaPages
     /**
      * Build header layout.
      *
-     * @since 1.4.3.11
+     * @since 1.5.2-1
      */
     protected function buildLayoutHeader()
     {
@@ -736,6 +741,11 @@ class TeaPages
         $updated =
                isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
             && isset($_REQUEST['for']) && 'settings' == $_REQUEST['for']
+            ? true
+            : false;
+        $dashboard =
+               isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
+            && isset($_REQUEST['for']) && 'dashboard' == $_REQUEST['for']
             ? true
             : false;
 
@@ -762,7 +772,7 @@ class TeaPages
     /**
      * Build footer layout.
      *
-     * @since 1.4.0
+     * @since 1.5.2-1
      */
     protected function buildLayoutFooter()
     {
@@ -778,6 +788,7 @@ class TeaPages
         $capurl = current_user_can(TTO_CAP_MAX)
             ? admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=caps')
             : '';
+        $cpturl = admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=cpts');
 
         //Include template
         include(TTO_PATH.'/Tpl/layouts/__layout_footer.tpl.php');
@@ -1058,7 +1069,7 @@ class TeaPages
      *
      * @param boolean $redirect Define if the TTO has to make a redirect
      *
-     * @since 1.5.0
+     * @since 1.5.2-1
      */
     protected function updateCapabilities($redirect = true)
     {
@@ -1087,7 +1098,7 @@ class TeaPages
 
         //Redirect to Tea TO homepage
         if ($redirect) {
-            wp_safe_redirect(admin_url('admin.php?page='.$this->identifier));
+            wp_safe_redirect(admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=dashboard'));
         }
     }
 
@@ -1096,7 +1107,7 @@ class TeaPages
      *
      * @param boolean $redirect Define if the TTO has to make a redirect
      *
-     * @since 1.5.0
+     * @since 1.5.2-1
      */
     protected function updateCpts($redirect = true)
     {
@@ -1113,12 +1124,12 @@ class TeaPages
             return;
         }
 
-        //Define cpt configurations
-        TeaThemeOptions::setConfigs('customposttypes', $cpts);
+        //Delete cpts configurations to built them back
+        TeaThemeOptions::setConfigs('customposttypes', array());
 
         //Redirect to Tea TO homepage
         if ($redirect) {
-            wp_safe_redirect(admin_url('admin.php?page='.$this->identifier));
+            wp_safe_redirect(admin_url('admin.php?page='.$this->identifier.'&action=tea_action&for=dashboard'));
         }
     }
 

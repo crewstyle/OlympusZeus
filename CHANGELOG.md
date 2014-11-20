@@ -1,3 +1,12 @@
+## 1.5.2-1 (November 20, 2014)
+Fix lots of bugs and add update CPTs from footer
+
+- **New:**
+  - add new `taxonomies` mode on `wordpress` field
+  - add new update CPT from footer
+- **Fix:**
+  - fix bugs on `Taxonomies`
+
 ## 1.5.2 (November 20, 2014)
 Lots of new features with some bug fixed
 

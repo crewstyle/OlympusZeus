@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Taxonomies
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.4.3.1
+ * @since 1.5.2-1
  *
  */
 class TeaCustomTaxonomies
@@ -64,7 +64,7 @@ class TeaCustomTaxonomies
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.4.3.1
+     * @since 1.5.2-1
      */
     public function __buildMenuCustomTaxonomy()
     {
@@ -80,18 +80,18 @@ class TeaCustomTaxonomies
         foreach ($taxonomies as $key => $tax) {
             //Check if no master page is defined
             if (!isset($tax['slug']) || empty($tax['slug'])) {
-                echo sprintf(__('Something went wrong in your parameters 
-                    definition: no slug defined for your <b>%s</b> 
-                    custom taxonomy. Please, try again by 
+                echo sprintf(__('Something went wrong in your parameters
+                    definition: no slug defined for your <b>%s</b>
+                    custom taxonomy. Please, try again by
                     filling the form properly.', TTO_I18N), $key);
                 continue;
             }
 
             //Check if no master page is defined
             if (!isset($tax['post_type']) || empty($tax['post_type'])) {
-                echo sprintf(__('Something went wrong in your parameters 
-                    definition: no post type defined for your <b>%s</b> 
-                    custom taxonomy. Please, try again by 
+                echo sprintf(__('Something went wrong in your parameters
+                    definition: no post type defined for your <b>%s</b>
+                    custom taxonomy. Please, try again by
                     filling the form properly.', TTO_I18N), $key);
                 continue;
             }
@@ -107,7 +107,7 @@ class TeaCustomTaxonomies
             //Special case: define a category/post_tag
             if (!in_array($slug, array('attachment', 'attachment_id', 'author', 'author_name', 'calendar', 'cat', 'category', 'category__and', 'category__in', 'category__not_in', 'category_name', 'comments_per_page', 'comments_popup', 'customize_messenger_channel', 'customized', 'cpage', 'day', 'debug', 'error', 'exact', 'feed', 'hour', 'link_category', 'm', 'minute', 'monthnum', 'more', 'name', 'nav_menu', 'nonce', 'nopaging', 'offset', 'order', 'orderby', 'p', 'page', 'page_id', 'paged', 'pagename', 'pb', 'perm', 'post', 'post__in', 'post__not_in', 'post_format', 'post_mime_type', 'post_status', 'post_tag', 'post_type', 'posts', 'posts_per_archive_page', 'posts_per_page', 'preview', 'robots', 's', 'search', 'second', 'sentence', 'showposts', 'static', 'subpost', 'subpost_id', 'tag', 'tag__and', 'tag__in', 'tag__not_in', 'tag_id', 'tag_slug__and', 'tag_slug__in', 'taxonomy', 'tb', 'term', 'theme', 'type', 'w', 'withcomments', 'withoutcomments', 'year')) && !taxonomy_exists($slug)) {
                 //Build labels
-                $title = ucfirst($slug);
+                $title = !isset($tax['contents']) || empty($tax['title']) ? ucfirst($slug) : $tax['title'];
                 $labels = array(
                     'name' => $title,
                     'singular_name' => $title,

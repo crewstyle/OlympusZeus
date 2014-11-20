@@ -18,7 +18,10 @@
 
     <footer class="teato-footer">
         <?php if (!empty($capurl)): ?>
-            <p><a href="<?php echo $capurl ?>"><b><?php _e('Update capabilities', TTO_I18N) ?></b></a></p>
+            <ul>
+                <li><a href="<?php echo $capurl ?>"><b><?php _e('Update capabilities', TTO_I18N) ?></b></a></li>
+                <li><a href="<?php echo $cpturl ?>"><b><?php _e('Update custom post types', TTO_I18N) ?></b></a></li>
+            </ul>
         <?php endif ?>
         <hr/>
         <p><?php _e('Brewed to you by Take a Tea &copy; 20xx Take a Tea. All rights reserved.', TTO_I18N) ?></p>

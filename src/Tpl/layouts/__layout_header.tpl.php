@@ -32,6 +32,10 @@
         <div class="updated headsup below-h2">
             <p><?php _e('The Tea Theme Options is updated.', TTO_I18N) ?></p>
         </div>
+    <?php elseif ($dashboard): ?>
+        <div class="updated headsup below-h2">
+            <p><?php _e('Your Tea Theme Options\' settings are updated.', TTO_I18N) ?></p>
+        </div>
     <?php endif ?>
 
     <?php if (!empty($description)): ?><p><?php echo $description ?></p><?php endif ?>

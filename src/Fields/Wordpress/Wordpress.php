@@ -18,7 +18,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_categories_field_id',
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
  * Adding a `menus`
  * array(
  *     'type' => 'wordpress',
@@ -27,7 +27,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_menus_field_id',
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
  * Adding a `pages`
  * array(
  *     'type' => 'wordpress',
@@ -36,7 +36,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_pages_field_id',
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
  * Adding a `posts`
  * array(
  *     'type' => 'wordpress',
@@ -49,7 +49,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     ),
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
  * Adding a `post types`
  * array(
  *     'type' => 'wordpress',
@@ -58,7 +58,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_posttypes_field_id',
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
  * Adding a `tags`
  * array(
  *     'type' => 'wordpress',
@@ -67,7 +67,19 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_tags_field_id',
  *     'multiselect' => true //Optional: to "false" by default
  * )
- * 
+ *
+ * Adding a `taxonomies`
+ * array(
+ *     'type' => 'wordpress',
+ *     'mode' => 'taxonomies',
+ *     'title' => 'My Wordpress taxonomies',
+ *     'id' => 'my_taxonomies_field_id',
+ *     'options' => array(
+ *         'term' => 'my_taxonomy'
+ *     ),
+ *     'multiselect' => true //Optional: to "false" by default
+ * )
+ *
  */
 
 if (!defined('ABSPATH')) {
@@ -83,7 +95,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Wordpress
- * @since 1.4.0
+ * @since 1.5.2-1
  *
  */
 class Wordpress extends TeaFields

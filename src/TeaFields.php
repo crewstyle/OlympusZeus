@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Fields
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0
+ * @since 1.5.2-1
  *
  */
 abstract class TeaFields
@@ -102,8 +102,8 @@ abstract class TeaFields
         //Check if an id is defined at least
         if (!isset($content['id'])) {
             //Set type
-            $type = isset($content['type']) 
-                ? $content['type'] 
+            $type = isset($content['type'])
+                ? $content['type']
                 : __('undefined (?)', TTO_I18N);
 
             //Display message
@@ -448,7 +448,7 @@ abstract class TeaFields
      * @param array $options Define if there are options to the WP request
      * @param int $post Define the post ID for meta boxes
      *
-     * @since 1.4.0
+     * @since 1.5.2-1
      */
     protected function setWPContents($type = 'posts', $multiple = false, $options = array(), $post = 0)
     {
@@ -578,6 +578,20 @@ abstract class TeaFields
                 foreach ($tags_obj as $tag) {
                     //Get the id and the name
                     $this->wpcontents[$type][0][$tag->term_id] = $tag->name;
+                }
+            }
+        }
+
+        //Taxonomies
+        else if ('taxonomies' == $type) {
+            //Build request
+            $taxs_obj = get_terms($options['term'], array('hide_empty' => 0));
+
+            //Iterate on tags
+            if (!empty($taxs_obj)) {
+                foreach ($taxs_obj as $tax) {
+                    //Get the id and the name
+                    $this->wpcontents[$type][0][$tax->term_id] = $tax->name;
                 }
             }
         }
