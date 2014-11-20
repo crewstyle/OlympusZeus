@@ -26,6 +26,9 @@
     text-align: center;
     vertical-align: top;
     width: 60px;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    transition: all ease .5s;
 }
 .tea-inside.gallery .upload-listing li.selected {
     border-color: @primary;
@@ -89,7 +92,7 @@
 .tea-inside.gallery .upload-items .item {
     display: block;
     height: 0;
-    margin: 0;
+    margin: -1px 0 0;
     opacity: 0;
     padding: 0;
     position: relative;
@@ -114,4 +117,22 @@
 .tea-inside.gallery .upload-items .item textarea {
     height: 230px;
     width: 100%;
+}
+
+
+/*--- [DRAGGABLE] ---*/
+.tea-inside.gallery .draggable:before {
+    background-color: @white;
+    bottom: 0;
+    cursor: move;
+    font-size: 10px;
+    height: 18px;
+    line-height: 20px;
+    left: 0;
+    top: auto;
+    width: 18px;
+    z-index: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    transform: none;
 }

@@ -303,6 +303,36 @@ hr {
   line-height: 20px;
   margin: 10px 0;
 }
+/*--- [DRAGGABLE] ---*/
+.draggable {
+  font-family: FontAwesome;
+  padding-left: 30px;
+  position: relative;
+}
+.draggable:before {
+  color: #303231;
+  content: "\f142";
+  cursor: move;
+  display: block;
+  font-size: 17px;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 25px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.draggable.ui-sortable-helper {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  padding-bottom: 4px;
+  padding-top: 4px;
+  -webkit-transition: padding ease .5s, background ease .5s;
+  -moz-transition: padding ease .5s, background ease .5s;
+  transition: padding ease .5s, background ease .5s;
+}
 
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
@@ -913,6 +943,9 @@ div.tea_to_message .column {
   text-align: center;
   vertical-align: top;
   width: 60px;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+  transition: all ease .5s;
 }
 .tea-inside.gallery .upload-listing li.selected {
   border-color: #91d04d;
@@ -974,7 +1007,7 @@ div.tea_to_message .column {
 .tea-inside.gallery .upload-items .item {
   display: block;
   height: 0;
-  margin: 0;
+  margin: -1px 0 0;
   opacity: 0;
   padding: 0;
   position: relative;
@@ -999,6 +1032,38 @@ div.tea_to_message .column {
 .tea-inside.gallery .upload-items .item textarea {
   height: 230px;
   width: 100%;
+}
+/*--- [DRAGGABLE] ---*/
+.tea-inside.gallery .draggable:before {
+  background-color: #ffffff;
+  bottom: 0;
+  cursor: move;
+  font-size: 10px;
+  height: 18px;
+  line-height: 20px;
+  left: 0;
+  top: auto;
+  width: 18px;
+  z-index: 1;
+  -webkit-transform: none;
+  -moz-transform: none;
+  transform: none;
+}
+
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Hidden plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+.tea_to_wrap.hiddenfield {
+  opacity: .5;
+  padding: 6px 12px;
+}
+.tea_to_wrap.hiddenfield p {
+  font-style: italic;
+  margin: 0;
 }
 
 /*!
@@ -1582,6 +1647,9 @@ a.tea-connection:before {
   margin: 0 10px 0 0;
   width: 50px;
 }
+.tea-inside.social input[type="checkbox"] {
+  margin: -2px 15px 0 0;
+}
 .tea-inside.social input[type="text"] {
   display: inline-block;
   margin: 0 10px 0 0;
@@ -1751,6 +1819,20 @@ a.tea-connection:before {
 .tea-inside.upload .upload_image_result .del_item:hover,
 .tea-inside.upload .upload_image_result .del_image:hover {
   color: #ff0000;
+}
+/*--- [DRAGGABLE] ---*/
+.tea-inside.upload .draggable:before {
+  background-color: #ffffff;
+  bottom: 0;
+  cursor: move;
+  height: 25px;
+  line-height: 28px;
+  left: 0;
+  top: auto;
+  z-index: 1;
+  -webkit-transform: none;
+  -moz-transform: none;
+  transform: none;
 }
 
 /*!

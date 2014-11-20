@@ -91,6 +91,20 @@
             });
         });
 
+        //Drag n drop
+        $('.tea-inside.social-checkbox fieldset').tea_dragndrop();
+        $('.tea-inside.gallery ul.upload-listing').tea_dragndrop({
+            items: 'li:not(.upload-time)',
+            reorder: {
+                parent: '.uploads',
+                element: '.upload-items',
+                items: '.item'
+            }
+        });
+        $('.tea-inside.upload .upload_image_result ul').tea_dragndrop({
+            items: 'li:not(.upload-time)'
+        });
+
         //Elasticsearch template
         $('.tea-inside .elastica-template').on('click', function (e){
             e.preventDefault();

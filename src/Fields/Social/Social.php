@@ -51,7 +51,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Social
- * @since 1.4.0
+ * @since 1.5.2
  *
  */
 class Social extends TeaFields
@@ -78,7 +78,7 @@ class Social extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.5.2
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -118,13 +118,13 @@ class Social extends TeaFields
         if (empty($post)) {
             //Check selected
             $vals = TeaThemeOptions::get_option($prefix.$id, $std);
-            $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
+            $vals = empty($vals) ? array() : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
-            $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
+            $vals = empty($vals) ? array() : (is_array($vals) ? $vals : array($vals));
         }
 
         //Get template

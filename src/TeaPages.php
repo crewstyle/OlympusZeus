@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.1-5
+ * @since 1.5.2
  *
  */
 class TeaPages
@@ -966,7 +966,7 @@ class TeaPages
      * @param array $dependancy The default value if no one is found
      * @todo find a better way for the plugin version
      *
-     * @since 1.5.0
+     * @since 1.5.2
      */
     protected function setOption($key, $value, $dependancy = array())
     {
@@ -1050,23 +1050,6 @@ class TeaPages
             if (!isset($dependancy[$previous])) {
                 TeaThemeOptions::set_option($previous, $value, $duration);
             }
-        }
-
-        //Special usecase: image. We can also register information as
-        //width, height, mimetype from upload and image inputs
-        else if (false !== strpos($key, '__upload')) {
-            //Get the image details
-            $image = getimagesize($value);
-
-            //Build details
-            $details = array(
-                'width' => $image[0],
-                'height' => $image[1],
-                'mime' => $image['mime']
-            );
-
-            //Set the other parameters
-            TeaThemeOptions::set_option($key.'_details', $details, $duration);
         }
     }
 

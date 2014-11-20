@@ -6,16 +6,20 @@
 
     <div class="inside tea-inside select">
         <select name="<?php echo $id ?>" id="<?php echo $id ?>">
-            <?php
-                foreach ($options as $key => $option):
-                    if (empty($key)) {
-                        continue;
-                    }
+            <?php if (!empty($options)): ?>
+                <?php
+                    foreach ($options as $key => $option):
+                        if (empty($key)) {
+                            continue;
+                        }
 
-                    $selected = $key == $val ? true : false;
-            ?>
-                <option value="<?php echo '-1' == $key ? '' : $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
-            <?php endforeach ?>
+                        $selected = $key == $val ? true : false;
+                ?>
+                    <option value="<?php echo '-1' == $key ? '' : $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
+                <?php endforeach ?>
+            <?php else: ?>
+                <?php _e('Something went wrong in your parameters definition: no options have been defined.') ?>
+            <?php endif ?>
         </select>
 
         <p><?php echo $description ?></p>

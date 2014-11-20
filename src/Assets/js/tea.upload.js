@@ -253,12 +253,12 @@
             //Iterates on them
             for (var i = 0, len = attach.length; i < len; i++) {
                 //check if item already exists
-                if ($result.find('li#' + target + '__' + attach[i].id).length) {
+                if ($result.find('li[data-id="' + target + '__' + attach[i].id + '"]').length) {
                     continue;
                 }
 
                 //built item
-                $itm = $(document.createElement('li')).attr('id', target + '__' + attach[i].id);
+                $itm = $(document.createElement('li')).attr('data-id', target + '__' + attach[i].id).addClass('draggable');
 
                 //check library
                 if ('image' == _tea.options.type) {
@@ -390,7 +390,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_upload');
+            $.error('Method ' + method + ' does not exist on tea_upload');
             return false;
         }
     };

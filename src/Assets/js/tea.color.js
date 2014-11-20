@@ -82,7 +82,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_color');
+            $.error('Method ' + method + ' does not exist on tea_color');
             return false;
         }
     };

@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.gallery.js v1.3.0
+ * tea.gallery.js v1.3.1
  * https://github.com/Takeatea/tea_theme_options
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -46,6 +46,7 @@
         _tea.options.wpid = _tea.options.media.model.settings.post.id;
 
         //bind event on click
+        _tea.$el.find('.upload-listing li').on('click', $.proxy(_tea.change_item, _tea));
         _tea.$el.find(_tea.options.add).on('click', $.proxy(_tea.add_item, _tea));
         _tea.$el.find(_tea.options.del).on('click', $.proxy(_tea.del_item, _tea));
         _tea.$el.parent('div').find(_tea.options.delall).on('click', $.proxy(_tea.del_items_all, _tea));
@@ -121,7 +122,7 @@
                 $del = null;
 
             //Iterates on them
-            for (var i = 0, len = attach.length; i < len; i++) {
+            for (var len = attach.length, i = len - 1; i >= 0; i--) {
                 if ($result.find('.item[data-id="' + attach[i].id + '"]').length) {
                     continue;
                 }
@@ -144,7 +145,7 @@
                 $txt = $(document.createElement('div')).addClass('gallery-editor').html('<textarea id="' + idtity + '" rows="4" class="wp-editor-area" name="' + _id + '[' + attach[i].id + '][content]' + '"></textarea>');
 
                 //Build list
-                $lis = $(document.createElement('li')).attr('data-id', attach[i].id);
+                $lis = $(document.createElement('li')).attr('data-id', attach[i].id).addClass('draggable');
                 $lnk = $(document.createElement('a')).attr('href', '#').addClass('itm');
                 $img = $(document.createElement('img')).attr({
                     src: attach[i].url
@@ -169,23 +170,6 @@
                 $lis.append($del);
                 $lis.append($lnk);
                 $listing.prepend($lis);
-
-                //Init tinyMCE textarea
-                /*if ('undefined' !== typeof tinyMCE) {
-                    tinyMCE.init({
-                        //language: 'wp-langs-en',
-                        selector: 'textarea#' + idtity,
-                        mode: 'teeny',
-                        resize: 'vertical',
-                        wpautop: false,
-                        menubar: false,
-                        toolbar1: 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen,wp_adv',
-                        toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
-                        toolbar3: '',
-                        toolbar4: '',
-                        body_class: 'post-format-standard'
-                    });
-                }*/
             }
 
             //Open the first one
@@ -268,27 +252,24 @@
         var $self = $(e.target || e.currentTarget);
         var $lis = $self.closest('li');
         var $itm = _tea.$el.find('.upload-items .item[data-id="' + $lis.attr('data-id') + '"]');
+        var _change = $lis.hasClass('selected') ? true : false;
 
         //Deleting animation
-        $lis.css('background', _tea.options.color);
-        $lis.animate({
-            opacity: '0'
-        }, 'slow', function (){
-            if ($lis.hasClass('selected')) {
-                $lis.next().addClass('selected');
-            }
-
-            $lis.remove();
-        });
         $itm.css('background', _tea.options.color);
         $itm.animate({
             opacity: '0'
         }, 'slow', function (){
-            if ($itm.hasClass('selected')) {
-                $itm.next().addClass('selected');
-            }
-
             $itm.remove();
+        });
+        $lis.css('background', _tea.options.color);
+        $lis.animate({
+            opacity: '0'
+        }, 'slow', function (){
+            $lis.remove();
+
+            if (_change) {
+                _tea.$el.find('.upload-listing li:first-child').click();
+            }
         });
     };
 
@@ -362,7 +343,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_gallery');
+            $.error('Method ' + method + ' does not exist on tea_gallery');
             return false;
         }
     };

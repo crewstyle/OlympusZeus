@@ -100,7 +100,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_code');
+            $.error('Method ' + method + ' does not exist on tea_code');
             return false;
         }
     };

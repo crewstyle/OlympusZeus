@@ -12,38 +12,35 @@
 
     <div class="inside tea-inside social social-checkbox" data-id="<?php echo $id ?>">
         <fieldset>
-            <?php foreach ($socials as $key => $option): ?>
-                <?php
-                    //Check if we need to display the social network
-                    if (!array_key_exists($key, $vals)) {
-                        continue;
-                    }
+            <?php if (!empty($vals)): ?>
+                <?php foreach ($vals as $k => $opt): ?>
+                    <?php
+                        //Get values
+                        $display = isset($opt['display']) ? $opt['display'] : '';
+                        $label = isset($opt['label']) ? $opt['label'] : '';
+                        $link = isset($opt['link']) ? $opt['link'] : '';
 
-                    //Get values
-                    $display = isset($vals[$key]['display']) ? $vals[$key]['display'] : '';
-                    $label = isset($vals[$key]['label']) ? $vals[$key]['label'] : '';
-                    $link = isset($vals[$key]['link']) ? $vals[$key]['link'] : '';
+                        //Treat contents
+                        $selected = !empty($display) && '1' == $display ? true : false;
+                        $for = $id . '_' . $k;
+                    ?>
+                    <div class="draggable" data-network="<?php echo $k ?>">
+                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
+                            <input type="hidden" name="<?php echo $id ?>[<?php echo $k ?>][display]" value="" />
+                            <input type="checkbox" name="<?php echo $id ?>[<?php echo $k ?>][display]" id="<?php echo $for ?>" value="1" <?php echo $selected ? 'checked="checked" ' : '' ?> />
+                            <i class="fa fa-<?php echo $k ?> fa-lg"></i>
+                        </label>
 
-                    //Treat contents
-                    $selected = !empty($display) && '1' == $display ? true : false;
-                    $for = $id . '_' . $key;
-                ?>
-                <div data-network="<?php echo $key ?>">
-                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
-                        <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
-                        <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>][display]" id="<?php echo $for ?>" value="1" <?php echo $selected ? 'checked="checked" ' : '' ?> />
-                        <i class="fa fa-<?php echo $key ?> fa-lg"></i>
-                    </label>
+                        <?php if (isset($socials[$k][0])): ?>
+                            <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][label]" value="<?php echo $label ?>" placeholder="<?php echo $socials[$k][0] ?>" />
+                        <?php endif ?>
 
-                    <?php if (isset($option[0])): ?>
-                        <input type="text" name="<?php echo $id ?>[<?php echo $key ?>][label]" value="<?php echo $label ?>" placeholder="<?php echo $option[0] ?>" />
-                    <?php endif ?>
-
-                    <?php if (isset($option[1])): ?>
-                        <input type="text" name="<?php echo $id ?>[<?php echo $key ?>][link]" value="<?php echo $link ?>" placeholder="<?php echo $option[1] ?>" />
-                    <?php endif ?>
-                </div>
-            <?php endforeach ?>
+                        <?php if (isset($socials[$k][1])): ?>
+                            <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][link]" value="<?php echo $link ?>" placeholder="<?php echo $socials[$k][1] ?>" />
+                        <?php endif ?>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
         </fieldset>
 
         <div class="hide-if-no-js">

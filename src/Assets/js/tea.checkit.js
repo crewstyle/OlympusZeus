@@ -88,7 +88,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_checkit');
+            $.error('Method ' + method + ' does not exist on tea_checkit');
             return false;
         }
     };

@@ -57,7 +57,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_link');
+            $.error('Method ' + method + ' does not exist on tea_link');
             return false;
         }
     };

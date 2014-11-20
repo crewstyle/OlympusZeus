@@ -6,16 +6,20 @@
 
     <div class="inside tea-inside multiselect">
         <select name="<?php echo $id ?>[]" id="<?php echo $id ?>" multiple="multiple" size="5">
-            <?php
-                foreach ($options as $key => $option):
-                    if (empty($key)) {
-                        continue;
-                    }
+            <?php if (!empty($options)): ?>
+                <?php
+                    foreach ($options as $key => $option):
+                        if (empty($key)) {
+                            continue;
+                        }
 
-                    $selected = is_array($vals) && in_array($key, $vals) ? true : false;
-                ?>
-                <option value="<?php echo $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
-            <?php endforeach ?>
+                        $selected = is_array($vals) && in_array($key, $vals) ? true : false;
+                    ?>
+                    <option value="<?php echo $key ?>" <?php echo $selected ? 'selected="selected" ' : '' ?>><?php echo $option ?></option>
+                <?php endforeach ?>
+            <?php else: ?>
+                <?php _e('Something went wrong in your parameters definition: no options have been defined.') ?>
+            <?php endif ?>
         </select>
 
         <p>

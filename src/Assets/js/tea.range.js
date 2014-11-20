@@ -65,7 +65,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_range');
+            $.error('Method ' + method + ' does not exist on tea_range');
             return false;
         }
     };

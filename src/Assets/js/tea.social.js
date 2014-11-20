@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.social.js v1.0.1
+ * tea.social.js v1.0.2
  * https://github.com/Takeatea/tea_theme_options
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -89,13 +89,13 @@
         }
 
         //Update modal content and add binding event
-        var $div = $(document.createElement('div')).attr('data-network', _key);
+        var $div = $(document.createElement('div')).attr('data-network', _key).addClass('draggable');
         var $main = $(document.createElement('label')).attr('for', _tea.options.label + '_' + _key);
         var $key = $(document.createElement('i')).addClass('fa fa-' + _key + ' fa-lg');
         var $hidden = $(document.createElement('input')).attr({
             type: 'hidden',
-            name: _tea.options.label + '__checkbox[' + _key + ']',
-            value: '0'
+            name: _tea.options.label + '[' + _key + '][display]',
+            value: ''
         });
         var $check = $(document.createElement('input')).attr({
             type: 'checkbox',
@@ -213,7 +213,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_social');
+            $.error('Method ' + method + ' does not exist on tea_social');
             return false;
         }
     };

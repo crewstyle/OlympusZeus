@@ -125,8 +125,11 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/js/codemirror/mode/sql/sql.js',
                         '<%= teato.path.src %>/js/codemirror/mode/xml/xml.js',
                         '<%= teato.path.src %>/js/codemirror/mode/yaml/yaml.js',
+                        //Sortable
+                        '<%= teato.path.src %>/js/sortable/sortable.js',
                         //TeaTO
                         '<%= teato.path.src %>/js/tea.modal.js',
+                        '<%= teato.path.src %>/js/tea.dragndrop.js',
                         '<%= teato.path.src %>/js/tea.checkall.js',
                         '<%= teato.path.src %>/js/tea.checkit.js',
                         '<%= teato.path.src %>/js/tea.code.js',

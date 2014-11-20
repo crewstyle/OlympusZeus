@@ -79,7 +79,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on Tea_textarea');
+            $.error('Method ' + method + ' does not exist on tea_textarea');
             return false;
         }
     };

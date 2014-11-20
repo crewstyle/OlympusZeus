@@ -1,14 +1,14 @@
-# Tea Theme Options package.
-# Copyright (C) 2014
-# This file is distributed under the same license as the Tea Theme Options package.
-# Achraf Chouk <ach@takeatea.com>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: tea-theme-options 1.5.0\n"
+"Project-Id-Version: tea-theme-options 1.5.1-8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-07 13:06+0100\n"
+"POT-Creation-Date: 2014-11-20 16:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: node_modules/grunt-pot/test/fixtures/some-file.php:3
+msgid "I'm a translatable string."
+msgstr ""
+
+#: node_modules/grunt-pot/test/fixtures/some-other-file.php:4
+msgid "Me too"
+msgstr ""
+
+#: node_modules/grunt-pot/test/fixtures/some-other-file.php:7
+#, php-format
+msgid "I have %d apple"
+msgid_plural "I have %d apples"
+msgstr[0] ""
+msgstr[1] ""
+
+#. / TRANSLATORS: This should be translated as a shorthand for YEAR-MONTH-DAY using 4, 2 and 2 digits.
+#: node_modules/grunt-pot/test/fixtures/some-other-file.php:16
+msgid "yyyy-mm-dd"
+msgstr ""
+
 #: src/Fields/Background/Background.php:88
 msgid "Tea Background"
 msgstr ""
 
-#: src/Fields/Background/Background.php:94 src/Fields/Gallery/Gallery.php:88
+#: src/Fields/Background/Background.php:94 src/Fields/Gallery/Gallery.php:81
 #: src/Fields/Maps/Maps.php:103 src/Fields/Upload/Upload.php:84
 msgid "Delete selection"
 msgstr ""
@@ -37,8 +57,8 @@ msgid "Add background"
 msgstr ""
 
 #: src/Fields/Background/in_pages.tpl.php:65
-#: src/Fields/Gallery/in_pages.tpl.php:57 src/Fields/Maps/in_pages.tpl.php:58
-#: src/Fields/Upload/in_pages.tpl.php:97
+#: src/Fields/Gallery/in_pages.tpl.php:64 src/Fields/Maps/in_pages.tpl.php:59
+#: src/Fields/Upload/in_pages.tpl.php:93
 msgid "It seems you are not able to upload files."
 msgstr ""
 
@@ -49,9 +69,21 @@ msgstr ""
 #: src/Fields/Checkbox/in_pages.tpl.php:7
 #: src/Fields/Elasticsearch/in_pages.tpl.php:181
 #: src/Fields/Elasticsearch/in_pages.tpl.php:214
-#: src/Fields/Maps/in_pages.tpl.php:145 src/Fields/Network/in_pages.tpl.php:6
+#: src/Fields/Maps/in_pages.tpl.php:146 src/Fields/Network/in_pages.tpl.php:6
 #: src/Fields/Social/in_pages.tpl.php:7
 msgid "Un/select all options"
+msgstr ""
+
+#: src/Fields/Checkbox/in_pages.tpl.php:34
+#: src/Fields/Multiselect/in_pages.tpl.php:21
+#: src/Fields/Radio/in_pages.tpl.php:32 src/Fields/Select/in_pages.tpl.php:21
+msgid ""
+"Something went wrong in your parameters definition: no options have been "
+"defined."
+msgstr ""
+
+#: src/Fields/Code/Code.php:79
+msgid "Tea Code"
 msgstr ""
 
 #: src/Fields/Color/Color.php:78
@@ -265,25 +297,25 @@ msgstr ""
 msgid "Tea Font"
 msgstr ""
 
-#: src/Fields/Gallery/Gallery.php:84
+#: src/Fields/Gallery/Gallery.php:77
 msgid "Tea Gallery"
 msgstr ""
 
 #: src/Fields/Gallery/in_pages.tpl.php:5
-msgid "Delete all galleries"
+msgid "Delete all items"
 msgstr ""
 
-#: src/Fields/Gallery/in_pages.tpl.php:48 src/TeaCustomPostTypes.php:124
-msgid "Edit"
-msgstr ""
-
-#: src/Fields/Gallery/in_pages.tpl.php:49
-#: src/Fields/Gallery/in_pages.tpl.php:50
+#: src/Fields/Gallery/in_pages.tpl.php:33
 msgid "Add item"
 msgstr ""
 
 #: src/Fields/Heading/Heading.php:63
 msgid "Tea Heading"
+msgstr ""
+
+#: src/Fields/Hidden/in_pages.tpl.php:4
+#, php-format
+msgid "Hidden field <code><b>%s</b></code> with value stored: <code>%s</code>"
 msgstr ""
 
 #: src/Fields/Includes/Includes.php:64
@@ -356,123 +388,123 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:53 src/Fields/Maps/in_pages.tpl.php:54
+#: src/Fields/Maps/in_pages.tpl.php:54 src/Fields/Maps/in_pages.tpl.php:55
 msgid "Add marker"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:66
+#: src/Fields/Maps/in_pages.tpl.php:67
 msgid "Width"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:70
+#: src/Fields/Maps/in_pages.tpl.php:71
 msgid "Define the width maps in pixels."
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:74
+#: src/Fields/Maps/in_pages.tpl.php:75
 msgid "Height"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:78
+#: src/Fields/Maps/in_pages.tpl.php:79
 msgid "Define the height maps in pixels."
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:89
+#: src/Fields/Maps/in_pages.tpl.php:90
 msgid "Zoom"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:93
+#: src/Fields/Maps/in_pages.tpl.php:94
 msgid "Define your default zoom."
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:99
+#: src/Fields/Maps/in_pages.tpl.php:100
 msgid "Type"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:104
+#: src/Fields/Maps/in_pages.tpl.php:105
 msgid "Roadmap"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:105
+#: src/Fields/Maps/in_pages.tpl.php:106
 msgid "Satellite"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:106
+#: src/Fields/Maps/in_pages.tpl.php:107
 msgid "Hybrid"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:107
+#: src/Fields/Maps/in_pages.tpl.php:108
 msgid "Terrain"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:117
+#: src/Fields/Maps/in_pages.tpl.php:118
 msgid "Define your default type."
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:127
+#: src/Fields/Maps/in_pages.tpl.php:128
 msgid "Drag'n drop"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:128
+#: src/Fields/Maps/in_pages.tpl.php:129
 msgid "Street View"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:129
+#: src/Fields/Maps/in_pages.tpl.php:130
 msgid "Zoom control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:131
+#: src/Fields/Maps/in_pages.tpl.php:132
 msgid "Map control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:132
+#: src/Fields/Maps/in_pages.tpl.php:133
 msgid "Scale control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:133
+#: src/Fields/Maps/in_pages.tpl.php:134
 msgid "Pan control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:135
+#: src/Fields/Maps/in_pages.tpl.php:136
 msgid "Rotate control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:136
+#: src/Fields/Maps/in_pages.tpl.php:137
 msgid "Rotate control options"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:137
+#: src/Fields/Maps/in_pages.tpl.php:138
 msgid "Scroll Wheel"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:139
+#: src/Fields/Maps/in_pages.tpl.php:140
 msgid "Overview Map control"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:140
+#: src/Fields/Maps/in_pages.tpl.php:141
 msgid "Overview Map control options"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:143
+#: src/Fields/Maps/in_pages.tpl.php:144
 msgid "Options"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:166
+#: src/Fields/Maps/in_pages.tpl.php:167
 msgid "Define your default options."
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:175
+#: src/Fields/Maps/in_pages.tpl.php:176
 msgid "Enable JSON design?"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:177
+#: src/Fields/Maps/in_pages.tpl.php:178
 msgid "Yes"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:178
+#: src/Fields/Maps/in_pages.tpl.php:179
 msgid "No"
 msgstr ""
 
-#: src/Fields/Maps/in_pages.tpl.php:185
+#: src/Fields/Maps/in_pages.tpl.php:186
 msgid ""
 "To customize your Google map, go to <a href=\"http://snazzymaps.com/\" "
 "target=\"_blank\"><b>SnazzyMaps</b></a> website, choose a theme and copy/"
@@ -483,7 +515,7 @@ msgstr ""
 msgid "Tea Multiselect"
 msgstr ""
 
-#: src/Fields/Multiselect/in_pages.tpl.php:22
+#: src/Fields/Multiselect/in_pages.tpl.php:26
 #: src/Fields/Wordpress/in_pages.tpl.php:28
 msgid ""
 "Press the <code>CTRL</code> or <code>CMD</code> button to select more than "
@@ -518,11 +550,11 @@ msgstr ""
 msgid "Tea Social"
 msgstr ""
 
-#: src/Fields/Social/in_pages.tpl.php:50 src/Fields/Social/in_pages.tpl.php:51
+#: src/Fields/Social/in_pages.tpl.php:47 src/Fields/Social/in_pages.tpl.php:48
 msgid "Add social networks"
 msgstr ""
 
-#: src/Fields/Social/in_pages.tpl.php:64
+#: src/Fields/Social/in_pages.tpl.php:61
 msgid "Choose the social networks you want to display"
 msgstr ""
 
@@ -542,11 +574,11 @@ msgstr ""
 msgid "Delete all medias"
 msgstr ""
 
-#: src/Fields/Upload/in_pages.tpl.php:52 src/Fields/Upload/in_pages.tpl.php:53
+#: src/Fields/Upload/in_pages.tpl.php:50 src/Fields/Upload/in_pages.tpl.php:51
 msgid "Add medias"
 msgstr ""
 
-#: src/Fields/Upload/in_pages.tpl.php:89 src/Fields/Upload/in_pages.tpl.php:90
+#: src/Fields/Upload/in_pages.tpl.php:85 src/Fields/Upload/in_pages.tpl.php:86
 msgid "Add media"
 msgstr ""
 
@@ -608,6 +640,10 @@ msgstr ""
 #: src/TeaCustomPostTypes.php:123
 #, php-format
 msgid "Add new %s"
+msgstr ""
+
+#: src/TeaCustomPostTypes.php:124
+msgid "Edit"
 msgstr ""
 
 #: src/TeaCustomPostTypes.php:125 src/TeaCustomTaxonomies.php:119
@@ -1116,15 +1152,19 @@ msgid ""
 msgstr ""
 
 #: src/TeaPages.php:141
-msgid "Tea T.O. ~ Earth tea"
+msgid "Tea T.O. ~ Earth"
 msgstr ""
 
 #: src/TeaPages.php:148
-msgid "Tea T.O. ~ Vulcan tea"
+msgid "Tea T.O. ~ Ocean"
 msgstr ""
 
 #: src/TeaPages.php:155
-msgid "Tea T.O. ~ Ocean tea"
+msgid "Tea T.O. ~ Vulcan"
+msgstr ""
+
+#: src/TeaPages.php:162
+msgid "Tea T.O. ~ Wind"
 msgstr ""
 
 #: src/TeaPages.php:300
@@ -1133,44 +1173,44 @@ msgid ""
 "                definition: no master page defined!"
 msgstr ""
 
-#: src/TeaPages.php:351 src/TeaPages.php:537
+#: src/TeaPages.php:360 src/TeaPages.php:547
 msgid ""
 "Something went wrong in your parameters\n"
 "                definition: no master page found. You can simply do that by\n"
 "                using the addPage public function."
 msgstr ""
 
-#: src/TeaPages.php:486
+#: src/TeaPages.php:495
 msgid ""
 "Something went wrong in your parameters\n"
 "                definition: your configs are empty. See README.md for\n"
 "                more explanations."
 msgstr ""
 
-#: src/TeaPages.php:493
+#: src/TeaPages.php:502
 msgid ""
 "Something went wrong in your parameters\n"
 "                definition: your contents are empty. See README.md for\n"
 "                more explanations."
 msgstr ""
 
-#: src/TeaPages.php:510 src/TeaPages.php:511
+#: src/TeaPages.php:520 src/TeaPages.php:521
 #: src/Tpl/contents/__content_dashboard.tpl.php:4
 #: src/Tpl/layouts/__layout_header.tpl.php:5
 msgid "Tea T.O."
 msgstr ""
 
-#: src/TeaPages.php:604
+#: src/TeaPages.php:614
 msgid ""
 "Something went wrong: it seems you\n"
 "                forgot to attach contents to the current page."
 msgstr ""
 
-#: src/TeaPages.php:736
+#: src/TeaPages.php:746
 msgid "Tea Theme Options"
 msgstr ""
 
-#: src/TeaPages.php:807
+#: src/TeaPages.php:817
 #, php-format
 msgid ""
 "Something went wrong in your\n"
@@ -1178,7 +1218,7 @@ msgid ""
 "                    the defined type is unknown!"
 msgstr ""
 
-#: src/TeaPages.php:823
+#: src/TeaPages.php:833
 #, php-format
 msgid ""
 "Something went wrong in\n"
@@ -1186,14 +1226,14 @@ msgid ""
 "                        does not exist!"
 msgstr ""
 
-#: src/TeaPages.php:971
+#: src/TeaPages.php:981
 #, php-format
 msgid ""
 "Something went wrong. Key \"%s\"\n"
 "                and/or its value is empty."
 msgstr ""
 
-#: src/TeaPages.php:1184
+#: src/TeaPages.php:1177
 msgid ""
 "Something went wrong in your parameters\n"
 "                definition. You need to specify a network to make the\n"
@@ -1328,13 +1368,64 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: src/Tpl/layouts/__layout_admin_connect.tpl.php:7
-msgid ""
-"<strong>Your Tea Theme Options is almost ready!</strong> Connect your "
-"profile to enable social features and get full of functionalities ;)"
+msgid "It's Tea time!"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:8
+msgid "Your Tea Theme Options is almost ready."
 msgstr ""
 
 #: src/Tpl/layouts/__layout_admin_connect.tpl.php:12
-msgid "Connect"
+msgid "Social features"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:16
+msgid "Coming soon."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:19
+msgid ""
+"Connect your profile to enable social features and get full of "
+"functionalities ;)"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:23
+msgid "Customize your theme"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:26
+msgid "Ocean tea"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:30
+msgid "Earth tea"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:34
+msgid "Vulcan tea"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:38
+#, php-format
+msgid ""
+"Do not forget to customize <a href=\"%s\">your current theme</a> with the 3 "
+"new Tea Theme Options appearances."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:41
+msgid "Boost your engine!"
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:43
+msgid "Manage your pages easily, create your own setting pages symply."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:44
+msgid "Boost your search engine with Elasticsearch."
+msgstr ""
+
+#: src/Tpl/layouts/__layout_admin_connect.tpl.php:45
+msgid "Create your own Custom Post Types."
 msgstr ""
 
 #: src/Tpl/layouts/__layout_admin_permalinks.tpl.php:2
@@ -1375,10 +1466,6 @@ msgstr ""
 
 #: src/Tpl/layouts/__layout_footer.tpl.php:33
 msgid "Search template"
-msgstr ""
-
-#: src/Tpl/layouts/__layout_header.tpl.php:26
-msgid "Close &times;"
 msgstr ""
 
 #: src/Tpl/layouts/__layout_header.tpl.php:33

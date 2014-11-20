@@ -959,3 +959,7 @@ msgstr "Fermer &times;"
 #: src/Tpl/layouts/__layout_header.tpl.php
 msgid "The Tea Theme Options is updated."
 msgstr "Le Tea Theme Options est à jour."
+
+#: src/Fields/**/*/in_pages.tpl.php
+msgid "Something went wrong in your parameters definition: no options have been defined."
+msgstr "Une erreur est survenue avec vos paramètres : aucune option n'a été définie."

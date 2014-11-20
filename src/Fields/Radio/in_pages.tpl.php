@@ -6,27 +6,31 @@
 
     <div class="inside tea-inside radio">
         <fieldset<?php echo 'image' == $mode ? ' class="radio-image"' : '' ?>>
-            <?php
-                foreach ($options as $key => $option):
-                    if (empty($key)) {
-                        continue;
-                    }
+            <?php if (!empty($options)): ?>
+                <?php
+                    foreach ($options as $key => $option):
+                        if (empty($key)) {
+                            continue;
+                        }
 
-                    $selected = $key == $val ? true : false;
-                    $for = $id . '_' . $key;
-                ?>
-                <p>
-                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
-                        <input type="radio" name="<?php echo $id ?>" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
+                        $selected = $key == $val ? true : false;
+                        $for = $id . '_' . $key;
+                    ?>
+                    <p>
+                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
+                            <input type="radio" name="<?php echo $id ?>" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
 
-                        <?php if ('image' == $mode): ?>
-                            <img src="<?php echo $option ?>" alt="" />
-                        <?php else: ?>
-                            <?php echo $option ?>
-                        <?php endif ?>
-                    </label>
-                </p>
-            <?php endforeach ?>
+                            <?php if ('image' == $mode): ?>
+                                <img src="<?php echo $option ?>" alt="" />
+                            <?php else: ?>
+                                <?php echo $option ?>
+                            <?php endif ?>
+                        </label>
+                    </p>
+                <?php endforeach ?>
+            <?php else: ?>
+                <?php _e('Something went wrong in your parameters definition: no options have been defined.') ?>
+            <?php endif ?>
         </fieldset>
 
         <p><?php echo $description ?></p>

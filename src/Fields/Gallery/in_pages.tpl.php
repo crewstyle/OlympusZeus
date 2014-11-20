@@ -21,7 +21,7 @@
                             continue;
                         }
                     ?>
-                        <li data-id="<?php echo $item['id'] ?>">
+                        <li class="draggable" data-id="<?php echo $item['id'] ?>">
                             <a href="#" class="del_item" data-target="<?php echo $item['id'] ?>">&times;</a>
                             <img src="<?php echo $item['image'] ?>" alt="" />
                         </li>
@@ -51,18 +51,6 @@
 
                             <div class="gallery-editor">
                                 <textarea id="<?php echo $id ?>_<?php echo $item['id'] ?>_content" rows="4" class="wp-editor-area" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]"><?php echo $item['content'] ?></textarea>
-                                <?php /*wp_editor($item['content'], $id . '_' . $item['id'] . '_content', array(
-                                    'media_buttons' => false,
-                                    'textarea_rows' => 3,
-                                    'textarea_name' => $id . '[' . $item['id'] . '][content]',
-                                    'teeny' => true,
-                                    'skin' => 'wordpress',
-                                    'tinymce' => array(
-                                        'theme_advanced_buttons1' => 'bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,close,|,youtube',
-                                        'theme_advanced_buttons2' => 'formatselect,underline,justifyfull,forecolor',
-                                        'theme_advanced_blockformats' => 'p,h2,h3,h4,h5,h6,pre'
-                                    )
-                                ))*/ ?>
                             </div>
                         </div>
                     <?php endforeach ?>

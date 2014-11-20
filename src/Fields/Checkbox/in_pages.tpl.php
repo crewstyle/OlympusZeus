@@ -12,23 +12,27 @@
 
     <div class="inside tea-inside checkbox">
         <fieldset>
-            <?php
-                foreach ($options as $key => $option):
-                    if (empty($option)) {
-                        continue;
-                    }
+            <?php if (!empty($options)): ?>
+                <?php
+                    foreach ($options as $key => $option):
+                        if (empty($option)) {
+                            continue;
+                        }
 
-                    $selected = is_array($vals) && in_array($key, $vals) ? true : false;
-                    $for = $id . '_' . $key;
-                ?>
-                <p>
-                    <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
-                        <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
-                        <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>]" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
-                        <?php echo $option ?>
-                    </label>
-                </p>
-            <?php endforeach ?>
+                        $selected = is_array($vals) && in_array($key, $vals) ? true : false;
+                        $for = $id . '_' . $key;
+                    ?>
+                    <p>
+                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
+                            <input type="hidden" name="<?php echo $id ?>[<?php echo $key ?>]" value="" />
+                            <input type="checkbox" name="<?php echo $id ?>[<?php echo $key ?>]" id="<?php echo $for ?>" value="<?php echo $key ?>" <?php echo $selected ? 'checked="checked" ' : '' ?> />
+                            <?php echo $option ?>
+                        </label>
+                    </p>
+                <?php endforeach ?>
+            <?php else: ?>
+                <?php _e('Something went wrong in your parameters definition: no options have been defined.') ?>
+            <?php endif ?>
         </fieldset>
 
         <p><?php echo $description ?></p>

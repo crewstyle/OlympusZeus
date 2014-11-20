@@ -38,18 +38,19 @@
                     <div style="float:left;margin:0 2% 0 0;width:49%;">
                         <h3><label for="<?php echo $id ?>-marker"><?php _e('Marker', TTO_I18N) ?></label></h3>
                         <div class="inside tea-inside upload" data-type="image">
-                            <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker" value="<?php echo $vals['marker'] ?>" />
-
                             <div class="upload_image_result">
                                 <?php if (!empty($vals['marker'])): ?>
                                     <figure>
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][id]" value="" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][url]" value="<?php echo $vals['marker'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][name]" value="" />
                                         <img src="<?php echo $vals['marker'] ?>" alt="" />
                                         <a href="#" class="del_image" data-target="<?php echo $id ?>-marker">&times;</i></a>
                                     </figure>
                                 <?php endif ?>
 
                                 <?php if ($can_upload): ?>
-                                    <div class="upload-time hide-if-no-js <?php echo !empty($vals['marker']) ? 'item-added' : '' ?>" data-target="<?php echo $id ?>-marker">
+                                    <div class="upload-time hide-if-no-js <?php echo !empty($vals['marker']) ? 'item-added' : '' ?>" data-target="<?php echo $id ?>[marker]">
                                         <a href="#" class="add_image" title="<?php echo esc_html(__('Add marker', TTO_I18N)) ?>">
                                             <i class="fa fa-map-marker fa-lg"></i> <?php _e('Add marker', TTO_I18N) ?>
                                         </a>
@@ -155,7 +156,7 @@
                                 ?>
                                 <p class="item">
                                     <label for="<?php echo $for ?>" class="<?php echo $sel ? 'selected' : '' ?>">
-                                        <input type="hidden" name="<?php echo $id ?>__checkbox[<?php echo $key ?>]" value="0" />
+                                        <input type="hidden" name="<?php echo $id ?>[options][<?php echo $key ?>]" value="" />
                                         <input type="checkbox" name="<?php echo $id ?>[options][<?php echo $key ?>]" id="<?php echo $for ?>" value="yes" <?php echo $sel ?> />
                                         <?php echo $option ?>
                                     </label>
