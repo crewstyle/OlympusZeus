@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Post Types
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0
+ * @since 1.5.2-3
  *
  */
 class TeaCustomPostTypes
@@ -66,7 +66,7 @@ class TeaCustomPostTypes
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.5.0
+     * @since 1.5.2-3
      */
     public function __buildMenuCustomPostType()
     {
@@ -165,7 +165,6 @@ class TeaCustomPostTypes
         }
 
         //Translate permalink structure
-        //add_action('init', array(&$this, '__addPermalinkStructure'));
         add_action('post_type_link', array(&$this, '__translatePermalink'), 10, 3);
 
         //Get all admin details
@@ -265,7 +264,7 @@ class TeaCustomPostTypes
      * @uses register_setting()
      * @uses add_settings_field()
      *
-     * @since 1.5.0
+     * @since 1.5.2-3
      */
     public function __registerPermalinks()
     {
@@ -307,15 +306,15 @@ class TeaCustomPostTypes
             }
 
             //Get value
-            $structure = TeaThemeOptions::get_option($opt, '/'.__('example', TTO_I18N).'-'.$cpt['slug']);
+            $structure = TeaThemeOptions::get_option($opt, '/%'.$cpt['slug'].'%-%post_id%');
 
             //Add fields
             add_settings_field(
-                $opt,                                   //Identifier
-                $cpt['title'],                          //Title
-                array(&$this,'__permalinksFields'),     //Callback function
-                'permalink',                            //Page
-                'tea_custom_permalinks',                //Section
+                $opt,                                               //Identifier
+                $cpt['title'].' <code>%'.$cpt['slug'].'%</code>',   //Title
+                array(&$this,'__permalinksFields'),                 //Callback function
+                'permalink',                                        //Page
+                'tea_custom_permalinks',                            //Section
                 array(
                     'name' => $cpt['slug'].'_tea_structure',
                     'value' => $structure,

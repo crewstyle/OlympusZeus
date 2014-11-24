@@ -88,6 +88,7 @@ class Color extends TeaFields
         else {
             //Check selected
             $val = get_post_meta($post->ID, $post->post_type . '-' . $id, true);
+            $val = empty($val) ? $std : $val;
         }
 
         //Get template

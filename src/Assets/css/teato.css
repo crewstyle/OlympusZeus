@@ -484,6 +484,20 @@ hr {
   display: block;
   margin: 32px 18px 32px 0px;
 }
+.teato-mainwrap #update-nag,
+.teato-mainwrap .update-nag {
+  margin: 0 0 0 -20px;
+}
+#update-nag a,
+.update-nag a {
+  color: #ffba00;
+}
+#update-nag a:focus,
+#update-nag a:hover,
+.update-nag a:focus,
+.update-nag a:hover {
+  color: #664a00;
+}
 div.tea_to_message {
   background: #ffffff;
   border: 1px solid #ffffff;

@@ -1,3 +1,6 @@
+## 1.5.2-3 (November 20, 2014)
+Fix `color` fields default value, update custom permalinks with new indications and updated-message block
+
 ## 1.5.2-2 (November 20, 2014)
 Remove [HTML5 Sortable](http://farhadi.ir/projects/html5sortable) jQuery component already installe din WP core
 
