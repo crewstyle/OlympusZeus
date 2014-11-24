@@ -1,3 +1,4 @@
+## 1.5.2-5 (November 24, 2014)
 ## 1.5.2-4 (November 24, 2014)
 Fix bugs in `maps` field with marker
 

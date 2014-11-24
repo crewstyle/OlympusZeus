@@ -16,7 +16,9 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'description' => 'Do not choose the black hole World',
  *     'std' => array( //every attribute is optional
  *         'address' => '3 avenue Secretan, Paris, France',
- *         'marker' => get_template_directory_uri() . 'img/my_marker.png',
+ *         'marker' => array(
+ *             'url' => get_template_directory_uri() . 'img/my_marker.png',
+ *         ),
  *         'width' => 500,
  *         'height' => 200,
  *         'zoom' => 14,
@@ -54,7 +56,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Maps
- * @since 1.4.0
+ * @since 1.5.2-5
  *
  */
 class Maps extends TeaFields
@@ -81,7 +83,7 @@ class Maps extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.5.2-5
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -106,7 +108,7 @@ class Maps extends TeaFields
         //Default values
         $std = isset($content['std']) ? $content['std'] : array();
         $std['address'] = isset($std['address']) ? $std['address'] : '';
-        $std['marker'] = isset($std['marker']) ? $std['marker'] : $url;
+        $std['marker'] = isset($std['marker']) ? $std['marker'] : array('url' => $url);
         $std['width'] = isset($std['width']) ? $std['width'] : '500';
         $std['height'] = isset($std['height']) ? $std['height'] : '250';
         $std['zoom'] = isset($std['zoom']) ? $std['zoom'] : '14';

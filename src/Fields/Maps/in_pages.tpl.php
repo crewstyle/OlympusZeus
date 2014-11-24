@@ -44,7 +44,7 @@
                                         <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][id]" value="<?php echo $vals['marker']['id'] ?>" />
                                         <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][url]" value="<?php echo $vals['marker']['url'] ?>" />
                                         <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][name]" value="<?php echo $vals['marker']['name'] ?>" />
-                                        <img src="<?php echo $vals['marker'] ?>" alt="" />
+                                        <img src="<?php echo $vals['marker']['url'] ?>" alt="" />
                                         <a href="#" class="del_image" data-target="<?php echo $id ?>-marker">&times;</i></a>
                                     </figure>
                                 <?php endif ?>
