@@ -41,9 +41,9 @@
                             <div class="upload_image_result">
                                 <?php if (!empty($vals['marker'])): ?>
                                     <figure>
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][id]" value="" />
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][url]" value="<?php echo $vals['marker'] ?>" />
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][name]" value="" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][id]" value="<?php echo $vals['marker']['id'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][url]" value="<?php echo $vals['marker']['url'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][name]" value="<?php echo $vals['marker']['name'] ?>" />
                                         <img src="<?php echo $vals['marker'] ?>" alt="" />
                                         <a href="#" class="del_image" data-target="<?php echo $id ?>-marker">&times;</i></a>
                                     </figure>

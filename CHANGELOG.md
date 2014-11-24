@@ -1,4 +1,7 @@
-## 1.5.2-3 (November 20, 2014)
+## 1.5.2-4 (November 24, 2014)
+Fix bugs in `maps` field with marker
+
+## 1.5.2-3 (November 24, 2014)
 Fix `color` fields default value, update custom permalinks with new indications and updated-message block
 
 ## 1.5.2-2 (November 20, 2014)
