@@ -24,10 +24,6 @@
                             $ids = $item['id'];
                             $url = isset($item['url']) ? $item['url'] : '';
                             $name = isset($item['name']) ? $item['name'] : '';
-
-                            $url = 'image' == $library ? $url : $wplink;
-                            $cls = 'image' == $library ? ' class="image"' : '';
-                            $det = 'image' == $library ? '' : '<br/><small>' . $name . '</small>';
                     ?>
                         <li class="movendrop" data-id="<?php echo $id ?>__<?php echo $item['id'] ?>">
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][url]" value="<?php echo $url ?>" />
@@ -36,11 +32,14 @@
 
                             <?php if ('video' == $library): ?>
                                 <video src="<?php echo $url ?>" controls></video>
+                                <br/><small><?php echo $name ?></small>
+                            <?php elseif ('image' == $library): ?>
+                                <img src="<?php echo $url ?>" alt="" class="image" />
                             <?php else: ?>
-                                <img src="<?php echo $url ?>" alt=""<?php echo $cls ?> />
+                                <img src="<?php echo $wplink ?>" alt="" />
+                                <br/><small><?php echo $name ?></small>
                             <?php endif ?>
 
-                            <?php echo $det ?>
                             <a href="#" class="del_image">&times;</a>
                         </li>
                     <?php endforeach ?>
@@ -69,7 +68,7 @@
 
                         <?php if ('image' == $library): ?>
                             <img src="<?php echo $url ?>" alt="" class="image" />
-                        <?php elseif ('application' == $library): ?>
+                        <?php elseif ('pdf' == in_array($library, array('application', 'application/pdf', 'pdf'))): ?>
                             <img src="<?php echo $wplink ?>" alt="" />
                             <br/><small><?php echo $name ?></small>
                         <?php elseif ('video' == $library): ?>

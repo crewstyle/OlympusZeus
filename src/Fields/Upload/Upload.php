@@ -84,6 +84,9 @@ class Upload extends TeaFields
         $delete = __('Delete selection', TTO_I18N);
         $wplink = TTO_INC . 'images/media/document.png';
 
+        //Fix bug with PDF
+        $library = 'pdf' == $library ? 'application/pdf' : $library;
+
         //Default way
         if (empty($post)) {
             //Check selected
