@@ -2,7 +2,7 @@
  * Tea Theme Options jQuery
  * https://github.com/Takeatea/tea_theme_options
  * ===================================================
- * Copyright 2014 Take a Tea (http://takeatea.com)
+ * Copyright 2015 Take a Tea (http://takeatea.com)
  * =================================================== */
 
 (function ($){
@@ -124,6 +124,9 @@
 
         //Link input
         $('.tea-inside.link .block-link input').tea_link();
+
+        //Multiselect input
+        $('.tea-inside select[multiple="true"]').tea_multiselect();
 
         //Range input
         $('.tea-inside input[type="range"]').tea_range();

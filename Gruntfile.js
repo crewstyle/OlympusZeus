@@ -70,6 +70,8 @@ module.exports = function(grunt) {
                         //Codemirror
                         '<%= teato.path.src %>/css/codemirror/codemirror.css',
                         '<%= teato.path.src %>/css/codemirror/monokai.css',
+                        //Selectize
+                        '<%= teato.path.src %>/css/selectize/selectize.css',
                         //TeaTO
                         '<%= teato.path.src %>/css/font-awesome.css',
                         '<%= teato.path.src %>/css/teato.css'
@@ -125,6 +127,8 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/js/codemirror/mode/sql/sql.js',
                         '<%= teato.path.src %>/js/codemirror/mode/xml/xml.js',
                         '<%= teato.path.src %>/js/codemirror/mode/yaml/yaml.js',
+                        //Selectize
+                        '<%= teato.path.src %>/js/selectize/selectize.js',
                         //TeaTO
                         '<%= teato.path.src %>/js/tea.modal.js',
                         '<%= teato.path.src %>/js/tea.dragndrop.js',
@@ -136,6 +140,7 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/js/tea.gallery.js',
                         '<%= teato.path.src %>/js/tea.labelize.js',
                         '<%= teato.path.src %>/js/tea.link.js',
+                        '<%= teato.path.src %>/js/tea.multiselect.js',
                         '<%= teato.path.src %>/js/tea.range.js',
                         '<%= teato.path.src %>/js/tea.social.js',
                         '<%= teato.path.src %>/js/tea.textarea.js',
@@ -362,6 +367,16 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/less/login/*.less'
                     ]
                 }
+            },
+            selectize: {
+                files: {
+                    '<%= teato.path.src %>/css/selectize/selectize.css': [
+                        '<%= teato.path.src %>/css/selectize/less/selectize.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.default.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.legacy.less',
+                        '<%= teato.path.src %>/css/selectize/less/plugins/*.less'
+                    ]
+                }
             }
         },
 
@@ -369,7 +384,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['<%= teato.path.src %>/less/**/*.less'],
-                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:wind', 'less:login', 'cssmin', 'copy', 'uglify'],
+                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:wind', 'less:login', 'less:selectize', 'cssmin', 'copy', 'uglify'],
                 options: {
                     nospawn: true
                 }
@@ -415,11 +430,11 @@ module.exports = function(grunt) {
     grunt.registerTask('lang',      ['pot','po2mo']);
 
     //Watch task: grunt default
-    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy']);
+    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','less:selectize','cssmin','uglify','copy']);
 
     //CSS and JS tasks: grunt css / grunt js
     grunt.registerTask('start',     ['clean']);
-    grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:login','cssmin']);
+    grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:login','less:selectize','cssmin']);
     grunt.registerTask('js',        ['uglify']);
     grunt.registerTask('move',      ['copy']);
 

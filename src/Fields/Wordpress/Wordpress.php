@@ -95,7 +95,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Wordpress
- * @since 1.5.2-1
+ * @since 1.5.2-7
  *
  */
 class Wordpress extends TeaFields

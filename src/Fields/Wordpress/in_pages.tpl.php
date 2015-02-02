@@ -7,7 +7,8 @@
     <div class="inside tea-inside <?php echo $mode ?>">
         <?php if (!empty($contents) && 1 <= count($contents)): ?>
             <?php $squares = $multiple ? '[]' : '' ?>
-            <select name="<?php echo $id.$squares ?>" id="<?php echo $id ?>" <?php echo $multiple ? 'multiple="true" size="5"' : '' ?>>
+            <input type="hidden" name="<?php echo $id.$squares ?>" value="" />
+            <select name="<?php echo $id.$squares ?>" id="<?php echo $id ?>" <?php echo $multiple ? 'multiple="true" size="5" data-value="'.implode(',', $vals).'"' : '' ?>>
                 <?php foreach ($contents as $key => $optgroup): ?>
                     <?php if (!empty($key)): ?>
                         <optgroup label="<?php echo $key ?>">

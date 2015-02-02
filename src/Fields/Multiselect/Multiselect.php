@@ -38,7 +38,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Multiselect
- * @since 1.4.0
+ * @since 1.5.2-7
  *
  */
 class Multiselect extends TeaFields

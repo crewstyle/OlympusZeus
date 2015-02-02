@@ -1,3 +1,9 @@
+## 1.5.2-7 (Fabruary 02, 2015)
+HAPPY NEW YEAR :)
+
+- **New:**
+  - add multiselect JS actions on `wordpress` and `multiselect` fields
+
 ## 1.5.2-6 (December 01, 2014)
 Fix bugs in `upload` field
 
