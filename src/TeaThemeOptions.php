@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.5.2-7
+ * Version: 1.5.2-8
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -53,7 +53,7 @@ if (!defined('ABSPATH')) {
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2-7');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2-8');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -85,7 +85,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0
+ * @since 1.5.2-8
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -116,7 +116,7 @@ class TeaThemeOptions
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 1.5.0
+     * @since 1.5.2-8
      */
     public function __construct($identifier = 'tea_theme_options', $options = array())
     {
@@ -128,8 +128,9 @@ class TeaThemeOptions
 
             //Build options
             $opts = array(
-                'connect' => isset($options['connect']) ? $options['connect'] : true,
-                'elastic' => isset($options['elastic']) ? $options['elastic'] : true,
+                'connect'   => isset($options['connect'])   ? $options['connect']   : true,
+                'elastic'   => isset($options['elastic'])   ? $options['elastic']   : true,
+                'notifs'    => isset($options['notifs'])    ? $options['notifs']    : true,
             );
 
             //Page component

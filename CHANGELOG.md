@@ -1,3 +1,6 @@
+## 1.5.2-8 (Fabruary 04, 2015)
+Add notifications option in instanciation
+
 ## 1.5.2-7 (Fabruary 02, 2015)
 HAPPY NEW YEAR :)
 

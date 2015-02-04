@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2-1
+ * @since 1.5.2-8
  *
  */
 class TeaPages
@@ -54,7 +54,7 @@ class TeaPages
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display connections and elasticsearch pages
      *
-     * @since 1.5.2-1
+     * @since 1.5.2-8
      */
     public function __construct($identifier, $options)
     {
@@ -95,7 +95,7 @@ class TeaPages
         $isdismissed = TeaThemeOptions::getConfigs('dismiss');
 
         //Check connection
-        if (empty($isactive) && empty($isdismissed)) {
+        if (empty($isactive) && empty($isdismissed) && $options['notifs']) {
             // Show connect notice on dashboard and plugins pages
             add_action('load-index.php', array(&$this, '__getNotices'));
             add_action('load-plugins.php', array(&$this, '__getNotices'));
