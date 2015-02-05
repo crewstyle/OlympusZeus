@@ -1,36 +1,39 @@
 {
-  "name": "tea-theme-options",
-  "version": "1.5.2-9",
-  "description": "Simple, easy to use and fully integrated Theme Options for Wordpress.",
-  "main": "assets/js/teato.min.js",
-  "scripts": {
+  "name":         "tea-theme-options",
+  "version":      "1.5.2-10",
+  "description":  "Simple, easy to use and fully integrated Theme Options for Wordpress, made by Take a tea.",
+  "main":         "assets/js/teato.min.js",
+  "scripts":      {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Takeatea/tea_theme_options"
+  "repository":   {
+    "type":   "git",
+    "url":    "https://github.com/Takeatea/tea_theme_options"
   },
-  "keywords": [
+  "keywords":     [
     "wordpress",
+    "plugin",
     "teathemeoptions",
+    "themeoptions",
+    "tea",
     "tto",
     "teato",
     "theme",
     "options"
   ],
-  "author": "Achraf Chouk <achrafchouk@gmail.com>",
-  "license": "http://opensource.org/licenses/MIT",
+  "author":       "Achraf Chouk <achrafchouk@gmail.com>",
+  "license":      "http://opensource.org/licenses/MIT",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-less": "^0.12.0",
+    "grunt":                  "~0.4.5",
+    "grunt-contrib-clean":    "~0.5.0",
+    "grunt-contrib-copy":     "^0.7.0",
+    "grunt-contrib-cssmin":   "~0.10.0",
+    "grunt-contrib-jshint":   "~0.10.0",
+    "grunt-contrib-less":     "^0.12.0",
     "grunt-contrib-nodeunit": "~0.4.0",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-po2mo": "~0.1.0",
-    "grunt-pot": "~0.2.0"
+    "grunt-contrib-uglify":   "~0.5.0",
+    "grunt-contrib-watch":    "^0.6.1",
+    "grunt-po2mo":            "~0.1.0",
+    "grunt-pot":              "~0.2.0"
   }
 }

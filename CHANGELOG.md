@@ -1,3 +1,6 @@
+## 1.5.2-10 (Fabruary 05, 2015)
+Update composer.json
+
 ## 1.5.2-9 (Fabruary 05, 2015)
 Add selectize theme colors
 
