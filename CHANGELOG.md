@@ -1,3 +1,6 @@
+## 1.5.2-9 (Fabruary 05, 2015)
+Add selectize theme colors
+
 ## 1.5.2-8 (Fabruary 04, 2015)
 Add notifications option in instanciation
 

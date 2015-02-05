@@ -58,135 +58,6 @@ module.exports = function(grunt) {
             }
         },
 
-        //minify CSS files
-        cssmin: {
-            compress: {
-                files: {
-                    '<%= teato.path.tar %>/css/teato.min.css': [
-                        //Pickadate
-                        '<%= teato.path.src %>/css/pickadate/classic.css',
-                        '<%= teato.path.src %>/css/pickadate/classic.date.css',
-                        '<%= teato.path.src %>/css/pickadate/classic.time.css',
-                        //Codemirror
-                        '<%= teato.path.src %>/css/codemirror/codemirror.css',
-                        '<%= teato.path.src %>/css/codemirror/monokai.css',
-                        //Selectize
-                        '<%= teato.path.src %>/css/selectize/selectize.css',
-                        //TeaTO
-                        '<%= teato.path.src %>/css/font-awesome.css',
-                        '<%= teato.path.src %>/css/teato.css'
-                    ],
-                    '<%= teato.path.tar %>/css/teato.admin.earth.css': [
-                        '<%= teato.path.src %>/css/teato.admin.earth.css'
-                    ],
-                    '<%= teato.path.tar %>/css/teato.admin.ocean.css': [
-                        '<%= teato.path.src %>/css/teato.admin.ocean.css'
-                    ],
-                    '<%= teato.path.tar %>/css/teato.admin.vulcan.css': [
-                        '<%= teato.path.src %>/css/teato.admin.vulcan.css'
-                    ],
-                    '<%= teato.path.tar %>/css/teato.admin.wind.css': [
-                        '<%= teato.path.src %>/css/teato.admin.wind.css'
-                    ],
-                    '<%= teato.path.tar %>/css/teato.login.css': [
-                        '<%= teato.path.src %>/css/teato.login.css'
-                    ]
-                }
-            }
-        },
-
-        //JShint validation
-        jshint: {
-            all: [
-                '<%= teato.path.src %>/js/*.js'
-            ]
-        },
-
-        //uglify JS files
-        uglify: {
-            my_target: {
-                files: {
-                    '<%= teato.path.tar %>/js/teato.min.js': [
-                        //Pickadate
-                        '<%= teato.path.src %>/js/pickadate/picker.js',
-                        '<%= teato.path.src %>/js/pickadate/picker.date.js',
-                        '<%= teato.path.src %>/js/pickadate/picker.time.js',
-                        '<%= teato.path.src %>/js/pickadate/legacy.js',
-                        //Codemirror
-                        '<%= teato.path.src %>/js/codemirror/codemirror.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/clike/clike.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/css/css.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/diff/diff.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/htmlmixed/htmlmixed.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/javascript/javascript.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/markdown/markdown.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/php/php.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/python/python.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/ruby/ruby.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/shell/shell.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/sql/sql.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/xml/xml.js',
-                        '<%= teato.path.src %>/js/codemirror/mode/yaml/yaml.js',
-                        //Selectize
-                        '<%= teato.path.src %>/js/selectize/selectize.js',
-                        //TeaTO
-                        '<%= teato.path.src %>/js/tea.modal.js',
-                        '<%= teato.path.src %>/js/tea.dragndrop.js',
-                        '<%= teato.path.src %>/js/tea.checkall.js',
-                        '<%= teato.path.src %>/js/tea.checkit.js',
-                        '<%= teato.path.src %>/js/tea.code.js',
-                        '<%= teato.path.src %>/js/tea.color.js',
-                        '<%= teato.path.src %>/js/tea.date.js',
-                        '<%= teato.path.src %>/js/tea.gallery.js',
-                        '<%= teato.path.src %>/js/tea.labelize.js',
-                        '<%= teato.path.src %>/js/tea.link.js',
-                        '<%= teato.path.src %>/js/tea.multiselect.js',
-                        '<%= teato.path.src %>/js/tea.range.js',
-                        '<%= teato.path.src %>/js/tea.social.js',
-                        '<%= teato.path.src %>/js/tea.textarea.js',
-                        '<%= teato.path.src %>/js/tea.upload.js',
-                        '<%= teato.path.src %>/js/teato.js'
-                    ]
-                }
-            }
-        },
-
-        //create POT file
-        pot: {
-            options:{
-                text_domain: 'tea_theme_options',
-                dest: 'languages/',
-                keywords: [
-                    '__:1',
-                    '_e:1',
-                    '_x:1,2c',
-                    'esc_html__:1',
-                    'esc_html_e:1',
-                    'esc_html_x:1,2c',
-                    'esc_attr__:1',
-                    'esc_attr_e:1',
-                    'esc_attr_x:1,2c',
-                    '_ex:1,2c',
-                    '_n:1,2',
-                    '_nx:1,2,4c',
-                    '_n_noop:1,2',
-                    '_nx_noop:1,2,3c'
-                ],
-            },
-            files:{
-                src: ['**/*.php'],
-                expand: true
-            }
-        },
-
-        //create MO file
-        po2mo: {
-            files: {
-                src: 'languages/*.po',
-                expand: true
-            }
-        },
-
         //less compilation
         less: {
             teato: {
@@ -368,15 +239,200 @@ module.exports = function(grunt) {
                     ]
                 }
             },
-            selectize: {
+            selectearth: {
+                options: {
+                    modifyVars: {
+                        primary: '#91d04d'
+                    },
+                    optimization: 2
+                },
                 files: {
-                    '<%= teato.path.src %>/css/selectize/selectize.css': [
+                    '<%= teato.path.src %>/css/selectize/selectize.earth.css': [
                         '<%= teato.path.src %>/css/selectize/less/selectize.less',
                         '<%= teato.path.src %>/css/selectize/less/selectize.default.less',
                         '<%= teato.path.src %>/css/selectize/less/selectize.legacy.less',
                         '<%= teato.path.src %>/css/selectize/less/plugins/*.less'
                     ]
                 }
+            },
+            selectocean: {
+                options: {
+                    modifyVars: {
+                        primary: '#4d9dd0'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/selectize/selectize.ocean.css': [
+                        '<%= teato.path.src %>/css/selectize/less/selectize.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.default.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.legacy.less',
+                        '<%= teato.path.src %>/css/selectize/less/plugins/*.less'
+                    ]
+                }
+            },
+            selectvulcan: {
+                options: {
+                    modifyVars: {
+                        primary: '#d04d4d'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/selectize/selectize.vulcan.css': [
+                        '<%= teato.path.src %>/css/selectize/less/selectize.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.default.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.legacy.less',
+                        '<%= teato.path.src %>/css/selectize/less/plugins/*.less'
+                    ]
+                }
+            },
+            selectwind: {
+                options: {
+                    modifyVars: {
+                        primary: '#69d2e7'
+                    },
+                    optimization: 2
+                },
+                files: {
+                    '<%= teato.path.src %>/css/selectize/selectize.wind.css': [
+                        '<%= teato.path.src %>/css/selectize/less/selectize.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.default.less',
+                        '<%= teato.path.src %>/css/selectize/less/selectize.legacy.less',
+                        '<%= teato.path.src %>/css/selectize/less/plugins/*.less'
+                    ]
+                }
+            },
+        },
+
+        //minify CSS files
+        cssmin: {
+            compress: {
+                files: {
+                    '<%= teato.path.tar %>/css/teato.min.css': [
+                        //Pickadate
+                        '<%= teato.path.src %>/css/pickadate/classic.css',
+                        '<%= teato.path.src %>/css/pickadate/classic.date.css',
+                        '<%= teato.path.src %>/css/pickadate/classic.time.css',
+                        //Codemirror
+                        '<%= teato.path.src %>/css/codemirror/codemirror.css',
+                        '<%= teato.path.src %>/css/codemirror/monokai.css',
+                        //TeaTO
+                        '<%= teato.path.src %>/css/font-awesome.css',
+                        '<%= teato.path.src %>/css/teato.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.earth.css': [
+                        '<%= teato.path.src %>/css/teato.admin.earth.css',
+                        '<%= teato.path.src %>/css/selectize/selectize.earth.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.ocean.css': [
+                        '<%= teato.path.src %>/css/teato.admin.ocean.css',
+                        '<%= teato.path.src %>/css/selectize/selectize.ocean.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.vulcan.css': [
+                        '<%= teato.path.src %>/css/teato.admin.vulcan.css',
+                        '<%= teato.path.src %>/css/selectize/selectize.vulcan.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.admin.wind.css': [
+                        '<%= teato.path.src %>/css/teato.admin.wind.css',
+                        '<%= teato.path.src %>/css/selectize/selectize.wind.css'
+                    ],
+                    '<%= teato.path.tar %>/css/teato.login.css': [
+                        '<%= teato.path.src %>/css/teato.login.css'
+                    ]
+                }
+            }
+        },
+
+        //JShint validation
+        jshint: {
+            all: [
+                '<%= teato.path.src %>/js/*.js'
+            ]
+        },
+
+        //uglify JS files
+        uglify: {
+            my_target: {
+                files: {
+                    '<%= teato.path.tar %>/js/teato.min.js': [
+                        //Pickadate
+                        '<%= teato.path.src %>/js/pickadate/picker.js',
+                        '<%= teato.path.src %>/js/pickadate/picker.date.js',
+                        '<%= teato.path.src %>/js/pickadate/picker.time.js',
+                        '<%= teato.path.src %>/js/pickadate/legacy.js',
+                        //Codemirror
+                        '<%= teato.path.src %>/js/codemirror/codemirror.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/clike/clike.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/css/css.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/diff/diff.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/htmlmixed/htmlmixed.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/javascript/javascript.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/markdown/markdown.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/php/php.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/python/python.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/ruby/ruby.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/shell/shell.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/sql/sql.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/xml/xml.js',
+                        '<%= teato.path.src %>/js/codemirror/mode/yaml/yaml.js',
+                        //Selectize
+                        '<%= teato.path.src %>/js/selectize/selectize.js',
+                        //TeaTO
+                        '<%= teato.path.src %>/js/tea.modal.js',
+                        '<%= teato.path.src %>/js/tea.dragndrop.js',
+                        '<%= teato.path.src %>/js/tea.checkall.js',
+                        '<%= teato.path.src %>/js/tea.checkit.js',
+                        '<%= teato.path.src %>/js/tea.code.js',
+                        '<%= teato.path.src %>/js/tea.color.js',
+                        '<%= teato.path.src %>/js/tea.date.js',
+                        '<%= teato.path.src %>/js/tea.gallery.js',
+                        '<%= teato.path.src %>/js/tea.labelize.js',
+                        '<%= teato.path.src %>/js/tea.link.js',
+                        '<%= teato.path.src %>/js/tea.multiselect.js',
+                        '<%= teato.path.src %>/js/tea.range.js',
+                        '<%= teato.path.src %>/js/tea.social.js',
+                        '<%= teato.path.src %>/js/tea.textarea.js',
+                        '<%= teato.path.src %>/js/tea.upload.js',
+                        '<%= teato.path.src %>/js/teato.js'
+                    ]
+                }
+            }
+        },
+
+        //create POT file
+        pot: {
+            options:{
+                text_domain: 'tea_theme_options',
+                dest: 'languages/',
+                keywords: [
+                    '__:1',
+                    '_e:1',
+                    '_x:1,2c',
+                    'esc_html__:1',
+                    'esc_html_e:1',
+                    'esc_html_x:1,2c',
+                    'esc_attr__:1',
+                    'esc_attr_e:1',
+                    'esc_attr_x:1,2c',
+                    '_ex:1,2c',
+                    '_n:1,2',
+                    '_nx:1,2,4c',
+                    '_n_noop:1,2',
+                    '_nx_noop:1,2,3c'
+                ],
+            },
+            files:{
+                src: ['**/*.php'],
+                expand: true
+            }
+        },
+
+        //create MO file
+        po2mo: {
+            files: {
+                src: 'languages/*.po',
+                expand: true
             }
         },
 
@@ -384,7 +440,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['<%= teato.path.src %>/less/**/*.less'],
-                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:wind', 'less:login', 'less:selectize', 'cssmin', 'copy', 'uglify'],
+                tasks: ['clean', 'less:teato', 'less:earth', 'less:ocean', 'less:vulcan', 'less:wind', 'less:login', 'less:selectearth', 'less:selectocean', 'less:selectvulcan', 'less:selectwind', 'cssmin', 'copy', 'uglify'],
                 options: {
                     nospawn: true
                 }
@@ -430,11 +486,11 @@ module.exports = function(grunt) {
     grunt.registerTask('lang',      ['pot','po2mo']);
 
     //Watch task: grunt default
-    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','less:selectize','cssmin','uglify','copy']);
+    grunt.registerTask('default',   ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','less:selectearth','less:selectocean','less:selectvulcan','less:selectwind','cssmin','uglify','copy']);
 
     //CSS and JS tasks: grunt css / grunt js
     grunt.registerTask('start',     ['clean']);
-    grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:login','less:selectize','cssmin']);
+    grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:login','less:selectearth','less:selectocean','less:selectvulcan','less:selectwind','cssmin']);
     grunt.registerTask('js',        ['uglify']);
     grunt.registerTask('move',      ['copy']);
 
