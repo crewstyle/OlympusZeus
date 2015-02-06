@@ -1,6 +1,8 @@
 # Tea Theme Options
 
-[![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Code Climate](https://codeclimate.com/github/Takeatea/tea_theme_options/badges/gpa.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options) [![Test Coverage](https://codeclimate.com/github/Takeatea/tea_theme_options/badges/coverage.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options)
+[![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](https://packagist.org/packages/takeatea/tea-theme-options)  
+[![Code Climate](https://codeclimate.com/github/Takeatea/tea_theme_options/badges/gpa.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options) [![Test Coverage](https://codeclimate.com/github/Takeatea/tea_theme_options/badges/coverage.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options)
+
 
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.
@@ -17,12 +19,15 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 + **Easier for developers** - Create a new admin panel easily with only 2 lines. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.
 
 
-## RTFM
 
-[To learn more about the Tea TO, read the docs](http://tea-theme-options.readme.io/).
+### Installation
+
+[To learn more about the Tea TO, read the docs](http://tea-theme-options.readme.io/).  
+The Tea TO uses ReadMe which was built entirely on Open Source projects.
 
 
-### That's all folkes!
+
+### And that's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -33,12 +38,12 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-## If you want to contribute... :)
 
+### Oh, if you want to contribute... :)
 
-### GruntJS
+#### GruntJS
 
-Before begin working with the Tea T.O., you will have to install some usefull tools.
+Before begin working with the Tea TO, you will have to install some usefull tools.  
 The first one is [GruntJS](http://gruntjs.com/) with the following command lines:
 
 ```
@@ -46,10 +51,9 @@ npm install -g grunt-cli
 npm install
 ```
 
+#### Bower
 
-### Bower
-
-The second usefull tool to work with the Tea T.O. is [Bower](http://bower.io/).
+The second usefull tool to work with the Tea TO is [Bower](http://bower.io/).  
 Just follow this command line:
 
 ```
@@ -58,13 +62,15 @@ bower install
 ```
 
 
-## Pleaaaaaaaase :D
 
-[![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)
+### All we need is LOOOOOOOOOVE
+
+[![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)  
 You can help us maintaining the Tea TO with some tips. It will be so gratefull :)
 
 
-## Authors and Copyright
+
+### Authors and Copyright
 
 **Take a Tea**
 
