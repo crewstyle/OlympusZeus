@@ -1,6 +1,6 @@
 # Tea Theme Options
 
-[![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](https://packagist.org/packages/takeatea/tea-theme-options)
+[![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Code Climate](https://codeclimate.com/repos/54d34bcae30ba032f5003ef8/badges/011089111351a46aab78/gpa.svg)](https://codeclimate.com/repos/54d34bcae30ba032f5003ef8/feed) [![Test Coverage](https://codeclimate.com/repos/54d34bcae30ba032f5003ef8/badges/011089111351a46aab78/coverage.svg)](https://codeclimate.com/repos/54d34bcae30ba032f5003ef8/feed)
 
 
 ## Simple, easy to use and fully integrated Theme Options for Wordpress.
@@ -69,6 +69,7 @@ bower install
 + http://fr.linkedin.com/in/achrafchouk/
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
+[![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)
 
 Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")
 Brewed by Take a tea ;)

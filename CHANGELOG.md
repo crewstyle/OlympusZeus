@@ -1,3 +1,6 @@
+## 1.5.2-13 (Fabruary 06, 2015)
+Code-Climate and Gratipay integration in the README.md
+
 ## 1.5.2-12 (Fabruary 06, 2015)
 Update the .gitignore file with bower generated files (no need in the package)
 
