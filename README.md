@@ -20,14 +20,14 @@ The [Tea Theme Options](https://github.com/Takeatea/tea_theme_options) (or **Tea
 
 
 
-### Installation
+## Installation
 
 [To learn more about the Tea TO, read the docs](http://tea-theme-options.readme.io/).  
 The Tea TO uses ReadMe which was built entirely on Open Source projects.
 
 
 
-### And that's all folkes!
+## And that's all folkes!
 
 Here is the latest step: check quickly your new panel options.
 
@@ -39,9 +39,9 @@ That's all to begin working with **Tea TO**
 
 
 
-### Oh, if you want to contribute... :)
+## Oh, if you want to contribute... :)
 
-#### GruntJS
+### GruntJS
 
 Before begin working with the Tea TO, you will have to install some usefull tools.  
 The first one is [GruntJS](http://gruntjs.com/) with the following command lines:
@@ -51,7 +51,7 @@ npm install -g grunt-cli
 npm install
 ```
 
-#### Bower
+### Bower
 
 The second usefull tool to work with the Tea TO is [Bower](http://bower.io/).  
 Just follow this command line:
@@ -63,14 +63,14 @@ bower install
 
 
 
-### All we need is LOOOOOOOOOVE
+## All we need is LOOOOOOOOOVE
 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)  
 You can help us maintaining the Tea TO with some tips. It will be so gratefull :)
 
 
 
-### Authors and Copyright
+## Authors and Copyright
 
 **Take a Tea**
 
