@@ -1,3 +1,15 @@
+## 1.5.2-11 (Fabruary 06, 2015)
+Ladies and Gentlemen, please welcome to BOWER :)
+
+- **New:**
+  - all dependencies are imported with bower.json
+  - command lines to install Grunt and Bower in README.md
+- **Enhance:**
+  - the `section` field get now svg and identifier attributes
+  - svg files are themed
+- **Delete:**
+  - remove all JS packages from the Assets folder
+
 ## 1.5.2-10 (Fabruary 05, 2015)
 Update composer.json
 
@@ -41,7 +53,7 @@ Lots of new features with some bug fixed
 - **New:**
   - some fields are now draggable thanks to the [HTML5 Sortable](http://farhadi.ir/projects/html5sortable) jQuery component
   - `hidden` field is now displayed in the interface (very usefull!)
-- **enhance:**
+- **Enhance:**
   - documentation is now on [readme.io](http://tea-theme-options.readme.io/)
   - remove title from `hidden` field
 - **Fix:**
@@ -95,7 +107,7 @@ Lots of new features with new core update version
   - new `date` field
   - new `link` field
   - new TeaAdminMessage class
-- **enhance:**
+- **Enhance:**
   - all JS packages
   - JShint validation
 - **Fix:**

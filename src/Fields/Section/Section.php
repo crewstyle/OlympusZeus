@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Section
- * @since 1.4.0
+ * @since 1.5.2-11
  *
  */
 class Section extends TeaFields
@@ -49,13 +49,15 @@ class Section extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 1.5.2-11
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
         //Default variables
         $color = isset($content['color']) ? $content['color'] : 'white';
+        $identifier = isset($content['identifier']) ? $content['identifier'] : '';
         $image = isset($content['image']) ? $content['image'] : '';
+        $svg = isset($content['svg']) ? $content['svg'] : '';
         $position = isset($content['position']) ? $content['position'] : 'left';
         $content = isset($content['content']) ? $content['content'] : '';
 

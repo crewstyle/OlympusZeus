@@ -56,6 +56,9 @@ a:focus,
 a:hover {
   color: #91d04d;
 }
+.tea-main-nav .tea-logo svg #water path:last-child {
+  fill: #55bb3a;
+}
 
 /*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
@@ -188,8 +191,22 @@ a:hover {
  * Copyright 20xx Take a Tea
  * By Take a Tea <takeatea.com> ;)
  */
+/*--- [MAIN] ---*/
 #dashboard-widgets-wrap {
   overflow: visible;
+}
+/*--- [SVG] ---*/
+#section-teato-logo.inside-section svg #water path:last-child,
+#section-teato-logo.inside-section svg #bull-2 path:last-child,
+#section-teato-logo.inside-section svg #bull-3 path,
+#section-teato-logo.inside-section svg #bull-4 path {
+  fill: #55bb3a;
+}
+#section-teato-cogs.inside-section svg #green path {
+  fill: #55bb3a;
+}
+#section-teato-wp.inside-section svg #water path:last-child {
+  fill: #55bb3a;
 }
 
 /*!
@@ -252,6 +269,9 @@ textarea:focus {
   -webkit-box-shadow: 0 0 2px rgba(229, 247, 229, 0.8);
   -moz-box-shadow: 0 0 2px rgba(229, 247, 229, 0.8);
   box-shadow: 0 0 2px rgba(229, 247, 229, 0.8);
+}
+input[type=radio]:checked:before {
+  background-color: #55bb3a;
 }
 textarea:focus {
   color: #000000;
@@ -450,6 +470,37 @@ ul#adminmenu .wp-menu-image img {
 .contextual-help-tabs .active {
   background-color: #ffffff;
   border-left-color: #91d04d;
+}
+
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Plugins
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+.teato-mainwrap .selectize-control.multi .selectize-input [data-value] {
+  background-color: #91d04d;
+  background-image: none;
+  border-color: #55bb3a;
+  border-radius: 0;
+  color: #ffffff;
+}
+.teato-mainwrap .selectize-control.multi .selectize-input [data-value].active {
+  background-color: #e5f7e5;
+  background-image: none;
+  border-color: #55bb3a;
+  color: #55bb3a;
+}
+.teato-mainwrap .selectize-dropdown {
+  border-radius: 0;
+  margin-top: -2px;
+  max-width: 100%;
+  right: 0;
+}
+.teato-mainwrap .selectize-dropdown .active {
+  background-color: #e5f7e5;
+  color: #111111;
 }
 
 /*!

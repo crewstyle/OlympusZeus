@@ -393,9 +393,11 @@ hr {
   margin-right: 5px;
   text-transform: uppercase;
 }
-.tea-main-nav .tea-logo img {
+.tea-main-nav .tea-logo object {
+  display: inline-block;
   margin: -6px 10px 0 0;
   max-height: 54px;
+  height: 40px;
   vertical-align: middle;
 }
 .tea-main-nav .tea-breadcrumb {

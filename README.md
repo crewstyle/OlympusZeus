@@ -31,7 +31,32 @@ Here is the latest step: check quickly your new panel options.
 That's all to begin working with **Tea TO**
 
 
-### Authors and Copyright
+## If you want to contribute... :)
+
+
+### GruntJS
+
+Before begin working with the Tea T.O., you will have to install some usefull tools.
+The first one is [GruntJS](http://gruntjs.com/) with the following command lines:
+
+```
+npm install -g grunt-cli
+npm install
+```
+
+
+### Bower
+
+The second usefull tool to work with the Tea T.O. is [Bower](http://bower.io/).
+Just follow this command line:
+
+```
+npm install -g bower
+bower install
+```
+
+
+## Authors and Copyright
 
 **Take a Tea**
 
