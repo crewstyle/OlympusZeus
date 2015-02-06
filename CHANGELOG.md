@@ -1,3 +1,6 @@
+## 1.5.2-12 (Fabruary 06, 2015)
+Update the .gitignore file with bower generated files (no need in the package)
+
 ## 1.5.2-11 (Fabruary 06, 2015)
 Ladies and Gentlemen, please welcome to BOWER :)
 

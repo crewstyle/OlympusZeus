@@ -3,4 +3,5 @@
 /vendor/
 /node_modules/
 /bower_components/
+/src/Assets/bower/
 composer.phar
