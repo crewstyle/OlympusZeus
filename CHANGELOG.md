@@ -1,10 +1,10 @@
-## 1.5.2-13 (Fabruary 06, 2015)
+## 1.5.2-13 (February 06, 2015)
 Code-Climate and Gratipay integration in the README.md
 
-## 1.5.2-12 (Fabruary 06, 2015)
+## 1.5.2-12 (February 06, 2015)
 Update the .gitignore file with bower generated files (no need in the package)
 
-## 1.5.2-11 (Fabruary 06, 2015)
+## 1.5.2-11 (February 06, 2015)
 Ladies and Gentlemen, please welcome to BOWER :)
 
 - **New:**
@@ -16,16 +16,16 @@ Ladies and Gentlemen, please welcome to BOWER :)
 - **Delete:**
   - remove all JS packages from the Assets folder
 
-## 1.5.2-10 (Fabruary 05, 2015)
+## 1.5.2-10 (February 05, 2015)
 Update composer.json
 
-## 1.5.2-9 (Fabruary 05, 2015)
-Add selectize theme colors
+## 1.5.2-9 (February 05, 2015)
+Add [Selectize.js](http://brianreavis.github.io/selectize.js/) theme colors
 
-## 1.5.2-8 (Fabruary 04, 2015)
+## 1.5.2-8 (February 04, 2015)
 Add notifications option in instanciation
 
-## 1.5.2-7 (Fabruary 02, 2015)
+## 1.5.2-7 (February 02, 2015)
 HAPPY NEW YEAR :)
 
 - **New:**
