@@ -69,6 +69,7 @@ bower install
 + http://fr.linkedin.com/in/achrafchouk/
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
+
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)
 
 Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")
