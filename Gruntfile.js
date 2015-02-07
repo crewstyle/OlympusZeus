@@ -40,16 +40,24 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         //remove any previously-created files
-        clean: [
-            '<%= teato.path.bow %>/*',
-            '<%= teato.path.src %>/css/teato.css',
-            '<%= teato.path.src %>/css/teato.admin.*.css',
-            '<%= teato.path.src %>/css/teato.login.css',
-            '<%= teato.path.tar %>/css/*',
-            '<%= teato.path.tar %>/fonts/*',
-            '<%= teato.path.tar %>/img/*',
-            '<%= teato.path.tar %>/js/*'
-        ],
+        clean: {
+            first: [
+                '<%= teato.path.bow %>/*',
+                '<%= teato.path.src %>/css/teato.css',
+                '<%= teato.path.src %>/css/teato.admin.*.css',
+                '<%= teato.path.src %>/css/teato.login.css',
+                '<%= teato.path.tar %>/css/*',
+                '<%= teato.path.tar %>/fonts/*',
+                '<%= teato.path.tar %>/img/*',
+                '<%= teato.path.tar %>/js/*'
+            ],
+            last: [
+                '<%= teato.path.bow %>/*',
+                '<%= teato.path.src %>/css/teato.css',
+                '<%= teato.path.src %>/css/teato.admin.*.css',
+                '<%= teato.path.src %>/css/teato.login.css'
+            ]
+        },
 
         //make bower magics
         bower: {
@@ -468,7 +476,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['<%= teato.path.src %>/less/**/*.less'],
-                tasks: ['clean','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','copy','uglify'],
+                tasks: ['clean:first','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','copy','uglify','clean:last'],
                 options: {
                     nospawn: true
                 }
@@ -511,7 +519,7 @@ module.exports = function(grunt) {
     //------ [REGISTER TASKS] ------//
 
     //bower magic: grunt bowie
-    grunt.registerTask('bow',       ['clean','bower']);
+    grunt.registerTask('bow',       ['clean:first','bower']);
 
     //JShint validation task: grunt hint
     grunt.registerTask('hint',      ['jshint']);
@@ -520,14 +528,14 @@ module.exports = function(grunt) {
     grunt.registerTask('lang',      ['pot','po2mo']);
 
     //all steps tasks: grunt css / grunt js
-    grunt.registerTask('start',     ['clean','bower']);
+    grunt.registerTask('start',     ['clean:first','bower']);
     grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin']);
     grunt.registerTask('js',        ['uglify']);
-    grunt.registerTask('move',      ['copy']);
+    grunt.registerTask('move',      ['copy','clean:last']);
 
     //watch less compiling
     grunt.registerTask('sniper',    ['watch']);
 
     //default task: grunt default / grunt
-    grunt.registerTask('default',   ['clean','bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy']);
+    grunt.registerTask('default',   ['clean:first','bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy','clean:last']);
 };

@@ -6,7 +6,7 @@ namespace Takeatea\TeaThemeOptions;
  * TEA FIELDS
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Fields
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2-1
+ * @since 1.5.2.14
  *
  */
 abstract class TeaFields
@@ -217,12 +217,8 @@ abstract class TeaFields
                     __('See my portfolio on Behance', TTO_I18N),
                     __('http://www.behance.com/__username__', TTO_I18N),
                 ),
-                'bloglovin'     => array(
-                    __('Follow me on Bloglovin', TTO_I18N),
-                    __('http://www.bloglovin.com/blog/__userid__/__username__', TTO_I18N),
-                ),
                 'bitbucket'     => array(
-                    __('Follow me on Bitbucket', TTO_I18N),
+                    __('Tip me on Bitbucket', TTO_I18N),
                     __('https://bitbucket.org/__username__', TTO_I18N),
                 ),
                 'codepen'       => array(
@@ -249,17 +245,9 @@ abstract class TeaFields
                     __('Follow me on Flickr', TTO_I18N),
                     __('http://www.flickr.com/photos/__username__', TTO_I18N),
                 ),
-                'forrst'        => array(
-                    __('Follow me on Forrst', TTO_I18N),
-                    __('http://forrst.com/people/__username__', TTO_I18N),
-                ),
                 'foursquare'    => array(
                     __('See me on Foursquare', TTO_I18N),
                     __('https://fr.foursquare.com/__username__', TTO_I18N),
-                ),
-                'friendfeed'    => array(
-                    __('Follow me on FriendFeed', TTO_I18N),
-                    __('http://friendfeed.com/__username__', TTO_I18N),
                 ),
                 'github'        => array(
                     __('Follow me on Github', TTO_I18N),
@@ -269,13 +257,13 @@ abstract class TeaFields
                     __('Follow me on Gittip', TTO_I18N),
                     __('https://www.gittip.com/__username__', TTO_I18N),
                 ),
-                'hellocoton'    => array(
-                    __('Follow me on Hellocoton', TTO_I18N),
-                    __('http://www.hellocoton.fr/mapage/__username__', TTO_I18N),
-                ),
                 'google-plus'   => array(
                     __('Follow me on Google+', TTO_I18N),
                     __('http://plus.google.com/__username__', TTO_I18N),
+                ),
+                'gratipay'      => array(
+                    __('Tip me Gratipay', TTO_I18N),
+                    __('https://gratipay.com/__username__', TTO_I18N),
                 ),
                 'instagram'     => array(
                     __('Follow me on Instagram', TTO_I18N),

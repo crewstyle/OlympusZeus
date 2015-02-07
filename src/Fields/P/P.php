@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\P;
 
 use Takeatea\TeaThemeOptions\TeaFields;
@@ -15,7 +16,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -28,7 +29,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields P
- * @since 1.4.0
+ * @since 1.5.2.14
  *
  */
 class P extends TeaFields

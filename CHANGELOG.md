@@ -1,3 +1,6 @@
+## 1.5.2-14 (February 07, 2015)
+Fix some bugs.
+
 ## 1.5.2-13 (February 06, 2015)
 Code-Climate and Gratipay integration in the README.md
 

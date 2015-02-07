@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.multiselect.js v1.0.0
+ * tea.multiselect.js v1.0.1
  * https://github.com/Takeatea/tea_theme_options
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -27,7 +27,11 @@
         //make it Selectizable
         _tea.$sel = _tea.$el.selectize({
             //options
-            plugins: ['drag_drop'],
+            plugins: [
+                'drag_drop',
+                'remove_button',
+                'restore_on_backspace'
+            ],
             create: false,
             //events
             onChange: $.proxy(_tea.onchange, _tea),

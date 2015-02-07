@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Network;
 
 use Takeatea\TeaThemeOptions\TeaFields;
@@ -9,7 +10,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -20,7 +21,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.0
+ * @since 1.5.2.14
  *
  */
 class Network extends TeaFields
@@ -55,10 +56,14 @@ class Network extends TeaFields
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Network', TTO_I18N);
 
+        //Get header template
+        include(TTO_PATH.'/Fields/Network/in_pages_head.tpl.php');
+
         //Get template
-        $area = 'head';
         include(TTO_PATH.'/Fields/Network/in_pages.tpl.php');
-        echo '<p>'.__('Coming soon', TTO_I18N).'</p>';
+
+        //Get footer template
+        include(TTO_PATH.'/Fields/Network/in_pages_foot.tpl.php');
 
         //Others vars
         /*$includes = $this->getIncludes();
@@ -85,10 +90,6 @@ class Network extends TeaFields
             $field = new $class();
             $field->templatePages();
         }*/
-
-        //Get template
-        $area = 'footer';
-        include(TTO_PATH.'/Fields/Network/in_pages.tpl.php');
     }
 
     /**

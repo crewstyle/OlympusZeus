@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Maps;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -43,7 +44,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -56,7 +57,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Maps
- * @since 1.5.2-5
+ * @since 1.5.2.14
  *
  */
 class Maps extends TeaFields
@@ -72,6 +73,45 @@ class Maps extends TeaFields
 
 
     //------------------------------------------------------------------------//
+
+    /**
+     * DEFAULTS
+     **/
+
+    /**
+     * Get default values.
+     *
+     * @param string $url Define the default marker URL
+     * @return array $default Contains all default values
+     *
+     * @since 1.5.2-14
+     */
+    public function getValues($url)
+    {
+        return array(
+            'address' => '',
+            'marker' => array('url' => $url),
+            'width' => '500',
+            'height' => '250',
+            'zoom' => '14',
+            'type' => 'ROADMAP',
+            'enable' => 'no',
+            'json' => '',
+            'options' => array(
+                'dragndrop' => 'no',
+                'mapcontrol' => 'no',
+                'pancontrol' => 'no',
+                'zoomcontrol' => 'no',
+                'scalecontrol' => 'no',
+                'scrollwheel' => 'no',
+                'streetview' => 'no',
+                'rotatecontrol' => 'no',
+                'rotatecontroloptions' => 'no',
+                'overviewmapcontrol' => 'no',
+                'overviewmapcontroloptions' => 'no',
+            )
+        );
+    }
 
     /**
      * MAIN FUNCTIONS
@@ -106,30 +146,11 @@ class Maps extends TeaFields
         $url = TTO_URI . '/src/Fields/Maps/img/marker@2x.png';
 
         //Default values
-        $std = isset($content['std']) ? $content['std'] : array();
-        $std['address'] = isset($std['address']) ? $std['address'] : '';
-        $std['marker'] = isset($std['marker']) ? $std['marker'] : array('url' => $url);
-        $std['width'] = isset($std['width']) ? $std['width'] : '500';
-        $std['height'] = isset($std['height']) ? $std['height'] : '250';
-        $std['zoom'] = isset($std['zoom']) ? $std['zoom'] : '14';
-        $std['type'] = isset($std['type']) ? $std['type'] : 'ROADMAP';
-        $std['enable'] = isset($std['enable']) ? $std['enable'] : 'no';
-        $std['json'] = isset($std['json']) ? $std['json'] : '';
+        $def = $this->getValues($url);
+        $ctn = isset($content['std']) ? $content['std'] : array();
 
-        //Default options
-        $std['options'] = array(
-            'dragndrop' => isset($std['options']['dragndrop']) ? $std['options']['dragndrop'] : 'no',
-            'mapcontrol' => isset($std['options']['mapcontrol']) ? $std['options']['mapcontrol'] : 'no',
-            'pancontrol' => isset($std['options']['pancontrol']) ? $std['options']['pancontrol'] : 'no',
-            'zoomcontrol' => isset($std['options']['zoomcontrol']) ? $std['options']['zoomcontrol'] : 'no',
-            'scalecontrol' => isset($std['options']['scalecontrol']) ? $std['options']['scalecontrol'] : 'no',
-            'scrollwheel' => isset($std['options']['scrollwheel']) ? $std['options']['scrollwheel'] : 'no',
-            'streetview' => isset($std['options']['streetview']) ? $std['options']['streetview'] : 'no',
-            'rotatecontrol' => isset($std['options']['rotatecontrol']) ? $std['options']['rotatecontrol'] : 'no',
-            'rotatecontroloptions' => isset($std['options']['rotatecontroloptions']) ? $std['options']['rotatecontroloptions'] : 'no',
-            'overviewmapcontrol' => isset($std['options']['overviewmapcontrol']) ? $std['options']['overviewmapcontrol'] : 'no',
-            'overviewmapcontroloptions' => isset($std['options']['overviewmapcontroloptions']) ? $std['options']['overviewmapcontroloptions'] : 'no',
-        );
+        //Merge values
+        $std = array_merge($def, $ctn);
 
         //Default way
         if (empty($post)) {

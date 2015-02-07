@@ -68,9 +68,12 @@
                             $for = 'social-networks_' . $key;
                             $datas = isset($option[0]) ? ' data-label="' . esc_html($option[0]) . '"' : '';
                             $datas .= isset($option[1]) ? ' data-link="' . esc_html($option[1]) . '"' : '';
+
+                            //Special cases
+                            $keyc = 'vimeo' == $key ? 'vimeo-square' : $key;
                         ?>
                         <a href="#<?php echo $key ?>" data-network="<?php echo $key ?>" class="button button-secondary"<?php echo $datas ?>>
-                            <i class="fa fa-<?php echo $key ?> fa-lg"></i> <?php echo $key ?>
+                            <i class="fa fa-<?php echo $keyc ?> fa-lg"></i> <?php echo $key ?>
                         </a>
                     <?php endforeach ?>
                 </div>

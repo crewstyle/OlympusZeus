@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Multiselect;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -25,7 +26,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -38,7 +39,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Multiselect
- * @since 1.5.2-7
+ * @since 1.5.2.14
  *
  */
 class Multiselect extends TeaFields

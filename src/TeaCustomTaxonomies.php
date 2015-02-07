@@ -6,7 +6,7 @@ namespace Takeatea\TeaThemeOptions;
  * TEA CUSTOM TAXONOMIES
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Taxonomies
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2-1
+ * @since 1.5.2.14
  *
  */
 class TeaCustomTaxonomies

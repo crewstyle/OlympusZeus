@@ -3,7 +3,8 @@
 $titles = array(
     'title' => __('Connections', TTO_I18N),
     'name' => __('<span style="color:#3a71bb">Connections</span>', TTO_I18N),
-    'slug' => '_connections'
+    'slug' => '_connections',
+    'submit' => false
 );
 $details = array(
     array(

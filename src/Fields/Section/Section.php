@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Section;
 
 use Takeatea\TeaThemeOptions\TeaFields;
@@ -9,7 +10,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -22,7 +23,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Section
- * @since 1.5.2-11
+ * @since 1.5.2.14
  *
  */
 class Section extends TeaFields

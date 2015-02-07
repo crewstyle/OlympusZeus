@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Networks\Twitter;
 
 use Takeatea\TeaThemeOptions\TeaNetworks;
@@ -7,7 +8,7 @@ use Takeatea\TeaThemeOptions\TeaNetworks;
  * TEA TWITTER NETWORK
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -18,7 +19,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Network
  *
- * @since 1.4.0
+ * @since 1.5.2.14
  *
  */
 class Twitter extends TeaNetworks

@@ -91,7 +91,7 @@
         //Update modal content and add binding event
         var $div = $(document.createElement('div')).attr('data-network', _key).addClass('movendrop');
         var $main = $(document.createElement('label')).attr('for', _tea.options.label + '_' + _key);
-        var $key = $(document.createElement('i')).addClass('fa fa-' + _key + ' fa-lg');
+        var $key = $(document.createElement('i')).addClass('fa fa-' + ('vimeo' == _key ? 'vimeo-square' : _key) + ' fa-lg');
         var $hidden = $(document.createElement('input')).attr({
             type: 'hidden',
             name: _tea.options.label + '[' + _key + '][display]',

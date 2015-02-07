@@ -4,7 +4,7 @@
         <label for="<?php echo $id ?>"><?php echo $title ?></label>
     </h3>
 
-    <div class="inside tea-inside <?php echo $mode ?>">
+    <div class="inside tea-inside tea-wordpress <?php echo $mode ?>">
         <?php if (!empty($contents) && 1 <= count($contents)): ?>
             <?php $squares = $multiple ? '[]' : '' ?>
             <input type="hidden" name="<?php echo $id.$squares ?>" value="" />

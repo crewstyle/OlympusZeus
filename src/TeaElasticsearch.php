@@ -17,7 +17,7 @@ use Elastica\Type\Mapping;
  * TEA ELASTICSEARCH
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Search
  *
- * @since 1.5.0
+ * @since 1.5.2.14
  *
  */
 class TeaElasticsearch
@@ -777,8 +777,8 @@ class TeaElasticsearch
         //Get index
         $index = $this->getIndex();
         $idp = $ctn['index_post'];
-        $idt = isset($ctn['index_tax']) && !empty($ctn['index_tax']) 
-            ? $ctn['index_tax'] 
+        $idt = isset($ctn['index_tax']) && !empty($ctn['index_tax'])
+            ? $ctn['index_tax']
             : array();
 
         //Check index
@@ -996,8 +996,8 @@ class TeaElasticsearch
         }
 
         //Get search datas
-        $search = isset($request['s']) 
-            ? str_replace('\"', '"', $request['s']) 
+        $search = isset($request['s'])
+            ? str_replace('\"', '"', $request['s'])
             : '';
 
         //Return everything
@@ -1007,11 +1007,11 @@ class TeaElasticsearch
 
         //Get search datas
         $type = isset($request['type']) ? $request['type'] : '';
-        $paged = isset($request['paged']) && !empty($request['paged']) 
-            ? $request['paged'] - 1 
+        $paged = isset($request['paged']) && !empty($request['paged'])
+            ? $request['paged'] - 1
             : 0;
-        $perpage = isset($request['perpage']) 
-            ? $request['perpage'] 
+        $perpage = isset($request['perpage'])
+            ? $request['perpage']
             : TeaThemeOptions::get_option('posts_per_page', 10);
 
         //Build query string
@@ -1215,19 +1215,7 @@ class TeaElasticsearch
     protected function getConfig()
     {
         //Return value
-        $default = array(
-            'enable' => 'no',
-            'status' => 0,
-            'server_host' => 'localhost',
-            'server_port' => '9200',
-            'index_name' => 'teasearch',
-            'read_timeout' => 5,
-            'write_timeout' => 10,
-            'template' => 'no',
-            'scores' => array(),
-            'index_post' => array(),
-            'index_tax' => array()
-        );
+        $default = $this->getValues();
         $ctn = array_merge($default, $this->config);
         return $ctn;
     }
@@ -1243,6 +1231,30 @@ class TeaElasticsearch
     {
         //Define value
         $this->config = $config;
+    }
+
+    /**
+     * Get default values.
+     *
+     * @return array $default Contains all default values
+     *
+     * @since 1.5.2.14
+     */
+    public static function getValues()
+    {
+        return array(
+            'enable' => 'no',
+            'status' => 0,
+            'server_host' => 'localhost',
+            'server_port' => '9200',
+            'index_name' => 'teasearch',
+            'read_timeout' => 5,
+            'write_timeout' => 10,
+            'template' => 'no',
+            'scores' => array(),
+            'index_post' => array(),
+            'index_tax' => array()
+        );
     }
 
     /**

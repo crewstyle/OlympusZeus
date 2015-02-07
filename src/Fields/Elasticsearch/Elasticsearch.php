@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Elasticsearch;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -12,7 +13,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -23,7 +24,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.4.3.10
+ * @since 1.5.2.14
  *
  */
 class Elasticsearch extends TeaFields
@@ -52,7 +53,7 @@ class Elasticsearch extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.3.10
+     * @since 1.5.2.14
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -67,22 +68,12 @@ class Elasticsearch extends TeaFields
         $description = isset($content['description']) ? $content['description'] : '';
         $page = $this->getCurrentPage();
         $index = TeaThemeOptions::getConfigs('elastic_index');
-        $index = $index[0];
+        $index = !empty($index) && isset($index[0]) ? $index[0] : '';
 
         //Default values
-        $std = isset($content['std']) ? $content['std'] : array(
-            'enable' => 'no',
-            'status' => 0,
-            'server_host' => 'localhost',
-            'server_port' => '9200',
-            'index_name' => 'teasearch',
-            'read_timeout' => 5,
-            'write_timeout' => 10,
-            'template' => 'no',
-            'scores' => array(),
-            'index_post' => array(),
-            'index_tax' => array()
-        );
+        $std = isset($content['std'])
+            ? $content['std']
+            : TeaElasticsearch::getValues();
 
         //Get scores
         //$scores = TeaElasticsearch::getFields();
@@ -232,7 +223,7 @@ class Elasticsearch extends TeaFields
         //Checks contents
         if (!$results) {
             TeaAdminMessage::__display(
-                __('Something went wrong: it seems you 
+                __('Something went wrong: it seems you
                 forgot to attach contents to the current page.', TTO_I18N)
             );
         }
@@ -254,7 +245,7 @@ class Elasticsearch extends TeaFields
      *
      * @param array $request Contains all data sent in $_REQUEST method
      *
-     * @since 1.4.3.10
+     * @since 1.5.2.14
      */
     public function updateElasticsearch($request)
     {
@@ -267,13 +258,10 @@ class Elasticsearch extends TeaFields
         $id = $this->getId();
         $ctn = TeaThemeOptions::getConfigs($id);
 
-        //Check old vars vs new
-        $shost = $request[$id]['server_host'] != $ctn['server_host'] ? 1 : 0;
-        $sport = $request[$id]['server_port'] != $ctn['server_port'] ? 1 : 0;
-        $sname = $request[$id]['index_name'] != $ctn['index_name'] ? 1 : 0;
-
         //Check old values
-        if ($shost || $sport || $sname) {
+        if ($request[$id]['server_host'] != $ctn['server_host'] ||
+            $request[$id]['server_port'] != $ctn['server_port'] ||
+            $request[$id]['index_name'] != $ctn['index_name']) {
             TeaThemeOptions::setConfigs('elastic_index', 0);
             $ctn['status'] = 0;
         }

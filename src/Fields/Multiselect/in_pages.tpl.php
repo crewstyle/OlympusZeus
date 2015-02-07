@@ -6,7 +6,7 @@
 
     <div class="inside tea-inside multiselect">
         <input type="hidden" name="<?php echo $id ?>[]" value="" />
-        <select name="<?php echo $id ?>[]" id="<?php echo $id ?>" multiple="multiple" size="5" data-value="<?php echo is_array($vals) ? implode(',', $vals) : $vals ?>">
+        <select name="<?php echo $id ?>[]" id="<?php echo $id ?>" multiple="true" size="5" data-value="<?php echo is_array($vals) ? implode(',', $vals) : (empty($vals) ? '' : $vals) ?>">
             <?php if (!empty($options)): ?>
                 <?php
                     foreach ($options as $key => $option):

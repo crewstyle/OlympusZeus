@@ -18,7 +18,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Gallery
- * @since 1.5.1-4
+ * @since 1.5.2.14
  *
  */
 class Gallery extends TeaFields
@@ -58,7 +58,7 @@ class Gallery extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.0
+     * @since 1.5.2.14
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -90,10 +90,6 @@ class Gallery extends TeaFields
         else {
             //Check selected
             $value = get_post_custom($post->ID);
-            /*$a = preg_replace_callback('/s:(\d+):"(.*?)";/s', function($m){
-                return 's:'.strlen($m[2]).':"'.$m[2].'";';
-            }, $value[$post->post_type . '-' . $id][0]);*/
-
             $vals = isset($value[$post->post_type . '-' . $id]) ? unserialize($value[$post->post_type . '-' . $id][0]) : $std;
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }

@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.5.2-13
+ * Version: 1.5.2-14
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -50,10 +50,12 @@ if (!defined('ABSPATH')) {
 
 //----------------------------------------------------------------------------//
 
+//The context used to define if the PHP files can be executed
+defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2-13');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2-14');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -85,7 +87,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2-8
+ * @since 1.5.2.14
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,

@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Wordpress;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -16,7 +17,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'My Wordpress categories',
  *     'mode' => 'categories',
  *     'id' => 'my_categories_field_id',
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `menus`
@@ -25,7 +26,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'mode' => 'menus',
  *     'title' => 'My Wordpress menus',
  *     'id' => 'my_menus_field_id',
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `pages`
@@ -34,7 +35,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'mode' => 'pages',
  *     'title' => 'My Wordpress pages',
  *     'id' => 'my_pages_field_id',
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `posts`
@@ -47,7 +48,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *         'post_type' => array('post', 'my_cpt_1', 'my_cpt_2'),
  *         'numberposts' => 10
  *     ),
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `post types`
@@ -56,7 +57,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'mode' => 'posttypes',
  *     'title' => 'My Wordpress post types',
  *     'id' => 'my_posttypes_field_id',
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `tags`
@@ -65,7 +66,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'mode' => 'tags',
  *     'title' => 'My Wordpress tags',
  *     'id' => 'my_tags_field_id',
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  * Adding a `taxonomies`
@@ -77,12 +78,12 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'options' => array(
  *         'term' => 'my_taxonomy'
  *     ),
- *     'multiselect' => true //Optional: to "false" by default
+ *     'multiple' => true //Optional: to "false" by default
  * )
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -95,7 +96,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Wordpress
- * @since 1.5.2-7
+ * @since 1.5.2.14
  *
  */
 class Wordpress extends TeaFields

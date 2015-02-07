@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Font;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -23,7 +24,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -36,7 +37,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Font
- * @since 1.4.0
+ * @since 1.5.2.14
  *
  */
 class Font extends TeaFields

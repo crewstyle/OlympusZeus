@@ -1,4 +1,5 @@
 <?php
+
 namespace Takeatea\TeaThemeOptions\Fields\Review;
 
 use Takeatea\TeaThemeOptions\TeaThemeOptions;
@@ -22,7 +23,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -35,7 +36,7 @@ if (!defined('ABSPATH')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Gallery
- * @since 1.4.0
+ * @since 1.5.2.14
  *
  */
 class Review extends TeaFields

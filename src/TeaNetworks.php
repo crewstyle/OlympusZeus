@@ -6,7 +6,7 @@ namespace Takeatea\TeaThemeOptions;
  * TEA NETWORKS
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  *
  * To get its own Fields
  *
- * @since 1.5.0
+ * @since 1.5.2.14
  *
  */
 abstract class TeaNetworks

@@ -6,7 +6,7 @@ namespace Takeatea\TeaThemeOptions;
  * TEA ADMIN MESSAGE
  */
 
-if (!defined('ABSPATH')) {
+if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * @package Tea Theme Options
  * @subpackage Tea Admin Message
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.0
+ * @since 1.5.2.14
  *
  */
 class TeaAdminMessage
@@ -84,7 +84,7 @@ class TeaAdminMessage
             //Get content
             $fields = $this->fields;
             $content = sprintf(
-                __('Something went wrong in your 
+                __('Something went wrong in your
                 parameters definition: no id(s) defined
                 for the following field(s) %s', TTO_I18N),
                 implode(', ', $fields)

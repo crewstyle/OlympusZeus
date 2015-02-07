@@ -48,8 +48,8 @@
                                                 <input type="radio" name="<?php echo $id ?>[<?php echo $author ?>][note]" id="<?php echo $for ?>" value="<?php echo $i ?>" <?php echo $sel ? 'checked="checked" ' : '' ?> />
                                             <?php endif ?>
 
-                                            <?php for ($j = 0; $j <= 5; $j++): ?>
-                                                <i class="fa fa-star<?php echo $j > $i ? '-o' : '' ?> fa-lg"></i>
+                                            <?php for ($j = 0; $j < 5; $j++): ?>
+                                                <i class="fa fa-star<?php echo $j >= $i ? '-o' : '' ?> fa-lg"></i>
                                             <?php endfor ?>
                                         </label>
                                     </p>
