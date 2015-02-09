@@ -15,8 +15,8 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'Once uppon a time...',
  *     'id' => 'my_date_field_id',
  *     'description' => 'A white rabbit was running...',
- *     'format' => 'dd.mm.YYYY', //optional, "YYYY/mm/dd" by default
- *     'std' => '27.04.1984'
+ *     'format' => 'dd.mm.yyyy', //optional, "YYYY/mm/dd" by default
+ *     'std' => '24.04.2012'
  * )
  *
  */

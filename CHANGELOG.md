@@ -1,3 +1,10 @@
+## 1.5.2-15 (February 09, 2015)
+Welcome Leaflet ;)
+
+- **New:**
+  - add Leaflet package from Bower
+  - update the `maps` field with real-time preview
+
 ## 1.5.2-14 (February 07, 2015)
 Fix some bugs.
 

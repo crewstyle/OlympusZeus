@@ -135,6 +135,19 @@ module.exports = function(grunt) {
                         dest: '<%= teato.path.tar %>/img/'
                     }
                 ]
+            },
+            bower: {
+                files: [
+                    {
+                        //Leaflet
+                        expand: true,
+                        flatten: '<%= teato.flatten %>',
+                        src: [
+                            '<%= teato.path.bow %>/leaflet/dist/images/*'
+                        ],
+                        dest: '<%= teato.path.tar %>/css/images/'
+                    }
+                ]
             }
         },
 
@@ -348,6 +361,8 @@ module.exports = function(grunt) {
                         //Codemirror
                         '<%= teato.path.bow %>/codemirror/lib/codemirror.css',
                         '<%= teato.path.bow %>/codemirror/theme/monokai.css',
+                        //Leaflet
+                        '<%= teato.path.bow %>/leaflet/dist/leaflet.css',
                         //Pickadate
                         '<%= teato.path.bow %>/pickadate/lib/themes/classic.css',
                         '<%= teato.path.bow %>/pickadate/lib/themes/classic.date.css',
@@ -389,6 +404,9 @@ module.exports = function(grunt) {
 
         //uglify JS files
         uglify: {
+            options: {
+                preserveComments: 'some',
+            },
             my_target: {
                 files: {
                     '<%= teato.path.tar %>/js/teato.min.js': [
@@ -407,6 +425,8 @@ module.exports = function(grunt) {
                         '<%= teato.path.bow %>/codemirror/mode/sql/sql.js',
                         '<%= teato.path.bow %>/codemirror/mode/xml/xml.js',
                         '<%= teato.path.bow %>/codemirror/mode/yaml/yaml.js',
+                        //Leaflet
+                        '<%= teato.path.bow %>/leaflet/dist/leaflet-src.js',
                         //Pickadate
                         '<%= teato.path.bow %>/pickadate/lib/picker.js',
                         '<%= teato.path.bow %>/pickadate/lib/picker.date.js',
@@ -415,21 +435,7 @@ module.exports = function(grunt) {
                         //Selectize
                         '<%= teato.path.bow %>/selectize/dist/js/standalone/selectize.js',
                         //TeaTO
-                        '<%= teato.path.src %>/js/tea.modal.js',
-                        '<%= teato.path.src %>/js/tea.dragndrop.js',
-                        '<%= teato.path.src %>/js/tea.checkall.js',
-                        '<%= teato.path.src %>/js/tea.checkit.js',
-                        '<%= teato.path.src %>/js/tea.code.js',
-                        '<%= teato.path.src %>/js/tea.color.js',
-                        '<%= teato.path.src %>/js/tea.date.js',
-                        '<%= teato.path.src %>/js/tea.gallery.js',
-                        '<%= teato.path.src %>/js/tea.labelize.js',
-                        '<%= teato.path.src %>/js/tea.link.js',
-                        '<%= teato.path.src %>/js/tea.multiselect.js',
-                        '<%= teato.path.src %>/js/tea.range.js',
-                        '<%= teato.path.src %>/js/tea.social.js',
-                        '<%= teato.path.src %>/js/tea.textarea.js',
-                        '<%= teato.path.src %>/js/tea.upload.js',
+                        '<%= teato.path.src %>/js/tea.*.js',
                         '<%= teato.path.src %>/js/teato.js'
                     ]
                 }
@@ -519,7 +525,7 @@ module.exports = function(grunt) {
     //------ [REGISTER TASKS] ------//
 
     //bower magic: grunt bowie
-    grunt.registerTask('bow',       ['clean:first','bower']);
+    grunt.registerTask('bow',       ['clean:first','bower','copy:bower']);
 
     //JShint validation task: grunt hint
     grunt.registerTask('hint',      ['jshint']);
@@ -528,14 +534,14 @@ module.exports = function(grunt) {
     grunt.registerTask('lang',      ['pot','po2mo']);
 
     //all steps tasks: grunt css / grunt js
-    grunt.registerTask('start',     ['clean:first','bower']);
+    grunt.registerTask('start',     ['clean:first','bower','copy:bower']);
     grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin']);
     grunt.registerTask('js',        ['uglify']);
-    grunt.registerTask('move',      ['copy','clean:last']);
+    grunt.registerTask('move',      ['copy:main','clean:last']);
 
     //watch less compiling
     grunt.registerTask('sniper',    ['watch']);
 
     //default task: grunt default / grunt
-    grunt.registerTask('default',   ['clean:first','bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy','clean:last']);
+    grunt.registerTask('default',   ['clean:first','bower','copy:bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy:main','clean:last']);
 };

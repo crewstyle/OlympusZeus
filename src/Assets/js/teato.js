@@ -125,6 +125,9 @@
         //Link input
         $('.tea-inside.link .block-link input').tea_link();
 
+        //Maps input
+        $('.tea-maps-container').tea_maps();
+
         //Multiselect input
         $('.tea-inside select[multiple="true"]').tea_multiselect();
 

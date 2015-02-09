@@ -1,5 +1,5 @@
 <!-- Content maps <?php echo $id ?> -->
-<div class="tea-screen-meta tea_to_wrap">
+<div class="tea-screen-meta tea_to_wrap tea-maps-container" data-id="<?php echo $id ?>">
     <div class="tea-contextual-help-wrap">
         <div class="tea-contextual-help-back"></div>
 
@@ -7,7 +7,7 @@
             <div class="contextual-help-tabs">
                 <h2><?php echo $title ?></h2>
                 <ul>
-                    <li class="active">
+                    <li>
                         <a href="#tea-maps-<?php echo $id ?>-globals"><?php _e('Globals', TTO_I18N) ?></a>
                     </li>
                     <li>
@@ -16,12 +16,15 @@
                     <li>
                         <a href="#tea-maps-<?php echo $id ?>-customs"><?php _e('Customizations', TTO_I18N) ?></a>
                     </li>
+                    <li class="active">
+                        <a href="#tea-maps-<?php echo $id ?>-preview"><?php _e('Preview', TTO_I18N) ?></a>
+                    </li>
                 </ul>
             </div>
 
             <div class="contextual-help-tabs-wrap">
                 <!-- Globals -->
-                <div id="tea-maps-<?php echo $id ?>-globals" class="help-tab-content active">
+                <div id="tea-maps-<?php echo $id ?>-globals" class="help-tab-content tea-conf">
                     <p><?php echo $description ?></p>
 
                     <!-- Address -->
@@ -41,9 +44,9 @@
                             <div class="upload_image_result">
                                 <?php if (!empty($vals['marker'])): ?>
                                     <figure>
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][id]" value="<?php echo $vals['marker']['id'] ?>" />
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][url]" value="<?php echo $vals['marker']['url'] ?>" />
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>[marker][name]" value="<?php echo $vals['marker']['name'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-id" value="<?php echo $vals['marker']['id'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-url" value="<?php echo $vals['marker']['url'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-name" value="<?php echo $vals['marker']['name'] ?>" />
                                         <img src="<?php echo $vals['marker']['url'] ?>" alt="" />
                                         <a href="#" class="del_image" data-target="<?php echo $id ?>-marker">&times;</i></a>
                                     </figure>
@@ -84,7 +87,7 @@
                 </div>
 
                 <!-- Configurations -->
-                <div id="tea-maps-<?php echo $id ?>-configs" class="help-tab-content">
+                <div id="tea-maps-<?php echo $id ?>-configs" class="help-tab-content tea-conf">
                     <!-- Zoom -->
                     <div style="float:left;margin:0 2% 0 0;width:49%;">
                         <h3><label for="<?php echo $id ?>-zoom"><?php _e('Zoom', TTO_I18N) ?></label></h3>
@@ -169,7 +172,7 @@
                 </div>
 
                 <!-- Customizations -->
-                <div id="tea-maps-<?php echo $id ?>-customs" class="help-tab-content">
+                <div id="tea-maps-<?php echo $id ?>-customs" class="help-tab-content tea-conf">
                     <!-- Zoom -->
                     <h3>
                         <label for="<?php echo $id ?>-enable">
@@ -185,6 +188,12 @@
 
                         <p><?php _e('To customize your Google map, go to <a href="http://snazzymaps.com/" target="_blank"><b>SnazzyMaps</b></a> website, choose a theme and copy/paste the <code>Javascript style array</code> code in this textarea.', TTO_I18N) ?></p>
                     </div>
+                </div>
+
+                <!-- Preview -->
+                <div id="tea-maps-<?php echo $id ?>-preview" class="help-tab-content active">
+                    <a href="#" title="" class="tea-reload"><?php _e('Reload', TTO_I18N) ?></a>
+                    <div id="tea-leaflet-<?php echo $id ?>" class="tea-maps" style="width:100%; height:320px;"></div>
                 </div>
             </div>
         </div>
