@@ -1,5 +1,5 @@
 ## 1.5.2-15 (February 09, 2015)
-Welcome Leaflet ;)
+Welcome [Leaflet](http://leafletjs.com/) ;)
 
 - **New:**
   - add Leaflet package from Bower
@@ -9,7 +9,7 @@ Welcome Leaflet ;)
 Fix some bugs.
 
 ## 1.5.2-13 (February 06, 2015)
-Code-Climate and Gratipay integration in the README.md
+[CodeClimate](https://codeclimate.com/github/Takeatea/tea_theme_options) and [Gratipay](https://gratipay.com/crewstyle/) integration in the README.md
 
 ## 1.5.2-12 (February 06, 2015)
 Update the .gitignore file with bower generated files (no need in the package)
