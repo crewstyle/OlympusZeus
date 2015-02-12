@@ -52,7 +52,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Social
- * @since 1.5.2.14
+ * @since 1.5.2.16
  *
  */
 class Social extends TeaFields
@@ -79,7 +79,7 @@ class Social extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2
+     * @since 1.5.2.16
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -115,6 +115,9 @@ class Social extends TeaFields
             $socials = $this->getDefaults('social');
         }
 
+        //Get all social networks added
+        $diff = array_diff_key($std, $socials);
+
         //Default way
         if (empty($post)) {
             //Check selected
@@ -127,6 +130,9 @@ class Social extends TeaFields
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
             $vals = empty($vals) ? array() : (is_array($vals) ? $vals : array($vals));
         }
+
+        //Get all social networks added and not saved yet
+        $news = array_diff_key($diff, $vals);
 
         //Get template
         include(TTO_PATH.'/Fields/Social/in_pages.tpl.php');

@@ -118,7 +118,7 @@ abstract class TeaFields
      * @return array $defaults All defaults data provided by the Tea TO
      * @todo find a better way to social networks
      *
-     * @since 1.4.3.2
+     * @since 1.5.2.16
      */
     static function getDefaults($return = 'images')
     {
@@ -287,6 +287,7 @@ abstract class TeaFields
                 ),
                 'skype'         => array(
                     __('Connect us on Skype', TTO_I18N),
+                    __('__username__', TTO_I18N),
                 ),
                 'soundcloud'    => array(
                     __('Follow me on Soundcloud', TTO_I18N),
@@ -436,7 +437,7 @@ abstract class TeaFields
      * @param array $options Define if there are options to the WP request
      * @param int $post Define the post ID for meta boxes
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     protected function setWPContents($type = 'posts', $multiple = false, $options = array(), $post = 0)
     {

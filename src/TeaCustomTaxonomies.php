@@ -64,7 +64,7 @@ class TeaCustomTaxonomies
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     public function __buildMenuCustomTaxonomy()
     {

@@ -54,7 +54,7 @@ class TeaPages
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display connections and elasticsearch pages
      *
-     * @since 1.5.2-8
+     * @since 1.5.2.8
      */
     public function __construct($identifier, $options)
     {
@@ -727,7 +727,7 @@ class TeaPages
     /**
      * Build header layout.
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     protected function buildLayoutHeader()
     {
@@ -772,7 +772,7 @@ class TeaPages
     /**
      * Build footer layout.
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     protected function buildLayoutFooter()
     {
@@ -1069,7 +1069,7 @@ class TeaPages
      *
      * @param boolean $redirect Define if the TTO has to make a redirect
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     protected function updateCapabilities($redirect = true)
     {
@@ -1107,7 +1107,7 @@ class TeaPages
      *
      * @param boolean $redirect Define if the TTO has to make a redirect
      *
-     * @since 1.5.2-1
+     * @since 1.5.2.1
      */
     protected function updateCpts($redirect = true)
     {

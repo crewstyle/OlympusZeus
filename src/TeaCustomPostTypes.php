@@ -66,7 +66,7 @@ class TeaCustomPostTypes
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.5.2-3
+     * @since 1.5.2.3
      */
     public function __buildMenuCustomPostType()
     {
@@ -264,7 +264,7 @@ class TeaCustomPostTypes
      * @uses register_setting()
      * @uses add_settings_field()
      *
-     * @since 1.5.2-3
+     * @since 1.5.2.3
      */
     public function __registerPermalinks()
     {

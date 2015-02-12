@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.5.2-15
+ * Version: 1.5.2.16
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2-15');
+defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2.16');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -118,7 +118,7 @@ class TeaThemeOptions
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 1.5.2-8
+     * @since 1.5.2.8
      */
     public function __construct($identifier = 'tea_theme_options', $options = array())
     {

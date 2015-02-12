@@ -84,7 +84,7 @@ class Maps extends TeaFields
      * @param string $url Define the default marker URL
      * @return array $default Contains all default values
      *
-     * @since 1.5.2-14
+     * @since 1.5.2.14
      */
     public function getValues($url)
     {
@@ -123,7 +123,7 @@ class Maps extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2-5
+     * @since 1.5.2.5
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {

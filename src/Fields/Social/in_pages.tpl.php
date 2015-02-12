@@ -23,6 +23,38 @@
                         //Treat contents
                         $selected = !empty($display) && '1' == $display ? true : false;
                         $for = $id . '_' . $k;
+
+                        //Special cases
+                        $keyc = 'vimeo' == $k ? 'vimeo-square' : (isset($diff[$k]) ? 'circle-thin' : $k);
+                    ?>
+                    <div class="movendrop" data-network="<?php echo $k ?>">
+                        <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
+                            <input type="hidden" name="<?php echo $id ?>[<?php echo $k ?>][display]" value="" />
+                            <input type="checkbox" name="<?php echo $id ?>[<?php echo $k ?>][display]" id="<?php echo $for ?>" value="1" <?php echo $selected ? 'checked="checked" ' : '' ?> />
+                            <i class="fa fa-<?php echo $keyc ?> fa-lg"></i>
+                        </label>
+
+                        <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][label]" value="<?php echo $label ?>" placeholder="<?php echo isset($socials[$k][0]) ? $socials[$k][0] : (isset($diff[$k]['label']) ? $diff[$k]['label'] : $label) ?>" />
+
+                        <?php if ('rss' != $k): ?>
+                            <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][link]" value="<?php echo $link ?>" placeholder="<?php echo isset($socials[$k][1]) ? $socials[$k][1] : (isset($diff[$k]['link']) ? $diff[$k]['link'] : $link) ?>" />
+                        <?php endif ?>
+
+                        <?php if (isset($diff[$k])): ?><?php echo $k ?><?php endif ?>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
+            <?php if (!empty($news)): ?>
+                <?php foreach ($news as $k => $opt): ?>
+                    <?php
+                        //Get values
+                        $display = isset($opt['display']) ? $opt['display'] : '';
+                        $label = isset($opt['label']) ? $opt['label'] : '';
+                        $link = isset($opt['link']) ? $opt['link'] : '';
+
+                        //Treat contents
+                        $selected = !empty($display) && '1' == $display ? true : false;
+                        $for = $id . '_' . $k;
                     ?>
                     <div class="movendrop" data-network="<?php echo $k ?>">
                         <label for="<?php echo $for ?>" class="<?php echo $selected ? 'selected' : '' ?>">
@@ -31,13 +63,9 @@
                             <i class="fa fa-<?php echo $k ?> fa-lg"></i>
                         </label>
 
-                        <?php if (isset($socials[$k][0])): ?>
-                            <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][label]" value="<?php echo $label ?>" placeholder="<?php echo $socials[$k][0] ?>" />
-                        <?php endif ?>
+                        <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][label]" value="<?php echo $opt['label'] ?>" placeholder="<?php echo $opt['label'] ?>" />
 
-                        <?php if (isset($socials[$k][1])): ?>
-                            <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][link]" value="<?php echo $link ?>" placeholder="<?php echo $socials[$k][1] ?>" />
-                        <?php endif ?>
+                        <input type="text" name="<?php echo $id ?>[<?php echo $k ?>][link]" value="<?php echo $opt['link'] ?>" placeholder="<?php echo $opt['link'] ?>" />
                     </div>
                 <?php endforeach ?>
             <?php endif ?>

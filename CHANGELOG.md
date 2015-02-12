@@ -1,3 +1,9 @@
+## 1.5.2-16 (February 12, 2015)
+Add you own social networks ;)
+
+- **Enhance:**
+  - the `social` field supports now your custom social networks
+
 ## 1.5.2-15 (February 09, 2015)
 Welcome [Leaflet](http://leafletjs.com/) ;)
 
