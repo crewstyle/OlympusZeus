@@ -1,5 +1,5 @@
 ## 1.5.2-16 (February 12, 2015)
-Add you own social networks ;)
+Add your own social networks ;)
 
 - **Enhance:**
   - the `social` field supports now your custom social networks
