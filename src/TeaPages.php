@@ -372,8 +372,8 @@ class TeaPages
         $tocheck = array($this->identifier.'_connections', $this->identifier.'_elasticsearch');
 
         //Set icon
-        $this->icon_small = TTO_URI . $this->icon_small;
-        $this->icon_big = TTO_URI . $this->icon_big;
+        $this->icon_small = TTO_PATH . $this->icon_small;
+        $this->icon_big = TTO_PATH . $this->icon_big;
 
         //Add submenu pages
         foreach ($this->pages as $page) {

@@ -1,3 +1,6 @@
+## 1.5.2-17 (February 19, 2015)
+Fix small bug on svg call
+
 ## 1.5.2-16 (February 12, 2015)
 Add your own social networks ;)
 
