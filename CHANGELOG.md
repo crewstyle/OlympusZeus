@@ -1,3 +1,6 @@
+## 1.5.2-18 (February 19, 2015)
+Fix small bug on svg call again
+
 ## 1.5.2-17 (February 19, 2015)
 Fix small bug on svg call
 

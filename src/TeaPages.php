@@ -38,8 +38,8 @@ class TeaPages
     protected $current = '';
     protected $duration = TTO_DURATION;
     protected $errors = array();
-    protected $icon_small = '/assets/img/teato-tiny.svg';
-    protected $icon_big = '/assets/img/teato.svg';
+    protected $icon_small = '/../assets/img/teato-tiny.svg';
+    protected $icon_big = '/../assets/img/teato.svg';
     protected $identifier;
     protected $includes = array();
     protected $index = null;
