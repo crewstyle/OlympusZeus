@@ -24,7 +24,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.14
+ * @since 1.5.2.19
  *
  */
 class TeaPages
@@ -38,8 +38,8 @@ class TeaPages
     protected $current = '';
     protected $duration = TTO_DURATION;
     protected $errors = array();
-    protected $icon_small = '/../assets/img/teato-tiny.svg';
-    protected $icon_big = '/../assets/img/teato.svg';
+    protected $icon_small = '/assets/img/teato-tiny.svg';
+    protected $icon_big = '/assets/img/teato.svg';
     protected $identifier;
     protected $includes = array();
     protected $index = null;
@@ -349,7 +349,7 @@ class TeaPages
      * @uses add_menu_page()
      * @uses add_submenu_page()
      *
-     * @since 1.5.1
+     * @since 1.5.2.19
      */
     public function __buildMenuPage()
     {
@@ -371,9 +371,12 @@ class TeaPages
         $is_page = $this->identifier == $this->current ? true : false;
         $tocheck = array($this->identifier.'_connections', $this->identifier.'_elasticsearch');
 
+        //Menu icon
+        $menuicon = TTO_URI . $this->icon_small;
+
         //Set icon
-        $this->icon_small = TTO_PATH . $this->icon_small;
-        $this->icon_big = TTO_PATH . $this->icon_big;
+        $this->icon_small = TTO_PATH . '/..' . $this->icon_small;
+        $this->icon_big = TTO_PATH . '/..' . $this->icon_big;
 
         //Add submenu pages
         foreach ($this->pages as $page) {
@@ -392,7 +395,7 @@ class TeaPages
                     $this->capability,              //capability
                     $this->identifier,              //parent slug
                     array(&$this, 'buildContent'),  //display content
-                    $this->icon_small,              //icon
+                    $menuicon,                      //icon
                     3                               //position
                 );
 
