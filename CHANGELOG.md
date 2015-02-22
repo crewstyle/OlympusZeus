@@ -1,4 +1,7 @@
-## 2.0.0 (February 21, 2015)
+## 2.0.1 (February 22, 2015)
+Fix small bug with _get_option and _set_option
+
+## 2.0.0 (February 22, 2015)
 Add a lots of features and fix lots of bugs.
 We follow now the [semver](http://semver.org/) guidelines, that's why we made the 2.0.0 ;)
 

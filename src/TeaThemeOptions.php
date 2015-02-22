@@ -522,23 +522,3 @@ class TeaThemeOptions
         }
     }
 }
-
-/**
- * Return a value from options
- *
- * @since 2.0.0
- */
-function _get_option($option, $default = '', $transient = false)
-{
-    return TeaThemeOptions::get_option($option, $default, $transient);
-}
-
-/**
- * Set a value into options
- *
- * @since 2.0.0
- */
-function _set_option($option, $value, $transient = false)
-{
-    TeaThemeOptions::set_option($option, $value, $transient);
-}
