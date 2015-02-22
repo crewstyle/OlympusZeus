@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 1.5.2.19
+ * Version: 2.0.0
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '1.5.2.19');
+defined('TTO_VERSION')      or define('TTO_VERSION', '2.0.0');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -87,7 +87,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -503,7 +503,7 @@ class TeaThemeOptions
      * @param string $value Contains value to insert
      * @param integer $transient Define if we use transiant API or not
      *
-     * @since 1.5.0
+     * @since 2.0.0
      */
     public static function set_option($option, $value, $transient = 0)
     {
@@ -513,7 +513,32 @@ class TeaThemeOptions
             set_transient($option, $value, TTO_DURATION);
         }
 
-        //Set value into DB
-        update_option($option, $value);
+        //Set value into DB without autoload
+        if (false === get_option($option)) {
+            add_option($option, $value, '', 'no');
+        }
+        else {
+            update_option($option, $value);
+        }
     }
+}
+
+/**
+ * Return a value from options
+ *
+ * @since 2.0.0
+ */
+function _get_option($option, $default = '', $transient = false)
+{
+    return TeaThemeOptions::get_option($option, $default, $transient);
+}
+
+/**
+ * Set a value into options
+ *
+ * @since 2.0.0
+ */
+function _set_option($option, $value, $transient = false)
+{
+    TeaThemeOptions::set_option($option, $value, $transient);
 }

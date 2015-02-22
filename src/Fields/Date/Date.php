@@ -16,7 +16,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'id' => 'my_date_field_id',
  *     'description' => 'A white rabbit was running...',
  *     'format' => 'dd.mm.yyyy', //optional, "YYYY/mm/dd" by default
- *     'std' => '24.04.2012'
+ *     'default' => '24.04.2012'
  * )
  *
  */
@@ -34,7 +34,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Date
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Date extends TeaFields
@@ -62,7 +62,7 @@ class Date extends TeaFields
      * @param array $post Contains all post data
      * @param string $prefix Contains meta post prefix
      *
-     * @since 1.5.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -79,7 +79,7 @@ class Date extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Date', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $description = isset($content['description']) ? $content['description'] : '';
         $format = isset($content['format']) ? $content['format'] : 'd mmmm, yyyy';
         $submit = isset($content['submit']) ? $content['submit'] : 'yyyy.mm.dd';
@@ -87,7 +87,7 @@ class Date extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
             $val = stripslashes($val);
         }
         //On CPT

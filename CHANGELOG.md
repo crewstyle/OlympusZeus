@@ -1,3 +1,20 @@
+## 2.0.0 (February 21, 2015)
+Add a lots of features and fix lots of bugs.
+We follow now the [semver](http://semver.org/) guidelines, that's why we made the 2.0.0 ;)
+
+- **Fix:**
+  - now saving a CPT will only save its custom fields
+  - now saving a CT will only save its custom fields
+  - all std attributes are now named default
+  - all checkall buttons have now their own ID
+- **Enhance:**
+  - data are now saved in DB without autoload
+  - the main file integrates now _get_option and _set_option methods
+  - update the `background` fiend with new display
+  - update the `social` field with expandable attribute
+
+
+
 ## 1.5.2-19 (February 20, 2015)
 Fix menu icon call
 

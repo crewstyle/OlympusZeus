@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'Code',
  *     'title' => 'How do Penguins code their icebergs?',
  *     'id' => 'my_code_field_id',
- *     'std' => 'With a frozen bug.',
+ *     'default' => 'With a frozen bug.',
  *     'rows' => 4,
  *     'description' => 'A simple question to know if you know how to seduce a penguin.'
  * )
@@ -34,7 +34,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Code
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Code extends TeaFields
@@ -44,7 +44,7 @@ class Code extends TeaFields
     /**
      * Constructor.
      *
-     * @since 1.5.1-6
+     * @since 1.5.1.6
      */
     public function __construct(){}
 
@@ -61,7 +61,7 @@ class Code extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.1-7
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -83,23 +83,23 @@ class Code extends TeaFields
 
 
         //Default values
-        $std = isset($content['std']) ? $content['std'] : array();
-        $std = array(
-            'mode' => isset($std['mode']) ? $std['mode'] : 'application/json',
-            'code' => isset($std['code']) ? $std['code'] : ''
+        $default = isset($content['default']) ? $content['default'] : array();
+        $default = array(
+            'mode' => isset($default['mode']) ? $default['mode'] : 'application/json',
+            'code' => isset($default['code']) ? $default['code'] : ''
         );
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, true);
-            $vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Get template

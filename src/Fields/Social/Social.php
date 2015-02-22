@@ -15,7 +15,8 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'Big Brother is watching you...',
  *     'id' => 'my_social_field_id',
  *     'description' => '...Or not!',
- *     'std' => array(
+ *     'expandable' => true,
+ *     'default' => array(
  *         'facebook' => array(
  *             'display' => '1',
  *             'label' => 'Become a fan',
@@ -52,7 +53,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Social
- * @since 1.5.2.16
+ * @since 2.0.0
  *
  */
 class Social extends TeaFields
@@ -79,7 +80,7 @@ class Social extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2.16
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -94,14 +95,15 @@ class Social extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Social', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : array();
+        $default = isset($content['default']) ? $content['default'] : array();
         $description = isset($content['description']) ? $content['description'] : '';
+        $expandable = isset($content['expandable']) && is_bool($content['expandable']) ? $content['expandable'] : true;
 
         //Get the social networks
         $socials = $this->getDefaults('social');
 
         //Count options
-        $count = count($std);
+        $count = count($default);
 
         //Get includes
         $includes = $this->getIncludes();
@@ -116,12 +118,12 @@ class Social extends TeaFields
         }
 
         //Get all social networks added
-        $diff = array_diff_key($std, $socials);
+        $diff = array_diff_key($default, $socials);
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array() : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT

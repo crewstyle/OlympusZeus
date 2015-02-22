@@ -31,7 +31,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Gallery
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Gallery extends TeaFields
@@ -58,7 +58,7 @@ class Gallery extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2.14
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -75,7 +75,7 @@ class Gallery extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Gallery', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $description = isset($content['description']) ? $content['description'] : '';
         $can_upload = $this->getCanUpload();
         $delete = __('Delete selection', TTO_I18N);
@@ -83,14 +83,14 @@ class Gallery extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $value = get_post_custom($post->ID);
-            $vals = isset($value[$post->post_type . '-' . $id]) ? unserialize($value[$post->post_type . '-' . $id][0]) : $std;
+            $vals = isset($value[$post->post_type . '-' . $id]) ? unserialize($value[$post->post_type . '-' . $id][0]) : $default;
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
 

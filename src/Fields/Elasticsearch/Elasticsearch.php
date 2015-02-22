@@ -24,7 +24,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * To get its own Fields
  *
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Elasticsearch extends TeaFields
@@ -53,7 +53,7 @@ class Elasticsearch extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2.14
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -71,8 +71,8 @@ class Elasticsearch extends TeaFields
         $index = !empty($index) && isset($index[0]) ? $index[0] : '';
 
         //Default values
-        $std = isset($content['std'])
-            ? $content['std']
+        $default = isset($content['default'])
+            ? $content['default']
             : TeaElasticsearch::getValues();
 
         //Get scores
@@ -81,7 +81,7 @@ class Elasticsearch extends TeaFields
         //Check selected
         $vals = TeaThemeOptions::getConfigs($id);
         $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
-        $vals = array_merge($std, $vals);
+        $vals = array_merge($default, $vals);
 
         //Get template
         include(TTO_PATH.'/Fields/Elasticsearch/in_pages.tpl.php');

@@ -13,7 +13,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  * array(
  *     'type' => 'hidden',
  *     'id' => 'my_hidden_field_id',
- *     'std' => 'Haha I will dominate the World!!! MOUAHAHAHAHAHA - Crazy Penguin'
+ *     'default' => 'Haha I will dominate the World!!! MOUAHAHAHAHAHA - Crazy Penguin'
  * )
  *
  */
@@ -31,7 +31,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Hidden
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Hidden extends TeaFields
@@ -58,7 +58,7 @@ class Hidden extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -67,10 +67,10 @@ class Hidden extends TeaFields
 
         //Default variables
         $id = $content['id'];
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
 
         //Check selected
-        $val = TeaThemeOptions::get_option($prefix.$id, $std);
+        $val = TeaThemeOptions::get_option($prefix.$id, $default);
 
         //Get template
         include(TTO_PATH.'/Fields/Hidden/in_pages.tpl.php');

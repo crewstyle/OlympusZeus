@@ -3,9 +3,9 @@
     <h3 class="tea_title">
         <label><?php echo $title ?></label>
         <?php if (2 < $count): ?>
-            <label for="checkall" class="checkall">
+            <label for="checkall-<?php echo $id ?>" class="checkall">
                 <?php _e('Un/select all options') ?>
-                <input type="checkbox" id="checkall" <?php echo $count == count($vals) ? 'checked="checked"' : '' ?> />
+                <input type="checkbox" id="checkall-<?php echo $id ?>" <?php echo $count == count($vals) ? 'checked="checked"' : '' ?> />
             </label>
         <?php endif ?>
     </h3>

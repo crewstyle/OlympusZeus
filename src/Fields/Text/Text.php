@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'text',
  *     'title' => 'What do you like?',
  *     'id' => 'my_text_field_id',
- *     'std' => "Penguins, I am sure they're gonna dominate the World!",
+ *     'default' => "Penguins, I am sure they're gonna dominate the World!",
  *     'placeholder' => "McDonald's as well",
  *     'description' => 'Put in here everything you want.',
  *     'maxlength' => 120
@@ -25,7 +25,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'text',
  *     'title' => 'How much do you like Penguins?',
  *     'id' => 'my_text_field_id',
- *     'std' => 100,
+ *     'default' => 100,
  *     'placeholder' => '50',
  *     'description' => 'Tell us how much do like Penguins to have a chance to get into our private Penguins community ;)',
  *     'options' => array(
@@ -51,7 +51,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Text
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Text extends TeaFields
@@ -78,7 +78,7 @@ class Text extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -95,7 +95,7 @@ class Text extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Text', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $placeholder = isset($content['placeholder']) ? 'placeholder="' . $content['placeholder'] . '"' : '';
         $maxlength = isset($content['maxlength']) ? 'maxlength="' . $content['maxlength'] . '"' : '';
         $description = isset($content['description']) ? $content['description'] : '';
@@ -123,7 +123,7 @@ class Text extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
             $val = stripslashes($val);
         }
         //On CPT

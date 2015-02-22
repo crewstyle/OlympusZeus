@@ -15,7 +15,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'Choose your final stage',
  *     'id' => 'my_maps_field_id',
  *     'description' => 'Do not choose the black hole World',
- *     'std' => array( //every attribute is optional
+ *     'default' => array( //every attribute is optional
  *         'address' => '3 avenue Secretan, Paris, France',
  *         'marker' => array(
  *             'url' => get_template_directory_uri() . 'img/my_marker.png',
@@ -57,7 +57,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Maps
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Maps extends TeaFields
@@ -123,7 +123,7 @@ class Maps extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2.5
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -147,22 +147,22 @@ class Maps extends TeaFields
 
         //Default values
         $def = $this->getValues($url);
-        $ctn = isset($content['std']) ? $content['std'] : array();
+        $ctn = isset($content['default']) ? $content['default'] : array();
 
         //Merge values
-        $std = array_merge($def, $ctn);
+        $default = array_merge($def, $ctn);
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
-            $vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Get template

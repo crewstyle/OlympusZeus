@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'rte',
  *     'title' => 'RTE',
  *     'id' => 'simple_rte',
- *     'std' => 'Do EEEEEEEEEEEEverything you want...',
+ *     'default' => 'Do EEEEEEEEEEEEverything you want...',
  *     'description' => 'But not so much ! :('
  * )
  *
@@ -33,7 +33,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields RTE
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Rte extends TeaFields
@@ -60,7 +60,7 @@ class Rte extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -77,13 +77,13 @@ class Rte extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea RTE', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $description = isset($content['description']) ? $content['description'] : '';
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
             $val = stripslashes($val);
         }
         //On CPT

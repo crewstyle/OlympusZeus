@@ -29,6 +29,7 @@
         "ruflin/Elastica":  "1.3.0.0"
     },
     "autoload":     {
+        "files": [ "takeatea/tea-theme-options/src/TeaFunctions.php" ],
         "psr-4": { "Takeatea\\TeaThemeOptions\\": "src/" }
     },
     "extra":        {

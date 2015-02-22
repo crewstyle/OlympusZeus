@@ -3,9 +3,9 @@
     <h3 class="tea_title">
         <label><?php echo $title ?></label>
         <?php if (2 < $count): ?>
-            <label for="checkall" class="checkall">
+            <label for="checkall-<?php echo $id ?>" class="checkall">
                 <?php _e('Un/select all options', TTO_I18N) ?>
-                <input type="checkbox" id="checkall" <?php echo $count == count($vals) ? 'checked="checked"' : '' ?> />
+                <input type="checkbox" id="checkall-<?php echo $id ?>" <?php echo $count == count($vals) ? 'checked="checked"' : '' ?> />
             </label>
         <?php endif ?>
     </h3>
@@ -71,17 +71,19 @@
             <?php endif ?>
         </fieldset>
 
-        <div class="hide-if-no-js">
-            <a href="#" class="button add_social" title="<?php echo esc_html(__('Add social networks', TTO_I18N)) ?>">
-                <i class="fa fa-globe fa-lg"></i> <?php _e('Add social networks', TTO_I18N) ?>
-            </a>
-        </div>
+        <?php if ($expandable): ?>
+            <div class="hide-if-no-js">
+                <a href="#" class="button add_social" title="<?php echo esc_html(__('Add social networks', TTO_I18N)) ?>">
+                    <i class="fa fa-globe fa-lg"></i> <?php _e('Add social networks', TTO_I18N) ?>
+                </a>
+            </div>
+        <?php endif ?>
 
         <p><?php echo $description ?></p>
     </div>
 </div>
 
-<?php if (!empty($socials)): ?>
+<?php if (!empty($socials) && $expandable): ?>
     <script type="template/html" id="modal-socials">
         <div id="" class="tea-modal" tabindex="-1" style="display:none;">
             <header>

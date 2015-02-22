@@ -41,16 +41,16 @@
                 <?php if (!empty($vals)): ?>
                     <?php
                     foreach ($vals as $key => $item):
-                        if (empty($item)) {
+                        if (empty($item) || !isset($item['id'])) {
                             continue;
                         }
                     ?>
                         <div class="item" data-id="<?php echo $item['id'] ?>">
-                            <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][image]" value="<?php echo $item['image'] ?>" />
+                            <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][image]" value="<?php echo isset($item['image']) ? $item['image'] : '' ?>" />
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][id]" value="<?php echo $item['id'] ?>" />
 
                             <div class="gallery-editor">
-                                <textarea id="<?php echo $id ?>_<?php echo $item['id'] ?>_content" rows="4" class="wp-editor-area" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]"><?php echo $item['content'] ?></textarea>
+                                <textarea id="<?php echo $id ?>_<?php echo $item['id'] ?>_content" rows="4" class="wp-editor-area" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]"><?php echo isset($item['content']) ? $item['content'] : '' ?></textarea>
                             </div>
                         </div>
                     <?php endforeach ?>

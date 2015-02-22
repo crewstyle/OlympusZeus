@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'textarea',
  *     'title' => 'How do Penguins drink their cola?',
  *     'id' => 'my_textarea_field_id',
- *     'std' => 'On the rocks.',
+ *     'default' => 'On the rocks.',
  *     'placeholder' => 'Tell us how?',
  *     'description' => 'A simple question to know if you will be able to survive to the Penguin domination.'
  * )
@@ -34,7 +34,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Textarea
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Textarea extends TeaFields
@@ -61,7 +61,7 @@ class Textarea extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -78,7 +78,7 @@ class Textarea extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Textarea', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $placeholder = isset($content['placeholder']) ? 'placeholder="' . $content['placeholder'] . '"' : '';
         $description = isset($content['description']) ? $content['description'] : '';
         $rows = isset($content['rows']) ? $content['rows'] : '8';
@@ -86,7 +86,7 @@ class Textarea extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
             $val = stripslashes($val);
         }
         //On CPT
