@@ -1,7 +1,7 @@
 {
     "name":         "takeatea/tea-theme-options",
     "type":         "wordpress-plugin",
-    "description":  "Simple, easy to use and fully integrated Theme Options for Wordpress, made by Take a tea.",
+    "description":  "Simple, easy to use and fully integrated Theme Options for Wordpress",
     "keywords":     [
         "wordpress",
         "plugin",
@@ -13,7 +13,7 @@
         "theme",
         "options"
     ],
-    "homepage":     "http://takeatea.com/",
+    "homepage":     "http://www.takeatea.com/",
     "license":      "MIT",
     "authors":      [
         {
@@ -30,11 +30,5 @@
     },
     "autoload":     {
         "psr-4": { "Takeatea\\TeaThemeOptions\\": "src/" }
-    },
-    "extra":        {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }
