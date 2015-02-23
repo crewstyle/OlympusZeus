@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa33fe01a8e2068cd47897b21b4fa726",
+    "hash": "d07e9b925ed71f527003a2dce24744fe",
     "packages": [
         {
             "name": "ruflin/elastica",
@@ -64,23 +64,98 @@
                 "search"
             ],
             "time": "2014-07-27 13:45:09"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v2.6.4",
+            "target-dir": "Symfony/Component/HttpFoundation",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/HttpFoundation.git",
+                "reference": "8fa63d614d56ccfe033e30411d90913cfc483ff6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8fa63d614d56ccfe033e30411d90913cfc483ff6",
+                "reference": "8fa63d614d56ccfe033e30411d90913cfc483ff6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "classmap": [
+                    "Symfony/Component/HttpFoundation/Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony HttpFoundation Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-02-01 16:10:57"
+        },
+        {
+            "name": "tea-to/encoder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@git.captainadmin.systems:teato/encodercomponent.git",
+                "reference": "ee99cd38f2f913008be0808547ab4b32c6218158"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://sateas-private.tools.takeatea.com/dist/tea-to-encoder-dev-master-869dcc.zip",
+                "reference": "ee99cd38f2f913008be0808547ab4b32c6218158",
+                "shasum": "daae0e61c81f973facb7605bfcbd591d0c503439"
+            },
+            "require": {
+                "symfony/http-foundation": "~2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TeaTo\\Component\\Encoder\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Library to provide encoding functionnalities",
+            "time": "2015-02-23 14:05:05"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "tea-to/encoder": 20
+    },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }
