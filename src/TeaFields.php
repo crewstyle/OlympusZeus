@@ -10,9 +10,6 @@ if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
 
-
-//----------------------------------------------------------------------------//
-
 /**
  * Tea Fields
  *
@@ -27,10 +24,20 @@ if (!defined('TTO_CONTEXT')) {
  */
 abstract class TeaFields
 {
-    //Define protected/private vars
-    public $adminmessage = null;
-    private $includes = array();
-    private $wpcontents = array();
+    /**
+     * @var TeaAdminMessage
+     */
+    public $adminmessage;
+
+    /**
+     * @var array
+     */
+    protected $includes = array();
+
+    /**
+     * @var array
+     */
+    protected $wpcontents = array();
 
     /**
      * Constructor.
@@ -39,16 +46,8 @@ abstract class TeaFields
      */
     public function __construct()
     {
-        //Init errors
         $this->adminmessage = new TeaAdminMessage();
     }
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * ABSTRACT & STATIC FUNCTIONS
-     */
 
     /**
      * Display HTML component.
@@ -59,7 +58,7 @@ abstract class TeaFields
      *
      * @since 1.4.0
      */
-    abstract protected function templatePages($content, $post = array(), $prefix = '');
+    abstract public function templatePages($content, $post = array(), $prefix = '');
 
     /**
      * Build HTML component.
@@ -67,48 +66,27 @@ abstract class TeaFields
      * @param array $post Contains all data such as Wordpress asks
      * @param array $args Contains all data such as Wordpress asks
      *
+     * @return int|null
+     *
      * @since 1.4.0
      */
-    static function templateCustomPostTypes($post, $args)
+    public static function templateCustomPostTypes($post, $args)
     {
         //If autosave...
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return isset($post->ID) ? $post->ID : 0;
+            return isset($post->ID) ? $post->ID : null;
         }
 
         //Get values
         $type = $args['args']['contents']['type'];
         $class = ucfirst($type);
-
-        //Make the magic
         $class = '\Takeatea\TeaThemeOptions\Fields\\'.$class.'\\'.$class;
+
+        /** @var $field TeaFields */
         $field = new $class();
         $field->templatePages($args, $post);
-    }
 
-    /**
-     * FUNCTIONS
-     **/
-
-    /**
-     * Checks if an ID is defined
-     *
-     * @param array $content Contains all field data
-     *
-     * @since 1.5.0
-     */
-    protected function checkId($content)
-    {
-        //Check if an id is defined at least
-        if (!isset($content['id'])) {
-            //Set type
-            $type = isset($content['type'])
-                ? $content['type']
-                : __('undefined (?)', TTO_I18N);
-
-            //Display message
-            $this->updateAdminMessage('<b>'.$type.'</b>');
-        }
+        return isset($post->ID) ? $post->ID : null;
     }
 
     /**
@@ -120,7 +98,7 @@ abstract class TeaFields
      *
      * @since 2.0.0
      */
-    static function getDefaults($return = 'images')
+    public static function getDefaults($return = 'images')
     {
         $defaults = array();
 
@@ -149,7 +127,7 @@ abstract class TeaFields
         }
 
         //Return defaults font
-        else if ('fonts' == $return) {
+        elseif ('fonts' == $return) {
             $defaults = array(
                 array('sansserif', 'Sans serif', ''),
                 array('Arvo', 'Arvo', '400,700'),
@@ -342,24 +320,6 @@ abstract class TeaFields
     }
 
     /**
-     * ACCESSORS
-     **/
-
-    /**
-     * Retrieve the $can_upload value
-     *
-     * @uses current_user_can()
-     * @return bool $can_upload Get if the user can upload files
-     *
-     * @since 1.3.0
-     */
-    protected function getCanUpload()
-    {
-        //Return value
-        return current_user_can('upload_files');
-    }
-
-    /**
      * Update adminmessage.
      *
      * @param string $content Contains field type in error
@@ -376,50 +336,16 @@ abstract class TeaFields
     }
 
     /**
-     * Get includes.
+     * Retrieve the $can_upload value
      *
-     * @return array $includes Array of all included files
+     * @uses current_user_can()
+     * @return bool $can_upload Get if the user can upload files
      *
      * @since 1.3.0
      */
-    protected function getIncludes()
+    protected function getCanUpload()
     {
-        //Return value
-        return $this->includes;
-    }
-
-    /**
-     * Set includes.
-     *
-     * @param string $context Name of the included file's context
-     *
-     * @since 1.5.0
-     */
-    protected function setIncludes($context)
-    {
-        $this->includes[$context] = true;
-    }
-
-    /**
-     * Get Wordpress contents already registered.
-     *
-     * @param string $type Wordpress content type to return
-     * @param bool $multiple Define if there is multiselect or not
-     * @param array $options Define options if needed
-     * @param int $post Define the post ID for meta boxes
-     * @return array $wpcontents Array of Wordpress content type registered
-     *
-     * @since 1.4.0
-     */
-    protected function getWPContents($type = 'posts', $multiple = false, $options = array(), $post = 0)
-    {
-        //Access the WordPress Categories via an Array
-        if (empty($this->wpcontents) || !isset($this->wpcontents[$type]) || !empty($options)) {
-            $this->setWPContents($type, $multiple, $options, $post);
-        }
-
-        //Return value
-        return $this->wpcontents[$type];
+        return current_user_can('upload_files');
     }
 
     /**
@@ -431,6 +357,7 @@ abstract class TeaFields
      * @uses get_post_types()
      * @uses get_the_tags()
      * @uses get_categories()
+     *
      * @param string $type Wordpress content type to return
      * @param bool $multiple Define if there is multiselect or not
      * @param array $options Define if there are options to the WP request
@@ -608,5 +535,48 @@ abstract class TeaFields
                 }
             }
         }
+    }
+
+    /**
+     * Checks if an ID is defined
+     *
+     * @param array $content Contains all field data
+     *
+     * @since 1.5.0
+     */
+    protected function checkId($content)
+    {
+        //Check if an id is defined at least
+        if (!isset($content['id'])) {
+            //Set type
+            $type = isset($content['type'])
+                ? $content['type']
+                : __('undefined (?)', TTO_I18N);
+
+            //Display message
+            $this->updateAdminMessage('<b>'.$type.'</b>');
+        }
+    }
+
+    /**
+     * Get Wordpress contents already registered.
+     *
+     * @param string $type Wordpress content type to return
+     * @param bool $multiple Define if there is multiselect or not
+     * @param array $options Define options if needed
+     * @param int $post Define the post ID for meta boxes
+     * @return array $wpcontents Array of Wordpress content type registered
+     *
+     * @since 1.4.0
+     */
+    protected function getWPContents($type = 'posts', $multiple = false, $options = array(), $post = 0)
+    {
+        //Access the WordPress Categories via an Array
+        if (empty($this->wpcontents) || !isset($this->wpcontents[$type]) || !empty($options)) {
+            $this->setWPContents($type, $multiple, $options, $post);
+        }
+
+        //Return value
+        return $this->wpcontents[$type];
     }
 }

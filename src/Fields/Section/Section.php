@@ -28,8 +28,6 @@ if (!defined('TTO_CONTEXT')) {
  */
 class Section extends TeaFields
 {
-    //Define protected vars
-
     /**
      * Constructor.
      *
@@ -37,18 +35,12 @@ class Section extends TeaFields
      */
     public function __construct(){}
 
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
     /**
      * Build HTML component to display in all the Tea T.O. defined pages.
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      *
      * @since 2.0.0
      */

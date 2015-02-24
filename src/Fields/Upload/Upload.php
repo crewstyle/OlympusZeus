@@ -58,6 +58,7 @@ class Upload extends TeaFields
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      *
      * @since 2.0.0
      */

@@ -3,6 +3,7 @@
 namespace Takeatea\TeaThemeOptions\Fields\Network;
 
 use Takeatea\TeaThemeOptions\TeaFields;
+use Takeatea\TeaThemeOptions\TeaNetworks;
 
 /**
  * TEA NETWORK FIELD
@@ -26,28 +27,17 @@ if (!defined('TTO_CONTEXT')) {
  */
 class Network extends TeaFields
 {
-    //Define protected vars
-    private $currentpage;
-
     /**
-     * Constructor.
-     *
-     * @since 1.3.0
+     * @var string
      */
-    public function __construct(){}
-
-
-    //--------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
+    protected $currentpage;
 
     /**
      * Build HTML component to display in all the Tea T.O. defined pages.
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      *
      * @since 2.0.0
      */
@@ -64,32 +54,6 @@ class Network extends TeaFields
 
         //Get footer template
         include(TTO_PATH.'/Fields/Network/in_pages_foot.tpl.php');
-
-        //Others vars
-        /*$includes = $this->getIncludes();
-        $page = $this->getCurrentPage();
-
-        //Get social networks
-        $socials = TeaFields::getDefaults('networks');
-
-        //Iterate on networks
-        foreach ($socials as $net => $work) {
-            //Check current network is valid
-            if (!array_key_exists($net, $default_networks)) {
-                continue;
-            }
-
-            //Check if the network has already been included
-            if (!isset($includes['network_' . $net])) {
-                $this->setIncludes('network_' . $net);
-            }
-
-            //Display it
-            $class = ucfirst($net);
-            $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
-            $field = new $class();
-            $field->templatePages();
-        }*/
     }
 
     /**
@@ -122,19 +86,13 @@ class Network extends TeaFields
     {
         //Get network
         $net = $request['tea_to_network'];
-        $includes = $this->getIncludes();
-        $page = $this->getCurrentPage();
 
         //Check if the network has already been included
-        if (!isset($includes['network_' . $net])) {
-            $this->setIncludes('network_' . $net);
+        if (!isset($this->includes['network_' . $net])) {
+            $this->includes['network_' . $net] = true;
         }
 
-        //Make the magic
-        $class = ucfirst($net);
-        $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
-        $field = new $class();
-        $field->setCurrentPage($page);
+        $field = $this->generateNetworkObject($net);
 
         //Update connection network
         if (isset($request['tea_to_connection'])) {
@@ -161,25 +119,18 @@ class Network extends TeaFields
     {
         //Default variables
         $callbacks = $this->getDefaults('networks_callback');
-        $includes = $this->getIncludes();
-        $page = $this->getCurrentPage();
 
         //Iterate on them
         foreach ($callbacks as $token => $net) {
             if (isset($request[$token])) {
                 //Check if the network has already been included
-                if (!isset($includes['network_' . $net])) {
-                    $this->setIncludes('network_' . $net);
+                if (!isset($this->includes['network_' . $net])) {
+                    $this->includes['network_' . $net] = true;
                 }
 
-                //Display it
-                $class = ucfirst($net);
-                $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
-                $field = new $class();
-                $field->setCurrentPage($page);
+                $field = $this->generateNetworkObject($net);
                 $field->getCallback($request);
 
-                //Finish
                 break;
             }
         }
@@ -194,38 +145,16 @@ class Network extends TeaFields
     {
         //Default variables
         $networks = $this->getDefaults('networks');
-        $includes = $this->getIncludes();
 
-        //Update ALL networks
         foreach($networks as $net => $work) {
             //Check if the network has already been included
-            if (!isset($includes['network_' . $net])) {
-                $this->setIncludes('network_' . $net);
+            if (!isset($this->includes['network_' . $net])) {
+                $this->includes['network_' . $net] = true;
             }
 
-            //Display it
-            $class = ucfirst($net);
-            $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
-            $field = new $class();
+            $field = $this->generateNetworkObject($net);
             $field->getUpdate();
         }
-    }
-
-    /**
-     * ACCESSORS
-     **/
-
-    /**
-     * Retrieve the $currentpage value
-     *
-     * @return string $currentpage Get the current page
-     *
-     * @since 1.3.0
-     */
-    protected function getCurrentPage()
-    {
-        //Return value
-        return $this->currentpage;
     }
 
     /**
@@ -238,5 +167,18 @@ class Network extends TeaFields
     public function setCurrentPage($currentpage = '')
     {
         $this->currentpage = $currentpage;
+    }
+
+    /**
+     * @param string $networkName
+     *
+     * @return TeaNetworks
+     */
+    protected function generateNetworkObject($networkName)
+    {
+        $class = ucfirst($networkName);
+        $class = "\Takeatea\TeaThemeOptions\Networks\\$class\\$class";
+
+        return new $class();
     }
 }

@@ -238,7 +238,7 @@ class TeaCustomPostTypes
                     }
 
                     //Set the include
-                    $this->setIncludes($type);
+                    $this->includes[$type] = true;
                 }
 
                 //Title
@@ -493,10 +493,6 @@ class TeaCustomPostTypes
     }
 
     /**
-     * MAIN FUNCTIONS
-     **/
-
-    /**
      * Add a CPT to the theme options panel.
      *
      * @param array $configs Array containing all configurations
@@ -546,33 +542,5 @@ class TeaCustomPostTypes
 
         //Define cpt configurations
         TeaThemeOptions::setConfigs('customposttypes', $cpts);
-    }
-
-    /**
-     * ACCESSORS
-     **/
-
-    /**
-     * Get includes.
-     *
-     * @return array $includes Array of all included files
-     *
-     * @since 1.4.0
-     */
-    protected function getIncludes()
-    {
-        return $this->includes;
-    }
-
-    /**
-     * Set includes.
-     *
-     * @param string $context Name of the included file's context
-     *
-     * @since 1.4.0
-     */
-    protected function setIncludes($context)
-    {
-        $this->includes[$context] = true;
     }
 }

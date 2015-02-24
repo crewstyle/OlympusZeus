@@ -33,7 +33,7 @@ class TeaPages
     protected $breadcrumb = array();
     protected $can_upload = false;
     protected $capability = TTO_CAP;
-    protected $caps = false;
+    protected $hasCapabilities = false;
     protected $categories = array();
     protected $current = '';
     protected $duration = TTO_DURATION;
@@ -77,10 +77,10 @@ class TeaPages
 
         //Define caps
         $caps = TeaThemeOptions::getConfigs('capabilities');
-        $this->caps = empty($caps) ? false : true;
+        $this->hasCapabilities = empty($caps) ? false : true;
 
         //Set capabilities if needed
-        if (!$this->caps) {
+        if (!$this->hasCapabilities) {
             $this->updateCapabilities(false);
         }
 
@@ -191,11 +191,6 @@ class TeaPages
             return;
         }
 
-        //Check if we are in TeaTO context
-        /*if (!isset($this->pages[$this->current])) {
-            return;
-        }*/
-
         //Get jQuery
         $jq = array('jquery');
 
@@ -228,11 +223,6 @@ class TeaPages
             return;
         }
 
-        //Check if we are in TeaTO context
-        /*if (!isset($this->pages[$this->current])) {
-            return;
-        }*/
-
         //Enqueue usefull styles
         wp_enqueue_style('media-views');
         wp_enqueue_style('farbtastic');
@@ -255,8 +245,6 @@ class TeaPages
         if (!TTO_IS_ADMIN) {
             return;
         }
-
-        //wp_deregister_script('media-models');
     }
 
     /**
@@ -568,9 +556,6 @@ class TeaPages
         add_action('admin_menu', array(&$this, '__buildMenuPage'), 999);
     }
 
-
-    //------------------------------------------------------------------------//
-
     /**
      * Build connection content.
      *
@@ -587,12 +572,11 @@ class TeaPages
 
         //Default variables
         $page = empty($this->current) ? $this->identifier : $this->current;
-        $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['network'])) {
+        if (!isset($this->includes['network'])) {
             //Set the include
-            $this->setIncludes('network');
+            $this->includes['network'] = true;
         }
 
         //Make the magic
@@ -647,6 +631,31 @@ class TeaPages
 
         //Build footer
         $this->buildLayoutFooter();
+    }
+
+    /**
+     * Get errors.
+     *
+     * @return array $errors Contains all error messages
+     *
+     * @since 1.5.0
+     */
+    public function getErrors()
+    {
+        //Return value
+        return $this->errors;
+    }
+
+    /**
+     * Define if there are errors or not.
+     *
+     * @return boolean $haserrors Determine if there are errors or not
+     *
+     * @since 1.5.0
+     */
+    public function hasErrors()
+    {
+        return count($this->errors) > 0;
     }
 
     /**
@@ -714,11 +723,10 @@ class TeaPages
 
         //Default variables
         $page = empty($this->current) ? $this->identifier : $this->current;
-        $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['elasticsearch'])) {
-            $this->setIncludes('elasticsearch');
+        if (!isset($this->includes['elasticsearch'])) {
+            $this->includes['elasticsearch'] = true;
         }
 
         //Make the magic
@@ -742,15 +750,15 @@ class TeaPages
 
         //Works on params
         $updated =
-               isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
+            isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
             && isset($_REQUEST['for']) && 'settings' == $_REQUEST['for']
-            ? true
-            : false;
+                ? true
+                : false;
         $dashboard =
-               isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
+            isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']
             && isset($_REQUEST['for']) && 'dashboard' == $_REQUEST['for']
-            ? true
-            : false;
+                ? true
+                : false;
 
         //Works on title
         $title = empty($this->current) ?
@@ -812,8 +820,6 @@ class TeaPages
             return;
         }
 
-        //Get includes
-        $includes = $this->getIncludes();
         $ident = $this->identifier;
 
         //Get all default fields in the Tea T.O. package
@@ -840,7 +846,7 @@ class TeaPages
             $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
 
             //Include class field
-            if (!isset($includes[$type])) {
+            if (!isset($this->includes[$type])) {
                 //Check if the class file exists
                 if (!class_exists($class)) {
                     TeaAdminMessage::__display(
@@ -852,99 +858,18 @@ class TeaPages
                 }
 
                 //Set the include
-                $this->setIncludes($type);
+                $this->includes[$type] = true;
             }
 
-            //Make the magic
+            /** @var $field TeaFields */
             $field = new $class();
-            try{
+            try {
                 $field->templatePages($content);
             }
             catch (TeaThemeException $e){
                 $this->errors[] = $e->getMessage();
             }
         }
-    }
-
-    /**
-     * ACCESSORS
-     **/
-
-    /**
-     * Get transient duration.
-     *
-     * @return number $duration Transient duration in secondes
-     *
-     * @since 1.3.0
-     */
-    protected function getDuration()
-    {
-        //Return value
-        return $this->duration;
-    }
-
-    /**
-     * Set transient duration.
-     *
-     * @param integer $duration Transient duration in secondes
-     *
-     * @since 1.4.0
-     */
-    protected function setDuration($duration = TTO_DURATION)
-    {
-        //Define value
-        $this->duration = $duration;
-    }
-
-    /**
-     * Get errors.
-     *
-     * @return array $errors Contains all error messages
-     *
-     * @since 1.5.0
-     */
-    public function getErrors()
-    {
-        //Return value
-        return $this->errors;
-    }
-
-    /**
-     * Define if there are errors or not.
-     *
-     * @return boolean $haserrors Determine if there are errors or not
-     *
-     * @since 1.5.0
-     */
-    public function hasErrors()
-    {
-        //Return if there are errors
-        return count($this->errors) > 0;
-    }
-
-    /**
-     * Get includes.
-     *
-     * @return array $includes Array of all included files
-     *
-     * @since 1.3.0
-     */
-    protected function getIncludes()
-    {
-        //Return value
-        return $this->includes;
-    }
-
-    /**
-     * Set includes.
-     *
-     * @param string $context Name of the included file's context
-     *
-     * @since 1.3.0
-     */
-    protected function setIncludes($context)
-    {
-        $this->includes[$context] = true;
     }
 
     /**
@@ -1153,12 +1078,11 @@ class TeaPages
 
         //Defaults variables
         $page = empty($this->current) ? $this->identifier : $this->current;
-        $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['elasticsearch'])) {
+        if (!isset($this->includes['elasticsearch'])) {
             //Set the include
-            $this->setIncludes('elasticsearch');
+            $this->includes['elasticsearch'] = true;
         }
 
         //Make the magic
@@ -1196,12 +1120,11 @@ class TeaPages
 
         //Defaults variables
         $page = empty($this->current) ? $this->identifier : $this->current;
-        $includes = $this->getIncludes();
 
         //Include class field
-        if (!isset($includes['network'])) {
+        if (!isset($this->includes['network'])) {
             //Set the include
-            $this->setIncludes('network');
+            $this->includes['network'] = true;
         }
 
         //Make the magic
@@ -1294,5 +1217,32 @@ class TeaPages
     {
         //Return value
         return $this->identifier . $slug;
+    }
+
+
+    /**
+     * Get transient duration.
+     *
+     * @return number $duration Transient duration in secondes
+     *
+     * @since 1.3.0
+     */
+    protected function getDuration()
+    {
+        //Return value
+        return $this->duration;
+    }
+
+    /**
+     * Set transient duration.
+     *
+     * @param integer $duration Transient duration in secondes
+     *
+     * @since 1.4.0
+     */
+    protected function setDuration($duration = TTO_DURATION)
+    {
+        //Define value
+        $this->duration = $duration;
     }
 }

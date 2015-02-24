@@ -48,8 +48,6 @@ if (!defined('TTO_CONTEXT')) {
  */
 class Background extends TeaFields
 {
-    //Define protected vars
-
     /**
      * Constructor.
      *
@@ -57,18 +55,12 @@ class Background extends TeaFields
      */
     public function __construct(){}
 
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
     /**
      * Build HTML component to display in all the Tea T.O. defined pages.
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      * @todo get default background values on FIELD abstract class and use of array_merge() to get user's default values
      *
      * @since 2.0.0

@@ -44,27 +44,12 @@ if (!defined('TTO_CONTEXT')) {
  */
 class Select extends TeaFields
 {
-    //Define protected vars
-
-    /**
-     * Constructor.
-     *
-     * @since 1.3.0
-     */
-    public function __construct(){}
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
     /**
      * Build HTML component to display in all the Tea T.O. defined pages.
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      *
      * @since 2.0.0
      */

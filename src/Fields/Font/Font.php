@@ -42,27 +42,12 @@ if (!defined('TTO_CONTEXT')) {
  */
 class Font extends TeaFields
 {
-    //Define protected vars
-
-    /**
-     * Constructor.
-     *
-     * @since 1.3.0
-     */
-    public function __construct(){}
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
     /**
      * Build HTML component to display in all the Tea T.O. defined pages.
      *
      * @param array $content Contains all data
      * @param array $post Contains all post data
+     * @param string $prefix
      *
      * @since 2.0.0
      */
@@ -91,14 +76,11 @@ class Font extends TeaFields
             $options = array_merge($fonts, $options);
         }
 
-        //Get includes
-        $includes = $this->getIncludes();
-        $linkstylesheet = '';
-        $gfontstyle = '';
+        $linkstylesheet = $gfontstyle = '';
 
         //Check if Google Font has already been included
-        if (!isset($includes['googlefonts'])) {
-            $this->setIncludes('googlefonts');
+        if (!isset($this->includes['googlefonts'])) {
+            $this->includes['googlefonts'] = true;
 
             //Define our stylesheets
             foreach ($options as $option) {

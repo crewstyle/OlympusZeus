@@ -68,16 +68,12 @@ class TeaCustomTaxonomies
      */
     public function __buildMenuCustomTaxonomy()
     {
-        //Get custom post types
-        $taxonomies = $this->taxonomies;
-
-        //Check if we have some taxonomies to initialize
-        if (empty($taxonomies)) {
+        if (empty($this->taxonomies)) {
             return;
         }
 
         //Iterate on each cpt
-        foreach ($taxonomies as $key => $tax) {
+        foreach ($this->taxonomies as $key => $tax) {
             //Check if no master page is defined
             if (!isset($tax['slug']) || empty($tax['slug'])) {
                 echo sprintf(__('Something went wrong in your parameters
@@ -173,23 +169,7 @@ class TeaCustomTaxonomies
     public function __fieldsCustomTaxonomy($term)
     {
         //Check term
-        if (!isset($term) || empty($term)) {
-            return;
-        }
-
-        //Check admin
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get custom taxonomies
-        $taxonomies = $this->taxonomies;
-
-        //Get all registered pages
-        $includes = $this->getIncludes();
-
-        //Check if we have some taxonomies to initialize
-        if (empty($this->contents) || empty($taxonomies)) {
+        if (!$term || !TTO_IS_ADMIN || !count($this->taxonomies) || !count($this->contents)) {
             return;
         }
 
@@ -199,12 +179,12 @@ class TeaCustomTaxonomies
         $tax = $isobject ? $term->taxonomy : $term;
 
         //Check if we have taxonomy
-        if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax])) {
+        if (!isset($this->taxonomies[$tax]) || empty($this->taxonomies[$tax])) {
             return;
         }
 
         //Check if we have taxonomy
-        if (!isset($taxonomies[$tax]['contents']) || empty($taxonomies[$tax]['contents'])) {
+        if (!isset($this->taxonomies[$tax]['contents']) || empty($this->taxonomies[$tax]['contents'])) {
             return;
         }
 
@@ -212,7 +192,7 @@ class TeaCustomTaxonomies
         echo $isobject ? '<div class="tea_tax_wrap">' : '<div class="tea_tax_main">';
 
         //Iterate on each contents
-        foreach ($taxonomies[$tax]['contents'] as $ctn) {
+        foreach ($this->taxonomies[$tax]['contents'] as $ctn) {
             //Define vars
             $type = $ctn['type'];
 
@@ -226,7 +206,7 @@ class TeaCustomTaxonomies
             $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
 
             //Include class field
-            if (!isset($includes[$type])) {
+            if (!isset($this->includes[$type])) {
                 //Check if the class file exists
                 if (!class_exists($class)) {
                     echo sprintf(__('Something went wrong in your
@@ -235,19 +215,17 @@ class TeaCustomTaxonomies
                     continue;
                 }
 
-                //Set the include
-                $this->setIncludes($type);
+                $this->includes[$type] = true;
             }
 
             //Set prefix
             $prefix = $isobject ? $term->term_id.'-'.$tax.'-' : $tax.'-';
 
-            //Title
+            /** @var $item \Takeatea\TeaThemeOptions\TeaFields */
             $item = new $class();
             $item->templatePages($ctn, array(), $prefix);
         }
 
-        //Display footer wrap
         echo '</div>';
     }
 
@@ -255,34 +233,25 @@ class TeaCustomTaxonomies
      * Hook building custom fields for CPTS.
      *
      * @uses update_post_meta()
+     *
      * @param number $term_id Contain term ID
-     * @return number $return
+     *
+     * @return number|null
      *
      * @since 2.0.0
      */
     public function __saveCustomTaxonomy($term_id)
     {
         //Check term
-        if (!isset($term_id) || empty($term_id)) {
+        if (!isset($term_id) || empty($term_id) || !TTO_IS_ADMIN) {
             return;
         }
-
-        //Check admin
-        if (!TTO_IS_ADMIN) {
-            return $term_id;
-        }
-
-        //Get custom taxonomies
-        $taxonomies = $this->taxonomies;
-
-        //Get all registered pages
-        $includes = $this->getIncludes();
 
         //Get all requests
         $request = isset($_REQUEST) ? $_REQUEST : array();
 
         //Check if we have some CPTS to initialize
-        if (empty($this->contents) || empty($taxonomies) || empty($request)) {
+        if (empty($this->contents) || empty($this->taxonomies) || empty($request)) {
             return $term_id;
         }
 
@@ -295,18 +264,17 @@ class TeaCustomTaxonomies
         $tax = $request['taxonomy'];
 
         //Check if tax exists or if its contents are empty
-        if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax]['contents'])) {
-            continue;
+        if (!isset($this->taxonomies[$tax]) || empty($this->taxonomies[$tax]['contents'])) {
+            return;
         }
 
-        //Do it works!
-        foreach ($taxonomies[$tax]['contents'] as $ctn) {
+        // Make it work !
+        foreach ($this->taxonomies[$tax]['contents'] as $ctn) {
             //Register values
             $value = isset($request[$ctn['id']]) ? $request[$ctn['id']] : '';
             update_option($term_id.'-'.$tax.'-'.$ctn['id'], $value);
         }
 
-        //Everything is allright!
         return true;
     }
 
@@ -324,13 +292,7 @@ class TeaCustomTaxonomies
      */
     public function addTaxonomy($configs = array(), $contents = array())
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Check params and if a master page already exists
-        if (empty($configs) || !isset($configs['slug']) || empty($configs['slug'])) {
+        if (!TTO_IS_ADMIN || empty($configs) || !isset($configs['slug']) || empty($configs['slug'])) {
             return;
         }
 
@@ -350,49 +312,11 @@ class TeaCustomTaxonomies
     public function buildTaxonomies()
     {
         //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get all registered pages
-        $taxonomies = $this->taxonomies;
-
-        //Check params and if a master page already exists
-        if (empty($taxonomies)) {
+        if (!TTO_IS_ADMIN || empty($this->taxonomies)) {
             return;
         }
 
         //Define cpt configurations
-        TeaThemeOptions::setConfigs('customtaxonomies', $taxonomies);
-    }
-
-    /**
-     * ACCESSORS
-     **/
-
-    /**
-     * Get includes.
-     *
-     * @return array $includes Array of all included files
-     *
-     * @since 1.4.2
-     */
-    protected function getIncludes()
-    {
-        //Return value
-        return $this->includes;
-    }
-
-    /**
-     * Set includes.
-     *
-     * @param string $context Name of the included file's context
-     *
-     * @since 1.4.2
-     */
-    protected function setIncludes($context)
-    {
-        //Define value
-        $this->includes[$context] = true;
+        TeaThemeOptions::setConfigs('customtaxonomies', $this->taxonomies);
     }
 }
