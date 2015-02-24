@@ -129,7 +129,7 @@ class Network extends TeaFields
                 }
 
                 $field = $this->generateNetworkObject($net);
-                $field->getCallback($request);
+//                $field->getCallback($request);
 
                 break;
             }
@@ -152,8 +152,8 @@ class Network extends TeaFields
                 $this->includes['network_' . $net] = true;
             }
 
-            $field = $this->generateNetworkObject($net);
-            $field->getUpdate();
+//            $field = $this->generateNetworkObject($net);
+//            $field->getUpdate();
         }
     }
 

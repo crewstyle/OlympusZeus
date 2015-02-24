@@ -107,223 +107,6 @@ class TeaThemeOptions
     protected $elasticsearch = null;
 
     /**
-     * Constructor.
-     *
-     * @uses add_filter()
-     * @uses load_textdomain()
-     * @uses wp_next_scheduled()
-     * @uses wp_schedule_event()
-     * @param string $identifier Define the main slug
-     * @param array $options Contains all options to dis/enable
-     * @internal param bool $connect Define if we can display connections page
-     * @internal param bool $elastic Define if we can display elasticsearch page
-     *
-     * @since 1.5.2.8
-     */
-    public function __construct($identifier = 'tea_theme_options', $options = array())
-    {
-        //Admin panel
-        if (TTO_IS_ADMIN) {
-            //i18n
-            $locale = apply_filters('theme_locale', get_locale(), TTO_I18N);
-            load_textdomain(TTO_I18N, TTO_PATH.'/languages/'.$locale.'.mo');
-
-            //Build options
-            $opts = array(
-                'connect'   => isset($options['connect'])   ? $options['connect']   : true,
-                'elastic'   => isset($options['elastic'])   ? $options['elastic']   : true,
-                'notifs'    => isset($options['notifs'])    ? $options['notifs']    : true,
-            );
-
-            //Page component
-            $this->pages = new TeaPages($identifier, $opts);
-        }
-
-        //Define custom schedule
-        if (!wp_next_scheduled('tea_task_schedule')) {
-            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
-        }
-
-        //Register custom schedule filter
-        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
-
-        //CPT component
-        $this->customposttypes = new TeaCustomPostTypes();
-
-        //Taxonomies component
-        $this->customtaxonomies = new TeaCustomTaxonomies();
-
-        //Elasticsearch component
-        $this->elasticsearch = new TeaElasticsearch();
-
-        //Add custom css to login page
-        add_action('login_head', array(&$this, '__loginPage'));
-    }
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * WORDPRESS USED HOOKS
-     **/
-
-    /**
-     * Display a warning message on the admin panel.
-     *
-     * @since 1.4.0
-     * @todo: make social connection with http://teato.me
-     */
-    public function __cronSchedules()
-    {
-        //Make the magic
-        $field = new Network();
-        $field->updateNetworks();
-    }
-
-    /**
-     * Display CSS form login page.
-     *
-     * @since 1.4.3.5
-     */
-    public function __loginPage()
-    {
-        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
-    }
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
-    /**
-     * Add a page to the theme options panel.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 1.4.0
-     */
-    public function addPage($configs = array(), $contents = array())
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Add page
-        $this->pages->addPage($configs, $contents);
-        $this->canbuildpages = true;
-    }
-
-    /**
-     * Register menus.
-     *
-     * @uses add_action()
-     *
-     * @since 1.4.0
-     */
-    public function buildPages()
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Check if we got pages
-        if (!$this->canbuildpages) {
-            return;
-        }
-
-        //Build menus
-        $this->pages->buildPages();
-    }
-
-    /**
-     * Add a CPT to the theme options panel.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 1.4.0
-     */
-    public function addCPT($configs = array(), $contents = array())
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Add page
-        $this->customposttypes->addCPT($configs, $contents);
-        $this->canbuildcpts = true;
-    }
-
-    /**
-     * Register menus.
-     *
-     * @uses add_action()
-     *
-     * @since 1.4.0
-     */
-    public function buildCPTs()
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Check if we got cpts
-        if (!$this->canbuildcpts) {
-            return;
-        }
-
-        //Build menus
-        $this->customposttypes->buildCPTs();
-    }
-
-    /**
-     * Add a CPT to the theme options panel.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 1.4.0
-     */
-    public function addTaxonomy($configs = array(), $contents = array())
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Add page
-        $this->customtaxonomies->addTaxonomy($configs, $contents);
-        $this->canbuildtaxonomies = true;
-    }
-
-    /**
-     * Register taxonomies.
-     *
-     * @uses add_action()
-     *
-     * @since 1.4.0
-     */
-    public function buildTaxonomies()
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Check if we got cpts
-        if (!$this->canbuildtaxonomies) {
-            return;
-        }
-
-        //Build menus
-        $this->customtaxonomies->buildTaxonomies();
-    }
-
-    /**
      * Get configs.
      *
      * @param string $option Define the option asked
@@ -365,23 +148,6 @@ class TeaThemeOptions
     }
 
     /**
-     * Get elasticsearch.
-     *
-     * @return object $elasticearch
-     *
-     * @since 1.4.0
-     */
-    public function getElasticsearch()
-    {
-        //Return value
-        return $this->elasticsearch;
-    }
-
-    /**
-     * STATICS
-     **/
-
-    /**
      * Return the access token got from teato.me
      *
      * @param integer $user_id The user ID stored in DB for the connection
@@ -402,7 +168,7 @@ class TeaThemeOptions
             $tokens = TeaThemeOptions::getConfigs('tokens');
 
             //Check integrity
-            if (/*empty($userid) || */empty($tokens)) {
+            if (empty($tokens)) {
                 return array();
             }
 
@@ -520,5 +286,222 @@ class TeaThemeOptions
         else {
             update_option($option, $value);
         }
+    }
+
+    /**
+     * Constructor.
+     *
+     * @uses add_filter()
+     * @uses load_textdomain()
+     * @uses wp_next_scheduled()
+     * @uses wp_schedule_event()
+     * @param string $identifier Define the main slug
+     * @param array $options Contains all options to dis/enable
+     * @internal param bool $connect Define if we can display connections page
+     * @internal param bool $elastic Define if we can display elasticsearch page
+     *
+     * @since 1.5.2.8
+     */
+    public function __construct($identifier = 'tea_theme_options', $options = array())
+    {
+        //Admin panel
+        if (TTO_IS_ADMIN) {
+            //i18n
+            $locale = apply_filters('theme_locale', get_locale(), TTO_I18N);
+            load_textdomain(TTO_I18N, TTO_PATH.'/languages/'.$locale.'.mo');
+
+            //Build options
+            $opts = array(
+                'connect'   => isset($options['connect'])   ? $options['connect']   : true,
+                'elastic'   => isset($options['elastic'])   ? $options['elastic']   : true,
+                'notifs'    => isset($options['notifs'])    ? $options['notifs']    : true,
+            );
+
+            //Page component
+            $this->pages = new TeaPages($identifier, $opts);
+        }
+
+        //Define custom schedule
+        if (!wp_next_scheduled('tea_task_schedule')) {
+            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
+        }
+
+        //Register custom schedule filter
+        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
+
+        //CPT component
+        $this->customposttypes = new TeaCustomPostTypes();
+
+        //Taxonomies component
+        $this->customtaxonomies = new TeaCustomTaxonomies();
+
+        //Elasticsearch component
+        $this->elasticsearch = new TeaElasticsearch();
+
+        //Add custom css to login page
+        add_action('login_head', array(&$this, '__loginPage'));
+    }
+
+    /**
+     * Display a warning message on the admin panel.
+     *
+     * @since 1.4.0
+     * @todo: make social connection with http://teato.me
+     */
+    public function __cronSchedules()
+    {
+        //Make the magic
+        $field = new Network();
+        $field->updateNetworks();
+    }
+
+    /**
+     * Display CSS form login page.
+     *
+     * @since 1.4.3.5
+     */
+    public function __loginPage()
+    {
+        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
+    }
+
+    /**
+     * MAIN FUNCTIONS
+     **/
+
+    /**
+     * Add a page to the theme options panel.
+     *
+     * @param array $configs Array containing all configurations
+     * @param array $contents Contains all data
+     *
+     * @since 1.4.0
+     */
+    public function addPage($configs = array(), $contents = array())
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Add page
+        $this->pages->addPage($configs, $contents);
+        $this->canbuildpages = true;
+    }
+
+    /**
+     * Register menus.
+     *
+     * @uses add_action()
+     *
+     * @since 1.4.0
+     */
+    public function buildPages()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN || !$this->canbuildpages) {
+            return;
+        }
+
+        $this->pages->buildPages();
+    }
+
+    /**
+     * Add a CPT to the theme options panel.
+     *
+     * @param array $configs Array containing all configurations
+     * @param array $contents Contains all data
+     *
+     * @since 1.4.0
+     */
+    public function addCPT($configs = array(), $contents = array())
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Add page
+        $this->customposttypes->addCPT($configs, $contents);
+        $this->canbuildcpts = true;
+    }
+
+    /**
+     * Register menus.
+     *
+     * @uses add_action()
+     *
+     * @since 1.4.0
+     */
+    public function buildCPTs()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we got cpts
+        if (!$this->canbuildcpts) {
+            return;
+        }
+
+        //Build menus
+        $this->customposttypes->buildCPTs();
+    }
+
+    /**
+     * Add a CPT to the theme options panel.
+     *
+     * @param array $configs Array containing all configurations
+     * @param array $contents Contains all data
+     *
+     * @since 1.4.0
+     */
+    public function addTaxonomy($configs = array(), $contents = array())
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Add page
+        $this->customtaxonomies->addTaxonomy($configs, $contents);
+        $this->canbuildtaxonomies = true;
+    }
+
+    /**
+     * Register taxonomies.
+     *
+     * @uses add_action()
+     *
+     * @since 1.4.0
+     */
+    public function buildTaxonomies()
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Check if we got cpts
+        if (!$this->canbuildtaxonomies) {
+            return;
+        }
+
+        //Build menus
+        $this->customtaxonomies->buildTaxonomies();
+    }
+
+    /**
+     * Get elasticsearch.
+     *
+     * @return object $elasticearch
+     *
+     * @since 1.4.0
+     */
+    public function getElasticsearch()
+    {
+        //Return value
+        return $this->elasticsearch;
     }
 }
