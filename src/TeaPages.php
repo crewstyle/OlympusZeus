@@ -38,11 +38,6 @@ class TeaPages
     protected $capability = TTO_CAP;
 
     /**
-     * @var bool
-     */
-    protected $hasCapabilities = false;
-
-    /**
      * @var array
      */
     protected $categories = array();
@@ -56,14 +51,45 @@ class TeaPages
      * @var int
      */
     protected $duration = TTO_DURATION;
+
+    /**
+     * @var array
+     */
     protected $errors = array();
+
+    /**
+     * @var string
+     */
     protected $icon_small = '/assets/img/teato-tiny.svg';
+
+    /**
+     * @var string
+     */
     protected $icon_big = '/assets/img/teato.svg';
+
+    /**
+     * @var string
+     */
     protected $identifier;
+
+    /**
+     * @var array
+     */
     protected $includes = array();
+
+    /**
+     * @var null
+     */
     protected $index = null;
-    protected $is_admin;
+
+    /**
+     * @var array
+     */
     protected $pages = array();
+
+    /**
+     * @var array
+     */
     protected $wp_contents = array();
 
     /**
@@ -90,16 +116,14 @@ class TeaPages
             );
         }
 
-        //Define parameters
-        $this->can_upload = current_user_can('upload_files');
+        // Define parameters
         $this->identifier = $identifier;
+        $this->can_upload = current_user_can('upload_files');
 
         //Define caps
-        $caps = TeaThemeOptions::getConfigs('capabilities');
-        $this->hasCapabilities = empty($caps) ? false : true;
+        $capabilities = TeaThemeOptions::getConfigs('capabilities');
 
-        //Set capabilities if needed
-        if (!$this->hasCapabilities) {
+        if (empty($capabilities)) {
             $this->updateCapabilities(false);
         }
 
@@ -130,27 +154,27 @@ class TeaPages
                 $this->updateCapabilities();
             }
             //...Or update CPTs options...
-            else if ('cpts' == $for) {
+            elseif ('cpts' == $for) {
                 $this->updateCpts();
             }
             //...Or update options...
-            else if ('settings' == $for) {
+            elseif ('settings' == $for) {
                 $this->updateOptions($_REQUEST, $_FILES);
             }
             //...Or update elasticsearch options...
-            else if ('elasticsearch' == $for) {
+            elseif ('elasticsearch' == $for) {
                 $this->updateElasticsearch($_REQUEST);
             }
             //...Or update network data
-            else if ('callback' == $for || 'network' == $for) {
+            elseif ('callback' == $for || 'network' == $for) {
                 $this->updateNetworks($_REQUEST);
             }
             //...Or dismiss admin notice
-            else if ('dismiss' == $for) {
+            elseif ('dismiss' == $for) {
                 $this->updateNotice(true);
             }
             //...Or display message on dashboard
-            else if ('dashboard' == $for) {
+            elseif ('dashboard' == $for) {
                 $this->updateNotice(true);
             }
         }
@@ -237,20 +261,6 @@ class TeaPages
 
         //Enqueue all minified styles
         wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.min.css');
-    }
-
-    /**
-     * Hook unload scripts.
-     *
-     * @uses wp_deregister_script()
-     *
-     * @since 1.4.0
-     */
-    public function __assetUnloaded()
-    {
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
     }
 
     /**
@@ -405,12 +415,7 @@ class TeaPages
             );
         }
 
-        //Unload unwanted assets
-        if (!empty($this->current) && $is_page) {
-            add_action('admin_head', array(&$this, '__assetUnloaded'));
-        }
-
-        //Load assets action hook
+        // Load assets action hook
         add_action('admin_print_scripts', array(&$this, '__assetScripts'));
         add_action('admin_print_styles', array(&$this, '__assetStyles'));
         add_filter('admin_body_class', array(&$this, '__bodyStyle'));
@@ -448,16 +453,8 @@ class TeaPages
      */
     public function __getNotices()
     {
-        //Make the magic
         add_action('admin_notices', array(&$this, '__displayNotice'));
     }
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * MAIN FUNCTIONS
-     **/
 
     /**
      * Add a page to the theme options panel.
@@ -469,7 +466,6 @@ class TeaPages
      */
     public function addPage($configs = array(), $contents = array())
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -482,7 +478,7 @@ class TeaPages
                 more explanations.', TTO_I18N)
             );
         }
-        else if (empty($contents)) {
+        elseif (empty($contents)) {
             TeaAdminMessage::__display(
                 __('Something went wrong in your parameters
                 definition: your contents are empty. See README.md for
@@ -521,7 +517,6 @@ class TeaPages
      */
     public function buildPages()
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -554,11 +549,10 @@ class TeaPages
      */
     protected function buildConnection($contents)
     {
-        $page = empty($this->current) ? $this->identifier : $this->current;
         $this->includes['network'] = true;
 
         $field = new Network();
-        $field->setCurrentPage($page);
+        $field->setCurrentPage(empty($this->current) ? $this->identifier : $this->current);
         $field->templatePages($contents);
     }
 
@@ -569,7 +563,6 @@ class TeaPages
      */
     public function buildContent()
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -585,11 +578,7 @@ class TeaPages
             );
         }
 
-        //Build header
         $this->buildLayoutHeader();
-
-        //Get contents
-        //$title = $this->pages[$current]['title'];
         $contents = $this->pages[$current]['contents'];
 
         //Build contents relatively to the type (special cases: Connections)
@@ -598,7 +587,7 @@ class TeaPages
             $this->buildConnection($contents);
         }
         //Build contents relatively to the type (special cases: Elasticsearh)
-        else if ($this->identifier . '_elasticsearch' == $current) {
+        elseif ($this->identifier . '_elasticsearch' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildElasticsearch($contents);
         }
@@ -606,7 +595,6 @@ class TeaPages
             $this->buildType($contents);
         }
 
-        //Build footer
         $this->buildLayoutFooter();
     }
 
@@ -619,7 +607,6 @@ class TeaPages
      */
     public function getErrors()
     {
-        //Return value
         return $this->errors;
     }
 
@@ -647,40 +634,30 @@ class TeaPages
      */
     protected function buildDefaults($connect = true, $elastic = true)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get dashboard page contents
-        $titles = $details = array();
         include(TTO_PATH.'/Tpl/contents/__content_dashboard.tpl.php');
 
-        //Get current user capabilities
+        // Get current user capabilities
         $canuser = current_user_can(TTO_CAP_MAX);
 
         //Build page with contents
         $this->addPage($titles, $details);
-        unset($titles, $details);
+        $titles = $details = array();
 
-        //Get network connections page contents
+        // Get network connections page contents
         if ($connect && $canuser) {
-            $titles = $details = array();
             include(TTO_PATH.'/Tpl/contents/__content_connections.tpl.php');
-
             //Build page with contents
             $this->addPage($titles, $details);
-            unset($titles, $details);
+            $titles = $details = array();
         }
 
-        //Get network connections page contents
+        // Get network connections page contents
         if ($elastic && $canuser) {
-            $titles = $details = array();
             include(TTO_PATH.'/Tpl/contents/__content_elasticsearch.tpl.php');
 
             //Build page with contents
             $this->addPage($titles, $details);
-            unset($titles, $details);
+            $titles = $details = array();
         }
     }
 
@@ -829,26 +806,6 @@ class TeaPages
     }
 
     /**
-     * Return option's value from transient.
-     *
-     * @param string $key The name of the transient
-     * @param mixed $default The default value if no one is found
-     * @return mixed $value
-     *
-     * @since 1.5.0
-     */
-    protected function getOption($key, $default)
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return '';
-        }
-
-        //Return value from DB
-        return TeaThemeOptions::get_option($key, $default);
-    }
-
-    /**
      * Register uniq option into transient.
      *
      * @uses get_cat_name()
@@ -858,18 +815,13 @@ class TeaPages
      * @uses get_category_link()
      * @param string $key The name of the transient
      * @param array $value The default value if no one is found
-     * @param array $dependancy The default value if no one is found
+     * @param array $dependency The default value if no one is found
      * @todo find a better way for the plugin version
      *
      * @since 1.5.2
      */
-    protected function setOption($key, $value, $dependancy = array())
+    protected function setOption($key, $value, $dependency = array())
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
         //Check the category
         if (empty($key)) {
             TeaAdminMessage::__display(
@@ -904,7 +856,6 @@ class TeaPages
 
                 //Iterate on children to get ID only
                 foreach ($cats as $ca) {
-                    //Idem
                     $children[$ca->cat_ID] = array(
                         'id' => $ca->cat_ID,
                         'name' => get_cat_name($ca->cat_ID),
@@ -931,15 +882,14 @@ class TeaPages
             //Set the other parameters: details as children
             TeaThemeOptions::set_option($key . '_details', $details, $this->duration);
         }
-
         //Special usecase: checkboxes. When it's not checked, no data is sent
         //through the $_POST array
-        else if (false !== strpos($key, '__checkbox') && !empty($dependancy)) {
+        elseif (false !== strpos($key, '__checkbox') && !empty($dependency)) {
             //Get the key
             $previous = str_replace('__checkbox', '', $key);
 
             //Check if it exists (= unchecked) and set the option
-            if (!isset($dependancy[$previous])) {
+            if (!isset($dependency[$previous])) {
                 TeaThemeOptions::set_option($previous, $value, $this->duration);
             }
         }
