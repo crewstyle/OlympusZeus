@@ -467,7 +467,7 @@ class TeaThemeOptions
         }
 
         //Build menus
-        $this->customposttypes->buildCPTs();
+        $this->customposttypes->buildCustomPostTypes();
     }
 
     /**

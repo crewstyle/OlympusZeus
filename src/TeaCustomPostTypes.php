@@ -26,9 +26,19 @@ if (!defined('TTO_CONTEXT')) {
  */
 class TeaCustomPostTypes
 {
-    //Define protected vars
+    /**
+     * @var array
+     */
     protected $contents = array();
-    protected $cpts = array();
+
+    /**
+     * @var array
+     */
+    protected $customPostTypes = array();
+
+    /**
+     * @var array
+     */
     protected $includes = array();
 
     /**
@@ -39,23 +49,15 @@ class TeaCustomPostTypes
     public function __construct()
     {
         //Get registered CPTs
-        $this->cpts = TeaThemeOptions::getConfigs('customposttypes');
+        $this->customPostTypes = TeaThemeOptions::getConfigs('customposttypes');
 
-        //Check params and if a master page already exists
-        if (empty($this->cpts)) {
+        if (empty($this->customPostTypes)) {
             return;
         }
 
         //Register global action hook
         add_action('init', array(&$this, '__buildMenuCustomPostType'));
     }
-
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * WORDPRESS USED HOOKS
-     **/
 
     /**
      * Hook building menus for CPTS.
@@ -70,18 +72,14 @@ class TeaCustomPostTypes
      */
     public function __buildMenuCustomPostType()
     {
-        //Get custom post types
-        $cpts = $this->cpts;
-
-        //Check if we have some CPTS to initialize
-        if (empty($cpts)) {
+        if (empty($this->customPostTypes)) {
             return;
         }
 
         //Iterate on each cpt
-        foreach ($cpts as $key => $cpt) {
+        foreach ($this->customPostTypes as $key => $customPostType) {
             //Check if no master page is defined
-            if (!isset($cpt['title']) || empty($cpt['title'])) {
+            if (!isset($customPostType['title']) || empty($customPostType['title'])) {
                 echo sprintf(__('Something went wrong in your parameters
                     definition: no title defined for your %s
                     custom post type. Please, try again by
@@ -90,58 +88,58 @@ class TeaCustomPostTypes
             }
 
             //Get contents
-            if (!empty($cpt['contents'])) {
-                $this->contents[] = $cpt['slug'];
+            if (!empty($customPostType['contents'])) {
+                $this->contents[] = $customPostType['slug'];
             }
 
             //Special case: define a post/page as title
             //to edit default post/page component
-            if (in_array($cpt['slug'], array('post', 'page'))) {
+            if (in_array($customPostType['slug'], array('post', 'page'))) {
                 continue;
             }
 
             //Check if post type already exists
-            if (post_type_exists($cpt['slug'])) {
+            if (post_type_exists($customPostType['slug'])) {
                 continue;
             }
 
             //Treat arrays
-            $sups = isset($cpt['supports']) && !empty($cpt['supports'])
-                ? $cpt['supports']
+            $sups = isset($customPostType['supports']) && !empty($customPostType['supports'])
+                ? $customPostType['supports']
                 : array('title', 'editor', 'thumbnail');
-            $taxs = isset($cpt['taxonomies'])
-                ? $cpt['taxonomies']
+            $taxs = isset($customPostType['taxonomies'])
+                ? $customPostType['taxonomies']
                 : array('category', 'post_tag');
 
             //Build labels
             $labels = array(
-                'name' => $cpt['title'],
-                'singular_name' => isset($cpt['singular']) && !empty($cpt['singular']) ? $cpt['singular'] : $cpt['title'],
-                'menu_name' => isset($cpt['menu_name']) && !empty($cpt['menu_name']) ? $cpt['menu_name'] : $cpt['title'],
-                'all_items' => isset($cpt['all_items']) && !empty($cpt['all_items']) ? $cpt['all_items'] : $cpt['title'],
-                'add_new' => isset($cpt['add_new']) && !empty($cpt['add_new']) ? $cpt['add_new'] : __('Add new', TTO_I18N),
-                'add_new_item' => isset($cpt['add_new_item']) && !empty($cpt['add_new_item']) ? $cpt['add_new_item'] : sprintf(__('Add new %s', TTO_I18N), $cpt['title']),
-                'edit' => isset($cpt['edit']) && !empty($cpt['edit']) ? $cpt['edit'] : __('Edit', TTO_I18N),
-                'edit_item' => isset($cpt['edit_item']) && !empty($cpt['edit_item']) ? $cpt['edit_item'] : sprintf(__('Edit %s', TTO_I18N), $cpt['title']),
-                'new_item' => isset($cpt['new_item']) && !empty($cpt['new_item']) ? $cpt['new_item'] : sprintf(__('New %s', TTO_I18N), $cpt['title']),
-                'view' => isset($cpt['view']) && !empty($cpt['view']) ? $cpt['view'] : __('View', TTO_I18N),
-                'view_item' => isset($cpt['view_item']) && !empty($cpt['view_item']) ? $cpt['view_item'] : sprintf(__('View %s', TTO_I18N), $cpt['title']),
-                'search_items' => isset($cpt['search_items']) && !empty($cpt['search_items']) ? $cpt['search_items'] : sprintf(__('Search %s', TTO_I18N), $cpt['title']),
-                'not_found' => isset($cpt['not_found']) && !empty($cpt['not_found']) ? $cpt['not_found'] : sprintf(__('No %s found', TTO_I18N), $cpt['title']),
-                'not_found_in_trash' => isset($cpt['not_found_in_trash']) && !empty($cpt['not_found_in_trash']) ? $cpt['not_found_in_trash'] : sprintf(__('No %s found in Trash', TTO_I18N), $cpt['title']),
-                'parent_item_colon' => isset($cpt['parent_item_colon']) && !empty($cpt['parent_item_colon']) ? $cpt['parent_item_colon'] : sprintf(__('Parent %s', TTO_I18N), $cpt['title'])
+                'name' => $customPostType['title'],
+                'singular_name' => isset($customPostType['singular']) && !empty($customPostType['singular']) ? $customPostType['singular'] : $customPostType['title'],
+                'menu_name' => isset($customPostType['menu_name']) && !empty($customPostType['menu_name']) ? $customPostType['menu_name'] : $customPostType['title'],
+                'all_items' => isset($customPostType['all_items']) && !empty($customPostType['all_items']) ? $customPostType['all_items'] : $customPostType['title'],
+                'add_new' => isset($customPostType['add_new']) && !empty($customPostType['add_new']) ? $customPostType['add_new'] : __('Add new', TTO_I18N),
+                'add_new_item' => isset($customPostType['add_new_item']) && !empty($customPostType['add_new_item']) ? $customPostType['add_new_item'] : sprintf(__('Add new %s', TTO_I18N), $customPostType['title']),
+                'edit' => isset($customPostType['edit']) && !empty($customPostType['edit']) ? $customPostType['edit'] : __('Edit', TTO_I18N),
+                'edit_item' => isset($customPostType['edit_item']) && !empty($customPostType['edit_item']) ? $customPostType['edit_item'] : sprintf(__('Edit %s', TTO_I18N), $customPostType['title']),
+                'new_item' => isset($customPostType['new_item']) && !empty($customPostType['new_item']) ? $customPostType['new_item'] : sprintf(__('New %s', TTO_I18N), $customPostType['title']),
+                'view' => isset($customPostType['view']) && !empty($customPostType['view']) ? $customPostType['view'] : __('View', TTO_I18N),
+                'view_item' => isset($customPostType['view_item']) && !empty($customPostType['view_item']) ? $customPostType['view_item'] : sprintf(__('View %s', TTO_I18N), $customPostType['title']),
+                'search_items' => isset($customPostType['search_items']) && !empty($customPostType['search_items']) ? $customPostType['search_items'] : sprintf(__('Search %s', TTO_I18N), $customPostType['title']),
+                'not_found' => isset($customPostType['not_found']) && !empty($customPostType['not_found']) ? $customPostType['not_found'] : sprintf(__('No %s found', TTO_I18N), $customPostType['title']),
+                'not_found_in_trash' => isset($customPostType['not_found_in_trash']) && !empty($customPostType['not_found_in_trash']) ? $customPostType['not_found_in_trash'] : sprintf(__('No %s found in Trash', TTO_I18N), $customPostType['title']),
+                'parent_item_colon' => isset($customPostType['parent_item_colon']) && !empty($customPostType['parent_item_colon']) ? $customPostType['parent_item_colon'] : sprintf(__('Parent %s', TTO_I18N), $customPostType['title'])
             );
 
             //Build args
             $args = array(
                 'labels' => $labels,
-                'public' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
-                'show_ui' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
-                'show_in_menu' => isset($cpt['options']['public']) && $cpt['options']['public'] ? true : false,
-                'hierarchical' => isset($cpt['options']['hierarchical']) && $cpt['options']['hierarchical'] ? true : false,
-                'has_archive' => isset($cpt['options']['has_archive']) && $cpt['options']['has_archive'] ? true : false,
-                'menu_icon' => isset($cpt['menu_icon']) ? $cpt['menu_icon'] : '',
-                'menu_position' => isset($cpt['menu_position']) ? $cpt['menu_position'] : 100,
+                'public' => isset($customPostType['options']['public']) && $customPostType['options']['public'] ? true : false,
+                'show_ui' => isset($customPostType['options']['public']) && $customPostType['options']['public'] ? true : false,
+                'show_in_menu' => isset($customPostType['options']['public']) && $customPostType['options']['public'] ? true : false,
+                'hierarchical' => isset($customPostType['options']['hierarchical']) && $customPostType['options']['hierarchical'] ? true : false,
+                'has_archive' => isset($customPostType['options']['has_archive']) && $customPostType['options']['has_archive'] ? true : false,
+                'menu_icon' => isset($customPostType['menu_icon']) ? $customPostType['menu_icon'] : '',
+                'menu_position' => isset($customPostType['menu_position']) ? $customPostType['menu_position'] : 100,
                 'permalink_epmask' => EP_PERMALINK,
                 'supports' => $sups,
                 'taxonomies' => $taxs,
@@ -151,23 +149,21 @@ class TeaCustomPostTypes
             );
 
             //Action to register
-            register_post_type($cpt['slug'], $args);
+            register_post_type($customPostType['slug'], $args);
 
             //Option
-            $opt = $cpt['slug'].'_tea_structure';
+            $opt = $customPostType['slug'].'_tea_structure';
 
             //Get value
-            $structure = TeaThemeOptions::get_option($opt, '/'.$cpt['slug']);
+            $structure = TeaThemeOptions::get_option($opt, '/'.$customPostType['slug']);
 
             //Change structure
-            add_rewrite_tag('%'.$cpt['slug'].'%', '([^/]+)', $cpt['slug'].'=');
-            add_permastruct($cpt['slug'], $structure, false);
+            add_rewrite_tag('%'.$customPostType['slug'].'%', '([^/]+)', $customPostType['slug'].'=');
+            add_permastruct($customPostType['slug'], $structure, false);
         }
 
-        //Translate permalink structure
         add_action('post_type_link', array(&$this, '__translatePermalink'), 10, 3);
 
-        //Get all admin details
         if (TTO_IS_ADMIN) {
             //Display CPT custom fields
             add_action('admin_init', array(&$this, '__fieldsCustomPostType'));
@@ -192,14 +188,7 @@ class TeaCustomPostTypes
      */
     public function __fieldsCustomPostType()
     {
-        //Get custom post types
-        $cpts = $this->cpts;
-
-        //Get all registered pages
-        $includes = $this->getIncludes();
-
-        //Check if we have some CPTS to initialize
-        if (empty($this->contents) || empty($cpts)) {
+        if (empty($this->contents) || empty($this->customPostTypes)) {
             return;
         }
 
@@ -209,17 +198,17 @@ class TeaCustomPostTypes
         //Iterate on each cpt
         foreach ($this->contents as $cpt) {
             //Check if cpt exists or if its contents are empty
-            if (!isset($cpts[$cpt]) || empty($cpts[$cpt]['contents'])) {
+            if (!isset($this->customPostTypes[$cpt]['content']) || empty($this->customPostTypes[$cpt]['contents'])) {
                 continue;
             }
 
             //Do it works!
-            foreach ($cpts[$cpt]['contents'] as $ctn) {
+            foreach ($this->customPostTypes[$cpt]['contents'] as $customPostType) {
                 //Define vars
-                $type = $ctn['type'];
+                $type = $customPostType['type'];
 
                 //Check if we are authorized to use this field in CPTs
-                if(in_array($type, $unauthorized)) {
+                if (in_array($type, $unauthorized)) {
                     continue;
                 }
 
@@ -228,7 +217,7 @@ class TeaCustomPostTypes
                 $class = "\Takeatea\TeaThemeOptions\Fields\\$class\\$class";
 
                 //Include class field
-                if (!isset($includes[$type])) {
+                if (!isset($this->includes[$type])) {
                     //Check if the class file exists
                     if (!class_exists($class)) {
                         echo sprintf(__('Something went wrong in your
@@ -242,17 +231,17 @@ class TeaCustomPostTypes
                 }
 
                 //Title
-                $title = isset($ctn['title']) ? $ctn['title'] : __('Metabox', TTO_I18N);
+                $title = isset($customPostType['title']) ? $customPostType['title'] : __('Metabox', TTO_I18N);
 
                 //Add meta box
                 add_meta_box(
-                    $cpt . '-meta-box-' . $ctn['id'],
+                    $cpt . '-meta-box-' . $customPostType['id'],
                     $title,
                     array(&$class, 'templateCustomPostTypes'),
                     $cpt,
                     'normal',
                     'low',
-                    array('contents' => $ctn)
+                    array('contents' => $customPostType)
                 );
             }
         }
@@ -268,11 +257,7 @@ class TeaCustomPostTypes
      */
     public function __registerPermalinks()
     {
-        //Get all registered pages
-        $cpts = $this->cpts;
-
-        //Check if we have some CPTS to initialize
-        if (empty($cpts)) {
+        if (empty($this->customPostTypes)) {
             return false;
         }
 
@@ -290,14 +275,14 @@ class TeaCustomPostTypes
         }
 
         //Iterate on each cpt
-        foreach ($cpts as $cpt) {
+        foreach ($this->customPostTypes as $customPostType) {
             //Special case: do not change post/page component
-            if (in_array($cpt['slug'], array('post', 'page'))) {
+            if (in_array($customPostType['slug'], array('post', 'page'))) {
                 continue;
             }
 
             //Option
-            $opt = $cpt['slug'].'_tea_structure';
+            $opt = $customPostType['slug'].'_tea_structure';
 
             //Check POST
             if (isset($_POST[$opt])) {
@@ -306,17 +291,17 @@ class TeaCustomPostTypes
             }
 
             //Get value
-            $structure = TeaThemeOptions::get_option($opt, '/%'.$cpt['slug'].'%-%post_id%');
+            $structure = TeaThemeOptions::get_option($opt, '/%'.$customPostType['slug'].'%-%post_id%');
 
             //Add fields
             add_settings_field(
                 $opt,                                               //Identifier
-                $cpt['title'].' <code>%'.$cpt['slug'].'%</code>',   //Title
+                $customPostType['title'].' <code>%'.$customPostType['slug'].'%</code>',   //Title
                 array(&$this,'__permalinksFields'),                 //Callback function
                 'permalink',                                        //Page
                 'tea_custom_permalinks',                            //Section
                 array(
-                    'name' => $cpt['slug'].'_tea_structure',
+                    'name' => $customPostType['slug'].'_tea_structure',
                     'value' => $structure,
                 )
             );
@@ -335,7 +320,6 @@ class TeaCustomPostTypes
     public function __permalinksFields($opt)
     {
         if (!empty($opt)) {
-            //Display settings
             include(TTO_PATH.'/Tpl/layouts/__layout_admin_permalinks.tpl.php');
         }
     }
@@ -373,27 +357,21 @@ class TeaCustomPostTypes
             return $post->ID;
         }
 
-        //Get all registered pages
-        $cpts = $this->cpts;
-
         //Check if we have some CPTS to initialize
-        if (empty($this->contents) || empty($cpts)) {
+        if (empty($this->contents) || empty($this->customPostTypes)) {
             return false;
         }
 
-        //Check if its contents are empty
-        if (!isset($cpts[$post->post_type]) || empty($cpts[$post->post_type]['contents'])) {
+        // Check if its content is empty
+        if (!isset($this->customPostTypes[$post->post_type]['contents']) || empty($this->customPostTypes[$post->post_type]['contents'])) {
             return false;
         }
 
-        //Do it works!
-        foreach ($cpts[$post->post_type]['contents'] as $ctn) {
-            //Register values
+        foreach ($this->customPostTypes[$post->post_type]['contents'] as $ctn) {
             $value = isset($_REQUEST[$ctn['id']]) ? $_REQUEST[$ctn['id']] : '';
             update_post_meta($post->ID, $post->post_type . '-' . $ctn['id'], $value);
         }
 
-        //Everything is allright!
         return true;
     }
 
@@ -503,12 +481,7 @@ class TeaCustomPostTypes
     public function addCPT($configs = array(), $contents = array())
     {
         //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Check params and if a master page already exists
-        if (empty($configs) || !isset($configs['slug']) || empty($configs['slug'])) {
+        if (!TTO_IS_ADMIN || empty($configs) || !isset($configs['slug']) || empty($configs['slug'])) {
             return;
         }
 
@@ -516,8 +489,8 @@ class TeaCustomPostTypes
         $slug = $configs['slug'];
 
         //Define cpt configurations
-        $this->cpts[$slug] = $configs;
-        $this->cpts[$slug]['contents'] = $contents;
+        $this->customPostTypes[$slug] = $configs;
+        $this->customPostTypes[$slug]['contents'] = $contents;
     }
 
     /**
@@ -525,22 +498,13 @@ class TeaCustomPostTypes
      *
      * @since 1.4.0
      */
-    public function buildCPTs()
+    public function buildCustomPostTypes()
     {
         //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!TTO_IS_ADMIN || !count($this->customPostTypes)) {
             return;
         }
 
-        //Get all registered pages
-        $cpts = $this->cpts;
-
-        //Check params and if a master page already exists
-        if (empty($cpts)) {
-            return;
-        }
-
-        //Define cpt configurations
-        TeaThemeOptions::setConfigs('customposttypes', $cpts);
+        TeaThemeOptions::setConfigs('customposttypes', $this->customPostTypes);
     }
 }
