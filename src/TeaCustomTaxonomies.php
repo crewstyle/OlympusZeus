@@ -236,7 +236,7 @@ class TeaCustomTaxonomies
      *
      * @param number $term_id Contain term ID
      *
-     * @return number|null
+     * @return number|void
      *
      * @since 2.0.0
      */
@@ -275,7 +275,7 @@ class TeaCustomTaxonomies
             update_option($term_id.'-'.$tax.'-'.$ctn['id'], $value);
         }
 
-        return true;
+        return;
     }
 
     /**
@@ -296,10 +296,7 @@ class TeaCustomTaxonomies
             return;
         }
 
-        //Define the slug
         $slug = $configs['slug'];
-
-        //Define cpt configurations
         $this->taxonomies[$slug] = $configs;
         $this->taxonomies[$slug]['contents'] = $contents;
     }
