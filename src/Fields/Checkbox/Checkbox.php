@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'checkbox',
  *     'title' => 'What are your preferred personas?',
  *     'id' => 'my_checkbox_field_id',
- *     'std' => array('minions', 'lapinscretins'), //define the default choice(s)
+ *     'default' => array('minions', 'lapinscretins'), //define the default choice(s)
  *     'description' => '',
  *     //define your options
  *     'options' => array(
@@ -41,7 +41,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Checkbox
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Checkbox extends TeaFields
@@ -68,7 +68,7 @@ class Checkbox extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -86,21 +86,21 @@ class Checkbox extends TeaFields
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Checkbox', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
-        $std = isset($content['std']) ? $content['std'] : array();
+        $default = isset($content['default']) ? $content['default'] : array();
         $options = isset($content['options']) ? $content['options'] : array();
         $count = count($options);
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
-            $vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Get template

@@ -26,16 +26,17 @@
         }
     ],
     "require":      {
-        "ruflin/Elastica":  "1.3.0.0",
-        "tea-to/encoder": "dev-master"
+        "ruflin/Elastica":  "1.x"
     },
     "autoload":     {
-        "psr-4": { "Takeatea\\TeaThemeOptions\\": "src/" }
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url":  "http://sateas-private.tools.takeatea.com"
+        "psr-4": {
+            "Takeatea\\TeaThemeOptions\\": "src/"
         }
-    ]
+    },
+    "extra":        {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
 }
+

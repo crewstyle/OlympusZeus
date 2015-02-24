@@ -2,7 +2,7 @@
 <h2><?php echo $title ?></h2>
 
 <?php if ('yes' == $vals['enable'] && 200 != $vals['status']): ?>
-    <div class="alert alert-warning">
+    <div class="error below-h2">
         <?php if (404 == $vals['status']): ?>
             <p>
                 <?php _e('The connection seems good but there is no "Index name" as you have set. Click on the "Create index" button.', TTO_I18N) ?>
@@ -14,7 +14,7 @@
         <?php endif ?>
     </div>
 <?php elseif ('yes' == $vals['enable'] && empty($index)): ?>
-    <div class="alert alert-success">
+    <div class="updated below-h2">
         <p>
             <?php _e('Your parameters are well configured. You can now use Elasticsearch in your website. Here is the last step: click on the "Index contents" button to index your old posts.', TTO_I18N) ?>
         </p>
@@ -102,12 +102,12 @@
                         <h3><label for="<?php echo $id ?>_server_url"><?php _e('Server URL', TTO_I18N) ?></label></h3>
                         <div class="inside tea-inside text">
                             http://
-                            <input type="text" name="<?php echo $id ?>[server_host]" id="<?php echo $id ?>_server_host" value="<?php echo $vals['server_host'] ?>" placeholder="<?php echo $std['server_host'] ?>" style="width:120px" />
+                            <input type="text" name="<?php echo $id ?>[server_host]" id="<?php echo $id ?>_server_host" value="<?php echo $vals['server_host'] ?>" placeholder="<?php echo $default['server_host'] ?>" style="width:120px" />
                             :
-                            <input type="text" name="<?php echo $id ?>[server_port]" id="<?php echo $id ?>_server_port" value="<?php echo $vals['server_port'] ?>" maxlength="4" placeholder="<?php echo $std['server_port'] ?>" style="width:50px" />
+                            <input type="text" name="<?php echo $id ?>[server_port]" id="<?php echo $id ?>_server_port" value="<?php echo $vals['server_port'] ?>" maxlength="4" placeholder="<?php echo $default['server_port'] ?>" style="width:50px" />
                             /
 
-                            <p><?php echo sprintf(__('If your search provider has given you a connection URL, use that instead of filling out server information..<br/>http://<code>%s</code>:<code>%d</code> are good values.', TTO_I18N), $std['server_host'], $std['server_port']) ?></p>
+                            <p><?php echo sprintf(__('If your search provider has given you a connection URL, use that instead of filling out server information..<br/>http://<code>%s</code>:<code>%d</code> are good values.', TTO_I18N), $default['server_host'], $default['server_port']) ?></p>
                         </div>
 
                         <br class="clear"/>
@@ -117,7 +117,7 @@
                         <div class="inside tea-inside text">
                             <input type="text" name="<?php echo $id ?>[index_name]" id="<?php echo $id ?>_index_name" value="<?php echo $vals['index_name'] ?>" />
 
-                            <p><?php echo sprintf(__('Use a uniq name in lowercase with no special character.<br/><code>%s</code> is a good value.', TTO_I18N), $std['index_name']) ?></p>
+                            <p><?php echo sprintf(__('Use a uniq name in lowercase with no special character.<br/><code>%s</code> is a good value.', TTO_I18N), $default['index_name']) ?></p>
                         </div>
 
                         <br class="clear"/>
@@ -127,7 +127,7 @@
                         <div class="inside tea-inside number">
                             <input type="number" name="<?php echo $id ?>[read_timeout]" id="<?php echo $id ?>_read_timeout" value="<?php echo $vals['read_timeout'] ?>" size="30" min="1" max="30" step="1" />
 
-                            <p><?php echo sprintf(__('The maximum time (in seconds) that read requests should wait for server response. If the call times out, wordpress will fallback to standard search.<br/><code>%s</code> is a good value.', TTO_I18N), $std['read_timeout']) ?></p>
+                            <p><?php echo sprintf(__('The maximum time (in seconds) that read requests should wait for server response. If the call times out, wordpress will fallback to standard search.<br/><code>%s</code> is a good value.', TTO_I18N), $default['read_timeout']) ?></p>
                         </div>
 
                         <br class="clear"/>
@@ -137,7 +137,7 @@
                         <div class="inside tea-inside number">
                             <input type="number" name="<?php echo $id ?>[write_timeout]" id="<?php echo $id ?>_write_timeout" value="<?php echo $vals['write_timeout'] ?>" size="30" min="1" max="30" step="1" />
 
-                            <p><?php echo sprintf(__('The maximum time (in seconds) that write requests should wait for server response. This should be set long enough to index your entire site.<br/><code>%s</code> is a good value.', TTO_I18N), $std['write_timeout']) ?></p>
+                            <p><?php echo sprintf(__('The maximum time (in seconds) that write requests should wait for server response. This should be set long enough to index your entire site.<br/><code>%s</code> is a good value.', TTO_I18N), $default['write_timeout']) ?></p>
                         </div>
 
                         <br class="clear"/>

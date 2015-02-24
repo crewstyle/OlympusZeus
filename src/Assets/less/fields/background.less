@@ -1,0 +1,122 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Background plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */
+
+/*--- [ALL BACKGROUNDS] ---*/
+.tea-background-container hr {
+    border: 1px solid lighten(@gray, 80%);
+    margin: 5px 0 20px;
+}
+.tea-background-container .bg-image label {
+    float: left;
+    margin: 0 10px 10px 0;
+    text-align: center;
+}
+.tea-background-container .bg-image label img {
+    border: 5px solid @white;
+    display: block;
+}
+.tea-background-container .bg-image label:hover img {
+    border: 5px solid @second;
+}
+.tea-background-container .bg-image label.selected img {
+    border: 5px solid @primary;
+}
+
+/*--- [BACKGROUND IMAGE] ---*/
+.tea-background-container label .image-to-show {
+    position: relative;
+}
+.tea-background-container label .image-to-show span {
+    background: @second;
+    bottom: 0;
+    color: @black;
+    display: none;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+}
+.tea-background-container label:hover .image-to-show span {
+    display: block;
+}
+.tea-background-container label.selected .image-to-show span {
+    background: @primary;
+    color: @white;
+    display: block;
+}
+
+/*--- [BACKGROUND CUSTOM] ---*/
+.tea-background-container .upload_image_result {
+    margin-top: 10px;
+    text-align: center;
+}
+.tea-background-container .upload_image_result figure {
+    background: url(../img/bg-upload.png) 0 0;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 1;
+    padding: 10px;
+    position: relative;
+}
+.tea-background-container .upload_image_result figure img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+.tea-background-container .upload_image_result div.upload-time {
+    background-image: url(../img/bg-upload.png);
+    padding: 10px;
+}
+.tea-background-container .upload_image_result div.upload-time.item-added {
+    background-image: none;
+    padding: 0 5px;
+}
+.tea-background-container .upload_image_result div.upload-time a {
+    background: @graylighter;
+    border: 1px solid lighten(@gray, 20%);
+    box-shadow: 0 0 0 4px fade(@main, 30%);
+    color: @primary;
+    display: block;
+    font-size: 30px;
+    padding: 38px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: border ease .5s;
+    -moz-transition: border ease .5s;
+    transition: border ease .5s;
+}
+.tea-background-container .upload_image_result div.upload-time a:focus,
+.tea-background-container .upload_image_result div.upload-time a:hover {
+    color: @main;
+    border: 1px solid @main;
+    box-shadow: 0 0 0 4px fade(@main, 60%);
+}
+.tea-background-container .upload_image_result div.upload-time.item-added a {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    font-size: 16px;
+    padding: 5px 0;
+}
+.tea-background-container .upload_image_result .del_image {
+    background-color: @white;
+    color: @danger;
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    height: 20px;
+    line-height: 20px;
+    padding: 4px 8px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+    z-index: 4;
+}
+.tea-background-container .upload_image_result .del_image:hover {
+    color: @red;
+}

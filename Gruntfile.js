@@ -185,8 +185,8 @@ module.exports = function(grunt) {
                         '<%= teato.path.src %>/less/_global.less',
                         '<%= teato.path.src %>/less/_navigation.less',
                         '<%= teato.path.src %>/less/_messages.less',
-                        //plugins
-                        '<%= teato.path.src %>/less/plugins/*.less',
+                        //fields
+                        '<%= teato.path.src %>/less/fields/*.less',
                         //responsive
                         '<%= teato.path.src %>/less/_responsive.less'
                     ]
@@ -476,17 +476,6 @@ module.exports = function(grunt) {
                 src: 'languages/*.po',
                 expand: true
             }
-        },
-
-        //watch for compiling
-        watch: {
-            styles: {
-                files: ['<%= teato.path.src %>/less/**/*.less'],
-                tasks: ['clean:first','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','copy','uglify','clean:last'],
-                options: {
-                    nospawn: true
-                }
-            }
         }
     });
 
@@ -519,9 +508,6 @@ module.exports = function(grunt) {
     //less compilation
     grunt.loadNpmTasks('grunt-contrib-less');
 
-    //watch for compiling
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
     //------ [REGISTER TASKS] ------//
 
     //bower magic: grunt bowie
@@ -538,9 +524,6 @@ module.exports = function(grunt) {
     grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin']);
     grunt.registerTask('js',        ['uglify']);
     grunt.registerTask('move',      ['copy:main','clean:last']);
-
-    //watch less compiling
-    grunt.registerTask('sniper',    ['watch']);
 
     //default task: grunt default / grunt
     grunt.registerTask('default',   ['clean:first','bower','copy:bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy:main','clean:last']);

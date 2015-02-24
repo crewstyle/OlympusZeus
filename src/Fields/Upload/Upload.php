@@ -32,7 +32,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Upload
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Upload extends TeaFields
@@ -59,7 +59,7 @@ class Upload extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.0-2
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -76,7 +76,7 @@ class Upload extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Upload', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : array();
+        $default = isset($content['default']) ? $content['default'] : array();
         $library = isset($content['library']) ? $content['library'] : 'image';
         $description = isset($content['description']) ? $content['description'] : '';
         $multiple = isset($content['multiple']) && (true === $content['multiple'] || '1' == $content['multiple']) ? '1' : '0';
@@ -90,7 +90,7 @@ class Upload extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
@@ -117,7 +117,7 @@ class Upload extends TeaFields
                 }
             }
             else {
-                $vals = empty($oldv) ? $std : (is_array($oldv) ? $oldv[0] : array($oldv));
+                $vals = empty($oldv) ? $default : (is_array($oldv) ? $oldv[0] : array($oldv));
             }
         }
 

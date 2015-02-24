@@ -15,7 +15,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'Never gonna give you up!',
  *     'id' => 'my_link_field_id',
  *     'description' => 'Never gonna give you up!',
- *     'std' => array(
+ *     'default' => array(
  *         'url' => "http://www.youtube.com/watch?v=BROWqjuTM0g",
  *         'label' => 'Never gonna get you down!', //optional, display link instead
  *         'target' => '_blank', //optional, "_self" by default
@@ -38,7 +38,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Link
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Link extends TeaFields
@@ -66,7 +66,7 @@ class Link extends TeaFields
      * @param array $post Contains all post data
      * @param string $prefix Contains meta post prefix
      *
-     * @since 1.5.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -86,23 +86,23 @@ class Link extends TeaFields
         $description = isset($content['description']) ? $content['description'] : '';
 
         //Default values
-        $std = isset($content['std']) ? $content['std'] : array();
-        $std['url'] = isset($std['url']) ? $std['url'] : '';
-        $std['label'] = isset($std['label']) ? $std['label'] : $std['url'];
-        $std['target'] = isset($std['target']) ? $std['target'] : '_self';
-        $std['rel'] = isset($std['rel']) ? $std['rel'] : 'external';
+        $default = isset($content['default']) ? $content['default'] : array();
+        $default['url'] = isset($default['url']) ? $default['url'] : '';
+        $default['label'] = isset($default['label']) ? $default['label'] : $default['url'];
+        $default['target'] = isset($default['target']) ? $default['target'] : '_self';
+        $default['rel'] = isset($default['rel']) ? $default['rel'] : 'external';
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, true);
-            $vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Get template

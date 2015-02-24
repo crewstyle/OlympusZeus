@@ -14,9 +14,9 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'font',
  *     'title' => 'Choose your style',
  *     'id' => 'my_font_field_id',
- *     'std' => 'my_gorgeous_font',
+ *     'default' => 'my_gorgeous_font',
  *     'description' => 'Tell us how to scribe :D',
- *     'default' => true,
+ *     'fonts' => true,
  *     'options' => array(
  *         'PT+Sans' => array('PT Sans', '400,500')
  *     )
@@ -37,7 +37,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Font
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Font extends TeaFields
@@ -64,7 +64,7 @@ class Font extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -79,16 +79,16 @@ class Font extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Font', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $description = isset($content['description']) ? $content['description'] : '';
-        $default = isset($content['default']) && (true === $content['default'] || '1' == $content['default']) ? true : false;
+        $fonts = isset($content['fonts']) && (true === $content['fonts'] || '1' == $content['fonts']) ? true : false;
 
         //Get options
         $options = isset($content['options']) ? $content['options'] : array();
 
-        if ($default) {
-            $default = $this->getDefaults('fonts');
-            $options = array_merge($default, $options);
+        if ($fonts) {
+            $fonts = $this->getDefaults('fonts');
+            $options = array_merge($fonts, $options);
         }
 
         //Get includes
@@ -113,7 +113,7 @@ class Font extends TeaFields
         }
 
         //Check selected
-        $val = TeaThemeOptions::get_option($prefix.$id, $std);
+        $val = TeaThemeOptions::get_option($prefix.$id, $default);
 
         //Get template
         include(TTO_PATH.'/Fields/Font/in_pages.tpl.php');

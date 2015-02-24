@@ -21,7 +21,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Post Types
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class TeaCustomPostTypes
@@ -359,7 +359,7 @@ class TeaCustomPostTypes
      *
      * @uses update_post_meta()
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function __saveCustomPostType()
     {
@@ -381,19 +381,16 @@ class TeaCustomPostTypes
             return false;
         }
 
-        //Iterate on each cpt
-        foreach ($this->contents as $cpt) {
-            //Check if cpt exists or if its contents are empty
-            if (!isset($cpts[$cpt]) || empty($cpts[$cpt]['contents'])) {
-                continue;
-            }
+        //Check if its contents are empty
+        if (!isset($cpts[$post->post_type]) || empty($cpts[$post->post_type]['contents'])) {
+            return false;
+        }
 
-            //Do it works!
-            foreach ($cpts[$cpt]['contents'] as $ctn) {
-                //Register values
-                $value = isset($_REQUEST[$ctn['id']]) ? $_REQUEST[$ctn['id']] : '';
-                update_post_meta($post->ID, $cpt . '-' . $ctn['id'], $value);
-            }
+        //Do it works!
+        foreach ($cpts[$post->post_type]['contents'] as $ctn) {
+            //Register values
+            $value = isset($_REQUEST[$ctn['id']]) ? $_REQUEST[$ctn['id']] : '';
+            update_post_meta($post->ID, $post->post_type . '-' . $ctn['id'], $value);
         }
 
         //Everything is allright!

@@ -23,7 +23,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Section
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Section extends TeaFields
@@ -50,7 +50,7 @@ class Section extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.5.2.11
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {

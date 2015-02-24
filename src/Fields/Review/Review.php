@@ -16,7 +16,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'description' => 'Place your bets, no more bets!',
  *     'note' => true,
  *     'rate' => true,
- *     'all' => false,
+ *     'reviewall' => false,
  *     'authors' => array(1, 2, 3), //IDs of all users authorized to review
  *     'id' => 'my_review_field_id'
  * )
@@ -36,7 +36,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Gallery
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Review extends TeaFields
@@ -63,7 +63,7 @@ class Review extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -85,7 +85,7 @@ class Review extends TeaFields
         $description = isset($content['description']) ? $content['description'] : '';
         $note = isset($content['note']) ? $content['note'] : true;
         $rate = isset($content['rate']) ? $content['rate'] : true;
-        $review_all = isset($content['all']) ? $content['all'] : false;
+        $review_all = isset($content['reviewall']) ? $content['reviewall'] : false;
         $level = isset($content['level']) ? $content['level'] : '';
 
         //Define users
@@ -112,7 +112,7 @@ class Review extends TeaFields
         }
 
         //Default values
-        $std = array(
+        $default = array(
             1 => array(
                 'note' => 1,
                 'rate' => '',
@@ -122,14 +122,14 @@ class Review extends TeaFields
         //Default way
         if (empty($post)) {
             //Check selected
-            $vals = TeaThemeOptions::get_option($prefix.$id, $std);
+            $vals = TeaThemeOptions::get_option($prefix.$id, $default);
             $vals = empty($vals) ? array(0) : (is_array($vals) ? $vals : array($vals));
         }
         //On CPT
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, false);
-            $vals = empty($vals) ? $std : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
         }
 
         //Get template

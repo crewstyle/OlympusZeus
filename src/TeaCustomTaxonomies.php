@@ -21,7 +21,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Taxonomies
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class TeaCustomTaxonomies
@@ -258,7 +258,7 @@ class TeaCustomTaxonomies
      * @param number $term_id Contain term ID
      * @return number $return
      *
-     * @since 1.4.2
+     * @since 2.0.0
      */
     public function __saveCustomTaxonomy($term_id)
     {
@@ -291,19 +291,19 @@ class TeaCustomTaxonomies
             return $term_id;
         }
 
-        //Iterate on each tax
-        foreach ($this->contents as $tax) {
-            //Check if tax exists or if its contents are empty
-            if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax]['contents'])) {
-                continue;
-            }
+        //Get current saved taxonomy
+        $tax = $request['taxonomy'];
 
-            //Do it works!
-            foreach ($taxonomies[$tax]['contents'] as $ctn) {
-                //Register values
-                $value = isset($request[$ctn['id']]) ? $request[$ctn['id']] : '';
-                update_option($term_id.'-'.$tax.'-'.$ctn['id'], $value);
-            }
+        //Check if tax exists or if its contents are empty
+        if (!isset($taxonomies[$tax]) || empty($taxonomies[$tax]['contents'])) {
+            continue;
+        }
+
+        //Do it works!
+        foreach ($taxonomies[$tax]['contents'] as $ctn) {
+            //Register values
+            $value = isset($request[$ctn['id']]) ? $request[$ctn['id']] : '';
+            update_option($term_id.'-'.$tax.'-'.$ctn['id'], $value);
         }
 
         //Everything is allright!

@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'color',
  *     'title' => 'What is your favorite Coke?',
  *     'id' => 'my_color_field_id',
- *     'std' => '#000000',
+ *     'default' => '#000000',
  *     'description' => 'Do not choose the Coke Zero, right? ;)'
  * )
  *
@@ -77,19 +77,19 @@ class Color extends TeaFields
         //Default variables
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Color', TTO_I18N);
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $description = isset($content['description']) ? $content['description'] : '';
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
         }
         //On CPT
         else {
             //Check selected
             $val = get_post_meta($post->ID, $post->post_type . '-' . $id, true);
-            $val = empty($val) ? $std : $val;
+            $val = empty($val) ? $default : $val;
         }
 
         //Get template

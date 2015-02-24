@@ -47,6 +47,11 @@
             closest:'label',
             selected:'is-active'
         });
+        $('.tea-background-container input[type="radio"]').tea_checkit({
+            container:'.tea-background-container',
+            closest:'label',
+            selected:'selected'
+        });
 
         //Checkbox check all
         $('.tea_to_wrap .checkall input[type="checkbox"]').tea_checkall({
@@ -75,7 +80,7 @@
         });
 
         //Color input
-        $('.tea-inside .color-picker').tea_color();
+        $('.tea-inside .color-picker, .tea-conf .color-picker').tea_color();
 
         //Date input
         $.each($('.tea-inside input.pickadate'), function (){
@@ -150,7 +155,7 @@
         $('.tea-inside textarea.textarea').tea_textarea();
 
         //Background input
-        $('.tea-inside.background .bg-upload').tea_upload({
+        $('.tea-background-container .bg-upload').tea_upload({
             wpid: null,
             media: wp.media,
             title: 'data-title'

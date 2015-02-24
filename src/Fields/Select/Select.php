@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'select',
  *     'title' => 'Prove it: what do they mean by "Bapouet"?',
  *     'id' => 'my_select_field_id',
- *     'std' => '',
+ *     'default' => '',
  *     'description' => "Don't cheat: the movie is NOT the solution :)",
  *     'options' => array(
  *         'toy' => 'A simple toy',
@@ -39,7 +39,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Select
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Select extends TeaFields
@@ -66,7 +66,7 @@ class Select extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -84,13 +84,13 @@ class Select extends TeaFields
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Select', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
-        $std = isset($content['std']) ? $content['std'] : '';
+        $default = isset($content['default']) ? $content['default'] : '';
         $options = isset($content['options']) ? $content['options'] : array();
 
         //Default way
         if (empty($post)) {
             //Check selected
-            $val = TeaThemeOptions::get_option($prefix.$id, $std);
+            $val = TeaThemeOptions::get_option($prefix.$id, $default);
         }
         //On CPT
         else {

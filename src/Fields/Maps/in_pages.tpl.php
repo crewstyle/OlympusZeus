@@ -145,9 +145,9 @@
                             );
                         ?>
                         <label><?php _e('Options', TTO_I18N) ?></label>
-                        <label for="checkall" class="checkall">
+                        <label for="checkall-<?php echo $id ?>" class="checkall">
                             <?php _e('Un/select all options') ?>
-                            <input type="checkbox" id="checkall" data-target="#<?php echo $id ?>-options input[type='checkbox']" <?php echo count($opt_details) == count($vals) ? 'checked="checked"' : '' ?> />
+                            <input type="checkbox" id="checkall-<?php echo $id ?>" data-target="#<?php echo $id ?>-options input[type='checkbox']" <?php echo count($opt_details) == count($vals) ? 'checked="checked"' : '' ?> />
                         </label>
                     </h3>
                     <div id="<?php echo $id ?>-options" class="inside tea-inside checkbox">

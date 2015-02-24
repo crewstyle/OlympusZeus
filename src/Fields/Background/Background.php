@@ -14,7 +14,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'type' => 'background',
  *     'title' => 'A new paint :D',
  *     'id' => 'my_background_field_id',
- *     'std' => array(
+ *     'default' => array(
  *         'image' => 'my_default_background_url',
  *         'image_custom' => 'my_custom_default_background_url',
  *         'color' => '#ffffff',
@@ -25,7 +25,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *         )
  *     ),
  *     'description' => "It's tricky :)",
- *     'default' => true
+ *     'backgrounds' => true
  * )
  *
  */
@@ -43,7 +43,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Background
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 class Background extends TeaFields
@@ -71,7 +71,7 @@ class Background extends TeaFields
      * @param array $post Contains all post data
      * @todo get default background values on FIELD abstract class and use of array_merge() to get user's default values
      *
-     * @since 1.4.0
+     * @since 2.0.0
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -89,26 +89,26 @@ class Background extends TeaFields
         $height = isset($content['height']) ? $content['height'] : '60';
         $width = isset($content['width']) ? $content['width'] : '150';
         $description = isset($content['description']) ? $content['description'] : '';
-        $default = isset($content['default']) && (true === $content['default'] || '1' == $content['default']) ? true : false;
+        $backgrounds = isset($content['backgrounds']) && (true === $content['backgrounds'] || '1' == $content['backgrounds']) ? true : false;
         $can_upload = $this->getCanUpload();
         $delete = __('Delete selection', TTO_I18N);
 
         //Default values
-        $std = isset($content['std']) ? $content['std'] : array();
-        $std['image'] = isset($content['std']['image']) ? $content['std']['image'] : '';
-        $std['image_custom'] = isset($content['std']['image_custom']) ? $content['std']['image_custom'] : '';
-        $std['color'] = isset($content['std']['color']) ? $content['std']['color'] : '';
-        $std['position'] = isset($content['std']['position']) ? $content['std']['position'] : array();
-        $std['position']['x'] = isset($content['std']['position']['x']) ? $content['std']['position']['x'] : 'left';
-        $std['position']['y'] = isset($content['std']['position']['y']) ? $content['std']['position']['y'] : 'top';
-        $std['repeat'] = isset($content['std']['repeat']) ? $content['std']['repeat'] : 'repeat';
+        $default = isset($content['default']) ? $content['default'] : array();
+        $default['image'] = isset($content['default']['image']) ? $content['default']['image'] : '';
+        $default['image_custom'] = isset($content['default']['image_custom']) ? $content['default']['image_custom'] : '';
+        $default['color'] = isset($content['default']['color']) ? $content['default']['color'] : '';
+        $default['position'] = isset($content['default']['position']) ? $content['default']['position'] : array();
+        $default['position']['x'] = isset($content['default']['position']['x']) ? $content['default']['position']['x'] : 'left';
+        $default['position']['y'] = isset($content['default']['position']['y']) ? $content['default']['position']['y'] : 'top';
+        $default['repeat'] = isset($content['default']['repeat']) ? $content['default']['repeat'] : 'repeat';
 
         //Get options
         $options = isset($content['options']) ? $content['options'] : array();
 
-        if ($default) {
-            $default = $this->getDefaults('images');
-            $options = array_merge($default, $options);
+        if ($backgrounds) {
+            $backgrounds = $this->getDefaults('images');
+            $options = array_merge($backgrounds, $options);
         }
 
         //Positions
@@ -116,7 +116,7 @@ class Background extends TeaFields
         $url = TTO_URI . '/src/Fields/Background/img/';
 
         //Check selected
-        $val = TeaThemeOptions::get_option($prefix.$id, $std);
+        $val = TeaThemeOptions::get_option($prefix.$id, $default);
 
         //Get template
         include(TTO_PATH.'/Fields/Background/in_pages.tpl.php');

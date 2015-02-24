@@ -22,7 +22,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Fields
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.14
+ * @since 2.0.0
  *
  */
 abstract class TeaFields
@@ -118,7 +118,7 @@ abstract class TeaFields
      * @return array $defaults All defaults data provided by the Tea TO
      * @todo find a better way to social networks
      *
-     * @since 1.5.2.16
+     * @since 2.0.0
      */
     static function getDefaults($return = 'images')
     {
@@ -190,7 +190,6 @@ abstract class TeaFields
                 'vertical_lines.png' => __('Vertical lines', TTO_I18N),
                 'vichy.png'          => __('Vichy', TTO_I18N),
                 'wavecut.png'        => __('Wavecut', TTO_I18N),
-                'custom.png'         => 'CUSTOM',
             );
         }
 
