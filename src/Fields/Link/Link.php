@@ -38,7 +38,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Link
- * @since 2.0.0
+ * @since 2.0.2
  *
  */
 class Link extends TeaFields
@@ -66,7 +66,7 @@ class Link extends TeaFields
      * @param array $post Contains all post data
      * @param string $prefix Contains meta post prefix
      *
-     * @since 2.0.0
+     * @since 2.0.2
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
@@ -102,7 +102,7 @@ class Link extends TeaFields
         else {
             //Check selected
             $vals = get_post_meta($post->ID, $post->post_type . '-' . $id, true);
-            $vals = empty($vals) ? $default : (is_array($vals) ? $vals[0] : array($vals));
+            $vals = empty($vals) ? $default : $vals;
         }
 
         //Get template

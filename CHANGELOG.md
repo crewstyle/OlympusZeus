@@ -1,3 +1,6 @@
+## 2.0.2 (February 24, 2015)
+Merge code_climate branch into master, fix `Link` field bug.
+
 ## 2.0.1 (February 22, 2015)
 Fix small bug with _get_option and _set_option
 
