@@ -97,14 +97,40 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  */
 class TeaThemeOptions
 {
-    //Define protected vars
-    protected $pages = null;
-    protected $customposttypes = null;
-    protected $customtaxonomies = null;
+    /**
+     * @var TeaPages|null
+     */
+    protected $pages;
+
+    /**
+     * @var TeaCustomPostTypes
+     */
+    protected $customposttypes;
+
+    /**
+     * @var TeaCustomTaxonomies
+     */
+    protected $customtaxonomies;
+
+    /**
+     * @var bool
+     */
     protected $canbuildpages = false;
+
+    /**
+     * @var bool
+     */
     protected $canbuildcpts = false;
+
+    /**
+     * @var bool
+     */
     protected $canbuildtaxonomies = false;
-    protected $elasticsearch = null;
+
+    /**
+     * @var TeaElasticsearch
+     */
+    protected $elasticsearch;
 
     /**
      * Get configs.
@@ -329,13 +355,8 @@ class TeaThemeOptions
         //Register custom schedule filter
         add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
 
-        //CPT component
         $this->customposttypes = new TeaCustomPostTypes();
-
-        //Taxonomies component
         $this->customtaxonomies = new TeaCustomTaxonomies();
-
-        //Elasticsearch component
         $this->elasticsearch = new TeaElasticsearch();
 
         //Add custom css to login page

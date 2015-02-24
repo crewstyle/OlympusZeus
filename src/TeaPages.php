@@ -5,16 +5,9 @@ namespace Takeatea\TeaThemeOptions;
 use Takeatea\TeaThemeOptions\Fields\Elasticsearch\Elasticsearch;
 use Takeatea\TeaThemeOptions\Fields\Network\Network;
 
-/**
- * TEA PAGES
- */
-
 if (!defined('TTO_CONTEXT')) {
     die('You are not authorized to directly access to this page');
 }
-
-
-//----------------------------------------------------------------------------//
 
 /**
  * Tea Pages
@@ -29,13 +22,39 @@ if (!defined('TTO_CONTEXT')) {
  */
 class TeaPages
 {
-    //Define protected vars
+    /**
+     * @var array
+     */
     protected $breadcrumb = array();
+
+    /**
+     * @var bool
+     */
     protected $can_upload = false;
+
+    /**
+     * @var string
+     */
     protected $capability = TTO_CAP;
+
+    /**
+     * @var bool
+     */
     protected $hasCapabilities = false;
+
+    /**
+     * @var array
+     */
     protected $categories = array();
+
+    /**
+     * @var string
+     */
     protected $current = '';
+
+    /**
+     * @var int
+     */
     protected $duration = TTO_DURATION;
     protected $errors = array();
     protected $icon_small = '/assets/img/teato-tiny.svg';
@@ -83,9 +102,6 @@ class TeaPages
         if (!$this->hasCapabilities) {
             $this->updateCapabilities(false);
         }
-
-        //Set default duration
-        $this->setDuration();
 
         //Get current page
         $this->current = isset($_REQUEST['page']) ? (string) $_REQUEST['page'] : '';
@@ -169,13 +185,6 @@ class TeaPages
         );
     }
 
-
-    //------------------------------------------------------------------------//
-
-    /**
-     * WORDPRESS USED HOOKS
-     **/
-
     /**
      * Hook building scripts.
      *
@@ -186,7 +195,6 @@ class TeaPages
      */
     public function __assetScripts()
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -218,7 +226,6 @@ class TeaPages
      */
     public function __assetStyles()
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -241,7 +248,6 @@ class TeaPages
      */
     public function __assetUnloaded()
     {
-        //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
@@ -259,13 +265,7 @@ class TeaPages
      */
     public function __bodyStyle($admin_body_class = '')
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return '';
-        }
-
-        //Check if we are in TeaTO context
-        if (!isset($this->pages[$this->current])) {
+        if (!TTO_IS_ADMIN || !isset($this->pages[$this->current])) {
             return '';
         }
 
@@ -307,26 +307,15 @@ class TeaPages
                     'title' => $page['title'],
                     'href' => admin_url('admin.php?page=' . $this->identifier)
                 ));
+            }
 
-                //Build the subpages
-                $wp_admin_bar->add_menu(array(
-                    'parent' => $this->identifier,
-                    'id' => $this->getSlug($page['slug']),
-                    'href' => admin_url('admin.php?page=' . $page['slug']),
-                    'title' => $page['name'],
-                    'meta' => false
-                ));
-            }
-            else {
-                //Build the subpages
-                $wp_admin_bar->add_menu(array(
-                    'parent' => $this->identifier,
-                    'id' => $this->getSlug($page['slug']),
-                    'href' => admin_url('admin.php?page=' . $page['slug']),
-                    'title' => $page['name'],
-                    'meta' => false
-                ));
-            }
+            $wp_admin_bar->add_menu(array(
+                'parent' => $this->identifier,
+                'id' => $this->identifier . $page['slug'],
+                'href' => admin_url('admin.php?page=' . $page['slug']),
+                'title' => $page['name'],
+                'meta' => false
+            ));
         }
     }
 
@@ -505,7 +494,7 @@ class TeaPages
         $this->capability = TTO_CAP;
 
         //Define the slug
-        $slug = isset($configs['slug']) ? $this->getSlug($configs['slug']) : $this->getSlug();
+        $slug = $this->identifier . (isset($configs['slug']) ? $configs['slug'] : '');
         $name = isset($configs['name']) ? $configs['name'] : (isset($configs['title']) ? $configs['title'] : '');
 
         //Update the current page index
@@ -565,21 +554,9 @@ class TeaPages
      */
     protected function buildConnection($contents)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Default variables
         $page = empty($this->current) ? $this->identifier : $this->current;
+        $this->includes['network'] = true;
 
-        //Include class field
-        if (!isset($this->includes['network'])) {
-            //Set the include
-            $this->includes['network'] = true;
-        }
-
-        //Make the magic
         $field = new Network();
         $field->setCurrentPage($page);
         $field->templatePages($contents);
@@ -716,23 +693,9 @@ class TeaPages
      */
     protected function buildElasticsearch($contents)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
+        if ($elasticSearch = $this->registerElasticSearch()) {
+            $elasticSearch->templatePages($contents);
         }
-
-        //Default variables
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Include class field
-        if (!isset($this->includes['elasticsearch'])) {
-            $this->includes['elasticsearch'] = true;
-        }
-
-        //Make the magic
-        $field = new Elasticsearch();
-        $field->setCurrentPage($page);
-        $field->templatePages($contents);
     }
 
     /**
@@ -815,16 +778,9 @@ class TeaPages
      */
     protected function buildType($contents)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $ident = $this->identifier;
-
         //Get all default fields in the Tea T.O. package
         $unauthorized = TeaFields::getDefaults('unauthorized');
-        $specials = in_array($this->current, array($ident, $ident.'_connections', $ident.'_elasticsearch'));
+        $specials = in_array($this->current, array($this->identifier, $this->identifier.'_connections', $this->identifier.'_elasticsearch'));
 
         //Iteration on all array
         foreach ($contents as $key => $content) {
@@ -925,11 +881,8 @@ class TeaPages
         //Check the key for special "NONE" value
         $value = 'NONE' == $value ? '' : $value;
 
-        //Get duration
-        $duration = $this->getDuration();
-
         //Set the option
-        TeaThemeOptions::set_option($key, $value, $duration);
+        TeaThemeOptions::set_option($key, $value, $this->duration);
 
         //Special usecase: category. We can also register information
         //as title, slug, description and children
@@ -976,7 +929,7 @@ class TeaPages
             }
 
             //Set the other parameters: details as children
-            TeaThemeOptions::set_option($key . '_details', $details, $duration);
+            TeaThemeOptions::set_option($key . '_details', $details, $this->duration);
         }
 
         //Special usecase: checkboxes. When it's not checked, no data is sent
@@ -987,7 +940,7 @@ class TeaPages
 
             //Check if it exists (= unchecked) and set the option
             if (!isset($dependancy[$previous])) {
-                TeaThemeOptions::set_option($previous, $value, $duration);
+                TeaThemeOptions::set_option($previous, $value, $this->duration);
             }
         }
     }
@@ -1071,24 +1024,9 @@ class TeaPages
      */
     protected function updateElasticsearch($request)
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
+        if ($elasticSearch = $this->registerElasticSearch()) {
+            $elasticSearch->actionElasticsearch($request);
         }
-
-        //Defaults variables
-        $page = empty($this->current) ? $this->identifier : $this->current;
-
-        //Include class field
-        if (!isset($this->includes['elasticsearch'])) {
-            //Set the include
-            $this->includes['elasticsearch'] = true;
-        }
-
-        //Make the magic
-        $field = new Elasticsearch();
-        $field->setCurrentPage($page);
-        $field->actionElasticsearch($request);
     }
 
     /**
@@ -1206,43 +1144,16 @@ class TeaPages
     }
 
     /**
-     * Returns automatical slug.
-     *
-     * @param string $slug
-     * @return string $identifier.$slug
-     *
-     * @since 1.3.0
+     * @return Elasticsearch|void
      */
-    protected function getSlug($slug = '')
+    protected function registerElasticSearch()
     {
-        //Return value
-        return $this->identifier . $slug;
-    }
+        $page = empty($this->current) ? $this->identifier : $this->current;
+        $this->includes['elasticsearch'] = true;
 
+        $field = new Elasticsearch();
+        $field->setCurrentPage($page);
 
-    /**
-     * Get transient duration.
-     *
-     * @return number $duration Transient duration in secondes
-     *
-     * @since 1.3.0
-     */
-    protected function getDuration()
-    {
-        //Return value
-        return $this->duration;
-    }
-
-    /**
-     * Set transient duration.
-     *
-     * @param integer $duration Transient duration in secondes
-     *
-     * @since 1.4.0
-     */
-    protected function setDuration($duration = TTO_DURATION)
-    {
-        //Define value
-        $this->duration = $duration;
+        return $field;
     }
 }
