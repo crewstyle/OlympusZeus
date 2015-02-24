@@ -26,9 +26,19 @@ if (!defined('TTO_CONTEXT')) {
  */
 class TeaCustomTaxonomies
 {
-    //Define protected vars
+    /**
+     * @var array
+     */
     protected $contents = array();
+
+    /**
+     * @var array
+     */
     protected $taxonomies = array();
+
+    /**
+     * @var array
+     */
     protected $includes = array();
 
     /**
