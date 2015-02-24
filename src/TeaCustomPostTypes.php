@@ -21,7 +21,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Post Types
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.0.0
+ * @since 2.0.3
  *
  */
 class TeaCustomPostTypes
@@ -184,7 +184,7 @@ class TeaCustomPostTypes
      *
      * @uses add_meta_box()
      *
-     * @since 1.4.0
+     * @since 2.0.3
      */
     public function __fieldsCustomPostType()
     {
@@ -198,7 +198,7 @@ class TeaCustomPostTypes
         //Iterate on each cpt
         foreach ($this->contents as $cpt) {
             //Check if cpt exists or if its contents are empty
-            if (!isset($this->customPostTypes[$cpt]['content']) || empty($this->customPostTypes[$cpt]['contents'])) {
+            if (!isset($this->customPostTypes[$cpt]['contents']) || empty($this->customPostTypes[$cpt]['contents'])) {
                 continue;
             }
 

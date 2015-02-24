@@ -1,3 +1,6 @@
+## 2.0.3 (February 24, 2015)
+Fix bug on CTPs check.
+
 ## 2.0.2 (February 24, 2015)
 Merge code_climate branch into master, fix `Link` field bug.
 
