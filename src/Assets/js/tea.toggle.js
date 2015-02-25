@@ -1,46 +1,44 @@
 /* =====================================================
- * tea.range.js v1.0.1
+ * tea.toggle.js v1.0.0
  * https://github.com/TeaThemeOptions/TeaThemeOptions
  * =====================================================
  * ~ Copyright since 2014 ~
  * Take a Tea (http://takeatea.com)
  * Tea Theme Options (http://teato.me)
  * =====================================================
- * This plugin adds range display in all range flieds.
+ * This plugin adds a display comportment with checkbox
+ * and radio buttons.
  * =====================================================
  * Example:
- *      $('input[type="range"]').tea_range();
+ *      $('fieldset.toggle').tea_toggle();
  * ===================================================== */
 
 (function ($){
     "use strict";
 
-    var Tea_range = function ($el){
+    var Tea_toggle = function ($el){
         //vars
         var _tea = this;
         _tea.$el = $el;
 
-        //initialize
-        _tea.init();
-    };
-
-    Tea_range.prototype.$el = null;
-    Tea_range.prototype.$output = null;
-
-    Tea_range.prototype.init = function (){
-        var _tea = this;
-
-        //create output
-        _tea.$output = $(document.createElement('<output></output>'));
-        _tea.$output.insertAfter(_tea.$el);
-
         //bind the change event
-        _tea.$el.on('change', $.proxy(_tea.change, _tea));
+        _tea.$el.find('input').on('change', $.proxy(_tea.change, _tea));
     };
 
-    Tea_range.prototype.change = function (){
+    Tea_toggle.prototype.$el = null;
+
+    Tea_toggle.prototype.change = function (e){
         var _tea = this;
-        _tea.$output.text(_tea.$el.val());
+
+        //check type
+        if (_tea.$el.hasClass('is-off')) {
+            _tea.$el.removeClass('is-off');
+            _tea.$el.addClass('is-on');
+        }
+        else {
+            _tea.$el.removeClass('is-on');
+            _tea.$el.addClass('is-off');
+        }
     };
 
     var methods = {
@@ -50,14 +48,14 @@
             }
 
             return this.each(function (){
-                new Tea_range($(this));
+                new Tea_toggle($(this));
             });
         },
         update: function (){},
         destroy: function (){}
     };
 
-    $.fn.tea_range = function (method){
+    $.fn.tea_toggle = function (method){
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }
@@ -65,7 +63,7 @@
             return methods.init.apply(this, arguments);
         }
         else {
-            $.error('Method ' + method + ' does not exist on tea_range');
+            $.error('Method ' + method + ' does not exist on tea_toggle');
             return false;
         }
     };

@@ -34,4 +34,3 @@
         <?php endif ?>
     </div>
 </div>
-<!-- /Content Wordpress <?php echo $mode ?> <?php echo $id ?> -->

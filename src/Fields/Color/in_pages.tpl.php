@@ -10,4 +10,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content color <?php echo $id ?> -->

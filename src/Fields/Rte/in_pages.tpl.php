@@ -11,4 +11,3 @@
         <?php wp_editor($val, $id, array('textarea_rows' => '10')) ?>
     </div>
 </div>
-<!-- /Content rte <?php echo $id ?> -->

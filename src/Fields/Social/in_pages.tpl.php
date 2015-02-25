@@ -111,4 +111,3 @@
         </div>
     </script>
 <?php endif ?>
-<!-- /Content social <?php echo $id ?> -->

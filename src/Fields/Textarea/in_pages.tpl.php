@@ -10,4 +10,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content textarea <?php echo $id ?> -->

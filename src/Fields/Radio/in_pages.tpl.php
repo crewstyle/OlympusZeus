@@ -36,4 +36,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content radio <?php echo $id ?> -->

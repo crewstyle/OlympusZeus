@@ -1,10 +1,7 @@
 <?php if (!empty($linkstylesheet) || !empty($gfontstyle)): ?>
 <!-- Content font style -->
     <?php echo $linkstylesheet ?>
-    <style>
-        <?php echo $gfontstyle ?>
-    </style>
-<!-- /Content font style -->
+    <style><?php echo $gfontstyle ?></style>
 <?php endif ?>
 
 <!-- Content font <?php echo $id ?> -->
@@ -35,4 +32,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content font <?php echo $id ?> -->

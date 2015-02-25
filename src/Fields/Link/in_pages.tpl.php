@@ -40,4 +40,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content Link <?php echo $id ?> -->

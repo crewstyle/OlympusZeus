@@ -149,6 +149,12 @@
  * Copyright 20xx Take a Tea
  * By Take a Tea <takeatea.com> ;)
  */.tea-inside.textarea{position:relative}.tea-inside.textarea .counter{background-color:#ddd;font-size:10px;left:98%;margin-left:-12px;padding:2px 6px;position:absolute;text-align:center;-webkit-transition:background ease .5s;-moz-transition:background ease .5s;transition:background ease .5s}.tea-inside.textarea .counter.on{background-color:rgba(85,187,58,.3);box-shadow:0 0 0 2px rgba(85,187,58,.3)}/*!
+ * Tea Theme Options v2.1.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Toggle plugin
+ *
+ * Copyright 20xx Take a Tea
+ * By Take a Tea <takeatea.com> ;)
+ */.tea-inside.toggle:after{clear:both;content:"";display:block}.tea-inside.toggle fieldset{background-color:rgba(170,170,170,.1);border:1px solid #ddd;color:#aaa;float:left;height:25px;margin-right:10px;overflow:hidden;position:relative;width:70px;-webkit-transition:all ease .5s;-moz-transition:all ease .5s;transition:all ease .5s}.tea-inside.toggle fieldset.is-on{background-color:rgba(145,208,77,.3);border-color:#91d04d;box-shadow:0 0 0 2px rgba(145,208,77,.3),inset 0 1px 2px rgba(0,0,0,.2)}.tea-inside.toggle fieldset label{-webkit-transition:all ease .5s;-moz-transition:all ease .5s;transition:all ease .5s}.tea-inside.toggle fieldset label.on{color:#91d04d;display:block;left:0;line-height:25px;padding:0 0 0 10px;position:absolute;top:0;width:140px;z-index:1}.tea-inside.toggle fieldset label.off{display:block;line-height:25px;padding:0 10px 0 0;position:absolute;right:0;text-align:right;top:0;width:140px;z-index:1}.tea-inside.toggle fieldset.is-on label.off{right:-70px;z-index:2}.tea-inside.toggle fieldset.is-off label.on{left:-70px;z-index:2}.tea-inside.toggle fieldset label:after{background-color:#fff;content:"";display:block;height:17px;position:absolute;top:4px;width:18px;-webkit-transition:all ease .5s;-moz-transition:all ease .5s;transition:all ease .5s}.tea-inside.toggle fieldset label.on:after{left:80px}.tea-inside.toggle fieldset.is-on label.on:after{left:48px}.tea-inside.toggle fieldset label.off:after{right:80px}.tea-inside.toggle fieldset.is-off label.off:after{right:48px}.tea-inside.toggle fieldset label input{left:-999px;position:absolute}/*!
  * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
  * Upload plugin
  *

@@ -199,4 +199,3 @@
         </div>
     </div>
 </div>
-<!-- /Content maps <?php echo $id ?> -->

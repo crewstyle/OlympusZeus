@@ -1,6 +1,6 @@
 /* ===================================================
  * Tea Theme Options jQuery
- * https://github.com/Takeatea/tea_theme_options
+ * https://github.com/TeaThemeOptions/TeaThemeOptions
  * ===================================================
  * Copyright 2015 Take a Tea (http://takeatea.com)
  * =================================================== */
@@ -35,7 +35,7 @@
         });
 
         //Checkbox & Radio & Image input
-        $('.tea-inside input[type="checkbox"], .tea-inside input[type="radio"]').tea_checkit({
+        $('.tea-inside:not(.toggle) input[type="checkbox"], .tea-inside:not(.toggle) input[type="radio"]').tea_checkit({
             container:'.inside',
             closest:'label',
             selected:'selected'
@@ -154,7 +154,10 @@
         //Textarea input
         $('.tea-inside textarea.textarea').tea_textarea();
 
-        //Background input
+        //Toggle input
+        $('.tea-inside.toggle fieldset').tea_toggle();
+
+        //Upload Background input
         $('.tea-background-container .bg-upload').tea_upload({
             wpid: null,
             media: wp.media,

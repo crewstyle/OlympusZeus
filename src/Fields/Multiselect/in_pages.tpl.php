@@ -29,4 +29,3 @@
         </p>
     </div>
 </div>
-<!-- /Content multiselect <?php echo $id ?> -->

@@ -9,4 +9,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content Date <?php echo $id ?> -->

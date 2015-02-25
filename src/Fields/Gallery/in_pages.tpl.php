@@ -66,4 +66,3 @@
 
     </div>
 </div>
-<!-- /Content upload <?php echo $id ?> -->

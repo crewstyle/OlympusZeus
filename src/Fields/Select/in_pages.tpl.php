@@ -25,4 +25,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content select <?php echo $id ?> -->

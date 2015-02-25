@@ -1,6 +1,6 @@
 /* =====================================================
  * tea.upload.js v1.1.0
- * https://github.com/Takeatea/tea_theme_options
+ * https://github.com/TeaThemeOptions/TeaThemeOptions
  * =====================================================
  * ~ Copyright since 2014 ~
  * Take a Tea (http://takeatea.com)

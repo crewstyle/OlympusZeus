@@ -14,4 +14,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content <?php echo $type ?> <?php echo $id ?> -->

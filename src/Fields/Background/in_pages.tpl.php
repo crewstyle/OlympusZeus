@@ -115,6 +115,3 @@
         </div>
     </div>
 </div>
-<!-- /Content background <?php echo $id ?> -->
-
-

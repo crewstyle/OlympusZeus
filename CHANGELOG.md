@@ -1,3 +1,9 @@
+## 2.1.0 (February 25, 2015)
+There's a new field in town
+
+- **New:**
+  - add new `toggle` field with only 1 or 0 values stored in DB
+
 ## 2.0.3 (February 24, 2015)
 Fix bug on CTPs check.
 

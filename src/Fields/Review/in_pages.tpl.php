@@ -79,4 +79,3 @@
         </div>
     </div>
 </div>
-<!-- /Content review <?php echo $id ?> -->

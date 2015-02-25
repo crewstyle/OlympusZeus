@@ -252,4 +252,3 @@
         </div>
     </div>
 </div>
-<!-- /Content elasticsearch -->

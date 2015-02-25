@@ -38,4 +38,3 @@
         <p><?php echo $description ?></p>
     </div>
 </div>
-<!-- /Content checkbox <?php echo $id ?> -->
