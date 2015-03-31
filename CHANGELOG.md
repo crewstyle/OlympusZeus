@@ -1,3 +1,7 @@
+## 2.2.0 (April 01, 2015)
+Update the `Gallery` field with some new functions.
+Naaaa, that was a joke! I did nothing in fact.
+
 ## 2.1.0 (February 25, 2015)
 There's a new field in town
 

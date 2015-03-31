@@ -50,7 +50,15 @@
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $item['id'] ?>][id]" value="<?php echo $item['id'] ?>" />
 
                             <div class="gallery-editor">
-                                <textarea id="<?php echo $id ?>_<?php echo $item['id'] ?>_content" rows="4" class="wp-editor-area" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]"><?php echo isset($item['content']) ? $item['content'] : '' ?></textarea>
+                                <div class="inside tea-inside">
+                                    <input type="text" name="<?php echo $id ?>[<?php echo $item['id'] ?>][text]" id="<?php echo $id ?>_<?php echo $item['id'] ?>_text" value="<?php echo isset($item['text']) ? $item['text'] : '' ?>" size="30" />
+                                </div>
+
+                                <?php if ($content): ?>
+                                    <hr/>
+
+                                    <textarea id="<?php echo $id ?>_<?php echo $item['id'] ?>_content" rows="4" class="wp-editor-area" name="<?php echo $id ?>[<?php echo $item['id'] ?>][content]"><?php echo isset($item['content']) ? $item['content'] : '' ?></textarea>
+                                <?php endif ?>
                             </div>
                         </div>
                     <?php endforeach ?>
