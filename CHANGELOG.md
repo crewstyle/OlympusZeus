@@ -1,3 +1,6 @@
+## 2.3.2 (June 24, 2015)
+Backend design updated.
+
 ## 2.3.1 (June 24, 2015)
 New tag with an updated composer.json
 
