@@ -1,3 +1,6 @@
+## 2.3.1 (June 24, 2015)
+New tag with an updated composer.json
+
 ## 2.3.0 (June 24, 2015)
 Add some htmlentites in text inputs.
 Fix some design bugs from the new WP version.

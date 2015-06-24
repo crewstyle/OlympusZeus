@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 2.3.0
+ * Version: 2.3.1
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.0');
+defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.1');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
