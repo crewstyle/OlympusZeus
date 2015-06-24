@@ -17,7 +17,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 1.5.2.19
+ * @since 2.3.0
  *
  */
 class TeaPages
@@ -135,14 +135,14 @@ class TeaPages
         $isdismissed = TeaThemeOptions::getConfigs('dismiss');
 
         //Check connection
-        if (empty($isactive) && empty($isdismissed) && $options['notifs']) {
+        if (empty($isactive) && empty($isdismissed) && $options['notifications']) {
             // Show connect notice on dashboard and plugins pages
             add_action('load-index.php', array(&$this, '__getNotices'));
             add_action('load-plugins.php', array(&$this, '__getNotices'));
         }
 
         //Build Dashboard contents
-        $this->buildDefaults($options['connect'], $options['elastic']);
+        $this->buildDefaults($options['social'], $options['elasticsearch']);
 
         //Make some actions
         if (isset($_REQUEST['action']) && 'tea_action' == $_REQUEST['action']) {
@@ -183,28 +183,28 @@ class TeaPages
         wp_admin_css_color(
             'teatocss-earth',
             __('Tea T.O. ~ Earth'),
-            TTO_URI . '/assets/css/teato.admin.earth.css',
+            TTO_URI.'/assets/css/teato.admin.earth.css',
             array('#222', '#303231', '#55bb3a', '#91d04d')
         );
         //Add custom CSS colors ~ Ocean
         wp_admin_css_color(
             'teatocss-ocean',
             __('Tea T.O. ~ Ocean'),
-            TTO_URI . '/assets/css/teato.admin.ocean.css',
+            TTO_URI.'/assets/css/teato.admin.ocean.css',
             array('#222', '#303231', '#3a80bb', '#4d9dd0')
         );
         //Add custom CSS colors ~ Vulcan
         wp_admin_css_color(
             'teatocss-vulcan',
             __('Tea T.O. ~ Vulcan'),
-            TTO_URI . '/assets/css/teato.admin.vulcan.css',
+            TTO_URI.'/assets/css/teato.admin.vulcan.css',
             array('#222', '#303231', '#bb3a3a', '#d04d4d')
         );
         //Add custom CSS colors ~ Wind
         wp_admin_css_color(
             'teatocss-wind',
             __('Tea T.O. ~ Wind'),
-            TTO_URI . '/assets/css/teato.admin.wind.css',
+            TTO_URI.'/assets/css/teato.admin.wind.css',
             array('#222', '#303231', '#69d2e7', '#a7dbd8')
         );
     }
@@ -238,7 +238,7 @@ class TeaPages
         }
 
         //Enqueue all minified scripts
-        wp_enqueue_script('tea-to', TTO_URI . '/assets/js/teato.min.js', $jq);
+        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq);
     }
 
     /**
@@ -260,7 +260,7 @@ class TeaPages
         wp_enqueue_style('wp-color-picker');
 
         //Enqueue all minified styles
-        wp_enqueue_style('tea-to', TTO_URI . '/assets/css/teato.min.css');
+        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css');
     }
 
     /**
@@ -315,14 +315,14 @@ class TeaPages
                 $wp_admin_bar->add_menu(array(
                     'id' => $this->identifier,
                     'title' => $page['title'],
-                    'href' => admin_url('admin.php?page=' . $this->identifier)
+                    'href' => admin_url('admin.php?page='.$this->identifier)
                 ));
             }
 
             $wp_admin_bar->add_menu(array(
                 'parent' => $this->identifier,
-                'id' => $this->identifier . $page['slug'],
-                'href' => admin_url('admin.php?page=' . $page['slug']),
+                'id' => $this->identifier.$page['slug'],
+                'href' => admin_url('admin.php?page='.$page['slug']),
                 'title' => $page['name'],
                 'meta' => false
             ));
@@ -359,11 +359,11 @@ class TeaPages
         $tocheck = array($this->identifier.'_connections', $this->identifier.'_elasticsearch');
 
         //Menu icon
-        $menuicon = TTO_URI . $this->icon_small;
+        $menuicon = TTO_URI.$this->icon_small;
 
         //Set icon
-        $this->icon_small = TTO_PATH . '/..' . $this->icon_small;
-        $this->icon_big = TTO_PATH . '/..' . $this->icon_big;
+        $this->icon_small = TTO_PATH.'/..'.$this->icon_small;
+        $this->icon_big = TTO_PATH.'/..'.$this->icon_big;
 
         //Add submenu pages
         foreach ($this->pages as $page) {
@@ -490,7 +490,7 @@ class TeaPages
         $this->capability = TTO_CAP;
 
         //Define the slug
-        $slug = $this->identifier . (isset($configs['slug']) ? $configs['slug'] : '');
+        $slug = $this->identifier.(isset($configs['slug']) ? $configs['slug'] : '');
         $name = isset($configs['name']) ? $configs['name'] : (isset($configs['title']) ? $configs['title'] : '');
 
         //Update the current page index
@@ -582,12 +582,12 @@ class TeaPages
         $contents = $this->pages[$current]['contents'];
 
         //Build contents relatively to the type (special cases: Connections)
-        if ($this->identifier . '_connections' == $current) {
+        if ($this->identifier.'_connections' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildConnection($contents);
         }
         //Build contents relatively to the type (special cases: Elasticsearh)
-        elseif ($this->identifier . '_elasticsearch' == $current) {
+        elseif ($this->identifier.'_elasticsearch' == $current) {
             $contents = 1 == count($contents) ? $contents[0] : $contents;
             $this->buildElasticsearch($contents);
         }
@@ -880,7 +880,7 @@ class TeaPages
             }
 
             //Set the other parameters: details as children
-            TeaThemeOptions::set_option($key . '_details', $details, $this->duration);
+            TeaThemeOptions::set_option($key.'_details', $details, $this->duration);
         }
         //Special usecase: checkboxes. When it's not checked, no data is sent
         //through the $_POST array
@@ -1073,9 +1073,9 @@ class TeaPages
         //Check if files are attempting to be uploaded
         if (!empty($files)) {
             //Get required files
-            require_once(ABSPATH . 'wp-admin/includes/image.php');
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
-            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            require_once(ABSPATH.'wp-admin/includes/image.php');
+            require_once(ABSPATH.'wp-admin/includes/file.php');
+            require_once(ABSPATH.'wp-admin/includes/media.php');
 
             //Set all URL in transient
             foreach ($files as $k => $v) {

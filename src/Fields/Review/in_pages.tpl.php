@@ -69,7 +69,7 @@
                                     'textarea_name' => $id . '[' . $author . '][rate]'
                                 )) ?>
                             <?php else: ?>
-                                <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][rate]" value="<?php echo esc_html($rate) ?>" />
+                                <input type="hidden" name="<?php echo $id ?>[<?php echo $author ?>][rate]" value="<?php echo htmlentities($rate) ?>" />
                                 <div><?php echo stripcslashes($rate) ?></div>
                             <?php endif ?>
                         </div>

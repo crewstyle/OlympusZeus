@@ -12,7 +12,7 @@
         </p>
         <p>
             <label for="<?php echo $id ?>-label"><?php _e('Title', TTO_I18N) ?></label>
-            <input type="text" name="<?php echo $id ?>[label]" id="<?php echo $id ?>-label" value="<?php echo $vals['label'] ?>" />
+            <input type="text" name="<?php echo $id ?>[label]" id="<?php echo $id ?>-label" value="<?php echo htmlentities($vals['label']) ?>" />
         </p>
         <p>
             <label for="<?php echo $id ?>-target"><?php _e('Target', TTO_I18N) ?></label>

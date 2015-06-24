@@ -49,7 +49,7 @@ class TeaElasticsearch
     public function __construct($hook = true)
     {
         //Get custom data
-        $ctn = TeaThemeOptions::getConfigs('elastic');
+        $ctn = TeaThemeOptions::getConfigs('elasticsearch');
         $this->setConfig($ctn);
 
         //Check index

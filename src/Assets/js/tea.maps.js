@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.maps.js v1.0.0
+ * tea.maps.js v1.0.1
  * https://github.com/TeaThemeOptions/TeaThemeOptions
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -143,7 +143,7 @@
 
         //build marker
         var teaicon = L.icon({
-            iconUrl: _datum.marker,
+            iconUrl: _datum.marker || 'http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/marker-icon.png',
             iconSize: [60, 83]
         });
 

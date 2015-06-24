@@ -1,3 +1,7 @@
+## 2.3.0 (June 24, 2015)
+Add some htmlentites in text inputs.
+Fix some design bugs from the new WP version.
+
 ## 2.2.0 (April 01, 2015)
 Update the `Gallery` field with some new functions.
 Naaaa, that was a joke! I did nothing in fact.

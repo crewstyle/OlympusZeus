@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 2.2.0
+ * Version: 2.3.0
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '2.2.0');
+defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.0');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -87,7 +87,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.0.0
+ * @since 2.3.0
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -326,7 +326,7 @@ class TeaThemeOptions
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 1.5.2.8
+     * @since 2.3.0
      */
     public function __construct($identifier = 'tea_theme_options', $options = array())
     {
@@ -338,9 +338,9 @@ class TeaThemeOptions
 
             //Build options
             $opts = array(
-                'connect'   => isset($options['connect'])   ? $options['connect']   : true,
-                'elastic'   => isset($options['elastic'])   ? $options['elastic']   : true,
-                'notifs'    => isset($options['notifs'])    ? $options['notifs']    : true,
+                'social' => isset($options['social']) ? $options['social'] : true,
+                'elasticsearch' => isset($options['elasticsearch']) ? $options['elasticsearch'] : true,
+                'notifications' => isset($options['notifications']) ? $options['notifications'] : true,
             );
 
             //Page component
@@ -348,12 +348,12 @@ class TeaThemeOptions
         }
 
         //Define custom schedule
-        if (!wp_next_scheduled('tea_task_schedule')) {
-            wp_schedule_event(time(), 'hourly', 'tea_task_schedule');
+        if (!wp_next_scheduled('tea_to_schedule')) {
+            wp_schedule_event(time(), 'hourly', 'tea_to_schedule');
         }
 
         //Register custom schedule filter
-        add_filter('tea_task_schedule', array(&$this, '__cronSchedules'));
+        add_filter('tea_to_schedule', array(&$this, '__cronSchedules'));
 
         $this->customposttypes = new TeaCustomPostTypes();
         $this->customtaxonomies = new TeaCustomTaxonomies();

@@ -51,7 +51,7 @@
 
                             <div class="gallery-editor">
                                 <div class="inside tea-inside">
-                                    <input type="text" name="<?php echo $id ?>[<?php echo $item['id'] ?>][text]" id="<?php echo $id ?>_<?php echo $item['id'] ?>_text" value="<?php echo isset($item['text']) ? $item['text'] : '' ?>" size="30" />
+                                    <input type="text" name="<?php echo $id ?>[<?php echo $item['id'] ?>][text]" id="<?php echo $id ?>_<?php echo $item['id'] ?>_text" value="<?php echo isset($item['text']) ? htmlentities($item['text']) : '' ?>" size="30" />
                                 </div>
 
                                 <?php if ($content): ?>

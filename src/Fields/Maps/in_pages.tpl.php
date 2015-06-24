@@ -30,7 +30,7 @@
                     <!-- Address -->
                     <h3><label for="<?php echo $id ?>-address"><?php _e('Address', TTO_I18N) ?></label></h3>
                     <div class="inside tea-inside text">
-                        <input type="text" name="<?php echo $id ?>[address]" id="<?php echo $id ?>-address" value="<?php echo stripcslashes($vals['address']) ?>" size="30" />
+                        <input type="text" name="<?php echo $id ?>[address]" id="<?php echo $id ?>-address" value="<?php echo htmlentities($vals['address']) ?>" size="30" />
 
                         <p><?php _e('Define your default address in which the maps will be centered.', TTO_I18N) ?></p>
                     </div>
@@ -46,7 +46,7 @@
                                     <figure>
                                         <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-id" value="<?php echo $vals['marker']['id'] ?>" />
                                         <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-url" value="<?php echo $vals['marker']['url'] ?>" />
-                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-name" value="<?php echo $vals['marker']['name'] ?>" />
+                                        <input type="hidden" name="<?php echo $id ?>[marker]" id="<?php echo $id ?>-marker-name" value="<?php echo htmlentities($vals['marker']['name']) ?>" />
                                         <img src="<?php echo $vals['marker']['url'] ?>" alt="" />
                                         <a href="#" class="del_image" data-target="<?php echo $id ?>-marker">&times;</i></a>
                                     </figure>

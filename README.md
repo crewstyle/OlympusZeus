@@ -74,12 +74,6 @@ You can help us maintaining the Tea T.O. with some tips. It will be so gratefull
 
 ## Authors and Copyright
 
-**Take a Tea**
-
-+ http://takeatea.com
-+ http://twitter.com/takeatea
-+ http://github.com/takeatea
-
 **Achraf Chouk**
 
 + http://www.linkedin.com/in/achrafchouk
@@ -91,6 +85,12 @@ You can help us maintaining the Tea T.O. with some tips. It will be so gratefull
 + https://www.linkedin.com/in/coureauxavier
 + http://twitter.com/xavismeh
 + http://github.com/xavismeh
+
+**Take a Tea**
+
++ http://takeatea.com
++ http://twitter.com/takeatea
++ http://github.com/takeatea
 
 Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")
 Brewed by Take a tea ;)

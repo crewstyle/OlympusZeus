@@ -28,7 +28,7 @@
                         <li class="movendrop" data-id="<?php echo $id ?>__<?php echo $item['id'] ?>">
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][url]" value="<?php echo $url ?>" />
                             <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][id]" value="<?php echo $ids ?>" />
-                            <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][name]" value="<?php echo $name ?>" />
+                            <input type="hidden" name="<?php echo $id ?>[<?php echo $ids ?>][name]" value="<?php echo htmlentities($name) ?>" />
 
                             <?php if ('video' == $library): ?>
                                 <video src="<?php echo $url ?>" controls></video>
@@ -64,7 +64,7 @@
                     <figure>
                         <input type="hidden" name="<?php echo $id ?>[url]" value="<?php echo $url ?>" />
                         <input type="hidden" name="<?php echo $id ?>[id]" value="<?php echo $ids ?>" />
-                        <input type="hidden" name="<?php echo $id ?>[name]" value="<?php echo $name ?>" />
+                        <input type="hidden" name="<?php echo $id ?>[name]" value="<?php echo htmlentities($name) ?>" />
 
                         <?php if ('image' == $library): ?>
                             <img src="<?php echo $url ?>" alt="" class="image" />
