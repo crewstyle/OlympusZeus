@@ -21,6 +21,7 @@
             <ul>
                 <li><a href="<?php echo $capurl ?>"><b><?php _e('Update capabilities', TTO_I18N) ?></b></a></li>
                 <li><a href="<?php echo $cpturl ?>"><b><?php _e('Update custom post types', TTO_I18N) ?></b></a></li>
+                <li><a href="<?php echo $rwturl ?>"><b><?php _e('Update rules', TTO_I18N) ?></b></a></li>
             </ul>
         <?php endif ?>
         <hr/>

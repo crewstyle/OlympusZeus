@@ -21,7 +21,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Custom Post Types
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.0.3
+ * @since 2.3.3
  *
  */
 class TeaCustomPostTypes
@@ -68,7 +68,7 @@ class TeaCustomPostTypes
      * @uses flush_rewrite_rules()
      * @uses register_post_type()
      *
-     * @since 1.5.2.3
+     * @since 2.3.3
      */
     public function __buildMenuCustomPostType()
     {
@@ -173,9 +173,6 @@ class TeaCustomPostTypes
 
             //Save CPT custom fields
             add_action('save_post', array(&$this, '__saveCustomPostType'));
-
-            //Flush all rewrite rules
-            flush_rewrite_rules();
         }
     }
 

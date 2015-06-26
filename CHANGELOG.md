@@ -1,3 +1,14 @@
+## 2.3.3 (June 24, 2015)
+Add lots of backend optimization.
+
+- **Fix**
+  - override the wp_enqueue_media function from WordPress by a new wp_enqueue_media_tto function
+  - remove all flush_rewrite_rules functions
+
+- **New**
+  - add a new footer link for flush rewrite rules once
+
+
 ## 2.3.2 (June 24, 2015)
 Backend design updated.
 
