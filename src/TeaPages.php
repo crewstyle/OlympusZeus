@@ -17,7 +17,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.3.3
+ * @since 2.3.4
  *
  */
 class TeaPages
@@ -1135,23 +1135,12 @@ class TeaPages
         return $field;
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Update rewrite rules options.
      *
      * @param array $args Define if the TTO has to make a redirect
      *
-     * @since 2.3.3
+     * @since 2.3.4
      */
     protected function wp_enqueue_media_tto($args = array())
     {
@@ -1161,7 +1150,7 @@ class TeaPages
         }
 
         //Enqueue me just once per page, please.
-        if (did_action('wp_enqueue_media_tto')) {
+        if (did_action('wp_enqueue_media_tto') || did_action('wp_enqueue_media')) {
             return;
         }
 

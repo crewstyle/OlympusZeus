@@ -1,4 +1,7 @@
-## 2.3.3 (June 24, 2015)
+## 2.3.4 (June 26, 2015)
+Fix enqueue media action.
+
+## 2.3.3 (June 26, 2015)
 Add lots of backend optimization.
 
 - **Fix**
