@@ -15,6 +15,7 @@ use Takeatea\TeaThemeOptions\TeaFields;
  *     'title' => 'Never gonna give you up!',
  *     'id' => 'my_link_field_id',
  *     'description' => 'Never gonna give you up!',
+ *     'expandable' => false,
  *     'default' => array(
  *         'url' => "http://www.youtube.com/watch?v=BROWqjuTM0g",
  *         'label' => 'Never gonna get you down!', //optional, display link instead
@@ -84,6 +85,7 @@ class Link extends TeaFields
         $id = $content['id'];
         $title = isset($content['title']) ? $content['title'] : __('Tea Link', TTO_I18N);
         $description = isset($content['description']) ? $content['description'] : '';
+        $expandable = isset($content['expandable']) && is_bool($content['expandable']) ? $content['expandable'] : false;
 
         //Default values
         $default = isset($content['default']) ? $content['default'] : array();

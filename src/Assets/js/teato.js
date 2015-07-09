@@ -128,7 +128,7 @@
         });
 
         //Link input
-        $('.tea-inside.link .block-link input').tea_link();
+        $('.tea-inside.link').tea_link();
 
         //Maps input
         $('.tea-maps-container').tea_maps();

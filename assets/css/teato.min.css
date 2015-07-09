@@ -100,7 +100,7 @@
  *
  * Copyright 20xx Take a Tea
  * By Take a Tea <takeatea.com> ;)
- */.tea-inside.link label{display:block;float:left;line-height:28px;padding:0 10px 0 0;text-align:right;width:100px}.tea-inside.link input,.tea-inside.link select{width:400px}.tea-inside.link .rel input{width:150px}.tea-inside.link small{display:block;font-style:italic;margin-left:110px}/*!
+ */.tea-inside.link .link-container{position:relative}.tea-inside.link .link-container.link-expand{border-top:1px solid #f1f1f1;margin:20px 0;padding:20px 0 0}.tea-inside.link .link-container.link-expand:first-child{border-top:none;margin-top:0;padding-top:0}.tea-inside.link .del_link{background-color:#fff;color:#dd3d36;display:block;font-size:18px;font-weight:700;height:20px;line-height:20px;padding:4px 8px;position:absolute;right:0;text-align:center;text-decoration:none;top:0;z-index:4}.tea-inside.link .del_link:hover{color:red}.tea-inside.link label{display:block;float:left;line-height:28px;padding:0 10px 0 0;text-align:right;width:100px}.tea-inside.link input,.tea-inside.link select{width:400px}.tea-inside.link .rel input{width:150px}.tea-inside.link small{display:block;font-style:italic;margin-left:110px}/*!
  * Tea Theme Options v1.5.1-6 - "Sogeking no shima deeeeeee - One Piece"
  * Maps plugin
  *

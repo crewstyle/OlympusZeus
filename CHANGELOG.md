@@ -1,3 +1,6 @@
+## 2.3.5 (July 08, 2015)
+Make `Link` field expandable.
+
 ## 2.3.4 (June 26, 2015)
 Fix enqueue media action.
 
