@@ -17,7 +17,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.3.4
+ * @since 2.3.6
  *
  */
 class TeaPages
@@ -214,60 +214,6 @@ class TeaPages
     }
 
     /**
-     * Hook building scripts.
-     *
-     * @uses wp_enqueue_media_tto()
-     * @uses wp_enqueue_script()
-     *
-     * @since 1.5.0-1
-     */
-    public function __assetScripts()
-    {
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get jQuery
-        $jq = array('jquery');
-
-        //Enqueue media and colorpicker scripts
-        //if (function_exists('wp_enqueue_media_tto')) {
-            $this->wp_enqueue_media_tto();
-            wp_enqueue_script('wp-color-picker');
-            wp_enqueue_script('accordion');
-        //}
-        //else {
-            //wp_enqueue_script('media-upload');
-            //wp_enqueue_script('farbtastic');
-        //}
-
-        //Enqueue all minified scripts
-        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq);
-    }
-
-    /**
-     * Hook building styles.
-     *
-     * @uses wp_enqueue_style()
-     *
-     * @since 1.4.0
-     */
-    public function __assetStyles()
-    {
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Enqueue usefull styles
-        wp_enqueue_style('media-views');
-        wp_enqueue_style('farbtastic');
-        wp_enqueue_style('wp-color-picker');
-
-        //Enqueue all minified styles
-        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css');
-    }
-
-    /**
      * Hook unload scripts.
      *
      * @uses wp_deregister_script()
@@ -340,7 +286,7 @@ class TeaPages
      * @uses add_menu_page()
      * @uses add_submenu_page()
      *
-     * @since 1.5.2.19
+     * @since 2.3.6
      */
     public function __buildMenuPage()
     {
@@ -420,8 +366,6 @@ class TeaPages
         }
 
         // Load assets action hook
-        add_action('admin_print_scripts', array(&$this, '__assetScripts'));
-        add_action('admin_print_styles', array(&$this, '__assetStyles'));
         add_filter('admin_body_class', array(&$this, '__bodyStyle'));
     }
 
@@ -517,7 +461,7 @@ class TeaPages
      *
      * @uses add_action()
      *
-     * @since 1.4.0
+     * @since 2.3.6
      */
     public function buildPages()
     {
@@ -539,9 +483,6 @@ class TeaPages
 
         //Register admin bar action hook
         add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
-
-        //Register admin page action hook
-        add_action('admin_menu', array(&$this, '__buildMenuPage'), 999);
     }
 
     /**
@@ -1142,7 +1083,7 @@ class TeaPages
      *
      * @since 2.3.4
      */
-    protected function wp_enqueue_media_tto($args = array())
+    static function wp_enqueue_media_tto($args = array())
     {
         //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {

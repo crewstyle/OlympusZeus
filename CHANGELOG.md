@@ -1,3 +1,6 @@
+## 2.3.6 (July 17, 2015)
+Assets are now accessibles even if no pages are defined.
+
 ## 2.3.5 (July 08, 2015)
 Make `Link` field expandable.
 

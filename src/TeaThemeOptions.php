@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 2.3.5
+ * Version: 2.3.6
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.5');
+defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.6');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -87,7 +87,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.3.0
+ * @since 2.3.6
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -326,7 +326,7 @@ class TeaThemeOptions
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 2.3.0
+     * @since 2.3.6
      */
     public function __construct($identifier = 'tea_theme_options', $options = array())
     {
@@ -345,6 +345,9 @@ class TeaThemeOptions
 
             //Page component
             $this->pages = new TeaPages($identifier, $opts);
+
+            //Register admin page action hook
+            add_action('admin_menu', array(&$this, '__buildAssets'), 999);
         }
 
         //Define custom schedule
@@ -361,6 +364,71 @@ class TeaThemeOptions
 
         //Add custom css to login page
         add_action('login_head', array(&$this, '__loginPage'));
+    }
+
+    /**
+     * Hook building assets.
+     *
+     * @since 2.3.6
+     */
+    public function __buildAssets()
+    {
+        add_action('admin_print_scripts', array(&$this, '__buildScripts'));
+        add_action('admin_print_styles', array(&$this, '__buildStyles'));
+    }
+
+    /**
+     * Hook building scripts.
+     *
+     * @uses wp_enqueue_media_tto()
+     * @uses wp_enqueue_script()
+     *
+     * @since 2.3.6
+     */
+    public function __buildScripts()
+    {
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Get jQuery
+        $jq = array('jquery');
+
+        //Enqueue media and colorpicker scripts
+        //if (function_exists('wp_enqueue_media_tto')) {
+            TeaPages::wp_enqueue_media_tto();
+            wp_enqueue_script('wp-color-picker');
+            wp_enqueue_script('accordion');
+        //}
+        //else {
+            //wp_enqueue_script('media-upload');
+            //wp_enqueue_script('farbtastic');
+        //}
+
+        //Enqueue all minified scripts
+        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq);
+    }
+
+    /**
+     * Hook building styles.
+     *
+     * @uses wp_enqueue_style()
+     *
+     * @since 2.3.6
+     */
+    public function __buildStyles()
+    {
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Enqueue usefull styles
+        wp_enqueue_style('media-views');
+        wp_enqueue_style('farbtastic');
+        wp_enqueue_style('wp-color-picker');
+
+        //Enqueue all minified styles
+        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css');
     }
 
     /**
