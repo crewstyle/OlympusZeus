@@ -6,7 +6,7 @@
 
     <div class="inside tea-inside link" data-id="<?php echo $id ?>">
         <?php
-            $links = !$expandable ? array($vals) : (!is_array($vals[0]) ? array($vals) : $vals);
+            $links = !$expandable ? array($vals) : $vals;
             $num = 0;
 
             foreach ($links as $k => $v):

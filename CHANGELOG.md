@@ -1,3 +1,6 @@
+## 2.3.7 (July 17, 2015)
+Fix bug on <Link> field.
+
 ## 2.3.6 (July 17, 2015)
 Assets are now accessibles even if no pages are defined.
 
