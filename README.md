@@ -76,21 +76,11 @@ You can help us maintaining the Tea T.O. with some tips. It will be so gratefull
 
 **Achraf Chouk**
 
-+ http://www.linkedin.com/in/achrafchouk
++ http://fr.linkedin.com/in/achrafchouk/
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
-**Xavier Coureau**
+Please, read [LICENSE](https://github.com/TeaThemeOptions/TeaThemeOptions/blob/master/LICENSE "LICENSE") for more details.
 
-+ https://www.linkedin.com/in/coureauxavier
-+ http://twitter.com/xavismeh
-+ http://github.com/xavismeh
-
-**Take a Tea**
-
-+ http://takeatea.com
-+ http://twitter.com/takeatea
-+ http://github.com/takeatea
-
-Copyright 20xx [Take a tea](http://takeatea.com "Take a tea")
-Brewed by Take a tea ;)
+Copyright 20xx [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk").  
+Brewed by [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk"), served by [Take a tea](http://www.takeatea.com "Take a tea") ;)
