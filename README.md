@@ -2,7 +2,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)
 [![Code Climate](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions/badges/gpa.svg)](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions) [![Test Coverage](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions/badges/coverage.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 
 
@@ -42,7 +41,7 @@ That's all to begin working with **Tea T.O.**
 
 ## Oh, if you want to contribute... :)
 
-### GruntJS
+### GruntJS [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 Before begin working with the Tea T.O., you will have to install some usefull tools.
 The first one is [GruntJS](http://gruntjs.com/) with the following command lines:
