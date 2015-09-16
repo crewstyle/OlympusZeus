@@ -1,5 +1,5 @@
 /* =====================================================
- * tea.maps.js v1.0.1
+ * tea.maps.js v1.0.2
  * https://github.com/TeaThemeOptions/TeaThemeOptions
  * =====================================================
  * ~ Copyright since 2014 ~
@@ -119,7 +119,6 @@
     Tea_maps.prototype.refreshMap = function (){
         var _tea = this,
             _id = _tea.$el.attr('data-id'),
-            _url = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
             _att = 'brewed by <a href="http://www.takeatea.com">Take a tea</a> ~ &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
 
         //hide reload button
@@ -152,14 +151,15 @@
 
         //build layers
         var tealayers = {
-            "Grayscale": _tea.L.tileLayer(_url, {
-                id: 'examples.map-20v6611k',
+            "Grayscale": _tea.L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                id: 'tto.map-grayscale',
                 attribution: _att
             }),
-            "Streets": _tea.L.tileLayer(_url, {
-                id: 'examples.map-i875mjb7',
-                attribution: _att
-            })
+            "WaterColor": _tea.L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
+                id: 'tto.map-watercolor',
+                attribution: _att,
+                ext: 'png'
+            }),
         };
 
         //add layers
@@ -167,9 +167,9 @@
             _tea.L.control.layers(tealayers).addTo(_tea.map);
         }
         else {
-            _tea.L.tileLayer(_url, {
-                attribution: _att,
-                id: 'examples.map-20v6611k'
+            _tea.L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                id: 'tto.map-grayscale',
+                attribution: _att
             }).addTo(_tea.map);
         }
 

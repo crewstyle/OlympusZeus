@@ -8,7 +8,7 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 2.3.7
+ * Version: 2.3.8
  * Snippet URI: https://github.com/Takeatea/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -55,7 +55,7 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The current version
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.7');
+defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.8');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -87,7 +87,7 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.3.6
+ * @since 2.3.8
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -131,188 +131,6 @@ class TeaThemeOptions
      * @var TeaElasticsearch
      */
     protected $elasticsearch;
-
-    /**
-     * Get configs.
-     *
-     * @param string $option Define the option asked
-     * @return array $configs Define configurations
-     *
-     * @since 1.4.3.3
-     */
-    public static function getConfigs($option = 'capabilities')
-    {
-        //Get datas from DB
-        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
-
-        //Check if data is available
-        $return = isset($configs[$option]) ? $configs[$option] : array();
-        $return = !is_array($return) ? array($return) : $return;
-
-        //Return value
-        return $return;
-    }
-
-    /**
-     * Set configs.
-     *
-     * @param string $option Define the option to update
-     * @param array|integer|string $value Define the value
-     *
-     * @since 1.4.3.3
-     */
-    public static function setConfigs($option = 'capabilities', $value = 'manage_tea_theme_options')
-    {
-        //Get datas from DB
-        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
-
-        //Define the data
-        $configs[$option] = $value;
-
-        //Update DB
-        TeaThemeOptions::set_option('tea_to_configs', $configs);
-    }
-
-    /**
-     * Return the access token got from teato.me
-     *
-     * @param integer $user_id The user ID stored in DB for the connection
-     * @return array $array Contains all data for the connection
-     *
-     * @since 1.5.0
-     */
-    public static function access_token($user_id = 0)
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
-            return array();
-        }
-
-        //Check user ID
-        if ($user_id) {
-            //Get datas
-            $tokens = TeaThemeOptions::getConfigs('tokens');
-
-            //Check integrity
-            if (empty($tokens)) {
-                return array();
-            }
-
-            //Get user token
-            $single = isset($tokens[$user_id]) ? $tokens[$user_id] : '';
-            $chunks = explode('.', $single);
-
-            //Check chunks
-            if (empty($chunks[0]) || empty($chunks[1])) {
-                return array();
-            }
-
-            //Define token
-            $token = $chunks[0].'.'.$chunks[1];
-        }
-        else {
-            //Get stored blog token
-            $token = TeaThemeOptions::getConfigs('token_blog');
-
-            //Check the token
-            if (empty($token)) {
-                return array();
-            }
-        }
-
-        //Return datas
-        return array(
-            'secret' => $token[0],
-            'external_user_id' => $user_id,
-        );
-    }
-
-    /**
-     * Set a value into options
-     *
-     * @param string $option Contains option name to delete from DB
-     * @param integer $transient Define if we use transiant API or not
-     *
-     * @since 1.5.0
-     */
-    public static function del_option($option, $transient = 0)
-    {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Delete the transient
-            delete_transient($option);
-        }
-
-        //Delete value from DB
-        delete_option($option);
-    }
-
-    /**
-     * Return a value from options
-     *
-     * @param string $option Contains option name to retrieve from DB
-     * @param string $default Contains default value if no data was found
-     * @param integer $transient Define if we use transiant API or not
-     * @return mixed|string|void
-     *
-     * @since 1.5.0
-     */
-    public static function get_option($option, $default = '', $transient = 0)
-    {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Get value from transient
-            $value = get_transient($option);
-
-            if (false === $value) {
-                //Get it from DB
-                $value = get_option($option);
-
-                //Put the default value if not
-                $value = false === $value ? $default : $value;
-
-                //Set the transient for this value
-                set_transient($option, $value, TTO_DURATION);
-            }
-        }
-        //Else...
-        else {
-            //Get value from DB
-            $value = get_option($option);
-
-            //Put the default value if not
-            $value = false === $value ? $default : $value;
-        }
-
-        //Return value
-        return $value;
-    }
-
-    /**
-     * Set a value into options
-     *
-     * @param string $option Contains option name to update from DB
-     * @param string $value Contains value to insert
-     * @param integer $transient Define if we use transiant API or not
-     *
-     * @since 2.0.0
-     */
-    public static function set_option($option, $value, $transient = 0)
-    {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Set the transient for this value
-            set_transient($option, $value, TTO_DURATION);
-        }
-
-        //Set value into DB without autoload
-        if (false === get_option($option)) {
-            add_option($option, $value, '', 'no');
-        }
-        else {
-            update_option($option, $value);
-        }
-    }
 
     /**
      * Constructor.
@@ -383,7 +201,7 @@ class TeaThemeOptions
      * @uses wp_enqueue_media_tto()
      * @uses wp_enqueue_script()
      *
-     * @since 2.3.6
+     * @since 2.3.8
      */
     public function __buildScripts()
     {
@@ -406,7 +224,7 @@ class TeaThemeOptions
         //}
 
         //Enqueue all minified scripts
-        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq);
+        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq, 'v'.TTO_VERSION);
     }
 
     /**
@@ -414,7 +232,7 @@ class TeaThemeOptions
      *
      * @uses wp_enqueue_style()
      *
-     * @since 2.3.6
+     * @since 2.3.8
      */
     public function __buildStyles()
     {
@@ -428,7 +246,7 @@ class TeaThemeOptions
         wp_enqueue_style('wp-color-picker');
 
         //Enqueue all minified styles
-        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css');
+        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css', array(), 'v'.TTO_VERSION);
     }
 
     /**
@@ -447,11 +265,11 @@ class TeaThemeOptions
     /**
      * Display CSS form login page.
      *
-     * @since 1.4.3.5
+     * @since 2.3.8
      */
     public function __loginPage()
     {
-        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css" rel="stylesheet" type="text/css" />';
+        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css?ver=v'.TTO_VERSION.'" rel="stylesheet" type="text/css" />';
     }
 
     /**
@@ -582,6 +400,101 @@ class TeaThemeOptions
     }
 
     /**
+     * Return the access token got from teato.me
+     *
+     * @param integer $user_id The user ID stored in DB for the connection
+     * @return array $array Contains all data for the connection
+     *
+     * @since 1.5.0
+     */
+    public static function access_token($user_id = 0)
+    {
+        //Check if we are in admin panel
+        if (!TTO_IS_ADMIN) {
+            return array();
+        }
+
+        //Check user ID
+        if ($user_id) {
+            //Get datas
+            $tokens = TeaThemeOptions::getConfigs('tokens');
+
+            //Check integrity
+            if (empty($tokens)) {
+                return array();
+            }
+
+            //Get user token
+            $single = isset($tokens[$user_id]) ? $tokens[$user_id] : '';
+            $chunks = explode('.', $single);
+
+            //Check chunks
+            if (empty($chunks[0]) || empty($chunks[1])) {
+                return array();
+            }
+
+            //Define token
+            $token = $chunks[0].'.'.$chunks[1];
+        }
+        else {
+            //Get stored blog token
+            $token = TeaThemeOptions::getConfigs('token_blog');
+
+            //Check the token
+            if (empty($token)) {
+                return array();
+            }
+        }
+
+        //Return datas
+        return array(
+            'secret' => $token[0],
+            'external_user_id' => $user_id,
+        );
+    }
+
+    /**
+     * Get configs.
+     *
+     * @param string $option Define the option asked
+     * @return array $configs Define configurations
+     *
+     * @since 1.4.3.3
+     */
+    public static function getConfigs($option = 'capabilities')
+    {
+        //Get datas from DB
+        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+
+        //Check if data is available
+        $return = isset($configs[$option]) ? $configs[$option] : array();
+        $return = !is_array($return) ? array($return) : $return;
+
+        //Return value
+        return $return;
+    }
+
+    /**
+     * Set configs.
+     *
+     * @param string $option Define the option to update
+     * @param array|integer|string $value Define the value
+     *
+     * @since 1.4.3.3
+     */
+    public static function setConfigs($option = 'capabilities', $value = 'manage_tea_theme_options')
+    {
+        //Get datas from DB
+        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+
+        //Define the data
+        $configs[$option] = $value;
+
+        //Update DB
+        TeaThemeOptions::set_option('tea_to_configs', $configs);
+    }
+
+    /**
      * Get elasticsearch.
      *
      * @return object $elasticearch
@@ -592,5 +505,92 @@ class TeaThemeOptions
     {
         //Return value
         return $this->elasticsearch;
+    }
+
+    /**
+     * Set a value into options
+     *
+     * @param string $option Contains option name to delete from DB
+     * @param integer $transient Define if we use transiant API or not
+     *
+     * @since 1.5.0
+     */
+    public static function del_option($option, $transient = 0)
+    {
+        //If a transient is asked...
+        if (!empty($transient)) {
+            //Delete the transient
+            delete_transient($option);
+        }
+
+        //Delete value from DB
+        delete_option($option);
+    }
+
+    /**
+     * Return a value from options
+     *
+     * @param string $option Contains option name to retrieve from DB
+     * @param string $default Contains default value if no data was found
+     * @param integer $transient Define if we use transiant API or not
+     * @return mixed|string|void
+     *
+     * @since 1.5.0
+     */
+    public static function get_option($option, $default = '', $transient = 0)
+    {
+        //If a transient is asked...
+        if (!empty($transient)) {
+            //Get value from transient
+            $value = get_transient($option);
+
+            if (false === $value) {
+                //Get it from DB
+                $value = get_option($option);
+
+                //Put the default value if not
+                $value = false === $value ? $default : $value;
+
+                //Set the transient for this value
+                set_transient($option, $value, TTO_DURATION);
+            }
+        }
+        //Else...
+        else {
+            //Get value from DB
+            $value = get_option($option);
+
+            //Put the default value if not
+            $value = false === $value ? $default : $value;
+        }
+
+        //Return value
+        return $value;
+    }
+
+    /**
+     * Set a value into options
+     *
+     * @param string $option Contains option name to update from DB
+     * @param string $value Contains value to insert
+     * @param integer $transient Define if we use transiant API or not
+     *
+     * @since 2.0.0
+     */
+    public static function set_option($option, $value, $transient = 0)
+    {
+        //If a transient is asked...
+        if (!empty($transient)) {
+            //Set the transient for this value
+            set_transient($option, $value, TTO_DURATION);
+        }
+
+        //Set value into DB without autoload
+        if (false === get_option($option)) {
+            add_option($option, $value, '', 'no');
+        }
+        else {
+            update_option($option, $value);
+        }
     }
 }

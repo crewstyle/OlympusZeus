@@ -17,7 +17,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Tea Pages
  * @author Achraf Chouk <ach@takeatea.com>
- * @since 2.3.6
+ * @since 2.3.8
  *
  */
 class TeaPages
@@ -99,7 +99,7 @@ class TeaPages
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display connections and elasticsearch pages
      *
-     * @since 2.3.3
+     * @since 2.3.8
      */
     public function __construct($identifier, $options)
     {
@@ -187,28 +187,28 @@ class TeaPages
         wp_admin_css_color(
             'teatocss-earth',
             __('Tea T.O. ~ Earth'),
-            TTO_URI.'/assets/css/teato.admin.earth.css',
+            TTO_URI.'/assets/css/teato.admin.earth.css?ver=v'.TTO_VERSION,
             array('#222', '#303231', '#55bb3a', '#91d04d')
         );
         //Add custom CSS colors ~ Ocean
         wp_admin_css_color(
             'teatocss-ocean',
             __('Tea T.O. ~ Ocean'),
-            TTO_URI.'/assets/css/teato.admin.ocean.css',
+            TTO_URI.'/assets/css/teato.admin.ocean.css?ver=v'.TTO_VERSION,
             array('#222', '#303231', '#3a80bb', '#4d9dd0')
         );
         //Add custom CSS colors ~ Vulcan
         wp_admin_css_color(
             'teatocss-vulcan',
             __('Tea T.O. ~ Vulcan'),
-            TTO_URI.'/assets/css/teato.admin.vulcan.css',
+            TTO_URI.'/assets/css/teato.admin.vulcan.css?ver=v'.TTO_VERSION,
             array('#222', '#303231', '#bb3a3a', '#d04d4d')
         );
         //Add custom CSS colors ~ Wind
         wp_admin_css_color(
             'teatocss-wind',
             __('Tea T.O. ~ Wind'),
-            TTO_URI.'/assets/css/teato.admin.wind.css',
+            TTO_URI.'/assets/css/teato.admin.wind.css?ver=v'.TTO_VERSION,
             array('#222', '#303231', '#69d2e7', '#a7dbd8')
         );
     }
@@ -235,9 +235,9 @@ class TeaPages
     /**
      * Hook building admin bar.
      *
-     * @uses add_menu()
+     * @uses add_node()
      *
-     * @since 1.5.1
+     * @since 2.3.8
      */
     public function __buildAdminBar()
     {
@@ -262,18 +262,20 @@ class TeaPages
             //Check the main page
             if ($this->identifier == $page['slug']) {
                 //Build WP menu in admin bar
-                $wp_admin_bar->add_menu(array(
+                $wp_admin_bar->add_node(array(
+                    'parent' => '',
                     'id' => $this->identifier,
                     'title' => $page['title'],
-                    'href' => admin_url('admin.php?page='.$this->identifier)
+                    'href' => admin_url('admin.php?page='.$this->identifier),
+                    'meta' => false
                 ));
             }
 
-            $wp_admin_bar->add_menu(array(
+            $wp_admin_bar->add_node(array(
                 'parent' => $this->identifier,
                 'id' => $this->identifier.$page['slug'],
-                'href' => admin_url('admin.php?page='.$page['slug']),
                 'title' => $page['name'],
+                'href' => admin_url('admin.php?page='.$page['slug']),
                 'meta' => false
             ));
         }
@@ -461,7 +463,7 @@ class TeaPages
      *
      * @uses add_action()
      *
-     * @since 2.3.6
+     * @since 2.3.8
      */
     public function buildPages()
     {
@@ -483,6 +485,9 @@ class TeaPages
 
         //Register admin bar action hook
         add_action('wp_before_admin_bar_render', array(&$this, '__buildAdminBar'));
+
+        //Register admin page action hook
+        add_action('admin_menu', array(&$this, '__buildMenuPage'), 999);
     }
 
     /**

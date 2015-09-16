@@ -1,3 +1,6 @@
+## 2.3.8 (July 17, 2015)
+Get back menu on admin bar, add assets version number, get WordPress 4.3 compatibility.
+
 ## 2.3.7 (July 17, 2015)
 Fix bug on <Link> field.
 
