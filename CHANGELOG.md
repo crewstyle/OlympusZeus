@@ -1,3 +1,6 @@
+## 2.3.9 (November 6, 2015)
+Make <Hidden> and <Includes> fields usable in a post page.
+
 ## 2.3.8 (July 17, 2015)
 Get back menu on admin bar, add assets version number, get WordPress 4.3 compatibility.
 

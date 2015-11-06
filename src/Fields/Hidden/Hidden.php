@@ -62,8 +62,15 @@ class Hidden extends TeaFields
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
-        //Check if an id is defined at least
-        $this->checkId($content);
+        //Check current post on CPTs
+        if (empty($post)) {
+            //Check if an id is defined at least
+            $this->checkId($content);
+        }
+        else {
+            //Modify content
+            $content = $content['args']['contents'];
+        }
 
         //Default variables
         $id = $content['id'];

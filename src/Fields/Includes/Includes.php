@@ -30,7 +30,7 @@ if (!defined('TTO_CONTEXT')) {
  *
  * @package Tea Fields
  * @subpackage Tea Fields Includes
- * @since 2.0.0
+ * @since 2.3.9
  *
  */
 class Includes extends TeaFields
@@ -57,10 +57,15 @@ class Includes extends TeaFields
      * @param array $content Contains all data
      * @param array $post Contains all post data
      *
-     * @since 2.0.0
+     * @since 2.3.9
      */
     public function templatePages($content, $post = array(), $prefix = '')
     {
+        //Check current post on CPTs
+        if (!empty($post)) {
+            $content = $content['args']['contents'];
+        }
+
         //Default variables
         $title = isset($content['title']) ? $content['title'] : __('Tea Include', TTO_I18N);
         $file = isset($content['file']) ? $content['file'] : false;
