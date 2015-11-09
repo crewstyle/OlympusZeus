@@ -3,6 +3,7 @@
 namespace crewstyle\TeaThemeOptions\Render;
 
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
+use Behat\Transliterator\Transliterator;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 use Twig_SimpleFunction;
@@ -26,7 +27,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Render\Render
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.1.0
  *
  */
 class Render
@@ -37,6 +38,20 @@ class Render
      * @since 3.0.0
      */
     public function __construct(){}
+
+    /**
+     * Slugify string.
+     *
+     * @param string $text Text string to slugify
+     * @param string $separator Character used to separate each word
+     * @return string $slugified Slugified string
+     *
+     * @since 3.1.0
+     */
+    public static function urlize($text, $separator = '-')
+    {
+        return Transliterator::urlize($text, $separator);
+    }
 
     /**
      * Render TWIG component.
@@ -55,7 +70,7 @@ class Render
 
         //Build Twig renderer
         $twig = new Twig_Environment($loader, array(
-            'cache' => TTO_PATH.'/../_cache',
+            'cache' => TTO_PATH . '/../_cache',
         ));
 
         //Get footer and header from WordPress

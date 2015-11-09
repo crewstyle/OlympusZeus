@@ -28,7 +28,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Menu\Engine\Engine
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.1.0
  *
  */
 class Engine
@@ -64,7 +64,7 @@ class Engine
      * @param string $identifier Define the main slug
      * @param array $options Define if we can display special pages
      *
-     * @since 3.0.0
+     * @since 3.1.0
      */
     public function __construct($identifier, $options)
     {
@@ -74,7 +74,8 @@ class Engine
         }
 
         //Initialize all default configurations
-        $this->identifier = trim($identifier);
+        $identifier = trim($identifier);
+        $this->identifier = TeaThemeOptions::getUrlize($identifier);
 
         //Get current page
         $this->currentPage = isset($_REQUEST['page']) ? (string) $_REQUEST['page'] : '';

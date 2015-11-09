@@ -8,16 +8,13 @@ use crewstyle\TeaThemeOptions\Controllers\Notification\Notification;
 use crewstyle\TeaThemeOptions\Controllers\Option\Option;
 use crewstyle\TeaThemeOptions\Menu\Menu;
 use crewstyle\TeaThemeOptions\Render\Render;
-//use crewstyle\TeaThemeOptions\PostType\PostType;
-//use crewstyle\TeaThemeOptions\Search\Search;
 use crewstyle\TeaThemeOptions\Translate\Translate;
-//use crewstyle\TeaThemeOptions\Term\Term;
 
 /**
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 3.0.0
+ * Version: 3.1.0
  * Snippet URI: https://github.com/crewstyle/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -64,11 +61,11 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The value defining if we are in admin panel or not
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '3.0.0');
+defined('TTO_VERSION')      or define('TTO_VERSION', '3.1.0');
 //The current baseline
 defined('TTO_QUOTE')        or define('TTO_QUOTE', 'Spartans! Ready your breakfast and eat hearty... For tonight, we dine in hell! ~ 300');
 //The current version
-defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '300');
+defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '310');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -103,7 +100,7 @@ defined('TTO_WP_CAP_MAX')   or define('TTO_WP_CAP_MAX', 'manage_tea_theme_option
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 2.3.8
+ * @since 3.1.0
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -302,60 +299,6 @@ class TeaThemeOptions
     }
 
     /**
-     * Return the access token got from teato.me
-     *
-     * @param integer $user_id The user ID stored in DB for the connection
-     * @return array $array Contains all data for the connection
-     *
-     * @since -
-     */
-    /*public static function access_token($user_id = 0)
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return array();
-        }
-
-        //Check user ID
-        if ($user_id) {
-            //Get datas
-            $tokens = TeaThemeOptions::getConfigs('tokens');
-
-            //Check integrity
-            if (empty($tokens)) {
-                return array();
-            }
-
-            //Get user token
-            $single = isset($tokens[$user_id]) ? $tokens[$user_id] : '';
-            $chunks = explode('.', $single);
-
-            //Check chunks
-            if (empty($chunks[0]) || empty($chunks[1])) {
-                return array();
-            }
-
-            //Define token
-            $token = $chunks[0].'.'.$chunks[1];
-        }
-        else {
-            //Get stored blog token
-            $token = TeaThemeOptions::getConfigs('token_blog');
-
-            //Check the token
-            if (empty($token)) {
-                return array();
-            }
-        }
-
-        //Return datas
-        return array(
-            'secret' => $token[0],
-            'external_user_id' => $user_id,
-        );
-    }*/
-
-    /**
      * Get configs.
      *
      * @param string $option Define the option asked
@@ -472,6 +415,25 @@ class TeaThemeOptions
         }
 
         Render::render($template, $vars);
+    }
+
+    /**
+     * Slugify string.
+     *
+     * @param string $text Text string to slugify
+     * @param string $separator Character used to separate each word
+     * @return string $slugified Slugified string
+     *
+     * @since 3.1.0
+     */
+    public static function getUrlize($text, $separator = '-')
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        return Render::urlize($text, $separator);
     }
 }
 

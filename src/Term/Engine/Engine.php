@@ -24,7 +24,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Term\Engine\Engine
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.1.0
  *
  */
 class Engine
@@ -77,7 +77,7 @@ class Engine
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since 3.0.0
+     * @since 3.1.0
      */
     public function addTerm($configs = array(), $contents = array())
     {
@@ -92,6 +92,7 @@ class Engine
         }
 
         //Define the slug
+        $configs['slug'] = TeaThemeOptions::getUrlize($configs['slug']);
         $slug = $configs['slug'];
 
         //Check if slug has already been registered

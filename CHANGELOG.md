@@ -1,3 +1,6 @@
+## 3.1.0 (November 09, 2015)
+Use Behat Transliterator script in vendor.
+
 ## 3.0.0 (November 09, 2015)
 **NEW VERSION, NEW CODE**
 
@@ -34,7 +37,6 @@ Add lots of backend optimization.
 - **Fix**
   - override the wp_enqueue_media function from WordPress by a new wp_enqueue_media_tto function
   - remove all flush_rewrite_rules functions
-
 - **New**
   - add a new footer link for flush rewrite rules once
 

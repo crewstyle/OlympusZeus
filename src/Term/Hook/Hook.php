@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Term\Hook\Hook
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.1.0
  *
  */
 class Hook
@@ -305,7 +305,7 @@ class Hook
      * @return array $term
      * @uses register_taxonomy()
      *
-     * @since 3.0.0
+     * @since 3.1.0
      */
     public function registerTerm($term = array())
     {
@@ -324,7 +324,6 @@ class Hook
             return array();
         }
 
-        $term['slug'] = sanitize_text_field($term['slug']);
         $slug = $term['slug'];
         $posttype = $term['post_type'];
 

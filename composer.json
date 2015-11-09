@@ -1,38 +1,30 @@
 {
-  "name": "crewstyle/tea-theme-options",
-  "type": "wordpress-plugin",
-  "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
-  "keywords": [
-    "wordpress",
-    "plugin",
-    "teathemeoptions",
-    "themeoptions",
-    "tea",
-    "tto",
-    "teato",
-    "theme",
-    "options"
-  ],
-  "homepage": "https://github.com/crewstyle/TeaThemeOptions",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Achraf Chouk",
-      "homepage": "https://github.com/crewstyle"
+    "name": "crewstyle/tea-theme-options",
+    "type": "wordpress-plugin",
+    "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
+    "keywords": ["wordpress", "theme", "options", "search", "post type", "taxonomy"],
+    "homepage": "https://github.com/crewstyle/TeaThemeOptions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Achraf Chouk",
+            "homepage": "https://github.com/crewstyle"
+        }
+    ],
+    "require": {
+        "behat/transliterator": "^1.1@dev",
+        "ruflin/Elastica": "2.x",
+        "twig/twig": "~1.0"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "crewstyle\\TeaThemeOptions\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
     }
-  ],
-  "require": {
-    "ruflin/Elastica": "1.x",
-    "twig/twig": "~1.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "crewstyle\\TeaThemeOptions\\": "src/"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "3.0.x-dev"
-    }
-  }
 }

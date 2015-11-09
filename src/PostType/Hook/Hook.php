@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage PostType\Hook\Hook
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.1.0
  *
  */
 class Hook
@@ -560,7 +560,7 @@ class Hook
      * @return array $posttype
      * @uses register_post_type()
      *
-     * @since 3.0.0
+     * @since 3.1.0
      */
     public function registerPostType($posttype = array())
     {
@@ -574,7 +574,6 @@ class Hook
             return array();
         }
 
-        $posttype['slug'] = sanitize_text_field($posttype['slug']);
         $slug = $posttype['slug'];
 
         //Register slug contents
