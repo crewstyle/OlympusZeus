@@ -1,0 +1,17 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_rte{% endblock %}
+{% block label %}
+    <label for="{{ id }}">
+        {{ title|raw }}
+        <small>{{ description|raw }}</small>
+    </label>
+{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content rte">
+        {{ wpEditor(val, id, settings) }}
+    </div>
+{% endblock %}

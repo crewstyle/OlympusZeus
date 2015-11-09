@@ -1,0 +1,67 @@
+/*!
+ * Tea Theme Options v2.3.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Form plugin
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+body.login div#login form {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px 20px;
+    width: 330px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+body.login div#login form label {
+    color: @graymedium;
+}
+body.login div#login form .input {
+    background: @graydark;
+    border: 1px solid @graydark;
+    border-radius: 0;
+    color: @graymedium;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    outline: 0;
+    padding: 5px 10px;
+}
+input:-webkit-autofill,
+body.login div#login form .input:-webkit-autofill {
+    background-color: @graydark !important;
+    color: @graymedium !important;
+    -webkit-box-shadow: 0 0 0 40px @graydark inset;
+}
+body.login div#login form p.forgetmenot {
+    float: none;
+    margin-top: 10px;
+}
+body.login div#login form p.submit {
+    margin-top: 25px;
+}
+body.login div#login form p.submit input#wp-submit {
+    background: @primary;
+    border-color: @main;
+    float: none;
+    margin-top: 0;
+    width: 100%;
+    -webkit-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+}
+body.login div#login form p.submit input#wp-submit:focus,
+body.login div#login form p.submit input#wp-submit:hover {
+    background: @main;
+    border-color: @main;
+    -webkit-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    -moz-box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+    box-shadow: inset 0 1px 0 fade(@primary, 50%),0 1px 0 fade(@black, 15%);
+}

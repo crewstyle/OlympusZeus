@@ -1,14 +1,20 @@
-/* ===================================================
+/*!
  * Tea Theme Options
- * https://github.com/Takeatea/tea_theme_options
- * =====================================================
- * Copyright 20xx Take a Tea (http://takeatea.com)
- * =================================================== */
+ * https://github.com/crewstyle/TeaThemeOptions
+ *
+ * Copyright 2015 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
+ */
 
 module.exports = function(grunt) {
-    //------ [REGISTER CONFIGURATION] ------//
+    //------ [TIME] ------//
+    require('time-grunt')(grunt);
 
+    //------ [REGISTER CONFIGURATION] ------//
     grunt.initConfig({
+        //pachakes are listed here
+        pkg: grunt.file.readJSON('package.json'),
+
         //project settings
         teato: {
             colors: {
@@ -26,23 +32,29 @@ module.exports = function(grunt) {
                 graymedium: '#999999',
                 graydark: '#3b3d3c',
                 graydarker: '#303231',
-                grayblack: '#111111'
+                grayblack: '#111111',
+                //fonts
+                fontmain: '"Raleway","Open Sans",sans-serif',
+                fontsecond: 'Verdana,arial,sans-serif'
             },
             flatten: true,
             path: {
-                src: 'src/Assets',
-                bow: 'src/Assets/bower',
+                src: 'src/Resources/assets',
+                bow: 'bower_components',
                 tar: 'assets'
             },
         },
 
-        //pachakes are listed here
-        pkg: grunt.file.readJSON('package.json'),
+        //0. JShint validation
+        jshint: {
+            all: [
+                '<%= teato.path.src %>/js/*.js'
+            ]
+        },
 
-        //remove any previously-created files
+        //1. remove any previously-created files
         clean: {
             first: [
-                '<%= teato.path.bow %>/*',
                 '<%= teato.path.src %>/css/teato.css',
                 '<%= teato.path.src %>/css/teato.admin.*.css',
                 '<%= teato.path.src %>/css/teato.login.css',
@@ -52,96 +64,40 @@ module.exports = function(grunt) {
                 '<%= teato.path.tar %>/js/*'
             ],
             last: [
-                '<%= teato.path.bow %>/*',
                 '<%= teato.path.src %>/css/teato.css',
                 '<%= teato.path.src %>/css/teato.admin.*.css',
-                '<%= teato.path.src %>/css/teato.login.css'
+                '<%= teato.path.src %>/css/teato.login.css',
             ]
         },
 
-        //make bower magics
-        bower: {
-            dev: {
-                dest: '<%= teato.path.bow %>',
-                options: {
-                    expand: true,
-                    ignorePackages: [
-                        'jquery',
-                        'microplugin',
-                        'sifter'
-                    ],
-                    packageSpecific: {
-                        //CodeMirror
-                        'codemirror': {
-                            keepExpandedHierarchy: true,
-                            files: [
-                                'lib/**',
-                                'mode/**',
-                                'theme/monokai.css'
-                            ]
-                        },
-                        //FontAwesome
-                        'fontawesome': {
-                            keepExpandedHierarchy: true,
-                            files: [
-                                'css/font-awesome.css',
-                                'fonts/**'
-                            ]
-                        },
-                        //Pickadate
-                        'pickadate': {
-                            keepExpandedHierarchy: true,
-                            files: [
-                                'lib/*.js',
-                                'lib/themes/class*.css'
-                            ]
-                        },
-                        //Selectize
-                        'selectize': {
-                            keepExpandedHierarchy: true,
-                            files: [
-                                'dist/js/standalone/selectize.js',
-                                'dist/css/**',
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-
-        //move fonts and images into the destinated folder
+        //2. move fonts and images into the destination folder
         copy: {
             main: {
                 files: [
                     {
                         //Fonts
                         expand: true,
-                        flatten: '<%= teato.flatten %>',
+                        flatten: true,
                         src: [
-                            //FontAwesome
                             '<%= teato.path.bow %>/fontawesome/fonts/*',
-                            //global
                             '<%= teato.path.src %>/fonts/*'
                         ],
                         dest: '<%= teato.path.tar %>/fonts/'
                     },
                     {
                         //Images
+                        cwd: '<%= teato.path.src %>/img/',
                         expand: true,
-                        flatten: '<%= teato.flatten %>',
+                        flatten: false,
                         src: [
-                            '<%= teato.path.src %>/img/*'
+                            '**/*'
                         ],
                         dest: '<%= teato.path.tar %>/img/'
-                    }
-                ]
-            },
-            bower: {
-                files: [
+                    },
                     {
                         //Leaflet
                         expand: true,
-                        flatten: '<%= teato.flatten %>',
+                        flatten: true,
                         src: [
                             '<%= teato.path.bow %>/leaflet/dist/images/*'
                         ],
@@ -151,7 +107,7 @@ module.exports = function(grunt) {
             }
         },
 
-        //less compilation
+        //3. less compilation
         less: {
             teato: {
                 options: {
@@ -173,12 +129,14 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
                 files: {
-                    //main css
                     '<%= teato.path.src %>/css/teato.css': [
                         //globals
                         '<%= teato.path.src %>/less/_fontface.less',
@@ -212,7 +170,10 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
@@ -244,7 +205,10 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
@@ -276,7 +240,10 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
@@ -308,7 +275,10 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
@@ -339,7 +309,10 @@ module.exports = function(grunt) {
                         graymedium: '<%= teato.colors.graymedium %>',
                         graydark: '<%= teato.colors.graydark %>',
                         graydarker: '<%= teato.colors.graydarker %>',
-                        grayblack: '<%= teato.colors.grayblack %>'
+                        grayblack: '<%= teato.colors.grayblack %>',
+                        //fonts
+                        fontmain: '<%= teato.colors.fontmain %>',
+                        fontsecond: '<%= teato.colors.fontsecond %>'
                     },
                     optimization: 2
                 },
@@ -353,7 +326,7 @@ module.exports = function(grunt) {
             }
         },
 
-        //minify CSS files
+        //4. minify CSS files
         cssmin: {
             compress: {
                 files: {
@@ -395,14 +368,7 @@ module.exports = function(grunt) {
             }
         },
 
-        //JShint validation
-        jshint: {
-            all: [
-                '<%= teato.path.src %>/js/*.js'
-            ]
-        },
-
-        //uglify JS files
+        //5. uglify conatenated JS files
         uglify: {
             options: {
                 preserveComments: 'some',
@@ -410,6 +376,8 @@ module.exports = function(grunt) {
             my_target: {
                 files: {
                     '<%= teato.path.tar %>/js/teato.min.js': [
+                        //HandlebarsJS
+                        '<%= teato.path.bow %>/handlebars/handlebars.js',
                         //Codemirror
                         '<%= teato.path.bow %>/codemirror/lib/codemirror.js',
                         '<%= teato.path.bow %>/codemirror/mode/clike/clike.js',
@@ -434,97 +402,82 @@ module.exports = function(grunt) {
                         '<%= teato.path.bow %>/pickadate/lib/legacy.js',
                         //Selectize
                         '<%= teato.path.bow %>/selectize/dist/js/standalone/selectize.js',
-                        //TeaTO
-                        '<%= teato.path.src %>/js/tea.*.js',
-                        '<%= teato.path.src %>/js/teato.js'
+                        //Tea T.O.
+                        '<%= teato.path.src %>/js/tto.*.js',
+                        '<%= teato.path.src %>/js/teathemeoptions.js'
                     ]
                 }
             }
         },
 
-        //create POT file
+        //6. create POT file
         pot: {
             options:{
-                text_domain: 'tea_theme_options',
                 dest: 'languages/',
+                encoding: 'UTF-8',
                 keywords: [
-                    '__:1',
-                    '_e:1',
-                    '_x:1,2c',
-                    'esc_html__:1',
-                    'esc_html_e:1',
-                    'esc_html_x:1,2c',
-                    'esc_attr__:1',
-                    'esc_attr_e:1',
-                    'esc_attr_x:1,2c',
-                    '_ex:1,2c',
-                    '_n:1,2',
-                    '_nx:1,2,4c',
-                    '_n_noop:1,2',
-                    '_nx_noop:1,2,3c'
+                    '__'
                 ],
+                msgid_bugs_address: 'achrafchouk@gmail.com',
+                package_name: 'TeaThemeOptions',
+                package_version: 'v3.0.0',
+                text_domain: 'tea_theme_options'
             },
             files:{
-                src: ['**/*.php'],
-                expand: true
+                expand: true,
+                src: ['src/**/*.php']
             }
-        },
+        }
 
-        //create MO file
+        /*//7. create MO file
         po2mo: {
             files: {
                 src: 'languages/*.po',
                 expand: true
             }
-        }
+        }*/
     });
 
     //------ [REGISTER MODULES] ------//
 
-    //make bower magics
-    grunt.loadNpmTasks('grunt-bower');
-
-    //remove any previously-created files
-    grunt.loadNpmTasks('grunt-contrib-clean');
-
-    //move fonts and images into the destinated folder
-    grunt.loadNpmTasks('grunt-contrib-copy');
-
-    //minify CSS files
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-
-    //JShint validation
+    //0. JShint validation
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    //uglify JS files
+    //1. remove any previously-created files
+    grunt.loadNpmTasks('grunt-contrib-clean');
+
+    //2. move fonts and images into the destination folder
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
+    //3. less compilation
+    grunt.loadNpmTasks('grunt-contrib-less');
+
+    //4. minify CSS files
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+    //5. uglify conatenated JS files
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    //create POT file
+    //6. create POT file
     grunt.loadNpmTasks('grunt-pot');
 
-    //create MO file
-    grunt.loadNpmTasks('grunt-po2mo');
-
-    //less compilation
-    grunt.loadNpmTasks('grunt-contrib-less');
+    //7. create MO file
+    //grunt.loadNpmTasks('grunt-po2mo');
 
     //------ [REGISTER TASKS] ------//
 
-    //bower magic: grunt bowie
-    grunt.registerTask('bow',       ['clean:first','bower','copy:bower']);
-
-    //JShint validation task: grunt hint
-    grunt.registerTask('hint',      ['jshint']);
-
-    //languages task: grunt lang
-    grunt.registerTask('lang',      ['pot','po2mo']);
+    //JShint validation task: grunt test
+    grunt.registerTask('test',      ['jshint']);
 
     //all steps tasks: grunt css / grunt js
-    grunt.registerTask('start',     ['clean:first','bower','copy:bower']);
+    grunt.registerTask('start',     ['clean:first']);
     grunt.registerTask('css',       ['less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin']);
     grunt.registerTask('js',        ['uglify']);
-    grunt.registerTask('move',      ['copy:main','clean:last']);
+    grunt.registerTask('move',      ['copy','clean:last']);
+
+    //languages task: grunt lang
+    grunt.registerTask('lang',      [/*'pot','po2mo'*/'pot']);
 
     //default task: grunt default / grunt
-    grunt.registerTask('default',   ['clean:first','bower','copy:bower','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy:main','clean:last']);
+    grunt.registerTask('default',   ['clean:first','less:teato','less:earth','less:ocean','less:vulcan','less:wind','less:login','cssmin','uglify','copy','clean:last']);
 };

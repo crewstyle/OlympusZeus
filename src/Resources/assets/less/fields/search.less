@@ -1,0 +1,86 @@
+/*!
+ * fields/search.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-t-o_page_tea_options_search {
+    .tea-to-field-content.search {
+        background-color: @white;
+        border: 1px solid lighten(@gray, 20%);
+        box-shadow: 0 1px 1px fade(@black, 4%);
+        padding: 30px 35px;
+        text-align: left;
+
+        &.toggle {
+            background-image: url(../img/section-square.png);
+            font-size: 16px;
+            text-align: center;
+
+            &.active {
+                border-color: @primary;
+                box-shadow: 0 0 0 2px fade(@primary, 30%),inset 0 1px 2px fade(@black, 20%);
+            }
+
+            fieldset {
+                font-size: 13px;
+                margin: 0 30px;
+                text-align: left;
+                vertical-align: -11px;
+            }
+        }
+
+        &.create {
+            text-align: center;
+
+            button {
+                font-size: 18px;
+                height: auto;
+                padding: 10px 30px;
+            }
+        }
+
+        &.index {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            text-align: center;
+
+            button {
+                font-size: 18px;
+                height: auto;
+                margin-bottom: 20px;
+                padding: 10px 30px;
+            }
+
+            p {
+                color: @gray;
+                margin: 0 0 60px;
+
+                b {
+                    color: @black;
+                }
+            }
+        }
+
+        .tea-to-field {
+            margin: 30px 0;
+        }
+
+        .tea-to-field-content {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .tea-to-field-content.code {
+        text-align: left;
+    }
+
+    .tea-to-wrap div.headsup.tea-to-error,
+    .tea-to-wrap div.headsup.tea-to-updated {
+        margin: 35px 0 0;
+    }
+}

@@ -1,15 +1,24 @@
 <?php
 
-namespace Takeatea\TeaThemeOptions;
+namespace crewstyle\TeaThemeOptions;
 
-use Takeatea\TeaThemeOptions\Fields\Network\Network;
+use crewstyle\TeaThemeOptions\Controllers\Action\Action;
+use crewstyle\TeaThemeOptions\Controllers\Hook\Hook;
+use crewstyle\TeaThemeOptions\Controllers\Notification\Notification;
+use crewstyle\TeaThemeOptions\Controllers\Option\Option;
+use crewstyle\TeaThemeOptions\Menu\Menu;
+use crewstyle\TeaThemeOptions\Render\Render;
+//use crewstyle\TeaThemeOptions\PostType\PostType;
+//use crewstyle\TeaThemeOptions\Search\Search;
+use crewstyle\TeaThemeOptions\Translate\Translate;
+//use crewstyle\TeaThemeOptions\Term\Term;
 
 /**
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 2.3.9
- * Snippet URI: https://github.com/Takeatea/tea_theme_options
+ * Version: 3.0.0
+ * Snippet URI: https://github.com/crewstyle/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
  * professional looking theme options panels to your WordPress theme.
@@ -17,12 +26,12 @@ use Takeatea\TeaThemeOptions\Fields\Network\Network;
  * custom taxonomies.
  *
  * Author: Achraf Chouk
- * Author URI: http://takeatea.com/
+ * Author URI: https://github.com/crewstyle
  * License: The MIT License (MIT)
  *
  * The MIT License (MIT)
  *
- * Copyright (C) 2014, Achraf Chouk - ach@takeatea.com
+ * Copyright (C) 2013-2015, Achraf Chouk - achrafchouk@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,10 +61,14 @@ if (!defined('ABSPATH')) {
 
 //The context used to define if the PHP files can be executed
 defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
-//The current version
+//The value defining if we are in admin panel or not
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '2.3.9');
+defined('TTO_VERSION')      or define('TTO_VERSION', '3.0.0');
+//The current baseline
+defined('TTO_QUOTE')        or define('TTO_QUOTE', 'Spartans! Ready your breakfast and eat hearty... For tonight, we dine in hell! ~ 300');
+//The current version
+defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '300');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -65,17 +78,20 @@ defined('TTO_HOME')         or define('TTO_HOME', get_option('home'));
 //The language blog
 defined('TTO_LOCAL')        or define('TTO_LOCAL', get_bloginfo('language'));
 //The URI
-defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri().'/vendor/takeatea/tea-theme-options');
+defined('TTO_URI')          or define('TTO_URI', get_template_directory_uri().'/vendor/crewstyle/tea-theme-options');
 //The path
 defined('TTO_PATH')         or define('TTO_PATH', dirname(__FILE__));
 //The wp-includes URI
 defined('TTO_INC')          or define('TTO_INC', includes_url());
-//The capabilities
-defined('TTO_CAP')          or define('TTO_CAP', 'edit_posts');
-//The custom capabilities
-defined('TTO_CAP_MAX')      or define('TTO_CAP_MAX', 'manage_tea_theme_options');
 //The nonce ajax value
 defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
+//The value defining if theme uses post thumbnails or not
+defined('TTO_CAN_THUMB')    or define('TTO_CAN_THUMB', current_theme_supports('post-thumbnails'));
+//The capabilities
+defined('TTO_WP_CAP')       or define('TTO_WP_CAP', 'edit_posts');
+//The custom capabilities
+defined('TTO_WP_CAP_MAX')   or define('TTO_WP_CAP_MAX', 'manage_tea_theme_options');
+
 
 //----------------------------------------------------------------------------//
 
@@ -86,317 +102,203 @@ defined('TTO_NONCE')        or define('TTO_NONCE', 'tea-ajax-nonce');
  * custom post types.
  *
  * @package Tea Theme Options
- * @author Achraf Chouk <ach@takeatea.com>
+ * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 2.3.8
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
  * @todo Shortcodes panel:  Google Adsense, Related posts, Private content,
- * @todo Shortcodes panel:  RSS Feed, Price table, Carousel, Icons
+ * @todo Shortcodes panel:  RSS Feed, Price table, Carousel, Icons, ...
  *
  */
 class TeaThemeOptions
 {
     /**
-     * @var TeaPages|null
+     * @var Action
      */
-    protected $pages;
+    protected $action = null;
 
     /**
-     * @var TeaCustomPostTypes
+     * @var Hook
      */
-    protected $customposttypes;
+    protected $hook = null;
 
     /**
-     * @var TeaCustomTaxonomies
+     * @var Menu
      */
-    protected $customtaxonomies;
-
-    /**
-     * @var bool
-     */
-    protected $canbuildpages = false;
-
-    /**
-     * @var bool
-     */
-    protected $canbuildcpts = false;
-
-    /**
-     * @var bool
-     */
-    protected $canbuildtaxonomies = false;
-
-    /**
-     * @var TeaElasticsearch
-     */
-    protected $elasticsearch;
+    protected $menu = null;
 
     /**
      * Constructor.
      *
-     * @uses add_filter()
-     * @uses load_textdomain()
-     * @uses wp_next_scheduled()
-     * @uses wp_schedule_event()
      * @param string $identifier Define the main slug
      * @param array $options Contains all options to dis/enable
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 2.3.6
+     * @since 3.0.0
      */
     public function __construct($identifier = 'tea_theme_options', $options = array())
     {
+        //Build identifier
+        $idx = trim($identifier);
+
+        //Instanciate Action
+        $this->action = new Action($idx);
+
+        //Instanciate Hook
+        $this->hook = new Hook();
+
+        //Instanciate Menu
+        $this->menu = new Menu($idx, $options);
+    }
+
+    /**
+     * Add a new page menu.
+     *
+     * @param array $configs Array containing all configurations
+     * @param array $contents Contains all data
+     *
+     * @since 3.0.0
+     */
+    public function addMenu($configs, $contents)
+    {
         //Admin panel
-        if (TTO_IS_ADMIN) {
-            //i18n
-            $locale = apply_filters('theme_locale', get_locale(), TTO_I18N);
-            load_textdomain(TTO_I18N, TTO_PATH.'/languages/'.$locale.'.mo');
-
-            //Build options
-            $opts = array(
-                'social' => isset($options['social']) ? $options['social'] : true,
-                'elasticsearch' => isset($options['elasticsearch']) ? $options['elasticsearch'] : true,
-                'notifications' => isset($options['notifications']) ? $options['notifications'] : true,
-            );
-
-            //Page component
-            $this->pages = new TeaPages($identifier, $opts);
-
-            //Register admin page action hook
-            add_action('admin_menu', array(&$this, '__buildAssets'), 999);
-        }
-
-        //Define custom schedule
-        if (!wp_next_scheduled('tea_to_schedule')) {
-            wp_schedule_event(time(), 'hourly', 'tea_to_schedule');
-        }
-
-        //Register custom schedule filter
-        add_filter('tea_to_schedule', array(&$this, '__cronSchedules'));
-
-        $this->customposttypes = new TeaCustomPostTypes();
-        $this->customtaxonomies = new TeaCustomTaxonomies();
-        $this->elasticsearch = new TeaElasticsearch();
-
-        //Add custom css to login page
-        add_action('login_head', array(&$this, '__loginPage'));
-    }
-
-    /**
-     * Hook building assets.
-     *
-     * @since 2.3.6
-     */
-    public function __buildAssets()
-    {
-        add_action('admin_print_scripts', array(&$this, '__buildScripts'));
-        add_action('admin_print_styles', array(&$this, '__buildStyles'));
-    }
-
-    /**
-     * Hook building scripts.
-     *
-     * @uses wp_enqueue_media_tto()
-     * @uses wp_enqueue_script()
-     *
-     * @since 2.3.8
-     */
-    public function __buildScripts()
-    {
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Get jQuery
-        $jq = array('jquery');
-
-        //Enqueue media and colorpicker scripts
-        //if (function_exists('wp_enqueue_media_tto')) {
-            TeaPages::wp_enqueue_media_tto();
-            wp_enqueue_script('wp-color-picker');
-            wp_enqueue_script('accordion');
-        //}
-        //else {
-            //wp_enqueue_script('media-upload');
-            //wp_enqueue_script('farbtastic');
-        //}
-
-        //Enqueue all minified scripts
-        wp_enqueue_script('tea-to', TTO_URI.'/assets/js/teato.min.js', $jq, 'v'.TTO_VERSION);
+        $this->menu->getMenu()->addMenu($configs, $contents);
     }
 
     /**
-     * Hook building styles.
-     *
-     * @uses wp_enqueue_style()
-     *
-     * @since 2.3.8
-     */
-    public function __buildStyles()
-    {
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Enqueue usefull styles
-        wp_enqueue_style('media-views');
-        wp_enqueue_style('farbtastic');
-        wp_enqueue_style('wp-color-picker');
-
-        //Enqueue all minified styles
-        wp_enqueue_style('tea-to', TTO_URI.'/assets/css/teato.min.css', array(), 'v'.TTO_VERSION);
-    }
-
-    /**
-     * Display a warning message on the admin panel.
-     *
-     * @since 1.4.0
-     * @todo: make social connection with http://teato.me
-     */
-    public function __cronSchedules()
-    {
-        //Make the magic
-        $field = new Network();
-        $field->updateNetworks();
-    }
-
-    /**
-     * Display CSS form login page.
-     *
-     * @since 2.3.8
-     */
-    public function __loginPage()
-    {
-        echo '<link href="'.TTO_URI.'/assets/css/teato.login.css?ver=v'.TTO_VERSION.'" rel="stylesheet" type="text/css" />';
-    }
-
-    /**
-     * MAIN FUNCTIONS
-     **/
-
-    /**
-     * Add a page to the theme options panel.
+     * Add a new post type.
      *
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since 1.4.0
+     * @since 3.0.0
      */
-    public function addPage($configs = array(), $contents = array())
+    public function addPostType($configs = array(), $contents = array())
     {
-        //Check if we are in admin panel
+        //Admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Add page
-        $this->pages->addPage($configs, $contents);
-        $this->canbuildpages = true;
+        $this->menu->getPosttype()->addPostType($configs, $contents);
     }
 
     /**
-     * Register menus.
-     *
-     * @uses add_action()
-     *
-     * @since 1.4.0
-     */
-    public function buildPages()
-    {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN || !$this->canbuildpages) {
-            return;
-        }
-
-        $this->pages->buildPages();
-    }
-
-    /**
-     * Add a CPT to the theme options panel.
+     * Add a new term.
      *
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since 1.4.0
+     * @since 3.0.0
      */
-    public function addCPT($configs = array(), $contents = array())
+    public function addTerm($configs = array(), $contents = array())
     {
-        //Check if we are in admin panel
+        //Admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Add page
-        $this->customposttypes->addCPT($configs, $contents);
-        $this->canbuildcpts = true;
+        $this->menu->getTerm()->addTerm($configs, $contents);
     }
 
     /**
-     * Register menus.
+     * Build menu.
      *
-     * @uses add_action()
-     *
-     * @since 1.4.0
+     * @since 3.0.0
      */
-    public function buildCPTs()
+    public function buildMenus()
     {
-        //Check if we are in admin panel
-        if (!TTO_IS_ADMIN) {
+        //Admin panel and if we can build
+        if (!TTO_IS_ADMIN || !$this->menu->getPages()) {
             return;
         }
 
-        //Check if we got cpts
-        if (!$this->canbuildcpts) {
-            return;
-        }
-
-        //Build menus
-        $this->customposttypes->buildCustomPostTypes();
+        $this->menu->getMenu()->buildMenus();
     }
 
     /**
-     * Add a CPT to the theme options panel.
+     * Build post types.
      *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 1.4.0
+     * @since 3.0.0
      */
-    public function addTaxonomy($configs = array(), $contents = array())
+    public function buildPostTypes()
     {
-        //Check if we are in admin panel
+        //Admin panel and if we can build
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Add page
-        $this->customtaxonomies->addTaxonomy($configs, $contents);
-        $this->canbuildtaxonomies = true;
+        $this->menu->getPosttype()->buildPostTypes();
     }
 
     /**
-     * Register taxonomies.
+     * Build terms.
      *
-     * @uses add_action()
-     *
-     * @since 1.4.0
+     * @since 3.0.0
      */
-    public function buildTaxonomies()
+    public function buildTerms()
     {
-        //Check if we are in admin panel
+        //Admin panel and if we can build
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Check if we got cpts
-        if (!$this->canbuildtaxonomies) {
+        $this->menu->getTerm()->buildTerms();
+    }
+
+    /**
+     * Translate typo.
+     *
+     * @param string $content Contains typo to translate
+     * @return Translate
+     *
+     * @since 3.0.0
+     */
+    public static function __($content)
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Build menus
-        $this->customtaxonomies->buildTaxonomies();
+        return (string) Translate::__($content);
+    }
+
+    /**
+     * Display notification.
+     *
+     * @param string $content Contains typo to display
+     * @return string $content
+     *
+     * @since 3.0.0
+     */
+    public static function notify($content)
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        //Display notification
+        $notif = new Notification($content);
+    }
+
+    /**
+     * Get search engine.
+     *
+     * @return Search $search
+     *
+     * @since 3.0.0
+     */
+    public function search()
+    {
+        return $this->menu->getSearch();
     }
 
     /**
@@ -405,11 +307,11 @@ class TeaThemeOptions
      * @param integer $user_id The user ID stored in DB for the connection
      * @return array $array Contains all data for the connection
      *
-     * @since 1.5.0
+     * @since -
      */
-    public static function access_token($user_id = 0)
+    /*public static function access_token($user_id = 0)
     {
-        //Check if we are in admin panel
+        //Admin panel
         if (!TTO_IS_ADMIN) {
             return array();
         }
@@ -451,7 +353,7 @@ class TeaThemeOptions
             'secret' => $token[0],
             'external_user_id' => $user_id,
         );
-    }
+    }*/
 
     /**
      * Get configs.
@@ -459,12 +361,12 @@ class TeaThemeOptions
      * @param string $option Define the option asked
      * @return array $configs Define configurations
      *
-     * @since 1.4.3.3
+     * @since 3.0.0
      */
     public static function getConfigs($option = 'capabilities')
     {
         //Get datas from DB
-        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+        $configs = self::getOption('tea-to-configs', array());
 
         //Check if data is available
         $return = isset($configs[$option]) ? $configs[$option] : array();
@@ -480,31 +382,23 @@ class TeaThemeOptions
      * @param string $option Define the option to update
      * @param array|integer|string $value Define the value
      *
-     * @since 1.4.3.3
+     * @since 3.0.0
      */
     public static function setConfigs($option = 'capabilities', $value = 'manage_tea_theme_options')
     {
         //Get datas from DB
-        $configs = TeaThemeOptions::get_option('tea_to_configs', array());
+        $configs = self::getOption('tea-to-configs', array());
+
+        //Check data
+        if (isset($configs[$option])) {
+            unset($configs[$option]);
+        }
 
         //Define the data
         $configs[$option] = $value;
 
         //Update DB
-        TeaThemeOptions::set_option('tea_to_configs', $configs);
-    }
-
-    /**
-     * Get elasticsearch.
-     *
-     * @return object $elasticearch
-     *
-     * @since 1.4.0
-     */
-    public function getElasticsearch()
-    {
-        //Return value
-        return $this->elasticsearch;
+        self::setOption('tea-to-configs', $configs);
     }
 
     /**
@@ -513,18 +407,11 @@ class TeaThemeOptions
      * @param string $option Contains option name to delete from DB
      * @param integer $transient Define if we use transiant API or not
      *
-     * @since 1.5.0
+     * @since 3.0.0
      */
-    public static function del_option($option, $transient = 0)
+    public static function delOption($option, $transient = 0)
     {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Delete the transient
-            delete_transient($option);
-        }
-
-        //Delete value from DB
-        delete_option($option);
+        Option::delOption($option, $transient);
     }
 
     /**
@@ -535,37 +422,11 @@ class TeaThemeOptions
      * @param integer $transient Define if we use transiant API or not
      * @return mixed|string|void
      *
-     * @since 1.5.0
+     * @since 3.0.0
      */
-    public static function get_option($option, $default = '', $transient = 0)
+    public static function getOption($option, $default = '', $transient = 0)
     {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Get value from transient
-            $value = get_transient($option);
-
-            if (false === $value) {
-                //Get it from DB
-                $value = get_option($option);
-
-                //Put the default value if not
-                $value = false === $value ? $default : $value;
-
-                //Set the transient for this value
-                set_transient($option, $value, TTO_DURATION);
-            }
-        }
-        //Else...
-        else {
-            //Get value from DB
-            $value = get_option($option);
-
-            //Put the default value if not
-            $value = false === $value ? $default : $value;
-        }
-
-        //Return value
-        return $value;
+        return Option::getOption($option, $default, $transient);
     }
 
     /**
@@ -575,22 +436,65 @@ class TeaThemeOptions
      * @param string $value Contains value to insert
      * @param integer $transient Define if we use transiant API or not
      *
-     * @since 2.0.0
+     * @since 3.0.0
      */
-    public static function set_option($option, $value, $transient = 0)
+    public static function setOption($option, $value, $transient = 0)
     {
-        //If a transient is asked...
-        if (!empty($transient)) {
-            //Set the transient for this value
-            set_transient($option, $value, TTO_DURATION);
+        Option::setOption($option, $value, $transient);
+    }
+
+    /**
+     * Force update a value into options without transient
+     *
+     * @param string $option Contains option name to update from DB
+     * @param string $value Contains value to insert
+     *
+     * @since 3.0.0
+     */
+    public static function updateOption($option, $value)
+    {
+        Option::updateOption($option, $value);
+    }
+
+    /**
+     * Get renderer.
+     *
+     * @param string $template Twig template to display
+     * @param array $vars Contains all field options
+     *
+     * @since 3.0.0
+     */
+    public static function getRender($template, $vars)
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
         }
 
-        //Set value into DB without autoload
-        if (false === get_option($option)) {
-            add_option($option, $value, '', 'no');
-        }
-        else {
-            update_option($option, $value);
-        }
+        Render::render($template, $vars);
+    }
+}
+
+/**
+ * Return a value from options
+ *
+ * @since 3.0.0
+ */
+if (!function_exists('_get_option')) {
+    function _get_option($option, $default = '', $transient = false)
+    {
+        return TeaThemeOptions::getOption($option, $default, $transient);
+    }
+}
+
+/**
+ * Set a value into options
+ *
+ * @since 3.0.0
+ */
+if (!function_exists('_set_option')) {
+    function _set_option($option, $value, $transient = false)
+    {
+        TeaThemeOptions::setOption($option, $value, $transient);
     }
 }

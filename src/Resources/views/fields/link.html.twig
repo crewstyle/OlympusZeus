@@ -1,0 +1,92 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_link{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content link" data-id="{{ id }}">
+        {% set num = 1 %}
+
+        <fieldset{{ expandable ? ' class="expandable"' : '' }}>
+            {% for k, v in val %}
+                {% set idexp = expandable ? id ~ '[' ~ num ~ ']' : id %}
+
+                <div class="link-container{{ expandable ? ' movendrop' : '' }}">
+                    {% if expandable %}
+                        <a href="#deleteLink" class="del-link"><i class="fa fa-times"></i></a>
+                    {% endif %}
+
+                    <p class="block-link">
+                        <label for="{{ idexp }}-url">{{ t_website_address }}</label>
+                        <input type="text" name="{{ idexp }}[url]" id="{{ idexp }}-url" value="{{ v.url }}" placeholder="{{ t_website_placeholder|raw }}" />
+                        <a href="{{ v.url }}" class="tea-to-tooltip" title="{{ t_goto|raw }}" target="_blank"><i class="fa fa-external-link"></i></a>
+                    </p>
+
+                    <p>
+                        <label for="{{ idexp }}-label">{{ t_title|raw }}</label>
+                        <input type="text" name="{{ idexp }}[label]" id="{{ idexp }}-label" value="{{ v.label }}" />
+                    </p>
+
+                    <p>
+                        <label for="{{ idexp }}-target">{{ t_target|raw }}</label>
+                        <select name="{{ idexp }}[target]" id="{{ idexp }}-target" class="no-selectize">
+                            <option value="_blank"{{ v.target == '_blank' ? ' selected="selected"' : '' }}>
+                                {{ t_target_blank|raw }}
+                            </option>
+                            <option value="_self"{{ v.target == '_self' ? ' selected="selected"' : '' }}>
+                                {{ t_target_self|raw }}
+                            </option>
+                            <option value="_parent"{{ v.target == '_parent' ? ' selected="selected"' : '' }}>
+                                {{ t_target_parent|raw }}
+                            </option>
+                            <option value="_top"{{ v.target == '_top' ? ' selected="selected"' : '' }}>
+                                {{ t_target_top|raw }}
+                            </option>
+                        </select>
+                    </p>
+
+                    <p class="rel">
+                        <label for="{{ idexp }}-rel">{{ t_relationship|raw }}</label>
+                        <input type="text" name="{{ idexp }}[rel]" id="{{ idexp }}-rel" value="{{ v.rel }}" />
+                        <small>{{ t_relationship_description|raw }}</small>
+                    </p>
+                </div>
+
+                {% set num = num + 1 %}
+            {% endfor %}
+        </fieldset>
+
+        {% if expandable %}
+            <div class="hide-if-no-js">
+                <a href="#addLink" class="button add-link" title="{{ t_add_link }}">
+                    <i class="fa fa-link fa-lg"></i> {{ t_add_link }}
+                </a>
+                <a href="#deleteLinks" class="del-all-links">{{ t_delete_all|raw }}</a>
+            </div>
+        {% endif %}
+
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% if expandable %}
+        <script type="text/x-handlebars-template" id="i-links-{{ id }}">
+            {% include 'templates/link.html.twig' with {
+                't_website_address': t_website_address,
+                't_website_placeholder': t_website_placeholder,
+                't_goto': t_goto,
+                't_title': t_title,
+                't_target': t_target,
+                't_target_blank': t_target_blank,
+                't_target_self': t_target_self,
+                't_target_parent': t_target_parent,
+                't_target_top': t_target_top,
+                't_relationship': t_relationship,
+                't_relationship_description': t_relationship_description,
+            } only %}
+        </script>
+    {% endif %}
+{% endblock %}

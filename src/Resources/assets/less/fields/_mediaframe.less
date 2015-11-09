@@ -1,0 +1,92 @@
+/*!
+ * fields/_mediaframe.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-to-media-frame.media-frame {
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 60px;
+
+    .media-frame-router {
+        left: 0;
+        padding: 0 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        .media-router {
+            a.active {
+                margin-top: 1px;
+                padding-bottom: 11px;
+                padding-top: 6px;
+            }
+        }
+    }
+
+    .media-frame-content {
+        bottom: 50px;
+        left: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 36px;
+
+        .media-menu-content {
+            display: none;
+            padding: 20px 50px;
+
+            &.active {
+                display: block;
+            }
+
+            h3 {
+                clear: left;
+                float: left;
+                padding: 8px 0;
+                text-align: left;
+                width: 180px;
+
+                select.no-selectize {
+                    display: block;
+                    width: 100px;
+                }
+
+                .tea-to-checkall {
+                    display: block;
+                    float: none;
+                }
+            }
+
+            .tea-to-field-content {
+                margin-left: 204px;
+                margin-bottom: 20px;
+                margin-top: 8px;
+                padding: 0;
+                text-align: left;
+
+                &:nth-child(2) {
+                    margin-top: 0;
+                }
+            }
+
+            .tea-to-field {
+                border: none;
+                box-shadow: none;
+                margin-bottom: 0;
+            }
+
+            hr {
+                margin: 0 0 20px;
+            }
+        }
+    }
+}
+
+@media (max-width:782px) {}

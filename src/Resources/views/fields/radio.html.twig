@@ -1,0 +1,40 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_radio{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content radio{{ mode == 'image' ? ' image' : '' }}">
+        <fieldset>
+            {% if options %}
+                {% set num = 0 %}
+
+                {% for k, option in options if option %}
+                    {% set selected = k == val ? true : false %}
+                    {% set for = id ~ '_' ~ num %}
+
+                    <p>
+                        <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
+                            <input type="radio" name="{{ id }}" id="{{ for }}" value="{{ k }}"{{ selected ? ' checked="checked"' : '' }} />
+
+                            {% if mode == 'image' %}
+                                <img src="{{ k }}" alt="" />
+                                <span>{{ option|raw }}</span>
+                            {% else %}
+                                {{ option|raw }}
+                            {% endif %}
+                        </label>
+                    </p>
+
+                    {% set num = num + 1 %}
+                {% endfor %}
+            {% else %}
+                {{ t_no_options|raw }}
+            {% endif %}
+        </fieldset>
+
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}

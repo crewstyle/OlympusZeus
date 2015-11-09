@@ -1,0 +1,28 @@
+/*!
+ * fields/select.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-to-field-content {
+    .selectize-dropdown {
+        &.single {
+            background: @white;
+            border: 1px solid lighten(@gray, 20%);
+            box-shadow: none;
+            margin-top: -3px;
+            max-width: 100%;
+        }
+
+        .active {
+            background-color: fade(@primary, 25%);
+        }
+    }
+
+    .selectize-control.single .selectize-input {
+        background: @white;
+        border: 1px solid lighten(@gray, 20%);
+        box-shadow: none;
+    }
+}

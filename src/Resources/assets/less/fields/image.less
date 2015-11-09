@@ -1,0 +1,42 @@
+/*!
+ * fields/image.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-to-field-content{
+    &.radio,
+    &.checkbox {
+        &.image {
+            p {
+                display: inline-block;
+                margin: 5px;
+                position: relative;
+                text-align: center;
+                max-width: 200px;
+            }
+
+            label {
+                border: none;
+                padding: 5px;
+                text-align: center;
+
+                img {
+                    display: block;
+                    max-width: 100%;
+                    position: relative;
+                    z-index: 2;
+                }
+
+                &:hover {
+                    background-color: @second;
+                }
+
+                &.selected {
+                    background-color: @primary;
+                }
+            }
+        }
+    }
+}

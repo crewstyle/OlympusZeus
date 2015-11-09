@@ -1,3 +1,15 @@
+## 3.0.0 (November 09, 2015)
+**NEW VERSION, NEW CODE**
+
+- **New**
+  - first of all, add new TWIG engine as a template engine
+- **Enhance:**
+  - update all fields design
+- **Delete:**
+  - remove <Review> and <Gallery> fields
+
+
+
 ## 2.3.9 (November 6, 2015)
 Make <Hidden> and <Includes> fields usable in a post page.
 

@@ -1,7 +1,10 @@
-# Tea Theme Options
+# Tea Theme Options [![GitHub version](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions.svg)](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions)
 
-[![Latest Stable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/stable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Total Downloads](https://poser.pugx.org/takeatea/tea-theme-options/downloads.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![Latest Unstable Version](https://poser.pugx.org/takeatea/tea-theme-options/v/unstable.svg)](https://packagist.org/packages/takeatea/tea-theme-options) [![License](https://poser.pugx.org/takeatea/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)
-[![Code Climate](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions/badges/gpa.svg)](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions) [![Test Coverage](https://codeclimate.com/github/TeaThemeOptions/TeaThemeOptions/badges/coverage.svg)](https://codeclimate.com/github/Takeatea/tea_theme_options)
+
+--
+[![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options)
+[![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)
+--
 
 
 
@@ -66,7 +69,7 @@ bower install
 ## All we need is LOOOOOOOOOVE
 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/)
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/TeaThemeOptions/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software)
 You can help us maintaining the Tea T.O. with some tips. It will be so gratefull :)
 
 
@@ -79,7 +82,6 @@ You can help us maintaining the Tea T.O. with some tips. It will be so gratefull
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
-Please, read [LICENSE](https://github.com/TeaThemeOptions/TeaThemeOptions/blob/master/LICENSE "LICENSE") for more details.
+Please, read [LICENSE](https://github.com/crewstyle/TeaThemeOptions/blob/master/LICENSE "LICENSE") for more details.
 
-Copyright 20xx [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk").  
-Brewed by [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk"), served by [Take a tea](http://www.takeatea.com "Take a tea") ;)
+Copyright 20xx [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk").

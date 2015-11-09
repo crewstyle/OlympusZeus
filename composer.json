@@ -1,42 +1,38 @@
 {
-    "name":         "takeatea/tea-theme-options",
-    "type":         "wordpress-plugin",
-    "description":  "Simple, easy to use and fully integrated Theme Options for Wordpress",
-    "keywords":     [
-        "wordpress",
-        "plugin",
-        "teathemeoptions",
-        "themeoptions",
-        "tea",
-        "tto",
-        "teato",
-        "theme",
-        "options"
-    ],
-    "homepage":     "http://www.teato.me/",
-    "license":      "MIT",
-    "authors":      [
-        {
-            "name":     "Achraf Chouk",
-            "homepage": "http://www.takeatea.com/"
-        },
-        {
-            "name":     "Take a tea",
-            "homepage": "http://www.takeatea.com/"
-        }
-    ],
-    "require":      {
-        "ruflin/Elastica":  "1.x"
-    },
-    "autoload":     {
-        "psr-4": {
-            "Takeatea\\TeaThemeOptions\\": "src/"
-        }
-    },
-    "extra":        {
-        "branch-alias": {
-            "dev-master": "2.3.x-dev"
-        }
+  "name": "crewstyle/tea-theme-options",
+  "type": "wordpress-plugin",
+  "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "teathemeoptions",
+    "themeoptions",
+    "tea",
+    "tto",
+    "teato",
+    "theme",
+    "options"
+  ],
+  "homepage": "https://github.com/crewstyle/TeaThemeOptions",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Achraf Chouk",
+      "homepage": "https://github.com/crewstyle"
     }
+  ],
+  "require": {
+    "ruflin/Elastica": "1.x",
+    "twig/twig": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "crewstyle\\TeaThemeOptions\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.0.x-dev"
+    }
+  }
 }
-

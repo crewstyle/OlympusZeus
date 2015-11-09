@@ -1,0 +1,43 @@
+/*!
+ * fields/textarea.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-to-field-content.textarea {
+    position: relative;
+
+    .counter {
+        background-color: fade(@gray, 10%);
+        border: 1px solid lighten(@gray, 20%);
+        border-radius: 15px;
+        bottom: 100%;
+        box-shadow: 0 0 0 2px fade(@black, 10%), inset 0 1px 2px fade(@black, 20%);
+        color: @gray;
+        font-size: 10px;
+        margin-bottom: 6px;
+        margin-left: -12px;
+        padding: 2px 10px;
+        position: absolute;
+        right: 12px;
+        text-align: center;
+        -webkit-transition: background ease .5s;
+        -moz-transition: background ease .5s;
+        transition: background ease .5s;
+
+        &.on {
+            background-color: fade(@primary, 30%);
+            border-color: @primary;
+            box-shadow: 0 0 0 2px fade(@primary, 30%),inset 0 1px 2px fade(@black, 20%);
+            color: @primary;
+        }
+    }
+}
+
+.inside .tea-to-field-content.textarea {
+    .counter {
+        margin-bottom: 13px;
+        right: 22px;
+    }
+}

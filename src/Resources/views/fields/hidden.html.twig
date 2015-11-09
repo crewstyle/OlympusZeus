@@ -1,0 +1,13 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_hidden{% endblock %}
+{% block class %}tea-to-hidden{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content hiddenfield">
+        <input type="hidden" name="{{ id }}" value="{{ val }}" />
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}

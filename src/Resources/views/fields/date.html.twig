@@ -1,0 +1,13 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_date{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content date">
+        <input type="text" name="{{ id }}" id="{{ id }}" value="{{ val }}" data-value="{{ val }}" placeholder="{{ format }}" data-format="{{ format }}" class="pickadate" />
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}

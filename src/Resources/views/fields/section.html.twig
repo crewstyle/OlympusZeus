@@ -1,0 +1,19 @@
+<div{{ identifier ? ' id="' ~ identifier ~ '"' : '' }} class="tea-to-field-content section {{ color }}">
+    {% if image or svg %}
+        <div class="{{ position }} centered">
+            {% if image %}
+                <img src="{{ image }}" alt="" />
+            {% elseif svg %}
+                <object>{{ svg|raw }}</object>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ content|raw }}
+        </div>
+    {% else %}
+        {{ content|raw }}
+    {% endif %}
+
+    <br class="tea-to-clear" />
+</div>

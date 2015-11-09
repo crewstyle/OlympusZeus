@@ -1,0 +1,293 @@
+/*!
+ * _global.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+html,
+#wp-content-editor-tools {
+    background-color: #fdfdfd;
+}
+ul#adminmenu a.wp-has-current-submenu:after,
+ul#adminmenu>li.current>a.current:after {
+    border-right-color: #fdfdfd;
+}
+
+h1, h2, h3 {
+    font-family: @fontmain;
+    font-weight: 200;
+
+    strong {
+        font-weight: 400;
+    }
+}
+
+h1 {
+    font-size: 38px;
+    line-height: 46px;
+    margin: 0;
+}
+
+#poststuff h2.tea-to-clear {
+    margin-top: 0;
+}
+
+hr {
+    border-bottom: 1px solid @white;
+}
+
+
+/*--- [MAIN WP WRAP] ---*/
+.tea-to-mainwrap {
+    #wpcontent,
+    #wpfooter {
+        display: block;
+    }
+
+    .auto-fold #wpcontent {
+        padding-left: 0;
+    }
+
+    #wpbody-content .wrap {
+        margin: 0 0 0 -20px;
+    }
+
+    #poststuff {
+        padding: 10px 2% 0;
+        max-width: 100%;
+        min-width: 92%;
+    }
+
+    .tea-to-mainwrap #wpfooter {
+        padding: 10px 19px;
+    }
+}
+
+
+/*--- [FOOTER] ---*/
+.tea-to-footer {
+    font-family: @fontmain;
+    margin: 60px auto 40px;
+    max-width: 95%;
+    text-align: center;
+    width: 600px;
+
+    hr, p {
+        margin: 5px 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            font-size: 12px;
+            margin: 0 10px;
+        }
+    }
+}
+
+
+/*--- [CLEARFIX] ---*/
+.tea-to-clear {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+        line-height: 0;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+
+/*--- [PAGE WRAP] ---*/
+.tea-to-wrap {
+    line-height: 1;
+    margin-bottom: 20px;
+    padding: 0;
+
+    .tea-to-field-content p {
+        margin: 5px 0;
+    }
+
+    .del-all-items,
+    .del-all-images {
+        color: darken(@red, 20%);
+        float: right;
+        font-size: 12px;
+        line-height: 20px;
+        text-decoration: none;
+
+        &:hover {
+            color: @red;
+        }
+    }
+}
+
+.inside,
+.tea-to-wrap {
+    textarea,
+    input[type="color"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"] {
+        border: 1px solid lighten(@gray, 20%);
+        line-height: 20px;
+        outline: 0;
+        padding: 4px 10px;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-transition: border ease .5s;
+        -moz-transition: border ease .5s;
+        transition: border ease .5s;
+
+        &:focus {
+            border-color: @main;
+            box-shadow: 0 0 0 2px fade(@main, 30%), inset 0 1px 2px fade(@black, 20%);
+            color: @main;
+            outline: 0;
+        }
+    }
+
+    select {
+        border: 1px solid lighten(@gray, 20%);
+        outline: 0;
+        width: 100%;
+        -webkit-transition: border ease .5s;
+        -moz-transition: border ease .5s;
+        transition: border ease .5s;
+
+        &:focus {
+            border-color: @main;
+            box-shadow: 0 0 0 2px fade(@main, 30%), inset 0 1px 2px fade(@black, 20%);
+            color: @main;
+            outline: 0;
+        }
+    }
+
+    textarea {
+        color: @black;
+        resize: vertical;
+
+        &:focus {
+            color: @black;
+        }
+    }
+
+    input[readonly] {
+        border-color: lighten(@gray, 30%);
+        box-shadow: 0 0 0 2px fade(lighten(@gray, 30%), 40%), inset 0 1px 2px fade(@black, 20%);
+    }
+
+    .tea-to-checkall {
+        float: right;
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+
+/*--- [MOVE'N DROP] ---*/
+.movendrop {
+    font-family: FontAwesome;
+    padding-left: 30px;
+    position: relative;
+
+    &:before {
+        color: @graydarker;
+        content: "\f142";
+        cursor: move;
+        display: block;
+        font-size: 17px;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 25px;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    &.ui-sortable-helper {
+        background-color: fade(@white, 70%);
+        box-shadow: 0 1px 2px fade(@black, 20%);
+        padding-bottom: 4px;
+        padding-top: 4px;
+        -webkit-transition: padding ease .5s, background ease .5s;
+        -moz-transition: padding ease .5s, background ease .5s;
+        transition: padding ease .5s, background ease .5s;
+    }
+}
+
+
+/*--- [TAXONOMIES & WRAPPER] ---*
+.tea-to-term {
+    margin-top: 30px;
+}
+
+.tea_tax_main .tea_to_wrap,
+.tea_tax_wrap .tea_to_wrap {
+    background: transparent;
+    border: none;
+    clear: both;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.tea_tax_wrap .tea_to_wrap > h3 {
+    float: left;
+    margin: 0;
+    padding: 0 10px 0 0;
+    width: 200px;
+}
+.tea_to_wrap .inside {
+    font-size: 13px;
+    line-height: 1.4em;
+    padding: 0 12px 12px;
+}
+.tea_tax_main .tea_to_wrap > .inside {
+    padding: 0;
+}
+.tea_tax_wrap .tea_to_wrap > .inside {
+    margin-left: 210px;
+    padding: 0 10px;
+}
+.meta-box-sortables .tea_to_wrap {
+    border: none;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.meta-box-sortables .tea_to_wrap .tea_title {
+    display: none;
+}
+.meta-box-sortables .tea_to_wrap .inside {
+    padding: 0;
+}
+*/

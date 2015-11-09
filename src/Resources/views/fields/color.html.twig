@@ -1,0 +1,13 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_color{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content color">
+        <input type="text" name="{{ id }}" id="{{ id }}" value="{{ val }}" class="color-picker" maxlength="7" />
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}

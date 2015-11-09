@@ -1,0 +1,43 @@
+/*!
+ * _theme.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+html {
+    background-color: @graylighter;
+
+    &.wp-toolbar {
+        padding-top: 52px;
+    }
+}
+
+h1, h2, h3 {
+    font-family: @fontmain;
+    font-weight: 200;
+
+    strong {
+        font-weight: 400;
+    }
+}
+
+h1 {
+    font-size: 38px;
+    line-height: 46px;
+    margin: 0;
+}
+
+a {
+    color: @main;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        color: @primary;
+    }
+}
+
+.tea-to-main-nav .tea-to-logo svg #water path:last-child {
+    fill: @main;
+}

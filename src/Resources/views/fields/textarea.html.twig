@@ -1,0 +1,13 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_textarea{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content textarea">
+        <textarea name="{{ id }}" id="{{ id }}" rows="{{ rows }}"{{ placeholder }}>{{ val }}</textarea>
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}

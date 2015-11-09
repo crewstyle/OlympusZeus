@@ -1,0 +1,61 @@
+/*!
+ * fields/code.less
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+.tea-to-field-content.code {
+    position: relative;
+
+    .CodeMirror-all {
+        background-color: @graylight;
+        border: 1px solid fade(@gray, 70%);
+        border-radius: 3px;
+        box-shadow: 0 0 0 2px fade(@graylight, 70%),inset 0 1px 2px fade(@black, 10%);
+        padding: 5px;
+
+        &.focused {
+            border-color: @main;
+            box-shadow: 0 0 0 2px fade(@main, 30%),inset 0 1px 2px fade(@black, 10%);
+        }
+
+        .change-mode {
+            float: right;
+            height: 25px;
+            margin: 0 0 5px 0;
+            width: 200px;
+        }
+
+        textarea {
+            background-color: @graydarker;
+            color: @white;
+            display: block;
+            margin: 0;
+            resize: vertical;
+            width: 100%;
+
+            &:focus {
+                color: @white;
+            }
+        }
+    }
+
+    .CodeMirror {
+        clear: both;
+        font-size: 12px;
+        height: auto;
+    }
+
+    .CodeMirror-gutters {
+        background-color: transparent;
+        border: none;
+        border-right: 10px solid transparent;
+        bottom: 0;
+        height: auto;
+    }
+
+    .CodeMirror-linenumber {
+        color: darken(@graylight, 20%);
+    }
+}

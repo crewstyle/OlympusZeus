@@ -1,11 +1,11 @@
 {
   "name": "tea-theme-options",
-  "version": "2.0.0",
-  "homepage": "https://github.com/Takeatea/tea_theme_options",
+  "version": "3.0.0",
+  "homepage": "https://github.com/crewstyle/TeaThemeOptions",
   "authors": [
     "Achraf Chouk <achrafchouk@gmail.com>"
   ],
-  "description": "Simple, easy to use and fully integrated Theme Options for Wordpress, made by Take a tea.",
+  "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
   "main": [
     "assets/css/teato.min.css",
     "assets/js/teato.min.js"
@@ -35,9 +35,10 @@
   ],
   "dependencies": {
     "codemirror": "codemirror/CodeMirror#~4.12.0",
-    "fontawesome": "FortAwesome/Font-Awesome#~4.3.0",
+    "fontawesome": "FortAwesome/Font-Awesome#~4.4.0",
+    "leaflet": "leaflet/leaflet#~0.7.3",
     "pickadate": "amsul/pickadate.js#~3.5.4",
     "selectize": "brianreavis/selectize.js#~0.12.0",
-    "leaflet": "leaflet/leaflet#~0.7.3"
+    "handlebars": "~4.0.3"
   }
 }

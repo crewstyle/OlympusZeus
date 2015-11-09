@@ -1,0 +1,131 @@
+/*!
+ * Tea Theme Options v1.5.0 - "Sogeking no shima deeeeeee - One Piece"
+ * Tea T.O. plugin
+ *
+ * Copyright 2015 Achraf Chouk
+ * Brewed by Achraf Chouk, served by Take a tea.
+ */
+
+
+/*--- [MAIN] ---*/
+.teato-mainwrap .tea-main-nav {
+    padding-top: 3px;
+}
+.teato-mainwrap .tea_to .tea-main-nav li a:focus:after,
+.teato-mainwrap .tea_to .tea-main-nav li a:hover:after,
+.teato-mainwrap .tea_to .tea-main-nav li a.current:after {
+    border: none;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    margin-top: 0;
+    position: absolute;
+    width: 6px;
+    top: 0;
+}
+.teato-mainwrap .tea_to .tea-main-nav li a:focus,
+.teato-mainwrap .tea_to .tea-main-nav li a:hover {
+    color: @primary;
+}
+.teato-mainwrap .tea_to .tea-main-nav li a:focus:after,
+.teato-mainwrap .tea_to .tea-main-nav li a:hover:after {
+    background: @graydarker;
+}
+.teato-mainwrap .tea_to .tea-main-nav li a.current:after {
+    background: @primary;
+}
+.teato-mainwrap .tea-main-nav,
+.teato-mainwrap .tea-inside.inside-section.green {
+    background-color: @primary;
+}
+.teato-mainwrap #poststuff .tea-inside.inside-section a,
+.teato-mainwrap .tea-inside.inside-section a {
+    color: @main;
+}
+.teato-mainwrap #poststuff .tea-inside.inside-section a:focus,
+.teato-mainwrap #poststuff .tea-inside.inside-section a:hover,
+.teato-mainwrap .tea-inside.inside-section a:focus,
+.teato-mainwrap .tea-inside.inside-section a:hover {
+    color: @second;
+}
+
+
+/*--- [CHECBOX] ---*/
+.teato-mainwrap .tea-inside.checkbox label {
+    border-left-color: @second;
+}
+.teato-mainwrap .tea-inside.checkbox label:hover {
+    background-color: @second;
+}
+.teato-mainwrap .tea-inside.checkbox label.selected {
+    border-left-color: @primary;
+    color: @primary;
+}
+
+
+/*--- [FORM] ---*/
+.teato-mainwrap .tea_to_wrap input[type=color]:focus,
+.teato-mainwrap .tea_to_wrap input[type=date]:focus,
+.teato-mainwrap .tea_to_wrap input[type=datetime-local]:focus,
+.teato-mainwrap .tea_to_wrap input[type=datetime]:focus,
+.teato-mainwrap .tea_to_wrap input[type=email]:focus,
+.teato-mainwrap .tea_to_wrap input[type=month]:focus,
+.teato-mainwrap .tea_to_wrap input[type=number]:focus,
+.teato-mainwrap .tea_to_wrap input[type=password]:focus,
+.teato-mainwrap .tea_to_wrap input[type=search]:focus,
+.teato-mainwrap .tea_to_wrap input[type=tel]:focus,
+.teato-mainwrap .tea_to_wrap input[type=text]:focus,
+.teato-mainwrap .tea_to_wrap input[type=time]:focus,
+.teato-mainwrap .tea_to_wrap input[type=url]:focus,
+.teato-mainwrap .tea_to_wrap input[type=week]:focus,
+.teato-mainwrap .tea_to_wrap select:focus,
+.teato-mainwrap .tea_to_wrap textarea:focus {
+    border-color: @main;
+    box-shadow: 0 0 0 2px fade(@main, 30%),inset 0 1px 2px fade(@black, 20%);
+    color: @main;
+}
+.teato-mainwrap .tea_to_wrap textarea:focus {
+    color: @black;
+}
+.teato-mainwrap .tea-inside.textarea .counter.on {
+    background-color: fade(@main, 30%);
+    box-shadow: 0 0 0 2px fade(@main, 30%);
+}
+
+
+/*--- [RADIO] ---*/
+.teato-mainwrap .tea-inside.radio label {
+    border-left-color: @second;
+}
+.teato-mainwrap .tea-inside.radio label:hover {
+    background-color: @second;
+}
+.teato-mainwrap .tea-inside.radio label.selected {
+    border-left-color: @primary;
+    color: @primary;
+}
+
+
+/*--- [SCREEN-META] ---*/
+.teato-mainwrap .tea_to_wrap.tea-screen-meta .contextual-help-tabs .active {
+    border-left-color: @primary;
+}
+.teato-mainwrap .tea_to_wrap.tea-screen-meta .contextual-help-tabs a {
+    color: @main;
+}
+
+
+/*--- [UPLOAD] ---*/
+.teato-mainwrap .tea-inside.upload .upload_image_result div.upload-time a,
+.teato-mainwrap .tea-inside.upload .upload_image_result li.upload-time a {
+    box-shadow: 0 0 0 4px fade(@main, 30%);
+    color: @primary;
+}
+.teato-mainwrap .tea-inside.upload .upload_image_result div.upload-time a:focus,
+.teato-mainwrap .tea-inside.upload .upload_image_result div.upload-time a:hover,
+.teato-mainwrap .tea-inside.upload .upload_image_result li.upload-time a:focus,
+.teato-mainwrap .tea-inside.upload .upload_image_result li.upload-time a:hover {
+    border-color: @main;
+    box-shadow: 0 0 0 4px fade(@main, 60%);
+    color: @main;
+}

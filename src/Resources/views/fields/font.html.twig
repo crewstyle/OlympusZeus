@@ -1,0 +1,28 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_font{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="tea-to-field-content font">
+        {% for k,opt in options %}
+            {% set selected = val == opt.name ? true : false %}
+            {% set style = '' %}
+            {% set for = id ~ '_' ~ k %}
+
+            {% if k != 'sans_serif' %}
+                {% set style = "font-family:'" ~ opt.title ~ "',sans-serif;" %}
+                <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ opt.name ~ ':' ~ opt.sizes }}" />
+            {% endif %}
+
+            <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
+                <span style="{{ style|raw }}">{{ opt.title|raw }}</span>
+                <input type="radio" name="{{ id }}" id="{{ for }}" value="{{ opt.name }}"{{ selected ? ' checked="checked"' : '' }} />
+            </label>
+        {% endfor %}
+
+        <p class="tea-to-description">{{ description|raw }}</p>
+    </div>
+{% endblock %}
