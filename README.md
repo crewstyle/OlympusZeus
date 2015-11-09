@@ -1,10 +1,7 @@
 # Tea Theme Options [![GitHub version](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions.svg)](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions)
 
 
---
-[![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options)
-[![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)
---
+[![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options) [![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)
 
 
 
@@ -84,4 +81,4 @@ You can help us maintaining the Tea T.O. with some tips. It will be so gratefull
 
 Please, read [LICENSE](https://github.com/crewstyle/TeaThemeOptions/blob/master/LICENSE "LICENSE") for more details.
 
-Copyright 20xx [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk").
+Built with ♥ by [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk") ~ (c) since 2015.
