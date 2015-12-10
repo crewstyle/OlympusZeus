@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Controllers\Template\Template
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.2.0
  *
  */
 class Template
@@ -134,7 +134,7 @@ class Template
     /**
      * Build header layout.
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     protected function tplVars()
     {
@@ -143,9 +143,10 @@ class Template
             return;
         }
 
+        //Build notices
+        $notice = array();
         $action = isset($_REQUEST['action']) && 'tea-to-action' == $_REQUEST['action'] ? true : false;
         $for = isset($_REQUEST['for']) ? $_REQUEST['for'] : false;
-        $notice = array();
 
         if ($action && $for && 'settings' == $for) {
                 $notice[] = array('updated', TeaThemeOptions::__('The Tea Theme Options is updated.'));
@@ -154,12 +155,46 @@ class Template
             $notice[] = array('updated', TeaThemeOptions::__('Your Tea Theme Options\' settings are updated.'));
         }
 
+        /**
+         * Display notice screen.
+         *
+         * @param array $notice An array of all notices with their statuses
+         *
+         * @since 3.0.0
+         */
         $notice = apply_filters('tea_to_notice', $notice);
 
         //Works on title
         $title = empty($this->current) 
             ? $this->pages[$this->identifier]['title'] 
             : $this->pages[$this->current]['title'];
+
+        //Build urls
+        $urls = array(
+            'capabilities' => array(
+                'url' => current_user_can(TTO_WP_CAP_MAX) 
+                    ? Action::buildAction($this->identifier, 'footer') . '&make=capabilities' : '',
+                'label' => TeaThemeOptions::__('Update capabilities'),
+            ),
+        );
+
+        /**
+         * Display footer usefull urls.
+         *
+         * @param array $notice An array of all footer usefull urls
+         *
+         * @since 3.2.0
+         */
+        $urls = apply_filters('tea_to_footer_urls', $urls, $this->identifier);
+
+        //Partners
+        $partners = array(
+            array(
+                'url' => 'http://www.takeatea.com',
+                'label' => 'Take a tea',
+                'image' => TTO_URI . '/assets/img/partners/takeatea.png',
+            ),
+        );
 
         //Get all pages with link, icon and slug
         $template = array(
@@ -177,21 +212,13 @@ class Template
                 : $this->pages[$this->current]['submit'],
             'breadcrumb' => $this->breadcrumb,
             'notice' => $notice,
-
-            'urls' => array(
-                'capabilities' => current_user_can(TTO_WP_CAP_MAX) 
-                    ? Action::buildAction($this->identifier, 'footer') . '&make=capabilities' : '',
-                'posttypes' => Action::buildAction($this->identifier, 'footer') . '&make=posttypes',
-                'terms' => Action::buildAction($this->identifier, 'footer') . '&make=terms',
-            ),
+            'urls' => $urls,
+            'partners' => $partners,
 
             //texts
             't_tto_title' => TeaThemeOptions::__('Tea T.O.'),
             't_tto_search' => TeaThemeOptions::__('Search template'),
             't_tto_update' => TeaThemeOptions::__('Update'),
-            't_tto_url_capabilities' => TeaThemeOptions::__('Update capabilities'),
-            't_tto_url_posttypes' => TeaThemeOptions::__('Update post types'),
-            't_tto_url_terms' => TeaThemeOptions::__('Update terms'),
             't_tto_copyright' => TeaThemeOptions::__('&copy; 2015, all rights reserved. Built with ♥ by Achraf Chouk.'),
             't_tto_contact' => sprintf(
                 TeaThemeOptions::__('Please, check  

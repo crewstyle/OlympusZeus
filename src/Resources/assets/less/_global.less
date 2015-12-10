@@ -29,8 +29,19 @@ h1 {
     margin: 0;
 }
 
-#poststuff h2.tea-to-clear {
-    margin-top: 0;
+#poststuff h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px 0;
+
+    &.tea-to-clear {
+        margin-top: 0;
+    }
+}
+
+h3.tea-to-title {
+    font-size: 16px;
+    margin: 16px;
 }
 
 hr {
@@ -54,12 +65,15 @@ hr {
     }
 
     #poststuff {
-        padding: 10px 2% 0;
         max-width: 100%;
         min-width: 92%;
+        padding: 10px 2% 0;
+    }
+    .tea-to-section-field #poststuff {
+        padding: 10px 0 0;
     }
 
-    .tea-to-mainwrap #wpfooter {
+    #wpfooter {
         padding: 10px 19px;
     }
 }
@@ -68,7 +82,7 @@ hr {
 /*--- [FOOTER] ---*/
 .tea-to-footer {
     font-family: @fontmain;
-    margin: 60px auto 40px;
+    margin: 60px auto 0;
     max-width: 95%;
     text-align: center;
     width: 600px;
@@ -91,7 +105,22 @@ hr {
             display: inline-block;
             font-size: 12px;
             margin: 0 10px;
+
+            a {
+                display: block;
+            }
         }
+
+        &.tea-to-f-partners {
+            margin-top: 30px;
+        }
+    }
+
+    .tea-to-f-links {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
     }
 }
 

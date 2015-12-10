@@ -1,3 +1,7 @@
+## 3.2.0 (December 10, 2015)
+Fix hooks on post types list page.
+Fix some CSS displays.
+
 ## 3.1.0 (November 09, 2015)
 Use Behat Transliterator script in vendor.
 

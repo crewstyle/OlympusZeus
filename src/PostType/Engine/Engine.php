@@ -24,7 +24,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage PostType\Engine\Engine
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.0
  *
  */
 class Engine
@@ -60,19 +60,25 @@ class Engine
     protected $posttypes = array();
 
     /**
+     * @var boolean
+     */
+    protected $registered = false;
+
+    /**
      * Constructor.
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     public function __construct()
     {
-        //Initialize all default configurations
-        $this->posttypes = TeaThemeOptions::getConfigs(self::getIndex());
+        //Instanciate Hook
         $this->hook = new Hook();
 
         //Add WP Hooks
         if (!TTO_IS_ADMIN) {
-            //$this->hook->setPostTypes($this->posttypes);
+            $this->posttypes = TeaThemeOptions::getConfigs(self::getIndex());
+            $this->hook->setPostTypes($this->posttypes);
+            $this->registered = true;
         }
     }
 
@@ -120,7 +126,7 @@ class Engine
     public function buildPostTypes()
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!TTO_IS_ADMIN || $this->registered) {
             return;
         }
 

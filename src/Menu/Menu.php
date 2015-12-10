@@ -28,7 +28,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Menu\Menu
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.2.0
  *
  */
 class Menu
@@ -60,22 +60,17 @@ class Menu
      * @param array $options Define if we can display special pages
      * @todo Networks!
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     public function __construct($identifier, $options)
     {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
         //Build options
         $opts = array_merge(array(
-            'networks' => true,
+            //'networks' => true,
+            //'notifications' => true,
             'posttypes' => true,
             'search' => true,
             'terms' => true,
-            'notifications' => true,
         ), $options);
 
         //Instanciate Network
@@ -88,7 +83,12 @@ class Menu
         $this->search = new SearchEngine($opts['search']);
 
         //Instanciate Term
-        $this->term = new TermEngine($opts['terms']);
+        $this->term = new TermEngine($opts['posttypes'], $opts['terms']);
+
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
 
         //Instanciate Menu engine
         $this->menu = new MenuEngine($identifier, $opts);

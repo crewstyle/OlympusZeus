@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage PostType\Hook\Hook
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.0
  *
  */
 class Hook
@@ -467,9 +467,9 @@ class Hook
      * @param array $columns Contains list of columns
      * @return array $columns Contains list of columns
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
-    public function hookPostTypeColumn($columns)
+    public function hookPostTypeColumns($columns)
     {
         //Get current post type
         $current = isset($_GET['post_type']) ? $_GET['post_type'] : '';
@@ -479,9 +479,17 @@ class Hook
             return $columns;
         }
 
-        //Do action to add extra columns
-        $columns = apply_filters('tea_to_posttype_' . $current . '_column', $columns);
-        return $columns;
+        /**
+         * Filter the column headers for a list table on a specific screen.
+         *
+         * The dynamic portion of the hook name, `$current`, refers to the
+         * post type of the current edit screen ID.
+         *
+         * @param array $columns An array of column headers.
+         *
+         * @since 3.2.0
+         */
+        return apply_filters('tto_manage_edit-' . $current . '_columns', $columns);
     }
 
     /**
@@ -490,9 +498,9 @@ class Hook
      * @param string $column Contains current column ID
      * @param integer $post_id Contains current post ID
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
-    public function hookPostTypeColumnCustom($column, $post_id)
+    public function hookPostTypeCustomColumn($column, $post_id)
     {
         //Get current post type
         $current = isset($_GET['post_type']) ? $_GET['post_type'] : '';
@@ -502,8 +510,15 @@ class Hook
             return;
         }
 
-        //Do action
-        do_action('tea_to_posttype_' . $current . '_column_' . $column, $post_id);
+        /**
+         * Fires for each custom column of a specific post type in the Posts list table.
+         *
+         * @param string $column The name of the column to display.
+         * @param int $post_id The current post ID.
+         *
+         * @since 3.2.0
+         */
+        do_action('tto_manage_' . $current . '_posts_custom_column', $column, $post_id);
     }
 
     /**
@@ -560,7 +575,7 @@ class Hook
      * @return array $posttype
      * @uses register_post_type()
      *
-     * @since 3.1.0
+     * @since 3.2.0
      */
     public function registerPostType($posttype = array())
     {
@@ -615,9 +630,11 @@ class Hook
         add_rewrite_tag('%' . $slug . '%', '([^/]+)', $slug . '=');
         add_permastruct($slug, $structure, false);
 
-        //Custom columns
-        add_filter('manage_' . $slug . '_posts_columns', array(&$this, 'hookPostTypeColumn'));
-        add_filter('manage_' . $slug . '_posts_custom_column', array(&$this, 'hookPostTypeColumnCustom'), 10, 2);
+        //Manage columns
+        if (TTO_IS_ADMIN) {
+            add_filter('manage_edit-' . $slug . '_columns', array(&$this, 'hookPostTypeColumns'), 10);
+            add_action('manage_' . $slug . '_posts_custom_column', array(&$this, 'hookPostTypeCustomColumn'), 11, 2);
+        }
 
         return $posttype;
     }
@@ -632,6 +649,7 @@ class Hook
      */
     public function setPostTypes($pts)
     {
+        //Define post types
         $this->posttypes = $pts;
 
         //Add WP Hooks

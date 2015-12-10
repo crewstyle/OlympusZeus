@@ -3,6 +3,7 @@
 namespace crewstyle\TeaThemeOptions\PostType;
 
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
+use crewstyle\TeaThemeOptions\Controllers\Action\Action;
 use crewstyle\TeaThemeOptions\PostType\Engine\Engine;
 
 /**
@@ -24,11 +25,16 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage PostType\PostType
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.2.0
  *
  */
 class PostType
 {
+    /**
+     * @var boolean
+     */
+    protected $enable = true;
+
     /**
      * @var PostTypeEngine
      */
@@ -50,12 +56,14 @@ class PostType
      * @param boolean $enable Define if Post types engine is enabled
      * @param boolean $filters Define if we need to call filters
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     public function __construct($enable = true, $filters = true)
     {
+        $this->enable = $enable;
+
         //Check post types engine
-        if (!$enable) {
+        if (!$this->enable) {
             return;
         }
 
@@ -63,6 +71,8 @@ class PostType
         $this->engine = new Engine();
 
         //Hooks
+        add_filter('tea_to_footer_urls', array(&$this, 'hookFooterUrls'), 10, 2);
+
         /*if ($filters) {
             add_filter('tea_to_menu_check', array(&$this, 'hookMenuCheck'), 10, 2);
             add_filter('tea_to_menu_init', array(&$this, 'hookMenuInit'), 10, 3);
@@ -76,12 +86,12 @@ class PostType
      * @param array $configs Array containing all configurations
      * @param array $contents Contains all data
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     public function addPostType($configs = array(), $contents = array())
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!TTO_IS_ADMIN || !$this->enable) {
             return;
         }
 
@@ -91,12 +101,12 @@ class PostType
     /**
      * Register post types.
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
     public function buildPostTypes()
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!TTO_IS_ADMIN || !$this->enable) {
             return;
         }
 
@@ -137,6 +147,23 @@ class PostType
     public static function getTemplate()
     {
         return (string) self::$template;
+    }
+
+    /**
+     * Hook special filter
+     *
+     * @return array $urls
+     * @return string $identifier
+     *
+     * @since 3.2.0
+     */
+    public function hookFooterUrls($urls, $identifier) {
+        $urls['posttypes'] = array(
+            'url' => Action::buildAction($identifier, 'footer') . '&make=posttypes',
+            'label' => TeaThemeOptions::__('Update post types'),
+        );
+
+        return $urls;
     }
 
     /**

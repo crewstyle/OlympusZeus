@@ -1,7 +1,11 @@
 {% set formAction = 'admin.php?page=' ~ currentPage ~ '&action=tea-to-action&for=settings' %}
 
+{% set fjson = fields|json_encode() %}
+{% set hstyle = 'fields\\/section.html.twig' in fjson ? ' tea-to-section-field' : '' %}
+{% set hstyle = 'fields\\/search.html.twig' in fjson ? hstyle ~ ' tea-to-search-field' : hstyle %}
+
 <!-- Tea Theme Options -->
-<div class="wrap tea-to-wrap">
+<div class="wrap tea-to-wrap{{ hstyle }}">
     <!-- Menu block -->
     <nav class="tea-to-main-nav" role="navigation">
         <a href="admin.php?page={{ identifier }}" class="tea-to-logo">
@@ -79,12 +83,15 @@
 
     <!-- Footer block -->
     <footer class="tea-to-footer">
-        {% if urls.capabilities %}
-            <ul>
-                <li><a href="{{ urls.capabilities }}"><b>{{ t_tto_url_capabilities|raw }}</b></a></li>
-                <li><a href="{{ urls.posttypes }}"><b>{{ t_tto_url_posttypes|raw }}</b></a></li>
-                <li><a href="{{ urls.terms }}"><b>{{ t_tto_url_terms|raw }}</b></a></li>
-            </ul>
+        {% if urls %}
+            <p class="tea-to-f-links">
+                {% for k, u in urls %}
+                    <a href="{{ u.url }}" class="{{ k }}"><b>{{ u.label|raw }}</b></a>
+                    {% if not loop.last %}
+                        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                    {% endif %}
+                {% endfor %}
+            </p>
         {% endif %}
 
         <hr/>
@@ -92,6 +99,20 @@
         <p>{{ t_tto_contact|raw }}</p>
         <p>{{ t_tto_copyright|raw }}</p>
         <p><small>{{ t_tto_version|raw }}</small><br/><small>{{ t_tto_quote|raw }}</small></p>
+
+        <hr/>
+
+        {% if partners %}
+            <ul class="tea-to-f-partners">
+                {% for p in partners %}
+                    <li>
+                        <a href="{{ p.url }}" title="{{ p.label|raw }}" class="tea-to-tooltip" target="_blank">
+                            <img src="{{ p.image }}" alt="{{ p.label|raw }}" />
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </footer>
 
     <div class="tea-to-modal-backdrop"></div>

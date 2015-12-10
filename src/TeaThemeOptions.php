@@ -14,7 +14,7 @@ use crewstyle\TeaThemeOptions\Translate\Translate;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 3.1.0
+ * Version: 3.2.0
  * Snippet URI: https://github.com/crewstyle/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -61,11 +61,11 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The value defining if we are in admin panel or not
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '3.1.0');
+defined('TTO_VERSION')      or define('TTO_VERSION', '3.2.0');
 //The current baseline
 defined('TTO_QUOTE')        or define('TTO_QUOTE', 'Spartans! Ready your breakfast and eat hearty... For tonight, we dine in hell! ~ 300');
 //The current version
-defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '310');
+defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '320');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -100,7 +100,7 @@ defined('TTO_WP_CAP_MAX')   or define('TTO_WP_CAP_MAX', 'manage_tea_theme_option
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.0
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
@@ -133,9 +133,9 @@ class TeaThemeOptions
      * @internal param bool $connect Define if we can display connections page
      * @internal param bool $elastic Define if we can display elasticsearch page
      *
-     * @since 3.0.0
+     * @since 3.2.0
      */
-    public function __construct($identifier = 'tea_theme_options', $options = array())
+    public function __construct($identifier = 'tea-to-options', $options = array())
     {
         //Build identifier
         $idx = trim($identifier);
@@ -434,29 +434,5 @@ class TeaThemeOptions
         }
 
         return Render::urlize($text, $separator);
-    }
-}
-
-/**
- * Return a value from options
- *
- * @since 3.0.0
- */
-if (!function_exists('_get_option')) {
-    function _get_option($option, $default = '', $transient = false)
-    {
-        return TeaThemeOptions::getOption($option, $default, $transient);
-    }
-}
-
-/**
- * Set a value into options
- *
- * @since 3.0.0
- */
-if (!function_exists('_set_option')) {
-    function _set_option($option, $value, $transient = false)
-    {
-        TeaThemeOptions::setOption($option, $value, $transient);
     }
 }

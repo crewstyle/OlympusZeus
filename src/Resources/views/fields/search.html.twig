@@ -1,5 +1,7 @@
 {% extends "_pages.html.twig" %}
 
+{% set post = 1 %}
+
 {% block id %}{{ id }}_search_{{ mode }}{% endblock %}
 {% block label %}{% endblock %}
 
@@ -43,15 +45,19 @@
     </form>
 
     {% if count > -1 %}
-        <div class="error below-h2 tea-to-updated headsup">
-            {% if count == 0 %}
+        {% if count == 0 %}
+            <div class="error below-h2 tea-to-error headsup">
                 <p>{{ t_es_notify_0|raw }}</p>
-            {% elseif count == 1 %}
+            </div>
+        {% elseif count == 1 %}
+            <div class="error below-h2 tea-to-updated headsup">
                 <p>{{ t_es_notify_1|raw }}</p>
-            {% else %}
+            </div>
+        {% else %}
+            <div class="error below-h2 tea-to-updated headsup">
                 <p>{{ t_es_notify_s|raw }}</p>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

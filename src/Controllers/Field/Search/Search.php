@@ -118,8 +118,7 @@ class Search extends Field
                 your configuration.'),
 
             //-> notifications
-            't_es_notify_0' => TeaThemeOptions::__('Something went wrong: it seems you
-                forgot to attach contents to the current page.'),
+            't_es_notify_0' => TeaThemeOptions::__('No post has already been indexed. Let\'s do it!'),
             't_es_notify_1' => TeaThemeOptions::__('Great job: your post has been indexed!'),
             't_es_notify_s' => sprintf(
                 TeaThemeOptions::__('Well done: %d posts have been indexed!'),

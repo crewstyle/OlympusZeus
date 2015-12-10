@@ -9,11 +9,12 @@ $titles = array(
 $details = array(
     array(
         'type' => 'section',
+        'color' => 'green',
         'content' => __('<h1 style="text-align:center">Your simple, easy to use<br/>and fully integrated<br/><strong>theme options for Wordpress</strong></h1>', TTO_I18N)
     ),
     array(
         'type' => 'section',
-        'color' => 'green',
+        //'color' => 'green',
         'identifier' => 'section-teato-logo',
         'svg' => TTO_URI . '/assets/img/teato-logo.svg',
         'content' => __('<h2>The <a href="https://github.com/crewstyle/TeaThemeOptions" title="Tea Theme Options" class="openit">Tea Theme Options</a> (or <b>Tea T.O.</b>) allows you to easily add professional looking theme options panels to your WordPress theme.</h2>
@@ -27,6 +28,7 @@ $details = array(
     ),
     array(
         'type' => 'section',
+        'color' => 'green',
         'identifier' => 'section-teato-cogs',
         'svg' => TTO_URI . '/assets/img/teato-cogs.svg',
         'content' => __('<h2>The <b>Tea T.O.</b> is built for <a href="http://wordpress.org" target="_blank">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>
@@ -39,7 +41,7 @@ $details = array(
     ),
     array(
         'type' => 'section',
-        'color' => 'green',
+        //'color' => 'green',
         'identifier' => 'section-teato-wp',
         'svg' => TTO_URI . '/assets/img/teato-wp.svg',
         'content' => __('<h2>How to get values in your Wordpress template?</h2>
