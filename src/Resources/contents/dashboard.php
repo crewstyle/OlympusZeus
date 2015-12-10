@@ -10,7 +10,7 @@ $details = array(
     array(
         'type' => 'section',
         'color' => 'green',
-        'content' => __('<h1 style="text-align:center">Your simple, easy to use<br/>and fully integrated<br/><strong>theme options for Wordpress</strong></h1>', TTO_I18N)
+        'content' => __('<h1>Your simple, easy to use<br/>and fully integrated<br/><strong>theme options for Wordpress</strong></h1>', TTO_I18N)
     ),
     array(
         'type' => 'section',
@@ -30,7 +30,7 @@ $details = array(
         'type' => 'section',
         'color' => 'green',
         'identifier' => 'section-teato-cogs',
-        'svg' => TTO_URI . '/assets/img/teato-cogs.svg',
+        'svg' => TTO_URI . '/assets/img/teato-cogs-w.svg',
         'content' => __('<h2>The <b>Tea T.O.</b> is built for <a href="http://wordpress.org" target="_blank">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>
             <ul>
                 <li><b>Custom Post Types</b> - Here is the simpliest way to create Wordpress Custom Post Types! A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way.</li>

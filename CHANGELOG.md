@@ -1,3 +1,6 @@
+## 3.2.1 (December 10, 2015)
+Fix <Section> CSS.
+
 ## 3.2.0 (December 10, 2015)
 Fix hooks on post types list page.
 Fix some CSS displays.
