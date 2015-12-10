@@ -13,7 +13,11 @@ use crewstyle\TeaThemeOptions\Controllers\Field\Field;
  *     'type' => 'upload',
  *     'title' => 'Upload',
  *     'id' => 'simple_upload',
- *     'description' => 'Simple description to upload panel'
+ *     'description' => 'Simple description to upload panel',
+ *     'alt' => 'Image title instead of alternative text',
+ *     'caption' => 'Custom url instead of caption text',
+ *     'multiple' => false,
+ *     'expand' => true,
  * )
  *
  */
@@ -32,7 +36,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Controllers\Field\Upload
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.2.3
  *
  */
 class Upload extends Field
@@ -55,7 +59,7 @@ class Upload extends Field
      * @param array $content Contains all field data
      * @param array $details Contains all field options
      *
-     * @since 3.0.0
+     * @since 3.2.3
      */
     public function prepareField($content, $details = array())
     {
@@ -73,6 +77,8 @@ class Upload extends Field
             'description' => isset($content['description']) ? $content['description'] : '',
             'multiple' => isset($content['multiple']) && $content['multiple'] ? true : false,
             'expand' => isset($content['expand']) && $content['expand'] ? true : false,
+            'alt' => isset($content['alt']) ? $content['alt'] : '',
+            'caption' => isset($content['caption']) ? $content['caption'] : '',
             'can_upload' => $this->getCanUpload(),
 
             //details
@@ -87,14 +93,16 @@ class Upload extends Field
             't_delete_all' => TeaThemeOptions::__('Delete all medias'),
             't_cannot_upload' => TeaThemeOptions::__('It seems you are not able to upload files.'),
 
-            't_alt' => TeaThemeOptions::__('Alternative text'),
-            't_caption' => TeaThemeOptions::__('Caption'),
             't_sizes' => TeaThemeOptions::__('Available sizes'),
             't_size_full' => TeaThemeOptions::__('Full size media'),
         );
 
         //Fix bug with PDF
         $template['library'] = 'pdf' == $template['library'] ? 'application/pdf' : $template['library'];
+
+        //Get titles
+        $template['t_alt'] = !empty($template['alt']) ? $template['alt'] : TeaThemeOptions::__('Alternative text');
+        $template['t_caption'] = !empty($template['caption']) ? $template['caption'] : TeaThemeOptions::__('Caption');
 
         //Retrieve field value
         $template['val'] = $this->getFieldValue($details, $template['default'], $content['id'], true);

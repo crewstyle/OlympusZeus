@@ -1,4 +1,4 @@
-# Tea Theme Options [![GitHub version](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions.svg)](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions)
+# Tea Theme Options [![GitHub version](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions.svg)](https://packagist.org/packages/crewstyle/tea-theme-options)
 
 
 [![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options) [![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](http://opensource.org/licenses/MIT)

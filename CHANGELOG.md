@@ -1,3 +1,6 @@
+## 3.2.3 (December 10, 2015)
+Enhance <Upload> field with labels customization.
+
 ## 3.2.2 (December 10, 2015)
 Fix global headings CSS.
 

@@ -17,7 +17,7 @@
                 {% set for = multiple ? id ~ '_' ~ item.id : id %}
                 {% set display = 'image' == library and item.sizes.thumbnail ? item.sizes.thumbnail.url : item.url %}
 
-                <fieldset{{ multiple ? ' class="movendrop"' : '' }} data-u="{{ item.id }}">
+                <fieldset class="{{ multiple ? 'movendrop' : '' }}{{ expand ? ' expand' : '' }}" data-u="{{ item.id }}">
                     {% if can_upload %}
                         <a href="#deleteMedia" class="del-media"><i class="fa fa-times"></i></a>
                     {% endif %}
@@ -38,39 +38,41 @@
                         <br/><small>{{ item.name }}</small>
                     </figure>
 
-                    <figcaption class="u-details">
-                        <div class="u-texts">
-                            <p>
-                                <label for="{{ for }}-alt">{{ t_alt|raw }}</label>
-                                <input type="text" name="{{ name }}[alt]" id="{{ for }}-alt" value="{{ item.alt }}" />
-                            </p>
-                            <p>
-                                <label for="{{ for }}-caption">{{ t_caption|raw }}</label>
-                                <input type="text" name="{{ name }}[caption]" id="{{ for }}-caption" value="{{ item.caption }}" />
-                            </p>
-                        </div>
+                    {% if expand %}
+                        <figcaption class="u-details">
+                            <div class="u-texts">
+                                <p>
+                                    <label for="{{ for }}-alt">{{ t_alt|raw }}</label>
+                                    <input type="text" name="{{ name }}[alt]" id="{{ for }}-alt" value="{{ item.alt }}" />
+                                </p>
+                                <p>
+                                    <label for="{{ for }}-caption">{{ t_caption|raw }}</label>
+                                    <input type="text" name="{{ name }}[caption]" id="{{ for }}-caption" value="{{ item.caption }}" />
+                                </p>
+                            </div>
 
-                        <div class="u-sizes">
-                            <h3>{{ t_sizes|raw }}</h3>
+                            <div class="u-sizes">
+                                <h3>{{ t_sizes|raw }}</h3>
 
-                            <ul class="u-lists">
-                                <li>
-                                    <a href="{{ item.url }}" title="{{ t_size_full|raw }}" class="tea-to-tooltip" target="_blank">{{ item.width }} x {{ item.height }} <i class="fa fa-external-link"></i></a>
-                                </li>
-
-                                {% for k, i in item.sizes %}
+                                <ul class="u-lists">
                                     <li>
-                                        <input type="hidden" name="{{ name }}[sizes][{{ k }}][height]" value="{{ i.height }}" />
-                                        <input type="hidden" name="{{ name }}[sizes][{{ k }}][name]" value="{{ i.name }}" />
-                                        <input type="hidden" name="{{ name }}[sizes][{{ k }}][url]" value="{{ i.url }}" />
-                                        <input type="hidden" name="{{ name }}[sizes][{{ k }}][width]" value="{{ i.width }}" />
-
-                                        <a href="{{ i.url }}" title="{{ i.name }}" class="tea-to-tooltip" target="_blank">{{ i.width }} x {{ i.height }} <i class="fa fa-external-link"></i></a>
+                                        <a href="{{ item.url }}" title="{{ t_size_full|raw }}" class="tea-to-tooltip" target="_blank">{{ item.width }} x {{ item.height }} <i class="fa fa-external-link"></i></a>
                                     </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </figcaption>
+
+                                    {% for k, i in item.sizes %}
+                                        <li>
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][height]" value="{{ i.height }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][name]" value="{{ i.name }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][url]" value="{{ i.url }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][width]" value="{{ i.width }}" />
+
+                                            <a href="{{ i.url }}" title="{{ i.name }}" class="tea-to-tooltip" target="_blank">{{ i.width }} x {{ i.height }} <i class="fa fa-external-link"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </figcaption>
+                    {% endif %}
                 </fieldset>
             {% endfor %}
         </div>
