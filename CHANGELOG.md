@@ -1,3 +1,6 @@
+## 3.2.2 (December 10, 2015)
+Fix global headings CSS.
+
 ## 3.2.1 (December 10, 2015)
 Fix <Section> CSS.
 
