@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Term\Hook\Hook
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.4
  *
  */
 class Hook
@@ -152,7 +152,7 @@ class Hook
      * @param string|object $term Contain term used by function
      * @uses add_meta_box()
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookFieldsDisplay($term)
     {
@@ -195,7 +195,7 @@ class Hook
             //Prefix
             $prefix = $isobject 
                 ? str_replace(array('%TERM%', '%SLUG%'), array($term->term_id, $current), Engine::getPrefix())
-                : $current . '-';
+                : $current.'-';
 
             //Get template
             $tpl = $field->prepareField($ctn, array(
@@ -214,7 +214,7 @@ class Hook
      * @return number|void
      * @uses update_post_meta()
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookFieldsSave($term_id)
     {
@@ -259,7 +259,7 @@ class Hook
             $value = isset($request[$ctn['id']]) ? $request[$ctn['id']] : '';
             $prefix = str_replace(array('%TERM%', '%SLUG%'), array($term_id, $current), Engine::getPrefix());
 
-            TeaThemeOptions::updateOption($prefix . $ctn['id'], $value);
+            TeaThemeOptions::updateOption($prefix.$ctn['id'], $value);
         }
 
         return;

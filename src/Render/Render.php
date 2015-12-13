@@ -27,7 +27,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Render\Render
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.4
  *
  */
 class Render
@@ -59,7 +59,7 @@ class Render
      * @param string $template Twig template to display
      * @param array $vars Contains all field options
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public static function render($template, $vars)
     {
@@ -70,7 +70,7 @@ class Render
 
         //Build Twig renderer
         $twig = new Twig_Environment($loader, array(
-            'cache' => TTO_PATH . '/../_cache',
+            'cache' => TTO_PATH.'/../_cache',
         ));
 
         //Get footer and header from WordPress

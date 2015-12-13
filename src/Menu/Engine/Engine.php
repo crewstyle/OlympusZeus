@@ -19,6 +19,8 @@ if (!defined('TTO_CONTEXT')) {
 
 
 //----------------------------------------------------------------------------//
+defined('ME_URI') or define('ME_URI', TTO_URI.'/assets/img/teato-tiny.svg');
+defined('ME_TEMPLATE') or define('ME_TEMPLATE', TTO_PATH.'/Resources/contents/dashboard.php');
 
 /**
  * TTO Menu
@@ -28,7 +30,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Menu\Engine\Engine
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.1.0
+ * @since 3.2.4
  *
  */
 class Engine
@@ -41,7 +43,7 @@ class Engine
     /**
      * @var string
      */
-    protected $iconSmall = TTO_URI.'/assets/img/teato-tiny.svg';
+    protected $iconSmall = ME_URI;
 
     /**
      * @var string
@@ -56,7 +58,7 @@ class Engine
     /**
      * @var string
      */
-    protected static $template = TTO_PATH.'/Resources/contents/dashboard.php';
+    protected static $template = ME_TEMPLATE;
 
     /**
      * Constructor.

@@ -16,6 +16,7 @@ if (!defined('TTO_CONTEXT')) {
 
 
 //----------------------------------------------------------------------------//
+defined('PT_TEMPLATE') or define('PT_TEMPLATE', TTO_PATH.'/Resources/contents/posttype.php');
 
 /**
  * TTO PostType
@@ -48,7 +49,7 @@ class PostType
     /**
      * @var string
      */
-    protected static $template = TTO_PATH.'/Resources/contents/posttype.php';
+    protected static $template = PT_TEMPLATE;
 
     /**
      * Constructor.

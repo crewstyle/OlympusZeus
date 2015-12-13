@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Controllers\Template\Template
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.0
+ * @since 3.2.4
  *
  */
 class Template
@@ -134,7 +134,7 @@ class Template
     /**
      * Build header layout.
      *
-     * @since 3.2.0
+     * @since 3.2.4
      */
     protected function tplVars()
     {
@@ -173,7 +173,7 @@ class Template
         $urls = array(
             'capabilities' => array(
                 'url' => current_user_can(TTO_WP_CAP_MAX) 
-                    ? Action::buildAction($this->identifier, 'footer') . '&make=capabilities' : '',
+                    ? Action::buildAction($this->identifier, 'footer').'&make=capabilities' : '',
                 'label' => TeaThemeOptions::__('Update capabilities'),
             ),
         );
@@ -192,7 +192,7 @@ class Template
             array(
                 'url' => 'http://www.takeatea.com',
                 'label' => 'Take a tea',
-                'image' => TTO_URI . '/assets/img/partners/takeatea.png',
+                'image' => TTO_URI.'/assets/img/partners/takeatea.png',
             ),
         );
 
@@ -200,7 +200,7 @@ class Template
         $template = array(
             'identifier' => $this->identifier,
             'version' => TTO_VERSION,
-            'icon' => file_get_contents(TTO_URI . '/assets/img/teato.svg', FILE_USE_INCLUDE_PATH),
+            'icon' => file_get_contents(TTO_URI.'/assets/img/teato.svg', FILE_USE_INCLUDE_PATH),
             'currentPage' => empty($this->current) ? $this->identifier : $this->current,
 
             'title' => empty($title) ? TeaThemeOptions::__('Tea Theme Options') : $title,

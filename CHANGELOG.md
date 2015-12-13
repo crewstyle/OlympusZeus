@@ -1,3 +1,6 @@
+## 3.2.4 (December 13, 2015)
+Fix parse error from STATICS on class definition.
+
 ## 3.2.3 (December 10, 2015)
 Enhance <Upload> field with labels customization.
 

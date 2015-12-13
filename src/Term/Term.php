@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Term\Term
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.0
+ * @since 3.2.4
  *
  */
 class Term
@@ -103,11 +103,11 @@ class Term
      * @return array $urls
      * @return string $identifier
      *
-     * @since 3.2.0
+     * @since 3.2.4
      */
     public function hookFooterUrls($urls, $identifier) {
         $urls['terms'] = array(
-            'url' => Action::buildAction($identifier, 'footer') . '&make=terms',
+            'url' => Action::buildAction($identifier, 'footer').'&make=terms',
             'label' => TeaThemeOptions::__('Update terms'),
         );
 

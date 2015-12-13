@@ -16,6 +16,7 @@ if (!defined('TTO_CONTEXT')) {
 
 
 //----------------------------------------------------------------------------//
+defined('SE_TEMPLATE') or define('SE_TEMPLATE', TTO_PATH . '/Resources/contents/search.php');
 
 /**
  * TTO Search
@@ -25,7 +26,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Search\Search
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 3.2.4
  *
  */
 class Search
@@ -63,7 +64,7 @@ class Search
     /**
      * @var string
      */
-    protected static $template = TTO_PATH.'/Resources/contents/search.php';
+    protected static $template = SE_TEMPLATE;
 
     /**
      * Constructor.
@@ -230,10 +231,10 @@ class Search
      *
      * @return array $enabled
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookTemplateSpecial($enabled, $identifier) {
-        $enabled[] = $identifier . self::getSlug();
+        $enabled[] = $identifier.self::getSlug();
         return $enabled;
     }
 

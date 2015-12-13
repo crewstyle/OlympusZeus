@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage PostType\Hook\Hook
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.0
+ * @since 3.2.4
  *
  */
 class Hook
@@ -145,7 +145,7 @@ class Hook
      *
      * @uses add_meta_box()
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookFieldsDisplay()
     {
@@ -207,7 +207,7 @@ class Hook
 
             //Add meta box
             add_meta_box(
-                $current . '-meta-box-' . $id,
+                $current.'-meta-box-'.$id,
                 $title,
                 array(&$field, 'hookFieldBuild'),
                 $current,
@@ -228,7 +228,7 @@ class Hook
      * @uses register_setting()
      * @uses add_settings_field()
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookFieldsPermalink()
     {
@@ -265,11 +265,11 @@ class Hook
                 TeaThemeOptions::setOption($opt, $value);
             }
             else {
-                $value = TeaThemeOptions::getOption($opt, '/%' . $pt['slug'] . '%-%post_id%');
+                $value = TeaThemeOptions::getOption($opt, '/%'.$pt['slug'].'%-%post_id%');
             }
 
             //Define metabox title
-            $title = $pt['labels']['name'] . ' <code>%' . $pt['slug'] . '%</code>';
+            $title = $pt['labels']['name'].' <code>%'.$pt['slug'].'%</code>';
 
             //Add fields
             add_settings_field(
@@ -293,7 +293,7 @@ class Hook
      *
      * @uses update_post_meta()
      *
-     * @since 3.0.0
+     * @since 3.2.4
      */
     public function hookFieldsSave()
     {
@@ -320,7 +320,7 @@ class Hook
         //Update all metas
         foreach ($this->contents[$post->post_type] as $ctn) {
             $value = isset($_REQUEST[$ctn['id']]) ? $_REQUEST[$ctn['id']] : '';
-            update_post_meta($post->ID, $post->post_type . '-' . $ctn['id'], $value);
+            update_post_meta($post->ID, $post->post_type.'-'.$ctn['id'], $value);
         }
 
         return true;
@@ -467,7 +467,7 @@ class Hook
      * @param array $columns Contains list of columns
      * @return array $columns Contains list of columns
      *
-     * @since 3.2.0
+     * @since 3.2.4
      */
     public function hookPostTypeColumns($columns)
     {
@@ -489,7 +489,7 @@ class Hook
          *
          * @since 3.2.0
          */
-        return apply_filters('tto_manage_edit-' . $current . '_columns', $columns);
+        return apply_filters('tto_manage_edit-'.$current.'_columns', $columns);
     }
 
     /**
@@ -498,7 +498,7 @@ class Hook
      * @param string $column Contains current column ID
      * @param integer $post_id Contains current post ID
      *
-     * @since 3.2.0
+     * @since 3.2.4
      */
     public function hookPostTypeCustomColumn($column, $post_id)
     {
@@ -518,7 +518,7 @@ class Hook
          *
          * @since 3.2.0
          */
-        do_action('tto_manage_' . $current . '_posts_custom_column', $column, $post_id);
+        do_action('tto_manage_'.$current.'_posts_custom_column', $column, $post_id);
     }
 
     /**
@@ -575,7 +575,7 @@ class Hook
      * @return array $posttype
      * @uses register_post_type()
      *
-     * @since 3.2.0
+     * @since 3.2.4
      */
     public function registerPostType($posttype = array())
     {
@@ -624,16 +624,16 @@ class Hook
         $opt = str_replace('%SLUG%', $slug, Engine::getPermalink());
 
         //Get value
-        $structure = TeaThemeOptions::getOption($opt, '/%' . $slug . '%-%post_id%');
+        $structure = TeaThemeOptions::getOption($opt, '/%'.$slug.'%-%post_id%');
 
         //Change structure
-        add_rewrite_tag('%' . $slug . '%', '([^/]+)', $slug . '=');
+        add_rewrite_tag('%'.$slug.'%', '([^/]+)', $slug.'=');
         add_permastruct($slug, $structure, false);
 
         //Manage columns
         if (TTO_IS_ADMIN) {
-            add_filter('manage_edit-' . $slug . '_columns', array(&$this, 'hookPostTypeColumns'), 10);
-            add_action('manage_' . $slug . '_posts_custom_column', array(&$this, 'hookPostTypeCustomColumn'), 11, 2);
+            add_filter('manage_edit-'.$slug.'_columns', array(&$this, 'hookPostTypeColumns'), 10);
+            add_action('manage_'.$slug.'_posts_custom_column', array(&$this, 'hookPostTypeCustomColumn'), 11, 2);
         }
 
         return $posttype;
