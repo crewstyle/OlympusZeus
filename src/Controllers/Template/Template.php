@@ -25,7 +25,7 @@ if (!defined('TTO_CONTEXT')) {
  * @package Tea Theme Options
  * @subpackage Controllers\Template\Template
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.4
+ * @since 3.2.5
  *
  */
 class Template
@@ -134,7 +134,7 @@ class Template
     /**
      * Build header layout.
      *
-     * @since 3.2.4
+     * @since 3.2.5
      */
     protected function tplVars()
     {
@@ -200,7 +200,7 @@ class Template
         $template = array(
             'identifier' => $this->identifier,
             'version' => TTO_VERSION,
-            'icon' => file_get_contents(TTO_URI.'/assets/img/teato.svg', FILE_USE_INCLUDE_PATH),
+            'icon' => file_get_contents(TTO_PATH.'/../assets/img/teato.svg', FILE_USE_INCLUDE_PATH),
             'currentPage' => empty($this->current) ? $this->identifier : $this->current,
 
             'title' => empty($title) ? TeaThemeOptions::__('Tea Theme Options') : $title,

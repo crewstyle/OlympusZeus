@@ -14,7 +14,7 @@ use crewstyle\TeaThemeOptions\Translate\Translate;
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 3.2.4
+ * Version: 3.2.5
  * Snippet URI: https://github.com/crewstyle/tea_theme_options
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
@@ -61,11 +61,11 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The value defining if we are in admin panel or not
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '3.2.4');
+defined('TTO_VERSION')      or define('TTO_VERSION', '3.2.5');
 //The current baseline
 defined('TTO_QUOTE')        or define('TTO_QUOTE', 'Spartans! Ready your breakfast and eat hearty... For tonight, we dine in hell! ~ 300');
 //The current version
-defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '324');
+defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '325');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration

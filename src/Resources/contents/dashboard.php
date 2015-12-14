@@ -16,7 +16,7 @@ $details = array(
         'type' => 'section',
         //'color' => 'green',
         'identifier' => 'section-teato-logo',
-        'svg' => TTO_URI . '/assets/img/teato-logo.svg',
+        'svg' => TTO_PATH . '/../assets/img/teato-logo.svg',
         'content' => __('<h2>The <a href="https://github.com/crewstyle/TeaThemeOptions" title="Tea Theme Options" class="openit">Tea Theme Options</a> (or <b>Tea T.O.</b>) allows you to easily add professional looking theme options panels to your WordPress theme.</h2>
             <ul>
                 <li><b>Option API</b> - A simple and standardized way of storing data in the database.</li>
@@ -30,7 +30,7 @@ $details = array(
         'type' => 'section',
         'color' => 'green',
         'identifier' => 'section-teato-cogs',
-        'svg' => TTO_URI . '/assets/img/teato-cogs-w.svg',
+        'svg' => TTO_PATH . '/../assets/img/teato-cogs-w.svg',
         'content' => __('<h2>The <b>Tea T.O.</b> is built for <a href="http://wordpress.org" target="_blank">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>
             <ul>
                 <li><b>Custom Post Types</b> - Here is the simpliest way to create Wordpress Custom Post Types! A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way.</li>
@@ -43,7 +43,7 @@ $details = array(
         'type' => 'section',
         //'color' => 'green',
         'identifier' => 'section-teato-wp',
-        'svg' => TTO_URI . '/assets/img/teato-wp.svg',
+        'svg' => TTO_PATH . '/../assets/img/teato-wp.svg',
         'content' => __('<h2>How to get values in your Wordpress template?</h2>
             <p>The <b>Tea T.O.</b> allows you to easily get back values and use them into your WordPress theme.<br/>There are 2 ways to get them back.</p>
             <ul>

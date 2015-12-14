@@ -1,3 +1,6 @@
+## 3.2.5 (December 14, 2015)
+Fix file_get_contents access bug.
+
 ## 3.2.4 (December 13, 2015)
 Fix parse error from STATICS on class definition.
 
