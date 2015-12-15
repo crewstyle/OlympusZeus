@@ -1,3 +1,4 @@
+## 3.2.7 (December 14, 2015)
 ## 3.2.6 (December 14, 2015)
 Fix <Checkbox> sent values.
 

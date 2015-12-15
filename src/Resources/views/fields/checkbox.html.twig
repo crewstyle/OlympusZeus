@@ -22,7 +22,7 @@
                 {% set num = 0 %}
 
                 {% for k, option in options if option %}
-                    {% set selected = val is iterable and k in val ? true : false %}
+                    {% set selected = val is iterable and val[k] == '1' ? true : false %}
                     {% set for = id ~ '-' ~ num %}
 
                     <p>
