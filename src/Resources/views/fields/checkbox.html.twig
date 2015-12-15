@@ -16,6 +16,8 @@
 {% block field %}
     <div class="tea-to-field-content checkbox{{ mode == 'image' ? ' image' : '' }}">
         <fieldset>
+            <input type="hidden" name="{{ id }}" value="" />
+
             {% if options %}
                 {% set num = 0 %}
 
@@ -25,8 +27,7 @@
 
                     <p>
                         <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
-                            <input type="hidden" name="{{ id }}[{{ num }}]" value="" />
-                            <input type="checkbox" name="{{ id }}[{{ num }}]" id="{{ for }}" value="{{ k }}"{{ selected ? ' checked="checked"' : '' }} />
+                            <input type="checkbox" name="{{ id }}[{{ k }}]" id="{{ for }}" value="1"{{ selected ? ' checked="checked"' : '' }} />
 
                             {% if mode == 'image' %}
                                 <img src="{{ k }}" alt="" />

@@ -1,3 +1,6 @@
+## 3.2.6 (December 14, 2015)
+Fix <Checkbox> sent values.
+
 ## 3.2.5 (December 14, 2015)
 Fix file_get_contents access bug.
 
