@@ -1,7 +1,7 @@
 {
   "name": "tea-theme-options",
-  "version": "3.0.0",
-  "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
+  "version": "3.3.0",
+  "description": "The Tea Theme Options allows you to easily add professional looking theme options panels to your WordPress website.",
   "main": "assets/js/teato.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

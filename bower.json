@@ -1,11 +1,11 @@
 {
   "name": "tea-theme-options",
-  "version": "3.0.0",
+  "version": "3.3.0",
   "homepage": "https://github.com/crewstyle/TeaThemeOptions",
   "authors": [
     "Achraf Chouk <achrafchouk@gmail.com>"
   ],
-  "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
+  "description": "The Tea Theme Options allows you to easily add professional looking theme options panels to your WordPress website.",
   "main": [
     "assets/css/teato.min.css",
     "assets/js/teato.min.js"
