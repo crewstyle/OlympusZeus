@@ -1,3 +1,18 @@
+## 3.3.0 (January 06, 2015)
+HAPPY NEW YEAR EVERYONE :)
+
+- **New**
+  - homepage and login redesigned
+  - please welcome new tabs on custom pages
+  - use of hooks to populate custom contents, such as pages, post types, terms
+  - use of the new WP termmeta methods: <get_term_meta> and <update_term_meta>
+- **Enhance:**
+  - all code globally with new smart folder structure
+  - plugins introduction with search engine only for now
+  - update all fields design
+  - search engine is now ElasticSearch 2.0 ready
+  - <grunt> tasks enhanced
+
 ## 3.2.7 (December 14, 2015)
 ## 3.2.6 (December 14, 2015)
 Fix <Checkbox> sent values.

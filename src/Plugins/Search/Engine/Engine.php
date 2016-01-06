@@ -1,9 +1,9 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Search\Engine;
+namespace crewstyle\TeaThemeOptions\Plugins\Search\Engine;
 
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Search\Elastica\Elastica;
+use crewstyle\TeaThemeOptions\Plugins\Search\Elastica\Elastica;
 
 /**
  * TTO SEARCH ENGINE
@@ -22,7 +22,7 @@ if (!defined('TTO_CONTEXT')) {
  * Class used to work with Search Engine.
  *
  * @package Tea Theme Options
- * @subpackage Search\Engine\Engine
+ * @subpackage Plugins\Search\Engine\Engine
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 3.0.0
  *

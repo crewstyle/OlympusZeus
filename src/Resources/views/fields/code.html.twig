@@ -21,6 +21,6 @@
             <textarea name="{{ id }}[code]" id="{{ id }}_code" rows="{{ rows }}"{{ readonly ? ' readonly' : '' }} class="code">{{ val.code }}</textarea>
         </div>
 
-        <p class="tea-to-description">{{ description|raw }}</p>
+        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

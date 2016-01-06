@@ -1,19 +1,22 @@
-<div id="{{ identifier }}" class="tea-to-field-content section {{ color }}">
-    {% if image or svg %}
-        <div class="{{ position }} centered">
-            {% if image %}
-                <img src="{{ image }}" alt="" />
-            {% elseif svg %}
-                <object>{{ svg|raw }}</object>
-            {% endif %}
-        </div>
+<div class="tea-to-field-content section {{ color }}">
+    {% if title %}
+        <h1>{{ title|raw }}</h1>
 
-        <div>
-            {{ content|raw }}
-        </div>
-    {% else %}
-        {{ content|raw }}
+        {% if action %}
+            <a href="{{ action.href }}" class="{{ action.class }}" target="{{ action.target }}">{{ action.label|raw }}</a>
+        {% endif %}
+
+        {% if quote %}
+            <small><code>{{ quote|raw }}</code></small>
+        {% endif %}
     {% endif %}
 
-    <br class="tea-to-clear" />
+    {% if contents %}
+        {% for c in contents %}
+            <div class="tea-to-section{% if loop.index is odd %} odd{% endif %} tea-to-clear">
+                <div class="svg"><object width="380">{{ c.svg|raw }}</object></div>
+                <div class="text">{{ c.text|raw }}</div>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>

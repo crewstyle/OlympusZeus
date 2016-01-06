@@ -19,6 +19,6 @@
             {{ t_no_options|raw }}
         {% endif %}
 
-        <p class="tea-to-description">{{ t_keyboard|raw }}<br/>{{ description|raw }}</p>
+        <p class="tea-to-description">{{ t_keyboard|raw }}{% if description %}<br/>{{ description|raw }}{% endif %}</p>
     </div>
 {% endblock %}

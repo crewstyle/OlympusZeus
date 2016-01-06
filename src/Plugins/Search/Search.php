@@ -1,10 +1,10 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Search;
+namespace crewstyle\TeaThemeOptions\Plugins\Search;
 
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Search\Action\Action;
-use crewstyle\TeaThemeOptions\Search\Engine\Engine;
+use crewstyle\TeaThemeOptions\Plugins\Search\Action\Action;
+use crewstyle\TeaThemeOptions\Plugins\Search\Engine\Engine;
 
 /**
  * TTO SEARCH
@@ -16,7 +16,7 @@ if (!defined('TTO_CONTEXT')) {
 
 
 //----------------------------------------------------------------------------//
-defined('SE_TEMPLATE') or define('SE_TEMPLATE', TTO_PATH . '/Resources/contents/search.php');
+defined('SE_TEMPLATE') or define('SE_TEMPLATE', TTO_PATH . '/Resources/contents/settings-search.php');
 
 /**
  * TTO Search
@@ -24,9 +24,9 @@ defined('SE_TEMPLATE') or define('SE_TEMPLATE', TTO_PATH . '/Resources/contents/
  * To get its own search engine with ElasticSearch.
  *
  * @package Tea Theme Options
- * @subpackage Search\Search
+ * @subpackage Plugins\Search\Search
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.4
+ * @since 3.3.0
  *
  */
 class Search
@@ -39,17 +39,7 @@ class Search
     /**
      * @var string
      */
-    protected static $countname = 'search-count';
-
-    /**
-     * @var string
-     */
-    protected static $id = 'search-configs';
-
-    /**
-     * @var string
-     */
-    protected static $index = 'search';
+    protected static $index = '3rd-search';
 
     /**
      * @var SearchEngine
@@ -57,93 +47,73 @@ class Search
     protected $search = null;
 
     /**
-     * @var string
-     */
-    protected static $slug = '_search';
-
-    /**
-     * @var string
-     */
-    protected static $template = SE_TEMPLATE;
-
-    /**
      * Constructor.
      *
-     * @param boolean $enable Define if search engine is enabled
      * @param boolean $hook Define if we need to call hooks
-     * @param boolean $filters Define if we need to call filters
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public function __construct($enable = true, $hook = true, $filters = true)
+    public function __construct($hook = true)
     {
-        //Check search engine
-        if (!$enable) {
+        //Initialize search engine
+        $configs = self::getConfigs();
+        $this->search = new Engine($configs, true);
+
+        //Update search content mode?
+        if (TTO_IS_ADMIN && !$hook) {
+            //Initialize action
+            $this->action = new Action($_REQUEST, $this->search);
+
             return;
         }
 
-        //Get custom data
-        $id = self::getId();
-        $ctn = TeaThemeOptions::getConfigs($id);
-
-        //Initialize action and search
-        $this->action = new Action();
-        $this->search = new Engine($ctn, $hook);
+        //Get current page
+        $currentPage = isset($_REQUEST['page']) ? (string) $_REQUEST['page'] : '';
 
         //Hooks
-        if ($filters) {
-            add_filter('tea_to_menu_check', array(&$this, 'hookMenuCheck'), 10, 2);
-            add_filter('tea_to_menu_init', array(&$this, 'hookMenuInit'), 10, 3);
-            add_filter('tea_to_template_special', array(&$this, 'hookTemplateSpecial'), 10, 2);
+        if (TTO_IS_ADMIN && preg_match('/-settings$/', $currentPage)) {
+            //Hooks
+            add_filter('tto_menu_settings-search_contents', function ($contents) {
+                //Get Search datum
+                $index = $this->getIndex();
+                $enable = TeaThemeOptions::getConfigs($index);
+                include(SE_TEMPLATE);
+
+                return $return;
+            }, 10, 1);
         }
     }
 
     /**
-     * Get count name.
+     * Get config values.
      *
-     * @return string $countname Search count name
+     * @return array $configs Contains all config values
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public static function getCountName()
+    public static function getConfigs()
     {
-        return (string) self::$countname;
-    }
-
-    /**
-     * Get default values.
-     *
-     * @return array $default Contains all default values
-     *
-     * @since 3.0.0
-     */
-    public static function getDefaults()
-    {
-        return array(
-            'toggle' => false,
+        //Build defaults
+        $defaults = array(
+            //ES configs
             'status' => 0,
             'server_host' => 'localhost',
             'server_port' => '9200',
-            'index_name' => 'elasticsearch',
+            'index_name' => 'ttosearch',
             'read_timeout' => 5,
             'write_timeout' => 10,
-            'template' => 'no',
-            'scores' => array(),
-            'index_posttypes' => array(),
-            'index_terms' => array()
-        );
-    }
 
-    /**
-     * Get id.
-     *
-     * @return string $id Search id
-     *
-     * @since 3.0.0
-     */
-    public static function getId()
-    {
-        return (string) self::$id;
+            //TTO configs
+            'template' => 'no',
+
+            //Indexes
+            'posttypes' => array(),
+            'terms' => array(),
+            'scores' => array(),
+        );
+
+        //Return merge values
+        return array_merge($defaults, TeaThemeOptions::getConfigs(self::getIndex().'-data'));
     }
 
     /**
@@ -156,104 +126,6 @@ class Search
     public static function getIndex()
     {
         return (string) self::$index;
-    }
-
-    /**
-     * Get slug.
-     *
-     * @return string $slug Search slug
-     *
-     * @since 3.0.0
-     */
-    public static function getSlug()
-    {
-        return (string) self::$slug;
-    }
-
-    /**
-     * Get template.
-     *
-     * @return string $template Search template
-     *
-     * @since 3.0.0
-     */
-    public static function getTemplate()
-    {
-        return (string) self::$template;
-    }
-
-    /**
-     * Hook special filter
-     *
-     * @return array $tocheck
-     *
-     * @since 3.0.0
-     */
-    public function hookMenuCheck($tocheck, $identifier) {
-        return array_merge($tocheck, array(
-            $identifier . self::getSlug()
-        ));
-    }
-
-    /**
-     * Hook special filter
-     *
-     * @return array $contents
-     *
-     * @since 3.0.0
-     */
-    public function hookMenuInit($contents, $options, $canuser) {
-        // Get post types engine page contents
-        if (!$options['search'] || !$canuser) {
-            return $contents;
-        }
-
-        $slug = self::getSlug();
-
-        //Get Search status
-        $id = self::getId();
-        $val = TeaThemeOptions::getConfigs($id);
-        $toggle = !empty($val) && isset($val['toggle']) && $val['toggle'] ? true : false;
-
-        include(self::getTemplate());
-
-        $contents[] = array(
-            'titles' => $titles,
-            'details' => $details,
-        );
-        unset($titles, $details);
-
-        return $contents;
-    }
-
-    /**
-     * Hook special filter
-     *
-     * @return array $enabled
-     *
-     * @since 3.2.4
-     */
-    public function hookTemplateSpecial($enabled, $identifier) {
-        $enabled[] = $identifier.self::getSlug();
-        return $enabled;
-    }
-
-    /**
-     * Actions to execute after updating or using the Search Engine.
-     *
-     * @param array $request Contains all data sent in $_REQUEST method
-     *
-     * @since 3.0.0
-     */
-    public function makeActions($request)
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Initialize actions
-        $this->action->initialize($request, $this->search);
     }
 
     /**

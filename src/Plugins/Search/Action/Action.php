@@ -1,10 +1,9 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Search\Action;
+namespace crewstyle\TeaThemeOptions\Plugins\Search\Action;
 
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Search\Engine\Engine;
-use crewstyle\TeaThemeOptions\Search\Search;
+use crewstyle\TeaThemeOptions\Plugins\Search\Search;
 
 /**
  * TTO SEARCH HOOK
@@ -38,40 +37,36 @@ class Action
     /**
      * Constructor.
      *
-     * @since 3.0.0
+     * @param array $request Contains all data sent in $_REQUEST method
+     * @param Search $search Contains search engine
+     *
+     * @since 3.3.0
      */
-    public function __construct(){}
+    public function __construct($request, $search)
+    {
+        $this->initialize($request, $search);
+    }
 
     /**
      * Initialize actions.
      *
-     * @param array $request Contains all data sent in $_REQUEST method
-     * @param Search $search Contains search engine
-     *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public function initialize($request, $search)
+    public function initialize($request, $searchengine)
     {
         //Admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Get current user action
-        $action = isset($request['action']) ? (string) $request['action'] : '';
-
-        if ('tea-to-action' != $action) {
-            return;
-        }
-
         //Update search
-        $this->search = $search;
+        $this->search = $searchengine;
 
         //Get the kind of action asked
-        $for = isset($request['for']) ? (string) $request['for'] : '';
+        $section = isset($request['section']) ? (string) $request['section'] : '';
 
         //Check action to make
-        if ('search' != $for) {
+        if ('search' !== $section) {
             return;
         }
 
@@ -80,48 +75,47 @@ class Action
 
         //Create index
         if ('create' == $make) {
-            $this->makeCreate();
+            $this->makeCreate($request);
         }
         //Index datas
         else if ('index' == $make) {
             $this->makeIndex();
         }
-        //Toggle search engine status
-        else if ('toggle' == $make) {
-            $this->makeToggle($request);
-        }
-        //Update datas
-        else if ('update' == $make) {
-            $this->makeUpdate($request);
-        }
+
+        //Redirect to Tea TO search configuration page
+        wp_safe_redirect(admin_url('admin.php?page='.$request['page'].'&section=search'));
     }
 
     /**
      * Create the index for all datas.
      *
+     * @param array $request Contains all data sent in $_REQUEST method
+     *
      * @since 3.0.0
      */
-    public function makeCreate()
+    public function makeCreate($request)
     {
         //Admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Get id
-        $id = Search::getId();
+        //Get index
         $index = Search::getIndex();
 
-        //Get datas
-        $ctn = TeaThemeOptions::getConfigs($id, array());
+        //Get enable
+        $enable = TeaThemeOptions::getConfigs($index, false);
 
         //Check if this action was properly called
-        if (!isset($ctn['toggle']) || !$ctn['toggle']) {
+        if (!$enable) {
             return;
         }
 
+        //Get contents
+        $status = TeaThemeOptions::getConfigs($index.'-status', 0);
+
         //Check status
-        if (!isset($ctn['status']) || 404 != $ctn['status']) {
+        if (200 === $status) {
             //We do not need to create the Index
             return;
         }
@@ -130,11 +124,10 @@ class Action
         $this->search->getEngine()->makeSearch();
 
         //Get Connection status
-        $ctn['status'] = $this->search->getEngine()->connection($ctn);
+        $status = $this->search->getEngine()->connection();
 
         //Define data in DB
-        TeaThemeOptions::setConfigs($id, $ctn);
-        TeaThemeOptions::setConfigs($index, 0);
+        TeaThemeOptions::setConfigs($index.'-status', $status);
     }
 
     /**
@@ -153,93 +146,7 @@ class Action
         $count = $this->search->getEngine()->indexContents();
 
         //Update counter
-        $countname = Search::getCountName();
-        TeaThemeOptions::setConfigs($countname, $count);
-    }
-
-    /**
-     * Toggle search engine status.
-     *
-     * @param array $request Contains all data sent in $_REQUEST method
-     *
-     * @since 3.0.0
-     */
-    public function makeToggle($request)
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get id
-        $id = Search::getId();
         $index = Search::getIndex();
-
-        //Check if this action was properly called
-        if (!isset($request[$id], $request[$id]['toggle'])) {
-            return;
-        }
-
-        //Get datas
-        $ctn = TeaThemeOptions::getConfigs($id, array());
-
-        //Enable or disable Elasticsearch
-        $ctn['toggle'] = $request[$id]['toggle'];
-        $ctn['status'] = 0;
-
-        //Update datas
-        TeaThemeOptions::setConfigs($id, $ctn);
-        TeaThemeOptions::setConfigs($index, 0);
-    }
-
-    /**
-     * Update all search datas.
-     *
-     * @param array $request Contains all data sent in $_REQUEST method
-     *
-     * @since 3.0.0
-     */
-    public function makeUpdate($request)
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        //Get id
-        $id = Search::getId();
-        $index = Search::getIndex();
-
-        //Check if this action was properly called
-        if (!isset($request[$id])) {
-            return;
-        }
-
-        //Get datas
-        $ctn = array_merge(
-            Search::getDefaults(),
-            TeaThemeOptions::getConfigs($id, array())
-        );
-
-        $shost = $request[$id]['server_host'] != $ctn['server_host'] ? true : false;
-        $sport = $request[$id]['server_port'] != $ctn['server_port'] ? true : false;
-        $sindex = $request[$id]['index_name'] != $ctn['index_name'] ? true : false;
-
-        //Check old values
-        if ($shost || $sport || $sindex) {
-            TeaThemeOptions::setConfigs($index, 0);
-            $ctn['status'] = 0;
-        }
-
-        //Update all datas
-        $new = array_merge($ctn, $request[$id]);
-
-        //Get Connection status
-        if (0 == $new['status']) {
-            $new['status'] = $this->search->getEngine()->connection($new);
-        }
-
-        //Define data in DB
-        TeaThemeOptions::setConfigs($id, $new);
+        TeaThemeOptions::setConfigs($index.'-count', $count);
     }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e4167de060777fc1145c8f9e63aa6e3",
-    "content-hash": "17e963de88f980403c19ef7c1a5fa779",
+    "hash": "3fde77ca6b01208c0324c757f819b5dc",
+    "content-hash": "ca7660ec7a7baa5a80d61f0cb03a34ea",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -87,36 +87,34 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "2.3.1",
+            "version": "3.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a"
+                "reference": "9220654061c3288bb8485b80e02e073d2c246e2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/0df1d7b513960ba11d3075652dcd71fcab8dd37a",
-                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/9220654061c3288bb8485b80e02e073d2c246e2d",
+                "reference": "9220654061c3288bb8485b80e02e073d2c246e2d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.4.0",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "guzzlehttp/guzzle": "5.3.*",
-                "munkie/elasticsearch-thrift-php": "1.4.*"
+                "guzzlehttp/guzzle": "5.3.*"
             },
             "suggest": {
                 "egeloen/http-adapter": "Allow using httpadapter transport",
                 "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
-                "monolog/monolog": "Logging request",
-                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+                "monolog/monolog": "Logging request"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -140,7 +138,7 @@
                 "client",
                 "search"
             ],
-            "time": "2015-10-19 07:09:10"
+            "time": "2015-11-26 22:09:03"
         },
         {
             "name": "twig/twig",
@@ -208,7 +206,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "behat/transliterator": 20
+        "behat/transliterator": 20,
+        "ruflin/elastica": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -26,6 +26,6 @@
             </select>
         {% endif %}
 
-        <p class="tea-to-description">{{ description|raw }}</p>
+        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

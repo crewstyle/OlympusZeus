@@ -1,54 +1,46 @@
 <?php
-//Build data
-$titles = array(
+$configs = array(
     'title' => __('Tea T.O.', TTO_I18N),
-    'name' => __('<span style="color:#55bb3a">Tea T.O.</span>', TTO_I18N),
+    'name' => __('<span style="color:#75cd45">Tea T.O.</span>', TTO_I18N),
     'slug' => '',
-    'submit' => false
-);
-$details = array(
-    array(
-        'type' => 'section',
-        'color' => 'green',
-        'content' => __('<h1>Your simple, easy to use<br/>and fully integrated<br/><strong>theme options for Wordpress</strong></h1>', TTO_I18N)
-    ),
-    array(
-        'type' => 'section',
-        //'color' => 'green',
-        'identifier' => 'section-teato-logo',
-        'svg' => TTO_PATH . '/../assets/img/teato-logo.svg',
-        'content' => __('<h2>The <a href="https://github.com/crewstyle/TeaThemeOptions" title="Tea Theme Options" class="openit">Tea Theme Options</a> (or <b>Tea T.O.</b>) allows you to easily add professional looking theme options panels to your WordPress theme.</h2>
-            <ul>
-                <li><b>Option API</b> - A simple and standardized way of storing data in the database.</li>
-                <li><b>Transient API</b> - Very similar to the Options API but with the added feature of an expiration time, which simplifies the process of using the wp_options database table to temporarily store cached information.</li>
-                <li><b>Easier for administrators</b> - The interface is thought to be the most userfriendly. The Tea TO core adds some extra interface customisations to make your life easier.</li>
-                <li><b>Easier for developers</b> - Create a new admin panel easily with the new dashboard. The Tea TO core is made to allow non-developer profiles to easily create the settings they need to customise their templates.</li>
-                <li><b>Elasticsearch API</b> - Elasticsearch creates scaleable, real-time search for your website by indexing all your datas millions of times a day.</li>
-            </ul>', TTO_I18N)
-    ),
-    array(
-        'type' => 'section',
-        'color' => 'green',
-        'identifier' => 'section-teato-cogs',
-        'svg' => TTO_PATH . '/../assets/img/teato-cogs-w.svg',
-        'content' => __('<h2>The <b>Tea T.O.</b> is built for <a href="http://wordpress.org" target="_blank">Wordpress</a> v3.x and uses the Wordpress built-in pages.</h2>
-            <ul>
-                <li><b>Custom Post Types</b> - Here is the simpliest way to create Wordpress Custom Post Types! A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way.</li>
-                <li><b>Custom Taxonomies</b> - Since the 1.4.2 version, you are now able to create easily Wordpress Custom Taxonomies with a couple of lines code. The Tea TO permit to add custom fields as you want.</li>
-                <li><b>Wordpress Media Manager</b> - Beautiful interface: A streamlined, all-new experience where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.</li>
-                <li><b>Full of Options</b> - 3 kind of options used to display information, store fields values or get data from your Wordpress database. The options are made to build your Wordpress pages easily.</li>
-            </ul>', TTO_I18N)
-    ),
-    array(
-        'type' => 'section',
-        //'color' => 'green',
-        'identifier' => 'section-teato-wp',
-        'svg' => TTO_PATH . '/../assets/img/teato-wp.svg',
-        'content' => __('<h2>How to get values in your Wordpress template?</h2>
-            <p>The <b>Tea T.O.</b> allows you to easily get back values and use them into your WordPress theme.<br/>There are 2 ways to get them back.</p>
-            <ul>
-                <li><b>Wordpress way</b> - By using the <code>get_option</code> method.</li>
-                <li><b>Tea T.O. way</b> - Very similar to the Wordpress solution, simply use the <code>_get_option</code> method (pay attention to the first underscore) to get values from Transient API.</li>
-            </ul>', TTO_I18N)
+    'submit' => false,
+    'contents' => array(
+        array(
+            'type' => 'section',
+            'color' => 'green',
+            'title' => __('Your simple, easy to use<br/>and fully integrated<br/><strong>theme options for WordPress</strong>', TTO_I18N),
+            'action' => array(
+                'label' => __('Settings <i class="fa fa-long-arrow-right"></i>', TTO_I18N),
+                'href' => $settingslink,
+                'target' => '_self',
+                'class' => 'button button-primary',
+            ),
+        ),
+        array(
+            'type' => 'section',
+            'contents' => array(
+                array(
+                    'svg' => TTO_PATH . '/../assets/img/teato-logo.svg',
+                    'text' => __('
+<h2>The <a href="https://github.com/crewstyle/TeaThemeOptions" title="Tea Theme Options" target="_blank">Tea Theme Options</a>, or <b>Tea T.O.</b>, allows you to easily add professional looking theme options panels to your WordPress website.</h2>
+<p>Easier for administrators <b>and</b> developers, the interface is thought to be the most user-friendly. The <b>Tea T.O. Core</b> adds some extra interface customisations to make your life easier. Developers can now create new admin panels with just a couple lines of codes. All is made to allow non-developer profiles to easily create the settings they need to customise their templates.</p>
+                    ', TTO_I18N),
+                ),
+                array(
+                    'svg' => TTO_PATH . '/../assets/img/teato-cogs.svg',
+                    'text' => __('
+<h2>The <b>Tea T.O.</b> is built with ♥ for <a href="http://wordpress.org" target="_blank">WordPress</a> v3.x/4.x and uses the WordPress built-in pages.</h2>
+<p>Custom post types, custom taxonomies, here is the simpliest way to create custom content types to your WordPress website. A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way. The <b>Tea T.O. Core</b> uses the WordPress Media Manager too: a beautiful interface where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.</p>
+                    ', TTO_I18N),
+                ),
+                array(
+                    'svg' => TTO_PATH . '/../assets/img/teato-wp.svg',
+                    'text' => __('
+<h2>A better search engine, real related contents, highly smart algorithms. The <b>Tea T.O.</b> offers you full of functionalities.</h2>
+<p>The <b>Tea T.O. Core</b> works has deeply integrated ElasticSearch search engine features to creates scaleable, real-time search for your website by indexing all your datas millions of times a day. Related contents works by the same way. The <b>Tea T.O.</b> is upgraded every day with new features you can use as you need.</p>
+                    ', TTO_I18N),
+                ),
+            ),
+        ),
     ),
 );

@@ -7,6 +7,7 @@
 
 {% block field %}
     <div class="tea-to-field-content link" data-id="{{ id }}">
+        <input type="hidden" name="{{ id }}" value="" />
         {% set num = 1 %}
 
         <fieldset{{ expandable ? ' class="expandable"' : '' }}>
@@ -56,6 +57,45 @@
 
                 {% set num = num + 1 %}
             {% endfor %}
+
+            {% if not expandable and not val %}
+                <div class="link-container">
+                    <p class="block-link">
+                        <label for="{{ id }}-url">{{ t_website_address }}</label>
+                        <input type="text" name="{{ id }}[url]" id="{{ id }}-url" value="{{ v.url }}" placeholder="{{ t_website_placeholder|raw }}" />
+                        <a href="{{ v.url }}" class="tea-to-tooltip" title="{{ t_goto|raw }}" target="_blank"><i class="fa fa-external-link"></i></a>
+                    </p>
+
+                    <p>
+                        <label for="{{ id }}-label">{{ t_title|raw }}</label>
+                        <input type="text" name="{{ id }}[label]" id="{{ id }}-label" value="{{ v.label }}" />
+                    </p>
+
+                    <p>
+                        <label for="{{ id }}-target">{{ t_target|raw }}</label>
+                        <select name="{{ id }}[target]" id="{{ id }}-target" class="no-selectize">
+                            <option value="_blank"{{ v.target == '_blank' ? ' selected="selected"' : '' }}>
+                                {{ t_target_blank|raw }}
+                            </option>
+                            <option value="_self"{{ v.target == '_self' ? ' selected="selected"' : '' }}>
+                                {{ t_target_self|raw }}
+                            </option>
+                            <option value="_parent"{{ v.target == '_parent' ? ' selected="selected"' : '' }}>
+                                {{ t_target_parent|raw }}
+                            </option>
+                            <option value="_top"{{ v.target == '_top' ? ' selected="selected"' : '' }}>
+                                {{ t_target_top|raw }}
+                            </option>
+                        </select>
+                    </p>
+
+                    <p class="rel">
+                        <label for="{{ id }}-rel">{{ t_relationship|raw }}</label>
+                        <input type="text" name="{{ id }}[rel]" id="{{ id }}-rel" value="{{ v.rel }}" />
+                        <small>{{ t_relationship_description|raw }}</small>
+                    </p>
+                </div>
+            {% endif %}
         </fieldset>
 
         {% if expandable %}
@@ -67,7 +107,7 @@
             </div>
         {% endif %}
 
-        <p class="tea-to-description">{{ description|raw }}</p>
+        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}
 

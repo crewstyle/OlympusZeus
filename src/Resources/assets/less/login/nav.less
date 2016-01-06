@@ -6,21 +6,25 @@
  * Brewed by Achraf Chouk, served by Take a tea.
  */
 
-body.login div#login p#nav {
-    margin: 0;
-    padding: 15px 20px 0;
-}
-body.login div#login p#backtoblog {
-    margin: 0;
-    padding: 0 20px 35px;
-}
-body.login div#login p#nav a,
-body.login div#login p#backtoblog a {
-    color: @graymedium;
-    text-decoration: none;
-    text-shadow: none;
-}
-body.login div#login p#nav a:hover,
-body.login div#login p#backtoblog a:hover {
-    color: @white;
+body.login div#login {
+    p#nav {
+        margin: 0;
+        padding: 30px 0 0;
+    }
+
+    p#backtoblog {
+        margin: 0;
+        padding: 0;
+    }
+
+    p#nav a,
+    p#backtoblog a {
+        color: @graymedium;
+        text-decoration: none;
+        text-shadow: none;
+
+        &:hover {
+            color: @white;
+        }
+    }
 }

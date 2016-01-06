@@ -1,6 +1,6 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Search\Elastica;
+namespace crewstyle\TeaThemeOptions\Plugins\Search\Elastica;
 
 use Elastica\Client;
 use Elastica\Document;
@@ -13,8 +13,8 @@ use Elastica\Suggest;
 use Elastica\Suggest\Term as SuggestTerm;
 use Elastica\Type\Mapping;
 use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\PostType\Engine\Engine as PostTypeEngine;
-use crewstyle\TeaThemeOptions\Search\Search;
+use crewstyle\TeaThemeOptions\Core\PostType\Engine\Engine as PostTypeEngine;
+use crewstyle\TeaThemeOptions\Plugins\Search\Search;
 
 /**
  * TTO SEARCH ELASTICA
@@ -33,7 +33,7 @@ if (!defined('TTO_CONTEXT')) {
  * Class used to work with Search Elastica.
  *
  * @package Tea Theme Options
- * @subpackage Search\Elastica\Elastica
+ * @subpackage Plugins\Search\Elastica\Elastica
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 3.0.0
  *
@@ -96,12 +96,11 @@ class Elastica
      *
      * @return array $search Array of all search datas
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
     protected function getConfig()
     {
-        $default = Search::getDefaults();
-        return array_merge($default, $this->config);
+        return $this->config;
     }
 
     /**
@@ -211,9 +210,21 @@ class Elastica
         }
 
         //Check field 'post_date'
-        if (isset($post->post_date)) {
-            $doc['date'] = date('c', strtotime($post->post_date));
-        }
+        /**
+         * @todo ES 2.0 incompatibility for now...
+         */
+        //if (isset($post->post_date)) {
+            //$doc['date'] = date('c', strtotime($post->post_date));
+        //}
+
+        /**
+         * Update post document.
+         *
+         * @param array $doc
+         *
+         * @since 3.3.0
+         */
+        do_action('tto_plugin_search_adddocumentpost', $doc);
 
         //Return document
         return $doc;
@@ -250,6 +261,15 @@ class Elastica
         if (isset($term->description)) {
             $doc['content'] = strip_tags(stripcslashes($term->description));
         }
+
+        /**
+         * Update term document.
+         *
+         * @param array $doc
+         *
+         * @since 3.3.0
+         */
+        do_action('tto_plugin_search_adddocumentterm', $doc);
 
         //Return document
         return $doc;
@@ -313,7 +333,7 @@ class Elastica
             ),
             'tags_suggest' => array(
                 'type' => 'completion',
-                'index_analyzer' => 'simple',
+                'analyzer' => 'simple',
                 'search_analyzer' => 'simple',
                 'payloads' => false,
             ),
@@ -323,9 +343,22 @@ class Elastica
             ),
         );
 
+        /**
+         * Update props analysis.
+         *
+         * @param array $props
+         *
+         * @since 3.3.0
+         */
+        do_action('tto_plugin_search_analysis', $props);
+
         //Set analysis
         if (isset($posttypes) && !empty($posttypes)) {
             foreach ($posttypes as $k) {
+                if (empty($k)) {
+                    continue;
+                }
+
                 $index->create(array(
                     'number_of_shards' => 4,
                     'number_of_replicas' => 1,
@@ -334,16 +367,16 @@ class Elastica
                             'indexAnalyzer' => array(
                                 'type' => 'custom',
                                 'tokenizer' => 'standard',
-                                'filter' => array('lowercase', 'asciifolding', 'filter_' . $k),
+                                'filter' => array('lowercase', 'asciifolding', 'filter_'.$k),
                             ),
                             'searchAnalyzer' => array(
                                 'type' => 'custom',
                                 'tokenizer' => 'standard',
-                                'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_' . $k),
+                                'filter' => array('standard', 'lowercase', 'asciifolding', 'filter_'.$k),
                             )
                         ),
                         'filter' => array(
-                            'filter_' . $k => array(
+                            'filter_'.$k => array(
                                 'type' => 'standard',
                                 'language' => TTO_LOCAL,
                                 'ignoreCase' => true,
@@ -358,19 +391,19 @@ class Elastica
                 //Define a new Elastica Mapper
                 $mapping = new Mapping();
                 $mapping->setType($type);
-                $mapping->setParam('index_analyzer', 'indexAnalyzer');
-                $mapping->setParam('search_analyzer', 'searchAnalyzer');
+                //$mapping->setParam('analyzer', 'indexAnalyzer');
+                //$mapping->setParam('search_analyzer', 'searchAnalyzer');
 
                 //Define boost field
-                $mapping->setParam('_boost', array(
+                /*$mapping->setParam('_boost', array(
                     'name' => '_boost',
                     'null_value' => 1.0
-                ));
+                ));*/
 
                 //Set mapping
                 $mapping->setProperties($props);
 
-                // Send mapping to type
+                //Send mapping to type
                 $mapping->send();
             }
         }
@@ -378,6 +411,10 @@ class Elastica
         //Set analysis
         if (isset($terms) && !empty($terms)) {
             foreach ($terms as $t) {
+                if (empty($t)) {
+                    continue;
+                }
+
                 $index->create(array(
                     'number_of_shards' => 4,
                     'number_of_replicas' => 1,
@@ -434,32 +471,34 @@ class Elastica
     /**
      * Check Elastica Connection.
      *
-     * @param array $ctn Contains all stored datas
      * @return int $status HTTP header status curl code
      *
      * @since 3.0.0
      */
-    public function connection($ctn)
+    public function connection()
     {
         //Check if we are in admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Do we have to check connection?
-        if (!isset($ctn['toggle']) || !$ctn['toggle']) {
-            return 0;
+        //Get index
+        $index = Search::getIndex();
+
+        //Get enable
+        $enable = TeaThemeOptions::getConfigs($index, false);
+
+        //Check if this action was properly called
+        if (!$enable) {
+            return;
         }
 
         //Defaults
-        $defaults = Search::getDefaults();
+        $ctn = Search::getConfigs();
 
         //Build url
-        $url = 'http://';
-        $url .= isset($ctn['server_host']) ? $ctn['server_host'] : $defaults['server_host'];
-        $url .= ':' . (isset($ctn['server_port']) ? $ctn['server_port'] : $defaults['server_port']) . '/';
-        $url .= isset($ctn['index_name']) ? $ctn['index_name'] . '/' : '';
-        $url .= '_status?ignore_unavailable=true';
+        $url = 'http://'.$ctn['server_host'].':'.$ctn['server_port'].'/'.$ctn['index_name'];
+        $url .= '/_recovery?ignore_unavailable=true';
 
         //Make curl
         $ch = curl_init();
@@ -494,7 +533,7 @@ class Elastica
      * @param boolean $idxctn Define it we have to index contents or just create index
      * @return int $count Get number of items indexed
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
     public function indexContents($idxctn = true)
     {
@@ -510,19 +549,22 @@ class Elastica
 
         //Get search datas
         $ctn = $this->getConfig();
-        $indexpt = PostTypeEngine::getIndex();
+
+        //Get posttypes and terms
+        $idp = isset($ctn['posttypes']) && !empty($ctn['posttypes']) 
+            ? array_filter($ctn['posttypes'], 'strlen') 
+            : array();
+        $idt = isset($ctn['index_terms']) && !empty($ctn['index_terms']) 
+            ? array_filter($ctn['index_terms'], 'strlen') 
+            : array();
 
         //Check if we can index some post types
-        if (!isset($ctn[$indexpt]) || empty($ctn[$indexpt])) {
+        if (empty($idp)) {
             return 0;
         }
 
         //Get index
         $index = $this->getIndex();
-        $idp = $ctn[$indexpt];
-        $idt = isset($ctn['index_terms']) && !empty($ctn['index_terms'])
-            ? $ctn['index_terms']
-            : array();
 
         //Check index
         if (null === $index || empty($index)) {
@@ -541,17 +583,19 @@ class Elastica
         ));
 
         //Iterate on all posts to create documents
-        foreach ($posts as $post) {
-            //Check post type
-            if (!array_key_exists($post->post_type, $idp)) {
-                continue;
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                //Check post type
+                if (!in_array($post->post_type, $idp)) {
+                    continue;
+                }
+
+                //Update document
+                $this->postUpdate($post, $index);
+
+                //Update counter
+                $count++;
             }
-
-            //Update document
-            $this->postUpdate($post, $index);
-
-            //Update counter
-            $count++;
         }
 
         //Check taxonomies
@@ -563,17 +607,19 @@ class Elastica
             ));
 
             //Iterate on all posts to create documents
-            foreach ($terms as $term) {
-                //Check post type
-                if (!array_key_exists($term->taxonomy, $idt)) {
-                    continue;
+            if (!empty($terms)) {
+                foreach ($terms as $term) {
+                    //Check post type
+                    if (!in_array($term->taxonomy, $idt)) {
+                        continue;
+                    }
+
+                    //Update document
+                    $this->termUpdate($term, $index);
+
+                    //Update counter
+                    $count++;
                 }
-
-                //Update document
-                $this->termUpdate($term, $index);
-
-                //Update counter
-                $count++;
             }
         }
 
@@ -683,11 +729,10 @@ class Elastica
 
         //Get search datas
         $ctn = $this->getConfig();
-        $indexpt = PostTypeEngine::getIndex();
 
         //Get datas for mapping
-        $idp = isset($ctn[$indexpt]) ? $ctn[$indexpt] : array();
-        $idt = isset($ctn['index_terms']) ? $ctn['index_terms'] : array();
+        $idp = isset($ctn['posttypes']) ? $ctn['posttypes'] : array();
+        $idt = isset($ctn['terms']) ? $ctn['terms'] : array();
 
         //Create analysers and mappers for Posts
         $index = $this->analysis($index, $idp, $idt);
@@ -707,10 +752,9 @@ class Elastica
     {
         //Get configs
         $ctn = $this->getConfig();
-        $indexpt = PostTypeEngine::getIndex();
 
         //Check post integrity
-        if (null == $post || !array_key_exists($post->post_type, $ctn[$indexpt])) {
+        if (null == $post || !in_array($post->post_type, $ctn['posttypes'])) {
             return;
         }
 
@@ -726,12 +770,12 @@ class Elastica
             $type->deleteById($post->ID);
 
             //Update counter
-            $countname = Search::getCountName();
-            $count = TeaThemeOptions::getConfigs($countname);
+            $index = Search::getIndex();
+            $count = TeaThemeOptions::getConfigs($index.'-count');
             $count = empty($count) ? 0 : $count[0] - 1;
 
             //Save in DB
-            TeaThemeOptions::setConfigs($countname, $count);
+            TeaThemeOptions::setConfigs($index.'-count', $count);
         } catch (NotFoundException $ex){}
     }
 
@@ -747,10 +791,9 @@ class Elastica
     {
         //Get configs
         $ctn = $this->getConfig();
-        $indexpt = PostTypeEngine::getIndex();
 
         //Check post integrity
-        if (null == $post || !array_key_exists($post->post_type, $ctn[$indexpt])) {
+        if (null == $post || !in_array($post->post_type, $ctn['posttypes'])) {
             return;
         }
 

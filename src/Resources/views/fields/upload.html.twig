@@ -9,7 +9,7 @@
     <div class="tea-to-field-content upload" data-id="{{ id }}" data-t="{{ library|raw }}"{{ multiple ? ' data-m="1"' : '' }}>
         <input type="hidden" name="{{ id }}" value="" />
 
-        <p class="tea-to-description">{{ description|raw }}</p>
+        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
 
         <div class="u-results">
             {% for item in val if item.id %}

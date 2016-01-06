@@ -13,7 +13,7 @@
     ],
     "require": {
         "behat/transliterator": "^1.1@dev",
-        "ruflin/Elastica": "2.x",
+        "ruflin/Elastica": "3.0.0-beta1",
         "twig/twig": "~1.0"
     },
     "minimum-stability": "stable",

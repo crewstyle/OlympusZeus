@@ -121,33 +121,19 @@ div.tea-to-notice {
 
 
 /*--- [ALERTS] ---*/
-.tea-to-wrap {
-    div.tea-to-error {
-        background: @white;
-        border: 1px solid @danger;
-        box-shadow: 0 0 0 2px fade(@danger, 30%);
-        margin-bottom: 20px;
-        padding: 1px 12px;
+.wrap {
+    .notice.tea-to-notify {
+        margin: 20px 2% 0;
     }
 
-    div.tea-to-updated {
-        background: @white;
-        border: 1px solid @main;
-        box-shadow: 0 0 0 2px fade(@main, 30%);
-        padding: 1px 12px;
-    }
-
-    div.tea-to-info {
-        background: @white;
-        border: 1px solid @blue;
-        box-shadow: 0 0 0 2px fade(@blue, 30%);
-        padding: 1px 12px;
-    }
-
-    div.headsup {
-        &.tea-to-error,
-        &.tea-to-updated {
-            margin: 35px 2% 0;
-        }
+    &.tea-to-section-field .notice.tea-to-notify {
+        left: 50%;
+        margin: 0;
+        position: absolute;
+        top: 60px;
+        z-index: 10;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
     }
 }

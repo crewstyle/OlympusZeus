@@ -2,20 +2,18 @@
 
 namespace crewstyle\TeaThemeOptions;
 
-use crewstyle\TeaThemeOptions\Controllers\Action\Action;
-use crewstyle\TeaThemeOptions\Controllers\Hook\Hook;
-use crewstyle\TeaThemeOptions\Controllers\Notification\Notification;
-use crewstyle\TeaThemeOptions\Controllers\Option\Option;
-use crewstyle\TeaThemeOptions\Menu\Menu;
-use crewstyle\TeaThemeOptions\Render\Render;
-use crewstyle\TeaThemeOptions\Translate\Translate;
+use crewstyle\TeaThemeOptions\Core\Core;
+use crewstyle\TeaThemeOptions\Core\Notification\Notification;
+use crewstyle\TeaThemeOptions\Core\Option\Option;
+use crewstyle\TeaThemeOptions\Core\Render\Render;
+use crewstyle\TeaThemeOptions\Core\Translate\Translate;
 
 /**
  * TEA THEME OPTIONS
  *
  * Plugin Name: Tea Theme Options
- * Version: 3.2.7
- * Snippet URI: https://github.com/crewstyle/tea_theme_options
+ * Version: 3.3.0
+ * Snippet URI: https://github.com/crewstyle/TeaThemeOptions
  * Read The Doc: http://tea-theme-options.readme.io/
  * Description: The Tea Theme Options (or "Tea TO") allows you to easily add
  * professional looking theme options panels to your WordPress theme.
@@ -61,11 +59,11 @@ defined('TTO_CONTEXT')      or define('TTO_CONTEXT', 'tea-theme-options');
 //The value defining if we are in admin panel or not
 defined('TTO_IS_ADMIN')     or define('TTO_IS_ADMIN', is_admin());
 //The current version
-defined('TTO_VERSION')      or define('TTO_VERSION', '3.2.7');
+defined('TTO_VERSION')      or define('TTO_VERSION', '3.3.0');
 //The current baseline
 defined('TTO_QUOTE')        or define('TTO_QUOTE', 'Spartans! Ready your breakfast and eat hearty... For tonight, we dine in hell! ~ 300');
 //The current version
-defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '327');
+defined('TTO_VERSION_NUM')  or define('TTO_VERSION_NUM', '330');
 //The i18n language code
 defined('TTO_I18N')         or define('TTO_I18N', 'tea_theme_options');
 //The transient expiration duration
@@ -100,153 +98,30 @@ defined('TTO_WP_CAP_MAX')   or define('TTO_WP_CAP_MAX', 'manage_tea_theme_option
  *
  * @package Tea Theme Options
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.0
+ * @since 3.3.0
  *
  * @todo Special field:     Typeahead
  * @todo Shortcodes panel:  Youtube, Vimeo, Dailymotion, Embed PDF,
- * @todo Shortcodes panel:  Google Adsense, Related posts, Private content,
+ * @todo Shortcodes panel:  Google Adsense, Related posts, Private content (membership),
  * @todo Shortcodes panel:  RSS Feed, Price table, Carousel, Icons, ...
  *
  */
 class TeaThemeOptions
 {
     /**
-     * @var Action
+     * @var Core
      */
-    protected $action = null;
-
-    /**
-     * @var Hook
-     */
-    protected $hook = null;
-
-    /**
-     * @var Menu
-     */
-    protected $menu = null;
+    protected $core = null;
 
     /**
      * Constructor.
      *
-     * @param string $identifier Define the main slug
-     * @param array $options Contains all options to dis/enable
-     * @internal param bool $connect Define if we can display connections page
-     * @internal param bool $elastic Define if we can display elasticsearch page
-     *
-     * @since 3.2.0
+     * @since 3.3.0
      */
-    public function __construct($identifier = 'tea-to-options', $options = array())
+    public function __construct()
     {
-        //Build identifier
-        $idx = trim($identifier);
-
-        //Instanciate Action
-        $this->action = new Action($idx);
-
-        //Instanciate Hook
-        $this->hook = new Hook();
-
-        //Instanciate Menu
-        $this->menu = new Menu($idx, $options);
-    }
-
-    /**
-     * Add a new page menu.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 3.0.0
-     */
-    public function addMenu($configs, $contents)
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $this->menu->getMenu()->addMenu($configs, $contents);
-    }
-
-    /**
-     * Add a new post type.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 3.0.0
-     */
-    public function addPostType($configs = array(), $contents = array())
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $this->menu->getPosttype()->addPostType($configs, $contents);
-    }
-
-    /**
-     * Add a new term.
-     *
-     * @param array $configs Array containing all configurations
-     * @param array $contents Contains all data
-     *
-     * @since 3.0.0
-     */
-    public function addTerm($configs = array(), $contents = array())
-    {
-        //Admin panel
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $this->menu->getTerm()->addTerm($configs, $contents);
-    }
-
-    /**
-     * Build menu.
-     *
-     * @since 3.0.0
-     */
-    public function buildMenus()
-    {
-        //Admin panel and if we can build
-        if (!TTO_IS_ADMIN || !$this->menu->getPages()) {
-            return;
-        }
-
-        $this->menu->getMenu()->buildMenus();
-    }
-
-    /**
-     * Build post types.
-     *
-     * @since 3.0.0
-     */
-    public function buildPostTypes()
-    {
-        //Admin panel and if we can build
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $this->menu->getPosttype()->buildPostTypes();
-    }
-
-    /**
-     * Build terms.
-     *
-     * @since 3.0.0
-     */
-    public function buildTerms()
-    {
-        //Admin panel and if we can build
-        if (!TTO_IS_ADMIN) {
-            return;
-        }
-
-        $this->menu->getTerm()->buildTerms();
+        //Instanciate Core
+        $this->core = new Core();
     }
 
     /**
@@ -255,7 +130,7 @@ class TeaThemeOptions
      * @param string $content Contains typo to translate
      * @return Translate
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
     public static function __($content)
     {
@@ -268,22 +143,118 @@ class TeaThemeOptions
     }
 
     /**
-     * Display notification.
+     * Add a new page menu.
      *
-     * @param string $content Contains typo to display
-     * @return string $content
+     * @param array $configs Array containing all configurations
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public static function notify($content)
+    public function addMenu($configs)
     {
         //Admin panel
         if (!TTO_IS_ADMIN) {
             return;
         }
 
-        //Display notification
-        $notif = new Notification($content);
+        $this->core->getCoreMenu()->getMenu()->addMenu($configs);
+    }
+
+    /**
+     * Add a new post type.
+     *
+     * @param array $configs Array containing all configurations
+     *
+     * @since 3.3.0
+     */
+    public function addPostType($configs = array())
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        $this->core->getCoreMenu()->getPosttype()->addPostType($configs);
+    }
+
+    /**
+     * Add a new term.
+     *
+     * @param array $configs Array containing all configurations
+     *
+     * @since 3.3.0
+     */
+    public function addTerm($configs = array())
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        $this->core->getCoreMenu()->getTerm()->addTerm($configs);
+    }
+
+    /**
+     * Build menu.
+     *
+     * @since 3.3.0
+     */
+    public function buildMenus()
+    {
+        //Admin panel and if we can build
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        $this->core->getCoreMenu()->getMenu()->buildMenus();
+    }
+
+    /**
+     * Build post types.
+     *
+     * @since 3.3.0
+     */
+    public function buildPostTypes()
+    {
+        //Admin panel and if we can build
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        $this->core->getCoreMenu()->getPosttype()->buildPostTypes();
+    }
+
+    /**
+     * Build terms.
+     *
+     * @since 3.3.0
+     */
+    public function buildTerms()
+    {
+        //Admin panel and if we can build
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        $this->core->getCoreMenu()->getTerm()->buildTerms();
+    }
+
+    /**
+     * Display notification.
+     *
+     * @param string $type Define notice type to display
+     * @param string $content Contains typo to display
+     * @return string $content
+     *
+     * @since 3.3.0
+     */
+    public static function notify($type, $content)
+    {
+        //Admin panel
+        if (!TTO_IS_ADMIN) {
+            return;
+        }
+
+        Notification::notify($type, $content);
     }
 
     /**
@@ -291,11 +262,11 @@ class TeaThemeOptions
      *
      * @return Search $search
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
     public function search()
     {
-        return $this->menu->getSearch();
+        return $this->core->getSearch();
     }
 
     /**
@@ -304,19 +275,11 @@ class TeaThemeOptions
      * @param string $option Define the option asked
      * @return array $configs Define configurations
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public static function getConfigs($option = 'capabilities')
+    public static function getConfigs($option = 'login')
     {
-        //Get datas from DB
-        $configs = self::getOption('tea-to-configs', array());
-
-        //Check if data is available
-        $return = isset($configs[$option]) ? $configs[$option] : array();
-        $return = !is_array($return) ? array($return) : $return;
-
-        //Return value
-        return $return;
+        return Option::getConfigs($option);
     }
 
     /**
@@ -325,23 +288,11 @@ class TeaThemeOptions
      * @param string $option Define the option to update
      * @param array|integer|string $value Define the value
      *
-     * @since 3.0.0
+     * @since 3.3.0
      */
-    public static function setConfigs($option = 'capabilities', $value = 'manage_tea_theme_options')
+    public static function setConfigs($option = 'login', $value = true)
     {
-        //Get datas from DB
-        $configs = self::getOption('tea-to-configs', array());
-
-        //Check data
-        if (isset($configs[$option])) {
-            unset($configs[$option]);
-        }
-
-        //Define the data
-        $configs[$option] = $value;
-
-        //Update DB
-        self::setOption('tea-to-configs', $configs);
+        Option::setConfigs($option, $value);
     }
 
     /**

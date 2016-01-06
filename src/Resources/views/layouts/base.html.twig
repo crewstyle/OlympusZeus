@@ -1,0 +1,129 @@
+{% set formSection = currentSection ? '&section=' ~ currentSection : '' %}
+{% set formAction = 'admin.php?page=' ~ currentPage ~ formSection ~ '&do=tto-action&from=settings' %}
+{% set submitSection = false %}
+
+{% set fjson = fields|json_encode() %}
+{% set hstyle = 'fields\\/section.html.twig' in fjson ? ' tea-to-section-field' : '' %}
+{% set hstyle = 'fields\\/search.html.twig' in fjson ? hstyle ~ ' tea-to-search-field' : hstyle %}
+
+<!-- Tea Theme Options -->
+<div class="wrap tea-to-wrap{{ hstyle }}">
+    <!-- Menu block -->
+    <nav class="tea-to-main-nav" role="navigation">
+        <a href="admin.php?page={{ identifier }}" class="tea-to-logo">{{ t_tto_title }}</a>
+
+        {% if identifier != currentPage %}
+            <span class="tea-to-breadcrumb">
+                <i class="fa fa-long-arrow-right fa-lg"></i> {{ title|raw }}
+            </span>
+
+            {% if subtitle %}
+                <span class="tea-to-breadcrumb">
+                    <i class="fa fa-long-arrow-right fa-lg"></i> {{ subtitle|raw }}
+                </span>
+            {% endif %}
+        {% endif %}
+    </nav>
+
+    {% if sections %}
+        <!-- Sections -->
+        <h2 class="nav-tab-wrapper">
+            {% for k,s in sections %}
+                {% set tabactive = currentSection == k ? ' nav-tab-active' : '' %}
+                {% set submitSection = currentSection == k and (s.submit is not defined or s.submit == true) ? true : submitSection %}
+                <a href="admin.php?page={{ currentPage }}&section={{ k }}" class="nav-tab{{ tabactive }}">{{ s.title|raw }}</a>
+            {% endfor %}
+        </h2>
+    {% endif %}
+
+    {% if notice %}
+        <!-- Updated block -->
+        {% for n in notice %}
+            <div class="tea-to-notify notice {{ n[0] }}">
+                <p>{{ n[1]|raw }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if description %}
+        <!-- Description block -->
+        <p class="tea-to-description">{{ description|raw }}</p>
+    {% endif %}
+
+    <!-- Main block -->
+    {% if submit or submitSection %}
+        <form method="post" action="{{ formAction|raw }}" enctype="multipart/form-data" class="tea-to-form">
+            <input type="hidden" name="updated" id="updated" value="true" />
+    {% endif %}
+
+        <div id="poststuff" class="tea-to-contents">
+            <div id="post-body" class="metabox-holder">
+
+                <!-- Content block -->
+                <div id="post-body-content">
+                    <!-- Content fields -->
+                    {% for field in fields %}
+                        {% set tpl = field.template %}
+                        {% include tpl with field.vars %}
+                    {% endfor %}
+
+                    {% if submit or submitSection %}
+                        <!-- Content save -->
+                        <div id="save_content">
+                            <div class="inside">
+                                <p class="submit">
+                                    <input type="submit" name="submit" class="button button-primary" value="{{ t_tto_update|raw }}" />
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="tea-to-clear"></div>
+            </div>
+        </div>
+
+    {% if submit or submitSection %}
+        </form>
+    {% endif %}
+
+    <!-- Footer block -->
+    <footer class="tea-to-footer">
+        <p class="tea-to-f-copyright">{{ t_tto_copyright|raw }}</p>
+
+        <hr/>
+
+        {% if urls %}
+            <p class="tea-to-f-links">
+                {{ t_tto_update|raw }}
+                {% for k, u in urls %}
+                    {% if u.target %}&nbsp;&nbsp;&bull;&nbsp;&nbsp;{% elseif loop.index0 > 0 %},{% endif %}
+
+                    {% if u.url %}
+                        <a href="{{ u.url }}" class="{{ k }}" target="{{ u.target ?: '_self' }}"><b>{{ u.label|raw }}</b></a>
+                    {% else %}
+                        {{ u.label|raw }}
+                    {% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        <p class="tea-to-f-quote"><small>{{ t_tto_quote|raw }}</small></p>
+
+        <hr/>
+
+        {% if partners %}
+            <ul class="tea-to-f-partners">
+                {% for p in partners %}
+                    <li>
+                        <a href="{{ p.url }}" title="{{ p.label|raw }}" class="tea-to-tooltip" target="_blank">
+                            <img src="{{ p.image }}" alt="{{ p.label|raw }}" />
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </footer>
+
+    <div class="tea-to-modal-backdrop"></div>
+</div>

@@ -6,7 +6,7 @@
 {% block label %}
     <label for="{{ id }}">
         {{ title|raw }}
-        <small>{{ description|raw }}</small>
+        {% if description %}<small>{{ description|raw }}</small>{% endif %}
     </label>
 {% endblock %}
 

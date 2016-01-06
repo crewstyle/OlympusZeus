@@ -38,7 +38,7 @@
         _tto.$counter.text(_tto.$el.val().length);
 
         //append counter
-        _tto.$counter.insertBefore(_tto.$el);
+        _tto.$counter.insertAfter(_tto.$el);
 
         //bind all event
         _tto.$el.on('blur', $.proxy(_tto.getBlur, _tto));

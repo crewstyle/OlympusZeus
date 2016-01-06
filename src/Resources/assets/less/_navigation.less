@@ -6,36 +6,11 @@
  */
 
 .tea-to-main-nav {
-    background: @primary url(../img/section-square.png);
-    box-shadow: inset 0 -4px 10px fade(@black, 30%);
+    background-color: @primary;
+    background-image: url(../img/section-square.png);
+    box-shadow: inset 0 -14px 4px -10px fade(@black, 30%);
     position: relative;
-    z-index: 2000;
-
-    .tea-to-menu-resp:before {
-        border: 0;
-        content: '\f228';
-        display: inline-block;
-        height: 44px;
-        font: 400 40px/45px Dashicons;
-        margin: 0;
-        outline: 0;
-        padding: 0;
-        position: absolute;
-        right: 5px;
-        text-align: center;
-        text-decoration: none;
-        top: 9px;
-        vertical-align: middle;
-        width: 50px;
-        z-index: 2;
-        -webkit-font-smoothing: antialiased;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition: all ease .5s;
-        -moz-transition: all ease .5s;
-        transition: all ease .5s;
-    }
+    z-index: 1;
 
     .tea-to-logo {
         display: inline-block;
@@ -52,6 +27,7 @@
             margin: -6px 10px 0 0;
             max-height: 54px;
             vertical-align: middle;
+            width: 31px;
         }
 
         &:focus,
@@ -123,30 +99,24 @@
             color: @white;
         }
     }
-
-    a.tea-to-fallback {
-        background-color: fade(@black, 70%);
-        bottom: 0;
-        display: none;
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-    }
 }
 
-.opened .tea-to-main-nav {
-    .tea-menu-resp:before {
-        content: '\f158';
-        right: 255px;
-        z-index: 10;
-    }
+.tea-to-mainwrap {
+    h2.nav-tab-wrapper {
+        background: @graylight;
+        padding: 9px 2% 0;
 
-    ul {
-        right: 0;
-    }
+        .nav-tab {
+            margin-left: 0;
+            margin-right: 7px;
+        }
 
-    a.tea-to-fallback {
-        display: block;
+        .nav-tab-active,
+        .nav-tab-active:focus,
+        .nav-tab-active:focus:active,
+        .nav-tab-active:hover {
+            background: #fdfdfd;
+            border-bottom-color: #fdfdfd;
+        }
     }
 }

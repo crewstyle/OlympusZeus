@@ -17,13 +17,13 @@
         padding: 5px;
         position: relative;
 
-        &:hover {
-            background-color: @second;
+        &.selected {
+            background-color: fade(@second, 40%);
+            border-left-color: @primary;
         }
 
-        &.selected {
-            border-left-color: @primary;
-            color: @primary;
+        &:hover {
+            background-color: @second;
         }
     }
 
