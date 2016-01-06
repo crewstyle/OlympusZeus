@@ -12,7 +12,10 @@ module.exports = {
     },
     files: [{
       expand: true,
-      src: './assets/img/*.{png,gif,jpg,jpeg}',
+      cwd: './assets/img/',
+      src: [
+        '**/*.{png,gif,jpg,jpeg}'
+      ],
       dest: './assets/img/'
     }]
   }

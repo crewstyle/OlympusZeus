@@ -7,10 +7,12 @@
 
 ---
 
-### Installation
+**The goal of the Tea Theme Options team is to work actively on the project of the same name.**  
+Here are all the links you need:
 
-[To learn more about the Tea Theme Options, read the docs](http://tea-theme-options.readme.io/).  
-The Tea T.O. uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
+[Salt Bountysource page](https://salt.bountysource.com/teams/tea-theme-options)  
+[Bountysource page](https://www.bountysource.com/teams/tea-theme-options)  
+[Documentation](https://tea-theme-options.readme.io/)
 
 ---
 
@@ -34,6 +36,13 @@ The **Tea T.O. Core** works has deeply integrated ElasticSearch search engine fe
 
 ---
 
+### Documentation
+
+[To learn more about the Tea Theme Options, read the docs](http://tea-theme-options.readme.io/).  
+The Tea T.O. uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
+
+---
+
 ### All we need is looooooooooooove :)
 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
@@ -54,4 +63,4 @@ Please, read [LICENSE](https://github.com/crewstyle/TeaThemeOptions/blob/master/
 
 ---
 
-Built with ♥ by [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk") ~ (c) since 2015.
+**Built with ♥ by [Achraf Chouk](http://github.com/crewstyle "Achraf Chouk") ~ (c) since 2015.**
