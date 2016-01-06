@@ -571,6 +571,15 @@ class Elastica
             return 0;
         }
 
+        //Get status
+        $status = $this->connection();
+
+        //Check status
+        if (200 !== $status) {
+            TeaThemeOptions::setConfigs(Search::getIndex().'-status', $status);
+            return 0;
+        }
+
         //Get all wanted posts
         $count = 0;
         $posts = get_posts(array(
