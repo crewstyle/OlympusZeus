@@ -1,3 +1,6 @@
+## 3.3.1 (January 09, 2015)
+Update composer and REAMDME.md
+
 ## 3.3.0 (January 06, 2015)
 HAPPY NEW YEAR EVERYONE :)
 
