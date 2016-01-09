@@ -3,7 +3,8 @@
 [![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options) 
 [![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](https://github.com/crewstyle/TeaThemeOptions/blob/master/LICENSE) 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software) 
+[![OpenHub](https://www.openhub.net/p/TeaThemeOptions/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/TeaThemeOptions)
 
 ---
 
