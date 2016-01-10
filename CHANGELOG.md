@@ -1,3 +1,6 @@
+## 3.3.2 (January 11, 2015)
+Make the package a plugin from composer.
+
 ## 3.3.1 (January 09, 2015)
 Update composer and REAMDME.md
 
