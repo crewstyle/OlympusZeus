@@ -1,6 +1,6 @@
 {
     "name": "crewstyle/tea-theme-options",
-    "type": "wordpress-plugin",
+    "type": "wordpress-muplugin",
     "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
     "keywords": ["wordpress", "theme", "options", "search", "post type", "taxonomy"],
     "homepage": "https://github.com/crewstyle/TeaThemeOptions",
