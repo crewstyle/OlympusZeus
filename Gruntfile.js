@@ -37,34 +37,10 @@ module.exports = function (grunt){
 
 
   //------ [TASKS REGISTRATION] ------//
-  //default task: JShint validation
-  grunt.registerTask('test', 'Test JS files.', ['debug']);
-  grunt.registerTask('debug', filterAvailable([
-    'jshint:app'
-  ]));
-
-  //distributed task
-  grunt.registerTask('default', 'Create minified & production-ready files.', [
-    'start',
-    'minify',
-    'move',
-    'end'
-  ]);
-  grunt.registerTask('start', filterAvailable(['clean:first']));
-  grunt.registerTask('minify', filterAvailable([
-    'less:main',
-    'less:earth',
-    'less:ocean',
-    'less:vulcan',
-    'less:wind',
-    'less:login',
-    'cssmin:compress',
-    'uglify:main'
-  ]));
-  grunt.registerTask('move', filterAvailable(['copy']));
-  grunt.registerTask('end', filterAvailable([
-    'imagemin:dist',
-    'clean:last'
+  grunt.registerTask('default', 'Create minified & production-ready files.', ['app']);
+  grunt.registerTask('app', filterAvailable([
+    'clean:app',
+    'copy:app'
   ]));
 
 

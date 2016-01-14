@@ -1,6 +1,6 @@
 {
   "name": "olympus-zeus",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "homepage": "https://github.com/crewstyle/OlympusZeus",
   "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
   "authors": [
@@ -32,12 +32,6 @@
     "tests"
   ],
   "dependencies": {
-    "codemirror": "codemirror/CodeMirror#~4.12.0",
-    "fontawesome": "FortAwesome/Font-Awesome#~4.4.0",
-    "leaflet": "leaflet/leaflet#~0.7.3",
-    "pickadate": "amsul/pickadate.js#~3.5.4",
-    "selectize": "brianreavis/selectize.js#~0.12.0",
-    "handlebars": "~4.0.3",
     "olympus.hera": "*"
   }
 }

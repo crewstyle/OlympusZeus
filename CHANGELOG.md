@@ -1,3 +1,6 @@
+## 4.0.1 (January 15, 2016)
+Full integration of the **Olympus Hera** package.
+
 ## 4.0.0 (January 14, 2016)
 **NEW VERSION, NEW CODE**
 Tea Theme Options is now **Olympus Zeus**, a part of the [**Olympus framework**](https://github.com/crewstyle/Olympus).

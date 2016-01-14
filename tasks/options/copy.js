@@ -6,20 +6,29 @@
  */
 
 module.exports = {
-  main: {
+  app: {
     files: [{
+      //CSS
+      cwd: './bower_components/olympus.hera/dist/css/',
+      expand: true,
+      flatten: false,
+      src: [
+        '**/*'
+      ],
+      dest: './assets/css/'
+    },
+
+    {
       //Fonts
       expand: true,
       flatten: true,
-      src: [
-        './bower_components/fontawesome/fonts/*',
-        './src/Resources/assets/fonts/*'
-      ],
+      src: ['./bower_components/olympus.hera/dist/fonts/*'],
       dest: './assets/fonts/'
     },
+
     {
       //Images
-      cwd: './src/Resources/assets/img/',
+      cwd: './bower_components/olympus.hera/dist/img/',
       expand: true,
       flatten: false,
       src: [
@@ -27,14 +36,13 @@ module.exports = {
       ],
       dest: './assets/img/'
     },
+
     {
-      //Leaflet
+      //JS
       expand: true,
       flatten: true,
-      src: [
-        './bower_components/leaflet/dist/images/*'
-      ],
-      dest: './assets/css/images/'
+      src: ['./bower_components/olympus.hera/dist/js/olz.min.js'],
+      dest: './assets/js/'
     }]
   },
 };

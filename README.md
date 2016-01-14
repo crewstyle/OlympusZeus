@@ -1,10 +1,14 @@
 # Olympus Zeus [![Packagist version](https://img.shields.io/packagist/v/crewstyle/olympus-zeus.svg?style=flat-square)](https://packagist.org/packages/crewstyle/olympus-zeus)
 
-_**Olympus Zeus** library is a part of Olympus framework (https://github.com/crewstyle/Olympus) for WordPress.
-It allows you to easily add professional looking theme options panels to your WordPress theme._  
+_**Olympus Zeus** library is a part of [**Olympus WordPress framework**](https://github.com/crewstyle/Olympus).
+It allows you to easily add professional looking theme options panels to your **WordPress** theme._  
 [![Total Downloads](https://img.shields.io/packagist/dt/crewstyle/olympus-zeus.svg?style=flat-square)](https://packagist.org/packages/crewstyle/olympus-zeus) 
 [![License](https://img.shields.io/github/license/crewstyle/OlympusZeus.svg?style=flat-square)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
-[![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus)
+[![GitHub version](https://img.shields.io/github/tag/crewstyle/OlympusZeus.svg?style=flat-square)](https://github.com/crewstyle/OlympusZeus) 
+[![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus) 
+~ ![For WordPress](https://img.shields.io/badge/for-WordPress-00aadc.svg?style=flat-square) 
+~ ![With GruntJS](https://img.shields.io/badge/with-GruntJS-fba919.svg?style=flat-square) 
+![With Bower](https://img.shields.io/badge/with-Bower-ffcc2f.svg?style=flat-square)  
 
 ---
 
@@ -39,15 +43,15 @@ The **Olympus Zeus** works has deeply integrated ElasticSearch search engine fea
 
 ### Documentation
 
-[To learn more about the Olympus Zeus library, read the docs](https://olympus.readme.io/).  
-The Olympus Zeus uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
+[To learn more about the **Olympus Zeus** library, read the docs](https://olympus.readme.io/).  
+The **Olympus Zeus** uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
 
 ---
 
 ### All we need is looooooooooooove :)
 
 [![Salt Bountysource page](https://img.shields.io/badge/Salt%20Bountysource-♥-brightgreen.svg?style=flat-square)](https://salt.bountysource.com/teams/olympus) [![Bountysource page](https://img.shields.io/badge/Bountysource-♥-brightgreen.svg?style=flat-square)](https://www.bountysource.com/teams/olympus)  
-Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library and the **Olympus** framework ;)
+Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library and the **Olympus WordPress framework** ;)
 
 ---
 

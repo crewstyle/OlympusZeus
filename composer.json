@@ -1,30 +1,30 @@
 {
-    "name": "crewstyle/olympus-zeus",
-    "type": "library",
-    "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
-    "keywords": ["wordpress", "theme", "options", "search", "post type", "taxonomy"],
-    "homepage": "https://github.com/crewstyle/OlympusZeus",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Achraf Chouk",
-            "homepage": "https://github.com/crewstyle"
-        }
-    ],
-    "require": {
-        "behat/transliterator": "^1.1@dev",
-        "ruflin/Elastica": ">=3.0",
-        "twig/twig": "~1.0"
-    },
-    "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {
-            "crewstyle\\OlympusZeus\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.x-dev"
-        }
+  "name": "crewstyle/olympus-zeus",
+  "type": "library",
+  "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
+  "keywords": ["wordpress", "theme", "options", "search", "post type", "taxonomy"],
+  "homepage": "https://github.com/crewstyle/OlympusZeus",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Achraf Chouk",
+      "homepage": "https://github.com/crewstyle"
     }
+  ],
+  "require": {
+    "behat/transliterator": "^1.1@dev",
+    "ruflin/Elastica": ">=3.0",
+    "twig/twig": "~1.0"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "crewstyle\\OlympusZeus\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "4.x-dev"
+    }
+  }
 }

@@ -12,17 +12,12 @@ var grunt = require('grunt'),
 //packages requisits for tasks
 var requiredTasks = {
   clean: ['grunt-contrib-clean'],
-  copy: ['grunt-contrib-copy'],
-  cssmin: ['grunt-contrib-cssmin'],
-  imagemin: ['grunt-contrib-imagemin'],
-  jshint: ['grunt-contrib-jshint'],
-  less: ['grunt-contrib-less'],
-  uglify: ['grunt-contrib-uglify']
+  copy: ['grunt-contrib-copy']
 };
 
 //fallbacks
 var fallbackTasks = {
-  'imagemin': 'copy:main'
+  'clean': 'clean:app'
 };
 
 //available tasks
