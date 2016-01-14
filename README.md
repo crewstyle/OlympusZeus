@@ -1,9 +1,9 @@
-# Olympus Zeus [![GitHub version](https://badge.fury.io/gh/crewstyle%2FOlympusZeus.svg)](https://packagist.org/packages/crewstyle/olympus-zeus)
+# Olympus Zeus [![Packagist version](https://img.shields.io/packagist/v/crewstyle/olympus-zeus.svg)](https://packagist.org/packages/crewstyle/olympus-zeus)
 
 _**Olympus Zeus** library is a part of Olympus framework (https://github.com/crewstyle/Olympus) for WordPress.
 It allows you to easily add professional looking theme options panels to your WordPress theme._  
-[![Total Downloads](https://poser.pugx.org/crewstyle/olympus-zeus/downloads.svg)](https://packagist.org/packages/crewstyle/olympus-zeus) 
-[![License](https://poser.pugx.org/crewstyle/olympus-zeus/license.svg)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
+[![Total Downloads](https://img.shields.io/packagist/dt/crewstyle/olympus-zeus.svg)](https://packagist.org/packages/crewstyle/olympus-zeus) 
+[![License](https://img.shields.io/github/license/crewstyle/OlympusZeus.svg)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
 [![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus)
 
 ---
@@ -46,8 +46,7 @@ The Olympus Zeus uses [ReadMe.io](https://readme.io) which was built entirely on
 
 ### All we need is looooooooooooove :)
 
-[![Salt Bountysource page](https://img.shields.io/badge/Salt%20Bountysource-Help%20us-brightgreen.svg)](https://salt.bountysource.com/teams/olympus) https://salt.bountysource.com/teams/olympus  
-[![Bountysource page](https://img.shields.io/badge/Bountysource-Help%20us-brightgreen.svg)](https://www.bountysource.com/teams/olympus) https://www.bountysource.com/teams/olympus  
+[![Salt Bountysource page](https://img.shields.io/badge/Salt%20Bountysource-♥-brightgreen.svg)](https://salt.bountysource.com/teams/olympus) [![Bountysource page](https://img.shields.io/badge/Bountysource-♥-brightgreen.svg)](https://www.bountysource.com/teams/olympus)  
 Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library and the **Olympus** framework ;)
 
 ---
