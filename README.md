@@ -1,7 +1,7 @@
 # Olympus Zeus [![GitHub version](https://badge.fury.io/gh/crewstyle%2FOlympusZeus.svg)](https://packagist.org/packages/crewstyle/olympus-zeus)
 
-_Olympus Zeus library is a part of Olympus framework (https://github.com/crewstyle/Olympus) for WordPress.
-It allows you to easily add professional looking theme options panels to your WordPress theme._
+_**Olympus Zeus** library is a part of Olympus framework (https://github.com/crewstyle/Olympus) for WordPress.
+It allows you to easily add professional looking theme options panels to your WordPress theme._  
 [![Total Downloads](https://poser.pugx.org/crewstyle/olympus.zeus/downloads.svg)](https://packagist.org/packages/crewstyle/olympus.zeus) 
 [![License](https://poser.pugx.org/crewstyle/olympus.zeus/license.svg)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
