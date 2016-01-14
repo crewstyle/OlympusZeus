@@ -3,9 +3,7 @@
 _**Olympus Zeus** library is a part of [**Olympus WordPress framework**](https://github.com/crewstyle/Olympus).
 It allows you to easily add professional looking theme options panels to your **WordPress** theme._  
 [![Total Downloads](https://img.shields.io/packagist/dt/crewstyle/olympus-zeus.svg?style=flat-square)](https://packagist.org/packages/crewstyle/olympus-zeus) 
-[![License](https://img.shields.io/github/license/crewstyle/OlympusZeus.svg?style=flat-square)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
 [![GitHub version](https://img.shields.io/github/tag/crewstyle/OlympusZeus.svg?style=flat-square)](https://github.com/crewstyle/OlympusZeus) 
-[![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus) 
 ~ ![For WordPress](https://img.shields.io/badge/for-WordPress-00aadc.svg?style=flat-square) 
 ~ ![With GruntJS](https://img.shields.io/badge/with-GruntJS-fba919.svg?style=flat-square) 
 ![With Bower](https://img.shields.io/badge/with-Bower-ffcc2f.svg?style=flat-square)  
@@ -63,7 +61,8 @@ Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
-Please, read [LICENSE](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE "LICENSE") ([MIT](http://opensource.org/licenses/MIT "MIT")) for more details.
+Please, read [LICENSE](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE "LICENSE") for more details.  
+[![MIT](https://img.shields.io/badge/license-MIT_License-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT "MIT")  
 
 ---
 
