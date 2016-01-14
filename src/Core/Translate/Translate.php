@@ -1,39 +1,32 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Translate;
+namespace crewstyle\OlympusZeus\Core\Translate;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-
-/**
- * TTO TRANSLATE
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
 
 /**
- * TTO Translate
+ * Translates typos.
  *
- * Class used to translate typos.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Translate\Translate
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 4.0.0
  *
  */
+
 class Translate
 {
     /**
      * Constructor.
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
-    public function __construct(){}
+    public function __construct()
+    {
+        //Load WordPress language file if exists
+        $locale = apply_filters('theme_locale', get_locale(), OLZ_I18N);
+        load_textdomain(OLZ_I18N, OLZ_PATH.'/../languages/'.$locale.'.mo');
+    }
 
     /**
      * Translate typo.
@@ -41,10 +34,10 @@ class Translate
      * @param string $content Contains typo to translate
      * @return Translate
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
-    public static function __($content)
+    public static function translate($content)
     {
-        return __($content, TTO_I18N);
+        return __($content, OLZ_I18N);
     }
 }

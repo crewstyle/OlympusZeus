@@ -1,14 +1,14 @@
 {
-  "name": "tea-theme-options",
-  "version": "3.3.0",
-  "homepage": "https://github.com/crewstyle/TeaThemeOptions",
+  "name": "olympus-zeus",
+  "version": "4.0.0",
+  "homepage": "https://github.com/crewstyle/OlympusZeus",
+  "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
   "authors": [
     "Achraf Chouk <achrafchouk@gmail.com>"
   ],
-  "description": "The Tea Theme Options allows you to easily add professional looking theme options panels to your WordPress website.",
   "main": [
-    "assets/css/teato.min.css",
-    "assets/js/teato.min.js"
+    "assets/css/olz.min.css",
+    "assets/js/olz.min.js"
   ],
   "moduleType": [
     "globals",
@@ -17,11 +17,9 @@
   "keywords": [
     "wordpress",
     "plugin",
-    "teathemeoptions",
-    "themeoptions",
-    "tea",
-    "tto",
-    "teato",
+    "olympus",
+    "zeus",
+    "olympuszeus",
     "theme",
     "options"
   ],
@@ -39,6 +37,7 @@
     "leaflet": "leaflet/leaflet#~0.7.3",
     "pickadate": "amsul/pickadate.js#~3.5.4",
     "selectize": "brianreavis/selectize.js#~0.12.0",
-    "handlebars": "~4.0.3"
+    "handlebars": "~4.0.3",
+    "olympus.hera": "*"
   }
 }

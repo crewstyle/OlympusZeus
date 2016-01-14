@@ -6,7 +6,7 @@
 {% block label %}<label>{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content toggle">
+    <div class="olz-field-content toggle">
         {{ disable|raw }}
 
         <fieldset class="{{ val ? 'is-on' : 'is-off' }}">
@@ -23,6 +23,6 @@
 
         {{ enable|raw }}
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

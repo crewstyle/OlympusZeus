@@ -7,9 +7,9 @@
 
 module.exports = {
   'first': [
-    './src/Resources/assets/css/teato.css',
-    './src/Resources/assets/css/teato.admin.*.css',
-    './src/Resources/assets/css/teato.login.css',
+    './src/Resources/assets/css/olz.css',
+    './src/Resources/assets/css/olz.admin.*.css',
+    './src/Resources/assets/css/olz.login.css',
     './assets/css/*',
     './assets/fonts/*',
     './assets/img/*',
@@ -17,8 +17,8 @@ module.exports = {
   ],
 
   'last': [
-    './src/Resources/assets/css/teato.css',
-    './src/Resources/assets/css/teato.admin.*.css',
-    './src/Resources/assets/css/teato.login.css',
+    './src/Resources/assets/css/olz.css',
+    './src/Resources/assets/css/olz.admin.*.css',
+    './src/Resources/assets/css/olz.login.css',
   ]
 };

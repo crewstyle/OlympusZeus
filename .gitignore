@@ -1,7 +1,23 @@
+##############################################
+# @package Olympus Zeus
+# @author Achraf Chouk <achrafchouk@gmail.com>
+# @since 4.0.0
+##############################################
+
+# Composer
+composer.lock
+composer.phar
+/vendor/
+
+# Useless auto-generated files
 .DS_Store
 .idea/
-/vendor/
+Thumbs.db
+
+# Auto-generated folders
 /node_modules/
 /bower_components/
-/_cache/*
-composer.phar
+
+# Olympus Zeus files
+/cache/*
+!/cache/.gitkeep

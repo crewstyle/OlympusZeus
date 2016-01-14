@@ -1,33 +1,20 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Plugins\Action;
+namespace crewstyle\OlympusZeus\Plugins\Action;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-//use crewstyle\TeaThemeOptions\Plugins\Network\Network;
-use crewstyle\TeaThemeOptions\Plugins\Search\Search;
-
-/**
- * TTO PLUGINS ACTION
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Plugins\Search\Search;
 
 /**
- * TTO Plugins Action
+ * Makes actions from GET param.
  *
- * Class used to make actions from GET param.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Plugins\Action\Action
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 class Action
 {
     /**
@@ -40,12 +27,12 @@ class Action
      *
      * @param string $identifier Define the main slug
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function __construct($identifier)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -59,14 +46,14 @@ class Action
     /**
      * Initialize actions.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function initialize()
     {
         //Get current user action
         $action = isset($_REQUEST['do']) ? (string) $_REQUEST['do'] : '';
 
-        if ('tto-action' !== $action) {
+        if ('olz-action' !== $action) {
             return;
         }
 
@@ -96,12 +83,12 @@ class Action
      * @param array $request Contains all data in $_REQUEST
      * @todo Networks!
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     protected function updateNetwork($request)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -114,8 +101,8 @@ class Action
 
         //Check if a network connection is asked
         if ('callback' != $for && 'network' != $for) {
-            TeaThemeOptions::notify('error',
-                TeaThemeOptions::__('Something went wrong in your parameters
+            OlympusZeus::notify('error',
+                OlympusZeus::__('Something went wrong in your parameters
                 definition. You need to specify a network to make the
                 connection happens.')
             );
@@ -135,12 +122,12 @@ class Action
      *
      * @param array $request Contains all data in $_REQUEST
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     protected function updateSearch($request)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 

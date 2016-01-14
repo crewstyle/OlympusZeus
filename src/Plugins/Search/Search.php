@@ -1,40 +1,24 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Plugins\Search;
+namespace crewstyle\OlympusZeus\Plugins\Search;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Plugins\Search\Action\Action;
-use crewstyle\TeaThemeOptions\Plugins\Search\Engine\Engine;
-
-/**
- * TTO SEARCH
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
-defined('SE_TEMPLATE') or define('SE_TEMPLATE', TTO_PATH . '/Resources/contents/settings-search.php');
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Plugins\Search\SearchAction;
+use crewstyle\OlympusZeus\Plugins\Search\SearchEngine;
 
 /**
- * TTO Search
+ * Gets its own search engine with ElasticSearch.
  *
- * To get its own search engine with ElasticSearch.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Plugins\Search\Search
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 class Search
 {
-    /**
-     * @var Action
-     */
-    protected $action = null;
+    const SE_TEMPLATE = '/Resources/contents/settings-search.php';
 
     /**
      * @var string
@@ -42,27 +26,32 @@ class Search
     protected static $index = '3rd-search';
 
     /**
+     * @var SearchAction
+     */
+    protected $searchAction = null;
+
+    /**
      * @var SearchEngine
      */
-    protected $search = null;
+    protected $searchEngine = null;
 
     /**
      * Constructor.
      *
      * @param boolean $hook Define if we need to call hooks
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function __construct($hook = true)
     {
         //Initialize search engine
         $configs = self::getConfigs();
-        $this->search = new Engine($configs, true);
+        $this->searchEngine = new SearchEngine($configs, true);
 
         //Update search content mode?
-        if (TTO_IS_ADMIN && !$hook) {
+        if (OLZ_ISADMIN && !$hook) {
             //Initialize action
-            $this->action = new Action($_REQUEST, $this->search);
+            $this->searchAction = new SearchAction($_REQUEST, $this->searchEngine);
 
             return;
         }
@@ -71,13 +60,13 @@ class Search
         $currentPage = isset($_REQUEST['page']) ? (string) $_REQUEST['page'] : '';
 
         //Hooks
-        if (TTO_IS_ADMIN && preg_match('/-settings$/', $currentPage)) {
+        if (OLZ_ISADMIN && preg_match('/-settings$/', $currentPage)) {
             //Hooks
-            add_filter('tto_menu_settings-search_contents', function ($contents) {
+            add_filter('olz_menu_settings-search_contents', function ($contents) {
                 //Get Search datum
                 $index = $this->getIndex();
-                $enable = TeaThemeOptions::getConfigs($index);
-                include(SE_TEMPLATE);
+                $enable = OlympusZeus::getConfigs($index);
+                include(OLZ_PATH.self::SE_TEMPLATE);
 
                 return $return;
             }, 10, 1);
@@ -99,11 +88,11 @@ class Search
             'status' => 0,
             'server_host' => 'localhost',
             'server_port' => '9200',
-            'index_name' => 'ttosearch',
+            'index_name' => 'olzsearch',
             'read_timeout' => 5,
             'write_timeout' => 10,
 
-            //TTO configs
+            //Library configs
             'template' => 'no',
 
             //Indexes
@@ -113,7 +102,7 @@ class Search
         );
 
         //Return merge values
-        return array_merge($defaults, TeaThemeOptions::getConfigs(self::getIndex().'-data'));
+        return array_merge($defaults, OlympusZeus::getConfigs(self::getIndex().'-data'));
     }
 
     /**
@@ -136,11 +125,11 @@ class Search
      * @param string $order Order way
      * @return array $search Combine of all results, total and aggregations
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public function searchChildren($type, $parent, $order = 'desc')
     {
-        return $this->search->getEngine()->searchContents($type, $parent, $order);
+        return $this->searchEngine->searchContents($type, $parent, $order);
     }
 
     /**
@@ -148,11 +137,11 @@ class Search
      *
      * @return array $search Combine of all results, total and aggregations
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public function searchContents()
     {
-        return $this->search->getEngine()->searchContents();
+        return $this->searchEngine->searchContents();
     }
 
     /**
@@ -163,10 +152,10 @@ class Search
      * @param array $tags Array contains all post tags
      * @return array $search Combine of all results, total and aggregations
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public function searchSuggest($type, $post, $tags)
     {
-        return $this->search->getEngine()->searchContents($type, $post, $tags);
+        return $this->searchEngine->searchContents($type, $post, $tags);
     }
 }

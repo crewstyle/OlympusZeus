@@ -1,56 +1,44 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\PostType;
+namespace crewstyle\OlympusZeus\Core\Posttype;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Core\Action\Action;
-use crewstyle\TeaThemeOptions\Core\PostType\Engine\Engine;
-
-/**
- * TTO POSTTYPE
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Core\Action\Action;
+use crewstyle\OlympusZeus\Core\Posttype\PosttypeEngine;
 
 /**
- * TTO PostType
+ * Gets its own post type.
  *
- * To get its own post type.
- *
- * @package Tea Theme Options
- * @subpackage Core\PostType\PostType
+ * @package Olympus Zeus
+ * @subpackage Core\Posttype\Posttype
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
-class PostType
+
+class Posttype
 {
     /**
-     * @var Engine
+     * @var PosttypeEngine
      */
-    protected $engine = null;
+    protected $posttypeEngine = null;
 
     /**
      * Constructor.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function __construct()
     {
         //Initialize search
-        $this->engine = new Engine();
+        $this->posttypeEngine = new PosttypeEngine();
 
         //Hooks
-        add_filter('tto_template_footer_urls', function ($urls, $identifier) {
+        add_filter('olz_template_footer_urls', function ($urls, $identifier) {
             return array_merge($urls, array(
                 'posttypes' => array(
-                    'url' => admin_url('admin.php?page='.$identifier.'&do=tto-action&from=footer&make=posttypes'),
-                    'label' => TeaThemeOptions::__('post types'),
+                    'url' => admin_url('admin.php?page='.$identifier.'&do=olz-action&from=footer&make=posttypes'),
+                    'label' => OlympusZeus::translate('post types'),
                 )
             ));
         }, 10, 2);
@@ -61,30 +49,30 @@ class PostType
      *
      * @param array $configs Array containing all configurations
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function addPostType($configs = array())
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
-        $this->engine->addPostType($configs);
+        $this->posttypeEngine->addPostType($configs);
     }
 
     /**
      * Register post types.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function buildPostTypes()
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
-        $this->engine->buildPostTypes();
+        $this->posttypeEngine->buildPostTypes();
     }
 }

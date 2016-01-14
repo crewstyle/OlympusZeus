@@ -1,43 +1,31 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Menu;
+namespace crewstyle\OlympusZeus\Core\Menu;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Core\Menu\Engine\Engine;
-use crewstyle\TeaThemeOptions\Core\PostType\PostType;
-use crewstyle\TeaThemeOptions\Core\Term\Term;
-
-/**
- * TTO MENU
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Core\Menu\MenuEngine;
+use crewstyle\OlympusZeus\Core\Posttype\Posttype;
+use crewstyle\OlympusZeus\Core\Term\Term;
 
 /**
- * TTO Menu
+ * Gets its own menu.
  *
- * To get its own menu.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Menu\Menu
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.0
+ * @since 4.0.0
  *
  */
+
 class Menu
 {
     /**
-     * @var Engine
+     * @var MenuEngine
      */
-    protected $menu = null;
+    protected $menuEngine = null;
 
     /**
-     * @var PostType
+     * @var Posttype
      */
     protected $posttype = null;
 
@@ -51,35 +39,35 @@ class Menu
      *
      * @param string $identifier Define the main slug
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function __construct($identifier)
     {
         //Instanciate PostType
-        $this->posttype = new PostType();
+        $this->posttype = new Posttype();
 
         //Instanciate Term
         $this->term = new Term();
 
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
         //Instanciate Menu engine
-        $this->menu = new Engine($identifier);
+        $this->menuEngine = new MenuEngine($identifier);
     }
 
     /**
      * Return Menu engine.
      *
-     * @return Menu $menu
+     * @return MenuEngine $menuEngine
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
-    public function getMenu()
+    public function getMenuEngine()
     {
-        return $this->menu;
+        return $this->menuEngine;
     }
 
     /**
@@ -87,11 +75,11 @@ class Menu
      *
      * @return array $pages
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public function getPages()
     {
-        return $this->getMenu()->getPages();
+        return $this->getMenuEngine()->getPages();
     }
 
     /**

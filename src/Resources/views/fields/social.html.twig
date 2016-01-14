@@ -14,7 +14,7 @@
 } %}
 
 {% block field %}
-    <div class="tea-to-field-content social" data-id="{{ id }}">
+    <div class="olz-field-content social" data-id="{{ id }}">
         <fieldset{{ expandable ? ' class="expandable"' : '' }}>
             {% for k, opt in val %}
                 {% set display = opt.display and opt.display == '1' ? true : false %}
@@ -51,17 +51,17 @@
             </div>
         {% endif %}
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}
 
 {% block footer %}
     {% if socials and expandable %}
         <script type="text/x-handlebars-template" id="i-socials-{{ id }}">
-            {% include 'templates/social.html.twig' %}
+            {% include 'fields/templates/social.html.twig' %}
         </script>
 
-        <div id="m-socials-{{ id }}" class="tea-to-modal social-modal" tabindex="-1" style="display:none;">
+        <div id="m-socials-{{ id }}" class="olz-modal social-modal" tabindex="-1" style="display:none;">
             <header>
                 <a href="#close" class="close">&times;</a>
                 <h2>{{ t_socials|raw }}</h2>
@@ -82,7 +82,7 @@
     <!-- Socials -->
     <h3><label>{{ t_socials_description|raw }}</label></h3>
 
-    <div class="tea-to-field-content list">
+    <div class="olz-field-content list">
         {% for k, opt in socials %}
             {% set attr = 'data-ll="' ~ opt.value ~ '" data-lk="' ~ opt.placeholder ~ '"' %}
             {% set for = id ~ '_' ~ k %}

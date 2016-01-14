@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3fde77ca6b01208c0324c757f819b5dc",
-    "content-hash": "ca7660ec7a7baa5a80d61f0cb03a34ea",
+    "hash": "d36c969bb6727e3471e44762ae1d5f11",
+    "content-hash": "4a585463c54a23e18458f7035281cb82",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -48,6 +48,40 @@
             "time": "2015-09-28 16:26:35"
         },
         {
+            "name": "philipp15b/php-i18n",
+            "version": "v3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Philipp15b/php-i18n.git",
+                "reference": "1d4b49f19ef7b1ee671d0af55af5cdb2fefa0404"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Philipp15b/php-i18n/zipball/1d4b49f19ef7b1ee671d0af55af5cdb2fefa0404",
+                "reference": "1d4b49f19ef7b1ee671d0af55af5cdb2fefa0404",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "i18n.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC BY-SA 3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Philipp Schröer",
+                    "email": "github@philworld.de"
+                }
+            ],
+            "description": "Simple i18n class for PHP",
+            "homepage": "https://github.com/Philipp15b/php-i18n",
+            "time": "2015-02-12 06:28:30"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -87,16 +121,16 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "3.0.0-beta1",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "9220654061c3288bb8485b80e02e073d2c246e2d"
+                "reference": "5446ff64692add886a11e2a329f37f0c0b547dbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/9220654061c3288bb8485b80e02e073d2c246e2d",
-                "reference": "9220654061c3288bb8485b80e02e073d2c246e2d",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/5446ff64692add886a11e2a329f37f0c0b547dbe",
+                "reference": "5446ff64692add886a11e2a329f37f0c0b547dbe",
                 "shasum": ""
             },
             "require": {
@@ -114,7 +148,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -138,7 +172,7 @@
                 "client",
                 "search"
             ],
-            "time": "2015-11-26 22:09:03"
+            "time": "2016-01-05 14:01:39"
         },
         {
             "name": "twig/twig",
@@ -206,8 +240,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "behat/transliterator": 20,
-        "ruflin/elastica": 10
+        "behat/transliterator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -6,8 +6,8 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content color">
+    <div class="olz-field-content color">
         <input type="text" name="{{ id }}" id="{{ id }}" value="{{ val }}" class="color-picker" maxlength="7" />
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

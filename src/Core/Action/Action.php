@@ -1,33 +1,22 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Action;
+namespace crewstyle\OlympusZeus\Core\Action;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Core\PostType\Engine\Engine as PostTypeEngine;
-use crewstyle\TeaThemeOptions\Core\Term\Engine\Engine as TermEngine;
-
-/**
- * TTO ACTION
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Core\Posttype\Posttype;
+use crewstyle\OlympusZeus\Core\Posttype\PosttypeEngine;
+use crewstyle\OlympusZeus\Core\Term\TermEngine;
 
 /**
- * TTO Action
+ * Used to make actions from GET param.
  *
- * Class used to make actions from GET param.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Action\Action
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 class Action
 {
     /**
@@ -45,7 +34,7 @@ class Action
     public function __construct($identifier)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -59,23 +48,23 @@ class Action
     /**
      * Initialize actions.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function initialize()
     {
         //Get capabilities
-        $capabilities = TeaThemeOptions::getConfigs('capabilities', 'backend');
+        $capabilities = OlympusZeus::getConfigs('capabilities', 'backend');
 
         //Define capabilities
         if (empty($capabilities)) {
-            $this->initializeDatum();
+            $this->initializeDatas();
             return;
         }
 
         //Get current user action
         $action = isset($_REQUEST['do']) ? (string) $_REQUEST['do'] : '';
 
-        if ('tto-action' !== $action) {
+        if ('olz-action' !== $action) {
             return;
         }
 
@@ -84,7 +73,7 @@ class Action
 
         //Simply display a message confirmation on TTO dashboard
         if ('dashboard' === $from) {
-            TeaThemeOptions::notify('updated', TeaThemeOptions::__('Your Tea Theme Options\' settings are updated.'));
+            OlympusZeus::notify('updated', OlympusZeus::translate('Your Olympus\' settings are updated.'));
         }
         //Update from footer links...
         elseif ('footer' === $from) {
@@ -114,12 +103,12 @@ class Action
     /**
      * Initialize all TTO datum.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
-    protected function initializeDatum()
+    protected function initializeDatas()
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -136,13 +125,13 @@ class Action
         }
 
         //Add custom role
-        $wp_roles->add_cap('administrator', TTO_WP_CAP_MAX);
+        $wp_roles->add_cap('administrator', OLZ_WP_CAP_MAX);
 
         //Capabilities
-        TeaThemeOptions::setConfigs('capabilities', TTO_WP_CAP_MAX);
+        OlympusZeus::setConfigs('capabilities', OLZ_WP_CAP_MAX);
 
         //Backend
-        TeaThemeOptions::setConfigs('backendhooks', array(
+        OlympusZeus::setConfigs('backendhooks', array(
             'emojicons' => true,
             'versioncheck' => true,
             'baricons' => true,
@@ -150,7 +139,7 @@ class Action
         ));
 
         //Frontend
-        TeaThemeOptions::setConfigs('frontendhooks', array(
+        OlympusZeus::setConfigs('frontendhooks', array(
             'generated' => true,
             'bodyclass' => true,
             'emojicons' => true,
@@ -159,28 +148,28 @@ class Action
         ));
 
         //Modules
-        TeaThemeOptions::setConfigs('modules', array(
+        OlympusZeus::setConfigs('modules', array(
             'database' => true,
             'customlogin' => true,
             'sanitizedfilename' => true,
         ));
 
         //3rd-party modules
-        TeaThemeOptions::setConfigs('3rd-search', false);
-        TeaThemeOptions::setConfigs('3rd-related', false);
-        TeaThemeOptions::setConfigs('3rd-comments', false);
-        TeaThemeOptions::setConfigs('3rd-networks', false);
+        OlympusZeus::setConfigs('3rd-search', false);
+        OlympusZeus::setConfigs('3rd-related', false);
+        OlympusZeus::setConfigs('3rd-comments', false);
+        OlympusZeus::setConfigs('3rd-networks', false);
     }
 
     /**
      * Create roles and capabilities.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     protected function updateFooter($make = 'capabilities')
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -199,31 +188,31 @@ class Action
             }
 
             //Add custom role
-            $wp_roles->add_cap('administrator', TTO_WP_CAP_MAX);
+            $wp_roles->add_cap('administrator', OLZ_WP_CAP_MAX);
 
             //Update DB
-            TeaThemeOptions::setConfigs('capabilities', true);
+            OlympusZeus::setConfigs('capabilities', true);
         }
         //Update post types or terms
         elseif ('posttypes' === $make || 'terms' === $make) {
             //Get post type's index
-            $index = 'posttypes' === $make ? PostTypeEngine::getIndex() : TermEngine::getIndex();
+            $index = 'posttypes' === $make ? PosttypeEngine::getIndex() : TermEngine::getIndex();
 
             //Get all registered pages
-            $contents = TeaThemeOptions::getConfigs($index);
+            $contents = OlympusZeus::getConfigs($index);
 
             //Check params and if a master page already exists
             if (!empty($contents)) {
                 //Delete configurations to built them back
-                TeaThemeOptions::setConfigs($index, array());
+                OlympusZeus::setConfigs($index, array());
             }
 
             //Flush all rewrite rules
             flush_rewrite_rules();
         }
 
-        //Redirect to Tea TO homepage
-        wp_safe_redirect(admin_url('admin.php?page='.$this->identifier.'&do=tto-action&from=dashboard'));
+        //Redirect to homepage
+        wp_safe_redirect(admin_url('admin.php?page='.$this->identifier.'&do=olz-action&from=dashboard'));
     }
 
     /**
@@ -231,17 +220,17 @@ class Action
      *
      * @param boolean $unhide Define if we have to hide or unhide notice
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     protected function updateNotice($unhide = true)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
         //Set default
-        TeaThemeOptions::setConfigs('notice', $unhide);
+        OlympusZeus::setConfigs('notice', $unhide);
     }
 
     /**
@@ -249,17 +238,17 @@ class Action
      *
      * @param array $request Contains all data in $_REQUEST
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     protected function updatePostType($request)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
         //Make actions
-        $posttype = new PostType(true, false);
+        $posttype = new Posttype(true, false);
         $posttype->makeActions($request);
     }
 
@@ -270,12 +259,12 @@ class Action
      * @param array $request Contains all data in $_REQUEST
      * @param array $files Contains all data in $_FILES
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     protected function updateSettings($request, $files)
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
@@ -295,9 +284,9 @@ class Action
             $v = 'NONE' == $v || empty($v) ? '' : $v;
 
             //Check settings
-            if (preg_match('/^tto-configs-/', $k)) {
-                $k = str_replace('tto-configs-', '', $k);
-                TeaThemeOptions::setConfigs($k, $v);
+            if (preg_match('/^olz-configs-/', $k)) {
+                $k = str_replace('olz-configs-', '', $k);
+                OlympusZeus::setConfigs($k, $v);
             }
             else {
                 /**
@@ -308,10 +297,10 @@ class Action
                  *
                  * @since 3.3.0
                  */
-                do_action('tto_action_update_settings', $k, $v);
+                do_action('olz_action_update_settings', $k, $v);
 
                 //Register option
-                TeaThemeOptions::setOption($k, $v);
+                OlympusZeus::setOption($k, $v);
             }
         }
 
@@ -333,11 +322,11 @@ class Action
                 $file = wp_handle_upload($v, array('test_form' => false));
 
                 //Register option and transient
-                TeaThemeOptions::setOption($k, $file['url']);
+                OlympusZeus::setOption($k, $file['url']);
             }
         }
 
         //Notify
-        TeaThemeOptions::notify('updated', TeaThemeOptions::__('The Tea Theme Options is updated.'));
+        OlympusZeus::notify('updated', OlympusZeus::translate('The Olympus is updated.'));
     }
 }

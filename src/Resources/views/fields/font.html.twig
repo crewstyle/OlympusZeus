@@ -6,7 +6,7 @@
 {% block label %}<label>{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content font">
+    <div class="olz-field-content font">
         {% for k,opt in options %}
             {% set selected = val == opt.name ? true : false %}
             {% set style = '' %}
@@ -23,6 +23,6 @@
             </label>
         {% endfor %}
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

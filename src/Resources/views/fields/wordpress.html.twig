@@ -6,7 +6,7 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content wordpress {{ mode }}">
+    <div class="olz-field-content wordpress {{ mode }}">
         {% if contents and contents|length >= 1 %}
             {% set squares = multiple ? '[]' : '' %}
             {% set attributes = multiple ? ' multiple="true" size="5" data-value="' ~ val|join(',') ~ '"' : '' %}
@@ -26,6 +26,6 @@
             </select>
         {% endif %}
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

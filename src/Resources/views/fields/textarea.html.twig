@@ -6,8 +6,8 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content textarea">
+    <div class="olz-field-content textarea">
         <textarea name="{{ id }}" id="{{ id }}" rows="{{ rows }}"{{ placeholder }}>{{ val }}</textarea>
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

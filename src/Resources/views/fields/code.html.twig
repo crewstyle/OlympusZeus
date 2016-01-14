@@ -6,7 +6,7 @@
 {% block label %}<label for="{{ id }}_code">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content code">
+    <div class="olz-field-content code">
         <div class="CodeMirror-all">
             {% if change %}
                 <select name="{{ id }}[mode]" class="change-mode no-selectize">
@@ -21,6 +21,6 @@
             <textarea name="{{ id }}[code]" id="{{ id }}_code" rows="{{ rows }}"{{ readonly ? ' readonly' : '' }} class="code">{{ val.code }}</textarea>
         </div>
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

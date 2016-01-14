@@ -1,4 +1,4 @@
-<div class="tea-to-field-content section {{ color }}">
+<div class="olz-field-content section {{ color }}">
     {% if title %}
         <h1>{{ title|raw }}</h1>
 
@@ -13,7 +13,7 @@
 
     {% if contents %}
         {% for c in contents %}
-            <div class="tea-to-section{% if loop.index is odd %} odd{% endif %} tea-to-clear">
+            <div class="olz-section{% if loop.index is odd %} odd{% endif %} olz-clear">
                 <div class="svg"><object width="380">{{ c.svg|raw }}</object></div>
                 <div class="text">{{ c.text|raw }}</div>
             </div>

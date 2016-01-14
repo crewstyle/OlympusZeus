@@ -45,7 +45,7 @@
         <!-- Name -->
         <h3><label for="slug">{{ t_pt_configs_slug|raw }}</label></h3>
 
-        <div class="tea-to-field-content text">
+        <div class="olz-field-content text">
             <input type="text" name="slug" id="slug" value="" size="30" maxlength="20" />
             <small>{{ t_pt_configs_slug_help|raw }}</small>
             <p>{{ t_pt_configs_slug_details|raw }}</p>
@@ -55,7 +55,7 @@
     <!-- Label -->
     <h3><label for="name">{{ t_pt_configs_plural|raw }}</label></h3>
 
-    <div class="tea-to-field-content text">
+    <div class="olz-field-content text">
         <input type="text" name="name" id="name" value="{{ val.labels ? val.labels.name : '' }}" size="30" />
         <small>{{ t_pt_configs_plural_help|raw }}</small>
     </div>
@@ -63,7 +63,7 @@
     <!-- Singular -->
     <h3><label for="singular">{{ t_pt_configs_singular|raw }}</label></h3>
 
-    <div class="tea-to-field-content text">
+    <div class="olz-field-content text">
         <input type="text" name="singular_name" id="singular" value="{{ val.labels ? val.labels.singular_name : '' }}" size="30" />
         <small>{{ t_pt_configs_singular_help|raw }}</small>
     </div>
@@ -71,7 +71,7 @@
     <!-- Menu icon -->
     <h3><label for="menuicon">{{ t_pt_configs_menuicon|raw }}</label></h3>
 
-    <div class="tea-to-field-content text">
+    <div class="olz-field-content text">
         <input type="text" name="menu_icon" id="menuicon" value="{{ val.args ? val.args.menu_icon : '' }}" size="30" />
         <small>{{ t_pt_configs_menuicon_help|raw }}</small>
         <p>{{ t_pt_configs_menuicon_details|raw }}</p>
@@ -80,14 +80,14 @@
     <!-- Menu position -->
     <h3><label for="menuposition">{{ t_pt_configs_menuposition|raw }}</label></h3>
 
-    <div class="tea-to-field-content text number">
+    <div class="olz-field-content text number">
         <input type="number" name="menu_position" id="menuposition" value="{{ val.args ? val.args.menu_position : '' }}" size="30" step="1" min="0" max="100" />
     </div>
 {% endblock %}
 
 {% block listcontents %}
     <!-- Supports -->
-    <div class="tea-to-field">
+    <div class="olz-field">
         <h3>
             <label>{{ t_pt_contents_supports|raw }}</label>
             {% include '_check_all.html.twig' with {
@@ -98,7 +98,7 @@
             } %}
         </h3>
 
-        <div class="tea-to-field-content checkbox">
+        <div class="olz-field-content checkbox">
             <fieldset>
                 {% for k, option in supports %}
                     {% set selected = val.labels and k in val.labels.supports ? ' checked="checked"' : '' %}
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Taxonomies -->
-    <div class="tea-to-field">
+    <div class="olz-field">
         <h3>
             <label>{{ t_pt_contents_taxonomies|raw }}</label>
             {% include '_check_all.html.twig' with {
@@ -130,7 +130,7 @@
             } %}
         </h3>
 
-        <div class="tea-to-field-content checkbox">
+        <div class="olz-field-content checkbox">
             <fieldset>
                 {% for k, option in taxonomies %}
                     {% set selected = val.labels and k in val.labels.taxonomies ? ' checked="checked"' : '' %}
@@ -158,7 +158,7 @@
         <!-- {{ option|raw }} -->
         <h3><label for="{{ for }}">{{ option|raw }}</label></h3>
 
-        <div class="tea-to-field-content text number">
+        <div class="olz-field-content text number">
             <input type="text" name="{{ k }}" id="{{ for }}" value="{{ val.labels ? val.labels[k] : '' }}" size="30" />
         </div>
     {% endfor %}
@@ -166,7 +166,7 @@
 
 {% block listoptions %}
     <!-- Options -->
-    <div class="tea-to-field">
+    <div class="olz-field">
         <h3>
             <label>{{ t_pt_options_options|raw }}</label>
             {% include '_check_all.html.twig' with {
@@ -177,7 +177,7 @@
             } %}
         </h3>
 
-        <div class="tea-to-field-content checkbox">
+        <div class="olz-field-content checkbox">
             <fieldset>
                 {% for k, option in options %}
                     {% set selected = val.args[k] ? ' checked="checked"' : '' %}
@@ -204,13 +204,13 @@
         <small>{{ t_pt_customfields_add|raw }}</small>
     </h3>
 
-    <nav class="tea-to-field-content tea-to-choose-fields">
+    <nav class="olz-field-content olz-choose-fields">
         {% for f in fields %}
-            <a href="#{{ f.name }}" title="{{ f.title }}" class="tea-to-tooltip button"><i class="fa {{ f.icon }}"></i></a>
+            <a href="#{{ f.name }}" title="{{ f.title }}" class="olz-tooltip button"><i class="fa {{ f.icon }}"></i></a>
         {% endfor %}
     </nav>
 
-    <div class="tea-to-field-content">
+    <div class="olz-field-content">
         {% if val.contents %}
             {% for pt in val.contents %}
                 <div class="movendrop">
@@ -231,12 +231,12 @@
 {% endblock %}
 
 {% block list %}
-    <div class="tea-to-field-content posttype create">
-        <a href="#m-posttype-add" class="tea-to-link-modal button button-primary">{{ posttypes|length ? t_pt_create|raw : t_pt_create_first|raw }}</a>
+    <div class="olz-field-content posttype create">
+        <a href="#m-posttype-add" class="olz-link-modal button button-primary">{{ posttypes|length ? t_pt_create|raw : t_pt_create_first|raw }}</a>
     </div>
 
     {% if posttypes %}
-        <table class="wp-list-table widefat fixed striped tea-to-table">
+        <table class="wp-list-table widefat fixed striped olz-table">
             <thead>
                 <tr>
                     <th scope="col" id="title" class="manage-column column-title column-primary">{{ t_pt_table_title }}</th>
@@ -249,7 +249,7 @@
                 {% for k, pt in posttypes %}
                     <tr id="pt-{{ pt.slug }}" class="level-0">
                         <td class="title column-title column-primary pt-title" data-colname="{{ t_pt_table_title }}">
-                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="row-title tea-to-tooltip">
+                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="row-title olz-tooltip">
                                 <strong>
                                     <i class="dashicons {{ pt.args.menu_icon }}"></i>
                                     {{ pt.labels.name }}
@@ -273,13 +273,13 @@
                             </ul>
                         </td>
                         <td class="actions column-format" data-colname="{{ t_pt_table_actions }}">
-                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="button tea-to-tooltip">
+                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="button olz-tooltip">
                                 <i class="dashicons dashicons-edit"></i>
                             </a>
-                            <a href="{{ fieldsAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_fieldpt }}" class="button tea-to-tooltip">
+                            <a href="{{ fieldsAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_fieldpt }}" class="button olz-tooltip">
                                 <i class="dashicons dashicons-plus"></i>
                             </a>
-                            <a href="{{ deleteAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_deletept }}" class="button button-danger tea-to-tooltip">
+                            <a href="{{ deleteAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_deletept }}" class="button button-danger olz-tooltip">
                                 <i class="dashicons dashicons-trash"></i>
                             </a>
                         </td>
@@ -289,9 +289,9 @@
         </table>
     {% endif %}
 
-    <div id="m-posttype-add" class="tea-to-modal posttype-modal" tabindex="-1" style="display:none;">
+    <div id="m-posttype-add" class="olz-modal posttype-modal" tabindex="-1" style="display:none;">
         <form action="{{ formAction|raw }}" method="post">
-            <input type="hidden" name="action" value="tea-to-action" />
+            <input type="hidden" name="action" value="olz-action" />
             <input type="hidden" name="for" value="posttype" />
             <input type="hidden" name="make" value="create" />
             <input type="hidden" name="slug" value="{{ val.slug }}" />
@@ -317,8 +317,8 @@
         <h2>{{ t_pt_edit|format(val.slug)|raw }}</h2>
     </header>
 
-    <form action="{{ formAction|raw }}" method="post" class="tea-to-field-content posttype edit">
-        <input type="hidden" name="action" value="tea-to-action" />
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype edit">
+        <input type="hidden" name="action" value="olz-action" />
         <input type="hidden" name="for" value="posttype" />
         <input type="hidden" name="make" value="edit" />
         <input type="hidden" name="slug" value="{{ val.slug }}" />
@@ -329,7 +329,7 @@
 
         <footer>
             <button type="submit" class="button button-primary">{{ t_pt_update|raw }}</button>
-            <a href="{{ cancelAction|raw }}" class="tea-to-cancel">{{ t_pt_cancel|raw }}</a>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
         </footer>
     </form>
 {% endblock %}
@@ -339,15 +339,15 @@
         <h2>{{ t_pt_delete|format(val.slug)|raw }}</h2>
     </header>
 
-    <form action="{{ formAction|raw }}" method="post" class="tea-to-field-content posttype delete">
-        <input type="hidden" name="action" value="tea-to-action" />
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype delete">
+        <input type="hidden" name="action" value="olz-action" />
         <input type="hidden" name="for" value="posttype" />
         <input type="hidden" name="make" value="delete" />
         <input type="hidden" name="slug" value="{{ val.slug }}" />
 
         <p>{{ t_pt_delete_description|raw }}</p>
 
-        <div class="tea-to-field-content select">
+        <div class="olz-field-content select">
             <select name="confirm" id="{{ id }}-confirm">
                 <option value="delete">{{ t_pt_delete_from_db|raw }}</option>
                 <option value="keep">{{ t_pt_delete_keep|raw }}</option>
@@ -356,7 +356,7 @@
 
         <footer>
             <button type="submit" class="button button-danger">{{ t_pt_delete_confirm|raw }}</button>
-            <a href="{{ cancelAction|raw }}" class="tea-to-cancel">{{ t_pt_cancel|raw }}</a>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
         </footer>
     </form>
 {% endblock %}
@@ -366,8 +366,8 @@
         <h2>{{ t_pt_fields|format(val.slug)|raw }}</h2>
     </header>
 
-    <form action="{{ formAction|raw }}" method="post" class="tea-to-field-content posttype fields">
-        <input type="hidden" name="action" value="tea-to-action" />
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype fields">
+        <input type="hidden" name="action" value="olz-action" />
         <input type="hidden" name="for" value="posttype" />
         <input type="hidden" name="make" value="fields" />
         <input type="hidden" name="slug" value="{{ val.slug }}" />
@@ -378,7 +378,7 @@
 
         <footer>
             <button type="submit" class="button button-primary">{{ t_pt_update|raw }}</button>
-            <a href="{{ cancelAction|raw }}" class="tea-to-cancel">{{ t_pt_cancel|raw }}</a>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
         </footer>
     </form>
 {% endblock %}

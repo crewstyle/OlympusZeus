@@ -1,8 +1,8 @@
 /*!
- * Tea Theme Options
- * https://github.com/crewstyle/TeaThemeOptions
+ * Olympus Zeus
+ * https://github.com/crewstyle/OlympusZeus
  *
- * Copyright 2015 Achraf Chouk
+ * Copyright 2016 Achraf Chouk
  * Achraf Chouk (https://github.com/crewstyle)
  */
 
@@ -52,7 +52,7 @@ module.exports = function (grunt){
   ]);
   grunt.registerTask('start', filterAvailable(['clean:first']));
   grunt.registerTask('minify', filterAvailable([
-    'less:teathemeoptions',
+    'less:main',
     'less:earth',
     'less:ocean',
     'less:vulcan',

@@ -1,23 +1,21 @@
 {
-  "name": "tea-theme-options",
-  "version": "3.3.0",
-  "description": "The Tea Theme Options allows you to easily add professional looking theme options panels to your WordPress website.",
-  "main": "assets/js/teato.min.js",
+  "name": "olympus-zeus",
+  "version": "4.0.0",
+  "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
+  "main": "assets/js/olz.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/crewstyle/TeaThemeOptions"
+    "url": "https://github.com/crewstyle/OlympusZeus"
   },
   "keywords": [
     "wordpress",
     "plugin",
-    "teathemeoptions",
-    "themeoptions",
-    "tea",
-    "tto",
-    "teato",
+    "olympus",
+    "zeus",
+    "olympuszeus",
     "theme",
     "options"
   ],
@@ -33,8 +31,6 @@
     "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-nodeunit": "~0.4.0",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-po2mo": "~0.1.0",
-    "grunt-pot": "^0.2.1",
     "load-grunt-config": "^0.19.1",
     "time-grunt": "^1.2.2"
   }

@@ -1,8 +1,8 @@
 /*!
  * _messages.less
  *
- * Copyright 2015 Achraf Chouk
- * Brewed by Achraf Chouk, served by Take a tea.
+ * Copyright 2016 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
  */
 
 
@@ -23,14 +23,16 @@
     }
 }
 
-.tea-to-mainwrap #update-nag,
-.tea-to-mainwrap .update-nag {
-    margin: 0 0 0 -20px;
+.olympus-mainwrap #update-nag,
+.olympus-mainwrap .update-nag {
+    margin: 0;
+    position: relative;
+    z-index: 1;
 }
 
 
 /*--- [DASHBOARD NOTICE] ---*/
-div.tea-to-notice {
+div.olz-notice {
     background: @white;
     border: 1px solid lighten(@gray, 70%);
     box-shadow: 0 1px 1px fade(@black, 4%);
@@ -122,11 +124,11 @@ div.tea-to-notice {
 
 /*--- [ALERTS] ---*/
 .wrap {
-    .notice.tea-to-notify {
+    .notice.olz-notify {
         margin: 20px 2% 0;
     }
 
-    &.tea-to-section-field .notice.tea-to-notify {
+    &.olz-section-field .notice.olz-notify {
         left: 50%;
         margin: 0;
         position: absolute;

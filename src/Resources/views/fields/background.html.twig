@@ -6,7 +6,7 @@
 {% block label %}<label>{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content background" data-id="{{ id }}">
+    <div class="olz-field-content background" data-id="{{ id }}">
         {% set color = val.color ?: '' %}
         {% set image = val.image ?: '' %}
         {% set repeat = val.repeat ?: 'repeat' %}
@@ -62,7 +62,7 @@
             <div class="bg-position-size">
                 <h3>{{ t_choose_position_size|raw }}</h3>
 
-                <div class="bg-position tea-to-field-content">
+                <div class="bg-position olz-field-content">
                     {% set num = 0 %}
 
                     <p>
@@ -70,7 +70,7 @@
                             {% set selected = position == k ? ' selected="selected"' : '' %}
                             {% set lfor = id ~ '-pos-' ~ num %}
 
-                            <label for="{{ lfor }}" title="{{ r }}" class="tea-to-tooltip{{ selected ? ' selected' : '' }}">
+                            <label for="{{ lfor }}" title="{{ r }}" class="olz-tooltip{{ selected ? ' selected' : '' }}">
                                 <i class="fa fa-circle-o"></i>
                                 <input type="radio" name="{{ id }}[position]" id="{{ lfor }}" value="{{ k }}"{{ selected|raw }} />
                             </label>
@@ -80,7 +80,7 @@
                     </p>
                 </div>
 
-                <div class="bg-size tea-to-field-content">
+                <div class="bg-size olz-field-content">
                     {% set num = 0 %}
 
                     <p>
@@ -88,7 +88,7 @@
                             {% set selected = size == k ? ' selected="selected"' : '' %}
                             {% set lfor = id ~ '-siz-' ~ num %}
 
-                            <label for="{{ lfor }}" title="{{ r[1] }}" class="tea-to-tooltip{{ selected ? ' selected' : '' }}">
+                            <label for="{{ lfor }}" title="{{ r[1] }}" class="olz-tooltip{{ selected ? ' selected' : '' }}">
                                 <i class="fa fa-{{ r[0] }}"></i>
                                 <input type="radio" name="{{ id }}[size]" id="{{ lfor }}" value="{{ k }}"{{ selected|raw }} />
                             </label>
@@ -100,13 +100,13 @@
             </div>
         </fieldset>
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}
 
 {% block footer %}
     <script type="text/x-handlebars-template" id="i-background-{{ id }}">
-        {% include 'templates/background.html.twig' with {
+        {% include 'fields/templates/background.html.twig' with {
             'id': id,
             't_remove': t_remove
         } only %}

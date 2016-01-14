@@ -24,15 +24,15 @@
 } %}
 
 {% block field %}
-    <div class="tea-to-field-content maps" data-id="{{ id }}">
+    <div class="olz-field-content maps" data-id="{{ id }}">
         <fieldset>
             <!-- Map -->
-            <div id="tea-to-leaflet-{{ id }}" class="tea-maps" style="width:100%; height:320px;"></div>
+            <div id="olz-leaflet-{{ id }}" class="olz-maps" style="width:100%; height:320px;"></div>
 
             {#<!-- Marker -->
             <div class="map-marker">
                 <h3><label for="{{ id }}-marker">{{ t_marker|raw }}</label></h3>
-                <div class="tea-to-field-content upload" data-type="image">
+                <div class="olz-field-content upload" data-type="image">
                     <div class="upload_image_result">
                         {% if val.marker %}
                             <figure>
@@ -66,12 +66,12 @@
             </a>
         </div>
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}
 
 {% block footer %}
-    <div id="m-maps-{{ id }}" class="tea-to-modal maps-modal" tabindex="-1" style="display:none;">
+    <div id="m-maps-{{ id }}" class="olz-modal maps-modal" tabindex="-1" style="display:none;">
         <header>
             <a href="#close" class="close">&times;</a>
             <h2>{{ t_item_customs|raw }}</h2>
@@ -82,7 +82,7 @@
         } only %}
 
         <footer>
-            <a href="#updateMaps" class="button button-primary tea-to-reload">{{ t_update|raw }}</a>
+            <a href="#updateMaps" class="button button-primary olz-reload">{{ t_update|raw }}</a>
         </footer>
     </div>
 {% endblock %}
@@ -91,7 +91,7 @@
     <!-- Address -->
     <h3><label for="{{ id }}-address">{{ t_address|raw }}</label></h3>
 
-    <div class="tea-to-field-content text">
+    <div class="olz-field-content text">
         <input type="text" name="{{ id }}[address]" id="{{ id }}-address" value="{{ val.address }}" size="30" />
         <p>{{ t_address_description|raw }}</p>
     </div>
@@ -99,7 +99,7 @@
     <!-- Width -->
     <h3><label for="{{ id }}-width">{{ t_width|raw }}</label></h3>
 
-    <div class="tea-to-field-content text number">
+    <div class="olz-field-content text number">
         <input type="number" name="{{ id }}[width]" id="{{ id }}-width" value="{{ val.width }}" size="30" step="1" />
         <p>{{ t_width_description|raw }}</p>
     </div>
@@ -107,7 +107,7 @@
     <!-- Height -->
     <h3><label for="{{ id }}-height">{{ t_height|raw }}</label></h3>
 
-    <div class="tea-to-field-content text number">
+    <div class="olz-field-content text number">
         <input type="number" name="{{ id }}[height]" id="{{ id }}-height" value="{{ val.height }}" size="30" step="1" />
         <p>{{ t_height_description|raw }}</p>
     </div>
@@ -115,7 +115,7 @@
     <!-- Zoom -->
     <h3><label for="{{ id }}-zoom">{{ t_zoom|raw }}</label></h3>
 
-    <div class="tea-to-field-content number">
+    <div class="olz-field-content number">
         <input type="number" name="{{ id }}[zoom]" id="{{ id }}-zoom" value="{{ val.zoom }}" size="30" min="0" max="21" step="1" />
         <p>{{ t_zoom_description|raw }}</p>
     </div>
@@ -125,7 +125,7 @@
     <!-- Type -->
     <h3><label for="{{ id }}-type">{{ t_type|raw }}</label></h3>
 
-    <div class="tea-to-field-content select">
+    <div class="olz-field-content select">
         <select name="{{ id }}[type]" id="{{ id }}-type" class="no-selectize">
             {% for k, option in types %}
                 {% set selected = k == val.type ? true : false %}
@@ -136,10 +136,10 @@
         <p>{{ t_type_description|raw }}</p>
     </div>
 
-    <hr class="tea-to-clear"/>
+    <hr class="olz-clear"/>
 
     <!-- Options -->
-    <div class="tea-to-field">
+    <div class="olz-field">
         <h3>
             <label>{{ t_options|raw }}</label>
             {% include '_check_all.html.twig' with {
@@ -150,7 +150,7 @@
             } %}
         </h3>
 
-        <div id="{{ id }}-options" class="tea-to-field-content checkbox">
+        <div id="{{ id }}-options" class="olz-field-content checkbox">
             <fieldset>
                 {% for k, option in options %}
                     {% set selected = val.options[k] and val.options[k] == 'yes' ? true : false %}
@@ -184,7 +184,7 @@
         </label>
     </h3>
 
-    <div class="tea-to-field-content textarea">
+    <div class="olz-field-content textarea">
         <textarea name="{{ id }}[json]" id="{{ id }}-json" rows="16" class="textarea" placeholder="[{'featureType':'administrative', 'stylers':[{'visibility':'off'}] }]">{{ val.json }}</textarea>
         <p>{{ t_json_description|raw }}</p>
     </div>

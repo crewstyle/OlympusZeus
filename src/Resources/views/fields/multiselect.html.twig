@@ -6,7 +6,7 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content multiselect">
+    <div class="olz-field-content multiselect">
         {% if options %}
             <input type="hidden" name="{{ id }}[]" value="" />
             <select name="{{ id }}[]" id="{{ id }}" multiple="true" size="5" data-value="{{ val is iterable ? val|join(',') : val }}">
@@ -19,6 +19,6 @@
             {{ t_no_options|raw }}
         {% endif %}
 
-        <p class="tea-to-description">{{ t_keyboard|raw }}{% if description %}<br/>{{ description|raw }}{% endif %}</p>
+        <p class="olz-description">{{ t_keyboard|raw }}{% if description %}<br/>{{ description|raw }}{% endif %}</p>
     </div>
 {% endblock %}

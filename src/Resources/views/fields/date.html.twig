@@ -6,8 +6,8 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content date">
+    <div class="olz-field-content date">
         <input type="text" name="{{ id }}" id="{{ id }}" value="{{ val }}" data-value="{{ val }}" placeholder="{{ format }}" data-format="{{ format }}" class="pickadate" />
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

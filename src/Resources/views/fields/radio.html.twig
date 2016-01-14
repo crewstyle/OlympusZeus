@@ -6,7 +6,7 @@
 {% block label %}<label>{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content radio{{ mode == 'image' ? ' image' : '' }}">
+    <div class="olz-field-content radio{{ mode == 'image' ? ' image' : '' }}">
         <fieldset>
             {% if options %}
                 {% set num = 0 %}
@@ -35,6 +35,6 @@
             {% endif %}
         </fieldset>
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

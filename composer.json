@@ -1,9 +1,9 @@
 {
-    "name": "crewstyle/tea-theme-options",
+    "name": "crewstyle/olympus-zeus",
     "type": "library",
-    "description": "The Tea Theme Options library allows you to easily add professional looking theme options panels to your WordPress theme.",
+    "description": "Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress theme.",
     "keywords": ["wordpress", "theme", "options", "search", "post type", "taxonomy"],
-    "homepage": "https://github.com/crewstyle/TeaThemeOptions",
+    "homepage": "https://github.com/crewstyle/OlympusZeus",
     "license": "MIT",
     "authors": [
         {
@@ -19,12 +19,12 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "crewstyle\\TeaThemeOptions\\": "src/"
+            "crewstyle\\OlympusZeus\\": "src/"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         }
     }
 }

@@ -1,29 +1,20 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Field;
+namespace crewstyle\OlympusZeus\Core\Field;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-
-/**
- * TTO FIELD
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
+use crewstyle\OlympusZeus\OlympusZeus;
 
 /**
- * TTO Field
- *
  * Abstract class to define all field context with authorized fields, how to
  * write some functions and every usefull checks.
  *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Field
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 abstract class Field
 {
     /**
@@ -34,7 +25,7 @@ abstract class Field
     /**
      * @var boolean
      */
-    protected $hasId = true;
+    protected static $hasId = true;
 
     /**
      * @var array
@@ -42,9 +33,9 @@ abstract class Field
     protected $includes = array();
 
     /**
-     * @var array
+     * @var boolean
      */
-    protected static $unauthorized = array('network', 'posttype', 'search', 'section');
+    public static $isauthorized = true;
 
     /**
      * Constructor.
@@ -82,7 +73,7 @@ abstract class Field
     public static function getField($type, $id, $special = array(), $ids = array())
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return false;
         }
 
@@ -94,43 +85,41 @@ abstract class Field
 
         //Check type integrity
         if (empty($type)) {
-            $error['vars']['content'] = TeaThemeOptions::__('Something went wrong in your
+            $error['vars']['content'] = OlympusZeus::translate('Something went wrong in your
                 parameters definition: no type defined!');
-
-            return $error;
-        }
-
-        //Get all default fields in the Tea T.O. package
-        $unauthorized = self::getUnauthorizedFields();
-
-        //Check if the asked field is unknown
-        if (in_array($type, $unauthorized) && !$special) {
-            $error['vars']['content'] = sprintf(TeaThemeOptions::__('Something went wrong in your
-                parameters definition with the id <code>%s</code>:
-                the defined type is unknown!'), $id);
 
             return $error;
         }
 
         //Set class
         $cls = ucfirst($type);
-        $class = "\\crewstyle\\TeaThemeOptions\\Core\\Field\\$cls\\$cls";
+        $default = "\\crewstyle\\OlympusZeus\\Core\\Field\\".$cls;
+        $plugin = "\\crewstyle\\OlympusZeus\\Plugins\\".$cls."\\".$cls."Field";
 
         //Check if the class file exists
-        if (!class_exists($class)) {
-            $error['vars']['content'] = sprintf(TeaThemeOptions::__('Something went wrong in
+        if (!class_exists($default) && !class_exists($plugin)) {
+            $error['vars']['content'] = sprintf(OlympusZeus::translate('Something went wrong in
                 your parameters definition: the class <code>%s</code>
                 does not exist!'), $cls);
 
             return $error;
         }
 
-        //Instanciate class
-        $field = new $class();
+        //Get the class
+        $class = class_exists($default) ? $default : $plugin;
+
+        //Check if the asked field is unknown
+        if (!$class::$isauthorized && !$special) {
+            $error['vars']['content'] = sprintf(OlympusZeus::translate('Something went wrong in your
+                parameters definition with the id <code>%s</code>:
+                the defined type is unknown!'), $id);
+
+            return $error;
+        }
 
         //Check if field needs an id
-        if ($field->hasID() && !$id) {
-            $error['vars']['content'] = sprintf(TeaThemeOptions::__('Something went wrong in
+        if ($class::$hasId && !$id) {
+            $error['vars']['content'] = sprintf(OlympusZeus::translate('Something went wrong in
                 your parameters definition: the type <code>%s</code>
                 needs an id.'), $type);
 
@@ -138,12 +127,15 @@ abstract class Field
         }
 
         //Check if field needs an id
-        if ($field->hasID() && in_array($id, $ids)) {
-            $error['vars']['content'] = sprintf(TeaThemeOptions::__('Something went wrong in
+        if ($class::$hasId && in_array($id, $ids)) {
+            $error['vars']['content'] = sprintf(OlympusZeus::translate('Something went wrong in
                 your parameters definition: the id <code>%s</code> is already in use.'), $id);
 
             return $error;
         }
+
+        //Instanciate class
+        $field = new $class();
 
         //Return $field
         return $field;
@@ -175,10 +167,10 @@ abstract class Field
             $value = empty($value) ? $default : $value;
         }
         //Special settings
-        else if (preg_match('/^tto-configs-/', $id)) {
-            //Update option from tto_configs_frontend_login into frontend_login
+        else if (preg_match('/^olz-configs-/', $id)) {
+            //Update option from olz_configs_frontend_login into frontend_login
             $option = $prefix.$id;
-            $id = str_replace('tto-configs-', '', $id);
+            $id = str_replace('olz-configs-', '', $id);
 
             //Check id[suboption]
             if (preg_match('/\[.*\]/', $id)) {
@@ -190,12 +182,12 @@ abstract class Field
                 $suboption = str_replace(array('[', ']'), '', $suboption);
 
                 //Get value
-                $vals = TeaThemeOptions::getConfigs($option);
+                $vals = OlympusZeus::getConfigs($option);
                 $value = !$vals ? $default : (isset($vals[$suboption]) ? $vals[$suboption] : $default);
             }
             else {
                 //Get value
-                $value = TeaThemeOptions::getConfigs($id);
+                $value = OlympusZeus::getConfigs($id);
                 $value = !$value ? $default : $value;
             }
         }
@@ -207,72 +199,11 @@ abstract class Field
         //Default
         else {
             $option = !empty($prefix) ? str_replace(array('%TERM%', '%SLUG%'), array($prefix, $id), $structure) : $id;
-            $value = TeaThemeOptions::getOption($option, $default);
+            $value = OlympusZeus::getOption($option, $default);
         }
 
         //Strip slasches?
         return $multiple || is_array($value) ? $value : stripslashes($value);
-    }
-
-    /**
-     * Return unauthorized fields to use.
-     *
-     * @return array $array All fields unauthorized to use
-     *
-     * @since 3.0.0
-     */
-    /*public static function getAuthorizedFields()
-    {
-        $folder = TTO_PATH . '/Controllers/Field/';
-
-        //List all registered fields
-        $fields = glob($folder . '*', GLOB_ONLYDIR);
-        $unauth = self::getUnauthorizedFields();
-        $auth = array();
-
-        foreach ($fields as $fd) {
-            $name = str_replace($folder, '', $fd);
-            $lowname = strtolower($name);
-
-            if (in_array($lowname, $unauth)) {
-                continue;
-            }
-
-            $class = "\\crewstyle\\TeaThemeOptions\\Core\\Field\\$name\\$name";
-
-            $auth[] = array(
-                'icon' => $class::$faicon,
-                'name' => $lowname,
-                'title' => $name
-            );
-        }
-
-        return $auth;
-    }*/
-
-    /**
-     * Return unauthorized fields to use.
-     *
-     * @return array $array All fields unauthorized to use
-     *
-     * @since 3.0.0
-     */
-    public static function getUnauthorizedFields()
-    {
-        return self::$unauthorized;
-    }
-
-    /**
-     * Check if field needs an ID.
-     *
-     * @return boolean $hasId Define if Field need an Id or not
-     *
-     * @since 3.0.0
-     */
-    public function hasID()
-    {
-        //Return value defined for each field
-        return $this->hasId;
     }
 
     /**
@@ -326,8 +257,8 @@ abstract class Field
 
         //Check if a type is defined
         if (empty($content) || empty($field) || !isset($args['args']['type'])) {
-            TeaThemeOptions::notify('error',
-                TeaThemeOptions::__('A field is missing because no type is defined.')
+            OlympusZeus::notify('error',
+                OlympusZeus::translate('A field is missing because no type is defined.')
             );
 
             return null;
@@ -339,7 +270,7 @@ abstract class Field
 
         //Display field content
         $tpl = $field->prepareField($content, array('post' => $post));
-        TeaThemeOptions::getRender($tpl['template'], $tpl['vars']);
+        OlympusZeus::getRender($tpl['template'], $tpl['vars']);
 
         //Return post if it is asked
         return isset($post->ID) ? $post->ID : null;

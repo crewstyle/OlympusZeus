@@ -1,3 +1,15 @@
+## 4.0.0 (January 14, 2016)
+**NEW VERSION, NEW CODE**
+Tea Theme Options is now **Olympus Zeus**, a part of the [**Olympus framework**](https://github.com/crewstyle/Olympus).
+
+- **New**
+  - PSR-4 validation
+  - constants can be overrided by the Olympus framework
+  - works now with Olympus Hera plugin
+  - uses `php-i18n` component
+
+
+
 ## 3.3.2 (January 11, 2015)
 Make the package a plugin from composer.
 
@@ -218,7 +230,7 @@ Lots of new features with some bug fixed
   - some fields are now draggable thanks to the [HTML5 Sortable](http://farhadi.ir/projects/html5sortable) jQuery component
   - `hidden` field is now displayed in the interface (very usefull!)
 - **Enhance:**
-  - documentation is now on [readme.io](http://tea-theme-options.readme.io/)
+  - documentation is now on [readme.io](https://olympus.readme.io/)
   - remove title from `hidden` field
 - **Fix:**
   - fix bugs on `checkbox` field

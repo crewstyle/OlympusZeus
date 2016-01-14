@@ -1,24 +1,24 @@
 {% set formSection = currentSection ? '&section=' ~ currentSection : '' %}
-{% set formAction = 'admin.php?page=' ~ currentPage ~ formSection ~ '&do=tto-action&from=settings' %}
+{% set formAction = 'admin.php?page=' ~ currentPage ~ formSection ~ '&do=olz-action&from=settings' %}
 {% set submitSection = false %}
 
 {% set fjson = fields|json_encode() %}
-{% set hstyle = 'fields\\/section.html.twig' in fjson ? ' tea-to-section-field' : '' %}
-{% set hstyle = 'fields\\/search.html.twig' in fjson ? hstyle ~ ' tea-to-search-field' : hstyle %}
+{% set hstyle = 'fields\\/section.html.twig' in fjson ? ' olz-section-field' : '' %}
+{% set hstyle = 'fields\\/search.html.twig' in fjson ? hstyle ~ ' olz-search-field' : hstyle %}
 
-<!-- Tea Theme Options -->
-<div class="wrap tea-to-wrap{{ hstyle }}">
+<!-- Olympus Zeus -->
+<div class="wrap olz-wrap{{ hstyle }}">
     <!-- Menu block -->
-    <nav class="tea-to-main-nav" role="navigation">
-        <a href="admin.php?page={{ identifier }}" class="tea-to-logo">{{ t_tto_title }}</a>
+    <nav class="olz-main-nav" role="navigation">
+        <a href="admin.php?page={{ identifier }}" class="olz-logo">{{ t_title|raw }}</a>
 
         {% if identifier != currentPage %}
-            <span class="tea-to-breadcrumb">
+            <span class="olz-breadcrumb">
                 <i class="fa fa-long-arrow-right fa-lg"></i> {{ title|raw }}
             </span>
 
             {% if subtitle %}
-                <span class="tea-to-breadcrumb">
+                <span class="olz-breadcrumb">
                     <i class="fa fa-long-arrow-right fa-lg"></i> {{ subtitle|raw }}
                 </span>
             {% endif %}
@@ -39,7 +39,7 @@
     {% if notice %}
         <!-- Updated block -->
         {% for n in notice %}
-            <div class="tea-to-notify notice {{ n[0] }}">
+            <div class="olz-notify notice {{ n[0] }}">
                 <p>{{ n[1]|raw }}</p>
             </div>
         {% endfor %}
@@ -47,16 +47,16 @@
 
     {% if description %}
         <!-- Description block -->
-        <p class="tea-to-description">{{ description|raw }}</p>
+        <p class="olz-description">{{ description|raw }}</p>
     {% endif %}
 
     <!-- Main block -->
     {% if submit or submitSection %}
-        <form method="post" action="{{ formAction|raw }}" enctype="multipart/form-data" class="tea-to-form">
+        <form method="post" action="{{ formAction|raw }}" enctype="multipart/form-data" class="olz-form">
             <input type="hidden" name="updated" id="updated" value="true" />
     {% endif %}
 
-        <div id="poststuff" class="tea-to-contents">
+        <div id="poststuff" class="olz-contents">
             <div id="post-body" class="metabox-holder">
 
                 <!-- Content block -->
@@ -72,14 +72,14 @@
                         <div id="save_content">
                             <div class="inside">
                                 <p class="submit">
-                                    <input type="submit" name="submit" class="button button-primary" value="{{ t_tto_update|raw }}" />
+                                    <input type="submit" name="submit" class="button button-primary" value="{{ t_update|raw }}" />
                                 </p>
                             </div>
                         </div>
                     {% endif %}
                 </div>
 
-                <div class="tea-to-clear"></div>
+                <div class="olz-clear"></div>
             </div>
         </div>
 
@@ -88,14 +88,14 @@
     {% endif %}
 
     <!-- Footer block -->
-    <footer class="tea-to-footer">
-        <p class="tea-to-f-copyright">{{ t_tto_copyright|raw }}</p>
+    <footer class="olz-footer">
+        <p class="olz-f-copyright">{{ t_copyright|raw }}</p>
 
         <hr/>
 
         {% if urls %}
-            <p class="tea-to-f-links">
-                {{ t_tto_update|raw }}
+            <p class="olz-f-links">
+                {{ t_update|raw }}
                 {% for k, u in urls %}
                     {% if u.target %}&nbsp;&nbsp;&bull;&nbsp;&nbsp;{% elseif loop.index0 > 0 %},{% endif %}
 
@@ -108,15 +108,15 @@
             </p>
         {% endif %}
 
-        <p class="tea-to-f-quote"><small>{{ t_tto_quote|raw }}</small></p>
+        <p class="olz-f-quote"><small>{{ t_quote|raw }}</small></p>
 
         <hr/>
 
         {% if partners %}
-            <ul class="tea-to-f-partners">
+            <ul class="olz-f-partners">
                 {% for p in partners %}
                     <li>
-                        <a href="{{ p.url }}" title="{{ p.label|raw }}" class="tea-to-tooltip" target="_blank">
+                        <a href="{{ p.url }}" title="{{ p.label|raw }}" class="olz-tooltip" target="_blank">
                             <img src="{{ p.image }}" alt="{{ p.label|raw }}" />
                         </a>
                     </li>
@@ -125,5 +125,5 @@
         {% endif %}
     </footer>
 
-    <div class="tea-to-modal-backdrop"></div>
+    <div class="olz-modal-backdrop"></div>
 </div>

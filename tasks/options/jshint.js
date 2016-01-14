@@ -9,20 +9,14 @@ module.exports = {
   app: {
     src: [
       './src/Resources/assets/js/*.js'
-    ],
-    options: {
-      jshintrc: './.jshintrc'
-    }
+    ]
   },
 
   tooling: {
     src: [
       './Gruntfile.js',
       './tasks/**/*.js'
-    ],
-    options: {
-      jshintrc: './tasks/.jshintrc'
-    }
+    ]
   },
 
   options: {

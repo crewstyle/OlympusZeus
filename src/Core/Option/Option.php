@@ -1,29 +1,17 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Option;
+namespace crewstyle\OlympusZeus\Core\Option;
 
 /**
- * TTO OPTION
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
-
-/**
- * TTO Option
+ * Works with WP options.
  *
- * Class used to work with WP options.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Option\Option
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.0.0
+ * @since 4.0.0
  *
  */
+
 class Option
 {
     /**
@@ -39,12 +27,12 @@ class Option
      * @param string $option Define the option asked
      * @return array $configs Define configurations
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public static function getConfigs($option = 'login')
     {
         //Get datas from DB
-        $configs = self::getOption('tto-configs', array());
+        $configs = self::getOption('olz-configs', array());
 
         //Check if data is available
         $return = isset($configs[$option]) ? $configs[$option] : array();
@@ -59,12 +47,12 @@ class Option
      * @param string $option Define the option to update
      * @param array|integer|string $value Define the value
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public static function setConfigs($option = 'login', $value = true)
     {
         //Get datas from DB
-        $configs = self::getOption('tto-configs', array());
+        $configs = self::getOption('olz-configs', array());
 
         //Check data
         if (isset($configs[$option])) {
@@ -75,7 +63,7 @@ class Option
         $configs[$option] = $value;
 
         //Update DB
-        self::setOption('tto-configs', $configs);
+        self::setOption('olz-configs', $configs);
     }
 
     /**
@@ -106,7 +94,7 @@ class Option
      * @param integer $transient Define if we use transiant API or not
      * @return mixed|string|void
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public static function getOption($option, $default = '', $transient = 0)
     {
@@ -123,7 +111,7 @@ class Option
                 $value = false === $value ? $default : $value;
 
                 //Set the transient for this value
-                set_transient($option, $value, TTO_DURATION);
+                set_transient($option, $value, OLZ_DURATION);
             }
         }
         //Else...
@@ -146,14 +134,14 @@ class Option
      * @param string $value Contains value to insert
      * @param integer $transient Define if we use transiant API or not
      *
-     * @since 3.0.0
+     * @since 4.0.0
      */
     public static function setOption($option, $value, $transient = 0)
     {
         //If a transient is asked...
         if (!empty($transient)) {
             //Set it for this value
-            set_transient($option, $value, TTO_DURATION);
+            set_transient($option, $value, OLZ_DURATION);
         }
 
         //Set value into DB without autoload

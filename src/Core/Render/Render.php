@@ -1,35 +1,23 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Render;
+namespace crewstyle\OlympusZeus\Core\Render;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
+use crewstyle\OlympusZeus\OlympusZeus;
 use Behat\Transliterator\Transliterator;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 use Twig_SimpleFunction;
 
 /**
- * TTO RENDER
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
-
-/**
- * TTO Render
+ * Render HTML entities.
  *
- * Class used to render HTML entities.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Render\Render
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.2.4
+ * @since 4.0.0
  *
  */
+
 class Render
 {
     /**
@@ -59,19 +47,15 @@ class Render
      * @param string $template Twig template to display
      * @param array $vars Contains all field options
      *
-     * @since 3.2.4
+     * @since 4.0.0
      */
     public static function render($template, $vars)
     {
         //Define Twig loaders
-        $loader = new Twig_Loader_Filesystem(array(
-            TTO_PATH.'/Resources/views'
-        ));
+        $loader = new Twig_Loader_Filesystem(array(OLZ_TWIG_VIEWS));
 
         //Build Twig renderer
-        $twig = new Twig_Environment($loader, array(
-            'cache' => TTO_PATH.'/../_cache',
-        ));
+        $twig = new Twig_Environment($loader, array('cache' => OLZ_CACHE));
 
         //Get footer and header from WordPress
         $twig->addFunction(new Twig_SimpleFunction('getFooter', function ($file = ''){

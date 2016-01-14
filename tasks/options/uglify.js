@@ -11,7 +11,7 @@ module.exports = {
   },
   main: {
     files: {
-      './assets/js/teato.min.js': [
+      './assets/js/olz.min.js': [
         //HandlebarsJS
         './bower_components/handlebars/handlebars.js',
         //Codemirror
@@ -38,9 +38,9 @@ module.exports = {
         './bower_components/pickadate/lib/legacy.js',
         //Selectize
         './bower_components/selectize/dist/js/standalone/selectize.js',
-        //Tea T.O.
-        './src/Resources/assets/js/tto.*.js',
-        './src/Resources/assets/js/teathemeoptions.js'
+        //Olympus
+        './bower_components/olympus.hera/src/*/hera.*.js',
+        './src/Resources/assets/js/olympuszeus.js'
       ]
     }
   }

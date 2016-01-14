@@ -7,7 +7,7 @@
 
 var grunt = require('grunt'),
   _ = grunt.util._,
-  teato = {
+  _configs = {
     //normal
     white: '#ffffff',
     black: '#000000',
@@ -30,17 +30,17 @@ var grunt = require('grunt'),
   };
 
 module.exports = {
-  teathemeoptions: {
+  main: {
     options: {
       modifyVars: _.extend({}, {
         primary: '#75cd45',
         second: '#e5f7e5',
         main: '#55bb3a'
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.css': [
+      './src/Resources/assets/css/olz.css': [
         //globals
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_global.less',
@@ -61,11 +61,11 @@ module.exports = {
         primary: '#75cd45',
         second: '#e5f7e5',
         main: '#55bb3a',
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.admin.earth.css': [
+      './src/Resources/assets/css/olz.admin.earth.css': [
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_theme.less',
         './src/Resources/assets/less/themes/*.less'
@@ -79,11 +79,11 @@ module.exports = {
         primary: '#4d9dd0',
         second: '#e5edf7',
         main: '#3a80bb'
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.admin.ocean.css': [
+      './src/Resources/assets/css/olz.admin.ocean.css': [
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_theme.less',
         './src/Resources/assets/less/themes/*.less'
@@ -97,11 +97,11 @@ module.exports = {
         primary: '#d04d4d',
         second: '#f7e5e5',
         main: '#bb3a3a'
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.admin.vulcan.css': [
+      './src/Resources/assets/css/olz.admin.vulcan.css': [
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_theme.less',
         './src/Resources/assets/less/themes/*.less'
@@ -115,11 +115,11 @@ module.exports = {
         primary: '#69d2e7',
         second: '#e3f6fa',
         main: '#a7dbd8'
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.admin.wind.css': [
+      './src/Resources/assets/css/olz.admin.wind.css': [
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_theme.less',
         './src/Resources/assets/less/themes/*.less'
@@ -132,11 +132,11 @@ module.exports = {
       modifyVars: _.extend({}, {
         primary: '#75cd45',
         main: '#55bb3a'
-      }, teato),
+      }, _configs),
       optimization: 2
     },
     files: {
-      './src/Resources/assets/css/teato.login.css': [
+      './src/Resources/assets/css/olz.login.css': [
         './src/Resources/assets/less/_fontface.less',
         './src/Resources/assets/less/_login.less',
         './src/Resources/assets/less/login/*.less'

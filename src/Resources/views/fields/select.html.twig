@@ -6,7 +6,7 @@
 {% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content select">
+    <div class="olz-field-content select">
         {% if options %}
             <select name="{{ id }}" id="{{ id }}">
                 {% for key, option in options if key %}
@@ -18,6 +18,6 @@
             {{ t_no_options }}
         {% endif %}
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}

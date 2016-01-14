@@ -1,56 +1,44 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Core\Term;
+namespace crewstyle\OlympusZeus\Core\Term;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Core\Action\Action;
-use crewstyle\TeaThemeOptions\Core\Term\Engine\Engine;
-
-/**
- * TTO TERM
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Core\Action\Action;
+use crewstyle\OlympusZeus\Core\Term\TermEngine;
 
 /**
- * TTO Term
+ * Gets its own term.
  *
- * To get its own term.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Core\Term\Term
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 class Term
 {
     /**
-     * @var Engine
+     * @var TermEngine
      */
-    protected $engine = null;
+    protected $termEngine = null;
 
     /**
      * Constructor.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function __construct()
     {
         //Initialize search
-        $this->engine = new Engine();
+        $this->termEngine = new TermEngine();
 
         //Hooks
-        add_filter('tto_template_footer_urls', function ($urls, $identifier) {
+        add_filter('olz_template_footer_urls', function ($urls, $identifier) {
             return array_merge($urls, array(
                 'terms' => array(
-                    'url' => admin_url('admin.php?page='.$identifier.'&do=tto-action&from=footer&make=terms'),
-                    'label' => TeaThemeOptions::__('terms'),
+                    'url' => admin_url('admin.php?page='.$identifier.'&do=olz-action&from=footer&make=terms'),
+                    'label' => OlympusZeus::translate('terms'),
                 )
             ));
         }, 10, 2);
@@ -61,30 +49,30 @@ class Term
      *
      * @param array $configs Array containing all configurations
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function addTerm($configs = array())
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
-        $this->engine->addTerm($configs);
+        $this->termEngine->addTerm($configs);
     }
 
     /**
      * Register terms.
      *
-     * @since 3.3.0
+     * @since 4.0.0
      */
     public function buildTerms()
     {
         //Admin panel
-        if (!TTO_IS_ADMIN) {
+        if (!OLZ_ISADMIN) {
             return;
         }
 
-        $this->engine->buildTerms();
+        $this->termEngine->buildTerms();
     }
 }

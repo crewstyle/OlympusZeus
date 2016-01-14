@@ -1,34 +1,21 @@
 <?php
 
-namespace crewstyle\TeaThemeOptions\Plugins;
+namespace crewstyle\OlympusZeus\Plugins;
 
-use crewstyle\TeaThemeOptions\TeaThemeOptions;
-use crewstyle\TeaThemeOptions\Plugins\Action\Action;
-//use crewstyle\TeaThemeOptions\Plugins\Network\Network;
-use crewstyle\TeaThemeOptions\Plugins\Search\Search;
-
-/**
- * TTO PLUGINS
- */
-
-if (!defined('TTO_CONTEXT')) {
-    die('You are not authorized to directly access to this page');
-}
-
-
-//----------------------------------------------------------------------------//
+use crewstyle\OlympusZeus\OlympusZeus;
+use crewstyle\OlympusZeus\Plugins\Action\Action;
+use crewstyle\OlympusZeus\Plugins\Search\Search;
 
 /**
- * TTO Plugins
+ * Gets all plugins methods.
  *
- * To get all plugins methods.
- *
- * @package Tea Theme Options
+ * @package Olympus Zeus
  * @subpackage Plugins\Plugins
  * @author Achraf Chouk <achrafchouk@gmail.com>
- * @since 3.3.0
+ * @since 4.0.0
  *
  */
+
 class Plugins
 {
     /**

@@ -1,54 +1,56 @@
-# Tea Theme Options [![GitHub version](https://badge.fury.io/gh/crewstyle%2FTeaThemeOptions.svg)](https://packagist.org/packages/crewstyle/tea-theme-options)
+# Olympus Zeus [![GitHub version](https://badge.fury.io/gh/crewstyle%2FOlympusZeus.svg)](https://packagist.org/packages/crewstyle/olympus-zeus)
 
-[![Total Downloads](https://poser.pugx.org/crewstyle/tea-theme-options/downloads.svg)](https://packagist.org/packages/crewstyle/tea-theme-options) 
-[![License](https://poser.pugx.org/crewstyle/tea-theme-options/license.svg)](https://github.com/crewstyle/TeaThemeOptions/blob/master/LICENSE) 
+_Olympus Zeus library is a part of Olympus framework (https://github.com/crewstyle/Olympus) for WordPress.
+It allows you to easily add professional looking theme options panels to your WordPress theme._
+[![Total Downloads](https://poser.pugx.org/crewstyle/olympus.zeus/downloads.svg)](https://packagist.org/packages/crewstyle/olympus.zeus) 
+[![License](https://poser.pugx.org/crewstyle/olympus.zeus/license.svg)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software) 
-[![OpenHub](https://www.openhub.net/p/TeaThemeOptions/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/TeaThemeOptions)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/OlympusZeus&title=OlympusZeus&language=&tags=github&category=software) 
+[![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus)
 
 ---
 
-**The goal of the Tea Theme Options team is to work actively on the project of the same name.**  
+**The goal of the Olympus team is to work actively on the project of the same name.**  
 Here are all the links you need:
 
-[Salt Bountysource page](https://salt.bountysource.com/teams/tea-theme-options)  
-[Bountysource page](https://www.bountysource.com/teams/tea-theme-options)  
-[Documentation](https://tea-theme-options.readme.io/)
+[Salt Bountysource page](https://salt.bountysource.com/teams/olympus)  
+[Bountysource page](https://www.bountysource.com/teams/olympus)  
+[Documentation](https://olympus.readme.io/)
 
 ---
 
 ### What's inside?
 
-**The Tea Theme Options allows you to easily add professional looking theme options panels to your WordPress website.**
+**The Olympus Zeus library allows you to easily add professional looking theme options panels to your WordPress website.**
 
-Easier for administrators **and** developers, the interface is thought to be the most user-friendly. The **Tea T.O. Core** adds some extra interface customisations to make your life easier. Developers can now create new admin panels with just a couple lines of codes. All is made to allow non-developer profiles to easily create the settings they need to customise their templates.
-
---
-
-**The Tea Theme Options is built with ♥ for WordPress v3.x/4.x and uses the WordPress built-in pages.**
-
-Custom post types, custom terms, here is the simpliest way to create custom content types to your WordPress website. A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way. The **Tea T.O. Core** uses the WordPress Media Manager too: a beautiful interface where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
+Easier for administrators **and** developers, the interface is thought to be the most user-friendly. The **Olympus Zeus** adds some extra interface customisations to make your life easier. Developers can now create new admin panels with just a couple lines of codes. All is made to allow non-developer profiles to easily create the settings they need to customise their templates.
 
 --
 
-**A better search engine, real related contents, highly smart algorithms. The Tea T.O. offers you full of functionalities.**
+**The Olympus Zeus is built with ♥ for WordPress v3.x/4.x and uses the WordPress built-in pages.**
 
-The **Tea T.O. Core** works has deeply integrated ElasticSearch search engine features to creates scaleable, real-time search for your website by indexing all your datas millions of times a day. Related contents works by the same way. The **Tea T.O.** is upgraded every day with new features you can use as you need.
+Custom post types, custom terms, here is the simpliest way to create custom content types to your WordPress website. A new experience with dashicons, complete customisable backend panels, custom fields and datas saved in DB as the good way. The **Olympus Zeus** uses the WordPress Media Manager too: a beautiful interface where you can create galleries faster with drag-and-drop reordering, inline caption editing, and simplified controls.
+
+--
+
+**A better search engine, real related contents, highly smart algorithms. The Olympus Zeus offers you full of functionalities.**
+
+The **Olympus Zeus** works has deeply integrated ElasticSearch search engine features to creates scaleable, real-time search for your website by indexing all your datas millions of times a day. Related contents works by the same way. The **Olympus Zeus** is upgraded every day with new features you can use as you need.
 
 ---
 
 ### Documentation
 
-[To learn more about the Tea Theme Options, read the docs](http://tea-theme-options.readme.io/).  
-The Tea T.O. uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
+[To learn more about the Olympus Zeus library, read the docs](https://olympus.readme.io/).  
+The Olympus Zeus uses [ReadMe.io](https://readme.io) which was built entirely on Open Source projects.
 
 ---
 
 ### All we need is looooooooooooove :)
 
 [![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/TeaThemeOptions&title=TeaThemeOptions&language=&tags=github&category=software)  
-Guys, do **not** hesitate to spread your love about the Tea Theme Options ;)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/OlympusZeus&title=OlympusZeus&language=&tags=github&category=software)  
+Guys, do **not** hesitate to spread your love about the Olympus Zeus library ;)
 
 ---
 
@@ -60,7 +62,7 @@ Guys, do **not** hesitate to spread your love about the Tea Theme Options ;)
 + http://twitter.com/crewstyle
 + http://github.com/crewstyle
 
-Please, read [LICENSE](https://github.com/crewstyle/TeaThemeOptions/blob/master/LICENSE "LICENSE") ([MIT](http://opensource.org/licenses/MIT "MIT")) for more details.
+Please, read [LICENSE](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE "LICENSE") ([MIT](http://opensource.org/licenses/MIT "MIT")) for more details.
 
 ---
 

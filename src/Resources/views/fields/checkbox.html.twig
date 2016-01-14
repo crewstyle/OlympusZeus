@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block field %}
-    <div class="tea-to-field-content checkbox{{ mode == 'image' ? ' image' : '' }}">
+    <div class="olz-field-content checkbox{{ mode == 'image' ? ' image' : '' }}">
         <fieldset>
             <input type="hidden" name="{{ id }}" value="" />
 
@@ -45,6 +45,6 @@
             {% endif %}
         </fieldset>
 
-        {% if description %}<p class="tea-to-description">{{ description|raw }}</p>{% endif %}
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
     </div>
 {% endblock %}
