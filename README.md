@@ -4,8 +4,6 @@ _**Olympus Zeus** library is a part of Olympus framework (https://github.com/cre
 It allows you to easily add professional looking theme options panels to your WordPress theme._  
 [![Total Downloads](https://poser.pugx.org/crewstyle/olympus-zeus/downloads.svg)](https://packagist.org/packages/crewstyle/olympus-zeus) 
 [![License](https://poser.pugx.org/crewstyle/olympus-zeus/license.svg)](https://github.com/crewstyle/OlympusZeus/blob/master/LICENSE) 
-[![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/OlympusZeus&title=OlympusZeus&language=&tags=github&category=software) 
 [![OpenHub](https://www.openhub.net/p/OlympusZeus/widgets/project_thin_badge?format=gif)](https://www.openhub.net/p/OlympusZeus)
 
 ---
@@ -48,9 +46,9 @@ The Olympus Zeus uses [ReadMe.io](https://readme.io) which was built entirely on
 
 ### All we need is looooooooooooove :)
 
-[![Gratipay](https://img.shields.io/gratipay/crewstyle.svg?style=flat)](https://www.gittip.com/crewstyle/) 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=crewstyle&url=https://github.com/crewstyle/OlympusZeus&title=OlympusZeus&language=&tags=github&category=software)  
-Guys, do **not** hesitate to spread your love about the Olympus Zeus library ;)
+[Salt Bountysource page](https://salt.bountysource.com/teams/olympus)  
+[Bountysource page](https://www.bountysource.com/teams/olympus)  
+Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library ;)
 
 ---
 
