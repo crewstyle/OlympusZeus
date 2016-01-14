@@ -46,9 +46,9 @@ The Olympus Zeus uses [ReadMe.io](https://readme.io) which was built entirely on
 
 ### All we need is looooooooooooove :)
 
-[Salt Bountysource page](https://salt.bountysource.com/teams/olympus)  
-[Bountysource page](https://www.bountysource.com/teams/olympus)  
-Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library ;)
+[![Salt Bountysource page](https://img.shields.io/badge/Salt%20Bountysource-Help%20us-brightgreen.svg)](https://salt.bountysource.com/teams/olympus) https://salt.bountysource.com/teams/olympus  
+[![Bountysource page](https://img.shields.io/badge/Bountysource-Help%20us-brightgreen.svg)](https://www.bountysource.com/teams/olympus) https://www.bountysource.com/teams/olympus  
+Guys, do **not** hesitate to spread your love about the **Olympus Zeus** library and the **Olympus** framework ;)
 
 ---
 
