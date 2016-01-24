@@ -1,0 +1,38 @@
+/*!
+ * date.less
+ *
+ * Copyright 2016 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
+ */
+
+.olz-field-content.date .picker--focused .picker__day--selected,
+.olz-field-content.date .picker__day--selected,
+.olz-field-content.date .picker__day--selected:hover {
+    background: @primary;
+}
+.olz-field-content.date .picker__day--highlighted:hover,
+.olz-field-content.date .picker__nav--next:hover,
+.olz-field-content.date .picker__nav--prev:hover,
+.olz-field-content.date .picker__day--infocus:hover,
+.olz-field-content.date .picker__day--outfocus:hover,
+.olz-field-content.date .picker__button--clear:hover,
+.olz-field-content.date .picker__button--close:hover,
+.olz-field-content.date .picker__button--today:hover {
+    background: @second;
+    border-bottom: 0;
+}
+.olz-field-content.date .picker--focused .picker__day--highlighted {
+    background: @second;
+    color: @primary;
+}
+.olz-field-content.date .picker__header select,
+.olz-field-content.date .picker__button--clear:focus,
+.olz-field-content.date .picker__button--close:focus,
+.olz-field-content.date .picker__button--today:focus,
+.olz-field-content.date .picker__input.picker__input--active,
+.olz-field-content.date .picker__day--highlighted {
+    border-color: @primary;
+}
+.olz-field-content.date .picker__button--today:before {
+    border-top-color: @primary;
+}

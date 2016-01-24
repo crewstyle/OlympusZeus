@@ -1,34 +1,26 @@
 /*!
  * copy.js
  *
- * Copyright 2015 Achraf Chouk
+ * Copyright 2016 Achraf Chouk
  * Achraf Chouk (https://github.com/crewstyle)
  */
 
 module.exports = {
   app: {
     files: [{
-      //CSS
-      cwd: './bower_components/olympus.hera/dist/css/',
-      expand: true,
-      flatten: false,
-      src: [
-        '**/*'
-      ],
-      dest: './assets/css/'
-    },
-
-    {
       //Fonts
       expand: true,
       flatten: true,
-      src: ['./bower_components/olympus.hera/dist/fonts/*'],
+      src: [
+        './bower_components/font-awesome/fonts/*',
+        './bower_components/material-design-raleway-font/webfonts/*.woff'
+      ],
       dest: './assets/fonts/'
     },
 
     {
       //Images
-      cwd: './bower_components/olympus.hera/dist/img/',
+      cwd: './src/Resources/assets/img/',
       expand: true,
       flatten: false,
       src: [
@@ -38,11 +30,13 @@ module.exports = {
     },
 
     {
-      //JS
+      //Leaflet
       expand: true,
       flatten: true,
-      src: ['./bower_components/olympus.hera/dist/js/olz.min.js'],
-      dest: './assets/js/'
+      src: [
+        './bower_components/leaflet/dist/images/*'
+      ],
+      dest: './assets/css/images/'
     }]
   },
 };

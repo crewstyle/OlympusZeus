@@ -1,3 +1,6 @@
+## 4.1.0 (January 24, 2016)
+The **Olympus Hera** package is fully integrated inside sources.
+
 ## 4.0.1 (January 15, 2016)
 Full integration of the **Olympus Hera** package.
 

@@ -12,7 +12,7 @@ use crewstyle\OlympusZeus\Plugins\Plugins;
  * OLYMPUS ZEUS
  *
  * Library Name: Olympus Zeus
- * Version: 4.0.1
+ * Version: 4.1.0
  * Snippet URI: https://github.com/crewstyle/OlympusZeus
  * Read The Doc: http://olympus-zeus.readme.io/
  * Description: The Olympus Zeus library allows you to easily add
@@ -83,7 +83,7 @@ define('OLZ_CONTEXT', 'olympus-zeus');
 //The i18n language code
 define('OLZ_I18N', 'olympus-zeus');
 //The current version
-define('OLZ_VERSION', '4.0.1');
+define('OLZ_VERSION', '4.1.0');
 //The current version
 define('OLZ_VERSION_NUM', str_replace('.', '', OLZ_VERSION));
 //The current baseline

@@ -1,0 +1,71 @@
+/*!
+ * fields/checkbox.less
+ *
+ * Copyright 2016 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
+ */
+
+.olz-field-content.checkbox {
+    background: @white;
+
+    .item {
+        float: left;
+        margin: 0 1% 10px 0;
+        width: 32%;
+
+        &:nth-child(3n+1) {
+            clear: left;
+        }
+    }
+
+    label {
+        background-color: @white;
+        border-left: 5px solid @second;
+        display: block;
+        padding: 5px;
+
+        &.selected {
+            background-color: fade(@second, 40%);
+            border-left-color: @primary;
+        }
+
+        &:hover {
+            background-color: @second;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+    }
+
+    &.image {
+        input[type="checkbox"] {
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+        }
+
+        label {
+            span {
+                background-color: @white;
+                bottom: 3px;
+                color: @black;
+                left: 2px;
+                padding: 2px 7px 1px;
+                position: absolute;
+                z-index: 2;
+            }
+
+            &:hover span {
+                background-color: @second;
+            }
+
+            &.selected span {
+                background-color: @primary;
+                color: @white;
+            }
+        }
+    }
+}

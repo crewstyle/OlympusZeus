@@ -1,0 +1,139 @@
+/*!
+ * fields/background.less
+ *
+ * Copyright 2016 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
+ */
+
+.olz-field-content.background {
+    font-size: 0;
+
+    .bg-preview {
+        background-color: fade(@gray, 30%);
+        border: 1px solid lighten(@gray, 20%);
+        border-radius: 3px;
+        box-shadow: 0 0 0 2px fade(@black, 10%), inset 0 1px 2px fade(@black, 20%);
+        box-sizing: border-box;
+        display: inline-block;
+        font-size: 12px;
+        height: 300px;
+        margin: 0;
+        position: relative;
+        vertical-align: top;
+        width: 70%;
+        -webkit-transition: all ease .5s;
+        -moz-transition: all ease .5s;
+        transition: all ease .5s;
+
+        &:hover {
+            border-color: @primary;
+            box-shadow: 0 0 0 2px fade(@primary, 30%),inset 0 1px 2px fade(@black, 20%);
+        }
+
+        figure span {
+            bottom: 48px;
+            display: block;
+            left: 0;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: 0;
+            z-index: 2;
+
+            .del-media {
+                bottom: -30px;
+                position: absolute;
+                right: 12px;
+                z-index: 2;
+            }
+        }
+
+        .bg-image {
+            background-color: fade(@white, 95%);
+            bottom: 0;
+            left: 0;
+            padding: 10px 8px;
+            position: absolute;
+            right: 0;
+            text-align: left;
+            z-index: 1;
+        }
+    }
+
+    .bg-options {
+        box-sizing: border-box;
+        display: inline-block;
+        font-size: 12px;
+        padding-left: 12px;
+        vertical-align: top;
+        width: 30%;
+
+        .bg-position-size {
+            font-size: 0;
+
+            p {
+                font-size: 0;
+                margin: 0 auto;
+                width: 90px;
+            }
+
+            label {
+                display: inline-block;
+                font-size: 12px;
+                height: 30px;
+                position: relative;
+                text-align: center;
+                width: 30px;
+
+                .fa {
+                    background-color: @white;
+                    display: block;
+                    line-height: 30px;
+                    position: relative;
+                    text-align: center;
+                    z-index: 2;
+                }
+
+                &:hover .fa {
+                    background-color: @second;
+                }
+
+                input {
+                    left: 7px;
+                    position: absolute;
+                    top: 7px;
+                    z-index: 1;
+                }
+            }
+        }
+
+        .bg-position,
+        .bg-size {
+            box-sizing: border-box;
+            display: inline-block;
+            padding: 0 10px;
+            vertical-align: top;
+            width: 50%;
+        }
+
+        .bg-position {
+            label.selected .fa:before {
+                content: '\f111';
+            }
+        }
+
+        .bg-size {
+            label {
+                font-size: 16px;
+
+                &.selected {
+                    color: @primary;
+                }
+            }
+        }
+    }
+
+    p {
+        font-size: 12px;
+    }
+}

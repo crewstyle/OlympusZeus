@@ -1,7 +1,7 @@
 /*!
  * clean.js
  *
- * Copyright 2015 Achraf Chouk
+ * Copyright 2016 Achraf Chouk
  * Achraf Chouk (https://github.com/crewstyle)
  */
 
@@ -11,5 +11,9 @@ module.exports = {
     './assets/fonts/*',
     './assets/img/*',
     './assets/js/*'
+  ],
+
+  src: [
+    './src/Resources/assets/css'
   ]
 };
