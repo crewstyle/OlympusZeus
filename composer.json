@@ -14,17 +14,18 @@
   "require": {
     "behat/transliterator": "^1.1@dev",
     "ruflin/Elastica": ">=3.0",
+    "symfony/http-foundation": "^3.0",
     "twig/twig": "~1.0"
   },
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "crewstyle\\OlympusZeus\\": "src/"
+      "crewstyle\\OlympusZeus\\": "src/OlympusZeus/"
     }
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "4.x-dev"
+      "dev-master": "5.x-dev"
     }
   }
 }

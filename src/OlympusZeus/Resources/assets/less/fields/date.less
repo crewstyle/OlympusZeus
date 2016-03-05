@@ -1,0 +1,33 @@
+/*!
+ * fields/date.less
+ *
+ * Copyright 2016 Achraf Chouk
+ * Achraf Chouk (https://github.com/crewstyle)
+ */
+
+.olz-field-content.date {
+    position: relative;
+
+    &:after {
+        color: @graydark;
+        content: "\f073";
+        font-family: @fonticon;
+        font-size: 16px;
+        margin-right: 17px;
+        position: absolute;
+        right: 0;
+        top: 5px;
+    }
+
+    .picker__header select {
+        margin-top: -2px;
+        width: 30%;
+    }
+}
+
+.picker__holder {
+    background-color: @white;
+    border: 1px solid lighten(@gray, 20%);
+    box-shadow: 0 1px 1px fade(@black, 4%);
+    border-radius: 0;
+}

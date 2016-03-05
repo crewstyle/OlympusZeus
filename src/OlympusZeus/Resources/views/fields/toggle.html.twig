@@ -1,0 +1,28 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_toggle{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content toggle">
+        {{ disable|raw }}
+
+        <fieldset class="{{ val ? 'is-on' : 'is-off' }}">
+            <label for="{{ id }}-on" class="on">
+                <input type="radio" name="{{ id }}" id="{{ id }}-on" value="1"{{ val ? ' checked="checked"' : '' }} />
+                <i class="fa fa-circle-o"></i>
+            </label>
+
+            <label for="{{ id }}-off" class="off">
+                <input type="radio" name="{{ id }}" id="{{ id }}-off" value="0"{{ val ? '' : ' checked="checked"' }} />
+                <i class="fa fa-minus fa-rotate-90"></i>
+            </label>
+        </fieldset>
+
+        {{ enable|raw }}
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_background{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content background" data-id="{{ id }}">
+        {% set color = val.color ?: '' %}
+        {% set image = val.image ?: '' %}
+        {% set repeat = val.repeat ?: 'repeat' %}
+        {% set position = val.position ?: '0 0' %}
+        {% set size = val.size ?: 'auto' %}
+
+        {% set style = color ? 'background-color:' ~ color ~ ';' : '' %}
+        {% set style = image ? 'background-image:url(' ~ image ~ ');' : '' %}
+        {% set style = repeat ? 'background-repeat:' ~ repeat ~ ';' : '' %}
+        {% set style = position ? 'background-position:' ~ position ~ ';' : '' %}
+        {% set style = size ? 'background-size:' ~ size ~ ';' : '' %}
+
+        <input type="hidden" name="{{ id }}[image]" id="{{ id }}_image" value="{{ image }}" />
+
+        <!-- Backgrounds -->
+        <fieldset class="bg-preview" style="{{ style }}">
+            <figure></figure>
+
+            <!-- Background pattern -->
+            <div class="bg-image">
+                {% if can_upload %}
+                    <div class="hide-if-no-js">
+                        <a href="#addMedia" class="button add-media" title="{{ t_add_background }}">
+                            <i class="fa fa-cloud-upload fa-lg"></i> {{ t_add_background|raw }}
+                        </a>
+                    </div>
+                {% else %}
+                    {{ t_cannot_upload|raw }}
+                {% endif %}
+            </div>
+        </fieldset>
+
+        <!-- Options -->
+        <fieldset class="bg-options">
+            <!-- Background color -->
+            <div class="bg-color">
+                <h3>{{ t_choose_color|raw }}</h3>
+                <input type="text" name="{{ id }}[color]" id="{{ id }}_color" value="{{ color }}" class="color-picker" maxlength="7" />
+            </div>
+
+            <!-- Background repeat -->
+            <div class="bg-repeat">
+                <h3>{{ t_choose_repeat|raw }}</h3>
+                <select name="{{ id }}[repeat]" id="{{ id }}_repeat" class="no-selectize">
+                    {% for k, r in details.repeat %}
+                        {% set selected = repeat == k ? ' selected="selected"' : '' %}
+                        <option value="{{ k }}"{{ selected|raw }}>{{ r }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Background position and size -->
+            <div class="bg-position-size">
+                <h3>{{ t_choose_position_size|raw }}</h3>
+
+                <div class="bg-position olz-field-content">
+                    {% set num = 0 %}
+
+                    <p>
+                        {% for k, r in details.position %}
+                            {% set selected = position == k ? ' selected="selected"' : '' %}
+                            {% set lfor = id ~ '-pos-' ~ num %}
+
+                            <label for="{{ lfor }}" title="{{ r }}" class="olz-tooltip{{ selected ? ' selected' : '' }}">
+                                <i class="fa fa-circle-o"></i>
+                                <input type="radio" name="{{ id }}[position]" id="{{ lfor }}" value="{{ k }}"{{ selected|raw }} />
+                            </label>
+
+                            {% set num = num + 1 %}
+                        {% endfor %}
+                    </p>
+                </div>
+
+                <div class="bg-size olz-field-content">
+                    {% set num = 0 %}
+
+                    <p>
+                        {% for k, r in details.size %}
+                            {% set selected = size == k ? ' selected="selected"' : '' %}
+                            {% set lfor = id ~ '-siz-' ~ num %}
+
+                            <label for="{{ lfor }}" title="{{ r[1] }}" class="olz-tooltip{{ selected ? ' selected' : '' }}">
+                                <i class="fa fa-{{ r[0] }}"></i>
+                                <input type="radio" name="{{ id }}[size]" id="{{ lfor }}" value="{{ k }}"{{ selected|raw }} />
+                            </label>
+
+                            {% set num = num + 1 %}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script type="text/x-handlebars-template" id="i-background-{{ id }}">
+        {% include 'fields/templates/background.html.twig' with {
+            'id': id,
+            't_remove': t_remove
+        } only %}
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_multiselect{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content multiselect">
+        {% if options %}
+            <input type="hidden" name="{{ id }}[]" value="" />
+            <select name="{{ id }}[]" id="{{ id }}" multiple="true" size="5" data-value="{{ val is iterable ? val|join(',') : val }}">
+                {% for key, option in options if key %}
+                    {% set selected = val is iterable and key in val ? true : false %}
+                    <option value="{{ key }}"{{ selected ? ' selected="selected"' : '' }}>{{ option }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            {{ t_no_options|raw }}
+        {% endif %}
+
+        <p class="olz-description">{{ t_keyboard|raw }}{% if description %}<br/>{{ description|raw }}{% endif %}</p>
+    </div>
+{% endblock %}

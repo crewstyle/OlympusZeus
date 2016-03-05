@@ -1,4 +1,10 @@
-## 4.1.0 (January 24, 2016)
+## 5.0.0-beta (March 05, 2016)
+**NEW VERSION, NEW CODE**
+Welcome abord in our new ship, matey! The **Olympus Zeus** is now fully developed as a complete OOP library.
+
+
+
+## 4.1.0 (March 05, 2016)
 The **Olympus Hera** package is fully integrated inside sources.
 
 ## 4.0.1 (January 15, 2016)

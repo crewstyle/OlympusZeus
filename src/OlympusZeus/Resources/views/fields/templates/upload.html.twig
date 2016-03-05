@@ -1,0 +1,55 @@
+<fieldset class="{{ multiple ? 'movendrop' : '' }}{{ expand ? ' expand' : '' }}" data-u="{% verbatim %}{{ id }}{% endverbatim %}">
+    <a href="#deleteMedia" class="del-media"><i class="fa fa-times"></i></a>
+
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][id]" value="{% verbatim %}{{ id }}{% endverbatim %}" />
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][name]" value="{% verbatim %}{{ name }}{% endverbatim %}" />
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][height]" value="{% verbatim %}{{ height }}{% endverbatim %}" />
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][url]" value="{% verbatim %}{{ url }}{% endverbatim %}" />
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][width]" value="{% verbatim %}{{ width }}{% endverbatim %}" />
+
+    <figure class="u-block{{ library in ['image', 'video'] ? ' u-damier' : '' }}">
+        {% if library == 'video' %}
+            <video src="{% verbatim %}{{ display }}{% endverbatim %}" controls></video>
+        {% else %}
+            <img src="{% verbatim %}{{ display }}{% endverbatim %}" alt="" class="image" />
+        {% endif %}
+
+        <br/><small>{% verbatim %}{{ name }}{% endverbatim %}</small>
+    </figure>
+
+    {% if expand %}
+        <figcaption class="u-details">
+            <div class="u-texts">
+                <p>
+                    <label for="{{ id }}_{% verbatim %}{{ id }}{% endverbatim %}-alt">{{ t_alt|raw }}</label>
+                    <input type="text" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][alt]" id="{{ id }}_{% verbatim %}{{ id }}{% endverbatim %}-alt" value="{% verbatim %}{{ alt }}{% endverbatim %}" />
+                </p>
+                <p>
+                    <label for="{{ id }}_{% verbatim %}{{ id }}{% endverbatim %}-caption">{{ t_caption|raw }}</label>
+                    <input type="text" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][caption]" id="{{ id }}_{% verbatim %}{{ id }}{% endverbatim %}-caption" value="{% verbatim %}{{ caption }}{% endverbatim %}" />
+                </p>
+            </div>
+
+            <div class="u-sizes">
+                <h3>{{ t_sizes|raw }}</h3>
+
+                <ul class="u-lists">
+                    <li>
+                        <a href="{% verbatim %}{{ url }}{% endverbatim %}" title="{{ t_size_full|raw }}" class="olz-tooltip" target="_blank">{% verbatim %}{{ width }}{% endverbatim %} x {% verbatim %}{{ height }}{% endverbatim %} <i class="fa fa-external-link"></i></a>
+                    </li>
+
+                    {% verbatim %}{{#each sizes}}{% endverbatim %}
+                        <li>
+                            <input type="hidden" name="{{ id }}[{% verbatim %}{{ this.id }}{% endverbatim %}][sizes][{% verbatim %}{{ this.key }}{% endverbatim %}][height]" value="{% verbatim %}{{ this.height }}{% endverbatim %}" />
+                            <input type="hidden" name="{{ id }}[{% verbatim %}{{ this.id }}{% endverbatim %}][sizes][{% verbatim %}{{ this.key }}{% endverbatim %}][name]" value="{% verbatim %}{{ this.key }}{% endverbatim %}" />
+                            <input type="hidden" name="{{ id }}[{% verbatim %}{{ this.id }}{% endverbatim %}][sizes][{% verbatim %}{{ this.key }}{% endverbatim %}][url]" value="{% verbatim %}{{ this.url }}{% endverbatim %}" />
+                            <input type="hidden" name="{{ id }}[{% verbatim %}{{ this.id }}{% endverbatim %}][sizes][{% verbatim %}{{ this.key }}{% endverbatim %}][width]" value="{% verbatim %}{{ this.width }}{% endverbatim %}" />
+
+                            <a href="{% verbatim %}{{ this.url }}{% endverbatim %}" title="{% verbatim %}{{ this.key }}{% endverbatim %}" class="olz-tooltip" target="_blank">{% verbatim %}{{ this.width }}{% endverbatim %} x {% verbatim %}{{ this.height }}{% endverbatim %} <i class="fa fa-external-link"></i></a>
+                        </li>
+                    {% verbatim %}{{/each}}{% endverbatim %}
+                </ul>
+            </div>
+        </figcaption>
+    {% endif %}
+</fieldset>

@@ -1,0 +1,23 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_select{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content select">
+        {% if options %}
+            <select name="{{ id }}" id="{{ id }}">
+                {% for key, option in options if key %}
+                    {% set selected = key == val ? true : false %}
+                    <option value="{{ key == '-1' ? '' : key }}"{{ selected ? ' selected="selected"' : '' }}>{{ option }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            {{ t_no_options }}
+        {% endif %}
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<div class="link-container{{ expandable ? ' movendrop' : '' }}">
+    {% if expandable %}
+        <a href="#deleteLink" class="del-link"><i class="fa fa-times"></i></a>
+    {% endif %}
+
+    <p class="block-link">
+        <label for="{% verbatim %}{{ lfor }}{% endverbatim %}-url">{{ t_website_address|raw }}</label>
+        <input type="text" name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ num }}{% endverbatim %}][url]" id="{% verbatim %}{{ lfor }}{% endverbatim %}-url" value="" placeholder="{{ t_website_placeholder|raw }}" />
+        <a href="" class="olz-tooltip" title="{{ t_goto|raw }}" target="_blank"><i class="fa fa-external-link"></i></a>
+    </p>
+
+    <p>
+        <label for="{% verbatim %}{{ lfor }}{% endverbatim %}-label">{{ t_title|raw }}</label>
+        <input type="text" name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ num }}{% endverbatim %}][label]" id="{% verbatim %}{{ lfor }}{% endverbatim %}-label" value="" />
+    </p>
+
+    <p>
+        <label for="{% verbatim %}{{ lfor }}{% endverbatim %}-target">{{ t_target|raw }}</label>
+        <select name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ num }}{% endverbatim %}][target]" id="{% verbatim %}{{ lfor }}{% endverbatim %}-target" class="no-selectize">
+            <option value="_blank" selected="selected">
+                {{ t_target_blank|raw }}
+            </option>
+            <option value="_self">
+                {{ t_target_self|raw }}
+            </option>
+            <option value="_parent">
+                {{ t_target_parent|raw }}
+            </option>
+            <option value="_top">
+                {{ t_target_top|raw }}
+            </option>
+        </select>
+    </p>
+
+    <p class="rel">
+        <label for="{% verbatim %}{{ lfor }}{% endverbatim %}-rel">{{ t_relationship|raw }}</label>
+        <input type="text" name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ num }}{% endverbatim %}][rel]" id="{% verbatim %}{{ lfor }}{% endverbatim %}-rel" value="" />
+        <small>{{ t_relationship_description|raw }}</small>
+    </p>
+</div>

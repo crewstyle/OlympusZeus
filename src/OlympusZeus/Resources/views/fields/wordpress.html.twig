@@ -1,0 +1,31 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_wordpress_{{ mode }}{% endblock %}
+{% block label %}<label for="{{ id }}">{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content wordpress {{ mode }}">
+        {% if contents and contents|length >= 1 %}
+            {% set squares = multiple ? '[]' : '' %}
+            {% set attributes = multiple ? ' multiple="true" size="5" data-value="' ~ val|join(',') ~ '"' : '' %}
+
+            <input type="hidden" name="{{ id }}{{ squares }}" value="" />
+            <select name="{{ id }}{{ squares }}" id="{{ id }}"{{ attributes }}>
+                {% for key, optgroup in contents %}
+                    {% if key %}<optgroup label="{{ key }}">{% endif %}
+
+                    {% for k, option in optgroup %}
+                        {% set sel = val|length > 1 and k in val ? true : (k == val ? true : false) %}
+                        <option value="{{ k }}"{{ sel ? ' selected="selected"' : '' }}>{{ option }}</option>
+                    {% endfor %}
+
+                    {% if key %}</optgroup>{% endif %}
+                {% endfor %}
+            </select>
+        {% endif %}
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+    </div>
+{% endblock %}

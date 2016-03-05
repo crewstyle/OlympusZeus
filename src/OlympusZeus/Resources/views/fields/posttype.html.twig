@@ -1,0 +1,384 @@
+{% extends "_pages.html.twig" %}
+
+{% block id %}{{ id }}_posttype_{{ mode }}{% endblock %}
+{% block label %}{% endblock %}
+
+{% set items = {
+    1: {
+        'id': 'posttype-configurations',
+        'name': t_pt_configurations,
+        'contents': block('listconfigurations')
+    },
+    2: {
+        'id': 'posttype-contents',
+        'name': t_pt_contents,
+        'contents': block('listcontents')
+    },
+    3: {
+        'id': 'posttype-menus',
+        'name': t_pt_menus,
+        'contents': block('listmenus')
+    },
+    4: {
+        'id': 'posttype-options',
+        'name': t_pt_options,
+        'contents': block('listoptions')
+    },
+} %}
+
+{% set fielditems = {
+    1: {
+        'id': 'posttype-customfields',
+        'name': t_pt_customfields,
+        'contents': block('customfields')
+    }
+} %}
+
+{% block field %}
+    {% if mode in blocks %}
+        {{ block(mode) }}
+    {% endif %}
+{% endblock %}
+
+{% block listconfigurations %}
+    {% if not val.slug %}
+        <!-- Name -->
+        <h3><label for="slug">{{ t_pt_configs_slug|raw }}</label></h3>
+
+        <div class="olz-field-content text">
+            <input type="text" name="slug" id="slug" value="" size="30" maxlength="20" />
+            <small>{{ t_pt_configs_slug_help|raw }}</small>
+            <p>{{ t_pt_configs_slug_details|raw }}</p>
+        </div>
+    {% endif %}
+
+    <!-- Label -->
+    <h3><label for="name">{{ t_pt_configs_plural|raw }}</label></h3>
+
+    <div class="olz-field-content text">
+        <input type="text" name="name" id="name" value="{{ val.labels ? val.labels.name : '' }}" size="30" />
+        <small>{{ t_pt_configs_plural_help|raw }}</small>
+    </div>
+
+    <!-- Singular -->
+    <h3><label for="singular">{{ t_pt_configs_singular|raw }}</label></h3>
+
+    <div class="olz-field-content text">
+        <input type="text" name="singular_name" id="singular" value="{{ val.labels ? val.labels.singular_name : '' }}" size="30" />
+        <small>{{ t_pt_configs_singular_help|raw }}</small>
+    </div>
+
+    <!-- Menu icon -->
+    <h3><label for="menuicon">{{ t_pt_configs_menuicon|raw }}</label></h3>
+
+    <div class="olz-field-content text">
+        <input type="text" name="menu_icon" id="menuicon" value="{{ val.args ? val.args.menu_icon : '' }}" size="30" />
+        <small>{{ t_pt_configs_menuicon_help|raw }}</small>
+        <p>{{ t_pt_configs_menuicon_details|raw }}</p>
+    </div>
+
+    <!-- Menu position -->
+    <h3><label for="menuposition">{{ t_pt_configs_menuposition|raw }}</label></h3>
+
+    <div class="olz-field-content text number">
+        <input type="number" name="menu_position" id="menuposition" value="{{ val.args ? val.args.menu_position : '' }}" size="30" step="1" min="0" max="100" />
+    </div>
+{% endblock %}
+
+{% block listcontents %}
+    <!-- Supports -->
+    <div class="olz-field">
+        <h3>
+            <label>{{ t_pt_contents_supports|raw }}</label>
+            {% include '_check_all.html.twig' with {
+                'id': 'pt-supps',
+                'count': supports|length,
+                'label': t_pt_contents_supports_select,
+                'val': val.labels ? val.labels.supports : []
+            } %}
+        </h3>
+
+        <div class="olz-field-content checkbox">
+            <fieldset>
+                {% for k, option in supports %}
+                    {% set selected = val.labels and k in val.labels.supports ? ' checked="checked"' : '' %}
+                    {% set for = id ~ '-supports-' ~ k %}
+
+                    <p>
+                        <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
+                            <input type="hidden" name="supports[{{ k }}]" value="" />
+                            <input type="checkbox" name="supports[{{ k }}]" id="{{ for }}" value="1"{{ selected }} />
+                            {{ option|raw }}
+                        </label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+
+            <p>{{ t_pt_contents_supports_details|raw }}</p>
+        </div>
+    </div>
+
+    <!-- Taxonomies -->
+    <div class="olz-field">
+        <h3>
+            <label>{{ t_pt_contents_taxonomies|raw }}</label>
+            {% include '_check_all.html.twig' with {
+                'id': 'pt-taxs',
+                'count': taxonomies|length,
+                'label': t_pt_contents_taxonomies_select,
+                'val': val.labels ? val.labels.taxonomies : []
+            } %}
+        </h3>
+
+        <div class="olz-field-content checkbox">
+            <fieldset>
+                {% for k, option in taxonomies %}
+                    {% set selected = val.labels and k in val.labels.taxonomies ? ' checked="checked"' : '' %}
+                    {% set for = id ~ '-taxonomies-' ~ k %}
+
+                    <p>
+                        <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
+                            <input type="hidden" name="taxonomies[{{ k }}]" value="" />
+                            <input type="checkbox" name="taxonomies[{{ k }}]" id="{{ for }}" value="1"{{ selected }} />
+                            {{ option|raw }}
+                        </label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+
+            <p>{{ t_pt_contents_taxonomies_details|raw }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block listmenus %}
+    {% for k, option in labels %}
+        {% set for = 'labels-' ~ k %}
+
+        <!-- {{ option|raw }} -->
+        <h3><label for="{{ for }}">{{ option|raw }}</label></h3>
+
+        <div class="olz-field-content text number">
+            <input type="text" name="{{ k }}" id="{{ for }}" value="{{ val.labels ? val.labels[k] : '' }}" size="30" />
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block listoptions %}
+    <!-- Options -->
+    <div class="olz-field">
+        <h3>
+            <label>{{ t_pt_options_options|raw }}</label>
+            {% include '_check_all.html.twig' with {
+                'id': 'pt-opts',
+                'count': options|length,
+                'label': t_pt_options_options_select,
+                'val': []
+            } %}
+        </h3>
+
+        <div class="olz-field-content checkbox">
+            <fieldset>
+                {% for k, option in options %}
+                    {% set selected = val.args[k] ? ' checked="checked"' : '' %}
+                    {% set for = 'options-' ~ k %}
+
+                    <p>
+                        <label for="{{ for }}"{{ selected ? ' class="selected"' : '' }}>
+                            <input type="hidden" name="options[{{ k }}]" value="" />
+                            <input type="checkbox" name="options[{{ k }}]" id="{{ for }}" value="1"{{ selected }} />
+                            {{ option|raw }}
+                        </label>
+                    </p>
+                {% endfor %}
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customfields %}
+    <!-- Label -->
+    <h3>
+        <label>{{ t_pt_customfields_list|raw }}</label>
+        <br/>
+        <small>{{ t_pt_customfields_add|raw }}</small>
+    </h3>
+
+    <nav class="olz-field-content olz-choose-fields">
+        {% for f in fields %}
+            <a href="#{{ f.name }}" title="{{ f.title }}" class="olz-tooltip button"><i class="fa {{ f.icon }}"></i></a>
+        {% endfor %}
+    </nav>
+
+    <div class="olz-field-content">
+        {% if val.contents %}
+            {% for pt in val.contents %}
+                <div class="movendrop">
+                    <h3>{{ pt.title }}</h3>
+                    <input type="text" name="type" value="{{ pt.type }}" />
+
+                    <a href="#edit" class="edit-posttype">
+                        Edit
+                    </a>
+
+                    <a href="#delete" class="del-posttype">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block list %}
+    <div class="olz-field-content posttype create">
+        <a href="#m-posttype-add" class="olz-link-modal button button-primary">{{ posttypes|length ? t_pt_create|raw : t_pt_create_first|raw }}</a>
+    </div>
+
+    {% if posttypes %}
+        <table class="wp-list-table widefat fixed striped olz-table">
+            <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-title column-primary">{{ t_pt_table_title }}</th>
+                    <th scope="col" id="supports" class="manage-column column-supports">{{ t_pt_table_supports }}</th>
+                    <th scope="col" id="taxonomies" class="manage-column column-supports">{{ t_pt_table_taxonomies }}</th>
+                    <th scope="col" id="actions" class="manage-column column-format">{{ t_pt_table_actions }}</th>
+                </tr>
+            </thead>
+            <tbody id="the-list">
+                {% for k, pt in posttypes %}
+                    <tr id="pt-{{ pt.slug }}" class="level-0">
+                        <td class="title column-title column-primary pt-title" data-colname="{{ t_pt_table_title }}">
+                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="row-title olz-tooltip">
+                                <strong>
+                                    <i class="dashicons {{ pt.args.menu_icon }}"></i>
+                                    {{ pt.labels.name }}
+                                </strong>
+                            </a>
+
+                            <small><code>{{ pt.slug }}</code> - <a href="{{ t_pt_url|format(pt.slug)|raw }}">{{ t_pt_goto|raw }}</a></small>
+                        </td>
+                        <td class="supports column-supports" data-colname="{{ t_pt_table_supports }}">
+                            <ul>
+                                {% for supp in pt.labels.supports %}
+                                    <li>{{ supp }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="taxonomies column-taxonomies" data-colname="{{ t_pt_table_taxonomies }}">
+                            <ul>
+                                {% for tax in pt.labels.taxonomies %}
+                                    <li>{{ tax }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="actions column-format" data-colname="{{ t_pt_table_actions }}">
+                            <a href="{{ editAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_editpt }}" class="button olz-tooltip">
+                                <i class="dashicons dashicons-edit"></i>
+                            </a>
+                            <a href="{{ fieldsAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_fieldpt }}" class="button olz-tooltip">
+                                <i class="dashicons dashicons-plus"></i>
+                            </a>
+                            <a href="{{ deleteAction|raw }}&amp;slug={{ pt.slug }}" title="{{ t_pt_deletept }}" class="button button-danger olz-tooltip">
+                                <i class="dashicons dashicons-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <div id="m-posttype-add" class="olz-modal posttype-modal" tabindex="-1" style="display:none;">
+        <form action="{{ formAction|raw }}" method="post">
+            <input type="hidden" name="action" value="olz-action" />
+            <input type="hidden" name="for" value="posttype" />
+            <input type="hidden" name="make" value="create" />
+            <input type="hidden" name="slug" value="{{ val.slug }}" />
+
+            <header>
+                <a href="#close" class="close">&times;</a>
+                <h2>{{ t_pt_new|raw }}</h2>
+            </header>
+
+            {% include '_frames.html.twig' with {
+                'items': items
+            } only %}
+
+            <footer>
+                <button type="submit" class="button button-primary">{{ posttypes|length ? t_pt_create|raw : t_pt_create_first|raw }}</a>
+            </footer>
+        </form>
+    </div>
+{% endblock %}
+
+{% block edit %}
+    <header>
+        <h2>{{ t_pt_edit|format(val.slug)|raw }}</h2>
+    </header>
+
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype edit">
+        <input type="hidden" name="action" value="olz-action" />
+        <input type="hidden" name="for" value="posttype" />
+        <input type="hidden" name="make" value="edit" />
+        <input type="hidden" name="slug" value="{{ val.slug }}" />
+
+        {% include '_frames.html.twig' with {
+            'items': items
+        } only %}
+
+        <footer>
+            <button type="submit" class="button button-primary">{{ t_pt_update|raw }}</button>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
+        </footer>
+    </form>
+{% endblock %}
+
+{% block delete %}
+    <header>
+        <h2>{{ t_pt_delete|format(val.slug)|raw }}</h2>
+    </header>
+
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype delete">
+        <input type="hidden" name="action" value="olz-action" />
+        <input type="hidden" name="for" value="posttype" />
+        <input type="hidden" name="make" value="delete" />
+        <input type="hidden" name="slug" value="{{ val.slug }}" />
+
+        <p>{{ t_pt_delete_description|raw }}</p>
+
+        <div class="olz-field-content select">
+            <select name="confirm" id="{{ id }}-confirm">
+                <option value="delete">{{ t_pt_delete_from_db|raw }}</option>
+                <option value="keep">{{ t_pt_delete_keep|raw }}</option>
+            </select>
+        </div>
+
+        <footer>
+            <button type="submit" class="button button-danger">{{ t_pt_delete_confirm|raw }}</button>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
+        </footer>
+    </form>
+{% endblock %}
+
+{% block fields %}
+    <header>
+        <h2>{{ t_pt_fields|format(val.slug)|raw }}</h2>
+    </header>
+
+    <form action="{{ formAction|raw }}" method="post" class="olz-field-content posttype fields">
+        <input type="hidden" name="action" value="olz-action" />
+        <input type="hidden" name="for" value="posttype" />
+        <input type="hidden" name="make" value="fields" />
+        <input type="hidden" name="slug" value="{{ val.slug }}" />
+
+        {% include '_frames.html.twig' with {
+            'items': fielditems
+        } only %}
+
+        <footer>
+            <button type="submit" class="button button-primary">{{ t_pt_update|raw }}</button>
+            <a href="{{ cancelAction|raw }}" class="olz-cancel">{{ t_pt_cancel|raw }}</a>
+        </footer>
+    </form>
+{% endblock %}

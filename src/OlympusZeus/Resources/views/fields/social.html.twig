@@ -1,0 +1,103 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_social{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% set items = {
+    1: {
+        'id': 'social-' ~ id ~ '-socials',
+        'name': t_socials_select,
+        'contents': block('socials')
+    },
+} %}
+
+{% block field %}
+    <div class="olz-field-content social" data-id="{{ id }}">
+        <fieldset{{ expandable ? ' class="expandable"' : '' }}>
+            {% for k, opt in val %}
+                {% set display = opt.display and opt.display == '1' ? true : false %}
+                {% set label = opt.label ? opt.label : '' %}
+                {% set link = opt.link ? opt.link : '' %}
+                {% set for = id ~ '_' ~ k %}
+
+                {% set style = opt.color ? ' style="background-color:rgb(' ~ opt.color ~ '); box-shadow:0 0 0 2px rgba(' ~ opt.color ~ ',.3),inset 0 1px 2px rgba(0,0,0,.2);"' : '' %}
+
+                <div class="movendrop" data-nk="{{ k }}">
+                    <label for="{{ for }}"{{ style|raw }}>
+                        <i class="fa fa-{{ k }} fa-lg"></i>
+                        {{ opt.title }}
+                    </label>
+
+                    <input type="text" name="{{ id }}[{{ k }}][label]" id="{{ for }}" value="{{ label }}" placeholder="{{ socials[k]['value'] ? socials[k]['value'] : '' }}" />
+                    <input type="text" name="{{ id }}[{{ k }}][link]" value="{{ link }}" placeholder="{{ socials[k]['placeholder'] ? socials[k]['placeholder'] : '' }}" />
+
+                    {% if expandable %}
+                        <a href="#deleteSocial" class="del-social" data-nk="{{ k }}">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        {% if expandable %}
+            <div class="hide-if-no-js">
+                <a href="#addSocial" class="button add-social" title="{{ t_add_social }}">
+                    <i class="fa fa-plus fa-lg"></i> {{ t_add_social|raw }}
+                </a>
+                <a href="#deleteSocials" class="del-all-socials">{{ t_delete_all|raw }}</a>
+            </div>
+        {% endif %}
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% if socials and expandable %}
+        <script type="text/x-handlebars-template" id="i-socials-{{ id }}">
+            {% include 'fields/templates/social.html.twig' %}
+        </script>
+
+        <div id="m-socials-{{ id }}" class="olz-modal social-modal" tabindex="-1" style="display:none;">
+            <header>
+                <a href="#close" class="close">&times;</a>
+                <h2>{{ t_socials|raw }}</h2>
+            </header>
+
+            {% include '_frames.html.twig' with {
+                'items': items
+            } only %}
+
+            <footer>
+                <a href="#close" class="button close">{{ t_close|raw }}</a>
+            </footer>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block socials %}
+    <!-- Socials -->
+    <h3><label>{{ t_socials_description|raw }}</label></h3>
+
+    <div class="olz-field-content list">
+        {% for k, opt in socials %}
+            {% set attr = 'data-ll="' ~ opt.value ~ '" data-lk="' ~ opt.placeholder ~ '"' %}
+            {% set for = id ~ '_' ~ k %}
+
+            {% set style = opt.color ? 'background-color:rgb(' ~ opt.color ~ '); box-shadow:0 0 0 2px rgba(' ~ opt.color ~ ',.3),inset 0 1px 2px rgba(0,0,0,.2);' : '' %}
+
+            <p>
+                <a href="#{{ k }}" style="{{ style|raw }}" data-nk="{{ k }}" class="s-link" {{ attr|raw }}>
+                    <i class="fa fa-{{ k }} fa-lg"></i> {{ opt.title|raw }}
+                </a>
+
+                {% if opt.url %}
+                    <a href="{{ opt.url }}" target="_blank">{{ opt.url }}</a>
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

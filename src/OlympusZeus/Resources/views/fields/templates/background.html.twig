@@ -1,0 +1,12 @@
+<span data-u="{% verbatim %}{{ id }}{% endverbatim %}">
+    <a href="#deleteMedia" class="del-media">{{ t_remove|raw }} <i class="fa fa-times"></i></a>
+
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][id]" value="{% verbatim %}{{ id }}{% endverbatim %}" />
+    <input type="hidden" name="{{ id }}[{% verbatim %}{{ id }}{% endverbatim %}][url]" value="{% verbatim %}{{ url }}{% endverbatim %}" />
+
+    <style>
+        #{{ id }}_background-content .bg-preview {
+            background-image:url({% verbatim %}{{ url }}{% endverbatim %});
+        }
+    </style>
+</span>

@@ -1,0 +1,13 @@
+<div class="movendrop" data-nk="{% verbatim %}{{ nwk }}{% endverbatim %}">
+    <label for="{% verbatim %}{{ lfor }}{% endverbatim %}" style="{% verbatim %}{{ style }}{% endverbatim %}">
+        <i class="fa fa-{% verbatim %}{{ nwk }}{% endverbatim %} fa-lg"></i>
+        {% verbatim %}{{ title }}{% endverbatim %}
+    </label>
+
+    <input type="text" name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ nwk }}{% endverbatim %}][label]" id="{% verbatim %}{{ lfor }}{% endverbatim %}" value="{% verbatim %}{{ label.value }}{% endverbatim %}" placeholder="{% verbatim %}{{ label.placeholder }}{% endverbatim %}" />
+    <input type="text" name="{% verbatim %}{{ id }}{% endverbatim %}[{% verbatim %}{{ nwk }}{% endverbatim %}][link]" value="{% verbatim %}{{ link.value }}{% endverbatim %}" placeholder="{% verbatim %}{{ link.placeholder }}{% endverbatim %}" />
+
+    <a href="#deleteSocial" class="del-social" data-nk="{% verbatim %}{{ nwk }}{% endverbatim %}">
+        <i class="fa fa-times"></i>
+    </a>
+</div>

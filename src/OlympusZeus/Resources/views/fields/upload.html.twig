@@ -1,0 +1,110 @@
+{% set twigtpl = template and template == 'terms' ? 'terms' : 'pages' %}
+
+{% extends "_" ~ twigtpl ~ ".html.twig" %}
+
+{% block id %}{{ id }}_upload{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div class="olz-field-content upload" data-id="{{ id }}" data-t="{{ library|raw }}"{{ multiple ? ' data-m="1"' : '' }}>
+        <input type="hidden" name="{{ id }}" value="" />
+
+        {% if description %}<p class="olz-description">{{ description|raw }}</p>{% endif %}
+
+        <div class="u-results">
+            {% for item in val if item.id %}
+                {% set name = multiple ? id ~ '[' ~ item.id ~ ']' : id %}
+                {% set for = multiple ? id ~ '_' ~ item.id : id %}
+                {% set display = 'image' == library and item.sizes.thumbnail ? item.sizes.thumbnail.url : item.url %}
+
+                <fieldset class="{{ multiple ? 'movendrop' : '' }}{{ expand ? ' expand' : '' }}" data-u="{{ item.id }}">
+                    {% if can_upload %}
+                        <a href="#deleteMedia" class="del-media"><i class="fa fa-times"></i></a>
+                    {% endif %}
+
+                    <input type="hidden" name="{{ name }}[id]" value="{{ item.id }}" />
+                    <input type="hidden" name="{{ name }}[name]" value="{{ item.name }}" />
+                    <input type="hidden" name="{{ name }}[height]" value="{{ item.height }}" />
+                    <input type="hidden" name="{{ name }}[url]" value="{{ item.url }}" />
+                    <input type="hidden" name="{{ name }}[width]" value="{{ item.width }}" />
+
+                    <figure class="u-block{{ library in ['image', 'video'] ? ' u-damier' : '' }}">
+                        {% if library == 'video' %}
+                            <video src="{{ display }}" controls></video>
+                        {% else %}
+                            <img src="{{ display }}" alt="" class="image" />
+                        {% endif %}
+
+                        <br/><small>{{ item.name }}</small>
+                    </figure>
+
+                    {% if expand %}
+                        <figcaption class="u-details">
+                            <div class="u-texts">
+                                <p>
+                                    <label for="{{ for }}-alt">{{ t_alt|raw }}</label>
+                                    <input type="text" name="{{ name }}[alt]" id="{{ for }}-alt" value="{{ item.alt }}" />
+                                </p>
+                                <p>
+                                    <label for="{{ for }}-caption">{{ t_caption|raw }}</label>
+                                    <input type="text" name="{{ name }}[caption]" id="{{ for }}-caption" value="{{ item.caption }}" />
+                                </p>
+                            </div>
+
+                            <div class="u-sizes">
+                                <h3>{{ t_sizes|raw }}</h3>
+
+                                <ul class="u-lists">
+                                    <li>
+                                        <a href="{{ item.url }}" title="{{ t_size_full|raw }}" class="olz-tooltip" target="_blank">{{ item.width }} x {{ item.height }} <i class="fa fa-external-link"></i></a>
+                                    </li>
+
+                                    {% for k, i in item.sizes %}
+                                        <li>
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][height]" value="{{ i.height }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][name]" value="{{ i.name }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][url]" value="{{ i.url }}" />
+                                            <input type="hidden" name="{{ name }}[sizes][{{ k }}][width]" value="{{ i.width }}" />
+
+                                            <a href="{{ i.url }}" title="{{ i.name }}" class="olz-tooltip" target="_blank">{{ i.width }} x {{ i.height }} <i class="fa fa-external-link"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </figcaption>
+                    {% endif %}
+                </fieldset>
+            {% endfor %}
+        </div>
+
+        {% if can_upload %}
+            <div class="hide-if-no-js">
+                <a href="#addMedia" class="button add-media" title="{{ t_add_media }}">
+                    <i class="fa fa-cloud-upload fa-lg"></i> {{ t_add_media|raw }}
+                </a>
+
+                {% if multiple %}
+                    <a href="#deleteMedias" class="del-all-medias">{{ t_delete_all|raw }}</a>
+                {% endif %}
+            </div>
+        {% else %}
+            {{ t_cannot_upload|raw }}
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script type="text/x-handlebars-template" id="i-uploads-{{ id }}">
+        {% include 'fields/templates/upload.html.twig' with {
+            'multiple': multiple,
+            'expand': expand,
+            'id': id,
+            'library': library,
+            't_alt': t_alt,
+            't_caption': t_caption,
+            't_sizes': t_sizes,
+            't_size_full': t_size_full,
+        } only %}
+    </script>
+{% endblock %}
