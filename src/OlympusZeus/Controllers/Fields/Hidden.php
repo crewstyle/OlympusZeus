@@ -7,28 +7,28 @@ use crewstyle\OlympusZeus\Controllers\Field;
 use crewstyle\OlympusZeus\Controllers\Translate;
 
 /**
- * Builds Color field.
+ * Builds Hidden field.
  *
  * @package Olympus Zeus
- * @subpackage Controllers\Fields\Color
+ * @subpackage Controllers\Fields\Hidden
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 5.0.0
  *
- * @see https://olympus.readme.io/docs/field-color
+ * @see https://olympus.readme.io/docs/field-hidden
  *
  */
 
-class Color extends Field
+class Hidden extends Field
 {
     /**
      * @var string
      */
-    protected $faIcon = 'fa-tint';
+    protected $faIcon = 'fa-eye-slash';
 
     /**
      * @var string
      */
-    protected $template = 'fields/color.html.twig';
+    protected $template = 'fields/hidden.html.twig';
 
     /**
      * Prepare HTML component.
@@ -43,7 +43,6 @@ class Color extends Field
         //Build defaults
         $defaults = [
             'id' => '',
-            'title' => Translate::t('Color'),
             'default' => '',
             'description' => '',
 
@@ -58,6 +57,13 @@ class Color extends Field
 
         //Retrieve field value
         $vars['val'] = $this->getValue($details, $vars['default'], $content['id'], true);
+
+        //Get description
+        $vars['description'] = sprintf(
+            Translate::t('Hidden field <code><b>%s</b></code> with value stored: <code>%s</code>'),
+            $content['id'],
+            $vars['val']
+        );
 
         //Update vars
         $this->getField()->setVars($vars);

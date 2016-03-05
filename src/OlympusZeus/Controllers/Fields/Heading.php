@@ -7,28 +7,33 @@ use crewstyle\OlympusZeus\Controllers\Field;
 use crewstyle\OlympusZeus\Controllers\Translate;
 
 /**
- * Builds Color field.
+ * Builds Heading field.
  *
  * @package Olympus Zeus
- * @subpackage Controllers\Fields\Color
+ * @subpackage Controllers\Fields\Heading
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 5.0.0
  *
- * @see https://olympus.readme.io/docs/field-color
+ * @see https://olympus.readme.io/docs/field-heading
  *
  */
 
-class Color extends Field
+class Heading extends Field
 {
     /**
      * @var string
      */
-    protected $faIcon = 'fa-tint';
+    protected $faIcon = 'fa-header';
+
+    /**
+     * @var boolean
+     */
+    protected $hasId = false;
 
     /**
      * @var string
      */
-    protected $template = 'fields/color.html.twig';
+    protected $template = 'fields/heading.html.twig';
 
     /**
      * Prepare HTML component.
@@ -42,22 +47,13 @@ class Color extends Field
     {
         //Build defaults
         $defaults = [
-            'id' => '',
-            'title' => Translate::t('Color'),
-            'default' => '',
-            'description' => '',
-
-            //details
-            'post' => 0,
-            'prefix' => '',
-            'template' => 'pages',
+            'title' => Translate::t('Heading'),
+            'level' => 2,
+            'style' => '',
         ];
 
         //Build defaults data
         $vars = array_merge($defaults, $content);
-
-        //Retrieve field value
-        $vars['val'] = $this->getValue($details, $vars['default'], $content['id'], true);
 
         //Update vars
         $this->getField()->setVars($vars);

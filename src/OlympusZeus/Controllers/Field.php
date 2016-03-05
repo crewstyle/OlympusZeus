@@ -33,6 +33,16 @@ abstract class Field
     protected $faIcon = 'fa-circle-o';
 
     /**
+     * @var boolean
+     */
+    protected $hasId = true;
+
+    /**
+     * @var boolean
+     */
+    protected $isAuthorized = true;
+
+    /**
      * @var string
      */
     protected $template = 'fields/text.html.twig';
@@ -46,6 +56,8 @@ abstract class Field
     {
         $this->field = new FieldModel();
         $this->field->setFaIcon($this->faIcon);
+        $this->field->setHasId($this->hasId);
+        $this->field->setIsAuthorized($this->isAuthorized);
         $this->field->setTemplate($this->template);
     }
 

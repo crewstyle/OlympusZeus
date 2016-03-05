@@ -7,28 +7,28 @@ use crewstyle\OlympusZeus\Controllers\Field;
 use crewstyle\OlympusZeus\Controllers\Translate;
 
 /**
- * Builds Color field.
+ * Builds Radio field.
  *
  * @package Olympus Zeus
- * @subpackage Controllers\Fields\Color
+ * @subpackage Controllers\Fields\Radio
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 5.0.0
  *
- * @see https://olympus.readme.io/docs/field-color
+ * @see https://olympus.readme.io/docs/field-radio
  *
  */
 
-class Color extends Field
+class Radio extends Field
 {
     /**
      * @var string
      */
-    protected $faIcon = 'fa-tint';
+    protected $faIcon = 'fa-dot-circle-o';
 
     /**
      * @var string
      */
-    protected $template = 'fields/color.html.twig';
+    protected $template = 'fields/radio.html.twig';
 
     /**
      * Prepare HTML component.
@@ -43,14 +43,20 @@ class Color extends Field
         //Build defaults
         $defaults = [
             'id' => '',
-            'title' => Translate::t('Color'),
+            'title' => Translate::t('Radio'),
             'default' => '',
             'description' => '',
+            'mode' => '',
+            'options' => [],
 
             //details
             'post' => 0,
             'prefix' => '',
             'template' => 'pages',
+
+            //texts
+            't_no_options' => Translate::t('Something went wrong in your parameters definition: 
+                no options have been defined.'),
         ];
 
         //Build defaults data

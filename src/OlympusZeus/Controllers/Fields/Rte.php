@@ -7,28 +7,28 @@ use crewstyle\OlympusZeus\Controllers\Field;
 use crewstyle\OlympusZeus\Controllers\Translate;
 
 /**
- * Builds Color field.
+ * Builds Rte field.
  *
  * @package Olympus Zeus
- * @subpackage Controllers\Fields\Color
+ * @subpackage Controllers\Fields\Rte
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 5.0.0
  *
- * @see https://olympus.readme.io/docs/field-color
+ * @see https://olympus.readme.io/docs/field-rte
  *
  */
 
-class Color extends Field
+class Rte extends Field
 {
     /**
      * @var string
      */
-    protected $faIcon = 'fa-tint';
+    protected $faIcon = 'fa-clipboard';
 
     /**
      * @var string
      */
-    protected $template = 'fields/color.html.twig';
+    protected $template = 'fields/rte.html.twig';
 
     /**
      * Prepare HTML component.
@@ -43,9 +43,13 @@ class Color extends Field
         //Build defaults
         $defaults = [
             'id' => '',
-            'title' => Translate::t('Color'),
+            'title' => Translate::t('Rich Text Editor'),
             'default' => '',
             'description' => '',
+            'settings' => [
+                'teeny' => false,
+                'textarea_rows' => 8,
+            ],
 
             //details
             'post' => 0,
@@ -57,7 +61,7 @@ class Color extends Field
         $vars = array_merge($defaults, $content);
 
         //Retrieve field value
-        $vars['val'] = $this->getValue($details, $vars['default'], $content['id'], true);
+        $vars['val'] = $this->getValue($details, $vars['default'], $content['id']);
 
         //Update vars
         $this->getField()->setVars($vars);

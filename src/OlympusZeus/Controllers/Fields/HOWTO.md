@@ -7,28 +7,33 @@ use crewstyle\OlympusZeus\Controllers\Field;
 use crewstyle\OlympusZeus\Controllers\Translate;
 
 /**
- * Builds Color field.
+ * Builds FIELDNAME field.
  *
  * @package Olympus Zeus
- * @subpackage Controllers\Fields\Color
+ * @subpackage Controllers\Fields\FIELDNAME
  * @author Achraf Chouk <achrafchouk@gmail.com>
  * @since 5.0.0
  *
- * @see https://olympus.readme.io/docs/field-color
+ * @see https://olympus.readme.io/docs/field-fieldname
  *
  */
 
-class Color extends Field
+class FIELDNAME extends Field
 {
     /**
      * @var string
      */
-    protected $faIcon = 'fa-tint';
+    protected $faIcon = 'fa-fieldname';
+
+    /**
+     * @var boolean
+     */
+    protected $hasId = false;
 
     /**
      * @var string
      */
-    protected $template = 'fields/color.html.twig';
+    protected $template = 'fields/fieldname.html.twig';
 
     /**
      * Prepare HTML component.
@@ -43,7 +48,7 @@ class Color extends Field
         //Build defaults
         $defaults = [
             'id' => '',
-            'title' => Translate::t('Color'),
+            'title' => Translate::t('FIELDNAME'),
             'default' => '',
             'description' => '',
 
